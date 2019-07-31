@@ -17,6 +17,6 @@ namespace Comparisons.SQLiteVSDoublets.Model
         [Required]
         public DateTime PublicationDateTime { get; set; }
 
-        public override string ToString() => $"BlogID={Id}\tTitle={Title}\tContent=<Length: {Content.Length}>\tDateTimeAdd={PublicationDateTime}";
+        public override string ToString() => $"ID={Id}\tTitle={Title}\tContent=<Length: {Content.Length}>\tPublicationDateTime={PublicationDateTime}";
     }
 }

@@ -1,5 +1,5 @@
 # Comparisons.SQLiteVSDoublets ([русская версия](README.ru.md))
-Comparison SQLite and LinksPlatform's Doublets (links) on basic embeded database operations with objects (create list, read list, delete list).
+Comparison of SQLite and LinksPlatform's Doublets (links) on basic embeded database operations with objects (create list, read list, delete list).
 
 Based on examples from https://github.com/FahaoTang/dotnetcore-examples and https://github.com/Konard/LinksPlatform
 

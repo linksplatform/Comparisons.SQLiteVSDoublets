@@ -126,6 +126,9 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
 First is SQLite, second is Doublets.
 
+![Image of SQLite RAM usage.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_ram_usage.png "SQLite RAM usage")
+![Image of Doublets RAM usage.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/doublets_ram_usage.png "Doublets RAM usage")
+
 ## Conclusion
 
-Doublets is faster than SQLite + EntityFramework, but uses more memory on disk. This is due to mapping of all 65536 UTF-16 characters to links space and using 64 bit per link reference. The example will be updated later and it should be even better in memory usage.
+Doublets is faster and uses less RAM than SQLite + EntityFramework, but uses more memory on disk. This is due to mapping of all 65536 UTF-16 characters to links space and using 64 bit per link reference. The example will be updated later and it should be even better in memory usage.

@@ -1,4 +1,7 @@
 # Comparisons.SQLiteVSDoublets ([english version](README.md))
+
+![Сравнение моделей данных](https://github.com/LinksPlatform/Documentation/raw/master/doc/ModelsComparison/relational_model_vs_associative_model_vs_links_ru.png)
+
 Сравнение SQLite и Дуплетов ПлатформыСвязей на базовых операциях в качестве встариваемых баз данных с объектами (создание списка, чтение списка, удаление списка).
 
 Основано на примерах из https://github.com/FahaoTang/dotnetcore-examples и https://github.com/Konard/LinksPlatform

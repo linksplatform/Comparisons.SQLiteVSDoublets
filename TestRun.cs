@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using Platform.IO;
-using Platform.Helpers;
+using Platform.Diagnostics;
 
 namespace Comparisons.SQLiteVSDoublets
 {
@@ -20,13 +20,13 @@ namespace Comparisons.SQLiteVSDoublets
             {
                 File.Delete(DbFilename);
             }
-            var prepareTime = PerformanceHelpers.Measure(Prepare);
+            var prepareTime = Performance.Measure(Prepare);
             Console.WriteLine($"Prepare execution time: {prepareTime}, db size after prepare: {FileHelpers.GetSize(DbFilename)}.");
-            var createListTime = PerformanceHelpers.Measure(CreateList);
+            var createListTime = Performance.Measure(CreateList);
             Console.WriteLine($"Create list execution time: {createListTime}, db size after create list: {FileHelpers.GetSize(DbFilename)}.");
-            var readListTime = PerformanceHelpers.Measure(ReadList);
+            var readListTime = Performance.Measure(ReadList);
             Console.WriteLine($"Read list execution time: {readListTime}.");
-            var deleteListTime = PerformanceHelpers.Measure(DeleteList);
+            var deleteListTime = Performance.Measure(DeleteList);
             Console.WriteLine($"Delete list execution time: {deleteListTime}, db size after delete list: {FileHelpers.GetSize(DbFilename)}.");
             File.Delete(DbFilename);
         }

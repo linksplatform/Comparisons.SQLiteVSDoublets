@@ -1,102 +1,111 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Platform.Disposables;
 using Platform.Collections.Arrays;
 using Platform.Data;
 using Platform.Data.Doublets;
-using Platform.Data.Doublets.Converters;
+using Platform.Data.Doublets.UnaryNumbers;
 using Platform.Data.Doublets.Decorators;
 using Platform.Data.Doublets.Incrementers;
-using Platform.Data.Doublets.PropertyOperators;
 using Platform.Data.Doublets.ResizableDirectMemory;
-using Platform.Data.Doublets.Sequences;
 using Platform.Data.Doublets.Sequences.Converters;
+using Platform.Data.Doublets.PropertyOperators;
+using Platform.Data.Doublets.Sequences.Indexes;
+using Platform.Data.Doublets.Sequences.Walkers;
+using Platform.Data.Doublets.Unicode;
 using Comparisons.SQLiteVSDoublets.Model;
+using LinkAddress = System.UInt32;
 
 namespace Comparisons.SQLiteVSDoublets.Doublets
 {
-    public class DoubletsDbContext : UInt64Links
+    public class DoubletsDbContext : DisposableBase
     {
-        private readonly Sequences _sequences;
-        private readonly ulong _meaningRoot;
-        private readonly ulong _unaryOne;
-        private readonly ulong _sequenceMarker;
-        private readonly ulong _frequencyMarker;
-        private readonly ulong _frequencyPropertyMarker;
-        private readonly ulong _titlePropertyMarker;
-        private readonly ulong _contentPropertyMarker;
-        private readonly ulong _publicationDateTimePropertyMarker;
-        private readonly ulong _blogPostMarker;
-        private readonly DefaultLinkPropertyOperator<ulong> _defaultLinkPropertyOperator;
-        private readonly LinkFrequencyIncrementer<ulong> _linkFrequencyIncrementer;
+        private readonly LinkAddress _meaningRoot;
+        private readonly LinkAddress _unaryOne;
+        private readonly LinkAddress _unicodeSymbolMarker;
+        private readonly LinkAddress _unicodeSequenceMarker;
+        private readonly LinkAddress _frequencyMarker;
+        private readonly LinkAddress _frequencyPropertyMarker;
+        private readonly LinkAddress _titlePropertyMarker;
+        private readonly LinkAddress _contentPropertyMarker;
+        private readonly LinkAddress _publicationDateTimePropertyMarker;
+        private readonly LinkAddress _blogPostMarker;
+        private readonly PropertiesOperator<LinkAddress> _defaultLinkPropertyOperator;
+        private readonly StringToUnicodeSequenceConverter<LinkAddress> _stringToUnicodeSymbolConverter;
+        private readonly UnicodeSequenceToStringConverter<LinkAddress> _unicodeSequenceToStringConverter;
+        private readonly ILinks<LinkAddress> _disposableLinks;
+        private readonly ILinks<LinkAddress> _links;
 
-        public DoubletsDbContext(string dbFilename) 
-            : base(new UInt64ResizableDirectMemoryLinks(dbFilename))
+        public DoubletsDbContext(string dbFilename)
         {
-            this.UseUnicode();
+            _disposableLinks = new ResizableDirectMemoryLinks<LinkAddress>(dbFilename);
+            _links = _disposableLinks;
+            _links = new LinksCascadeUsagesResolver<LinkAddress>(_links);
+            _links = new NonNullContentsLinkDeletionResolver<LinkAddress>(_links);
+            _links = new LinksCascadeUniquenessAndUsagesResolver<LinkAddress>(_links);
+            _links = new LinksItselfConstantToSelfReferenceResolver<LinkAddress>(_links);
+            _links = new LinksInnerReferenceExistenceValidator<LinkAddress>(_links);
 
-            var currentMappingLinkIndex = UnicodeMap.LastCharLink + 1;
-            _meaningRoot = GerOrCreateMeaningRoot(currentMappingLinkIndex);
-            _unaryOne = GetOrCreateNextMapping(++currentMappingLinkIndex);
-            _sequenceMarker = GetOrCreateNextMapping(++currentMappingLinkIndex);
-            _frequencyMarker = GetOrCreateNextMapping(++currentMappingLinkIndex);
-            _frequencyPropertyMarker = GetOrCreateNextMapping(++currentMappingLinkIndex);
-            _titlePropertyMarker = GetOrCreateNextMapping(++currentMappingLinkIndex);
-            _contentPropertyMarker = GetOrCreateNextMapping(++currentMappingLinkIndex);
-            _publicationDateTimePropertyMarker = GetOrCreateNextMapping(++currentMappingLinkIndex);
-            _blogPostMarker = GetOrCreateNextMapping(++currentMappingLinkIndex);
+            LinkAddress currentMappingLinkIndex = 1;
+            _meaningRoot = GerOrCreateMeaningRoot(currentMappingLinkIndex++);
+            _unaryOne = GetOrCreateNextMapping(currentMappingLinkIndex++);
+            _unicodeSymbolMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
+            _unicodeSequenceMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
+            _frequencyMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
+            _frequencyPropertyMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
+            _titlePropertyMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
+            _contentPropertyMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
+            _publicationDateTimePropertyMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
+            _blogPostMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
 
-            _defaultLinkPropertyOperator = new DefaultLinkPropertyOperator<ulong>(this);
+            _defaultLinkPropertyOperator = new PropertiesOperator<LinkAddress>(_links);
 
-            // Create LinkFrequencyIncrementer and OptimalVariantConverter
-            var unaryNumberToAddressConveter = new UnaryNumberToAddressAddOperationConverter<ulong>(this, _unaryOne);
-            var unaryNumberIncrementer = new UnaryNumberIncrementer<ulong>(this, _unaryOne);
-            var frequencyIncrementer = new FrequencyIncrementer<ulong>(this, _frequencyMarker, _unaryOne, unaryNumberIncrementer);
-            var frequencyPropertyOperator = new FrequencyPropertyOperator<ulong>(this, _frequencyPropertyMarker, _frequencyMarker);
-            _linkFrequencyIncrementer = new LinkFrequencyIncrementer<ulong>(this, frequencyPropertyOperator, frequencyIncrementer); // TODO: Put it directly to Sequences after fix of https://github.com/linksplatform/Data.Doublets/issues/2
-            var linkToItsFrequencyNumberConverter = new LinkToItsFrequencyNumberConveter<ulong>(this, frequencyPropertyOperator, unaryNumberToAddressConveter);
-            var sequenceToItsLocalElementLevelsConverter = new SequenceToItsLocalElementLevelsConverter<ulong>(this, linkToItsFrequencyNumberConverter);
-            var optimalVariantConverter = new OptimalVariantConverter<ulong>(this, sequenceToItsLocalElementLevelsConverter);
-
-            var syncLinks = new SynchronizedLinks<ulong>(this);
-            _sequences = new Sequences(syncLinks, new SequencesOptions<ulong>() { UseSequenceMarker = true, SequenceMarkerLink = _sequenceMarker, LinksToSequenceConverter = optimalVariantConverter });
+            // Create StringToUnicodeSequenceConverter and UnicodeSequenceToStringConverter
+            var unaryNumberToAddressConverter = new UnaryNumberToAddressAddOperationConverter<LinkAddress>(_links, _unaryOne);
+            var powerOf2ToUnaryNumberConverter = new PowerOf2ToUnaryNumberConverter<LinkAddress>(_links, _unaryOne);
+            var addressToUnaryNumberConverter = new AddressToUnaryNumberConverter<LinkAddress>(_links, powerOf2ToUnaryNumberConverter);
+            var unaryNumberIncrementer = new UnaryNumberIncrementer<LinkAddress>(_links, _unaryOne);
+            var frequencyIncrementer = new FrequencyIncrementer<LinkAddress>(_links, _frequencyMarker, _unaryOne, unaryNumberIncrementer);
+            var frequencyPropertyOperator = new PropertyOperator<LinkAddress>(_links, _frequencyPropertyMarker, _frequencyMarker);
+            var index = new FrequencyIncrementingSequenceIndex<LinkAddress>(_links, frequencyPropertyOperator, frequencyIncrementer);
+            var linkToItsFrequencyNumberConverter = new LinkToItsFrequencyNumberConveter<LinkAddress>(_links, frequencyPropertyOperator, unaryNumberToAddressConverter);
+            var sequenceToItsLocalElementLevelsConverter = new SequenceToItsLocalElementLevelsConverter<LinkAddress>(_links, linkToItsFrequencyNumberConverter);
+            var optimalVariantConverter = new OptimalVariantConverter<LinkAddress>(_links, sequenceToItsLocalElementLevelsConverter);
+            var unicodeSymbolCriterionMatcher = new UnicodeSymbolCriterionMatcher<LinkAddress>(_links, _unicodeSymbolMarker);
+            var unicodeSequenceCriterionMatcher = new UnicodeSequenceCriterionMatcher<LinkAddress>(_links, _unicodeSequenceMarker);
+            var charToUnicodeSymbolConverter = new CharToUnicodeSymbolConverter<LinkAddress>(_links, addressToUnaryNumberConverter, _unicodeSymbolMarker);
+            var unicodeSymbolToCharConverter = new UnicodeSymbolToCharConverter<LinkAddress>(_links, unaryNumberToAddressConverter, unicodeSymbolCriterionMatcher);
+            var sequenceWalker = new LeveledSequenceWalker<LinkAddress>(_links, unicodeSymbolCriterionMatcher.IsMatched);
+            _stringToUnicodeSymbolConverter = new StringToUnicodeSequenceConverter<LinkAddress>(_links, charToUnicodeSymbolConverter, index, optimalVariantConverter, _unicodeSequenceMarker);
+            _unicodeSequenceToStringConverter = new UnicodeSequenceToStringConverter<LinkAddress>(_links, unicodeSequenceCriterionMatcher, sequenceWalker, unicodeSymbolToCharConverter);
         }
 
-        private ulong GerOrCreateMeaningRoot(ulong meaningRootIndex) => this.Exists(meaningRootIndex) ? meaningRootIndex : this.CreatePoint();
+        private LinkAddress GerOrCreateMeaningRoot(LinkAddress meaningRootIndex) => _links.Exists(meaningRootIndex) ? meaningRootIndex : _links.CreatePoint();
 
-        private ulong GetOrCreateNextMapping(ulong currentMappingIndex) => this.Exists(currentMappingIndex) ? currentMappingIndex : this.CreateAndUpdate(_meaningRoot, Constants.Itself);
+        private LinkAddress GetOrCreateNextMapping(LinkAddress currentMappingIndex) => _links.Exists(currentMappingIndex) ? currentMappingIndex : _links.CreateAndUpdate(_meaningRoot, _links.Constants.Itself);
 
-        public string GetString(ulong sequence)
-        {
-            var links = _sequences.ReadSequenceCore(sequence, UnicodeMap.IsCharLink);
-            return UnicodeMap.FromLinksToString(links);
-        }
+        public string GetString(LinkAddress sequence) => _unicodeSequenceToStringConverter.Convert(sequence);
 
-        public ulong CreateString(string @string)
-        {
-            var links = UnicodeMap.FromStringToLinkArray(@string);
-            _linkFrequencyIncrementer.Increment(links); // TODO: Remove it after fix of https://github.com/linksplatform/Data.Doublets/issues/2
-            var sequence = _sequences.Create(links);
-            return sequence;
-        }
+        public LinkAddress CreateString(string @string) => _stringToUnicodeSymbolConverter.Convert(@string);
 
         public IList<BlogPost> BlogPosts => GetBlogPosts();
 
         public IList<BlogPost> GetBlogPosts()
         {
-            var blogPostsCount = this.Count(Constants.Any, _blogPostMarker, Constants.Any);
-            var array = new IList<ulong>[blogPostsCount];
+            var blogPostsCount = _links.Count(_links.Constants.Any, _blogPostMarker, _links.Constants.Any);
+            var array = new IList<LinkAddress>[blogPostsCount];
             if (blogPostsCount > 0)
             {
-                var arrayFiller = new ArrayFiller<IList<ulong>, ulong>(array, Constants.Continue);
-                this.Each(arrayFiller.AddAndReturnConstant, Constants.Any, _blogPostMarker, Constants.Any);
+                var arrayFiller = new ArrayFiller<IList<LinkAddress>, LinkAddress>(array, _links.Constants.Continue);
+                _links.Each(arrayFiller.AddAndReturnConstant, _links.Constants.Any, _blogPostMarker, _links.Constants.Any);
             }
             return array.Select(GetBlogPost).ToArray();
         }
 
-        public BlogPost GetBlogPost(IList<ulong> postLink) => GetBlogPost(postLink[Constants.IndexPart]);
+        public BlogPost GetBlogPost(IList<LinkAddress> postLink) => GetBlogPost(postLink[_links.Constants.IndexPart]);
 
-        public BlogPost GetBlogPost(ulong postLink)
+        public BlogPost GetBlogPost(LinkAddress postLink)
         {
             var blogPost = new BlogPost();
 
@@ -115,9 +124,11 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             return blogPost;
         }
 
-        public ulong CreateBlogPost(BlogPost post)
+        public void Delete(LinkAddress link) => _links.Delete(link);
+
+        public LinkAddress CreateBlogPost(BlogPost post)
         {
-            var newPostLink = this.CreateAndUpdate(_blogPostMarker, Constants.Itself);
+            var newPostLink = _links.CreateAndUpdate(_blogPostMarker, _links.Constants.Itself);
 
             _defaultLinkPropertyOperator.SetValue(newPostLink, _titlePropertyMarker, CreateString(post.Title));
 
@@ -128,6 +139,14 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             _defaultLinkPropertyOperator.SetValue(newPostLink, _publicationDateTimePropertyMarker, publicationDateTimeSequence);
 
             return newPostLink;
+        }
+
+        protected override void Dispose(bool manual, bool wasDisposed)
+        {
+            if (!wasDisposed)
+            {
+                _disposableLinks.DisposeIfPossible();
+            }
         }
     }
 }

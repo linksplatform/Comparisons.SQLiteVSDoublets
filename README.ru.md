@@ -59,7 +59,6 @@ namespace Comparisons.SQLiteVSDoublets.SQLite
         }
     }
 }
-
 ```
 
 ## Дуплеты
@@ -98,6 +97,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
         public override void ReadList()
         {
+            Console.WriteLine();
             using (var dbContext = new DoubletsDbContext(DbFilename))
             {
                 foreach (var blogPost in dbContext.BlogPosts)
@@ -114,13 +114,12 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
                 var blogPosts = dbContext.BlogPosts;
                 foreach (var blogPost in blogPosts)
                 {
-                    dbContext.Delete((ulong)blogPost.Id);
+                    dbContext.Delete((uint)blogPost.Id);
                 }
             }
         }
     }
 }
-
 ```
 
 ## Результат

@@ -125,12 +125,12 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
 ## Result
 
-![Image with result of comparison between SQLite and Doublets.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_comparison_result.png "Result of comparison between SQLite and Doublets")
+![Image with result of comparison between SQLite and Doublets.](https://raw.githubusercontent.com/linksplatform/Documentation/719831c184ee8a4d709d9a8d9cb4d9abea316dcb/doc/Examples/sqlite_vs_doublets_comparison_result.png "Result of comparison between SQLite and Doublets")
 
 First is SQLite, second is Doublets.
 
-![Image of SQLite RAM usage.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_ram_usage.png "SQLite RAM usage")
-![Image of Doublets RAM usage.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/doublets_ram_usage.png "Doublets RAM usage")
+![Image of SQLite RAM usage.](https://github.com/linksplatform/Documentation/raw/719831c184ee8a4d709d9a8d9cb4d9abea316dcb/doc/Examples/sqlite_ram_usage.png "SQLite RAM usage")
+![Image of Doublets RAM usage.](https://raw.githubusercontent.com/linksplatform/Documentation/719831c184ee8a4d709d9a8d9cb4d9abea316dcb/doc/Examples/doublets_ram_usage.png "Doublets RAM usage")
 
 ## Conclusion
 

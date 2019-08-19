@@ -129,7 +129,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
 Первый это SQLite, второй это Дуплеты.
 
-![Изображение использования ОЗУ SQLite.](https://github.com/linksplatform/Documentation/raw/719831c184ee8a4d709d9a8d9cb4d9abea316dcb/doc/Examples/sqlite_ram_usage.png "Использование ОЗУ SQLite")
+![Изображение использования ОЗУ SQLite.](https://raw.githubusercontent.com/linksplatform/Documentation/719831c184ee8a4d709d9a8d9cb4d9abea316dcb/doc/Examples/sqlite_ram_usage.png "Использование ОЗУ SQLite")
 ![Изображение использования ОЗУ Дуплетами.](https://raw.githubusercontent.com/linksplatform/Documentation/719831c184ee8a4d709d9a8d9cb4d9abea316dcb/doc/Examples/doublets_ram_usage.png "Использование ОЗУ Дуплетами")
 
 ## Заключение

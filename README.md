@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/linksplatform/Comparisons.SQLiteVSDoublets.svg?branch=master)](https://travis-ci.com/linksplatform/Comparisons.SQLiteVSDoublets)
+
 # Comparisons.SQLiteVSDoublets ([русская версия](README.ru.md))
 
 ![Comparison of models](https://github.com/LinksPlatform/Documentation/raw/master/doc/ModelsComparison/relational_model_vs_associative_model_vs_links.png)

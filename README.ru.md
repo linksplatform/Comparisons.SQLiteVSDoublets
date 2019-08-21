@@ -124,12 +124,12 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
 ## Результат
 
-![Изображение результата сравнения SQLite и Дуплетов.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_comparison_result.png "Результат сравнения SQLite и Дуплетов")
+![Изображение результата сравнения SQLite и Дуплетов.](https://raw.githubusercontent.com/linksplatform/Documentation/649aa97995c1911c345d98cda6a711c5beec1fc4/doc/Examples/sqlite_vs_doublets_comparison_result.png "Результат сравнения SQLite и Дуплетов")
 
 Первый это SQLite, второй это Дуплеты.
 
-![Изображение использования ОЗУ SQLite.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_ram_usage.png "Использование ОЗУ SQLite")
-![Изображение использования ОЗУ Дуплетами.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/doublets_ram_usage.png "Использование ОЗУ Дуплетами")
+![Изображение использования ОЗУ SQLite.](https://raw.githubusercontent.com/linksplatform/Documentation/649aa97995c1911c345d98cda6a711c5beec1fc4/doc/Examples/sqlite_ram_usage.png "Использование ОЗУ SQLite")
+![Изображение использования ОЗУ Дуплетами.](https://raw.githubusercontent.com/linksplatform/Documentation/649aa97995c1911c345d98cda6a711c5beec1fc4/doc/Examples/doublets_ram_usage.png "Использование ОЗУ Дуплетами")
 
 ## Заключение
 

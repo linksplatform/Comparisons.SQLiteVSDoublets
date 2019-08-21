@@ -1,0 +1,8 @@
+language: csharp
+sudo: required
+dist: xenial
+mono: latest
+dotnet: 2.2
+script:
+  - dotnet build -c Release
+  - dotnet run -c Release

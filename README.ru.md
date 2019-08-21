@@ -8,7 +8,6 @@
 
 ## SQLite
 ```C#
-using System;
 using System.Linq;
 using Comparisons.SQLiteVSDoublets.Model;
 
@@ -44,7 +43,7 @@ namespace Comparisons.SQLiteVSDoublets.SQLite
             {
                 foreach (var blogPost in dbContext.BlogPosts)
                 {
-                    Console.WriteLine(blogPost);
+                    ReadBlogPosts.Add(blogPost);
                 }
             }
         }
@@ -63,7 +62,6 @@ namespace Comparisons.SQLiteVSDoublets.SQLite
 
 ## Дуплеты
 ``` C#
-using System;
 using System.Linq;
 using Comparisons.SQLiteVSDoublets.Model;
 
@@ -86,8 +84,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             {
                 if (!dbContext.BlogPosts.Any())
                 {
-                    var blogPosts = BlogPosts.List;
-                    foreach (BlogPost blogPost in blogPosts)
+                    foreach (var blogPost in BlogPosts.List)
                     {
                         dbContext.CreateBlogPost(blogPost);
                     }
@@ -97,12 +94,11 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
         public override void ReadList()
         {
-            Console.WriteLine();
             using (var dbContext = new DoubletsDbContext(DbFilename))
             {
                 foreach (var blogPost in dbContext.BlogPosts)
                 {
-                    Console.WriteLine(blogPost);
+                    ReadBlogPosts.Add(blogPost);
                 }
             }
         }
@@ -114,7 +110,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
                 var blogPosts = dbContext.BlogPosts;
                 foreach (var blogPost in blogPosts)
                 {
-                    dbContext.Delete((uint)blogPost.Id);
+                    dbContext.Delete((ulong)blogPost.Id);
                 }
             }
         }
@@ -124,13 +120,14 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
 ## Результат
 
-![Изображение результата сравнения SQLite и Дуплетов.](https://raw.githubusercontent.com/linksplatform/Documentation/649aa97995c1911c345d98cda6a711c5beec1fc4/doc/Examples/sqlite_vs_doublets_comparison_result.png "Результат сравнения SQLite и Дуплетов")
+![Изображение результата сравнения SQLite и Дуплетов.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_comparison_result.png "Результат сравнения SQLite и Дуплетов")
 
-Первый это SQLite, второй это Дуплеты.
-
-![Изображение использования ОЗУ SQLite.](https://raw.githubusercontent.com/linksplatform/Documentation/649aa97995c1911c345d98cda6a711c5beec1fc4/doc/Examples/sqlite_ram_usage.png "Использование ОЗУ SQLite")
-![Изображение использования ОЗУ Дуплетами.](https://raw.githubusercontent.com/linksplatform/Documentation/649aa97995c1911c345d98cda6a711c5beec1fc4/doc/Examples/doublets_ram_usage.png "Использование ОЗУ Дуплетами")
+![Изображение использования ОЗУ SQLite.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_ram_usage.png "Использование ОЗУ SQLite")
+![Изображение использования ОЗУ Дуплетами.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/doublets_ram_usage.png "Использование ОЗУ Дуплетами")
 
 ## Заключение
 
-Дуплеты быстрее при запуске, создании списка и используют меньше ОЗУ чем SQLite + EntityFramework, но медленее при чтении списка и удалении списка и используют больше памяти на диске.
+Дублеты быстрее и используют меньше оперативной памяти, чем SQLite + EntityFramework, но используют больше памяти на диске.
+Это включает в себя 1 тестовый прогон и 5 записей списка.
+Если мы увеличим количество тестов и записей, то будут Дублеты становиться всё медленее и медленнее чем SQLite.
+Таким образом, настоящий победитель здесь - SQLite.

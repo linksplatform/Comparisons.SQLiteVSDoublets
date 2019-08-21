@@ -8,7 +8,6 @@ Based on examples from https://github.com/FahaoTang/dotnetcore-examples and http
 
 ## SQLite
 ```C#
-using System;
 using System.Linq;
 using Comparisons.SQLiteVSDoublets.Model;
 
@@ -44,7 +43,7 @@ namespace Comparisons.SQLiteVSDoublets.SQLite
             {
                 foreach (var blogPost in dbContext.BlogPosts)
                 {
-                    Console.WriteLine(blogPost);
+                    ReadBlogPosts.Add(blogPost);
                 }
             }
         }
@@ -63,7 +62,6 @@ namespace Comparisons.SQLiteVSDoublets.SQLite
 
 ## Doublets
 ``` C#
-using System;
 using System.Linq;
 using Comparisons.SQLiteVSDoublets.Model;
 
@@ -86,8 +84,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             {
                 if (!dbContext.BlogPosts.Any())
                 {
-                    var blogPosts = BlogPosts.List;
-                    foreach (BlogPost blogPost in blogPosts)
+                    foreach (var blogPost in BlogPosts.List)
                     {
                         dbContext.CreateBlogPost(blogPost);
                     }
@@ -97,12 +94,11 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
         public override void ReadList()
         {
-            Console.WriteLine();
             using (var dbContext = new DoubletsDbContext(DbFilename))
             {
                 foreach (var blogPost in dbContext.BlogPosts)
                 {
-                    Console.WriteLine(blogPost);
+                    ReadBlogPosts.Add(blogPost);
                 }
             }
         }
@@ -114,7 +110,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
                 var blogPosts = dbContext.BlogPosts;
                 foreach (var blogPost in blogPosts)
                 {
-                    dbContext.Delete((uint)blogPost.Id);
+                    dbContext.Delete((ulong)blogPost.Id);
                 }
             }
         }
@@ -124,13 +120,14 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
 ## Result
 
-![Image with result of comparison between SQLite and Doublets.](https://raw.githubusercontent.com/linksplatform/Documentation/649aa97995c1911c345d98cda6a711c5beec1fc4/doc/Examples/sqlite_vs_doublets_comparison_result.png "Result of comparison between SQLite and Doublets")
+![Image with result of comparison between SQLite and Doublets.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_comparison_result.png "Result of comparison between SQLite and Doublets")
 
-First is SQLite, second is Doublets.
-
-![Image of SQLite RAM usage.](https://raw.githubusercontent.com/linksplatform/Documentation/649aa97995c1911c345d98cda6a711c5beec1fc4/doc/Examples/sqlite_ram_usage.png "SQLite RAM usage")
-![Image of Doublets RAM usage.](https://raw.githubusercontent.com/linksplatform/Documentation/649aa97995c1911c345d98cda6a711c5beec1fc4/doc/Examples/doublets_ram_usage.png "Doublets RAM usage")
+![Image of SQLite RAM usage.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_ram_usage.png "SQLite RAM usage")
+![Image of Doublets RAM usage.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/doublets_ram_usage.png "Doublets RAM usage")
 
 ## Conclusion
 
-Doublets is faster at startup and list creation and uses less RAM than SQLite + EntityFramework, but slower at list reading, list deletion and uses more memory on disk.
+Doublets are faster and use less RAM than SQLite + EntityFramework, but use more memory on disk.
+This includes 1 test run and 5 records list.
+If we increase the number of test runs and records then Doublets become slower and slower than SQLite.
+So the real winner here is SQLite.

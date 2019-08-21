@@ -1,17 +1,22 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System.Collections.Generic;
 using Platform.IO;
 using Platform.Diagnostics;
+using Comparisons.SQLiteVSDoublets.Model;
 
 namespace Comparisons.SQLiteVSDoublets
 {
     public abstract class TestRun
     {
         public string DbFilename { get; }
+        public TestRunResults Results { get; }
+        public List<BlogPost> ReadBlogPosts { get; }
 
         protected TestRun(string dbFilename)
         {
             DbFilename = dbFilename;
+            Results = new TestRunResults();
+            ReadBlogPosts = new List<BlogPost>();
         }
 
         public void Run()
@@ -20,14 +25,14 @@ namespace Comparisons.SQLiteVSDoublets
             {
                 File.Delete(DbFilename);
             }
-            var prepareTime = Performance.Measure(Prepare);
-            Console.WriteLine($"Prepare execution time: {prepareTime}, db size after prepare: {FileHelpers.GetSize(DbFilename)}.");
-            var createListTime = Performance.Measure(CreateList);
-            Console.WriteLine($"Create list execution time: {createListTime}, db size after create list: {FileHelpers.GetSize(DbFilename)}.");
-            var readListTime = Performance.Measure(ReadList);
-            Console.WriteLine($"Read list execution time: {readListTime}.");
-            var deleteListTime = Performance.Measure(DeleteList);
-            Console.WriteLine($"Delete list execution time: {deleteListTime}, db size after delete list: {FileHelpers.GetSize(DbFilename)}.");
+            Results.PrepareTime = Performance.Measure(Prepare);
+            Results.DbSizeAfterPrepare = FileHelpers.GetSize(DbFilename);
+            Results.ListCreationTime = Performance.Measure(CreateList);
+            Results.DbSizeAfterCreation = FileHelpers.GetSize(DbFilename);
+            Results.ListReadingTime = Performance.Measure(ReadList);
+            Results.DbSizeAfterReading = FileHelpers.GetSize(DbFilename);
+            Results.ListDeletionTime = Performance.Measure(DeleteList);
+            Results.DbSizeAfterDeletion = FileHelpers.GetSize(DbFilename);
             File.Delete(DbFilename);
         }
 

@@ -3,30 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using Platform.Disposables;
 using Platform.Collections.Arrays;
+using Platform.Collections.Stacks;
 using Platform.Data;
 using Platform.Data.Doublets;
-using Platform.Data.Doublets.UnaryNumbers;
 using Platform.Data.Doublets.Decorators;
-using Platform.Data.Doublets.Incrementers;
 using Platform.Data.Doublets.ResizableDirectMemory;
-using Platform.Data.Doublets.Sequences.Converters;
 using Platform.Data.Doublets.PropertyOperators;
+using Platform.Data.Doublets.Unicode;
+using Platform.Data.Doublets.Numbers.Raw;
 using Platform.Data.Doublets.Sequences.Indexes;
 using Platform.Data.Doublets.Sequences.Walkers;
-using Platform.Data.Doublets.Unicode;
+using Platform.Data.Doublets.Sequences.Converters;
+using Platform.Data.Doublets.Sequences.Frequencies.Cache;
+using Platform.Data.Doublets.Sequences.Frequencies.Counters;
 using Comparisons.SQLiteVSDoublets.Model;
-using LinkAddress = System.UInt32;
+using LinkAddress = System.UInt64;
 
 namespace Comparisons.SQLiteVSDoublets.Doublets
 {
     public class DoubletsDbContext : DisposableBase
     {
         private readonly LinkAddress _meaningRoot;
-        private readonly LinkAddress _unaryOne;
         private readonly LinkAddress _unicodeSymbolMarker;
         private readonly LinkAddress _unicodeSequenceMarker;
-        private readonly LinkAddress _frequencyMarker;
-        private readonly LinkAddress _frequencyPropertyMarker;
         private readonly LinkAddress _titlePropertyMarker;
         private readonly LinkAddress _contentPropertyMarker;
         private readonly LinkAddress _publicationDateTimePropertyMarker;
@@ -39,21 +38,16 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
         public DoubletsDbContext(string dbFilename)
         {
-            _disposableLinks = new ResizableDirectMemoryLinks<LinkAddress>(dbFilename);
-            _links = _disposableLinks;
-            _links = new LinksCascadeUsagesResolver<LinkAddress>(_links);
-            _links = new NonNullContentsLinkDeletionResolver<LinkAddress>(_links);
-            _links = new LinksCascadeUniquenessAndUsagesResolver<LinkAddress>(_links);
+            //_disposableLinks = new ResizableDirectMemoryLinks<LinkAddress>(dbFilename);
+            _disposableLinks = new UInt64ResizableDirectMemoryLinks(dbFilename);
+            _links = _disposableLinks.DecorateWithAutomaticUniquenessAndUsagesResolution();
             _links = new LinksItselfConstantToSelfReferenceResolver<LinkAddress>(_links);
-            _links = new LinksInnerReferenceExistenceValidator<LinkAddress>(_links);
+            //_links = new LinksInnerReferenceExistenceValidator<LinkAddress>(_links);
 
             LinkAddress currentMappingLinkIndex = 1;
             _meaningRoot = GerOrCreateMeaningRoot(currentMappingLinkIndex++);
-            _unaryOne = GetOrCreateNextMapping(currentMappingLinkIndex++);
             _unicodeSymbolMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
             _unicodeSequenceMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
-            _frequencyMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
-            _frequencyPropertyMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
             _titlePropertyMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
             _contentPropertyMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
             _publicationDateTimePropertyMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
@@ -62,21 +56,19 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             _defaultLinkPropertyOperator = new PropertiesOperator<LinkAddress>(_links);
 
             // Create StringToUnicodeSequenceConverter and UnicodeSequenceToStringConverter
-            var unaryNumberToAddressConverter = new UnaryNumberToAddressAddOperationConverter<LinkAddress>(_links, _unaryOne);
-            var powerOf2ToUnaryNumberConverter = new PowerOf2ToUnaryNumberConverter<LinkAddress>(_links, _unaryOne);
-            var addressToUnaryNumberConverter = new AddressToUnaryNumberConverter<LinkAddress>(_links, powerOf2ToUnaryNumberConverter);
-            var unaryNumberIncrementer = new UnaryNumberIncrementer<LinkAddress>(_links, _unaryOne);
-            var frequencyIncrementer = new FrequencyIncrementer<LinkAddress>(_links, _frequencyMarker, _unaryOne, unaryNumberIncrementer);
-            var frequencyPropertyOperator = new PropertyOperator<LinkAddress>(_links, _frequencyPropertyMarker, _frequencyMarker);
-            var index = new FrequencyIncrementingSequenceIndex<LinkAddress>(_links, frequencyPropertyOperator, frequencyIncrementer);
-            var linkToItsFrequencyNumberConverter = new LinkToItsFrequencyNumberConveter<LinkAddress>(_links, frequencyPropertyOperator, unaryNumberToAddressConverter);
+            var numberToAddressConverter = new RawNumberToAddressConverter<LinkAddress>();
+            var addressToNumberConverter = new AddressToRawNumberConverter<LinkAddress>();
+            var totalSequenceSymbolFrequencyCounter = new TotalSequenceSymbolFrequencyCounter<LinkAddress>(_links);
+            var linkFrequenciesCache = new LinkFrequenciesCache<LinkAddress>(_links, totalSequenceSymbolFrequencyCounter);
+            var index = new CachedFrequencyIncrementingSequenceIndex<LinkAddress>(linkFrequenciesCache);
+            var linkToItsFrequencyNumberConverter = new FrequenciesCacheBasedLinkToItsFrequencyNumberConverter<LinkAddress>(linkFrequenciesCache);
             var sequenceToItsLocalElementLevelsConverter = new SequenceToItsLocalElementLevelsConverter<LinkAddress>(_links, linkToItsFrequencyNumberConverter);
             var optimalVariantConverter = new OptimalVariantConverter<LinkAddress>(_links, sequenceToItsLocalElementLevelsConverter);
             var unicodeSymbolCriterionMatcher = new UnicodeSymbolCriterionMatcher<LinkAddress>(_links, _unicodeSymbolMarker);
             var unicodeSequenceCriterionMatcher = new UnicodeSequenceCriterionMatcher<LinkAddress>(_links, _unicodeSequenceMarker);
-            var charToUnicodeSymbolConverter = new CharToUnicodeSymbolConverter<LinkAddress>(_links, addressToUnaryNumberConverter, _unicodeSymbolMarker);
-            var unicodeSymbolToCharConverter = new UnicodeSymbolToCharConverter<LinkAddress>(_links, unaryNumberToAddressConverter, unicodeSymbolCriterionMatcher);
-            var sequenceWalker = new LeveledSequenceWalker<LinkAddress>(_links, unicodeSymbolCriterionMatcher.IsMatched);
+            var charToUnicodeSymbolConverter = new CharToUnicodeSymbolConverter<LinkAddress>(_links, addressToNumberConverter, _unicodeSymbolMarker);
+            var unicodeSymbolToCharConverter = new UnicodeSymbolToCharConverter<LinkAddress>(_links, numberToAddressConverter, unicodeSymbolCriterionMatcher);
+            var sequenceWalker = new RightSequenceWalker<LinkAddress>(_links, new DefaultStack<LinkAddress>(), unicodeSymbolCriterionMatcher.IsMatched);
             _stringToUnicodeSymbolConverter = new StringToUnicodeSequenceConverter<LinkAddress>(_links, charToUnicodeSymbolConverter, index, optimalVariantConverter, _unicodeSequenceMarker);
             _unicodeSequenceToStringConverter = new UnicodeSequenceToStringConverter<LinkAddress>(_links, unicodeSequenceCriterionMatcher, sequenceWalker, unicodeSymbolToCharConverter);
         }

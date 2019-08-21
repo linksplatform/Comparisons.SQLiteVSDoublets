@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Comparisons.SQLiteVSDoublets.Model;
 
 namespace Comparisons.SQLiteVSDoublets.SQLite
@@ -34,7 +33,7 @@ namespace Comparisons.SQLiteVSDoublets.SQLite
             {
                 foreach (var blogPost in dbContext.BlogPosts)
                 {
-                    Console.WriteLine(blogPost);
+                    ReadBlogPosts.Add(blogPost);
                 }
             }
         }

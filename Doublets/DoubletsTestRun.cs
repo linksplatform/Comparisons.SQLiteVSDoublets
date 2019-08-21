@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Comparisons.SQLiteVSDoublets.Model;
 
 namespace Comparisons.SQLiteVSDoublets.Doublets
@@ -21,8 +20,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             {
                 if (!dbContext.BlogPosts.Any())
                 {
-                    var blogPosts = BlogPosts.List;
-                    foreach (BlogPost blogPost in blogPosts)
+                    foreach (var blogPost in BlogPosts.List)
                     {
                         dbContext.CreateBlogPost(blogPost);
                     }
@@ -32,12 +30,11 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
         public override void ReadList()
         {
-            Console.WriteLine();
             using (var dbContext = new DoubletsDbContext(DbFilename))
             {
                 foreach (var blogPost in dbContext.BlogPosts)
                 {
-                    Console.WriteLine(blogPost);
+                    ReadBlogPosts.Add(blogPost);
                 }
             }
         }
@@ -49,7 +46,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
                 var blogPosts = dbContext.BlogPosts;
                 foreach (var blogPost in blogPosts)
                 {
-                    dbContext.Delete((uint)blogPost.Id);
+                    dbContext.Delete((ulong)blogPost.Id);
                 }
             }
         }

@@ -122,6 +122,8 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
 ![Изображение результата сравнения SQLite и Дуплетов.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_comparison_result.png "Результат сравнения SQLite и Дуплетов")
 
+Первый это SQLite, второй это Дуплеты:
+
 ![Изображение использования ОЗУ SQLite.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_ram_usage.png "Использование ОЗУ SQLite")
 ![Изображение использования ОЗУ Дуплетами.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/doublets_ram_usage.png "Использование ОЗУ Дуплетами")
 

@@ -23,7 +23,7 @@ namespace Comparisons.SQLiteVSDoublets.SQLite
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BlogPost>().ToTable("Blogs", "test");
+            modelBuilder.Entity<BlogPost>().ToTable("BlogPosts", "test");
             modelBuilder.Entity<BlogPost>(entity =>
             {
                 entity.HasKey(e => e.Id);

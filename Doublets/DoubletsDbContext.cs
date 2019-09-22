@@ -18,6 +18,7 @@ using Platform.Data.Doublets.Sequences.Frequencies.Cache;
 using Platform.Data.Doublets.Sequences.Frequencies.Counters;
 using Comparisons.SQLiteVSDoublets.Model;
 using LinkAddress = System.UInt64;
+using Platform.Data.Doublets.Sequences;
 
 namespace Comparisons.SQLiteVSDoublets.Doublets
 {
@@ -39,10 +40,11 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
         public DoubletsDbContext(string dbFilename)
         {
             //_disposableLinks = new ResizableDirectMemoryLinks<LinkAddress>(dbFilename);
-            _disposableLinks = new UInt64ResizableDirectMemoryLinks(dbFilename);
-            _links = _disposableLinks.DecorateWithAutomaticUniquenessAndUsagesResolution();
-            _links = new LinksItselfConstantToSelfReferenceResolver<LinkAddress>(_links);
+            //_links = _disposableLinks.DecorateWithAutomaticUniquenessAndUsagesResolution();
+            //_links = new LinksItselfConstantToSelfReferenceResolver<LinkAddress>(_links);
             //_links = new LinksInnerReferenceExistenceValidator<LinkAddress>(_links);
+            _disposableLinks = new UInt64ResizableDirectMemoryLinks(dbFilename);
+            _links = new UInt64Links(_disposableLinks);
 
             LinkAddress currentMappingLinkIndex = 1;
             _meaningRoot = GerOrCreateMeaningRoot(currentMappingLinkIndex++);
@@ -85,14 +87,10 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
         public IList<BlogPost> GetBlogPosts()
         {
-            var blogPostsCount = _links.Count(_links.Constants.Any, _blogPostMarker, _links.Constants.Any);
-            var array = new IList<LinkAddress>[blogPostsCount];
-            if (blogPostsCount > 0)
-            {
-                var arrayFiller = new ArrayFiller<IList<LinkAddress>, LinkAddress>(array, _links.Constants.Continue);
-                _links.Each(arrayFiller.AddAndReturnConstant, _links.Constants.Any, _blogPostMarker, _links.Constants.Any);
-            }
-            return array.Select(GetBlogPost).ToArray();
+            var list = new List<IList<LinkAddress>>();
+            var listFiller = new ListFiller<IList<LinkAddress>, LinkAddress>(list, _links.Constants.Continue);
+            _links.Each(listFiller.AddAndReturnConstant, _links.Constants.Any, _blogPostMarker, _links.Constants.Any);
+            return list.Select(GetBlogPost).ToList();
         }
 
         public BlogPost GetBlogPost(IList<LinkAddress> postLink) => GetBlogPost(postLink[_links.Constants.IndexPart]);

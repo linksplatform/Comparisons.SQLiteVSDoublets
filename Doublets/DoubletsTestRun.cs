@@ -18,12 +18,9 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
         {
             using (var dbContext = new DoubletsDbContext(DbFilename))
             {
-                if (!dbContext.BlogPosts.Any())
+                foreach (var blogPost in BlogPosts.List)
                 {
-                    foreach (var blogPost in BlogPosts.List)
-                    {
-                        dbContext.CreateBlogPost(blogPost);
-                    }
+                    dbContext.CreateBlogPost(blogPost);
                 }
             }
         }
@@ -43,8 +40,8 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
         {
             using (var dbContext = new DoubletsDbContext(DbFilename))
             {
-                var blogPosts = dbContext.BlogPosts;
-                foreach (var blogPost in blogPosts)
+                var blogPostsToDelete = dbContext.BlogPosts;
+                foreach (var blogPost in blogPostsToDelete)
                 {
                     dbContext.Delete((ulong)blogPost.Id);
                 }

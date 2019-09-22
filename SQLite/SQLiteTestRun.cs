@@ -19,11 +19,8 @@ namespace Comparisons.SQLiteVSDoublets.SQLite
         {
             using (var dbContext = new SQLiteDbContext(DbFilename))
             {
-                if (!dbContext.BlogPosts.Any())
-                {
-                    dbContext.BlogPosts.AddRange(BlogPosts.List);
-                    dbContext.SaveChanges();
-                }
+                dbContext.BlogPosts.AddRange(BlogPosts.List);
+                dbContext.SaveChanges();
             }
         }
 
@@ -42,7 +39,8 @@ namespace Comparisons.SQLiteVSDoublets.SQLite
         {
             using (var dbContext = new SQLiteDbContext(DbFilename))
             {
-                dbContext.BlogPosts.RemoveRange(dbContext.BlogPosts);
+                var blogPostsToDelete = dbContext.BlogPosts.ToList();
+                dbContext.BlogPosts.RemoveRange(blogPostsToDelete);
                 dbContext.SaveChanges();
             }
         }

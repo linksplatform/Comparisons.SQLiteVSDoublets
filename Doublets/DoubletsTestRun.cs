@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Comparisons.SQLiteVSDoublets.Model;
+﻿using Comparisons.SQLiteVSDoublets.Model;
 
 namespace Comparisons.SQLiteVSDoublets.Doublets
 {

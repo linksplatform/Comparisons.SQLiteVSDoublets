@@ -31,11 +31,8 @@ namespace Comparisons.SQLiteVSDoublets.SQLite
         {
             using (var dbContext = new SQLiteDbContext(DbFilename))
             {
-                if (!dbContext.BlogPosts.Any())
-                {
-                    dbContext.BlogPosts.AddRange(BlogPosts.List);
-                    dbContext.SaveChanges();
-                }
+                dbContext.BlogPosts.AddRange(BlogPosts.List);
+                dbContext.SaveChanges();
             }
         }
 
@@ -54,7 +51,8 @@ namespace Comparisons.SQLiteVSDoublets.SQLite
         {
             using (var dbContext = new SQLiteDbContext(DbFilename))
             {
-                dbContext.BlogPosts.RemoveRange(dbContext.BlogPosts);
+                var blogPostsToDelete = dbContext.BlogPosts.ToList();
+                dbContext.BlogPosts.RemoveRange(blogPostsToDelete);
                 dbContext.SaveChanges();
             }
         }
@@ -64,7 +62,6 @@ namespace Comparisons.SQLiteVSDoublets.SQLite
 
 ## Дуплеты
 ``` C#
-using System.Linq;
 using Comparisons.SQLiteVSDoublets.Model;
 
 namespace Comparisons.SQLiteVSDoublets.Doublets
@@ -84,12 +81,9 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
         {
             using (var dbContext = new DoubletsDbContext(DbFilename))
             {
-                if (!dbContext.BlogPosts.Any())
+                foreach (var blogPost in BlogPosts.List)
                 {
-                    foreach (var blogPost in BlogPosts.List)
-                    {
-                        dbContext.CreateBlogPost(blogPost);
-                    }
+                    dbContext.CreateBlogPost(blogPost);
                 }
             }
         }
@@ -109,8 +103,8 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
         {
             using (var dbContext = new DoubletsDbContext(DbFilename))
             {
-                var blogPosts = dbContext.BlogPosts;
-                foreach (var blogPost in blogPosts)
+                var blogPostsToDelete = dbContext.BlogPosts;
+                foreach (var blogPost in blogPostsToDelete)
                 {
                     dbContext.Delete((ulong)blogPost.Id);
                 }

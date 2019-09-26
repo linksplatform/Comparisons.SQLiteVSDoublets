@@ -19,11 +19,34 @@ using Platform.Data.Doublets.Sequences.Frequencies.Counters;
 using Comparisons.SQLiteVSDoublets.Model;
 using LinkAddress = System.UInt64;
 using Platform.Data.Doublets.Sequences;
+using Platform.Interfaces;
 
 namespace Comparisons.SQLiteVSDoublets.Doublets
 {
     public class DoubletsDbContext : DisposableBase
     {
+        private class CachedConverter<TSource, TTarget> : IConverter<TSource, TTarget>
+        {
+            private readonly IConverter<TSource, TTarget> _baseConverter;
+            private readonly Dictionary<TSource, TTarget> _cache;
+
+            public CachedConverter(IConverter<TSource, TTarget> baseConverter)
+            {
+                _baseConverter = baseConverter;
+                _cache = new Dictionary<TSource, TTarget>();
+            }
+
+            public TTarget Convert(TSource source)
+            {
+                if (!_cache.TryGetValue(source, out TTarget value))
+                {
+                    value = _baseConverter.Convert(source);
+                    _cache.Add(source, value);
+                }
+                return value;
+            }
+        }
+
         private readonly LinkAddress _meaningRoot;
         private readonly LinkAddress _unicodeSymbolMarker;
         private readonly LinkAddress _unicodeSequenceMarker;
@@ -32,8 +55,10 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
         private readonly LinkAddress _publicationDateTimePropertyMarker;
         private readonly LinkAddress _blogPostMarker;
         private readonly PropertiesOperator<LinkAddress> _defaultLinkPropertyOperator;
-        private readonly StringToUnicodeSequenceConverter<LinkAddress> _stringToUnicodeSymbolConverter;
-        private readonly UnicodeSequenceToStringConverter<LinkAddress> _unicodeSequenceToStringConverter;
+        private readonly RawNumberToAddressConverter<ulong> _numberToAddressConverter;
+        private readonly AddressToRawNumberConverter<ulong> _addressToNumberConverter;
+        private readonly IConverter<string, LinkAddress> _stringToUnicodeSequenceConverter;
+        private readonly IConverter<LinkAddress, string> _unicodeSequenceToStringConverter;
         private readonly ILinks<LinkAddress> _disposableLinks;
         private readonly ILinks<LinkAddress> _links;
 
@@ -58,21 +83,22 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             _defaultLinkPropertyOperator = new PropertiesOperator<LinkAddress>(_links);
 
             // Create StringToUnicodeSequenceConverter and UnicodeSequenceToStringConverter
-            var numberToAddressConverter = new RawNumberToAddressConverter<LinkAddress>();
-            var addressToNumberConverter = new AddressToRawNumberConverter<LinkAddress>();
-            var totalSequenceSymbolFrequencyCounter = new TotalSequenceSymbolFrequencyCounter<LinkAddress>(_links);
-            var linkFrequenciesCache = new LinkFrequenciesCache<LinkAddress>(_links, totalSequenceSymbolFrequencyCounter);
-            var index = new CachedFrequencyIncrementingSequenceIndex<LinkAddress>(linkFrequenciesCache);
-            var linkToItsFrequencyNumberConverter = new FrequenciesCacheBasedLinkToItsFrequencyNumberConverter<LinkAddress>(linkFrequenciesCache);
-            var sequenceToItsLocalElementLevelsConverter = new SequenceToItsLocalElementLevelsConverter<LinkAddress>(_links, linkToItsFrequencyNumberConverter);
-            var optimalVariantConverter = new OptimalVariantConverter<LinkAddress>(_links, sequenceToItsLocalElementLevelsConverter);
+            _numberToAddressConverter = new RawNumberToAddressConverter<LinkAddress>();
+            _addressToNumberConverter = new AddressToRawNumberConverter<LinkAddress>();
+            //var totalSequenceSymbolFrequencyCounter = new TotalSequenceSymbolFrequencyCounter<LinkAddress>(_links);
+            //var linkFrequenciesCache = new LinkFrequenciesCache<LinkAddress>(_links, totalSequenceSymbolFrequencyCounter);
+            //var index = new CachedFrequencyIncrementingSequenceIndex<LinkAddress>(linkFrequenciesCache);
+            //var linkToItsFrequencyNumberConverter = new FrequenciesCacheBasedLinkToItsFrequencyNumberConverter<LinkAddress>(linkFrequenciesCache);
+            //var sequenceToItsLocalElementLevelsConverter = new SequenceToItsLocalElementLevelsConverter<LinkAddress>(_links, linkToItsFrequencyNumberConverter);
+            //var optimalVariantConverter = new OptimalVariantConverter<LinkAddress>(_links, sequenceToItsLocalElementLevelsConverter);
+            var balancedVariantConverter = new BalancedVariantConverter<LinkAddress>(_links);
             var unicodeSymbolCriterionMatcher = new UnicodeSymbolCriterionMatcher<LinkAddress>(_links, _unicodeSymbolMarker);
             var unicodeSequenceCriterionMatcher = new UnicodeSequenceCriterionMatcher<LinkAddress>(_links, _unicodeSequenceMarker);
-            var charToUnicodeSymbolConverter = new CharToUnicodeSymbolConverter<LinkAddress>(_links, addressToNumberConverter, _unicodeSymbolMarker);
-            var unicodeSymbolToCharConverter = new UnicodeSymbolToCharConverter<LinkAddress>(_links, numberToAddressConverter, unicodeSymbolCriterionMatcher);
+            var charToUnicodeSymbolConverter = new CharToUnicodeSymbolConverter<LinkAddress>(_links, _addressToNumberConverter, _unicodeSymbolMarker);
+            var unicodeSymbolToCharConverter = new UnicodeSymbolToCharConverter<LinkAddress>(_links, _numberToAddressConverter, unicodeSymbolCriterionMatcher);
             var sequenceWalker = new RightSequenceWalker<LinkAddress>(_links, new DefaultStack<LinkAddress>(), unicodeSymbolCriterionMatcher.IsMatched);
-            _stringToUnicodeSymbolConverter = new StringToUnicodeSequenceConverter<LinkAddress>(_links, charToUnicodeSymbolConverter, index, optimalVariantConverter, _unicodeSequenceMarker);
-            _unicodeSequenceToStringConverter = new UnicodeSequenceToStringConverter<LinkAddress>(_links, unicodeSequenceCriterionMatcher, sequenceWalker, unicodeSymbolToCharConverter);
+            _stringToUnicodeSequenceConverter = new CachedConverter<string, LinkAddress>(new StringToUnicodeSequenceConverter<LinkAddress>(_links, charToUnicodeSymbolConverter, new Unindex<LinkAddress>(), balancedVariantConverter, _unicodeSequenceMarker));
+            _unicodeSequenceToStringConverter = new CachedConverter<LinkAddress, string>(new UnicodeSequenceToStringConverter<LinkAddress>(_links, unicodeSequenceCriterionMatcher, sequenceWalker, unicodeSymbolToCharConverter));
         }
 
         private LinkAddress GerOrCreateMeaningRoot(LinkAddress meaningRootIndex) => _links.Exists(meaningRootIndex) ? meaningRootIndex : _links.CreatePoint();
@@ -81,7 +107,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
         public string GetString(LinkAddress sequence) => _unicodeSequenceToStringConverter.Convert(sequence);
 
-        public LinkAddress CreateString(string @string) => _stringToUnicodeSymbolConverter.Convert(@string);
+        public LinkAddress CreateString(string @string) => _stringToUnicodeSequenceConverter.Convert(@string);
 
         public IList<BlogPost> BlogPosts => GetBlogPosts();
 
@@ -107,9 +133,11 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             var contentSequence = _defaultLinkPropertyOperator.GetValue(postLink, _contentPropertyMarker);
             blogPost.Content = GetString(contentSequence);
 
-            var publicationDateTimeSequence = _defaultLinkPropertyOperator.GetValue(postLink, _publicationDateTimePropertyMarker);
-            var publicationDateTimeString = GetString(publicationDateTimeSequence);
-            blogPost.PublicationDateTime = DateTime.ParseExact(publicationDateTimeString, "s", System.Globalization.CultureInfo.InvariantCulture);
+            //var publicationDateTimeSequence = _defaultLinkPropertyOperator.GetValue(postLink, _publicationDateTimePropertyMarker);
+            //var publicationDateTimeString = GetString(publicationDateTimeSequence);
+            //blogPost.PublicationDateTime = DateTime.ParseExact(publicationDateTimeString, "s", System.Globalization.CultureInfo.InvariantCulture);
+
+            blogPost.PublicationDateTime = DateTime.FromFileTimeUtc((long)_numberToAddressConverter.Convert(_defaultLinkPropertyOperator.GetValue(postLink, _publicationDateTimePropertyMarker)));
 
             return blogPost;
         }
@@ -124,9 +152,11 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
             _defaultLinkPropertyOperator.SetValue(newPostLink, _contentPropertyMarker, CreateString(post.Content));
 
-            var publicationDateTimeString = post.PublicationDateTime.ToString("s", System.Globalization.CultureInfo.InvariantCulture);
-            var publicationDateTimeSequence = CreateString(publicationDateTimeString);
-            _defaultLinkPropertyOperator.SetValue(newPostLink, _publicationDateTimePropertyMarker, publicationDateTimeSequence);
+            //var publicationDateTimeString = post.PublicationDateTime.ToString("s", System.Globalization.CultureInfo.InvariantCulture);
+            //var publicationDateTimeSequence = CreateString(publicationDateTimeString);
+            //_defaultLinkPropertyOperator.SetValue(newPostLink, _publicationDateTimePropertyMarker, publicationDateTimeSequence);
+
+            _defaultLinkPropertyOperator.SetValue(newPostLink, _publicationDateTimePropertyMarker, _addressToNumberConverter.Convert((ulong)post.PublicationDateTime.ToFileTimeUtc()));
 
             return newPostLink;
         }

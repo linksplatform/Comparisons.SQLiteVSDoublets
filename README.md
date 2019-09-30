@@ -127,4 +127,4 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
 ## Conclusion
 
-Doublets are faster and use less memory on disk, but that comes with the cost of RAM usage (where Sqlite performs better).
+In this particular comparison, Doublets are faster and use less memory on disk, but that comes with the cost of RAM usage (where Sqlite performs better).

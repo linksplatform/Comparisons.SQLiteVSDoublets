@@ -4,12 +4,19 @@ using System.Collections.Generic;
 using Comparisons.SQLiteVSDoublets.SQLite;
 using Comparisons.SQLiteVSDoublets.Doublets;
 using Comparisons.SQLiteVSDoublets.Model;
+using BenchmarkDotNet.Running;
 
 namespace Comparisons.SQLiteVSDoublets
 {
     class Program
     {
         static void Main()
+        {
+            BenchmarkRunner.Run<Benchmarks>();
+            //Run();
+        }
+
+        private static void Run()
         {
             const int numberOfTestRuns = 1;
             const int numberOfRecordsPerTestRun = 5;

@@ -127,6 +127,8 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
 ### Исходные данные
 ```
+// * Summary *
+
 BenchmarkDotNet=v0.11.5, OS=Windows 10.0.18362
 Intel Core i7-6700K CPU 4.00GHz (Skylake), 1 CPU, 8 logical and 4 physical cores
 .NET Core SDK=3.0.100
@@ -151,6 +153,17 @@ WarmupCount=2
 | Doublets |     Clr | 100000 | 11,093.7 ms |    NA | 3147000.0000 | 327000.0000 |         - | 12628.43 MB |          64192256 |
 |   SQLite |    Core | 100000 | 15,128.5 ms |    NA |  575000.0000 | 152000.0000 | 1000.0000 |  2771.32 MB |          90714112 |
 | Doublets |    Core | 100000 | 11,758.4 ms |    NA | 3136000.0000 | 335000.0000 |         - | 12584.04 MB |          64192256 |
+
+// * Legends *
+  N                 : Value of the 'N' parameter
+  Mean              : Arithmetic mean of all measurements
+  Error             : Half of 99.9% confidence interval
+  Gen 0             : GC Generation 0 collects per 1000 operations
+  Gen 1             : GC Generation 1 collects per 1000 operations
+  Gen 2             : GC Generation 2 collects per 1000 operations
+  Allocated         : Allocated memory per single operation (managed only, inclusive, 1KB = 1024B)
+  SizeAfterCreation : Allocated memory on disk after all records are created (1KB = 1024B)
+  1 ms              : 1 Millisecond (0.001 sec)
 ```
 
 

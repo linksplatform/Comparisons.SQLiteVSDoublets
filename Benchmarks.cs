@@ -9,7 +9,7 @@ namespace Comparisons.SQLiteVSDoublets
 {
     [ClrJob, CoreJob]
     [MemoryDiagnoser]
-    [MaxWarmupCount(2)]
+    [WarmupCount(2)]
     [IterationCount(1)]
     [Config(typeof(Config))]
     public class Benchmarks

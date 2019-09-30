@@ -114,7 +114,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 }
 ```
 
-## Результат
+## [Результат](https://www.icloud.com/keynote/0cYVNWkWD5RLU0k-XIBs3qWkA#Sqlite_vs_Doublets)
 
 ### Производительность
 ![Изображение с результатом сравнения производительности SQLite и Дуплетов.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_performance.png "Результат сравнения производительности SQLite и Дуплетов")

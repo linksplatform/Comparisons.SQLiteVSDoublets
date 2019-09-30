@@ -14,15 +14,15 @@ namespace Comparisons.SQLiteVSDoublets
     [Config(typeof(Config))]
     public class Benchmarks
     {
-        [Params(1000, 10000, 100000)]
-        public int N;
-        private SQLiteTestRun _sqliteTestRun;
-        private DoubletsTestRun _doubletsTestRun;
-
         private class Config : ManualConfig
         {
             public Config() => Add(new SizeAfterCreationColumn());
         }
+
+        [Params(1000, 10000, 100000)]
+        public int N;
+        private SQLiteTestRun _sqliteTestRun;
+        private DoubletsTestRun _doubletsTestRun;
 
         [GlobalSetup]
         public void Setup()
@@ -31,19 +31,6 @@ namespace Comparisons.SQLiteVSDoublets
             _sqliteTestRun = new SQLiteTestRun("test.db");
             _doubletsTestRun = new DoubletsTestRun("test.links");
         }
-
-        //[GlobalCleanup]
-        //public void Cleanup()
-        //{
-        //    if (_sqliteTestRun.Results.DbSizeAfterCreation > 0)
-        //    {
-        //        File.WriteAllText($"disk-size.sqlite.{N}.txt", _sqliteTestRun.Results.DbSizeAfterCreation.ToString());
-        //    }
-        //    if (_doubletsTestRun.Results.DbSizeAfterCreation > 0)
-        //    {
-        //        File.WriteAllText($"disk-size.doublets.{N}.txt", _doubletsTestRun.Results.DbSizeAfterCreation.ToString());
-        //    }
-        //}
 
         [Benchmark]
         public void SQLite() => _sqliteTestRun.Run();

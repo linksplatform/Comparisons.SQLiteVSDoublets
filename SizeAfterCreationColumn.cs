@@ -7,23 +7,15 @@ using BenchmarkDotNet.Running;
 
 namespace Comparisons.SQLiteVSDoublets
 {
-    public class SizeAfterCreationColumn : IColumn, IMetricDescriptor
+    public class SizeAfterCreationColumn : IColumn
     {
         public string Id => nameof(SizeAfterCreationColumn);
 
-        public string DisplayName => ColumnName;
+        public string ColumnName => "SizeAfterCreation";
 
         public string Legend => "Allocated memory on disk after all records are created (1KB = 1024B)";
 
-        public string NumberFormat => "N0";
-
         public UnitType UnitType => UnitType.Size;
-
-        public string Unit => SizeUnit.B.Name;
-
-        public bool TheGreaterTheBetter => false;
-
-        public string ColumnName => "SizeAfterCreation";
 
         public bool AlwaysShow => true;
 
@@ -42,11 +34,12 @@ namespace Comparisons.SQLiteVSDoublets
         public string GetValue(Summary summary, BenchmarkCase benchmarkCase, SummaryStyle style)
         {
             var benchmarkName = benchmarkCase.Descriptor.WorkloadMethod.Name;
-            if (!benchmarkCase.Parameters.Items.Any(x => x.Name == "N"))
+            var parameter = benchmarkCase.Parameters.Items.FirstOrDefault(x => x.Name == "N");
+            if (parameter == null)
             {
                 return "no parameter";
             }
-            var N = Convert.ToInt32(benchmarkCase.Parameters.Items.Where(x => x.Name == "N").Select(x => x.Value).First());
+            var N = Convert.ToInt32(parameter.Value);
             var filename = $"disk-size.{benchmarkName}.{N}.txt";
             return File.Exists(filename) ? File.ReadAllText(filename) : "no file";
         }

@@ -125,6 +125,34 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 ### RAM usage
 ![Image with result of RAM usage comparison between SQLite and Doublets.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_ram_usage.png "Result of RAM usage comparison between SQLite and Doublets")
 
+### Raw data
+```
+BenchmarkDotNet=v0.11.5, OS=Windows 10.0.18362
+Intel Core i7-6700K CPU 4.00GHz (Skylake), 1 CPU, 8 logical and 4 physical cores
+.NET Core SDK=3.0.100
+  [Host]     : .NET Core 2.2.7 (CoreCLR 4.6.28008.02, CoreFX 4.6.28008.03), 64bit RyuJIT
+  Job-PSBABD : .NET Framework 4.7.2 (CLR 4.0.30319.42000), 64bit RyuJIT-v4.8.4018.0
+  Job-LILDDA : .NET Core 2.2.7 (CoreCLR 4.6.28008.02, CoreFX 4.6.28008.03), 64bit RyuJIT
+
+InvocationCount=1  IterationCount=1  UnrollFactor=1
+WarmupCount=2
+
+|   Method | Runtime |      N |        Mean | Error |        Gen 0 |       Gen 1 |     Gen 2 |   Allocated | SizeAfterCreation |
+|--------- |-------- |------- |------------:|------:|-------------:|------------:|----------:|------------:|------------------:|
+|   SQLite |     Clr |   1000 |    157.1 ms |    NA |    5000.0000 |   2000.0000 |         - |    28.05 MB |            917504 |
+| Doublets |     Clr |   1000 |    106.9 ms |    NA |   35000.0000 |   1000.0000 |         - |   142.43 MB |            767616 |
+|   SQLite |    Core |   1000 |    144.1 ms |    NA |    4000.0000 |   1000.0000 |         - |    27.17 MB |            917504 |
+| Doublets |    Core |   1000 |    121.2 ms |    NA |   35000.0000 |   2000.0000 |         - |   141.93 MB |            767616 |
+|   SQLite |     Clr |  10000 |  1,669.2 ms |    NA |   57000.0000 |  19000.0000 |         - |    283.3 MB |           9064448 |
+| Doublets |     Clr |  10000 |  1,016.3 ms |    NA |  309000.0000 |  24000.0000 |         - |  1246.77 MB |           6528256 |
+|   SQLite |    Core |  10000 |  1,363.3 ms |    NA |   53000.0000 |  16000.0000 |         - |   274.84 MB |           9064448 |
+| Doublets |    Core |  10000 |    944.7 ms |    NA |  308000.0000 |  32000.0000 |         - |  1242.26 MB |           6528256 |
+|   SQLite |     Clr | 100000 | 16,270.9 ms |    NA |  595000.0000 | 154000.0000 | 1000.0000 |   2855.7 MB |          90714112 |
+| Doublets |     Clr | 100000 | 11,093.7 ms |    NA | 3147000.0000 | 327000.0000 |         - | 12628.43 MB |          64192256 |
+|   SQLite |    Core | 100000 | 15,128.5 ms |    NA |  575000.0000 | 152000.0000 | 1000.0000 |  2771.32 MB |          90714112 |
+| Doublets |    Core | 100000 | 11,758.4 ms |    NA | 3136000.0000 | 335000.0000 |         - | 12584.04 MB |          64192256 |
+```
+
 ## Conclusion
 
 In this particular comparison, Doublets are faster and use less memory on disk, but that comes with the cost of RAM usage (where Sqlite performs better).

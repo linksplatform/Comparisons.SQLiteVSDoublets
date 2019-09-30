@@ -116,16 +116,15 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
 ## Result
 
-![Image with result of comparison between SQLite and Doublets.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_comparison_result.png "Result of comparison between SQLite and Doublets")
+### Performance
+![Image with result of performance comparison between SQLite and Doublets.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_performance.png "Result of performance comparison between SQLite and Doublets")
 
-First is SQLite, second is Doublets:
+### Disk usage
+![Image with result of disk usage comparison between SQLite and Doublets.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_disk_usage.png "Result of disk usage comparison between SQLite and Doublets")
 
-![Image of SQLite RAM usage.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_ram_usage.png "SQLite RAM usage")
-![Image of Doublets RAM usage.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/doublets_ram_usage.png "Doublets RAM usage")
+### RAM usage
+![Image with result of RAM usage comparison between SQLite and Doublets.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_ram_usage.png "Result of RAM usage comparison between SQLite and Doublets")
 
 ## Conclusion
 
-Doublets are faster and use less RAM than SQLite + EntityFramework, but use more memory on disk.
-This includes 1 test run and 5 records list.
-If we increase the number of test runs and records then Doublets become slower and slower than SQLite.
-So the real winner here is SQLite.
+Doublets are faster and use less memory on disk, but that comes with the cost of RAM usage (where Sqlite performs better).

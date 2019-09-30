@@ -114,7 +114,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 }
 ```
 
-## Result
+## [Result](https://www.icloud.com/keynote/0cYVNWkWD5RLU0k-XIBs3qWkA#Sqlite_vs_Doublets)
 
 ### Performance
 ![Image with result of performance comparison between SQLite and Doublets.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_performance.png "Result of performance comparison between SQLite and Doublets")

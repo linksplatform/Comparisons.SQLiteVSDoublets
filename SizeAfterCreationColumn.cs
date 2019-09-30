@@ -33,7 +33,7 @@ namespace Comparisons.SQLiteVSDoublets
 
         public string GetValue(Summary summary, BenchmarkCase benchmarkCase, SummaryStyle style)
         {
-            var benchmarkName = benchmarkCase.Descriptor.WorkloadMethod.Name;
+            var benchmarkName = benchmarkCase.Descriptor.WorkloadMethod.Name.ToLower();
             var parameter = benchmarkCase.Parameters.Items.FirstOrDefault(x => x.Name == "N");
             if (parameter == null)
             {

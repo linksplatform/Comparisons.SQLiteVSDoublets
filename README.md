@@ -168,4 +168,4 @@ WarmupCount=2
 
 ## Conclusion
 
-In this particular comparison, Doublets are faster and use less memory on disk, but that comes with the cost of RAM usage (where Sqlite performs better).
+In this particular comparison, Doublets are faster and use less memory on disk, but this comes with the cost of additional use of RAM (Sqlite uses it less).

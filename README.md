@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/linksplatform/Comparisons.SQLiteVSDoublets.svg?branch=master)](https://travis-ci.com/linksplatform/Comparisons.SQLiteVSDoublets)
+[![Actions Status](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/workflows/CI/badge.svg)](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions?workflow=CI)
 
 # Comparisons.SQLiteVSDoublets ([русская версия](README.ru.md))
 

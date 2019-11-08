@@ -26,28 +26,6 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 {
     public class DoubletsDbContext : DisposableBase
     {
-        private class CachedConverter<TSource, TTarget> : IConverter<TSource, TTarget>
-        {
-            private readonly IConverter<TSource, TTarget> _baseConverter;
-            private readonly Dictionary<TSource, TTarget> _cache;
-
-            public CachedConverter(IConverter<TSource, TTarget> baseConverter)
-            {
-                _baseConverter = baseConverter;
-                _cache = new Dictionary<TSource, TTarget>();
-            }
-
-            public TTarget Convert(TSource source)
-            {
-                if (!_cache.TryGetValue(source, out TTarget value))
-                {
-                    value = _baseConverter.Convert(source);
-                    _cache.Add(source, value);
-                }
-                return value;
-            }
-        }
-
         private readonly LinkAddress _meaningRoot;
         private readonly LinkAddress _unicodeSymbolMarker;
         private readonly LinkAddress _unicodeSequenceMarker;
@@ -98,8 +76,8 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             var charToUnicodeSymbolConverter = new CharToUnicodeSymbolConverter<LinkAddress>(_links, _addressToNumberConverter, _unicodeSymbolMarker);
             var unicodeSymbolToCharConverter = new UnicodeSymbolToCharConverter<LinkAddress>(_links, _numberToAddressConverter, unicodeSymbolCriterionMatcher);
             var sequenceWalker = new RightSequenceWalker<LinkAddress>(_links, new DefaultStack<LinkAddress>(), unicodeSymbolCriterionMatcher.IsMatched);
-            _stringToUnicodeSequenceConverter = new CachedConverter<string, LinkAddress>(new StringToUnicodeSequenceConverter<LinkAddress>(_links, charToUnicodeSymbolConverter, new Unindex<LinkAddress>(), balancedVariantConverter, _unicodeSequenceMarker));
-            _unicodeSequenceToStringConverter = new CachedConverter<LinkAddress, string>(new UnicodeSequenceToStringConverter<LinkAddress>(_links, unicodeSequenceCriterionMatcher, sequenceWalker, unicodeSymbolToCharConverter));
+            _stringToUnicodeSequenceConverter = new CachingConverterDecorator<string, LinkAddress>(new StringToUnicodeSequenceConverter<LinkAddress>(_links, charToUnicodeSymbolConverter, new Unindex<LinkAddress>(), balancedVariantConverter, _unicodeSequenceMarker));
+            _unicodeSequenceToStringConverter = new CachingConverterDecorator<LinkAddress, string>(new UnicodeSequenceToStringConverter<LinkAddress>(_links, unicodeSequenceCriterionMatcher, sequenceWalker, unicodeSymbolToCharConverter));
         }
 
         private LinkAddress GerOrCreateMeaningRoot(LinkAddress meaningRootIndex) => _links.Exists(meaningRootIndex) ? meaningRootIndex : _links.CreatePoint();

@@ -1,13 +1,15 @@
 ﻿using System.IO;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Jobs;
 using Comparisons.SQLiteVSDoublets.Model;
 using Comparisons.SQLiteVSDoublets.SQLite;
 using Comparisons.SQLiteVSDoublets.Doublets;
 
 namespace Comparisons.SQLiteVSDoublets
 {
-    [ClrJob, CoreJob]
+    [SimpleJob(RuntimeMoniker.Net471)]
+    [SimpleJob(RuntimeMoniker.NetCoreApp22)]
     [MemoryDiagnoser]
     [WarmupCount(2)]
     [IterationCount(1)]

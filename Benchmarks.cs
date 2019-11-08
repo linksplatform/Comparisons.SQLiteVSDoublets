@@ -1,15 +1,13 @@
 ﻿using System.IO;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Jobs;
 using Comparisons.SQLiteVSDoublets.Model;
 using Comparisons.SQLiteVSDoublets.SQLite;
 using Comparisons.SQLiteVSDoublets.Doublets;
 
 namespace Comparisons.SQLiteVSDoublets
 {
-    [SimpleJob(RuntimeMoniker.Net471)]
-    [SimpleJob(RuntimeMoniker.NetCoreApp22)]
+    [SimpleJob]
     [MemoryDiagnoser]
     [WarmupCount(2)]
     [IterationCount(1)]
@@ -38,12 +36,12 @@ namespace Comparisons.SQLiteVSDoublets
         public void SQLite() => _sqliteTestRun.Run();
 
         [IterationCleanup(Target = "SQLite")]
-        public void SQLiteOutput() => File.WriteAllText($"disk-size.sqlite.{N}.txt", _sqliteTestRun.Results.DbSizeAfterCreation.ToString());
+        public void SQLiteOutput() => File.WriteAllText($@"C:\disk-size.sqlite.{N}.txt", _sqliteTestRun.Results.DbSizeAfterCreation.ToString());
 
         [Benchmark]
         public void Doublets() => _doubletsTestRun.Run();
 
         [IterationCleanup(Target = "Doublets")]
-        public void DoubletsOutput() => File.WriteAllText($"disk-size.doublets.{N}.txt", _doubletsTestRun.Results.DbSizeAfterCreation.ToString());
+        public void DoubletsOutput() => File.WriteAllText($@"C:\disk-size.doublets.{N}.txt", _doubletsTestRun.Results.DbSizeAfterCreation.ToString());
     }
 }

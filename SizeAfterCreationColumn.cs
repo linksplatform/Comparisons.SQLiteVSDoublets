@@ -40,7 +40,7 @@ namespace Comparisons.SQLiteVSDoublets
                 return "no parameter";
             }
             var N = Convert.ToInt32(parameter.Value);
-            var filename = $"disk-size.{benchmarkName}.{N}.txt";
+            var filename = $@"C:\disk-size.{benchmarkName}.{N}.txt";
             return File.Exists(filename) ? File.ReadAllText(filename) : "no file";
         }
 

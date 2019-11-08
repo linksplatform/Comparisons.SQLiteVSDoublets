@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using Platform.Disposables;
 using Platform.Collections.Arrays;
+using Platform.Collections.Lists;
 using Platform.Collections.Stacks;
+using Platform.Converters;
 using Platform.Data;
+using Platform.Data.Numbers.Raw;
 using Platform.Data.Doublets;
 using Platform.Data.Doublets.Decorators;
-using Platform.Data.Doublets.ResizableDirectMemory;
+using Platform.Data.Doublets.ResizableDirectMemory.Specific;
 using Platform.Data.Doublets.PropertyOperators;
 using Platform.Data.Doublets.Unicode;
-using Platform.Data.Doublets.Numbers.Raw;
+using Platform.Data.Doublets.Sequences;
 using Platform.Data.Doublets.Sequences.Indexes;
 using Platform.Data.Doublets.Sequences.Walkers;
 using Platform.Data.Doublets.Sequences.Converters;
@@ -18,8 +21,6 @@ using Platform.Data.Doublets.Sequences.Frequencies.Cache;
 using Platform.Data.Doublets.Sequences.Frequencies.Counters;
 using Comparisons.SQLiteVSDoublets.Model;
 using LinkAddress = System.UInt64;
-using Platform.Data.Doublets.Sequences;
-using Platform.Interfaces;
 
 namespace Comparisons.SQLiteVSDoublets.Doublets
 {

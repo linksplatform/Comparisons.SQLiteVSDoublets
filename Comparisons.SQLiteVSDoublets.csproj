@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.12.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.0.0" />
-    <PackageReference Include="Platform.Data.Doublets" Version="0.3.0" />
+    <PackageReference Include="Platform.Data.Doublets" Version="0.4.0" />
     <PackageReference Include="Platform.Diagnostics" Version="0.0.3" />
   </ItemGroup>
 

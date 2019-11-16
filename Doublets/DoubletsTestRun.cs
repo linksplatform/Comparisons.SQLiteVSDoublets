@@ -8,42 +8,34 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
         public override void Prepare()
         {
-            using (var dbContext = new DoubletsDbContext(DbFilename))
-            {
-            }
+            using var dbContext = new DoubletsDbContext(DbFilename);
         }
 
         public override void CreateList()
         {
-            using (var dbContext = new DoubletsDbContext(DbFilename))
+            using var dbContext = new DoubletsDbContext(DbFilename);
+            foreach (var blogPost in BlogPosts.List)
             {
-                foreach (var blogPost in BlogPosts.List)
-                {
-                    dbContext.CreateBlogPost(blogPost);
-                }
+                dbContext.SaveBlogPost(blogPost);
             }
         }
 
         public override void ReadList()
         {
-            using (var dbContext = new DoubletsDbContext(DbFilename))
+            using var dbContext = new DoubletsDbContext(DbFilename);
+            foreach (var blogPost in dbContext.BlogPosts)
             {
-                foreach (var blogPost in dbContext.BlogPosts)
-                {
-                    ReadBlogPosts.Add(blogPost);
-                }
+                ReadBlogPosts.Add(blogPost);
             }
         }
 
         public override void DeleteList()
         {
-            using (var dbContext = new DoubletsDbContext(DbFilename))
+            using var dbContext = new DoubletsDbContext(DbFilename);
+            var blogPostsToDelete = dbContext.BlogPosts;
+            foreach (var blogPost in blogPostsToDelete)
             {
-                var blogPostsToDelete = dbContext.BlogPosts;
-                foreach (var blogPost in blogPostsToDelete)
-                {
-                    dbContext.Delete((ulong)blogPost.Id);
-                }
+                dbContext.Delete((ulong)blogPost.Id);
             }
         }
     }

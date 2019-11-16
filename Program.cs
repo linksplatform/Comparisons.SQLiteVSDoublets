@@ -13,13 +13,14 @@ namespace Comparisons.SQLiteVSDoublets
         static void Main()
         {
             BenchmarkRunner.Run<Benchmarks>();
+            // Use this method if you need full control over the execution.
             //Run();
         }
 
         private static void Run()
         {
             const int numberOfTestRuns = 1;
-            const int numberOfRecordsPerTestRun = 5;
+            const int numberOfRecordsPerTestRun = 1;
             BlogPosts.GenerateData(numberOfRecordsPerTestRun);
             var sqliteTestRuns = new List<SQLiteTestRun>();
             var doubletsTestRuns = new List<DoubletsTestRun>();

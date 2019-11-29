@@ -36,12 +36,20 @@ namespace Comparisons.SQLiteVSDoublets
         public void SQLite() => _sqliteTestRun.Run();
 
         [IterationCleanup(Target = "SQLite")]
-        public void SQLiteOutput() => File.WriteAllText($@"C:\disk-size.sqlite.{N}.txt", _sqliteTestRun.Results.DbSizeAfterCreation.ToString());
+        public void SQLiteOutput()
+        {
+            Directory.CreateDirectory(SizeAfterCreationColumn.DbSizeOutputFolder);
+            File.WriteAllText(Path.Combine(SizeAfterCreationColumn.DbSizeOutputFolder, $"disk-size.sqlite.{N}.txt"), _sqliteTestRun.Results.DbSizeAfterCreation.ToString());
+        }
 
         [Benchmark]
         public void Doublets() => _doubletsTestRun.Run();
 
         [IterationCleanup(Target = "Doublets")]
-        public void DoubletsOutput() => File.WriteAllText($@"C:\disk-size.doublets.{N}.txt", _doubletsTestRun.Results.DbSizeAfterCreation.ToString());
+        public void DoubletsOutput()
+        {
+            Directory.CreateDirectory(SizeAfterCreationColumn.DbSizeOutputFolder);
+            File.WriteAllText(Path.Combine(SizeAfterCreationColumn.DbSizeOutputFolder, $"disk-size.doublets.{N}.txt"), _doubletsTestRun.Results.DbSizeAfterCreation.ToString());
+        }
     }
 }

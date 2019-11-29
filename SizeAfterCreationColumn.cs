@@ -9,6 +9,8 @@ namespace Comparisons.SQLiteVSDoublets
 {
     public class SizeAfterCreationColumn : IColumn
     {
+        public static readonly string DbSizeOutputFolder = Path.Combine(Path.GetTempPath(), nameof(Comparisons), nameof(SQLiteVSDoublets));
+
         public string Id => nameof(SizeAfterCreationColumn);
 
         public string ColumnName => "SizeAfterCreation";
@@ -40,7 +42,7 @@ namespace Comparisons.SQLiteVSDoublets
                 return "no parameter";
             }
             var N = Convert.ToInt32(parameter.Value);
-            var filename = $@"C:\disk-size.{benchmarkName}.{N}.txt";
+            var filename = Path.Combine(DbSizeOutputFolder, $"disk-size.{benchmarkName}.{N}.txt");
             return File.Exists(filename) ? File.ReadAllText(filename) : "no file";
         }
 

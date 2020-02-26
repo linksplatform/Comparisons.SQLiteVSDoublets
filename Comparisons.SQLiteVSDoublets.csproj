@@ -9,7 +9,7 @@
     <PackageReference Include="BenchmarkDotNet" Version="0.12.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.2" />
     <PackageReference Include="Platform.Data.Doublets" Version="0.5.0" />
-    <PackageReference Include="Platform.Diagnostics" Version="0.0.3" />
+    <PackageReference Include="Platform.Diagnostics" Version="0.1.0" />
   </ItemGroup>
 
 </Project>

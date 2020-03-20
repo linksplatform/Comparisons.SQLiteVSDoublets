@@ -9,15 +9,15 @@ using Platform.Data;
 using Platform.Data.Numbers.Raw;
 using Platform.Data.Doublets;
 using Platform.Data.Doublets.Decorators;
-using Platform.Data.Doublets.ResizableDirectMemory.Specific;
+using Platform.Data.Doublets.Memory.United.Specific;
 using Platform.Data.Doublets.PropertyOperators;
 using Platform.Data.Doublets.Unicode;
 using Platform.Data.Doublets.Sequences;
-using Platform.Data.Doublets.Sequences.Indexes;
 using Platform.Data.Doublets.Sequences.Walkers;
 using Platform.Data.Doublets.Sequences.Converters;
 using Comparisons.SQLiteVSDoublets.Model;
 using LinkAddress = System.UInt64;
+using Platform.Data.Doublets.CriterionMatchers;
 
 namespace Comparisons.SQLiteVSDoublets.Doublets
 {
@@ -41,7 +41,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
         public DoubletsDbContext(string dbFilename)
         {
             // Init the links storage
-            _disposableLinks = new UInt64ResizableDirectMemoryLinks(dbFilename); // Low-level logic
+            _disposableLinks = new UInt64UnitedMemoryLinks(dbFilename); // Low-level logic
             _links = new UInt64Links(_disposableLinks); // Main logic in the combined decorator
 
             // Set up constant links (markers, aka mapped links)
@@ -63,12 +63,12 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
             // Create converters that are able to convert string to unicode sequence stored as link and back
             var balancedVariantConverter = new BalancedVariantConverter<LinkAddress>(_links);
-            var unicodeSymbolCriterionMatcher = new UnicodeSymbolCriterionMatcher<LinkAddress>(_links, _unicodeSymbolMarker);
-            var unicodeSequenceCriterionMatcher = new UnicodeSequenceCriterionMatcher<LinkAddress>(_links, _unicodeSequenceMarker);
+            var unicodeSymbolCriterionMatcher = new TargetMatcher<LinkAddress>(_links, _unicodeSymbolMarker);
+            var unicodeSequenceCriterionMatcher = new TargetMatcher<LinkAddress>(_links, _unicodeSequenceMarker);
             var charToUnicodeSymbolConverter = new CharToUnicodeSymbolConverter<LinkAddress>(_links, _addressToNumberConverter, _unicodeSymbolMarker);
             var unicodeSymbolToCharConverter = new UnicodeSymbolToCharConverter<LinkAddress>(_links, _numberToAddressConverter, unicodeSymbolCriterionMatcher);
             var sequenceWalker = new RightSequenceWalker<LinkAddress>(_links, new DefaultStack<LinkAddress>(), unicodeSymbolCriterionMatcher.IsMatched);
-            _stringToUnicodeSequenceConverter = new CachingConverterDecorator<string, LinkAddress>(new StringToUnicodeSequenceConverter<LinkAddress>(_links, charToUnicodeSymbolConverter, new Unindex<LinkAddress>(), balancedVariantConverter, _unicodeSequenceMarker));
+            _stringToUnicodeSequenceConverter = new CachingConverterDecorator<string, LinkAddress>(new StringToUnicodeSequenceConverter<LinkAddress>(_links, charToUnicodeSymbolConverter, balancedVariantConverter, _unicodeSequenceMarker));
             _unicodeSequenceToStringConverter = new CachingConverterDecorator<LinkAddress, string>(new UnicodeSequenceToStringConverter<LinkAddress>(_links, unicodeSequenceCriterionMatcher, sequenceWalker, unicodeSymbolToCharConverter));
         }
 

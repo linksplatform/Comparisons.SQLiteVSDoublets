@@ -134,7 +134,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             _defaultLinkPropertyOperator.SetValue(newPostLink, _contentPropertyMarker, ConvertToSequence(post.Content));
 
             // Save PublicationDateTime property value to the links storage
-            _defaultLinkPropertyOperator.SetValue(newPostLink, _publicationDateTimePropertyMarker, _addressToNumberConverter.Convert((ulong)post.PublicationDateTime.ToFileTimeUtc()));
+            _defaultLinkPropertyOperator.SetValue(newPostLink, _publicationDateTimePropertyMarker, _addressToNumberConverter.Convert((TLinkAddress)post.PublicationDateTime.ToFileTimeUtc()));
 
             return newPostLink;
         }

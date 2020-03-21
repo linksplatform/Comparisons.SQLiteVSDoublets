@@ -9,7 +9,6 @@ using Platform.Data;
 using Platform.Data.Numbers.Raw;
 using Platform.Data.Doublets;
 using Platform.Data.Doublets.Decorators;
-using Platform.Data.Doublets.Memory.United.Specific;
 using Platform.Data.Doublets.PropertyOperators;
 using Platform.Data.Doublets.Unicode;
 using Platform.Data.Doublets.Sequences;
@@ -18,6 +17,9 @@ using Platform.Data.Doublets.Sequences.Converters;
 using Comparisons.SQLiteVSDoublets.Model;
 using LinkAddress = System.UInt64;
 using Platform.Data.Doublets.CriterionMatchers;
+using Platform.Data.Doublets.Memory.Split.Specific;
+using System.IO;
+using Platform.Memory;
 
 namespace Comparisons.SQLiteVSDoublets.Doublets
 {
@@ -31,8 +33,8 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
         private readonly LinkAddress _publicationDateTimePropertyMarker;
         private readonly LinkAddress _blogPostMarker;
         private readonly PropertiesOperator<LinkAddress> _defaultLinkPropertyOperator;
-        private readonly RawNumberToAddressConverter<ulong> _numberToAddressConverter;
-        private readonly AddressToRawNumberConverter<ulong> _addressToNumberConverter;
+        private readonly RawNumberToAddressConverter<LinkAddress> _numberToAddressConverter;
+        private readonly AddressToRawNumberConverter<LinkAddress> _addressToNumberConverter;
         private readonly IConverter<string, LinkAddress> _stringToUnicodeSequenceConverter;
         private readonly IConverter<LinkAddress, string> _unicodeSequenceToStringConverter;
         private readonly ILinks<LinkAddress> _disposableLinks;
@@ -40,8 +42,11 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
         public DoubletsDbContext(string dbFilename)
         {
+            var dataMemory = new FileMappedResizableDirectMemory(dbFilename);
+            var indexMemory = new FileMappedResizableDirectMemory($"{Path.GetFileNameWithoutExtension(dbFilename)}.links.index");
+
             // Init the links storage
-            _disposableLinks = new UInt64UnitedMemoryLinks(dbFilename); // Low-level logic
+            _disposableLinks = new UInt64SplitMemoryLinks(dataMemory, indexMemory); // Low-level logic
             _links = new UInt64Links(_disposableLinks); // Main logic in the combined decorator
 
             // Set up constant links (markers, aka mapped links)

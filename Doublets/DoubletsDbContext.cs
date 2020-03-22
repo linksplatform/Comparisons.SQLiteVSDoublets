@@ -15,14 +15,102 @@ using Platform.Data.Doublets.Sequences;
 using Platform.Data.Doublets.Sequences.Walkers;
 using Platform.Data.Doublets.Sequences.Converters;
 using Comparisons.SQLiteVSDoublets.Model;
-using TLinkAddress = System.UInt64;
+using TLinkAddress = System.UInt32;
 using Platform.Data.Doublets.CriterionMatchers;
 using Platform.Data.Doublets.Memory.Split.Specific;
 using System.IO;
 using Platform.Memory;
+using System.Runtime.CompilerServices;
+using Platform.Numbers;
+using Platform.Reflection;
 
 namespace Comparisons.SQLiteVSDoublets.Doublets
 {
+    public class NumberToLongRawNumberSequenceConverter<TSource, TTarget> : LinksDecoratorBase<TTarget>, IConverter<TSource, TTarget>
+    {
+        private static readonly Comparer<TSource> _comparer = Comparer<TSource>.Default;
+        private static readonly TSource _maximumValue = NumericType<TSource>.MaxValue;
+        private static readonly int _bitsPerRawNumber = NumericType<TTarget>.BitsSize - 1;
+        private static readonly TSource _bitMask = Bit.ShiftRight(_maximumValue, NumericType<TTarget>.BitsSize + 1);
+        private static readonly TSource _maximumConvertableAddress = CheckedConverter<TTarget, TSource>.Default.Convert(Arithmetic.Decrement(Hybrid<TTarget>.ExternalZero));
+        private static readonly UncheckedConverter<TSource, TTarget> _sourceToTargetConverter = UncheckedConverter<TSource, TTarget>.Default;
+
+        private readonly IConverter<TTarget> _addressToNumberConverter;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public NumberToLongRawNumberSequenceConverter(ILinks<TTarget> links, IConverter<TTarget> addressToNumberConverter) : base(links) => _addressToNumberConverter = addressToNumberConverter;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public TTarget Convert(TSource source)
+        {
+            if (_comparer.Compare(source, _maximumConvertableAddress) > 0)
+            {
+                var numberPart = Bit.And(source, _bitMask);
+                var convertedNumber = _addressToNumberConverter.Convert(_sourceToTargetConverter.Convert(numberPart));
+                return Links.GetOrCreate(convertedNumber, Convert(Bit.ShiftRight(source, _bitsPerRawNumber)));
+            }
+            else
+            {
+                return _addressToNumberConverter.Convert(_sourceToTargetConverter.Convert(source));
+            }
+        }
+    }
+
+    public class LongRawNumberSequenceToNumberConverter<TSource, TTarget> : LinksDecoratorBase<TSource>, IConverter<TSource, TTarget>
+    {
+        private static readonly int _bitsPerRawNumber = NumericType<TSource>.BitsSize - 1;
+        private static readonly UncheckedConverter<TSource, TTarget> _sourceToTargetConverter = UncheckedConverter<TSource, TTarget>.Default;
+
+        private readonly IConverter<TSource> _numberToAddressConverter;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public LongRawNumberSequenceToNumberConverter(ILinks<TSource> links, IConverter<TSource> numberToAddressConverter) : base(links) => _numberToAddressConverter = numberToAddressConverter;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public TTarget Convert(TSource source)
+        {
+            var constants = Links.Constants;
+            var externalReferencesRange = constants.ExternalReferencesRange;
+            if (externalReferencesRange.HasValue && externalReferencesRange.Value.Contains(source))
+            {
+                return _sourceToTargetConverter.Convert(_numberToAddressConverter.Convert(source));
+            }
+            else
+            {
+                var pair = Links.GetLink(source);
+                var walker = new LeftSequenceWalker<TSource>(Links, new DefaultStack<TSource>(), (link) => externalReferencesRange.HasValue && externalReferencesRange.Value.Contains(link));
+                TTarget result = default;
+                foreach (var element in walker.Walk(source))
+                {
+                    result = Bit.Or(Bit.ShiftLeft(result, _bitsPerRawNumber), Convert(element));
+                }
+                return result;
+            }
+        }
+    }
+
+    public class DateTimeToLongRawNumberSequenceConverter<TLink> : IConverter<DateTime, TLink>
+    {
+        private readonly IConverter<long, TLink> _int64ToLongRawNumberConverter;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public DateTimeToLongRawNumberSequenceConverter(IConverter<long, TLink> int64ToLongRawNumberConverter) => _int64ToLongRawNumberConverter = int64ToLongRawNumberConverter;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public TLink Convert(DateTime source) => _int64ToLongRawNumberConverter.Convert(source.ToFileTimeUtc());
+    }
+
+    public class LongRawNumberSequenceToDateTimeConverter<TLink> : IConverter<TLink, DateTime>
+    {
+        private readonly IConverter<TLink, long> _longRawNumberConverterToInt64;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public LongRawNumberSequenceToDateTimeConverter(IConverter<TLink, long> longRawNumberConverterToInt64) => _longRawNumberConverterToInt64 = longRawNumberConverterToInt64;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public DateTime Convert(TLink source) => DateTime.FromFileTimeUtc(_longRawNumberConverterToInt64.Convert(source));
+    }
+
     public class DoubletsDbContext : DisposableBase
     {
         private readonly TLinkAddress _meaningRoot;
@@ -35,6 +123,8 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
         private readonly PropertiesOperator<TLinkAddress> _defaultLinkPropertyOperator;
         private readonly RawNumberToAddressConverter<TLinkAddress> _numberToAddressConverter;
         private readonly AddressToRawNumberConverter<TLinkAddress> _addressToNumberConverter;
+        private readonly LongRawNumberSequenceToDateTimeConverter<TLinkAddress> _longRawNumberToDateTimeConverter;
+        private readonly DateTimeToLongRawNumberSequenceConverter<TLinkAddress> _dateTimeToLongRawNumberConverter;
         private readonly IConverter<string, TLinkAddress> _stringToUnicodeSequenceConverter;
         private readonly IConverter<TLinkAddress, string> _unicodeSequenceToStringConverter;
         private readonly ILinks<TLinkAddress> _disposableLinks;
@@ -48,8 +138,8 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             var linksConstants = new LinksConstants<TLinkAddress>(enableExternalReferencesSupport: true);
 
             // Init the links storage
-            _disposableLinks = new UInt64SplitMemoryLinks(dataMemory, indexMemory, UInt64SplitMemoryLinks.DefaultLinksSizeStep, linksConstants); // Low-level logic
-            _links = new UInt64Links(_disposableLinks); // Main logic in the combined decorator
+            _disposableLinks = new UInt32SplitMemoryLinks(dataMemory, indexMemory, UInt32SplitMemoryLinks.DefaultLinksSizeStep, linksConstants); // Low-level logic
+            _links = new UInt32Links(_disposableLinks); // Main logic in the combined decorator
 
             // Set up constant links (markers, aka mapped links)
             TLinkAddress currentMappingLinkIndex = 1;
@@ -67,6 +157,10 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             // Create converters that are able to convert link's address (UInt64 value) to a raw number represented with another UInt64 value and back
             _numberToAddressConverter = new RawNumberToAddressConverter<TLinkAddress>();
             _addressToNumberConverter = new AddressToRawNumberConverter<TLinkAddress>();
+
+            // Create converters for dates
+            _longRawNumberToDateTimeConverter = new LongRawNumberSequenceToDateTimeConverter<TLinkAddress>(new LongRawNumberSequenceToNumberConverter<TLinkAddress, long>(_links, _numberToAddressConverter));
+            _dateTimeToLongRawNumberConverter = new DateTimeToLongRawNumberSequenceConverter<TLinkAddress>(new NumberToLongRawNumberSequenceConverter<long, TLinkAddress>(_links, _addressToNumberConverter));
 
             // Create converters that are able to convert string to unicode sequence stored as link and back
             var balancedVariantConverter = new BalancedVariantConverter<TLinkAddress>(_links);
@@ -118,7 +212,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             blogPost.Content = ConvertToString(contentSequence);
 
             // Load PublicationDateTime property value from the links storage
-            blogPost.PublicationDateTime = DateTime.FromFileTimeUtc((long)_numberToAddressConverter.Convert(_defaultLinkPropertyOperator.GetValue(postLink, _publicationDateTimePropertyMarker)));
+            blogPost.PublicationDateTime = _longRawNumberToDateTimeConverter.Convert(_defaultLinkPropertyOperator.GetValue(postLink, _publicationDateTimePropertyMarker));
 
             return blogPost;
         }
@@ -134,7 +228,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             _defaultLinkPropertyOperator.SetValue(newPostLink, _contentPropertyMarker, ConvertToSequence(post.Content));
 
             // Save PublicationDateTime property value to the links storage
-            _defaultLinkPropertyOperator.SetValue(newPostLink, _publicationDateTimePropertyMarker, _addressToNumberConverter.Convert((TLinkAddress)post.PublicationDateTime.ToFileTimeUtc()));
+            _defaultLinkPropertyOperator.SetValue(newPostLink, _publicationDateTimePropertyMarker, _dateTimeToLongRawNumberConverter.Convert(post.PublicationDateTime));
 
             return newPostLink;
         }

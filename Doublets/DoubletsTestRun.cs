@@ -35,7 +35,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             var blogPostsToDelete = dbContext.BlogPosts;
             foreach (var blogPost in blogPostsToDelete)
             {
-                dbContext.Delete((ulong)blogPost.Id);
+                dbContext.Delete((uint)blogPost.Id);
             }
         }
     }

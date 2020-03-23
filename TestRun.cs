@@ -23,16 +23,26 @@ namespace Comparisons.SQLiteVSDoublets
         {
             if (File.Exists(DbFilename))
             {
-                File.Delete(DbFilename);
+                DeleteDatabase();
             }
             Results.PrepareTime = Performance.Measure(Prepare);
-            Results.DbSizeAfterPrepare = FileHelpers.GetSize(DbFilename);
+            Results.DbSizeAfterPrepare = GetDatabaseSizeInBytes();
             Results.ListCreationTime = Performance.Measure(CreateList);
-            Results.DbSizeAfterCreation = FileHelpers.GetSize(DbFilename);
+            Results.DbSizeAfterCreation = GetDatabaseSizeInBytes();
             Results.ListReadingTime = Performance.Measure(ReadList);
-            Results.DbSizeAfterReading = FileHelpers.GetSize(DbFilename);
+            Results.DbSizeAfterReading = GetDatabaseSizeInBytes();
             Results.ListDeletionTime = Performance.Measure(DeleteList);
-            Results.DbSizeAfterDeletion = FileHelpers.GetSize(DbFilename);
+            Results.DbSizeAfterDeletion = GetDatabaseSizeInBytes();
+            DeleteDatabase();
+        }
+
+        protected virtual long GetDatabaseSizeInBytes()
+        {
+            return FileHelpers.GetSize(DbFilename);
+        }
+
+        protected virtual void DeleteDatabase()
+        {
             File.Delete(DbFilename);
         }
 

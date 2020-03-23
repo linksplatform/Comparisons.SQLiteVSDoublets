@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Platform.Disposables;
 using Platform.Collections.Lists;
 using Platform.Collections.Stacks;
 using Platform.Converters;
+using Platform.Memory;
+using Platform.Numbers;
+using Platform.Reflection;
 using Platform.Data;
 using Platform.Data.Numbers.Raw;
 using Platform.Data.Doublets;
@@ -14,15 +18,10 @@ using Platform.Data.Doublets.Unicode;
 using Platform.Data.Doublets.Sequences;
 using Platform.Data.Doublets.Sequences.Walkers;
 using Platform.Data.Doublets.Sequences.Converters;
-using Comparisons.SQLiteVSDoublets.Model;
-using TLinkAddress = System.UInt32;
 using Platform.Data.Doublets.CriterionMatchers;
 using Platform.Data.Doublets.Memory.Split.Specific;
-using System.IO;
-using Platform.Memory;
-using System.Runtime.CompilerServices;
-using Platform.Numbers;
-using Platform.Reflection;
+using Comparisons.SQLiteVSDoublets.Model;
+using TLinkAddress = System.UInt32;
 
 namespace Comparisons.SQLiteVSDoublets.Doublets
 {
@@ -130,10 +129,10 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
         private readonly ILinks<TLinkAddress> _disposableLinks;
         private readonly ILinks<TLinkAddress> _links;
 
-        public DoubletsDbContext(string dbFilename)
+        public DoubletsDbContext(string dataDBFilename, string indexDBFilename)
         {
-            var dataMemory = new FileMappedResizableDirectMemory(dbFilename);
-            var indexMemory = new FileMappedResizableDirectMemory($"{Path.GetFileNameWithoutExtension(dbFilename)}.links.index");
+            var dataMemory = new FileMappedResizableDirectMemory(dataDBFilename);
+            var indexMemory = new FileMappedResizableDirectMemory(indexDBFilename);
 
             var linksConstants = new LinksConstants<TLinkAddress>(enableExternalReferencesSupport: true);
 

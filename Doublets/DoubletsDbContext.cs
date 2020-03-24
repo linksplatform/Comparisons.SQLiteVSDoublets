@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Platform.Disposables;
 using Platform.Collections.Lists;
 using Platform.Collections.Stacks;
 using Platform.Converters;
 using Platform.Memory;
-using Platform.Numbers;
-using Platform.Reflection;
 using Platform.Data;
 using Platform.Data.Numbers.Raw;
 using Platform.Data.Doublets;
 using Platform.Data.Doublets.Decorators;
 using Platform.Data.Doublets.PropertyOperators;
 using Platform.Data.Doublets.Unicode;
+using Platform.Data.Doublets.Time;
+using Platform.Data.Doublets.Numbers.Raw;
 using Platform.Data.Doublets.Sequences;
 using Platform.Data.Doublets.Sequences.Walkers;
 using Platform.Data.Doublets.Sequences.Converters;
@@ -25,91 +23,6 @@ using TLinkAddress = System.UInt32;
 
 namespace Comparisons.SQLiteVSDoublets.Doublets
 {
-    public class NumberToLongRawNumberSequenceConverter<TSource, TTarget> : LinksDecoratorBase<TTarget>, IConverter<TSource, TTarget>
-    {
-        private static readonly Comparer<TSource> _comparer = Comparer<TSource>.Default;
-        private static readonly TSource _maximumValue = NumericType<TSource>.MaxValue;
-        private static readonly int _bitsPerRawNumber = NumericType<TTarget>.BitsSize - 1;
-        private static readonly TSource _bitMask = Bit.ShiftRight(_maximumValue, NumericType<TTarget>.BitsSize + 1);
-        private static readonly TSource _maximumConvertableAddress = CheckedConverter<TTarget, TSource>.Default.Convert(Arithmetic.Decrement(Hybrid<TTarget>.ExternalZero));
-        private static readonly UncheckedConverter<TSource, TTarget> _sourceToTargetConverter = UncheckedConverter<TSource, TTarget>.Default;
-
-        private readonly IConverter<TTarget> _addressToNumberConverter;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public NumberToLongRawNumberSequenceConverter(ILinks<TTarget> links, IConverter<TTarget> addressToNumberConverter) : base(links) => _addressToNumberConverter = addressToNumberConverter;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TTarget Convert(TSource source)
-        {
-            if (_comparer.Compare(source, _maximumConvertableAddress) > 0)
-            {
-                var numberPart = Bit.And(source, _bitMask);
-                var convertedNumber = _addressToNumberConverter.Convert(_sourceToTargetConverter.Convert(numberPart));
-                return Links.GetOrCreate(convertedNumber, Convert(Bit.ShiftRight(source, _bitsPerRawNumber)));
-            }
-            else
-            {
-                return _addressToNumberConverter.Convert(_sourceToTargetConverter.Convert(source));
-            }
-        }
-    }
-
-    public class LongRawNumberSequenceToNumberConverter<TSource, TTarget> : LinksDecoratorBase<TSource>, IConverter<TSource, TTarget>
-    {
-        private static readonly int _bitsPerRawNumber = NumericType<TSource>.BitsSize - 1;
-        private static readonly UncheckedConverter<TSource, TTarget> _sourceToTargetConverter = UncheckedConverter<TSource, TTarget>.Default;
-
-        private readonly IConverter<TSource> _numberToAddressConverter;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public LongRawNumberSequenceToNumberConverter(ILinks<TSource> links, IConverter<TSource> numberToAddressConverter) : base(links) => _numberToAddressConverter = numberToAddressConverter;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TTarget Convert(TSource source)
-        {
-            var constants = Links.Constants;
-            var externalReferencesRange = constants.ExternalReferencesRange;
-            if (externalReferencesRange.HasValue && externalReferencesRange.Value.Contains(source))
-            {
-                return _sourceToTargetConverter.Convert(_numberToAddressConverter.Convert(source));
-            }
-            else
-            {
-                var pair = Links.GetLink(source);
-                var walker = new LeftSequenceWalker<TSource>(Links, new DefaultStack<TSource>(), (link) => externalReferencesRange.HasValue && externalReferencesRange.Value.Contains(link));
-                TTarget result = default;
-                foreach (var element in walker.Walk(source))
-                {
-                    result = Bit.Or(Bit.ShiftLeft(result, _bitsPerRawNumber), Convert(element));
-                }
-                return result;
-            }
-        }
-    }
-
-    public class DateTimeToLongRawNumberSequenceConverter<TLink> : IConverter<DateTime, TLink>
-    {
-        private readonly IConverter<long, TLink> _int64ToLongRawNumberConverter;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public DateTimeToLongRawNumberSequenceConverter(IConverter<long, TLink> int64ToLongRawNumberConverter) => _int64ToLongRawNumberConverter = int64ToLongRawNumberConverter;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public TLink Convert(DateTime source) => _int64ToLongRawNumberConverter.Convert(source.ToFileTimeUtc());
-    }
-
-    public class LongRawNumberSequenceToDateTimeConverter<TLink> : IConverter<TLink, DateTime>
-    {
-        private readonly IConverter<TLink, long> _longRawNumberConverterToInt64;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public LongRawNumberSequenceToDateTimeConverter(IConverter<TLink, long> longRawNumberConverterToInt64) => _longRawNumberConverterToInt64 = longRawNumberConverterToInt64;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public DateTime Convert(TLink source) => DateTime.FromFileTimeUtc(_longRawNumberConverterToInt64.Convert(source));
-    }
-
     public class DoubletsDbContext : DisposableBase
     {
         private readonly TLinkAddress _meaningRoot;

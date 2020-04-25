@@ -3,8 +3,14 @@ name: CI
 on: [push]
 
 jobs:
-  build:
+  build-linux:
     runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run
+      run: dotnet run -c Release
+  build-windows:
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
     - name: Run

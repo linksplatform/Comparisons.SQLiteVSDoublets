@@ -55,7 +55,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 
             // Set up constant links (markers, aka mapped links)
             TLinkAddress currentMappingLinkIndex = 1;
-            _meaningRoot = GerOrCreateMeaningRoot(currentMappingLinkIndex++);
+            _meaningRoot = GetOrCreateMeaningRoot(currentMappingLinkIndex++);
             _unicodeSymbolMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
             _unicodeSequenceMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
             _titlePropertyMarker = GetOrCreateNextMapping(currentMappingLinkIndex++);
@@ -85,7 +85,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             _unicodeSequenceToStringConverter = new CachingConverterDecorator<TLinkAddress, string>(new UnicodeSequenceToStringConverter<TLinkAddress>(_links, unicodeSequenceCriterionMatcher, sequenceWalker, unicodeSymbolToCharConverter));
         }
 
-        private TLinkAddress GerOrCreateMeaningRoot(TLinkAddress meaningRootIndex) => _links.Exists(meaningRootIndex) ? meaningRootIndex : _links.CreatePoint();
+        private TLinkAddress GetOrCreateMeaningRoot(TLinkAddress meaningRootIndex) => _links.Exists(meaningRootIndex) ? meaningRootIndex : _links.CreatePoint();
 
         private TLinkAddress GetOrCreateNextMapping(TLinkAddress currentMappingIndex) => _links.Exists(currentMappingIndex) ? currentMappingIndex : _links.CreateAndUpdate(_meaningRoot, _links.Constants.Itself);
 

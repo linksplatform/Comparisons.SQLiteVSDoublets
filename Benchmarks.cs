@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 using Comparisons.SQLiteVSDoublets.Model;
@@ -7,6 +7,12 @@ using Comparisons.SQLiteVSDoublets.Doublets;
 
 namespace Comparisons.SQLiteVSDoublets
 {
+    /// <summary>
+    /// <para>
+    /// Represents the benchmarks.
+    /// </para>
+    /// <para></para>
+    /// </summary>
     [SimpleJob]
     [MemoryDiagnoser]
     [WarmupCount(2)]
@@ -14,16 +20,53 @@ namespace Comparisons.SQLiteVSDoublets
     [Config(typeof(Config))]
     public class Benchmarks
     {
+        /// <summary>
+        /// <para>
+        /// Represents the config.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <seealso cref="ManualConfig"/>
         private class Config : ManualConfig
         {
+            /// <summary>
+            /// <para>
+            /// Initializes a new <see cref="Config"/> instance.
+            /// </para>
+            /// <para></para>
+            /// </summary>
             public Config() => Add(new SizeAfterCreationColumn());
         }
 
+        /// <summary>
+        /// <para>
+        /// The .
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Params(1000, 10000, 100000)]
         public int N;
+        /// <summary>
+        /// <para>
+        /// The sqlite test run.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private SQLiteTestRun _sqliteTestRun;
+        /// <summary>
+        /// <para>
+        /// The doublets test run.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private DoubletsTestRun _doubletsTestRun;
 
+        /// <summary>
+        /// <para>
+        /// Setup this instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [GlobalSetup]
         public void Setup()
         {
@@ -32,9 +75,21 @@ namespace Comparisons.SQLiteVSDoublets
             _doubletsTestRun = new DoubletsTestRun("test.links");
         }
 
+        /// <summary>
+        /// <para>
+        /// Sqs the lite.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Benchmark]
         public void SQLite() => _sqliteTestRun.Run();
 
+        /// <summary>
+        /// <para>
+        /// Sqs the lite output.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [IterationCleanup(Target = "SQLite")]
         public void SQLiteOutput()
         {
@@ -42,9 +97,21 @@ namespace Comparisons.SQLiteVSDoublets
             File.WriteAllText(Path.Combine(SizeAfterCreationColumn.DbSizeOutputFolder, $"disk-size.sqlite.{N}.txt"), _sqliteTestRun.Results.DbSizeAfterCreation.ToString());
         }
 
+        /// <summary>
+        /// <para>
+        /// Doubletses this instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [Benchmark]
         public void Doublets() => _doubletsTestRun.Run();
 
+        /// <summary>
+        /// <para>
+        /// Doubletses the output.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         [IterationCleanup(Target = "Doublets")]
         public void DoubletsOutput()
         {

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Platform.Disposables;
 using Platform.Collections.Lists;
@@ -23,25 +23,142 @@ using TLinkAddress = System.UInt32;
 
 namespace Comparisons.SQLiteVSDoublets.Doublets
 {
+    /// <summary>
+    /// <para>
+    /// Represents the doublets db context.
+    /// </para>
+    /// <para></para>
+    /// </summary>
+    /// <seealso cref="DisposableBase"/>
     public class DoubletsDbContext : DisposableBase
     {
+        /// <summary>
+        /// <para>
+        /// The meaning root.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly TLinkAddress _meaningRoot;
+        /// <summary>
+        /// <para>
+        /// The unicode symbol marker.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly TLinkAddress _unicodeSymbolMarker;
+        /// <summary>
+        /// <para>
+        /// The unicode sequence marker.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly TLinkAddress _unicodeSequenceMarker;
+        /// <summary>
+        /// <para>
+        /// The title property marker.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly TLinkAddress _titlePropertyMarker;
+        /// <summary>
+        /// <para>
+        /// The content property marker.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly TLinkAddress _contentPropertyMarker;
+        /// <summary>
+        /// <para>
+        /// The publication date time property marker.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly TLinkAddress _publicationDateTimePropertyMarker;
+        /// <summary>
+        /// <para>
+        /// The blog post marker.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly TLinkAddress _blogPostMarker;
+        /// <summary>
+        /// <para>
+        /// The default link property operator.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly PropertiesOperator<TLinkAddress> _defaultLinkPropertyOperator;
+        /// <summary>
+        /// <para>
+        /// The number to address converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly RawNumberToAddressConverter<TLinkAddress> _numberToAddressConverter;
+        /// <summary>
+        /// <para>
+        /// The address to number converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly AddressToRawNumberConverter<TLinkAddress> _addressToNumberConverter;
+        /// <summary>
+        /// <para>
+        /// The long raw number to date time converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly LongRawNumberSequenceToDateTimeConverter<TLinkAddress> _longRawNumberToDateTimeConverter;
+        /// <summary>
+        /// <para>
+        /// The date time to long raw number converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly DateTimeToLongRawNumberSequenceConverter<TLinkAddress> _dateTimeToLongRawNumberConverter;
+        /// <summary>
+        /// <para>
+        /// The string to unicode sequence converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IConverter<string, TLinkAddress> _stringToUnicodeSequenceConverter;
+        /// <summary>
+        /// <para>
+        /// The unicode sequence to string converter.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly IConverter<TLinkAddress, string> _unicodeSequenceToStringConverter;
+        /// <summary>
+        /// <para>
+        /// The disposable links.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ILinks<TLinkAddress> _disposableLinks;
+        /// <summary>
+        /// <para>
+        /// The links.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private readonly ILinks<TLinkAddress> _links;
 
+        /// <summary>
+        /// <para>
+        /// Initializes a new <see cref="DoubletsDbContext"/> instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="dataDBFilename">
+        /// <para>A data db filename.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="indexDBFilename">
+        /// <para>A index db filename.</para>
+        /// <para></para>
+        /// </param>
         public DoubletsDbContext(string dataDBFilename, string indexDBFilename)
         {
             var dataMemory = new FileMappedResizableDirectMemory(dataDBFilename);
@@ -85,16 +202,88 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             _unicodeSequenceToStringConverter = new CachingConverterDecorator<TLinkAddress, string>(new UnicodeSequenceToStringConverter<TLinkAddress>(_links, unicodeSequenceCriterionMatcher, sequenceWalker, unicodeSymbolToCharConverter));
         }
 
+        /// <summary>
+        /// <para>
+        /// Gets the or create meaning root using the specified meaning root index.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="meaningRootIndex">
+        /// <para>The meaning root index.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link address</para>
+        /// <para></para>
+        /// </returns>
         private TLinkAddress GetOrCreateMeaningRoot(TLinkAddress meaningRootIndex) => _links.Exists(meaningRootIndex) ? meaningRootIndex : _links.CreatePoint();
 
+        /// <summary>
+        /// <para>
+        /// Gets the or create next mapping using the specified current mapping index.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="currentMappingIndex">
+        /// <para>The current mapping index.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link address</para>
+        /// <para></para>
+        /// </returns>
         private TLinkAddress GetOrCreateNextMapping(TLinkAddress currentMappingIndex) => _links.Exists(currentMappingIndex) ? currentMappingIndex : _links.CreateAndUpdate(_meaningRoot, _links.Constants.Itself);
 
+        /// <summary>
+        /// <para>
+        /// Converts the to string using the specified sequence.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="sequence">
+        /// <para>The sequence.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The string</para>
+        /// <para></para>
+        /// </returns>
         public string ConvertToString(TLinkAddress sequence) => _unicodeSequenceToStringConverter.Convert(sequence);
 
+        /// <summary>
+        /// <para>
+        /// Converts the to sequence using the specified string.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="@string">
+        /// <para>The string.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The link address</para>
+        /// <para></para>
+        /// </returns>
         public TLinkAddress ConvertToSequence(string @string) => _stringToUnicodeSequenceConverter.Convert(@string);
 
+        /// <summary>
+        /// <para>
+        /// Gets the blog posts value.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         public IList<BlogPost> BlogPosts => GetBlogPosts();
 
+        /// <summary>
+        /// <para>
+        /// Gets the blog posts.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <returns>
+        /// <para>A list of blog post</para>
+        /// <para></para>
+        /// </returns>
         public IList<BlogPost> GetBlogPosts()
         {
             var list = new List<IList<TLinkAddress>>();
@@ -107,8 +296,36 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             return list.Select(LoadBlogPost).ToList();
         }
 
+        /// <summary>
+        /// <para>
+        /// Loads the blog post using the specified post link.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="postLink">
+        /// <para>The post link.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The blog post</para>
+        /// <para></para>
+        /// </returns>
         public BlogPost LoadBlogPost(IList<TLinkAddress> postLink) => LoadBlogPost(postLink[_links.Constants.IndexPart]);
 
+        /// <summary>
+        /// <para>
+        /// Loads the blog post using the specified post link.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="postLink">
+        /// <para>The post link.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The blog post.</para>
+        /// <para></para>
+        /// </returns>
         public BlogPost LoadBlogPost(TLinkAddress postLink)
         {
             var blogPost = new BlogPost();
@@ -129,6 +346,20 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             return blogPost;
         }
 
+        /// <summary>
+        /// <para>
+        /// Saves the blog post using the specified post.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="post">
+        /// <para>The post.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The new post link.</para>
+        /// <para></para>
+        /// </returns>
         public TLinkAddress SaveBlogPost(BlogPost post)
         {
             var newPostLink = _links.CreateAndUpdate(_blogPostMarker, _links.Constants.Itself);
@@ -145,8 +376,32 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             return newPostLink;
         }
 
+        /// <summary>
+        /// <para>
+        /// Deletes the link.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="link">
+        /// <para>The link.</para>
+        /// <para></para>
+        /// </param>
         public void Delete(TLinkAddress link) => _links.Delete(link);
 
+        /// <summary>
+        /// <para>
+        /// Disposes the manual.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="manual">
+        /// <para>The manual.</para>
+        /// <para></para>
+        /// </param>
+        /// <param name="wasDisposed">
+        /// <para>The was disposed.</para>
+        /// <para></para>
+        /// </param>
         protected override void Dispose(bool manual, bool wasDisposed)
         {
             if (!wasDisposed)

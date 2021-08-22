@@ -1,18 +1,46 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Comparisons.SQLiteVSDoublets.Model
 {
+    /// <summary>
+    /// <para>
+    /// Represents the blog posts.
+    /// </para>
+    /// <para></para>
+    /// </summary>
     public static class BlogPosts
     {
+        /// <summary>
+        /// <para>
+        /// Gets or sets the list value.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         public static IReadOnlyList<BlogPost> List { get; private set; }
 
+        /// <summary>
+        /// <para>
+        /// Initializes a new <see cref="BlogPosts"/> instance.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         static BlogPosts()
         {
             List = new List<BlogPost>();
         }
 
+        /// <summary>
+        /// <para>
+        /// Generates the data using the specified number of records.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="numberOfRecords">
+        /// <para>The number of records.</para>
+        /// <para></para>
+        /// </param>
         static public void GenerateData(int numberOfRecords)
         {
             var contentStrings = new string[]

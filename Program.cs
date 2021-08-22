@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Comparisons.SQLiteVSDoublets.SQLite;
@@ -8,8 +8,20 @@ using BenchmarkDotNet.Running;
 
 namespace Comparisons.SQLiteVSDoublets
 {
+    /// <summary>
+    /// <para>
+    /// Represents the program.
+    /// </para>
+    /// <para></para>
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// <para>
+        /// Main.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         static void Main()
         {
             BenchmarkRunner.Run<Benchmarks>();
@@ -17,6 +29,12 @@ namespace Comparisons.SQLiteVSDoublets
             //Run();
         }
 
+        /// <summary>
+        /// <para>
+        /// Runs.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private static void Run()
         {
             const int numberOfTestRuns = 1;
@@ -41,6 +59,20 @@ namespace Comparisons.SQLiteVSDoublets
             Console.WriteLine(averageDoubletsResults.ToString());
         }
 
+        /// <summary>
+        /// <para>
+        /// Gets the results average using the specified test runs.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <param name="testRuns">
+        /// <para>The test runs.</para>
+        /// <para></para>
+        /// </param>
+        /// <returns>
+        /// <para>The test run results</para>
+        /// <para></para>
+        /// </returns>
         private static TestRunResults GetResultsAverage(IEnumerable<TestRun> testRuns)
         {
             return new TestRunResults()

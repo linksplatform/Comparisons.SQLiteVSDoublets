@@ -12,15 +12,15 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)'=='Release'">
-    <PackageReference Include="Platform.Data.Doublets" Version="0.7.0" />
+    <PackageReference Include="Platform.Data.Doublets.Sequences" Version="0.0.1" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(Configuration)'=='Debug' AND Exists('..\Data.Doublets\csharp\Platform.Data.Doublets\Platform.Data.Doublets.csproj')">
-    <ProjectReference Include="..\Data.Doublets\csharp\Platform.Data.Doublets\Platform.Data.Doublets.csproj" />
+  <ItemGroup Condition="'$(Configuration)'=='Debug' AND Exists('..\Data.Doublets.Sequences\csharp\Platform.Data.Doublets.Sequences\Platform.Data.Doublets.Sequences.csproj')">
+    <ProjectReference Include="..\Data.Doublets.Sequences\csharp\Platform.Data.Doublets.Sequences\Platform.Data.Doublets.Sequences.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(Configuration)'=='Debug' AND !Exists('..\Data.Doublets\csharp\Platform.Data.Doublets\Platform.Data.Doublets.csproj')">
-    <PackageReference Include="Platform.Data.Doublets" Version="0.7.0" />
+  <ItemGroup Condition="'$(Configuration)'=='Debug' AND !Exists('..\Data.Doublets.Sequences\csharp\Platform.Data.Doublets.Sequences\Platform.Data.Doublets.Sequences.csproj')">
+    <PackageReference Include="Platform.Data.Doublets.Sequences" Version="0.0.1" />
   </ItemGroup>
 
 </Project>

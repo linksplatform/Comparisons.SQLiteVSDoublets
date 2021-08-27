@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Comparisons.SQLiteVSDoublets", "Comparisons.SQLiteVSDoublets.csproj", "{2B2D5048-3A81-4ED5-91CD-32744C970875}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Data.Doublets", "..\Data.Doublets\csharp\Platform.Data.Doublets\Platform.Data.Doublets.csproj", "{9FCFADCE-4E07-4B0B-80DB-E4FB9BF23D4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Platform.Data.Doublets.Sequences", "..\Data.Doublets.Sequences\csharp\Platform.Data.Doublets.Sequences\Platform.Data.Doublets.Sequences.csproj", "{9FCFADCE-4E07-4B0B-80DB-E4FB9BF23D4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

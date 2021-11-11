@@ -20,6 +20,13 @@ namespace Comparisons.SQLiteVSDoublets
     [Config(typeof(Config))]
     public class Benchmarks
     {
+        /// <summary>
+        /// <para>
+        /// Represents the config.
+        /// </para>
+        /// <para></para>
+        /// </summary>
+        /// <seealso cref="ManualConfig"/>
         private class Config : ManualConfig
         {
             /// <summary>
@@ -39,7 +46,19 @@ namespace Comparisons.SQLiteVSDoublets
         /// </summary>
         [Params(1000, 10000, 100000)]
         public int N;
+        /// <summary>
+        /// <para>
+        /// The sqlite test run.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private SQLiteTestRun _sqliteTestRun;
+        /// <summary>
+        /// <para>
+        /// The doublets test run.
+        /// </para>
+        /// <para></para>
+        /// </summary>
         private DoubletsTestRun _doubletsTestRun;
 
         /// <summary>

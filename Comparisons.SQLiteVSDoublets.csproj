@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)'=='Release'">
-    <PackageReference Include="Platform.Data.Doublets.Sequences" Version="0.1.0" />
+    <PackageReference Include="Platform.Data.Doublets.Sequences" Version="0.1.1" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)'=='Debug' AND Exists('..\Data.Doublets.Sequences\csharp\Platform.Data.Doublets.Sequences\Platform.Data.Doublets.Sequences.csproj')">
@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)'=='Debug' AND !Exists('..\Data.Doublets.Sequences\csharp\Platform.Data.Doublets.Sequences\Platform.Data.Doublets.Sequences.csproj')">
-    <PackageReference Include="Platform.Data.Doublets.Sequences" Version="0.1.0" />
+    <PackageReference Include="Platform.Data.Doublets.Sequences" Version="0.1.1" />
   </ItemGroup>
 
 </Project>

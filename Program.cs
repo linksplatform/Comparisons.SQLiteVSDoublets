@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Comparisons.SQLiteVSDoublets.SQLite;
+using Comparisons.SQLiteVSDoublets.PostgreSQL;
 using Comparisons.SQLiteVSDoublets.Doublets;
 using Comparisons.SQLiteVSDoublets.Model;
 using BenchmarkDotNet.Running;
@@ -28,12 +29,16 @@ namespace Comparisons.SQLiteVSDoublets
             const int numberOfRecordsPerTestRun = 1;
             BlogPosts.GenerateData(numberOfRecordsPerTestRun);
             var sqliteTestRuns = new List<SQLiteTestRun>();
+            var postgresqlTestRuns = new List<PostgreSQLTestRun>();
             var doubletsTestRuns = new List<DoubletsTestRun>();
             for (int i = 0; i < numberOfTestRuns; i++)
             {
                 var sqliteTestRun = new SQLiteTestRun("test.db");
                 sqliteTestRun.Run();
                 sqliteTestRuns.Add(sqliteTestRun);
+                var postgresqlTestRun = new PostgreSQLTestRun("Host=localhost;Database=test;Username=test;Password=test");
+                postgresqlTestRun.Run();
+                postgresqlTestRuns.Add(postgresqlTestRun);
                 var doubletsTestRun = new DoubletsTestRun("test.links");
                 doubletsTestRun.Run();
                 doubletsTestRuns.Add(doubletsTestRun);
@@ -41,6 +46,9 @@ namespace Comparisons.SQLiteVSDoublets
             Console.WriteLine("SQLite results:");
             var averageSqliteResults = GetResultsAverage(sqliteTestRuns);
             Console.WriteLine(averageSqliteResults.ToString());
+            Console.WriteLine("PostgreSQL results:");
+            var averagePostgreSqlResults = GetResultsAverage(postgresqlTestRuns);
+            Console.WriteLine(averagePostgreSqlResults.ToString());
             Console.WriteLine("Doublets results:");
             var averageDoubletsResults = GetResultsAverage(doubletsTestRuns);
             Console.WriteLine(averageDoubletsResults.ToString());

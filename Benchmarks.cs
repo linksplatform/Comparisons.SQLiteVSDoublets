@@ -3,6 +3,7 @@ using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 using Comparisons.SQLiteVSDoublets.Model;
 using Comparisons.SQLiteVSDoublets.SQLite;
+using Comparisons.SQLiteVSDoublets.SystemDataSQLite;
 using Comparisons.SQLiteVSDoublets.Doublets;
 
 namespace Comparisons.SQLiteVSDoublets
@@ -22,6 +23,7 @@ namespace Comparisons.SQLiteVSDoublets
         [Params(1000, 10000, 100000)]
         public int N;
         private SQLiteTestRun _sqliteTestRun;
+        private SystemDataSQLiteTestRun _systemDataSqliteTestRun;
         private DoubletsTestRun _doubletsTestRun;
 
         [GlobalSetup]
@@ -29,6 +31,7 @@ namespace Comparisons.SQLiteVSDoublets
         {
             BlogPosts.GenerateData(N);
             _sqliteTestRun = new SQLiteTestRun("test.db");
+            _systemDataSqliteTestRun = new SystemDataSQLiteTestRun("test-systemdata.db");
             _doubletsTestRun = new DoubletsTestRun("test.links");
         }
 
@@ -40,6 +43,16 @@ namespace Comparisons.SQLiteVSDoublets
         {
             Directory.CreateDirectory(SizeAfterCreationColumn.DbSizeOutputFolder);
             File.WriteAllText(Path.Combine(SizeAfterCreationColumn.DbSizeOutputFolder, $"disk-size.sqlite.{N}.txt"), _sqliteTestRun.Results.DbSizeAfterCreation.ToString());
+        }
+
+        [Benchmark]
+        public void SystemDataSQLite() => _systemDataSqliteTestRun.Run();
+
+        [IterationCleanup(Target = "SystemDataSQLite")]
+        public void SystemDataSQLiteOutput()
+        {
+            Directory.CreateDirectory(SizeAfterCreationColumn.DbSizeOutputFolder);
+            File.WriteAllText(Path.Combine(SizeAfterCreationColumn.DbSizeOutputFolder, $"disk-size.systemdata-sqlite.{N}.txt"), _systemDataSqliteTestRun.Results.DbSizeAfterCreation.ToString());
         }
 
         [Benchmark]

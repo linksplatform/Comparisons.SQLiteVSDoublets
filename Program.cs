@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Comparisons.SQLiteVSDoublets.SQLite;
 using Comparisons.SQLiteVSDoublets.Doublets;
+using Comparisons.SQLiteVSDoublets.Experiments;
 using Comparisons.SQLiteVSDoublets.Model;
 using BenchmarkDotNet.Running;
 
@@ -18,6 +19,9 @@ namespace Comparisons.SQLiteVSDoublets
         /// </summary>
         static void Main()
         {
+            // Test System.Data.SQLite implementation
+            TestSystemDataSQLite.RunTest();
+            
             BenchmarkRunner.Run<Benchmarks>();
             // Use this method if you need full control over the execution.
             //Run();

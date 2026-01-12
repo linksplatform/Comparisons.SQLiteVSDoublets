@@ -1,6 +1,14 @@
 name: CI
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'csharp/**'
+      - '.github/workflows/CI.yml'
+
+defaults:
+  run:
+    working-directory: csharp
 
 jobs:
   build-linux:

@@ -1,0 +1,34 @@
+[package]
+name = "sqlite-vs-doublets"
+version = "0.1.0"
+edition = "2021"
+license = "Unlicense"
+description = "Benchmark comparing SQLite vs Doublets performance for basic CRUD operations"
+
+[[bench]]
+name = "bench"
+harness = false
+
+[dependencies]
+rusqlite = { version = "=0.27.0", features = ["bundled"] }
+doublets = { git = "https://github.com/linksplatform/doublets-rs.git", rev = "5522d91c536654934b7181829f6efb570fb8bb44" }
+once_cell = "1.14"
+
+[dev-dependencies]
+criterion = { version = "=0.3.6", default-features = false }
+
+# Pin dependencies for compatibility with nightly-2022-08-22 (rustc 1.65)
+serde_derive = "=1.0.136"
+proc-macro2 = "=1.0.36"
+quote = "=1.0.15"
+syn = "=1.0.86"
+bumpalo = "=3.11.1"
+rayon = "=1.6.1"
+rayon-core = "=1.10.2"
+itoa = "=1.0.5"
+ryu = "=1.0.12"
+unicode-width = "=0.1.10"
+
+[profile.release]
+lto = true
+codegen-units = 1

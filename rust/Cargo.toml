@@ -28,6 +28,9 @@ rayon-core = "=1.10.2"
 itoa = "=1.0.5"
 ryu = "=1.0.12"
 unicode-width = "=0.1.10"
+tempfile = "=3.3.0"
+fastrand = "=1.8.0"
+getrandom = "=0.2.8"
 
 [profile.release]
 lto = true

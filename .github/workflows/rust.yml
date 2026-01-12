@@ -73,7 +73,7 @@ jobs:
             ${{ runner.os }}-cargo-bench-
 
       - name: Run benchmarks
-        run: cargo bench -- --noplot
+        run: cargo bench
         env:
           BENCHMARK_LINK_COUNT: 1000
           BACKGROUND_LINK_COUNT: 3000

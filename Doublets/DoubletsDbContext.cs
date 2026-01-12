@@ -10,14 +10,15 @@ using Platform.Data.Numbers.Raw;
 using Platform.Data.Doublets;
 using Platform.Data.Doublets.Decorators;
 using Platform.Data.Doublets.PropertyOperators;
-using Platform.Data.Doublets.Unicode;
-using Platform.Data.Doublets.Time;
-using Platform.Data.Doublets.Numbers.Raw;
+using Platform.Data.Doublets.CriterionMatchers;
 using Platform.Data.Doublets.Sequences;
+using Platform.Data.Doublets.Sequences.Unicode;
+using Platform.Data.Doublets.Sequences.Time;
 using Platform.Data.Doublets.Sequences.Walkers;
 using Platform.Data.Doublets.Sequences.Converters;
-using Platform.Data.Doublets.CriterionMatchers;
-using Platform.Data.Doublets.Memory.Split.Specific;
+using Platform.Data.Doublets.Sequences.CriterionMatchers;
+using Platform.Data.Doublets.Sequences.Numbers.Raw;
+using Platform.Data.Doublets.Memory.Split.Generic;
 using Comparisons.SQLiteVSDoublets.Model;
 using TLinkAddress = System.UInt32;
 
@@ -167,8 +168,8 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             var linksConstants = new LinksConstants<TLinkAddress>(enableExternalReferencesSupport: true);
 
             // Init the links storage
-            _disposableLinks = new UInt32SplitMemoryLinks(dataMemory, indexMemory, UInt32SplitMemoryLinks.DefaultLinksSizeStep, linksConstants); // Low-level logic
-            _links = new UInt32Links(_disposableLinks); // Main logic in the combined decorator
+            _disposableLinks = new SplitMemoryLinks<TLinkAddress>(dataMemory, indexMemory);
+            _links = _disposableLinks;
 
             // Set up constant links (markers, aka mapped links)
             TLinkAddress currentMappingLinkIndex = 1;
@@ -199,7 +200,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             var unicodeSymbolToCharConverter = new UnicodeSymbolToCharConverter<TLinkAddress>(_links, _numberToAddressConverter, unicodeSymbolCriterionMatcher);
             var sequenceWalker = new RightSequenceWalker<TLinkAddress>(_links, new DefaultStack<TLinkAddress>(), unicodeSymbolCriterionMatcher.IsMatched);
             _stringToUnicodeSequenceConverter = new CachingConverterDecorator<string, TLinkAddress>(new StringToUnicodeSequenceConverter<TLinkAddress>(_links, charToUnicodeSymbolConverter, balancedVariantConverter, _unicodeSequenceMarker));
-            _unicodeSequenceToStringConverter = new CachingConverterDecorator<TLinkAddress, string>(new UnicodeSequenceToStringConverter<TLinkAddress>(_links, unicodeSequenceCriterionMatcher, sequenceWalker, unicodeSymbolToCharConverter));
+            _unicodeSequenceToStringConverter = new CachingConverterDecorator<TLinkAddress, string>(new UnicodeSequenceToStringConverter<TLinkAddress>(_links, unicodeSequenceCriterionMatcher, sequenceWalker, unicodeSymbolToCharConverter, _unicodeSequenceMarker));
         }
 
         /// <summary>

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)'=='Release'">
+    <PackageReference Include="Platform.Data.Doublets" Version="0.17.2" />
     <PackageReference Include="Platform.Data.Doublets.Sequences" Version="0.5.2" />
   </ItemGroup>
 
@@ -21,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)'=='Debug' AND !Exists('..\Data.Doublets.Sequences\csharp\Platform.Data.Doublets.Sequences\Platform.Data.Doublets.Sequences.csproj')">
+    <PackageReference Include="Platform.Data.Doublets" Version="0.17.2" />
     <PackageReference Include="Platform.Data.Doublets.Sequences" Version="0.5.2" />
   </ItemGroup>
 

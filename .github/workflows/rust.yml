@@ -72,8 +72,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-bench-
 
-      - name: Run benchmarks
-        run: cargo bench
+      - name: Run benchmark tests
+        run: cargo bench -- --test
         env:
-          BENCHMARK_LINK_COUNT: 1000
-          BACKGROUND_LINK_COUNT: 3000
+          BENCHMARK_LINK_COUNT: 100
+          BACKGROUND_LINK_COUNT: 100

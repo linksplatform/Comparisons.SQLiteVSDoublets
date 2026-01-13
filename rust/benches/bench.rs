@@ -7,6 +7,7 @@ use sqlite_vs_doublets::{
     benched::{DoubletsSplitVolatileBenched, DoubletsUnitedVolatileBenched, SqliteMemoryBenched},
     Benched, Links, BACKGROUND_LINK_COUNT, BENCHMARK_LINK_COUNT,
 };
+use std::time::Duration;
 
 /// Run create operations benchmark
 fn bench_create(c: &mut Criterion) {
@@ -367,15 +368,24 @@ fn bench_query_by_target(c: &mut Criterion) {
     group.finish();
 }
 
-criterion_group!(
-    benches,
-    bench_create,
-    bench_delete,
-    bench_update,
-    bench_query_all,
-    bench_query_by_id,
-    bench_query_by_source,
-    bench_query_by_target,
-);
+/// Configure criterion for faster CI runs
+fn configure_criterion() -> Criterion {
+    Criterion::default()
+        .sample_size(10)
+        .measurement_time(Duration::from_secs(1))
+        .warm_up_time(Duration::from_millis(500))
+}
+
+criterion_group! {
+    name = benches;
+    config = configure_criterion();
+    targets = bench_create,
+              bench_delete,
+              bench_update,
+              bench_query_all,
+              bench_query_by_id,
+              bench_query_by_source,
+              bench_query_by_target
+}
 
 criterion_main!(benches);

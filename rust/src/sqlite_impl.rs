@@ -1,6 +1,6 @@
 //! SQLite implementation for links storage
 
-use crate::{Link, Links};
+use crate::{BlogPost, Link, Links, Objects};
 use rusqlite::{params, Connection};
 use std::path::Path;
 
@@ -24,34 +24,7 @@ impl SqliteLinks {
     }
 
     fn init(conn: Connection) -> Self {
-        conn.execute(
-            "CREATE TABLE IF NOT EXISTS links (
-                id INTEGER PRIMARY KEY,
-                source INTEGER NOT NULL,
-                target INTEGER NOT NULL
-            )",
-            [],
-        )
-        .expect("Failed to create links table");
-
-        // Create indexes for efficient queries
-        conn.execute(
-            "CREATE INDEX IF NOT EXISTS idx_source ON links(source)",
-            [],
-        )
-        .expect("Failed to create source index");
-
-        conn.execute(
-            "CREATE INDEX IF NOT EXISTS idx_target ON links(target)",
-            [],
-        )
-        .expect("Failed to create target index");
-
-        conn.execute(
-            "CREATE INDEX IF NOT EXISTS idx_source_target ON links(source, target)",
-            [],
-        )
-        .expect("Failed to create source_target index");
+        Self::create_schema(&conn);
 
         // Get the max ID to continue from
         let next_id: u64 = conn
@@ -63,37 +36,42 @@ impl SqliteLinks {
         Self { conn, next_id }
     }
 
-    /// Drop all tables and recreate them
-    pub fn reset(&mut self) {
-        self.conn
-            .execute("DROP TABLE IF EXISTS links", [])
-            .expect("Failed to drop links table");
-        self.conn
-            .execute(
-                "CREATE TABLE links (
+    /// Creates the tables and the indexes used by the benchmarks.
+    ///
+    /// `links` stores the link related benchmark data, `blog_posts` stores the
+    /// object like structures — the same shape the C# benchmark stores through
+    /// Entity Framework Core (a primary key, a unique title, a content and a
+    /// publication date).
+    fn create_schema(conn: &Connection) {
+        conn.execute_batch(
+            "CREATE TABLE IF NOT EXISTS links (
                 id INTEGER PRIMARY KEY,
                 source INTEGER NOT NULL,
                 target INTEGER NOT NULL
-            )",
-                [],
+            );
+            CREATE INDEX IF NOT EXISTS idx_source ON links(source);
+            CREATE INDEX IF NOT EXISTS idx_target ON links(target);
+            CREATE INDEX IF NOT EXISTS idx_source_target ON links(source, target);
+            CREATE TABLE IF NOT EXISTS blog_posts (
+                id INTEGER PRIMARY KEY,
+                title TEXT NOT NULL,
+                content TEXT NOT NULL,
+                publication_date_time INTEGER NOT NULL
+            );
+            CREATE UNIQUE INDEX IF NOT EXISTS idx_blog_posts_title ON blog_posts(title);",
+        )
+        .expect("Failed to create the benchmark schema");
+    }
+
+    /// Drop all tables and recreate them
+    pub fn reset(&mut self) {
+        self.conn
+            .execute_batch(
+                "DROP TABLE IF EXISTS links;
+                DROP TABLE IF EXISTS blog_posts;",
             )
-            .expect("Failed to create links table");
-
-        self.conn
-            .execute("CREATE INDEX idx_source ON links(source)", [])
-            .expect("Failed to create source index");
-
-        self.conn
-            .execute("CREATE INDEX idx_target ON links(target)", [])
-            .expect("Failed to create target index");
-
-        self.conn
-            .execute(
-                "CREATE INDEX idx_source_target ON links(source, target)",
-                [],
-            )
-            .expect("Failed to create source_target index");
-
+            .expect("Failed to drop the benchmark tables");
+        Self::create_schema(&self.conn);
         self.next_id = 1;
     }
 }
@@ -224,6 +202,70 @@ impl Links for SqliteLinks {
     fn count(&self) -> usize {
         self.conn
             .query_row("SELECT COUNT(*) FROM links", [], |row| row.get::<_, i64>(0))
+            .unwrap_or(0) as usize
+    }
+}
+
+impl Objects for SqliteLinks {
+    fn create_posts(&mut self, posts: &[BlogPost]) -> Vec<u64> {
+        let transaction = self
+            .conn
+            .unchecked_transaction()
+            .expect("Failed to start a transaction");
+        let mut ids = Vec::with_capacity(posts.len());
+        {
+            let mut statement = transaction
+                .prepare(
+                    "INSERT INTO blog_posts (title, content, publication_date_time)
+                     VALUES (?1, ?2, ?3)",
+                )
+                .expect("Failed to prepare the blog post insert");
+            for post in posts {
+                statement
+                    .execute(params![
+                        post.title,
+                        post.content,
+                        post.publication_date_time
+                    ])
+                    .expect("Failed to insert a blog post");
+                ids.push(transaction.last_insert_rowid() as u64);
+            }
+        }
+        transaction.commit().expect("Failed to commit blog posts");
+        ids
+    }
+
+    fn read_posts(&self) -> Vec<BlogPost> {
+        let mut statement = self
+            .conn
+            .prepare("SELECT id, title, content, publication_date_time FROM blog_posts")
+            .expect("Failed to prepare the blog post query");
+
+        statement
+            .query_map([], |row| {
+                Ok(BlogPost {
+                    id: row.get::<_, i64>(0)? as u64,
+                    title: row.get(1)?,
+                    content: row.get(2)?,
+                    publication_date_time: row.get(3)?,
+                })
+            })
+            .expect("Failed to query blog posts")
+            .filter_map(|post| post.ok())
+            .collect()
+    }
+
+    fn delete_posts(&mut self) {
+        self.conn
+            .execute("DELETE FROM blog_posts", [])
+            .expect("Failed to delete blog posts");
+    }
+
+    fn count_posts(&self) -> usize {
+        self.conn
+            .query_row("SELECT COUNT(*) FROM blog_posts", [], |row| {
+                row.get::<_, i64>(0)
+            })
             .unwrap_or(0) as usize
     }
 }

@@ -35,8 +35,13 @@ impl<S> DoubletsLinks<S> {
 
 impl<S: Doublets<usize> + DoubletsExt<usize>> Links for DoubletsLinks<S> {
     fn create(&mut self, source: u64, target: u64) -> u64 {
+        // `create_by` passes its argument as a *restriction* of the query, and
+        // the memory stores ignore it — it always creates an empty link. The
+        // source and the target are only assigned by the update that follows,
+        // which is exactly what `create_link` does (the equivalent of
+        // `CreateAndUpdate` of the C# `Platform.Data.Doublets`).
         self.store
-            .create_by([source as usize, target as usize])
+            .create_link(source as usize, target as usize)
             .expect("Failed to create link") as u64
     }
 
@@ -151,6 +156,23 @@ mod tests {
         let link = db.query_by_id(id).unwrap();
         assert_eq!(link.source, id);
         assert_eq!(link.target, id);
+    }
+
+    /// Regression test: `create` used to call `create_by([source, target])`,
+    /// which the memory stores read as a restriction and ignore, so every
+    /// benchmarked link was created empty instead of connecting two links.
+    #[test]
+    fn test_create_assigns_source_and_target() {
+        let mut db = create_united_volatile();
+        let first = db.create_point();
+        let second = db.create_point();
+        let id = db.create(first, second);
+
+        let link = db.query_by_id(id).unwrap();
+        assert_eq!(link.source, first);
+        assert_eq!(link.target, second);
+        assert_eq!(db.query_by_source(first).len(), 2);
+        assert_eq!(db.query_by_target(second).len(), 2);
     }
 
     #[test]

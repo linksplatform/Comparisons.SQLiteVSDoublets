@@ -2,8 +2,16 @@ name: CI
 
 on:
   push:
+    branches: [main]
     paths:
       - 'csharp/**'
+      - 'scripts/**'
+      - '.github/workflows/CI.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'csharp/**'
+      - 'scripts/**'
       - '.github/workflows/CI.yml'
 
 defaults:
@@ -11,21 +19,176 @@ defaults:
     working-directory: csharp
 
 jobs:
-  build-linux:
+  test:
+    name: Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Build
+        run: dotnet build Comparisons.SQLiteVSDoublets.sln -c Release --warnaserror
+      - name: Verify every storage variant
+        run: dotnet run -c Release --no-build -- --self-test
+
+  results-pipeline:
+    name: Results pipeline tests
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-    - uses: actions/checkout@v1
-    - name: Run
-      run: dotnet run -c Release
-  build-windows:
-    runs-on: windows-latest
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install chart dependencies
+        run: python -m pip install matplotlib numpy
+        working-directory: .
+      - name: Test shared and C# reporting
+        run: |
+          python -m unittest discover -s scripts -p 'test_*.py' -v
+          python -m unittest discover -s csharp -p 'test_*.py' -v
+        working-directory: .
+
+  benchmark-pr:
+    name: Benchmark (PR validation)
+    if: github.event_name == 'pull_request'
+    needs: [test, results-pipeline]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
-    - uses: actions/checkout@v1
-    - name: Run
-      run: dotnet run -c Release
-  build-macos:
-    runs-on: macos-latest
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install chart dependencies
+        run: python -m pip install matplotlib numpy
+        working-directory: .
+      - name: Build benchmark
+        run: dotnet build Comparisons.SQLiteVSDoublets.sln -c Release
+      - name: Run reduced-scale benchmark
+        env:
+          BENCHMARK_LINK_COUNT: 10
+          BACKGROUND_LINK_COUNT: 30
+          BENCHMARK_WARMUP_COUNT: 1
+          BENCHMARK_ITERATION_COUNT: 1
+        run: >-
+          dotnet run -c Release --no-build --
+          --filter '*LinksBenchmarks*' > benchmark.log 2>&1
+      - name: Generate table and charts
+        env:
+          BENCHMARK_LINK_COUNT: 10
+          BACKGROUND_LINK_COUNT: 30
+        run: |
+          mkdir -p artifacts
+          report_path=$(find BenchmarkDotNet.Artifacts/results -name '*LinksBenchmarks-report-full.json' -print -quit)
+          test -n "$report_path"
+          python out.py "$report_path" \
+            --results artifacts/results.md \
+            --output-dir artifacts \
+            --docs-dir artifacts/docs
+      - name: Add results to job summary
+        run: |
+          {
+            echo '## C# benchmark (reduced-scale validation)'
+            echo
+            cat artifacts/results.md
+            echo
+            echo '_These numbers validate the pipeline; full results are published from `main`._'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload diagnostic and report artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: csharp-benchmark-pr
+          path: |
+            csharp/benchmark.log
+            csharp/BenchmarkDotNet.Artifacts/results/
+            csharp/artifacts/
+
+  benchmark:
+    name: Benchmark (full)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [test, results-pipeline]
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    concurrency:
+      group: benchmark-publication
+      cancel-in-progress: false
+    permissions:
+      contents: write
     steps:
-    - uses: actions/checkout@v1
-    - name: Run
-      run: dotnet run -c Release
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install chart dependencies
+        run: python -m pip install matplotlib numpy
+        working-directory: .
+      - name: Build benchmark
+        run: dotnet build Comparisons.SQLiteVSDoublets.sln -c Release
+      - name: Run full benchmark
+        env:
+          BENCHMARK_LINK_COUNT: 1000
+          BACKGROUND_LINK_COUNT: 3000
+          BENCHMARK_WARMUP_COUNT: 2
+          BENCHMARK_ITERATION_COUNT: 5
+        run: >-
+          dotnet run -c Release --no-build --
+          --filter '*LinksBenchmarks*' > benchmark.log 2>&1
+      - name: Generate and publish documentation
+        env:
+          BENCHMARK_LINK_COUNT: 1000
+          BACKGROUND_LINK_COUNT: 3000
+        run: |
+          report_path=$(find BenchmarkDotNet.Artifacts/results -name '*LinksBenchmarks-report-full.json' -print -quit)
+          test -n "$report_path"
+          python out.py "$report_path" \
+            --results results.md \
+            --readme ../README.md \
+            --readme ../README.ru.md \
+            --docs-dir ../docs/benchmarks
+      - name: Add results to job summary
+        run: |
+          {
+            echo '## C# benchmark (full scale)'
+            echo
+            cat results.md
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Commit published results
+        working-directory: .
+        run: |
+          git config user.email 'linksplatform@gmail.com'
+          git config user.name 'LinksPlatformBencher'
+          git add README.md README.ru.md csharp/results.md docs/benchmarks/
+          if git diff --staged --quiet; then
+            echo 'No benchmark documentation changed.'
+          else
+            git commit -m 'Update C# benchmark results [skip ci]'
+            git push origin HEAD:main
+          fi
+      - name: Upload diagnostic and report artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: csharp-benchmark-full
+          path: |
+            csharp/benchmark.log
+            csharp/BenchmarkDotNet.Artifacts/results/
+            csharp/results.md
+            csharp/bench_csharp.png
+            csharp/bench_csharp_log_scale.png

@@ -4,9 +4,42 @@
 
 ![Сравнение моделей данных](https://github.com/LinksPlatform/Documentation/raw/master/doc/ModelsComparison/relational_model_vs_associative_model_vs_links_ru.png)
 
-Сравнение SQLite и Дуплетов ПлатформыСвязей на базовых операциях в качестве встариваемых баз данных с объектами (создание списка, чтение списка, удаление списка).
+Сравнение SQLite и Дуплетов ПлатформыСвязей на базовых операциях встроенных баз данных со связями и объектоподобными структурами.
 
 Основано на примерах из https://github.com/FahaoTang/dotnetcore-examples и https://github.com/Konard/LinksPlatform
+
+## Автоматизированный набор тестов производительности
+
+Одинаковая нагрузка со связями выполняется для SQLite в памяти и в файле, а также для четырёх вариантов Дуплетов: объединённого/разделённого и энергозависимого/энергонезависимого. Измеряются создание, обновление, удаление, перечисление всех связей и запросы по идентификатору, конкретной паре `(начало, конец)`, началу и концу. Набор на Rust также измеряет создание, чтение и удаление объектоподобных записей блога во всех вариантах хранилищ.
+
+Подготовка и очистка данных не входят в измеряемый интервал. Для pull request запускается сокращённая проверка, а исходный вывод, таблицы и диаграммы сохраняются как артефакты workflow. Полные запуски в `main` публикуют таблицы и диаграммы ниже вместе со ссылкой на создавший их запуск.
+
+Локальный запуск проверок:
+
+```bash
+cd rust
+cargo test --lib --tests
+cargo check --benches
+BENCHMARK_LINK_COUNT=10 BACKGROUND_LINK_COUNT=30 BENCHMARK_OBJECT_COUNT=5 cargo bench --bench bench -- --output-format bencher
+
+cd ../csharp
+dotnet run -c Release -- --self-test
+BENCHMARK_LINK_COUNT=10 BACKGROUND_LINK_COUNT=30 dotnet run -c Release -- --filter '*LinksBenchmarks*'
+```
+
+### Результаты операций со связями на C#
+
+<!--CSHARP_BENCHMARK_RESULTS_START-->
+> Результаты будут созданы полным workflow после попадания изменений в `main`.
+<!--CSHARP_BENCHMARK_RESULTS_END-->
+
+### Результаты операций со связями и объектами на Rust
+
+<!--RUST_BENCHMARK_RESULTS_START-->
+> Результаты будут созданы полным workflow после попадания изменений в `main`.
+<!--RUST_BENCHMARK_RESULTS_END-->
+
+Исходное сравнение объектов на C# и его исторические результаты сохранены ниже.
 
 ## SQLite
 ```C#

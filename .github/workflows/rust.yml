@@ -2,18 +2,22 @@ name: Rust
 
 on:
   push:
-    branches: main
+    branches: [main]
     paths:
       - 'rust/**'
+      - 'scripts/**'
       - '.github/workflows/rust.yml'
   pull_request:
+    branches: [main]
     paths:
       - 'rust/**'
+      - 'scripts/**'
       - '.github/workflows/rust.yml'
 
 env:
   CARGO_TERM_COLOR: always
   RUST_BACKTRACE: 1
+  RUST_TOOLCHAIN: nightly-2022-08-22
 
 defaults:
   run:
@@ -23,6 +27,7 @@ jobs:
   test:
     name: Test (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
@@ -30,21 +35,196 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Rust
+      - name: Setup pinned Rust nightly
         uses: dtolnay/rust-toolchain@master
         with:
-          toolchain: nightly-2022-08-22
+          toolchain: ${{ env.RUST_TOOLCHAIN }}
+          components: rustfmt, clippy
 
-      - name: Cache cargo registry
-        uses: actions/cache@v4
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
         with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            rust/target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('rust/Cargo.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-cargo-
+          workspaces: rust -> target
+          cache-on-failure: 'true'
 
-      - name: Run tests
-        run: cargo test --release
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+
+      - name: Run Clippy
+        run: cargo clippy --lib --tests --benches -- -D warnings
+
+      - name: Run unit and integration tests
+        run: cargo test --release --lib --tests
+
+      # `cargo test --all-targets` executes Criterion binaries. Compile them
+      # explicitly so file-backed measurements are only run in bounded jobs.
+      - name: Compile benchmarks
+        run: cargo check --release --benches
+
+  results-pipeline:
+    name: Results pipeline tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install chart dependencies
+        run: python -m pip install matplotlib numpy
+        working-directory: .
+      - name: Test shared and Rust reporting
+        run: |
+          python -m unittest discover -s scripts -p 'test_*.py' -v
+          python -m unittest discover -s rust -p 'test_*.py' -v
+        working-directory: .
+
+  benchmark-pr:
+    name: Benchmark (PR validation)
+    if: github.event_name == 'pull_request'
+    needs: [test, results-pipeline]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup pinned Rust nightly
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ env.RUST_TOOLCHAIN }}
+          components: rustfmt, clippy
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install chart dependencies
+        run: python -m pip install matplotlib numpy
+        working-directory: .
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust -> target
+          cache-on-failure: 'true'
+      - name: Run reduced-scale benchmark
+        env:
+          BENCHMARK_LINK_COUNT: 10
+          BACKGROUND_LINK_COUNT: 30
+          BENCHMARK_OBJECT_COUNT: 5
+          BENCHMARK_SAMPLE_SIZE: 10
+          BENCHMARK_MEASUREMENT_SECONDS: 1
+          BENCHMARK_WARM_UP_MILLISECONDS: 100
+        run: |
+          set -o pipefail
+          rm -rf target/criterion
+          cargo bench --bench bench -- --output-format bencher | tee out.txt
+      - name: Generate table and charts
+        env:
+          BENCHMARK_LINK_COUNT: 10
+          BACKGROUND_LINK_COUNT: 30
+          BENCHMARK_OBJECT_COUNT: 5
+        run: |
+          mkdir -p artifacts
+          python out.py out.txt \
+            --results artifacts/results.md \
+            --output-dir artifacts \
+            --docs-dir artifacts/docs
+      - name: Add results to job summary
+        run: |
+          {
+            echo '## Rust benchmark (reduced-scale validation)'
+            echo
+            cat artifacts/results.md
+            echo
+            echo '_These numbers validate the pipeline; full results are published from `main`._'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload diagnostic and report artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rust-benchmark-pr
+          path: |
+            rust/out.txt
+            rust/artifacts/
+
+  benchmark:
+    name: Benchmark (full)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [test, results-pipeline]
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    concurrency:
+      group: benchmark-publication
+      cancel-in-progress: false
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Setup pinned Rust nightly
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ env.RUST_TOOLCHAIN }}
+          components: rustfmt, clippy
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install chart dependencies
+        run: python -m pip install matplotlib numpy
+        working-directory: .
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust -> target
+          cache-on-failure: 'true'
+      - name: Run full benchmark
+        env:
+          BENCHMARK_LINK_COUNT: 1000
+          BACKGROUND_LINK_COUNT: 3000
+          BENCHMARK_OBJECT_COUNT: 1000
+          BENCHMARK_SAMPLE_SIZE: 20
+          BENCHMARK_MEASUREMENT_SECONDS: 3
+          BENCHMARK_WARM_UP_MILLISECONDS: 1000
+        run: |
+          set -o pipefail
+          rm -rf target/criterion
+          cargo bench --bench bench -- --output-format bencher | tee out.txt
+      - name: Generate and publish documentation
+        env:
+          BENCHMARK_LINK_COUNT: 1000
+          BACKGROUND_LINK_COUNT: 3000
+          BENCHMARK_OBJECT_COUNT: 1000
+        run: |
+          python out.py out.txt \
+            --results results.md \
+            --readme ../README.md \
+            --readme ../README.ru.md \
+            --docs-dir ../docs/benchmarks
+      - name: Add results to job summary
+        run: |
+          {
+            echo '## Rust benchmark (full scale)'
+            echo
+            cat results.md
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Commit published results
+        working-directory: .
+        run: |
+          git config user.email 'linksplatform@gmail.com'
+          git config user.name 'LinksPlatformBencher'
+          git add README.md README.ru.md rust/results.md docs/benchmarks/
+          if git diff --staged --quiet; then
+            echo 'No benchmark documentation changed.'
+          else
+            git commit -m 'Update Rust benchmark results [skip ci]'
+            git push origin HEAD:main
+          fi
+      - name: Upload diagnostic and report artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rust-benchmark-full
+          path: |
+            rust/out.txt
+            rust/results.md
+            rust/bench_rust.png
+            rust/bench_rust_log_scale.png

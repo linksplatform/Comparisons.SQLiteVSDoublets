@@ -293,7 +293,7 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
             // All links that match this query are BlogPosts.
             var any = _links.Constants.Any;
             var query = new Link<TLinkAddress>(any, _blogPostMarker, any);
-            _links.Each(listFiller.AddAndReturnConstant, query);
+            _links.Each(element => listFiller.AddAndReturnConstant(element!), query);
             return list.Select(LoadBlogPost).ToList();
         }
 

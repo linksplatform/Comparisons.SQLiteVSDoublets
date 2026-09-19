@@ -8,6 +8,8 @@ cpp/*.so
 cpp/*.exe
 
 # Common temporary files
+__pycache__/
+*.py[cod]
 *.tmp
 *.log
 *.swp

@@ -16,13 +16,13 @@ namespace Comparisons.SQLiteVSDoublets
     {
         private class Config : ManualConfig
         {
-            public Config() => Add(new SizeAfterCreationColumn());
+            public Config() => AddColumn(new SizeAfterCreationColumn());
         }
 
         [Params(1000, 10000, 100000)]
         public int N;
-        private SQLiteTestRun _sqliteTestRun;
-        private DoubletsTestRun _doubletsTestRun;
+        private SQLiteTestRun _sqliteTestRun = null!;
+        private DoubletsTestRun _doubletsTestRun = null!;
 
         [GlobalSetup]
         public void Setup()

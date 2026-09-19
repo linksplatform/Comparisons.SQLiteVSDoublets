@@ -63,7 +63,9 @@ where
         // Updating to a doublet that is not stored yet, as the update benchmark does.
         let unused = links.create_point();
         links.update(sample.id, unused, background[0]);
-        let updated = links.query_by_id(sample.id).expect("updated link is missing");
+        let updated = links
+            .query_by_id(sample.id)
+            .expect("updated link is missing");
         assert_eq!((updated.source, updated.target), (unused, background[0]));
 
         let before = links.count();
@@ -162,6 +164,9 @@ macro_rules! storage_tests {
 storage_tests!(sqlite_memory, SqliteMemoryBenched);
 storage_tests!(sqlite_file, SqliteFileBenched);
 storage_tests!(doublets_united_volatile, DoubletsUnitedVolatileBenched);
-storage_tests!(doublets_united_non_volatile, DoubletsUnitedNonVolatileBenched);
+storage_tests!(
+    doublets_united_non_volatile,
+    DoubletsUnitedNonVolatileBenched
+);
 storage_tests!(doublets_split_volatile, DoubletsSplitVolatileBenched);
 storage_tests!(doublets_split_non_volatile, DoubletsSplitNonVolatileBenched);

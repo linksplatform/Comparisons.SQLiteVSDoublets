@@ -143,9 +143,9 @@ impl<S: Doublets<usize> + DoubletsExt<usize>> Links for DoubletsLinks<S> {
     }
 
     fn query_by_id(&self, id: u64) -> Option<Link> {
-        self.store.get_link(id as usize).map(|link| {
-            Link::new(link.index as u64, link.source as u64, link.target as u64)
-        })
+        self.store
+            .get_link(id as usize)
+            .map(|link| Link::new(link.index as u64, link.source as u64, link.target as u64))
     }
 
     fn query_by_source(&self, source: u64) -> Vec<Link> {
@@ -195,7 +195,9 @@ impl<S: Doublets<usize> + DoubletsExt<usize>> DoubletsLinks<S> {
     }
 
     fn point(&mut self) -> usize {
-        self.store.create_point().expect("Failed to create a marker")
+        self.store
+            .create_point()
+            .expect("Failed to create a marker")
     }
 
     /// Returns the point link representing `character`, creating it on first use.

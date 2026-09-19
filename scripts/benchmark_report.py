@@ -10,9 +10,8 @@ the same way:
   times faster (or slower) it is than the fastest SQLite measurement of the
   same operation,
 - a linear ("pixel") scale chart and a logarithmic scale chart,
-- an in place update of a results section of a Markdown document, delimited by
-  the ``<!--BENCHMARK_RESULTS_START-->`` / ``<!--BENCHMARK_RESULTS_END-->``
-  markers.
+- an in place update of a language-specific results section of a Markdown
+  document.
 
 The style follows the sibling LinksPlatform comparisons
 (Comparisons.Neo4jVSDoublets, Comparisons.PostgreSQLVSDoublets,
@@ -37,8 +36,10 @@ except ImportError:  # pragma: no cover - exercised only without matplotlib
     print("Warning: matplotlib/numpy not installed, skipping chart generation")
     HAS_MATPLOTLIB = False
 
-START_MARKER = "<!--BENCHMARK_RESULTS_START-->"
-END_MARKER = "<!--BENCHMARK_RESULTS_END-->"
+RUST_START_MARKER = "<!--RUST_BENCHMARK_RESULTS_START-->"
+RUST_END_MARKER = "<!--RUST_BENCHMARK_RESULTS_END-->"
+CSHARP_START_MARKER = "<!--CSHARP_BENCHMARK_RESULTS_START-->"
+CSHARP_END_MARKER = "<!--CSHARP_BENCHMARK_RESULTS_END-->"
 
 # Operations shared by every language of this comparison. The first element of
 # each pair is the identifier used by the benchmark runner, the second one is
@@ -93,6 +94,17 @@ def empty_results(operations=OPERATIONS):
 def has_any_results(results):
     """Return ``True`` when at least one measurement was parsed."""
     return any(measurements for measurements in results.values())
+
+
+def missing_measurements(results, operations=OPERATIONS, variants=VARIANTS):
+    """List expected ``operation/variant`` pairs absent from parsed output."""
+    missing = []
+    for operation, _operation_label in operations:
+        measured = results.get(operation, {})
+        for variant, _variant_label, _color in variants:
+            if not measured.get(variant):
+                missing.append(f"{operation}/{variant}")
+    return missing
 
 
 def baseline_of(measurements, baselines=BASELINES):
@@ -162,7 +174,8 @@ def build_provenance(
     """Describe how and when the committed results were produced."""
     benchmark_links = benchmark_links or os.environ.get("BENCHMARK_LINK_COUNT", "1000")
     background_links = background_links or os.environ.get("BACKGROUND_LINK_COUNT", "3000")
-    object_count = object_count or os.environ.get("BENCHMARK_OBJECT_COUNT", "1000")
+    if object_count is not False:
+        object_count = object_count or os.environ.get("BENCHMARK_OBJECT_COUNT", "1000")
     generated_at = generated_at or datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
     source = "a local benchmark run"
@@ -177,12 +190,13 @@ def build_provenance(
     prefix = f"_Generated {generated_at}"
     if language:
         prefix += f" for {language}"
-    return (
-        f"{prefix} by {source} — "
+    quantities = (
         f"{benchmark_links} benchmarked links, "
-        f"{background_links} background links, "
-        f"{object_count} objects._"
+        f"{background_links} background links"
     )
+    if object_count is not False:
+        quantities += f", {object_count} objects"
+    return f"{prefix} by {source} — {quantities}._"
 
 
 def render_results_section(results, provenance=None, **table_options):
@@ -191,7 +205,7 @@ def render_results_section(results, provenance=None, **table_options):
     return f"{provenance}\n\n{format_results_table(results, **table_options)}"
 
 
-def update_markers(path, section, start_marker=START_MARKER, end_marker=END_MARKER):
+def update_markers(path, section, start_marker, end_marker):
     """Replace the marked results section of a Markdown document.
 
     Returns ``True`` when the file was modified.

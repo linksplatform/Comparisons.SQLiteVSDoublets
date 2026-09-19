@@ -149,8 +149,16 @@ mod tests {
     #[test]
     fn generated_dates_are_within_the_last_30_days() {
         let posts = generate_posts(64);
-        let newest = posts.iter().map(|post| post.publication_date_time).max().unwrap();
-        let oldest = posts.iter().map(|post| post.publication_date_time).min().unwrap();
+        let newest = posts
+            .iter()
+            .map(|post| post.publication_date_time)
+            .max()
+            .unwrap();
+        let oldest = posts
+            .iter()
+            .map(|post| post.publication_date_time)
+            .min()
+            .unwrap();
         assert!(newest - oldest <= 30 * 24 * 60 * 60);
     }
 }

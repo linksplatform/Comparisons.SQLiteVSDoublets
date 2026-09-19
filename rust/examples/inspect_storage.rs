@@ -39,13 +39,19 @@ where
 
     println!("{name}:");
     println!("  links                  {}", storage.count());
-    println!("  by identity            {:?}", storage.query_by_id(sample.id));
+    println!(
+        "  by identity            {:?}",
+        storage.query_by_id(sample.id)
+    );
     let outgoing = storage.query_by_source(sample.source).len();
     println!("  outgoing of the sample {outgoing}");
     let incoming = storage.query_by_target(sample.target).len();
     println!("  incoming of the sample {incoming}");
     println!("  blog posts             {}", storage.count_posts());
-    println!("  first blog post        {:?}", storage.read_posts().first());
+    println!(
+        "  first blog post        {:?}",
+        storage.read_posts().first()
+    );
 }
 
 fn main() {

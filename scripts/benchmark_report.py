@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Shared benchmark reporting helpers for the SQLite vs Doublets comparison.
+"""
+Shared benchmark reporting helpers for the SQLite vs Doublets comparison.
 
 Both language specific pipelines (``rust/out.py`` and ``csharp/out.py``) parse
 their own benchmark output format and then hand the measurements to the
@@ -44,7 +45,7 @@ CSHARP_END_MARKER = "<!--CSHARP_BENCHMARK_RESULTS_END-->"
 # Operations shared by every language of this comparison. The first element of
 # each pair is the identifier used by the benchmark runner, the second one is
 # the label used in reports.
-LINK_OPERATIONS = [
+LINK_OPERATIONS = (
     ("create", "Create"),
     ("update", "Update"),
     ("delete", "Delete"),
@@ -53,37 +54,37 @@ LINK_OPERATIONS = [
     ("query_by_source_target", "Each Concrete"),
     ("query_by_source", "Each Outgoing"),
     ("query_by_target", "Each Incoming"),
-]
+)
 
 # Object-like structures (blog posts), the operations the C# comparison has
 # been built around from the beginning.
-OBJECT_OPERATIONS = [
+OBJECT_OPERATIONS = (
     ("objects_create", "Objects Create List"),
     ("objects_read", "Objects Read List"),
     ("objects_delete", "Objects Delete List"),
-]
+)
 
 OPERATIONS = LINK_OPERATIONS + OBJECT_OPERATIONS
 
 # Benchmarked backends: identifier, label and chart color.
-DOUBLETS_VARIANTS = [
+DOUBLETS_VARIANTS = (
     ("Doublets_United_Volatile", "Doublets United Volatile", "salmon"),
     ("Doublets_United_NonVolatile", "Doublets United NonVolatile", "red"),
     ("Doublets_Split_Volatile", "Doublets Split Volatile", "lightgreen"),
     ("Doublets_Split_NonVolatile", "Doublets Split NonVolatile", "green"),
-]
+)
 
-SQLITE_VARIANTS = [
+SQLITE_VARIANTS = (
     ("SQLite_Memory", "SQLite Memory", "lightblue"),
     ("SQLite_File", "SQLite File", "royalblue"),
-]
+)
 
 VARIANTS = DOUBLETS_VARIANTS + SQLITE_VARIANTS
 
 # Doublets cells are annotated relative to the fastest SQLite measurement of
 # the same operation, the same way Comparisons.Neo4jVSDoublets annotates
 # against the fastest of the two Neo4j modes.
-BASELINES = [key for key, _label, _color in SQLITE_VARIANTS]
+BASELINES = tuple(key for key, _label, _color in SQLITE_VARIANTS)
 
 
 def empty_results(operations=OPERATIONS):
@@ -206,7 +207,8 @@ def render_results_section(results, provenance=None, **table_options):
 
 
 def update_markers(path, section, start_marker, end_marker):
-    """Replace the marked results section of a Markdown document.
+    """
+    Replace the marked results section of a Markdown document.
 
     Returns ``True`` when the file was modified.
     """
@@ -289,7 +291,8 @@ def generate_charts(
     operations=OPERATIONS,
     variants=VARIANTS,
 ):
-    """Generate the linear and logarithmic comparison charts.
+    """
+    Generate the linear and logarithmic comparison charts.
 
     Returns the list of generated file paths (empty without matplotlib).
     """

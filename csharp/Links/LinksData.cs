@@ -29,7 +29,7 @@ public static class LinksData
         for (var index = 0; index < count; index++)
         {
             var source = background[index % background.Count];
-            var target = background[(index % background.Count + 1 + index / background.Count)
+            var target = background[((index % background.Count) + 1 + (index / background.Count))
                 % background.Count];
             links[index] = new LinkRecord(storage.Create(source, target), source, target);
         }

@@ -4,6 +4,11 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <!-- EF Core 7 transitively includes legacy Alpine-specific native SQLite
+         assets. NETSDK1206 only reports that those assets are ignored by the
+         .NET 8 RID graph; the generic assets used by this cross-platform
+         benchmark remain available. Keep every other warning as an error. -->
+    <NoWarn>$(NoWarn);NETSDK1206</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

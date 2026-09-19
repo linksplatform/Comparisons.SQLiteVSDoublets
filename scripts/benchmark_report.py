@@ -193,11 +193,7 @@ def render_results_section(results, provenance=None, **table_options):
 
 
 def update_markers(path, section, start_marker, end_marker):
-    """
-    Replace the marked results section of a Markdown document.
-
-    Returns ``True`` when the file was modified.
-    """
+    """Replace a marked Markdown section and report whether it changed."""
     with open(path, "r", encoding="utf-8") as handle:
         document = handle.read()
 
@@ -277,11 +273,7 @@ def generate_charts(
     operations=OPERATIONS,
     variants=VARIANTS,
 ):
-    """
-    Generate the linear and logarithmic comparison charts.
-
-    Returns the list of generated file paths (empty without matplotlib).
-    """
+    """Generate linear/log charts and return their paths when available."""
     if not HAS_MATPLOTLIB:
         return []
 

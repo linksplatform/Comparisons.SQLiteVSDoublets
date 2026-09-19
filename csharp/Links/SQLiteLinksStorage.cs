@@ -17,7 +17,14 @@ public sealed class SQLiteLinksStorage : ILinksStorage
             ? null
             : Path.Combine(Path.GetTempPath(), $"sqlite-vs-doublets-{Guid.NewGuid():N}.db");
         var dataSource = _path ?? ":memory:";
-        _connection = new SqliteConnection($"Data Source={dataSource}");
+        var connectionString = new SqliteConnectionStringBuilder
+        {
+            DataSource = dataSource,
+            // A pooled native connection keeps temporary database files open
+            // after Dispose, which prevents their immediate removal on Windows.
+            Pooling = false,
+        }.ToString();
+        _connection = new SqliteConnection(connectionString);
         _connection.Open();
         using var command = _connection.CreateCommand();
         command.CommandText = """

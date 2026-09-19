@@ -1,24 +1,10 @@
 #!/usr/bin/env python3
-"""
-Shared benchmark reporting helpers for the SQLite vs Doublets comparison.
+"""Shared benchmark reporting helpers for the SQLite vs Doublets comparison."""
 
-Both language specific pipelines (``rust/out.py`` and ``csharp/out.py``) parse
-their own benchmark output format and then hand the measurements to the
-functions of this module, so that every report of this repository is rendered
-the same way:
-
-- a Markdown table where every Doublets measurement is annotated with how many
-  times faster (or slower) it is than the fastest SQLite measurement of the
-  same operation,
-- a linear ("pixel") scale chart and a logarithmic scale chart,
-- an in place update of a language-specific results section of a Markdown
-  document.
-
-The style follows the sibling LinksPlatform comparisons
-(Comparisons.Neo4jVSDoublets, Comparisons.PostgreSQLVSDoublets,
-Comparisons.SpacetimeDBVSDoublets) so that all of them are documented the same
-way.
-"""
+# The language-specific pipelines parse their own benchmark formats, then use
+# this module for consistent Markdown tables, speedup annotations, linear and
+# logarithmic charts, and in-place result-section updates. The report format
+# follows the sibling LinksPlatform database comparisons.
 
 import os
 import re

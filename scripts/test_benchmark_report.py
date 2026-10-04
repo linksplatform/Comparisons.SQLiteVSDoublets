@@ -1,95 +1,164 @@
 #!/usr/bin/env python3
-"""Tests for shared result formatting and Markdown publication helpers."""
+"""Tests for benchmark_report.py: run with `python -m unittest discover -s scripts`."""
 
-import os
+import importlib.util
+import json
 import tempfile
 import unittest
+from pathlib import Path
 
 import benchmark_report as report
 
 
-class ResultTests(unittest.TestCase):
-    def test_fastest_sqlite_variant_is_the_baseline(self):
-        self.assertEqual(
-            report.baseline_of({"SQLite_Memory": 200, "SQLite_File": 100}), 100
-        )
-
-    def test_formats_faster_and_slower_measurements(self):
-        self.assertEqual(report.format_speedup(100, 1_000), "100 (10.0x faster)")
-        self.assertEqual(report.format_speedup(1_000, 100), "1000 (10.0x slower)")
-
-    def test_reports_every_missing_measurement(self):
-        results = report.empty_results([("create", "Create")])
-
-        missing = report.missing_measurements(
-            results,
-            [("create", "Create")],
-            [("SQLite_Memory", "SQLite Memory", "blue")],
-        )
-
-        self.assertEqual(missing, ["create/SQLite_Memory"])
+def measurement(median, low=None, high=None):
+    low = median if low is None else low
+    high = median if high is None else high
+    return {"median_ns": median, "min_ns": low, "max_ns": high, "samples_ns": [low, median, high]}
 
 
-class MarkerTests(unittest.TestCase):
+def results(category, variants, file_bytes=None):
+    return {
+        "category": category,
+        "results": [
+            {
+                "variant": variant,
+                "file_bytes": file_bytes,
+                "operations": {operation: measurement(median) for operation in report.OPERATIONS[category]},
+            }
+            for variant, median in variants.items()
+        ],
+    }
+
+
+def sample(category="links", language="Rust", bits=64, size=100_000, **extra):
+    data = results(category, {"SQLite_Memory": 1000, "SQLite_File": 2000, "Doublets_United_Volatile": 100})
+    data.update(language=language, bits=bits, size=size, repetitions=3, sqlite_version="3.53.2", **extra)
+    return data
+
+
+class FormattingTests(unittest.TestCase):
+    def test_durations_keep_three_significant_digits(self):
+        self.assertEqual(report.duration(999), "999 ns")
+        self.assertEqual(report.duration(1_234), "1.23 µs")
+        self.assertEqual(report.duration(45_600_000), "45.6 ms")
+        self.assertEqual(report.duration(2e9), "2 s")
+
+    def test_sizes(self):
+        self.assertEqual(report.size(10_000_000), "10,000,000")
+        self.assertEqual(report.file_size(64 * 2**20), "64.0 MiB")
+        self.assertEqual(report.file_size(None), "—")
+
+    def test_russian_plurals(self):
+        repetitions = report.TEXT["ru"]["repetitions"]
+        self.assertEqual([repetitions(count) for count in (1, 3, 5, 11, 21)],
+                         ["1 повтор", "3 повтора", "5 повторов", "11 повторов", "21 повтор"])
+
+
+class ComparisonTests(unittest.TestCase):
+    text = report.TEXT["en"]
+
+    def test_doublets_are_compared_with_sqlite_of_the_same_durability(self):
+        self.assertEqual(report.baseline("Doublets_Split_Volatile"), "SQLite_Memory")
+        self.assertEqual(report.baseline("Doublets_United_NonVolatile_Cached"), "SQLite_File")
+        self.assertIsNone(report.baseline("SQLite_File"))
+
+    def test_clear_differences(self):
+        self.assertEqual(report.comparison(measurement(100), measurement(1000), self.text), "10× faster")
+        self.assertEqual(report.comparison(measurement(2500), measurement(1000), self.text), "2.5× slower")
+
+    def test_overlapping_ranges_are_not_a_difference(self):
+        self.assertEqual(report.comparison(measurement(100, 90, 300), measurement(250, 200, 260), self.text), "≈ same")
+
+    def test_single_samples_within_noise_are_not_a_difference(self):
+        self.assertEqual(report.comparison(measurement(1040), measurement(1000), self.text), "≈ same")
+        self.assertEqual(report.comparison(measurement(1100), measurement(1000), self.text), "1.1× slower")
+
+    def test_table_compares_every_operation_with_the_baseline(self):
+        table = report.table(sample(), self.text).splitlines()
+        self.assertEqual(len(table), 2 + 3)
+        self.assertEqual(table[0].count("|"), len(report.OPERATIONS["links"]) + 3)
+        self.assertNotIn("faster", table[2])
+        self.assertEqual(table[4].count("10× faster"), len(report.OPERATIONS["links"]))
+
+
+class SectionTests(unittest.TestCase):
+    def test_hierarchy_is_category_language_bits_size(self):
+        reports = {
+            ("links", "Rust", 64, 1_000_000): sample(size=1_000_000),
+            ("links", "Rust", 64, 100_000): sample(),
+            ("objects", "C#", 32, 100_000): sample("objects", "C#", 32),
+        }
+        headings = [line for line in report.section(reports, "en", "docs").splitlines() if line.startswith("#")]
+        self.assertEqual(headings, [
+            "## Doublets vs SQLite as storage for links",
+            "### Rust doublets vs SQLite",
+            "#### 32 bit address/id space benchmarks",
+            "#### 64 bit address/id space benchmarks",
+            "##### 100,000 links",
+            "##### 1,000,000 links",
+            "### C# doublets vs SQLite",
+            "#### 32 bit address/id space benchmarks",
+            "#### 64 bit address/id space benchmarks",
+            "## Doublets vs SQLite as storage for objects",
+            "### Rust doublets vs SQLite",
+            "#### 32 bit address/id space benchmarks",
+            "#### 64 bit address/id space benchmarks",
+            "### C# doublets vs SQLite",
+            "#### 32 bit address/id space benchmarks",
+            "##### 100,000 blog posts",
+            "#### 64 bit address/id space benchmarks",
+        ])
+
+    def test_missing_groups_and_provenance(self):
+        url = "https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/1"
+        reports = {("links", "Rust", 64, 100_000): sample(run_url=url, date="2026-10-04", machine="ubuntu-24.04")}
+        text = report.section(reports, "en", None)
+        self.assertEqual(text.count("_No results yet._"), 7)
+        self.assertIn(f"_3 repetitions after a warm-up, median time per operation. SQLite 3.53.2, ubuntu-24.04, "
+                      f"[GitHub Actions run]({url}) on 2026-10-04._", text)
+        self.assertNotIn("![", text)
+
+    def test_charts_are_linked_per_category_language_and_bits(self):
+        text = report.section({("objects", "C#", 32, 100_000): sample("objects", "C#", 32)}, "ru", "docs/benchmarks")
+        self.assertIn("(docs/benchmarks/objects-csharp-32.png)", text)
+        self.assertIn("## Дуплеты против SQLite как хранилище объектов", text)
+        self.assertIn("локальный запуск", text)
+
+
+class DocumentTests(unittest.TestCase):
     def setUp(self):
-        self.temporary = tempfile.TemporaryDirectory()
-        self.addCleanup(self.temporary.cleanup)
-        self.path = os.path.join(self.temporary.name, "README.md")
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
 
-    def write(self, content):
-        with open(self.path, "w", encoding="utf-8") as handle:
-            handle.write(content)
-
-    def read(self):
-        with open(self.path, "r", encoding="utf-8") as handle:
-            return handle.read()
-
-    def test_updates_only_the_selected_language(self):
-        self.write(
-            f"{report.RUST_START_MARKER}\nold rust\n{report.RUST_END_MARKER}\n"
-            f"{report.CSHARP_START_MARKER}\nold csharp\n{report.CSHARP_END_MARKER}\n"
-        )
-
-        report.update_markers(
-            self.path,
-            r"new rust \g<0> $1",
-            report.RUST_START_MARKER,
-            report.RUST_END_MARKER,
-        )
-
-        self.assertIn(r"new rust \g<0> $1", self.read())
-        self.assertIn("old csharp", self.read())
-
-    def test_update_is_idempotent(self):
-        self.write(
-            f"{report.RUST_START_MARKER}\nold\n{report.RUST_END_MARKER}\n"
-        )
-        report.update_markers(
-            self.path,
-            "new",
-            report.RUST_START_MARKER,
-            report.RUST_END_MARKER,
-        )
-
-        self.assertFalse(
-            report.update_markers(
-                self.path,
-                "new",
-                report.RUST_START_MARKER,
-                report.RUST_END_MARKER,
-            )
-        )
-
-    def test_missing_markers_raise(self):
-        self.write("# No results\n")
-
+    def test_only_the_marked_section_is_replaced(self):
+        document = f"before\n{report.START_MARKER}\nold\n{report.END_MARKER}\nafter\n"
+        self.assertEqual(report.replace_section(document, "new\n"),
+                         f"before\n{report.START_MARKER}\nnew\n{report.END_MARKER}\nafter\n")
         with self.assertRaises(ValueError):
-            report.update_markers(
-                self.path,
-                "new",
-                report.RUST_START_MARKER,
-                report.RUST_END_MARKER,
-            )
+            report.replace_section("no markers", "new\n")
+
+    def test_duplicate_reports_are_rejected(self):
+        for name in ("a.json", "b.json"):
+            (self.root / name).write_text(json.dumps(sample()), encoding="utf-8")
+        with self.assertRaises(ValueError):
+            report.load(self.root)
+
+    @unittest.skipUnless(importlib.util.find_spec("matplotlib"), "matplotlib is not installed")
+    def test_main_updates_readmes_and_writes_charts(self):
+        results_directory = self.root / "results"
+        results_directory.mkdir()
+        for index, data in enumerate((sample(), sample(size=1_000_000), sample("objects", "C#", 32))):
+            (results_directory / f"{index}.json").write_text(json.dumps(data), encoding="utf-8")
+        for name in ("README.md", "README.ru.md"):
+            (self.root / name).write_text(f"intro\n{report.START_MARKER}\n{report.END_MARKER}\n", encoding="utf-8")
+        report.main([str(results_directory), "--readme", str(self.root / "README.md"),
+                     "--readme", str(self.root / "README.ru.md"), "--charts", str(self.root / "docs")])
+        self.assertEqual(sorted(path.name for path in (self.root / "docs").iterdir()),
+                         ["links-rust-64.png", "objects-csharp-32.png"])
+        english = (self.root / "README.md").read_text(encoding="utf-8")
+        self.assertIn("![Rust doublets vs SQLite, 64 bit, links](docs/links-rust-64.png)", english)
+        self.assertIn("Дуплеты на C# против SQLite", (self.root / "README.ru.md").read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

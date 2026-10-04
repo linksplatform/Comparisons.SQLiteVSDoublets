@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/workflows/CI/badge.svg)](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions?workflow=CI)
+[![Rust](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/rust.yml/badge.svg)](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/rust.yml) [![C#](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/csharp.yml/badge.svg)](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/csharp.yml) [![Benchmarks](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/benchmarks.yml/badge.svg)](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/benchmarks.yml)
 
 # Comparisons.SQLiteVSDoublets ([русская версия](README.ru.md))
 
@@ -8,84 +8,87 @@ Comparison of SQLite and LinksPlatform's Doublets (links) on basic embedded data
 
 Based on examples from https://github.com/FahaoTang/dotnetcore-examples and https://github.com/Konard/LinksPlatform
 
-## Automated benchmark suite
+## Benchmarks
 
-The comparison runs the same link workload against SQLite in-memory and file
-databases and four Doublets layouts: united/split and volatile/non-volatile.
-It measures create, update, delete, enumerate all, and queries by identity,
-concrete `(source, target)`, outgoing source, and incoming target. The Rust
-suite also measures creation, reading, and deletion of object-like blog posts
-on every storage variant.
+Rust ([doublets](https://crates.io/crates/doublets) and [rusqlite](https://crates.io/crates/rusqlite) with bundled SQLite) and C# ([Platform.Data.Doublets](https://www.nuget.org/packages/Platform.Data.Doublets), [Platform.Data.Doublets.Sequences](https://www.nuget.org/packages/Platform.Data.Doublets.Sequences) and [Microsoft.Data.Sqlite](https://www.nuget.org/packages/Microsoft.Data.Sqlite)) run the same workloads on the same deterministic data, with 32 bit (`u32`/`uint`) and 64 bit (`u64`/`ulong`) ids:
 
-Preparation and cleanup are outside the measured region. Pull requests run a
-reduced-scale validation and preserve raw output, tables, and charts as
-workflow artifacts. Full runs on `main` publish the tables and charts below
-with a link to the producing workflow run.
+- **Links**: SQLite stores the table `links(id INTEGER PRIMARY KEY, "from", "to")` with the indices `("from", "to")` and `("to", "from")`; Doublets stores the links themselves. The operations are create, read all, read by id, search by `(from, to)`, read by `from`, read by `to`, update (swap `from` and `to`) and delete.
+- **Objects**: blog posts with a title, content and publication date. SQLite stores the table `blog_posts(id, title, content, publication_date)`; Doublets stores every post as links, with strings as sequences of Unicode symbols, like [Platform.Data.Doublets.Sequences](https://github.com/linksplatform/Data.Doublets.Sequences) does. The operations are create, read all, read by id and delete. Every Doublets store runs with and without a cache of the string sequences (`Cached`/`Uncached`).
 
-Run the checks locally:
+Storages: SQLite in memory and in a file; Doublets united (one array of links with index trees) and split (separate data and index arrays), each volatile (in memory) and non-volatile (in memory-mapped files). Doublets are compared with SQLite of the same durability: volatile with `SQLite Memory`, non-volatile with `SQLite File`.
+
+Every repetition runs on a fresh store in an empty directory, after one discarded warm-up repetition on up to 10,000 records. Each operation is one timed transaction over all records, point operations visit the records in a scattered order, and each result is checked against the expected count and order-sensitive checksum, so a storage that loses, duplicates or mixes up records fails the run instead of being reported as fast. Repetitions are `3,000,000 / size` for links and `500,000 / size` for objects, clamped to `1..=10`. The tables show the median time per operation; a difference is reported only if the interquartile ranges (the middle half) of the repetitions do not overlap and the medians differ by more than 5%, otherwise it is `≈ same`. The file size is measured after creation; Doublets files are preallocated memory-mapped files, so small stores show the preallocation size.
+
+Every table is measured by its own GitHub Actions job, with all variants on the same runner, by the [Benchmarks workflow](.github/workflows/benchmarks.yml): links with 100,000, 1,000,000 and 10,000,000 records and objects with 100,000 and 1,000,000 records (larger sizes do not fit into the 6 hour limit of a job). Pull requests check the whole pipeline on 1,000 records, and pushes to `main` update the results below. The workflow can also be started manually with other sizes.
+
+Run locally:
 
 ```bash
-cd rust
-cargo test --lib --tests
-cargo check --benches
-BENCHMARK_LINK_COUNT=10 BACKGROUND_LINK_COUNT=30 \
-  BENCHMARK_OBJECT_COUNT=5 cargo bench --bench bench -- \
-  --output-format bencher
-
-cd ../csharp
-dotnet run -c Release -- --self-test
-BENCHMARK_LINK_COUNT=10 BACKGROUND_LINK_COUNT=30 \
-  dotnet run -c Release -- --filter '*LinksBenchmarks*'
+mkdir -p results
+cargo run --release --manifest-path rust/Cargo.toml -- links 64 100000 --output results/links-rust-64-100000.json
+dotnet run -c Release --project csharp/SQLiteVSDoublets -- objects 32 1000 --variants SQLite_File,Doublets_Split_NonVolatile_Cached
+python3 scripts/benchmark_report.py results  # prints the tables, add --readme README.md --charts docs/benchmarks to update this file
 ```
 
-### C# link results
+Notes:
 
-<!--CSHARP_BENCHMARK_RESULTS_START-->
-_Generated 2026-09-19 18:13 UTC for C# by [GitHub Actions run 35459522587](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/35459522587) — 1000 benchmarked links, 3000 background links._
+- The split stores of doublets 0.5.0 (Rust) lose a link that is updated to reference itself, so the benchmark updates a link to `(0, 0)` first, which is the state links are created in ([experiments/split_store_delete](experiments/split_store_delete)).
+- In C#, links are deleted with `Delete(id, handler: null)`, which resets the link before deleting it; the bare `Delete(id)` leaves the link in the index trees, and later searches fail ([experiments/csharp_tree_delete](experiments/csharp_tree_delete)).
+- The C# united stores use AVL index trees: the default size balanced trees degenerate when many links share a source or a target, which makes each blog post creation linear in the number of posts ([experiments/csharp_objects_profile](experiments/csharp_objects_profile)).
+- Objects stores use external references for numbers and Unicode symbols, so raw values never collide with link ids.
+- Reading a string without the cache walks its sequence link by link; in C# each `GetSource`/`GetTarget` call of `Platform.Data` allocates a handler and a list, which makes the uncached C# reads much slower than the Rust ones.
 
-| Operation     | Doublets United Volatile | Doublets United NonVolatile | Doublets Split Volatile | Doublets Split NonVolatile | SQLite Memory | SQLite File |
-|---------------|--------------------------|-----------------------------|-------------------------|----------------------------|---------------|-------------|
-| Create        | 2414327 (3.7x faster)    | 2512520 (3.5x faster)       | 867200 (10.2x faster)   | 896999 (9.8x faster)       | 8818051       | 2294476668  |
-| Update        | 4566053 (2.3x faster)    | 4670899 (2.3x faster)       | 1541871 (7.0x faster)   | 1534119 (7.0x faster)      | 10720700      | 2733072615  |
-| Delete        | 484008 (14.3x faster)    | 465524 (14.8x faster)       | 523910 (13.2x faster)   | 521322 (13.3x faster)      | 6907869       | 1682008343  |
-| Each All      | 437356 (3.7x faster)     | 470885 (3.4x faster)        | 420518 (3.8x faster)    | 397666 (4.0x faster)       | 2113072       | 1598861     |
-| Each Identity | 430962 (11.6x faster)    | 411173 (12.1x faster)       | 403128 (12.4x faster)   | 385531 (13.0x faster)      | 4995738       | 12044311    |
-| Each Concrete | 1363130 (5.2x faster)    | 1408600 (5.1x faster)       | 647769 (11.0x faster)   | 917509 (7.8x faster)       | 7134655       | 13622920    |
-| Each Outgoing | 1160157 (5.3x faster)    | 1180175 (5.3x faster)       | 862790 (7.2x faster)    | 830070 (7.5x faster)       | 6199124       | 12923172    |
-| Each Incoming | 1139559 (5.7x faster)    | 1169325 (5.6x faster)       | 796694 (8.2x faster)    | 776158 (8.4x faster)       | 6533836       | 13510164    |
+<!--BENCHMARK_RESULTS_START-->
+## Doublets vs SQLite as storage for links
 
-![C# benchmark comparison](docs/benchmarks/bench_csharp.png)
+### Rust doublets vs SQLite
 
-![C# benchmark comparison, logarithmic scale](docs/benchmarks/bench_csharp_log_scale.png)
-<!--CSHARP_BENCHMARK_RESULTS_END-->
+#### 32 bit address/id space benchmarks
 
-### Rust link and object results
+_No results yet._
 
-<!--RUST_BENCHMARK_RESULTS_START-->
-_Generated 2026-09-19 18:46 UTC for Rust by [GitHub Actions run 35459522519](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/35459522519) — 1000 benchmarked links, 3000 background links, 1000 objects._
+#### 64 bit address/id space benchmarks
 
-| Operation           | Doublets United Volatile | Doublets United NonVolatile | Doublets Split Volatile | Doublets Split NonVolatile | SQLite Memory | SQLite File |
-|---------------------|--------------------------|-----------------------------|-------------------------|----------------------------|---------------|-------------|
-| Create              | 141747 (40.7x faster)    | 143659 (40.2x faster)       | 69524 (83.0x faster)    | 69702 (82.8x faster)       | 5772002       | 993908545   |
-| Update              | 283809 (29.6x faster)    | 277912 (30.2x faster)       | 63882 (131.3x faster)   | 72899 (115.1x faster)      | 8390541       | 1067410860  |
-| Delete              | 168149 (26.8x faster)    | 166496 (27.1x faster)       | 77711 (58.0x faster)    | 78217 (57.6x faster)       | 4509130       | 977528491   |
-| Each All            | 31671 (15.9x faster)     | 31638 (15.9x faster)        | 34426 (14.6x faster)    | 34487 (14.6x faster)       | 504031        | 595624      |
-| Each Identity       | 2132 (1269.3x faster)    | 2136 (1266.9x faster)       | 2130 (1270.5x faster)   | 2127 (1272.3x faster)      | 2706180       | 10678850    |
-| Each Concrete       | 124784 (34.7x faster)    | 120544 (36.0x faster)       | 45647 (95.0x faster)    | 43793 (99.0x faster)       | 4335748       | 12668554    |
-| Each Outgoing       | 210057 (18.1x faster)    | 208064 (18.2x faster)       | 44112 (86.0x faster)    | 45302 (83.7x faster)       | 3792959       | 12033519    |
-| Each Incoming       | 212266 (19.3x faster)    | 210393 (19.4x faster)       | 50873 (80.4x faster)    | 46396 (88.1x faster)       | 4089215       | 12477405    |
-| Objects Create List | 8759735 (10.5x slower)   | 8759735 (10.5x slower)      | 5388349 (6.5x slower)   | 5436404 (6.5x slower)      | 832974        | 2098461     |
-| Objects Read List   | 5889568 (18.5x slower)   | 5585959 (17.6x slower)      | 5393697 (17.0x slower)  | 4889083 (15.4x slower)     | 317868        | 343282      |
-| Objects Delete List | 2709133 (75.1x slower)   | 2667861 (74.0x slower)      | 1083231 (30.0x slower)  | 1106546 (30.7x slower)     | 36069         | 992614      |
+_No results yet._
 
-![Rust benchmark comparison](docs/benchmarks/bench_rust.png)
+### C# doublets vs SQLite
 
-![Rust benchmark comparison, logarithmic scale](docs/benchmarks/bench_rust_log_scale.png)
-<!--RUST_BENCHMARK_RESULTS_END-->
+#### 32 bit address/id space benchmarks
 
-The original C# object comparison and its historical results remain below.
+_No results yet._
 
-## SQLite
+#### 64 bit address/id space benchmarks
+
+_No results yet._
+
+## Doublets vs SQLite as storage for objects
+
+### Rust doublets vs SQLite
+
+#### 32 bit address/id space benchmarks
+
+_No results yet._
+
+#### 64 bit address/id space benchmarks
+
+_No results yet._
+
+### C# doublets vs SQLite
+
+#### 32 bit address/id space benchmarks
+
+_No results yet._
+
+#### 64 bit address/id space benchmarks
+
+_No results yet._
+<!--BENCHMARK_RESULTS_END-->
+
+## Original comparison
+
+The original C# object comparison and its historical results.
+
+### SQLite
 ```C#
 using System.Linq;
 using Comparisons.SQLiteVSDoublets.Model;
@@ -129,7 +132,7 @@ namespace Comparisons.SQLiteVSDoublets.SQLite
 }
 ```
 
-## Doublets
+### Doublets
 ``` C#
 using System.IO;
 using Platform.IO;
@@ -187,18 +190,18 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 }
 ```
 
-## [Result](https://www.icloud.com/keynote/0cYVNWkWD5RLU0k-XIBs3qWkA#Sqlite_vs_Doublets)
+### [Result](https://www.icloud.com/keynote/0cYVNWkWD5RLU0k-XIBs3qWkA#Sqlite_vs_Doublets)
 
-### Performance
+#### Performance
 ![Image with result of performance comparison between SQLite and Doublets.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_performance.png "Result of performance comparison between SQLite and Doublets")
 
-### Disk usage
+#### Disk usage
 ![Image with result of disk usage comparison between SQLite and Doublets.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_disk_usage.png "Result of disk usage comparison between SQLite and Doublets")
 
-### RAM usage
+#### RAM usage
 ![Image with result of RAM usage comparison between SQLite and Doublets.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_ram_usage.png "Result of RAM usage comparison between SQLite and Doublets")
 
-### Source data
+#### Source data
 ``` ini
 
 BenchmarkDotNet=v0.12.0, OS=Windows 10.0.18362
@@ -220,6 +223,6 @@ WarmupCount=2
 |   **SQLite** | **100000** | **35,853.8 ms** |    **NA** |  **680000.0000** | **151000.0000** |     **-** |  **3234.09 MB** |          **90890240** |
 | Doublets | 100000 | 13,083.4 ms |    NA | 3088000.0000 | 328000.0000 |     - | 12356.33 MB |          64192256 |
 
-## Conclusion
+### Conclusion
 
 In this particular comparison, Doublets are faster and use less memory on disk, but this comes with the cost of additional use of RAM (Sqlite uses it less).

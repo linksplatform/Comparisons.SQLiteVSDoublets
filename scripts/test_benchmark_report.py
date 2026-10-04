@@ -10,10 +10,9 @@ from pathlib import Path
 import benchmark_report as report
 
 
-def measurement(median, low=None, high=None):
-    low = median if low is None else low
-    high = median if high is None else high
-    return {"median_ns": median, "min_ns": low, "max_ns": high, "samples_ns": [low, median, high]}
+def measurement(median, *samples):
+    samples = sorted(samples or [median])
+    return {"median_ns": median, "min_ns": samples[0], "max_ns": samples[-1], "samples_ns": samples}
 
 
 def results(category, variants, file_bytes=None):
@@ -66,8 +65,16 @@ class ComparisonTests(unittest.TestCase):
         self.assertEqual(report.comparison(measurement(100), measurement(1000), self.text), "10× faster")
         self.assertEqual(report.comparison(measurement(2500), measurement(1000), self.text), "2.5× slower")
 
-    def test_overlapping_ranges_are_not_a_difference(self):
-        self.assertEqual(report.comparison(measurement(100, 90, 300), measurement(250, 200, 260), self.text), "≈ same")
+    def test_overlapping_interquartile_ranges_are_not_a_difference(self):
+        measured, reference = measurement(150, 90, 100, 150, 200, 300), measurement(190, 150, 180, 190, 210, 260)
+        self.assertEqual(report.quartiles(measured), (100, 200))
+        self.assertEqual(report.comparison(measured, reference, self.text), "≈ same")
+
+    def test_outlier_repetitions_do_not_hide_a_difference(self):
+        # C# objects, 1,000 blog posts, read by id: Doublets Split NonVolatile Cached vs SQLite File (µs).
+        doublets = measurement(3.75, 2.1, 2.6, 2.7, 3.1, 3.5, 4.0, 5.1, 6.3, 15.7, 23.0)
+        sqlite = measurement(19.0, 5.7, 11.4, 16.9, 17.6, 18.2, 19.8, 20.6, 28.2, 29.1, 90.9)
+        self.assertEqual(report.comparison(doublets, sqlite, self.text), "5.07× faster")
 
     def test_single_samples_within_noise_are_not_a_difference(self):
         self.assertEqual(report.comparison(measurement(1040), measurement(1000), self.text), "≈ same")

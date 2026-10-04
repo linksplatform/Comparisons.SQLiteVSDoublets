@@ -12,6 +12,7 @@ category -> language -> bits -> size, and charts are written per category, langu
 import argparse
 import json
 import re
+import statistics
 from pathlib import Path
 
 START_MARKER = "<!--BENCHMARK_RESULTS_START-->"
@@ -149,13 +150,23 @@ def file_size(count):
     return "—" if count is None else f"{count / 2**20:.1f} MiB"
 
 
+def quartiles(measured):
+    """The middle half of the samples: unlike the full range, one outlier repetition does not widen it."""
+    samples = measured["samples_ns"]
+    if len(samples) == 1:
+        return samples[0], samples[0]
+    first, _, third = statistics.quantiles(samples, n=4, method="inclusive")
+    return first, third
+
+
 def comparison(measured, reference, text):
     """How `measured` compares with `reference`.
 
-    Overlapping sample ranges and medians within NOISE of each other (single samples have no range)
+    Overlapping interquartile ranges and medians within NOISE of each other (single samples have no range)
     are not called a difference.
     """
-    overlapping = measured["min_ns"] <= reference["max_ns"] and reference["min_ns"] <= measured["max_ns"]
+    (low, high), (reference_low, reference_high) = quartiles(measured), quartiles(reference)
+    overlapping = low <= reference_high and reference_low <= high
     ratio = max(measured["median_ns"], reference["median_ns"]) / min(measured["median_ns"], reference["median_ns"])
     if overlapping or ratio < 1 + NOISE:
         return text["same"]

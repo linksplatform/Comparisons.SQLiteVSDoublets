@@ -1,4 +1,4 @@
-[![Состояние сборки](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/workflows/CI/badge.svg)](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions?workflow=CI)
+[![Rust](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/rust.yml/badge.svg)](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/rust.yml) [![C#](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/csharp.yml/badge.svg)](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/csharp.yml) [![Benchmarks](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/benchmarks.yml/badge.svg)](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/benchmarks.yml)
 
 # Comparisons.SQLiteVSDoublets ([english version](README.md))
 
@@ -8,84 +8,87 @@
 
 Основано на примерах из https://github.com/FahaoTang/dotnetcore-examples и https://github.com/Konard/LinksPlatform
 
-## Автоматизированный набор тестов производительности
+## Тесты производительности
 
-Одинаковая нагрузка со связями выполняется для SQLite в памяти и в файле, а
-также для четырёх вариантов Дуплетов: объединённого/разделённого и
-энергозависимого/энергонезависимого. Измеряются создание, обновление, удаление,
-перечисление всех связей и запросы по идентификатору, конкретной паре
-`(начало, конец)`, началу и концу. Набор на Rust также измеряет создание,
-чтение и удаление объектоподобных записей блога во всех вариантах хранилищ.
+Rust ([doublets](https://crates.io/crates/doublets) и [rusqlite](https://crates.io/crates/rusqlite) со встроенной SQLite) и C# ([Platform.Data.Doublets](https://www.nuget.org/packages/Platform.Data.Doublets), [Platform.Data.Doublets.Sequences](https://www.nuget.org/packages/Platform.Data.Doublets.Sequences) и [Microsoft.Data.Sqlite](https://www.nuget.org/packages/Microsoft.Data.Sqlite)) выполняют одинаковую нагрузку на одинаковых детерминированных данных с 32-битными (`u32`/`uint`) и 64-битными (`u64`/`ulong`) идентификаторами:
 
-Подготовка и очистка данных не входят в измеряемый интервал. Для pull request
-запускается сокращённая проверка, а исходный вывод, таблицы и диаграммы
-сохраняются как артефакты workflow. Полные запуски в `main` публикуют таблицы и
-диаграммы ниже вместе со ссылкой на создавший их запуск.
+- **Связи**: SQLite хранит таблицу `links(id INTEGER PRIMARY KEY, "from", "to")` с индексами `("from", "to")` и `("to", "from")`; Дуплеты хранят сами связи. Операции: создание, чтение всех, чтение по id, поиск по `(from, to)`, чтение по `from`, чтение по `to`, обновление (обмен `from` и `to`) и удаление.
+- **Объекты**: записи блога с заголовком, содержимым и датой публикации. SQLite хранит таблицу `blog_posts(id, title, content, publication_date)`; Дуплеты хранят каждую запись в виде связей, а строки — в виде последовательностей символов Юникода, как это делает [Platform.Data.Doublets.Sequences](https://github.com/linksplatform/Data.Doublets.Sequences). Операции: создание, чтение всех, чтение по id и удаление. Каждое хранилище Дуплетов проверяется с кэшем последовательностей строк и без него (`Cached`/`Uncached`).
 
-Локальный запуск проверок:
+Хранилища: SQLite в памяти и в файле; Дуплеты объединённые (один массив связей с деревьями индексов) и разделённые (отдельные массивы данных и индексов), каждое энергозависимое (в памяти) и энергонезависимое (в отображаемых в память файлах). Дуплеты сравниваются с SQLite той же надёжности хранения: энергозависимые с `SQLite Memory`, энергонезависимые с `SQLite File`.
+
+Каждый повтор выполняется на новом хранилище в пустой папке после одного отбрасываемого прогревочного повтора на не более чем 10 000 записей. Каждая операция — одна измеряемая транзакция по всем записям, точечные операции обходят записи в перемешанном порядке, а каждый результат сверяется с ожидаемым количеством и зависящей от порядка контрольной суммой, поэтому хранилище, которое теряет, дублирует или путает записи, завершает запуск ошибкой, а не попадает в отчёт как быстрое. Число повторов — `3 000 000 / размер` для связей и `500 000 / размер` для объектов, но от 1 до 10. В таблицах указано медианное время одной операции; разница указывается, только если межквартильные диапазоны (средняя половина) повторов не пересекаются и медианы отличаются больше чем на 5%, иначе пишется `≈ так же`. Размер файлов измеряется после создания; файлы Дуплетов — заранее выделенные отображаемые в память файлы, поэтому для небольших хранилищ показан размер предварительного выделения.
+
+Каждая таблица измеряется отдельной задачей GitHub Actions со всеми вариантами на одной машине в [workflow Benchmarks](.github/workflows/benchmarks.yml): связи на 100 000, 1 000 000 и 10 000 000 записей, объекты на 100 000 и 1 000 000 записей (большие размеры не укладываются в 6-часовое ограничение задачи). Pull request проверяют весь процесс на 1 000 записей, а push в `main` обновляет результаты ниже. Workflow можно запустить и вручную с другими размерами.
+
+Локальный запуск:
 
 ```bash
-cd rust
-cargo test --lib --tests
-cargo check --benches
-BENCHMARK_LINK_COUNT=10 BACKGROUND_LINK_COUNT=30 \
-  BENCHMARK_OBJECT_COUNT=5 cargo bench --bench bench -- \
-  --output-format bencher
-
-cd ../csharp
-dotnet run -c Release -- --self-test
-BENCHMARK_LINK_COUNT=10 BACKGROUND_LINK_COUNT=30 \
-  dotnet run -c Release -- --filter '*LinksBenchmarks*'
+mkdir -p results
+cargo run --release --manifest-path rust/Cargo.toml -- links 64 100000 --output results/links-rust-64-100000.json
+dotnet run -c Release --project csharp/SQLiteVSDoublets -- objects 32 1000 --variants SQLite_File,Doublets_Split_NonVolatile_Cached
+python3 scripts/benchmark_report.py results  # печатает таблицы, добавьте --readme README.ru.md --charts docs/benchmarks для обновления этого файла
 ```
 
-### Результаты операций со связями в C#-версии
+Замечания:
 
-<!--CSHARP_BENCHMARK_RESULTS_START-->
-_Generated 2026-09-19 18:13 UTC for C# by [GitHub Actions run 35459522587](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/35459522587) — 1000 benchmarked links, 3000 background links._
+- Разделённые хранилища doublets 0.5.0 (Rust) теряют связь, обновлённую так, чтобы она ссылалась на саму себя, поэтому тест сначала обновляет связь до `(0, 0)` — состояния, в котором связи создаются ([experiments/split_store_delete](experiments/split_store_delete)).
+- В C# связи удаляются через `Delete(id, handler: null)`, который сбрасывает связь перед удалением; простой `Delete(id)` оставляет связь в деревьях индексов, и последующий поиск ломается ([experiments/csharp_tree_delete](experiments/csharp_tree_delete)).
+- Объединённые хранилища на C# используют АВЛ-деревья индексов: деревья по умолчанию, сбалансированные по размеру, вырождаются, когда много связей имеют общее начало или конец, и создание каждой записи блога становится линейным по числу записей ([experiments/csharp_objects_profile](experiments/csharp_objects_profile)).
+- Хранилища объектов используют внешние ссылки для чисел и символов Юникода, поэтому исходные значения никогда не совпадают с идентификаторами связей.
+- Чтение строки без кэша обходит её последовательность связь за связью; в C# каждый вызов `GetSource`/`GetTarget` из `Platform.Data` выделяет обработчик и список, поэтому чтение без кэша на C# значительно медленнее, чем на Rust.
 
-| Operation     | Doublets United Volatile | Doublets United NonVolatile | Doublets Split Volatile | Doublets Split NonVolatile | SQLite Memory | SQLite File |
-|---------------|--------------------------|-----------------------------|-------------------------|----------------------------|---------------|-------------|
-| Create        | 2414327 (3.7x faster)    | 2512520 (3.5x faster)       | 867200 (10.2x faster)   | 896999 (9.8x faster)       | 8818051       | 2294476668  |
-| Update        | 4566053 (2.3x faster)    | 4670899 (2.3x faster)       | 1541871 (7.0x faster)   | 1534119 (7.0x faster)      | 10720700      | 2733072615  |
-| Delete        | 484008 (14.3x faster)    | 465524 (14.8x faster)       | 523910 (13.2x faster)   | 521322 (13.3x faster)      | 6907869       | 1682008343  |
-| Each All      | 437356 (3.7x faster)     | 470885 (3.4x faster)        | 420518 (3.8x faster)    | 397666 (4.0x faster)       | 2113072       | 1598861     |
-| Each Identity | 430962 (11.6x faster)    | 411173 (12.1x faster)       | 403128 (12.4x faster)   | 385531 (13.0x faster)      | 4995738       | 12044311    |
-| Each Concrete | 1363130 (5.2x faster)    | 1408600 (5.1x faster)       | 647769 (11.0x faster)   | 917509 (7.8x faster)       | 7134655       | 13622920    |
-| Each Outgoing | 1160157 (5.3x faster)    | 1180175 (5.3x faster)       | 862790 (7.2x faster)    | 830070 (7.5x faster)       | 6199124       | 12923172    |
-| Each Incoming | 1139559 (5.7x faster)    | 1169325 (5.6x faster)       | 796694 (8.2x faster)    | 776158 (8.4x faster)       | 6533836       | 13510164    |
+<!--BENCHMARK_RESULTS_START-->
+## Дуплеты против SQLite как хранилище связей
 
-![C# benchmark comparison](docs/benchmarks/bench_csharp.png)
+### Дуплеты на Rust против SQLite
 
-![C# benchmark comparison, logarithmic scale](docs/benchmarks/bench_csharp_log_scale.png)
-<!--CSHARP_BENCHMARK_RESULTS_END-->
+#### Тесты с 32-битным пространством адресов/идентификаторов
 
-### Результаты операций со связями и объектами на Rust
+_Результатов пока нет._
 
-<!--RUST_BENCHMARK_RESULTS_START-->
-_Generated 2026-09-19 18:46 UTC for Rust by [GitHub Actions run 35459522519](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/35459522519) — 1000 benchmarked links, 3000 background links, 1000 objects._
+#### Тесты с 64-битным пространством адресов/идентификаторов
 
-| Operation           | Doublets United Volatile | Doublets United NonVolatile | Doublets Split Volatile | Doublets Split NonVolatile | SQLite Memory | SQLite File |
-|---------------------|--------------------------|-----------------------------|-------------------------|----------------------------|---------------|-------------|
-| Create              | 141747 (40.7x faster)    | 143659 (40.2x faster)       | 69524 (83.0x faster)    | 69702 (82.8x faster)       | 5772002       | 993908545   |
-| Update              | 283809 (29.6x faster)    | 277912 (30.2x faster)       | 63882 (131.3x faster)   | 72899 (115.1x faster)      | 8390541       | 1067410860  |
-| Delete              | 168149 (26.8x faster)    | 166496 (27.1x faster)       | 77711 (58.0x faster)    | 78217 (57.6x faster)       | 4509130       | 977528491   |
-| Each All            | 31671 (15.9x faster)     | 31638 (15.9x faster)        | 34426 (14.6x faster)    | 34487 (14.6x faster)       | 504031        | 595624      |
-| Each Identity       | 2132 (1269.3x faster)    | 2136 (1266.9x faster)       | 2130 (1270.5x faster)   | 2127 (1272.3x faster)      | 2706180       | 10678850    |
-| Each Concrete       | 124784 (34.7x faster)    | 120544 (36.0x faster)       | 45647 (95.0x faster)    | 43793 (99.0x faster)       | 4335748       | 12668554    |
-| Each Outgoing       | 210057 (18.1x faster)    | 208064 (18.2x faster)       | 44112 (86.0x faster)    | 45302 (83.7x faster)       | 3792959       | 12033519    |
-| Each Incoming       | 212266 (19.3x faster)    | 210393 (19.4x faster)       | 50873 (80.4x faster)    | 46396 (88.1x faster)       | 4089215       | 12477405    |
-| Objects Create List | 8759735 (10.5x slower)   | 8759735 (10.5x slower)      | 5388349 (6.5x slower)   | 5436404 (6.5x slower)      | 832974        | 2098461     |
-| Objects Read List   | 5889568 (18.5x slower)   | 5585959 (17.6x slower)      | 5393697 (17.0x slower)  | 4889083 (15.4x slower)     | 317868        | 343282      |
-| Objects Delete List | 2709133 (75.1x slower)   | 2667861 (74.0x slower)      | 1083231 (30.0x slower)  | 1106546 (30.7x slower)     | 36069         | 992614      |
+_Результатов пока нет._
 
-![Rust benchmark comparison](docs/benchmarks/bench_rust.png)
+### Дуплеты на C# против SQLite
 
-![Rust benchmark comparison, logarithmic scale](docs/benchmarks/bench_rust_log_scale.png)
-<!--RUST_BENCHMARK_RESULTS_END-->
+#### Тесты с 32-битным пространством адресов/идентификаторов
 
-Исходное сравнение объектов на C# и его исторические результаты сохранены ниже.
+_Результатов пока нет._
 
-## SQLite
+#### Тесты с 64-битным пространством адресов/идентификаторов
+
+_Результатов пока нет._
+
+## Дуплеты против SQLite как хранилище объектов
+
+### Дуплеты на Rust против SQLite
+
+#### Тесты с 32-битным пространством адресов/идентификаторов
+
+_Результатов пока нет._
+
+#### Тесты с 64-битным пространством адресов/идентификаторов
+
+_Результатов пока нет._
+
+### Дуплеты на C# против SQLite
+
+#### Тесты с 32-битным пространством адресов/идентификаторов
+
+_Результатов пока нет._
+
+#### Тесты с 64-битным пространством адресов/идентификаторов
+
+_Результатов пока нет._
+<!--BENCHMARK_RESULTS_END-->
+
+## Исходное сравнение
+
+Исходное сравнение объектов на C# и его исторические результаты.
+
+### SQLite
 ```C#
 using System.Linq;
 using Comparisons.SQLiteVSDoublets.Model;
@@ -129,7 +132,7 @@ namespace Comparisons.SQLiteVSDoublets.SQLite
 }
 ```
 
-## Дуплеты
+### Дуплеты
 ``` C#
 using System.IO;
 using Platform.IO;
@@ -187,18 +190,18 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 }
 ```
 
-## [Результат](https://www.icloud.com/keynote/0cYVNWkWD5RLU0k-XIBs3qWkA#Sqlite_vs_Doublets)
+### [Результат](https://www.icloud.com/keynote/0cYVNWkWD5RLU0k-XIBs3qWkA#Sqlite_vs_Doublets)
 
-### Производительность
+#### Производительность
 ![Изображение с результатом сравнения производительности SQLite и Дуплетов.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_performance.png "Результат сравнения производительности SQLite и Дуплетов")
 
-### Использование пространства на диске
+#### Использование пространства на диске
 ![Изображение с результатом сравнения использования пространства на диске SQLite и Дуплетов.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_disk_usage.png "Результат сравнения использования пространства на диске SQLite и Дуплетов")
 
-### Использование оперативной памяти
+#### Использование оперативной памяти
 ![Изображение с результатом сравнения использования оперативной памяти SQLite и Дуплетов.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_ram_usage.png "Результат сравнения использования оперативной памяти SQLite и Дуплетов")
 
-### Исходные данные
+#### Исходные данные
 ``` ini
 
 BenchmarkDotNet=v0.12.0, OS=Windows 10.0.18362
@@ -221,6 +224,6 @@ WarmupCount=2
 | Doublets | 100000 | 13,083.4 ms |    NA | 3088000.0000 | 328000.0000 |     - | 12356.33 MB |          64192256 |
 
 
-## Заключение
+### Заключение
 
 В этом конкретном сравнении Дуплеты работают быстрее и используют меньше памяти на диске, но это достигается за счёт дополнительного использования оперативной памяти (Sqlite использует её меньше).

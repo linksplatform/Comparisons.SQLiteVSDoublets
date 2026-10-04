@@ -2,21 +2,22 @@
 //        [--variants A,B] [--directory DIR] [--output FILE]
 //
 // Repetitions default to `work / size` clamped to 1..=MaxRepetitions, so smaller sizes get more,
-// but not endless, repetitions.
+// but not endless, repetitions. Objects get less work, because one blog post takes hundreds of links.
 
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Comparisons.SQLiteVSDoublets;
 using Microsoft.Data.Sqlite;
 
-const ulong DefaultWork = 3_000_000;
+const ulong LinksWork = 3_000_000;
+const ulong ObjectsWork = 500_000;
 const ulong MaxRepetitions = 10;
 
 var (category, bits, sizeText) = (args[0], args[1], args[2]);
 var options = args[3..].Chunk(2).ToDictionary(pair => pair[0].TrimStart('-'), pair => pair[1]);
 static ulong Number(string text) => ulong.Parse(text.Replace("_", ""));
 var size = Number(sizeText);
-var work = options.TryGetValue("work", out var workText) ? Number(workText) : DefaultWork;
+var work = options.TryGetValue("work", out var workText) ? Number(workText) : category == "links" ? LinksWork : ObjectsWork;
 var repetitions = options.TryGetValue("repetitions", out var count)
     ? int.Parse(count)
     : (int)Math.Clamp(work / size, 1, MaxRepetitions);

@@ -2,14 +2,15 @@
 //!        [--variants A,B] [--directory DIR] [--output FILE]
 //!
 //! Repetitions default to `work / size` clamped to `1..=MAX_REPETITIONS`, so smaller sizes get more,
-//! but not endless, repetitions.
+//! but not endless, repetitions. Objects get less work, because one blog post takes hundreds of links.
 
 use doublets::data::LinkReference;
 use serde_json::json;
 use sqlite_vs_doublets::harness::{self, LINKS_VARIANTS, Measurement, OBJECTS_VARIANTS};
 use std::{collections::HashMap, env, fs, path::Path};
 
-const DEFAULT_WORK: u64 = 3_000_000;
+const LINKS_WORK: u64 = 3_000_000;
+const OBJECTS_WORK: u64 = 500_000;
 const MAX_REPETITIONS: u64 = 10;
 
 fn main() {
@@ -25,9 +26,14 @@ fn main() {
         .map(|pair| (pair[0].trim_start_matches("--"), pair[1].as_str()))
         .collect();
     let size: u64 = size.replace('_', "").parse().unwrap();
+    let default_work = if category == "links" {
+        LINKS_WORK
+    } else {
+        OBJECTS_WORK
+    };
     let work: u64 = options
         .get("work")
-        .map_or(DEFAULT_WORK, |work| work.replace('_', "").parse().unwrap());
+        .map_or(default_work, |work| work.replace('_', "").parse().unwrap());
     let repetitions: usize = options
         .get("repetitions")
         .map_or((work / size).clamp(1, MAX_REPETITIONS) as usize, |count| {

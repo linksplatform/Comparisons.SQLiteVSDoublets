@@ -301,8 +301,13 @@ public static class Harness
     private static FileMappedResizableDirectMemory Mapped(string directory, string name) => new(File(directory, name));
 
     /// <summary>Objects store numbers and Unicode symbols as raw numbers, which are external references.</summary>
+    /// <remarks>
+    /// The size balanced index trees (the default) degenerate when many links share a source or a target,
+    /// which makes every blog post creation linear in the number of stored posts;
+    /// the AVL trees stay logarithmic (see experiments/csharp_objects_profile).
+    /// </remarks>
     public static ILinks<T> United<T>(IResizableDirectMemory memory, bool external = false) where T : struct, IBinaryInteger<T>, IUnsignedNumber<T>, IMinMaxValue<T> =>
-        new UnitedMemoryLinks<T>(memory, UnitedMemoryLinks<T>.DefaultLinksSizeStep, new LinksConstants<T>(external), IndexTreeType.Default);
+        new UnitedMemoryLinks<T>(memory, UnitedMemoryLinks<T>.DefaultLinksSizeStep, new LinksConstants<T>(external), IndexTreeType.SizedAndThreadedAVLBalancedTree);
 
     public static ILinks<T> Split<T>(IResizableDirectMemory data, IResizableDirectMemory index, bool external = false) where T : struct, IBinaryInteger<T>, IUnsignedNumber<T>, IMinMaxValue<T> =>
         new SplitMemoryLinks<T>(data, index, SplitMemoryLinks<T>.DefaultLinksSizeStep, new LinksConstants<T>(external));

@@ -7,6 +7,7 @@ use sqlite_vs_doublets::{
     dataset::{BlogPost, blog_post, link, scattered},
     harness::{self, LINKS_VARIANTS, OBJECTS_VARIANTS},
     links::{DoubletsLinks, Link, LinksStorage, SqliteLinks},
+    memory::volatile,
     objects::{BlogPostsStorage, DoubletsBlogPosts, SqliteBlogPosts},
 };
 use std::collections::HashSet;
@@ -69,6 +70,32 @@ fn split_store_keeps_links_updated_to_reference_themselves() {
     links.delete(link);
     links.delete(point);
     assert_eq!(links.count(), 0);
+}
+
+/// A fresh store reserves 2^20 links, so this many links make it grow once.
+const GROWN: u64 = (1 << 20) + 1;
+
+fn create_until_grown(mut links: impl LinksStorage<u32>) {
+    for i in 1..=GROWN {
+        let (from, to) = link(i);
+        links.create(from as u32, to as u32);
+    }
+    assert_eq!(links.count(), GROWN);
+    for i in [1, 1_040_384, 1_040_385, GROWN] {
+        let (from, to) = link(i);
+        let (id, from, to) = (i as u32, from as u32, to as u32);
+        assert_eq!(links.get(id), Some(Link { id, from, to }));
+    }
+}
+
+#[test]
+fn stores_keep_their_links_when_their_memory_grows() {
+    create_until_grown(DoubletsLinks::new(
+        unit::Store::<u32, _>::new(volatile()).unwrap(),
+    ));
+    create_until_grown(DoubletsLinks::new(
+        split::Store::<u32, _, _>::new(volatile(), volatile()).unwrap(),
+    ));
 }
 
 #[test]

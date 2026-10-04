@@ -4,11 +4,12 @@
 use crate::{
     dataset::{self, blog_post, link, mix, scattered},
     links::{DoubletsLinks, Link, LinksStorage, SqliteLinks},
+    memory::{Whole, volatile},
     objects::{BlogPostsStorage, DoubletsBlogPosts, SqliteBlogPosts},
 };
 use doublets::{
     data::{LinkReference, LinksConstants},
-    mem::{FileMapped, Global},
+    mem::FileMapped,
     split, unit,
 };
 use serde_json::{Value, json};
@@ -361,8 +362,8 @@ fn file(directory: &Path, name: &str) -> PathBuf {
     directory.join(name)
 }
 
-fn mapped<P>(directory: &Path, name: &str) -> FileMapped<P> {
-    FileMapped::from_path(file(directory, name)).unwrap()
+fn mapped<P>(directory: &Path, name: &str) -> Whole<FileMapped<P>> {
+    crate::memory::mapped(file(directory, name))
 }
 
 pub fn measure_links<T: LinkReference>(
@@ -393,7 +394,7 @@ pub fn measure_links<T: LinkReference>(
             n,
             repetitions,
             directory,
-            |_| DoubletsLinks::new(unit::Store::<T, _>::new(Global::new()).unwrap()),
+            |_| DoubletsLinks::new(unit::Store::<T, _>::new(volatile()).unwrap()),
             links_lifecycle,
         ),
         "Doublets_United_NonVolatile" => measure(
@@ -409,11 +410,7 @@ pub fn measure_links<T: LinkReference>(
             n,
             repetitions,
             directory,
-            |_| {
-                DoubletsLinks::new(
-                    split::Store::<T, _, _>::new(Global::new(), Global::new()).unwrap(),
-                )
-            },
+            |_| DoubletsLinks::new(split::Store::<T, _, _>::new(volatile(), volatile()).unwrap()),
             links_lifecycle,
         ),
         "Doublets_Split_NonVolatile" => measure(
@@ -470,7 +467,7 @@ pub fn measure_objects<T: LinkReference>(
             directory,
             |_| {
                 DoubletsBlogPosts::new(
-                    unit::Store::<T, _>::with_constants(Global::new(), LinksConstants::external())
+                    unit::Store::<T, _>::with_constants(volatile(), LinksConstants::external())
                         .unwrap(),
                     cached,
                 )
@@ -502,8 +499,8 @@ pub fn measure_objects<T: LinkReference>(
             |_| {
                 DoubletsBlogPosts::new(
                     split::Store::<T, _, _>::with_constants(
-                        Global::new(),
-                        Global::new(),
+                        volatile(),
+                        volatile(),
                         LinksConstants::external(),
                     )
                     .unwrap(),

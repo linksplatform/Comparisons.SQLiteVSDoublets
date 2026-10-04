@@ -33,6 +33,7 @@ python3 scripts/benchmark_report.py results  # prints the tables, add --readme R
 Notes:
 
 - The split stores of doublets 0.5.0 (Rust) lose a link that is updated to reference itself, so the benchmark updates a link to `(0, 0)` first, which is the state links are created in ([experiments/split_store_delete](experiments/split_store_delete)).
+- The stores of doublets 0.5.0 (Rust) take the part of the memory that `platform-mem` 0.3.0 returns after growing it for the whole memory, so a store fails after 1,040,384 links; the benchmarks wrap the memory in [`memory::Whole`](rust/src/memory.rs), which returns the whole memory ([experiments/unit_store_growth](experiments/unit_store_growth)).
 - In C#, links are deleted with `Delete(id, handler: null)`, which resets the link before deleting it; the bare `Delete(id)` leaves the link in the index trees, and later searches fail ([experiments/csharp_tree_delete](experiments/csharp_tree_delete)).
 - The C# united stores use AVL index trees: the default size balanced trees degenerate when many links share a source or a target, which makes each blog post creation linear in the number of posts ([experiments/csharp_objects_profile](experiments/csharp_objects_profile)).
 - Objects stores use external references for numbers and Unicode symbols, so raw values never collide with link ids.

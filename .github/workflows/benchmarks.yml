@@ -5,7 +5,7 @@ name: Benchmarks
 # on small sizes; pushes to main publish the results to README.md and README.ru.md.
 on:
   push:
-    branches: [main]
+    branches: [main, issue-107-bce58c21006b]
     paths: ['rust/**', 'csharp/**', 'scripts/**', '.github/workflows/benchmarks.yml']
   pull_request:
     paths: ['rust/**', 'csharp/**', 'scripts/**', '.github/workflows/benchmarks.yml']

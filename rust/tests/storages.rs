@@ -1,4 +1,8 @@
-use doublets::{data::LinkReference, mem::Global, split, unit};
+use doublets::{
+    data::{LinkReference, LinksConstants},
+    mem::Global,
+    split, unit,
+};
 use sqlite_vs_doublets::{
     dataset::{BlogPost, blog_post, link, scattered},
     harness::{self, LINKS_VARIANTS, OBJECTS_VARIANTS},
@@ -133,19 +137,31 @@ fn every_objects_storage_returns_the_stored_posts() {
     round_trip::<u64>(SqliteBlogPosts::in_memory());
     for cached in [false, true] {
         round_trip(DoubletsBlogPosts::new(
-            unit::Store::<u32, _>::new(Global::new()).unwrap(),
+            unit::Store::<u32, _>::with_constants(Global::new(), LinksConstants::external())
+                .unwrap(),
             cached,
         ));
         round_trip(DoubletsBlogPosts::new(
-            unit::Store::<u64, _>::new(Global::new()).unwrap(),
+            unit::Store::<u64, _>::with_constants(Global::new(), LinksConstants::external())
+                .unwrap(),
             cached,
         ));
         round_trip(DoubletsBlogPosts::new(
-            split::Store::<u32, _, _>::new(Global::new(), Global::new()).unwrap(),
+            split::Store::<u32, _, _>::with_constants(
+                Global::new(),
+                Global::new(),
+                LinksConstants::external(),
+            )
+            .unwrap(),
             cached,
         ));
         round_trip(DoubletsBlogPosts::new(
-            split::Store::<u64, _, _>::new(Global::new(), Global::new()).unwrap(),
+            split::Store::<u64, _, _>::with_constants(
+                Global::new(),
+                Global::new(),
+                LinksConstants::external(),
+            )
+            .unwrap(),
             cached,
         ));
     }

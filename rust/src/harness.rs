@@ -7,7 +7,7 @@ use crate::{
     objects::{BlogPostsStorage, DoubletsBlogPosts, SqliteBlogPosts},
 };
 use doublets::{
-    data::LinkReference,
+    data::{LinkReference, LinksConstants},
     mem::{FileMapped, Global},
     split, unit,
 };
@@ -468,7 +468,13 @@ pub fn measure_objects<T: LinkReference>(
             n,
             repetitions,
             directory,
-            |_| DoubletsBlogPosts::new(unit::Store::<T, _>::new(Global::new()).unwrap(), cached),
+            |_| {
+                DoubletsBlogPosts::new(
+                    unit::Store::<T, _>::with_constants(Global::new(), LinksConstants::external())
+                        .unwrap(),
+                    cached,
+                )
+            },
             objects_lifecycle,
         ),
         "Doublets_United_NonVolatile" => measure(
@@ -478,7 +484,11 @@ pub fn measure_objects<T: LinkReference>(
             directory,
             |dir| {
                 DoubletsBlogPosts::new(
-                    unit::Store::<T, _>::new(mapped(dir, "links.links")).unwrap(),
+                    unit::Store::<T, _>::with_constants(
+                        mapped(dir, "links.links"),
+                        LinksConstants::external(),
+                    )
+                    .unwrap(),
                     cached,
                 )
             },
@@ -491,7 +501,12 @@ pub fn measure_objects<T: LinkReference>(
             directory,
             |_| {
                 DoubletsBlogPosts::new(
-                    split::Store::<T, _, _>::new(Global::new(), Global::new()).unwrap(),
+                    split::Store::<T, _, _>::with_constants(
+                        Global::new(),
+                        Global::new(),
+                        LinksConstants::external(),
+                    )
+                    .unwrap(),
                     cached,
                 )
             },
@@ -504,9 +519,10 @@ pub fn measure_objects<T: LinkReference>(
             directory,
             |dir| {
                 DoubletsBlogPosts::new(
-                    split::Store::<T, _, _>::new(
+                    split::Store::<T, _, _>::with_constants(
                         mapped(dir, "data.links"),
                         mapped(dir, "index.links"),
+                        LinksConstants::external(),
                     )
                     .unwrap(),
                     cached,

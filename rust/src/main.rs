@@ -1,14 +1,16 @@
 //! Usage: sqlite-vs-doublets <links|objects> <32|64> <size> [--work N | --repetitions N]
 //!        [--variants A,B] [--directory DIR] [--output FILE]
 //!
-//! Repetitions default to `work / size` (at least one), so every size does about the same total work.
+//! Repetitions default to `work / size` clamped to `1..=MAX_REPETITIONS`, so smaller sizes get more,
+//! but not endless, repetitions.
 
 use doublets::data::LinkReference;
 use serde_json::json;
 use sqlite_vs_doublets::harness::{self, LINKS_VARIANTS, Measurement, OBJECTS_VARIANTS};
 use std::{collections::HashMap, env, fs, path::Path};
 
-const DEFAULT_WORK: u64 = 10_000_000;
+const DEFAULT_WORK: u64 = 3_000_000;
+const MAX_REPETITIONS: u64 = 10;
 
 fn main() {
     let arguments: Vec<String> = env::args().skip(1).collect();
@@ -28,7 +30,7 @@ fn main() {
         .map_or(DEFAULT_WORK, |work| work.replace('_', "").parse().unwrap());
     let repetitions: usize = options
         .get("repetitions")
-        .map_or((work / size).max(1) as usize, |count| {
+        .map_or((work / size).clamp(1, MAX_REPETITIONS) as usize, |count| {
             count.parse().unwrap()
         });
     let all_variants: &[&'static str] = if category == "links" {

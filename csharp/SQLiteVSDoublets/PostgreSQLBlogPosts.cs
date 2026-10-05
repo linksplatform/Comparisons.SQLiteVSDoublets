@@ -7,7 +7,7 @@ namespace Comparisons.SQLiteVSDoublets;
 /// <summary>EF Core blog posts in a fresh, owned schema on a configured PostgreSQL server.</summary>
 public sealed class PostgreSQLBlogPosts<T> : IBlogPostsStorage<T> where T : struct, IBinaryInteger<T>
 {
-    public const string ConnectionStringVariable = "POSTGRESQL_CONNECTION_STRING";
+    public static string ConnectionStringVariable => "POSTGRESQL_CONNECTION_STRING";
     private readonly NpgsqlConnection _connection;
     private readonly PostsContext _context;
     private bool _disposed;
@@ -48,6 +48,7 @@ public sealed class PostgreSQLBlogPosts<T> : IBlogPostsStorage<T> where T : stru
     {
         var row = new PostRow
         {
+            Id = 0, // EF treats zero as unset and replaces it with the server-generated identity.
             Title = post.Title,
             Content = post.Content,
             PublicationDate = checked((long)post.PublicationDate),

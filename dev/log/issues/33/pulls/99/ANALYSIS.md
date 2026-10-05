@@ -85,3 +85,12 @@ PostgreSQL was extracted from Ubuntu packages into a temporary directory and
 run as the workspace user with 64 MiB shared buffers and 20 connections.
 Hosted integration uses the pinned PostgreSQL 18.3 service. The bounded tests
 establish correctness and report integration, not a general performance claim.
+
+## Hosted static analysis
+
+Codacy on `522ee59` reported S2339 for the public environment-variable constant
+and S3459 for the EF-generated identity property. The configuration name now
+uses a static read-only property. New rows explicitly start with the unset
+identity value zero, which EF replaces with the generated key after saving.
+The PostgreSQL integration tests and executable report probe verify that ids
+are generated and round-trip correctly with these changes.

@@ -1,0 +1,4 @@
+<stdin>:10:15: specifying action "$/.github/actions/prepare-ci" in invalid format because ref is missing. available formats are "{owner}/{repo}@{ref}" or "{owner}/{repo}/{path}@{ref}" [action]
+   |
+10 |       - uses: $/.github/actions/prepare-ci
+   |               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~

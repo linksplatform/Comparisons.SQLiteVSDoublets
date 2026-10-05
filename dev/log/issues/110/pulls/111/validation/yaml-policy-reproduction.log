@@ -1,0 +1,55 @@
+test_explicit_false_does_not_suppress_failures (test_ci_checks.PolicyTests.test_explicit_false_does_not_suppress_failures) ... FAIL
+test_failure_suppression_is_rejected (test_ci_checks.PolicyTests.test_failure_suppression_is_rejected) ... ok
+test_local_missing_link_is_a_failure (test_ci_checks.PolicyTests.test_local_missing_link_is_a_failure) ... ok
+test_matrix_runner_aliases_are_checked (test_ci_checks.PolicyTests.test_matrix_runner_aliases_are_checked) ... ok
+test_privileged_event_rejects_checkout (test_ci_checks.PolicyTests.test_privileged_event_rejects_checkout) ... ok
+test_read_only_workflow (test_ci_checks.PolicyTests.test_read_only_workflow) ... ok
+test_writer_cannot_be_cancelled_or_race_another_workflow (test_ci_checks.PolicyTests.test_writer_cannot_be_cancelled_or_race_another_workflow) ... ok
+
+======================================================================
+FAIL: test_explicit_false_does_not_suppress_failures (test_ci_checks.PolicyTests.test_explicit_false_does_not_suppress_failures)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/gh-issue-solver-1791195897867/scripts/test_ci_checks.py", line 47, in test_explicit_false_does_not_suppress_failures
+    self.assertEqual(ci.workflow_errors(self.workflow), [])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['test: continue-on-error hides failed checks'] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+'test: continue-on-error hides failed checks'
+
+- ['test: continue-on-error hides failed checks']
++ []
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.005s
+
+FAILED (failures=1)
+test_empty_status_is_an_error (test_check_pipeline_status.StatusTests.test_empty_status_is_an_error) ... ok
+test_only_proven_superseded_cancellable_readers_are_accepted (test_check_pipeline_status.StatusTests.test_only_proven_superseded_cancellable_readers_are_accepted) ... ok
+test_success_and_intentional_skips (test_check_pipeline_status.StatusTests.test_success_and_intentional_skips) ... ok
+test_timeout_or_failure_fails_current_run (test_check_pipeline_status.StatusTests.test_timeout_or_failure_fails_current_run) ... ok
+test_yaml_boolean_cancellation_policy (test_check_pipeline_status.StatusTests.test_yaml_boolean_cancellation_policy) ... FAIL
+
+======================================================================
+FAIL: test_yaml_boolean_cancellation_policy (test_check_pipeline_status.StatusTests.test_yaml_boolean_cancellation_policy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/gh-issue-solver-1791195897867/scripts/test_check_pipeline_status.py", line 33, in test_yaml_boolean_cancellation_policy
+    self.assertEqual(failures({"test": {"result": "cancelled"}}, workflow, True), [])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['test: cancelled'] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+'test: cancelled'
+
+- ['test: cancelled']
++ []
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+FAILED (failures=1)
+test: superseded reader cancelled as configured

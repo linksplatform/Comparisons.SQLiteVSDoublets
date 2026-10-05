@@ -1,0 +1,8 @@
+experiments/csharp_objects_profile/csharp_objects_profile.csproj
+exit 0
+experiments/csharp_split_linked_list/csharp_split_linked_list.csproj
+exit 0
+experiments/csharp_tree_delete/csharp_tree_delete.csproj
+exit 0
+experiments/system_data_sqlite/system_data_sqlite.csproj
+exit 0

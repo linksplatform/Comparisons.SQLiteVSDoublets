@@ -1,0 +1,231 @@
+auto-merge	Set up job	﻿2026-10-05T10:03:51.6729916Z Current runner version: '2.337.0'
+auto-merge	Set up job	2026-10-05T10:03:51.6757469Z ##[group]Runner Image Provisioner
+auto-merge	Set up job	2026-10-05T10:03:51.6758366Z Hosted Compute Agent
+auto-merge	Set up job	2026-10-05T10:03:51.6759118Z Version: 20260901.588
+auto-merge	Set up job	2026-10-05T10:03:51.6759830Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+auto-merge	Set up job	2026-10-05T10:03:51.6760659Z Build Date: 2026-09-01T19:56:44Z
+auto-merge	Set up job	2026-10-05T10:03:51.6761425Z Worker ID: {72099549-8d76-491c-b602-f4707e0543bf}
+auto-merge	Set up job	2026-10-05T10:03:51.6762221Z Azure Region: eastus
+auto-merge	Set up job	2026-10-05T10:03:51.6762842Z ##[endgroup]
+auto-merge	Set up job	2026-10-05T10:03:51.6765122Z ##[group]Operating System
+auto-merge	Set up job	2026-10-05T10:03:51.6766025Z Ubuntu
+auto-merge	Set up job	2026-10-05T10:03:51.6766624Z 24.04.5
+auto-merge	Set up job	2026-10-05T10:03:51.6767246Z LTS
+auto-merge	Set up job	2026-10-05T10:03:51.6767823Z ##[endgroup]
+auto-merge	Set up job	2026-10-05T10:03:51.6768439Z ##[group]Runner Image
+auto-merge	Set up job	2026-10-05T10:03:51.6769175Z Image: ubuntu-24.04
+auto-merge	Set up job	2026-10-05T10:03:51.6769764Z Version: 20260927.320.1
+auto-merge	Set up job	2026-10-05T10:03:51.6770942Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+auto-merge	Set up job	2026-10-05T10:03:51.6772938Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+auto-merge	Set up job	2026-10-05T10:03:51.6774424Z ##[endgroup]
+auto-merge	Set up job	2026-10-05T10:03:51.6777633Z ##[group]GITHUB_TOKEN Permissions
+auto-merge	Set up job	2026-10-05T10:03:51.6780036Z Actions: write
+auto-merge	Set up job	2026-10-05T10:03:51.6780754Z ArtifactMetadata: write
+auto-merge	Set up job	2026-10-05T10:03:51.6781476Z Attestations: write
+auto-merge	Set up job	2026-10-05T10:03:51.6782116Z Checks: write
+auto-merge	Set up job	2026-10-05T10:03:51.6782732Z CodeQuality: write
+auto-merge	Set up job	2026-10-05T10:03:51.6783326Z Contents: write
+auto-merge	Set up job	2026-10-05T10:03:51.6784143Z CopilotRequests: write
+auto-merge	Set up job	2026-10-05T10:03:51.6784828Z Deployments: write
+auto-merge	Set up job	2026-10-05T10:03:51.6785406Z Discussions: write
+auto-merge	Set up job	2026-10-05T10:03:51.6786053Z Drives: write
+auto-merge	Set up job	2026-10-05T10:03:51.6786638Z Issues: write
+auto-merge	Set up job	2026-10-05T10:03:51.6787209Z Metadata: read
+auto-merge	Set up job	2026-10-05T10:03:51.6787937Z Models: read
+auto-merge	Set up job	2026-10-05T10:03:51.6788507Z Packages: write
+auto-merge	Set up job	2026-10-05T10:03:51.6789170Z Pages: write
+auto-merge	Set up job	2026-10-05T10:03:51.6789728Z PullRequests: write
+auto-merge	Set up job	2026-10-05T10:03:51.6790343Z RepositoryProjects: write
+auto-merge	Set up job	2026-10-05T10:03:51.6791083Z SecurityEvents: write
+auto-merge	Set up job	2026-10-05T10:03:51.6791680Z Statuses: write
+auto-merge	Set up job	2026-10-05T10:03:51.6792329Z VulnerabilityAlerts: read
+auto-merge	Set up job	2026-10-05T10:03:51.6793110Z ##[endgroup]
+auto-merge	Set up job	2026-10-05T10:03:51.6796106Z Secret source: Actions
+auto-merge	Set up job	2026-10-05T10:03:51.6797112Z Cache mode: read
+auto-merge	Set up job	2026-10-05T10:03:51.6798148Z Prepare workflow directory
+auto-merge	Set up job	2026-10-05T10:03:51.7147908Z Prepare all required actions
+auto-merge	Set up job	2026-10-05T10:03:51.7197930Z Getting action download info
+auto-merge	Set up job	2026-10-05T10:03:52.0083748Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+auto-merge	Set up job	2026-10-05T10:03:52.3245866Z Download action repository 'ahmadnassri/action-dependabot-auto-merge@v2' (SHA:45fc124d949b19b6b8bf6645b6c9d55f4f9ac61a)
+auto-merge	Set up job	2026-10-05T10:03:52.5669770Z Complete job name: auto-merge
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	﻿2026-10-05T10:03:52.6167005Z ##[group]Pull down action image 'ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6'
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:52.6289431Z ##[command]/usr/bin/docker pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:52.9716325Z 2.6.6: Pulling from ahmadnassri/action-dependabot-auto-merge
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.0212824Z c158987b0551: Pulling fs layer
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.0214142Z 27ae9ce8b069: Pulling fs layer
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.0214836Z ab5501735aae: Pulling fs layer
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.0215512Z 9ce0a5833ea2: Pulling fs layer
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.0216562Z 50992d27cc59: Pulling fs layer
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.0217708Z 4f4fb700ef54: Pulling fs layer
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.0218780Z 86b6187bfb6b: Pulling fs layer
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.0219458Z 16a9b0b01bb9: Pulling fs layer
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.0220065Z 9ce0a5833ea2: Waiting
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.0220709Z 50992d27cc59: Waiting
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.0221252Z 4f4fb700ef54: Waiting
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.0221816Z 86b6187bfb6b: Waiting
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.0222405Z 16a9b0b01bb9: Waiting
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.0991349Z c158987b0551: Verifying Checksum
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.0993009Z c158987b0551: Download complete
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.1171062Z ab5501735aae: Verifying Checksum
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.1176665Z ab5501735aae: Download complete
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.1612273Z 9ce0a5833ea2: Verifying Checksum
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.1614809Z 9ce0a5833ea2: Download complete
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.1717276Z 50992d27cc59: Verifying Checksum
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.1718736Z 50992d27cc59: Download complete
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.2183337Z 4f4fb700ef54: Verifying Checksum
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.2185110Z 4f4fb700ef54: Download complete
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.2353172Z 86b6187bfb6b: Verifying Checksum
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.2354514Z 86b6187bfb6b: Download complete
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.2480024Z c158987b0551: Pull complete
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.2821818Z 27ae9ce8b069: Verifying Checksum
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.2824902Z 27ae9ce8b069: Download complete
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.3030266Z 16a9b0b01bb9: Verifying Checksum
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:53.3031845Z 16a9b0b01bb9: Download complete
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:57.9846367Z 27ae9ce8b069: Pull complete
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:58.0456721Z ab5501735aae: Pull complete
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:58.0562480Z 9ce0a5833ea2: Pull complete
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:58.0642777Z 50992d27cc59: Pull complete
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:58.0745413Z 4f4fb700ef54: Pull complete
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:58.0899417Z 86b6187bfb6b: Pull complete
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:58.3155395Z 16a9b0b01bb9: Pull complete
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:58.3195754Z Digest: sha256:23911f794fd35017a9ed9e7b527bf5bb9b39db009c90c9fb52b50a21bc4ccb55
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:58.3211461Z Status: Downloaded newer image for ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:58.3222263Z ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6
+auto-merge	Pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6	2026-10-05T10:03:58.3243046Z ##[endgroup]
+auto-merge	Run actions/checkout@v7	﻿2026-10-05T10:03:58.3568919Z ##[group]Run actions/checkout@v7
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.3569632Z with:
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.3569994Z   repository: linksplatform/Comparisons.SQLiteVSDoublets
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.3573041Z   token: ***
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.3573305Z   ssh-strict: true
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.3573972Z   ssh-user: git
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.3574400Z   persist-credentials: true
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.3574700Z   clean: true
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.3574978Z   sparse-checkout-cone-mode: true
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.3575321Z   fetch-depth: 1
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.3575580Z   fetch-tags: false
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.3575842Z   show-progress: true
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.3576112Z   lfs: false
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.3576355Z   submodules: false
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.3576630Z   set-safe-directory: true
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.3576967Z   allow-unsafe-pr-checkout: false
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.3577617Z ##[endgroup]
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.4656409Z Syncing repository: linksplatform/Comparisons.SQLiteVSDoublets
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.4658775Z ##[group]Getting Git version info
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.4659900Z Working directory is '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.4661235Z [command]/usr/bin/git version
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.4744763Z git version 2.55.0
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.4773682Z ##[endgroup]
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.4781855Z Temporarily overriding HOME='/home/runner/work/_temp/1464dd6f-f689-4f81-91d5-092d52d9ce60' before making global git config changes
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.4783862Z Adding repository directory to the temporary git global config as a safe directory
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.4786910Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.4843619Z Deleting the contents of '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.4862983Z ##[group]Determining repository object format
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.4864615Z ##[endgroup]
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.4865235Z ##[group]Initializing the repository
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.4866278Z [command]/usr/bin/git init /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5005844Z hint: Using 'master' as the name for the initial branch. This default branch name
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5007754Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5009116Z hint: to use in all of your new repositories, which will suppress this warning,
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5010680Z hint: call:
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5011446Z hint:
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5012365Z hint: 	git config --global init.defaultBranch <name>
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5013338Z hint:
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5014783Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5016229Z hint: 'development'. The just-created branch can be renamed via this command:
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5018228Z hint:
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5019719Z hint: 	git branch -m <name>
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5021341Z hint:
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5023049Z hint: Disable this message with "git config set advice.defaultBranchName false"
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5025593Z Initialized empty Git repository in /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5036166Z [command]/usr/bin/git remote add origin https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5100681Z ##[endgroup]
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5101583Z ##[group]Disabling automatic garbage collection
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5105422Z [command]/usr/bin/git config --local gc.auto 0
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5149706Z ##[endgroup]
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5151121Z ##[group]Setting up auth
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5152066Z Removing SSH command configuration
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5156841Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5199900Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5649598Z Removing HTTP extra header
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5655902Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5693065Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5916819Z Removing includeIf entries pointing to credentials config files
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5923158Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.5962191Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.6199640Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-92b62508-7c45-4f10-9687-7c5dedea3391.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.6242579Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path /home/runner/work/_temp/git-credentials-92b62508-7c45-4f10-9687-7c5dedea3391.config
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.6278162Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-92b62508-7c45-4f10-9687-7c5dedea3391.config
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.6317200Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-92b62508-7c45-4f10-9687-7c5dedea3391.config
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.6352679Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-92b62508-7c45-4f10-9687-7c5dedea3391.config
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.6385866Z ##[endgroup]
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.6386394Z ##[group]Fetching the repository
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.6392805Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +f61d5832f1a08991b4bb952e7d581ea99d9dd5d3:refs/remotes/origin/main
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9074577Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9076219Z  * [new ref]         f61d5832f1a08991b4bb952e7d581ea99d9dd5d3 -> origin/main
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9085321Z [command]/usr/bin/git branch --list --remote origin/main
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9119332Z   origin/main
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9129314Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9157721Z f61d5832f1a08991b4bb952e7d581ea99d9dd5d3
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9162097Z ##[endgroup]
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9162896Z ##[group]Determining the checkout info
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9164214Z ##[endgroup]
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9168828Z [command]/usr/bin/git sparse-checkout disable
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9228389Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9261962Z ##[group]Checking out the ref
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9265789Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9403142Z Switched to a new branch 'main'
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9409686Z branch 'main' set up to track 'origin/main'.
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9500409Z ##[endgroup]
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9503135Z [command]/usr/bin/git log -1 --format=%H
+auto-merge	Run actions/checkout@v7	2026-10-05T10:03:58.9508526Z f61d5832f1a08991b4bb952e7d581ea99d9dd5d3
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	﻿2026-10-05T10:03:58.9741606Z ##[group]Run ahmadnassri/action-dependabot-auto-merge@v2
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	2026-10-05T10:03:58.9742040Z with:
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	2026-10-05T10:03:58.9742280Z   target: minor
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	2026-10-05T10:03:58.9742789Z   github-token: ***
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	2026-10-05T10:03:58.9743076Z   config: .github/auto-merge.yml
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	2026-10-05T10:03:58.9743366Z   command: merge
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	2026-10-05T10:03:58.9743953Z   botName: dependabot
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	2026-10-05T10:03:58.9744233Z   approve: true
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	2026-10-05T10:03:58.9744481Z ##[endgroup]
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	2026-10-05T10:03:58.9842682Z ##[command]/usr/bin/docker run --name ghcrioahmadnassriactiondependabotautomerge266_d1ed3e --label 4a49e1 --workdir /github/workspace --rm -e "INPUT_TARGET" -e "INPUT_GITHUB-TOKEN" -e "INPUT_CONFIG" -e "INPUT_COMMAND" -e "INPUT_BOTNAME" -e "INPUT_APPROVE" -e "HOME" -e "GITHUB_JOB" -e "GITHUB_REF" -e "GITHUB_SHA" -e "GITHUB_REPOSITORY" -e "GITHUB_REPOSITORY_OWNER" -e "GITHUB_REPOSITORY_OWNER_ID" -e "GITHUB_RUN_ID" -e "GITHUB_RUN_NUMBER" -e "GITHUB_RETENTION_DAYS" -e "GITHUB_RUN_ATTEMPT" -e "GITHUB_ACTOR_ID" -e "GITHUB_ACTOR" -e "GITHUB_WORKFLOW" -e "GITHUB_HEAD_REF" -e "GITHUB_BASE_REF" -e "GITHUB_EVENT_NAME" -e "GITHUB_SERVER_URL" -e "GITHUB_API_URL" -e "GITHUB_GRAPHQL_URL" -e "GITHUB_REF_NAME" -e "GITHUB_REF_PROTECTED" -e "GITHUB_REF_TYPE" -e "GITHUB_WORKFLOW_REF" -e "GITHUB_WORKFLOW_SHA" -e "GITHUB_REPOSITORY_ID" -e "GITHUB_TRIGGERING_ACTOR" -e "GITHUB_WORKSPACE" -e "GITHUB_ACTION" -e "GITHUB_EVENT_PATH" -e "GITHUB_ACTION_REPOSITORY" -e "GITHUB_ACTION_REF" -e "GITHUB_PATH" -e "GITHUB_ENV" -e "GITHUB_STEP_SUMMARY" -e "GITHUB_STATE" -e "GITHUB_OUTPUT" -e "GITHUB_ARTIFACTS" -e "GITHUB_ARTIFACTS_LIST" -e "RUNNER_OS" -e "RUNNER_ARCH" -e "RUNNER_NAME" -e "RUNNER_ENVIRONMENT" -e "RUNNER_TOOL_CACHE" -e "RUNNER_TEMP" -e "RUNNER_WORKSPACE" -e "ACTIONS_RUNTIME_URL" -e "ACTIONS_RUNTIME_TOKEN" -e "ACTIONS_CACHE_URL" -e "ACTIONS_RESULTS_URL" -e "ACTIONS_CACHE_MODE" -e "ACTIONS_ORCHESTRATION_ID" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work/_temp":"/github/runner_temp" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" -v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands" -v "/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets":"/github/workspace" ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	2026-10-05T10:03:59.4588683Z using workflow's "target": 
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	2026-10-05T10:03:59.4589519Z - match:
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	2026-10-05T10:03:59.4590181Z     dependency_type: all
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	2026-10-05T10:03:59.4590874Z     update_type: semver:minor
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	2026-10-05T10:03:59.4591331Z 
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	2026-10-05T10:03:59.4604330Z title: "Bump egor-tensin/setup-clang from 1 to 2"
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	2026-10-05T10:03:59.4605244Z depName: egor-tensin/setup-clang
+auto-merge	Run ahmadnassri/action-dependabot-auto-merge@v2	2026-10-05T10:03:59.4647622Z ##[warning]failed to parse title: no recognizable versions
+auto-merge	Post Run actions/checkout@v7	﻿2026-10-05T10:03:59.5686767Z Post job cleanup.
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.6557430Z [command]/usr/bin/git version
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.6602606Z git version 2.55.0
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.6641130Z Temporarily overriding HOME='/home/runner/work/_temp/e1d3d05f-b40c-4f9a-9acb-9ab197b86705' before making global git config changes
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.6642865Z Adding repository directory to the temporary git global config as a safe directory
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.6650150Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.6691129Z Removing SSH command configuration
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.6699046Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.6738232Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7005244Z Removing HTTP extra header
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7015031Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7068845Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7355322Z Removing includeIf entries pointing to credentials config files
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7356888Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7381459Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7385778Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7387335Z includeif.gitdir:/github/workspace/.git.path
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7390764Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7396138Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7436384Z /home/runner/work/_temp/git-credentials-92b62508-7c45-4f10-9687-7c5dedea3391.config
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7457515Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-92b62508\-7c45\-4f10\-9687\-7c5dedea3391\.config
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7504465Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7538126Z /home/runner/work/_temp/git-credentials-92b62508-7c45-4f10-9687-7c5dedea3391.config
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7569573Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-92b62508\-7c45\-4f10\-9687\-7c5dedea3391\.config
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7622101Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7659092Z /github/runner_temp/git-credentials-92b62508-7c45-4f10-9687-7c5dedea3391.config
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7664158Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-92b62508\-7c45\-4f10\-9687\-7c5dedea3391\.config
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7735575Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7745167Z /github/runner_temp/git-credentials-92b62508-7c45-4f10-9687-7c5dedea3391.config
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7764032Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-92b62508\-7c45\-4f10\-9687\-7c5dedea3391\.config
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.7831327Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+auto-merge	Post Run actions/checkout@v7	2026-10-05T10:03:59.8062698Z Removing credentials config '/home/runner/work/_temp/git-credentials-92b62508-7c45-4f10-9687-7c5dedea3391.config'
+auto-merge	Complete job	﻿2026-10-05T10:03:59.8221629Z Cleaning up orphan processes

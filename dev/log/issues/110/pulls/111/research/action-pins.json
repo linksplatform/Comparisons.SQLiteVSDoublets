@@ -1,0 +1,13 @@
+{
+  "actions/checkout@v7": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+  "actions/setup-python@v7": "5fda3b95a4ea91299a34e894583c3862153e4b97",
+  "actions/setup-dotnet@v6": "a98b56852c35b8e3190ac28c8c2271da59106c68",
+  "actions/upload-artifact@v7": "043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+  "actions/download-artifact@v8": "3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c",
+  "Swatinem/rust-cache@v2": "6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+  "dtolnay/rust-toolchain@stable": "89b12181fb390509a0842a86cc55eeb8eb928c1d",
+  "ahmadnassri/action-dependabot-auto-merge@v2": "45fc124d949b19b6b8bf6645b6c9d55f4f9ac61a",
+  "zizmorcore/zizmor-action@v0.6.2": "3dc1ecc9bcb9e94e9b2c709687979e1298497054",
+  "dependabot/fetch-metadata@v2": "21025c705c08248db411dc16f3619e6b5f9ea21a",
+  "gitleaks/gitleaks-action@v2": "ff98106e4c7b2bc287b24eaf42907196329070c7"
+}

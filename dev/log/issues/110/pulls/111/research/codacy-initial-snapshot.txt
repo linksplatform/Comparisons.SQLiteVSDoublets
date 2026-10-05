@@ -1,0 +1,790 @@
+- generic [active] [ref=e1]:
+  - region "We value your privacy" [ref=e8]:
+    - generic [ref=e9]:
+      - generic [ref=e11]:
+        - heading "We value your privacy" [level=2] [ref=e12]
+        - generic [ref=e13]:
+          - generic [ref=e14]:
+            - paragraph [ref=e15]:
+              - text: This website stores cookies on your computer. These cookies are used to collect information about how you interact with our website and allow us to remember you. We use this information in order to improve and customize your browsing experience and for analytics and metrics about our visitors both on this website and other media. To find out more about the cookies we use, see our
+              - link "Privacy Policy" [ref=e16] [cursor=pointer]:
+                - /url: https://www.codacy.com/privacy
+              - text: . If you decline, your information won’t be tracked when you visit this website. A single cookie will be used in your browser to remember your preference not to be tracked.
+            - paragraph [ref=e17]
+          - group [ref=e18]:
+            - button "Customise" [ref=e19] [cursor=pointer]
+            - button "Accept All" [ref=e20] [cursor=pointer]
+      - generic [ref=e23]:
+        - text: Powered by
+        - link "Visit CookieYes website" [ref=e24] [cursor=pointer]:
+          - /url: https://www.cookieyes.com/product/cookie-consent/?ref=cypbcyb&utm_source=cookie-banner&utm_medium=fl-branding
+  - generic [ref=e38]:
+    - banner [ref=e39]:
+      - generic [ref=e40]:
+        - navigation [ref=e41]:
+          - link [ref=e42] [cursor=pointer]:
+            - /url: /organizations
+            - img "codacy-white" [ref=e44]
+        - navigation [ref=e53]:
+          - generic [ref=e55]:
+            - img [ref=e56]:
+              - img "Briefcase" [ref=e57]
+            - link [ref=e60] [cursor=pointer]:
+              - /url: /organizations/gh/linksplatform
+              - strong [ref=e61]: linksplatform
+            - button [disabled]:
+              - generic:
+                - generic:
+                  - img:
+                    - img "Chevron Down"
+          - separator [ref=e62]
+          - generic [ref=e64]:
+            - img [ref=e65]:
+              - img "Folder Open" [ref=e66]
+            - paragraph [ref=e69]: Comparisons.SQLiteVSDoublets
+            - button [disabled]:
+              - generic:
+                - generic:
+                  - img:
+                    - img "Chevron Down"
+      - navigation [ref=e70]:
+        - link "Platform" [ref=e72] [cursor=pointer]:
+          - /url: https://www.codacy.com/
+        - link "Pricing" [ref=e74] [cursor=pointer]:
+          - /url: https://www.codacy.com/pricing
+        - link "Login" [ref=e76] [cursor=pointer]:
+          - /url: https://app.codacy.com/login?accessUri=/gh/linksplatform/Comparisons.SQLiteVSDoublets/pull-requests/111/issues
+        - separator [ref=e77]
+        - link [ref=e79] [cursor=pointer]:
+          - /url: https://www.codacy.com/signup
+          - button "Sign up" [ref=e80]
+    - main [ref=e83]:
+      - generic [ref=e85]:
+        - link [ref=e87] [cursor=pointer]:
+          - /url: /gh/linksplatform/Comparisons.SQLiteVSDoublets/dashboard
+          - img [ref=e88]:
+            - img "Home"
+          - paragraph [ref=e89]: Overview
+        - link [ref=e91] [cursor=pointer]:
+          - /url: /gh/linksplatform/Comparisons.SQLiteVSDoublets/commits
+          - img [ref=e92]:
+            - img "Git Commit"
+          - paragraph [ref=e93]: Commits
+        - link [ref=e95] [cursor=pointer]:
+          - /url: /gh/linksplatform/Comparisons.SQLiteVSDoublets/files
+          - img [ref=e96]:
+            - img "Documents"
+          - paragraph [ref=e97]: Files
+        - link [ref=e99] [cursor=pointer]:
+          - /url: /gh/linksplatform/Comparisons.SQLiteVSDoublets/issues
+          - img [ref=e100]:
+            - img "Bug"
+          - paragraph [ref=e101]: Issues
+        - link [ref=e103] [cursor=pointer]:
+          - /url: /gh/linksplatform/Comparisons.SQLiteVSDoublets/coverage
+          - img [ref=e104]:
+            - img "Umbrella"
+          - paragraph [ref=e105]: Coverage
+        - link [ref=e107] [cursor=pointer]:
+          - /url: /gh/linksplatform/Comparisons.SQLiteVSDoublets/pull-requests
+          - img [ref=e108]:
+            - img "Git Pull Request"
+          - paragraph [ref=e109]: Pull requests
+      - generic [ref=e114]:
+        - generic [ref=e115]:
+          - generic [ref=e116]:
+            - generic [ref=e117]:
+              - generic [ref=e118]: "[WIP] Check for all false positives, false negatives, warnings and errors in CI/CD and fix them all"
+              - generic [ref=e119]: Open
+            - generic [ref=e126]:
+              - generic [ref=e127]:
+                - paragraph [ref=e128]:
+                  - strong [ref=e129]: konard
+                  - text: wants to merge
+                  - strong [ref=e130]: issue-110-e1f96d946132
+                  - text: into
+                  - strong [ref=e131]: main
+                - paragraph [ref=e132]: "#111"
+              - paragraph [ref=e133]:
+                - text: Last updated
+                - time [ref=e134]: 11 minutes ago
+              - generic [ref=e135]:
+                - link "View in GitHub" [ref=e136] [cursor=pointer]:
+                  - /url: https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/pull/111
+                - button "View logs" [ref=e140] [cursor=pointer]
+          - generic [ref=e143]:
+            - generic [ref=e144]:
+              - generic "Failed" [ref=e145]
+              - heading "Not up to quality standards." [level=2] [ref=e147]
+            - generic [ref=e149]:
+              - heading "Issues" [level=5] [ref=e151]
+              - paragraph [ref=e153] [cursor=pointer]: "+31"
+              - paragraph [ref=e154]:
+                - text: Fails
+                - link "≤ 0 minor issues" [ref=e155] [cursor=pointer]:
+                  - /url: /gh/linksplatform/Comparisons.SQLiteVSDoublets/settings/gates
+        - tablist "Pull request navigation" [ref=e156]:
+          - tab "Issues +31" [selected] [ref=e157] [cursor=pointer]:
+            - generic [ref=e158]:
+              - img [ref=e159]:
+                - img "Bug" [ref=e160]
+              - generic [ref=e164]: Issues
+            - generic "New issues" [ref=e165]: "+31"
+          - tab "Duplication" [ref=e167] [cursor=pointer]:
+            - generic [ref=e168]:
+              - img [ref=e169]:
+                - img "Copy" [ref=e170]
+              - generic [ref=e173]: Duplication
+          - tab "Complexity +216" [ref=e174] [cursor=pointer]:
+            - generic [ref=e175]: Complexity
+            - generic "Complexity variation" [ref=e184]: "+216"
+          - tab "Diff" [ref=e186] [cursor=pointer]:
+            - generic [ref=e187]:
+              - img [ref=e188]:
+                - img "Git Compare" [ref=e189]
+              - generic [ref=e194]: Diff
+          - tab "Files" [ref=e195] [cursor=pointer]:
+            - generic [ref=e196]:
+              - img [ref=e197]:
+                - img "Documents" [ref=e198]
+              - generic [ref=e203]: Files
+          - tab "Commits" [ref=e204] [cursor=pointer]:
+            - generic [ref=e205]:
+              - img [ref=e206]:
+                - img "Git Commit" [ref=e207]
+              - generic [ref=e209]: Commits
+        - generic [ref=e210]:
+          - generic [ref=e212]:
+            - heading "Filter by" [level=6] [ref=e213]
+            - generic [ref=e214]:
+              - generic [ref=e217] [cursor=pointer]:
+                - generic [ref=e218]:
+                  - img [ref=e219]:
+                    - img "Bug" [ref=e220]
+                  - generic [ref=e224]: New issues
+                - generic [ref=e226]: "+31"
+              - generic [ref=e227]:
+                - generic [ref=e229] [cursor=pointer]:
+                  - generic [ref=e230]: Medium
+                  - generic [ref=e240]: "+23"
+                - generic [ref=e242] [cursor=pointer]:
+                  - generic [ref=e243]: Minor
+                  - generic [ref=e253]: "+8"
+              - generic [ref=e254]:
+                - generic [ref=e256] [cursor=pointer]:
+                  - generic [ref=e257]:
+                    - img [ref=e258]:
+                      - img "Shield" [ref=e259]
+                    - generic [ref=e261]: Security
+                  - generic [ref=e263]: "+26"
+                - generic [ref=e265] [cursor=pointer]:
+                  - generic [ref=e266]:
+                    - img [ref=e267]:
+                      - img "Ribbon" [ref=e268]
+                    - generic [ref=e273]: Best practice
+                  - generic [ref=e275]: "+5"
+            - heading "Files with new issues" [level=6] [ref=e276]
+            - generic [ref=e277]:
+              - generic [ref=e281] [cursor=pointer]:
+                - generic [ref=e282]:
+                  - img [ref=e283]:
+                    - img "Document" [ref=e284]
+                  - generic [ref=e287]: CONTRIBUTING.md
+                - generic [ref=e289]: "+1"
+              - generic [ref=e290]:
+                - paragraph [ref=e291]: cpp
+                - generic [ref=e294] [cursor=pointer]:
+                  - generic [ref=e295]:
+                    - img [ref=e296]:
+                      - img "Document" [ref=e297]
+                    - generic [ref=e300]: README.md
+                  - generic [ref=e302]: "+1"
+              - generic [ref=e303]:
+                - paragraph [ref=e304]: experiments/ci
+                - generic [ref=e305]:
+                  - generic [ref=e307] [cursor=pointer]:
+                    - generic [ref=e308]:
+                      - img [ref=e309]:
+                        - img "Document" [ref=e310]
+                      - generic [ref=e313]: collect_evidence.py
+                    - generic [ref=e315]: "+4"
+                  - generic [ref=e317] [cursor=pointer]:
+                    - generic [ref=e318]:
+                      - img [ref=e319]:
+                        - img "Document" [ref=e320]
+                      - generic [ref=e323]: run_smoke.py
+                    - generic [ref=e325]: "+4"
+              - generic [ref=e326]:
+                - paragraph [ref=e327]: scripts
+                - generic [ref=e328]:
+                  - generic [ref=e330] [cursor=pointer]:
+                    - generic [ref=e331]:
+                      - img [ref=e332]:
+                        - img "Document" [ref=e333]
+                      - generic [ref=e336]: audit_dotnet.py
+                    - generic [ref=e338]: "+5"
+                  - generic [ref=e340] [cursor=pointer]:
+                    - generic [ref=e341]:
+                      - img [ref=e342]:
+                        - img "Document" [ref=e343]
+                      - generic [ref=e346]: benchmark_ci.py
+                    - generic [ref=e348]: "+1"
+                  - generic [ref=e350] [cursor=pointer]:
+                    - generic [ref=e351]:
+                      - img [ref=e352]:
+                        - img "Document" [ref=e353]
+                      - generic [ref=e356]: benchmark_report.py
+                    - generic [ref=e358]: "+2"
+                  - generic [ref=e360] [cursor=pointer]:
+                    - generic [ref=e361]:
+                      - img [ref=e362]:
+                        - img "Document" [ref=e363]
+                      - generic [ref=e366]: check_pipeline_status.py
+                    - generic [ref=e368]: "+4"
+                  - generic [ref=e370] [cursor=pointer]:
+                    - generic [ref=e371]:
+                      - img [ref=e372]:
+                        - img "Document" [ref=e373]
+                      - generic [ref=e376]: ci_checks.py
+                    - generic [ref=e378]: "+1"
+                  - generic [ref=e380] [cursor=pointer]:
+                    - generic [ref=e381]:
+                      - img [ref=e382]:
+                        - img "Document" [ref=e383]
+                      - generic [ref=e386]: publish_benchmarks.py
+                    - generic [ref=e388]: "+5"
+                  - generic [ref=e390] [cursor=pointer]:
+                    - generic [ref=e391]:
+                      - img [ref=e392]:
+                        - img "Document" [ref=e393]
+                      - generic [ref=e396]: test_publish_benchmarks.py
+                    - generic [ref=e398]: "+3"
+          - generic [ref=e399]:
+            - heading "Showing 31 issues" [level=3] [ref=e402]
+            - generic [ref=e403]:
+              - generic [ref=e404] [cursor=pointer]:
+                - generic [ref=e406]:
+                  - generic [ref=e407]: MEDIUM
+                  - paragraph [ref=e417]: Best practice
+                - paragraph [ref=e421]: Use isinstance() rather than type() for a typecheck.
+              - generic [ref=e424]:
+                - img [ref=e425]:
+                  - img "Document" [ref=e426]
+                - generic [ref=e430]:
+                  - text: scripts/
+                  - paragraph [ref=e431]: benchmark_ci.py
+              - code [ref=e434]:
+                - generic [ref=e435]:
+                  - generic [ref=e436]: "38"
+                  - generic [ref=e437]: "if any(type(size) is not int or not 1 <= size <= 10000000 for size in sizes):"
+            - generic [ref=e438]:
+              - generic [ref=e439] [cursor=pointer]:
+                - generic [ref=e441]:
+                  - generic [ref=e442]: MEDIUM
+                  - paragraph [ref=e452]: Best practice
+                - paragraph [ref=e456]: Use isinstance() rather than type() for a typecheck.
+              - generic [ref=e459]:
+                - img [ref=e460]:
+                  - img "Document" [ref=e461]
+                - generic [ref=e465]:
+                  - text: scripts/
+                  - paragraph [ref=e466]: benchmark_report.py
+              - code [ref=e469]:
+                - generic [ref=e470]:
+                  - generic [ref=e471]: "146"
+                  - generic [ref=e472]: "if type(report[\"repetitions\"]) is not int or report[\"repetitions\"] <= 0:"
+            - generic [ref=e473]:
+              - generic [ref=e474] [cursor=pointer]:
+                - generic [ref=e476]:
+                  - generic [ref=e477]: MEDIUM
+                  - paragraph [ref=e487]: Best practice
+                - paragraph [ref=e491]: Use isinstance() rather than type() for a typecheck.
+              - generic [ref=e494]:
+                - img [ref=e495]:
+                  - img "Document" [ref=e496]
+                - generic [ref=e500]:
+                  - text: scripts/
+                  - paragraph [ref=e501]: benchmark_report.py
+              - code [ref=e504]:
+                - generic [ref=e505]:
+                  - generic [ref=e506]: "144"
+                  - generic [ref=e507]: "if report[\"bits\"] not in BITS or type(report[\"size\"]) is not int or report[\"size\"] <= 0:"
+            - generic [ref=e508]:
+              - generic [ref=e509] [cursor=pointer]:
+                - generic [ref=e511]:
+                  - generic [ref=e512]: MEDIUM
+                  - paragraph [ref=e522]: Security
+                  - paragraph [ref=e523]: Input Validation
+                - paragraph [ref=e527]: subprocess call - check for execution of untrusted input.
+              - generic [ref=e530]:
+                - img [ref=e531]:
+                  - img "Document" [ref=e532]
+                - generic [ref=e536]:
+                  - text: scripts/
+                  - paragraph [ref=e537]: audit_dotnet.py
+              - code [ref=e540]:
+                - generic [ref=e541]:
+                  - generic [ref=e542]: "36"
+                  - generic [ref=e543]: result = subprocess.run(
+            - generic [ref=e544]:
+              - generic [ref=e545] [cursor=pointer]:
+                - generic [ref=e547]:
+                  - generic [ref=e548]: MEDIUM
+                  - paragraph [ref=e558]: Security
+                  - paragraph [ref=e559]: Command Injection
+                - paragraph [ref=e563]: Starting a process with a partial executable path
+              - generic [ref=e566]:
+                - img [ref=e567]:
+                  - img "Document" [ref=e568]
+                - generic [ref=e572]:
+                  - text: experiments/ci/
+                  - paragraph [ref=e573]: collect_evidence.py
+              - code [ref=e576]:
+                - generic [ref=e577]:
+                  - generic [ref=e578]: "107"
+                  - generic [ref=e579]: result = subprocess.run(
+            - generic [ref=e580]:
+              - generic [ref=e581] [cursor=pointer]:
+                - generic [ref=e583]:
+                  - generic [ref=e584]: MEDIUM
+                  - paragraph [ref=e594]: Security
+                  - paragraph [ref=e595]: Command Injection
+                - paragraph [ref=e599]: Starting a process with a partial executable path
+              - generic [ref=e602]:
+                - img [ref=e603]:
+                  - img "Document" [ref=e604]
+                - generic [ref=e608]:
+                  - text: scripts/
+                  - paragraph [ref=e609]: audit_dotnet.py
+              - code [ref=e612]:
+                - generic [ref=e613]:
+                  - generic [ref=e614]: "35"
+                  - generic [ref=e615]: subprocess.run(["dotnet", "restore", str(project), "-warnaserror"], check=True)
+            - generic [ref=e616]:
+              - generic [ref=e617] [cursor=pointer]:
+                - generic [ref=e619]:
+                  - generic [ref=e620]: MEDIUM
+                  - paragraph [ref=e630]: Security
+                  - paragraph [ref=e631]: Command Injection
+                - paragraph [ref=e635]: Starting a process with a partial executable path
+              - generic [ref=e638]:
+                - img [ref=e639]:
+                  - img "Document" [ref=e640]
+                - generic [ref=e644]:
+                  - text: scripts/
+                  - paragraph [ref=e645]: publish_benchmarks.py
+              - code [ref=e648]:
+                - generic [ref=e649]:
+                  - generic [ref=e650]: "22"
+                  - generic [ref=e651]: result = subprocess.run(["git", *args], cwd=cwd, capture_output=True, text=True, check=False)
+            - generic [ref=e652]:
+              - generic [ref=e653] [cursor=pointer]:
+                - generic [ref=e655]:
+                  - generic [ref=e656]: MEDIUM
+                  - paragraph [ref=e666]: Security
+                  - paragraph [ref=e667]: Input Validation
+                - paragraph [ref=e671]: subprocess call - check for execution of untrusted input.
+              - generic [ref=e674]:
+                - img [ref=e675]:
+                  - img "Document" [ref=e676]
+                - generic [ref=e680]:
+                  - text: scripts/
+                  - paragraph [ref=e681]: publish_benchmarks.py
+              - code [ref=e684]:
+                - generic [ref=e685]:
+                  - generic [ref=e686]: "22"
+                  - generic [ref=e687]: result = subprocess.run(["git", *args], cwd=cwd, capture_output=True, text=True, check=False)
+            - generic [ref=e688]:
+              - generic [ref=e689] [cursor=pointer]:
+                - generic [ref=e691]:
+                  - generic [ref=e692]: MEDIUM
+                  - paragraph [ref=e702]: Security
+                  - paragraph [ref=e703]: Insecure Modules Libraries
+                - paragraph [ref=e707]: Use of unsafe yaml load. Allows instantiation of arbitrary objects. Consider yaml.safe_load().
+              - generic [ref=e710]:
+                - img [ref=e711]:
+                  - img "Document" [ref=e712]
+                - generic [ref=e716]:
+                  - text: scripts/
+                  - paragraph [ref=e717]: check_pipeline_status.py
+              - code [ref=e720]:
+                - generic [ref=e721]:
+                  - generic [ref=e722]: "34"
+                  - generic [ref=e723]: workflow = yaml.load(Path(os.environ["WORKFLOW_FILE"]).read_text(), Loader=yaml.BaseLoader)
+            - generic [ref=e724]:
+              - generic [ref=e725] [cursor=pointer]:
+                - generic [ref=e727]:
+                  - generic [ref=e728]: MEDIUM
+                  - paragraph [ref=e738]: Security
+                  - paragraph [ref=e739]: Command Injection
+                - paragraph [ref=e743]: Starting a process with a partial executable path
+              - generic [ref=e746]:
+                - img [ref=e747]:
+                  - img "Document" [ref=e748]
+                - generic [ref=e752]:
+                  - text: experiments/ci/
+                  - paragraph [ref=e753]: run_smoke.py
+              - code [ref=e756]:
+                - generic [ref=e757]:
+                  - generic [ref=e758]: "18"
+                  - generic [ref=e759]: sha = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+            - generic [ref=e760]:
+              - generic [ref=e761] [cursor=pointer]:
+                - generic [ref=e763]:
+                  - generic [ref=e764]: MEDIUM
+                  - paragraph [ref=e774]: Security
+                  - paragraph [ref=e775]: Input Validation
+                - paragraph [ref=e779]: subprocess call - check for execution of untrusted input.
+              - generic [ref=e782]:
+                - img [ref=e783]:
+                  - img "Document" [ref=e784]
+                - generic [ref=e788]:
+                  - text: scripts/
+                  - paragraph [ref=e789]: audit_dotnet.py
+              - code [ref=e792]:
+                - generic [ref=e793]:
+                  - generic [ref=e794]: "35"
+                  - generic [ref=e795]: subprocess.run(["dotnet", "restore", str(project), "-warnaserror"], check=True)
+            - generic [ref=e796]:
+              - generic [ref=e797] [cursor=pointer]:
+                - generic [ref=e799]:
+                  - generic [ref=e800]: MEDIUM
+                  - paragraph [ref=e810]: Security
+                  - paragraph [ref=e811]: Command Injection
+                - paragraph [ref=e815]: Starting a process with a partial executable path
+              - generic [ref=e818]:
+                - img [ref=e819]:
+                  - img "Document" [ref=e820]
+                - generic [ref=e824]:
+                  - text: scripts/
+                  - paragraph [ref=e825]: check_pipeline_status.py
+              - code [ref=e828]:
+                - generic [ref=e829]:
+                  - generic [ref=e830]: "37"
+                  - generic [ref=e831]: remote = subprocess.run(
+            - generic [ref=e832]:
+              - generic [ref=e833] [cursor=pointer]:
+                - generic [ref=e835]:
+                  - generic [ref=e836]: MEDIUM
+                  - paragraph [ref=e846]: Security
+                  - paragraph [ref=e847]: Input Validation
+                - paragraph [ref=e851]: subprocess call - check for execution of untrusted input.
+              - generic [ref=e854]:
+                - img [ref=e855]:
+                  - img "Document" [ref=e856]
+                - generic [ref=e860]:
+                  - text: scripts/
+                  - paragraph [ref=e861]: publish_benchmarks.py
+              - code [ref=e864]:
+                - generic [ref=e865]:
+                  - generic [ref=e866]: "67"
+                  - generic [ref=e867]: subprocess.run(
+            - generic [ref=e868]:
+              - generic [ref=e869] [cursor=pointer]:
+                - generic [ref=e871]:
+                  - generic [ref=e872]: MEDIUM
+                  - paragraph [ref=e882]: Security
+                  - paragraph [ref=e883]: Insecure Modules Libraries
+                - paragraph [ref=e887]: Use of unsafe yaml load. Allows instantiation of arbitrary objects. Consider yaml.safe_load().
+              - generic [ref=e890]:
+                - img [ref=e891]:
+                  - img "Document" [ref=e892]
+                - generic [ref=e896]:
+                  - text: scripts/
+                  - paragraph [ref=e897]: ci_checks.py
+              - code [ref=e900]:
+                - generic [ref=e901]:
+                  - generic [ref=e902]: "68"
+                  - generic [ref=e903]: workflow = yaml.load(path.read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
+            - generic [ref=e904]:
+              - generic [ref=e905] [cursor=pointer]:
+                - generic [ref=e907]:
+                  - generic [ref=e908]: MEDIUM
+                  - paragraph [ref=e918]: Security
+                  - paragraph [ref=e919]: Input Validation
+                - paragraph [ref=e923]: subprocess call - check for execution of untrusted input.
+              - generic [ref=e926]:
+                - img [ref=e927]:
+                  - img "Document" [ref=e928]
+                - generic [ref=e932]:
+                  - text: experiments/ci/
+                  - paragraph [ref=e933]: collect_evidence.py
+              - code [ref=e936]:
+                - generic [ref=e937]:
+                  - generic [ref=e938]: "107"
+                  - generic [ref=e939]: result = subprocess.run(
+            - generic [ref=e940]:
+              - generic [ref=e941] [cursor=pointer]:
+                - generic [ref=e943]:
+                  - generic [ref=e944]: MINOR
+                  - paragraph [ref=e954]: Security
+                  - paragraph [ref=e955]: Command Injection
+                - paragraph [ref=e959]: Consider possible security implications associated with the subprocess module.
+              - generic [ref=e962]:
+                - img [ref=e963]:
+                  - img "Document" [ref=e964]
+                - generic [ref=e968]:
+                  - text: experiments/ci/
+                  - paragraph [ref=e969]: run_smoke.py
+              - code [ref=e972]:
+                - generic [ref=e973]:
+                  - generic [ref=e974]: "4"
+                  - generic [ref=e975]: import subprocess
+            - generic [ref=e976]:
+              - generic [ref=e977] [cursor=pointer]:
+                - generic [ref=e979]:
+                  - generic [ref=e980]: MEDIUM
+                  - paragraph [ref=e990]: Security
+                  - paragraph [ref=e991]: Input Validation
+                - paragraph [ref=e995]: subprocess call - check for execution of untrusted input.
+              - generic [ref=e998]:
+                - img [ref=e999]:
+                  - img "Document" [ref=e1000]
+                - generic [ref=e1004]:
+                  - text: experiments/ci/
+                  - paragraph [ref=e1005]: run_smoke.py
+              - code [ref=e1008]:
+                - generic [ref=e1009]:
+                  - generic [ref=e1010]: "28"
+                  - generic [ref=e1011]: subprocess.run(
+            - generic [ref=e1012]:
+              - generic [ref=e1013] [cursor=pointer]:
+                - generic [ref=e1015]:
+                  - generic [ref=e1016]: MEDIUM
+                  - paragraph [ref=e1026]: Security
+                  - paragraph [ref=e1027]: Command Injection
+                - paragraph [ref=e1031]: Starting a process with a partial executable path
+              - generic [ref=e1034]:
+                - img [ref=e1035]:
+                  - img "Document" [ref=e1036]
+                - generic [ref=e1040]:
+                  - text: scripts/
+                  - paragraph [ref=e1041]: audit_dotnet.py
+              - code [ref=e1044]:
+                - generic [ref=e1045]:
+                  - generic [ref=e1046]: "36"
+                  - generic [ref=e1047]: result = subprocess.run(
+            - generic [ref=e1048]:
+              - generic [ref=e1049] [cursor=pointer]:
+                - generic [ref=e1051]:
+                  - generic [ref=e1052]: MEDIUM
+                  - paragraph [ref=e1062]: Security
+                  - paragraph [ref=e1063]: Input Validation
+                - paragraph [ref=e1067]: subprocess call - check for execution of untrusted input.
+              - generic [ref=e1070]:
+                - img [ref=e1071]:
+                  - img "Document" [ref=e1072]
+                - generic [ref=e1076]:
+                  - text: scripts/
+                  - paragraph [ref=e1077]: test_publish_benchmarks.py
+              - code [ref=e1080]:
+                - generic [ref=e1081]:
+                  - generic [ref=e1082]: "71"
+                  - generic [ref=e1083]: return subprocess.run(["git", *args], cwd=cwd, capture_output=True, text=True, check=True)
+            - generic [ref=e1084]:
+              - generic [ref=e1085] [cursor=pointer]:
+                - generic [ref=e1087]:
+                  - generic [ref=e1088]: MEDIUM
+                  - paragraph [ref=e1098]: Security
+                  - paragraph [ref=e1099]: Command Injection
+                - paragraph [ref=e1103]: Starting a process with a partial executable path
+              - generic [ref=e1106]:
+                - img [ref=e1107]:
+                  - img "Document" [ref=e1108]
+                - generic [ref=e1112]:
+                  - text: scripts/
+                  - paragraph [ref=e1113]: test_publish_benchmarks.py
+              - code [ref=e1116]:
+                - generic [ref=e1117]:
+                  - generic [ref=e1118]: "71"
+                  - generic [ref=e1119]: return subprocess.run(["git", *args], cwd=cwd, capture_output=True, text=True, check=True)
+            - generic [ref=e1120]:
+              - generic [ref=e1121] [cursor=pointer]:
+                - generic [ref=e1123]:
+                  - generic [ref=e1124]: MINOR
+                  - paragraph [ref=e1134]: Security
+                  - paragraph [ref=e1135]: Command Injection
+                - paragraph [ref=e1139]: Consider possible security implications associated with the subprocess module.
+              - generic [ref=e1142]:
+                - img [ref=e1143]:
+                  - img "Document" [ref=e1144]
+                - generic [ref=e1148]:
+                  - text: scripts/
+                  - paragraph [ref=e1149]: publish_benchmarks.py
+              - code [ref=e1152]:
+                - generic [ref=e1153]:
+                  - generic [ref=e1154]: "6"
+                  - generic [ref=e1155]: import subprocess
+            - generic [ref=e1156]:
+              - generic [ref=e1157] [cursor=pointer]:
+                - generic [ref=e1159]:
+                  - generic [ref=e1160]: MEDIUM
+                  - paragraph [ref=e1170]: Security
+                  - paragraph [ref=e1171]: Input Validation
+                - paragraph [ref=e1175]: subprocess call - check for execution of untrusted input.
+              - generic [ref=e1178]:
+                - img [ref=e1179]:
+                  - img "Document" [ref=e1180]
+                - generic [ref=e1184]:
+                  - text: experiments/ci/
+                  - paragraph [ref=e1185]: run_smoke.py
+              - code [ref=e1188]:
+                - generic [ref=e1189]:
+                  - generic [ref=e1190]: "18"
+                  - generic [ref=e1191]: sha = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+            - generic [ref=e1192]:
+              - generic [ref=e1193] [cursor=pointer]:
+                - generic [ref=e1195]:
+                  - generic [ref=e1196]: MEDIUM
+                  - paragraph [ref=e1206]: Security
+                  - paragraph [ref=e1207]: Command Injection
+                - paragraph [ref=e1211]: Starting a process with a partial executable path
+              - generic [ref=e1214]:
+                - img [ref=e1215]:
+                  - img "Document" [ref=e1216]
+                - generic [ref=e1220]:
+                  - text: scripts/
+                  - paragraph [ref=e1221]: publish_benchmarks.py
+              - code [ref=e1224]:
+                - generic [ref=e1225]:
+                  - generic [ref=e1226]: "67"
+                  - generic [ref=e1227]: subprocess.run(
+            - generic [ref=e1228]:
+              - generic [ref=e1229] [cursor=pointer]:
+                - generic [ref=e1231]:
+                  - generic [ref=e1232]: MINOR
+                  - paragraph [ref=e1242]: Security
+                  - paragraph [ref=e1243]: Command Injection
+                - paragraph [ref=e1247]: Consider possible security implications associated with the subprocess module.
+              - generic [ref=e1250]:
+                - img [ref=e1251]:
+                  - img "Document" [ref=e1252]
+                - generic [ref=e1256]:
+                  - text: scripts/
+                  - paragraph [ref=e1257]: test_publish_benchmarks.py
+              - code [ref=e1260]:
+                - generic [ref=e1261]:
+                  - generic [ref=e1262]: "5"
+                  - generic [ref=e1263]: import subprocess
+            - generic [ref=e1264]:
+              - generic [ref=e1265] [cursor=pointer]:
+                - generic [ref=e1267]:
+                  - generic [ref=e1268]: MEDIUM
+                  - paragraph [ref=e1278]: Security
+                  - paragraph [ref=e1279]: Input Validation
+                - paragraph [ref=e1283]: subprocess call - check for execution of untrusted input.
+              - generic [ref=e1286]:
+                - img [ref=e1287]:
+                  - img "Document" [ref=e1288]
+                - generic [ref=e1292]:
+                  - text: scripts/
+                  - paragraph [ref=e1293]: check_pipeline_status.py
+              - code [ref=e1296]:
+                - generic [ref=e1297]:
+                  - generic [ref=e1298]: "37"
+                  - generic [ref=e1299]: remote = subprocess.run(
+            - generic [ref=e1300]:
+              - generic [ref=e1301] [cursor=pointer]:
+                - generic [ref=e1303]:
+                  - generic [ref=e1304]: MINOR
+                  - paragraph [ref=e1314]: Security
+                  - paragraph [ref=e1315]: Command Injection
+                - paragraph [ref=e1319]: Consider possible security implications associated with the subprocess module.
+              - generic [ref=e1322]:
+                - img [ref=e1323]:
+                  - img "Document" [ref=e1324]
+                - generic [ref=e1328]:
+                  - text: experiments/ci/
+                  - paragraph [ref=e1329]: collect_evidence.py
+              - code [ref=e1332]:
+                - generic [ref=e1333]:
+                  - generic [ref=e1334]: "5"
+                  - generic [ref=e1335]: import subprocess
+            - generic [ref=e1336]:
+              - generic [ref=e1337] [cursor=pointer]:
+                - generic [ref=e1339]:
+                  - generic [ref=e1340]: MINOR
+                  - paragraph [ref=e1350]: Security
+                  - paragraph [ref=e1351]: Command Injection
+                - paragraph [ref=e1355]: Consider possible security implications associated with the subprocess module.
+              - generic [ref=e1358]:
+                - img [ref=e1359]:
+                  - img "Document" [ref=e1360]
+                - generic [ref=e1364]:
+                  - text: scripts/
+                  - paragraph [ref=e1365]: audit_dotnet.py
+              - code [ref=e1368]:
+                - generic [ref=e1369]:
+                  - generic [ref=e1370]: "4"
+                  - generic [ref=e1371]: import subprocess
+            - generic [ref=e1372]:
+              - generic [ref=e1373] [cursor=pointer]:
+                - generic [ref=e1375]:
+                  - generic [ref=e1376]: MINOR
+                  - paragraph [ref=e1386]: Security
+                  - paragraph [ref=e1387]: Command Injection
+                - paragraph [ref=e1391]: Consider possible security implications associated with the subprocess module.
+              - generic [ref=e1394]:
+                - img [ref=e1395]:
+                  - img "Document" [ref=e1396]
+                - generic [ref=e1400]:
+                  - text: scripts/
+                  - paragraph [ref=e1401]: check_pipeline_status.py
+              - code [ref=e1404]:
+                - generic [ref=e1405]:
+                  - generic [ref=e1406]: "5"
+                  - generic [ref=e1407]: import subprocess
+            - generic [ref=e1408]:
+              - generic [ref=e1409] [cursor=pointer]:
+                - generic [ref=e1411]:
+                  - generic [ref=e1412]: MEDIUM
+                  - paragraph [ref=e1422]: Security
+                  - paragraph [ref=e1423]: Input Validation
+                - paragraph [ref=e1427]: subprocess call - check for execution of untrusted input.
+              - generic [ref=e1430]:
+                - img [ref=e1431]:
+                  - img "Document" [ref=e1432]
+                - generic [ref=e1436]:
+                  - text: experiments/ci/
+                  - paragraph [ref=e1437]: collect_evidence.py
+              - code [ref=e1440]:
+                - generic [ref=e1441]:
+                  - generic [ref=e1442]: "17"
+                  - generic [ref=e1443]: result = subprocess.run(args, capture_output=True, text=True, check=False)
+            - generic [ref=e1444]:
+              - generic [ref=e1445] [cursor=pointer]:
+                - generic [ref=e1447]:
+                  - generic [ref=e1448]: MINOR
+                  - paragraph [ref=e1458]: Best practice
+                - paragraph [ref=e1462]: "Expected: [None]; Actual: # C++ placeholder"
+              - generic [ref=e1465]:
+                - img [ref=e1466]:
+                  - img "Document" [ref=e1467]
+                - generic [ref=e1471]:
+                  - text: cpp/
+                  - paragraph [ref=e1472]: README.md
+              - code [ref=e1475]:
+                - generic [ref=e1476]:
+                  - generic [ref=e1477]: "1"
+                  - generic [ref=e1478]: "# C++ placeholder"
+            - generic [ref=e1479]:
+              - generic [ref=e1480] [cursor=pointer]:
+                - generic [ref=e1482]:
+                  - generic [ref=e1483]: MINOR
+                  - paragraph [ref=e1493]: Best practice
+                - paragraph [ref=e1497]: "Expected: [None]; Actual: # Contributing"
+              - generic [ref=e1500]:
+                - img [ref=e1501]:
+                  - img "Document" [ref=e1502]
+                - paragraph [ref=e1507]: CONTRIBUTING.md
+              - code [ref=e1510]:
+                - generic [ref=e1511]:
+                  - generic [ref=e1512]: "1"
+                  - generic [ref=e1513]: "# Contributing"
+  - alertdialog [ref=e1514]:
+    - generic [ref=e1520]:
+      - paragraph [ref=e1521]: "NEW: Automatic configurations that understand your project"
+      - paragraph [ref=e1522]: Get better feedback and reduce noise to a zero. Auto-config understands your project, reviews your issues, and adjusts your configurations.
+    - generic [ref=e1524]:
+      - button "Explore" [ref=e1525] [cursor=pointer]
+      - button "Close" [ref=e1528] [cursor=pointer]

@@ -1,0 +1,40 @@
+creating link 100000
+creating link 200000
+creating link 300000
+creating link 400000
+creating link 500000
+creating link 600000
+creating link 700000
+creating link 800000
+creating link 900000
+creating link 1000000
+creating link 1040380
+creating link 1040381
+creating link 1040382
+creating link 1040383
+creating link 1040384
+
+thread 'main' (22107) panicked at /home/box/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/doublets-0.5.0/src/mem/unit/store.rs:153:55:
+Data part should be in data memory
+stack backtrace:
+   0:     0x654f17e3c6f1 - <<std[6c98fd8553dbae28]::sys::backtrace::BacktraceLock>::print::DisplayBacktrace as core[c0acaeba6ab4c2e0]::fmt::Display>::fmt
+   1:     0x654f17e4d61a - core[c0acaeba6ab4c2e0]::fmt::write
+   2:     0x654f17e406dc - <std[6c98fd8553dbae28]::sys::stdio::unix::Stderr as std[6c98fd8553dbae28]::io::Write>::write_fmt
+   3:     0x654f17e27cd6 - std[6c98fd8553dbae28]::panicking::default_hook::{closure#0}
+   4:     0x654f17e389f1 - std[6c98fd8553dbae28]::panicking::default_hook
+   5:     0x654f17e38bab - std[6c98fd8553dbae28]::panicking::panic_with_hook
+   6:     0x654f17e27d82 - std[6c98fd8553dbae28]::panicking::panic_handler::{closure#0}
+   7:     0x654f17e1d379 - std[6c98fd8553dbae28]::sys::backtrace::__rust_end_short_backtrace::<std[6c98fd8553dbae28]::panicking::panic_handler::{closure#0}, !>
+   8:     0x654f17e2855d - __rustc[100742bb89c490cb]::rust_begin_unwind
+   9:     0x654f17e4dd4c - core[c0acaeba6ab4c2e0]::panicking::panic_fmt
+  10:     0x654f17e4daa4 - core[c0acaeba6ab4c2e0]::option::expect_failed
+  11:     0x654f17e10220 - unit_store_growth[d30826c85b9d223d]::main
+  12:     0x654f17e11633 - std[6c98fd8553dbae28]::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  13:     0x654f17e11649 - std[6c98fd8553dbae28]::rt::lang_start::<()>::{closure#0}
+  14:     0x654f17e37f17 - std[6c98fd8553dbae28]::rt::lang_start_internal
+  15:     0x654f17e11285 - main
+  16:     0x7fbb7f9ce1ca - <unknown>
+  17:     0x7fbb7f9ce28b - __libc_start_main
+  18:     0x654f17e0ed95 - _start
+  19:                0x0 - <unknown>
+Err(Any { .. })

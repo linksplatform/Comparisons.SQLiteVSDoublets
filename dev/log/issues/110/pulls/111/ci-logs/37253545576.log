@@ -1,0 +1,1491 @@
+Test (macos-latest)	UNKNOWN STEP	﻿2026-10-05T01:59:03.7044450Z Current runner version: '2.337.0'
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7065020Z ##[group]Runner Image Provisioner
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7065870Z Hosted Compute Agent
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7066430Z Version: 20260828.587
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7066950Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7067550Z Build Date: 2026-08-28T16:44:25Z
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7068100Z Worker ID: {d83e31d6-7e4d-464d-9d01-35a2b3b64540}
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7068670Z Azure Region: westus
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7069140Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7070340Z ##[group]Operating System
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7070760Z macOS
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7071290Z 26.6.2
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7071740Z 25G83
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7072160Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7072590Z ##[group]Runner Image
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7073070Z Image: macos-26-arm64
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7073680Z Version: 20260907.0351.1
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7074770Z Included Software: https://github.com/actions/runner-images/blob/macos-26-arm64/20260907.0351/images/macos/macos-26-arm64-Readme.md
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7075990Z Image Release: https://github.com/actions/runner-images/releases/tag/macos-26-arm64%2F20260907.0351
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7076680Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7079170Z ##[group]GITHUB_TOKEN Permissions
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7081640Z Actions: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7082250Z ArtifactMetadata: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7082670Z Attestations: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7083220Z Checks: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7083710Z CodeQuality: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7084140Z Contents: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7084580Z CopilotRequests: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7085100Z Deployments: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7085580Z Discussions: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7087660Z Drives: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7088980Z Issues: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7090270Z Metadata: read
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7091680Z Models: read
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7092700Z Packages: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7093700Z Pages: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7094890Z PullRequests: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7100000Z RepositoryProjects: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7101640Z SecurityEvents: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7102900Z Statuses: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7103970Z VulnerabilityAlerts: read
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7105430Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7109170Z Secret source: Actions
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7113270Z Cache mode: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7114190Z Prepare workflow directory
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7647890Z Prepare all required actions
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:03.7749870Z Getting action download info
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:04.1314980Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:04.5715660Z Download action repository 'dtolnay/rust-toolchain@stable' (SHA:89b12181fb390509a0842a86cc55eeb8eb928c1d)
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:05.0252420Z Download action repository 'Swatinem/rust-cache@v2' (SHA:6323deb102c322ba6fcbdcafc7e3dddab59af2b6)
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:05.9209010Z Complete job name: Test (macos-latest)
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0172470Z ##[group]Run actions/checkout@v7
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0173360Z with:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0173910Z   repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0177300Z   token: ***
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0177660Z   ssh-strict: true
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0178020Z   ssh-user: git
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0178400Z   persist-credentials: true
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0179390Z   clean: true
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0179790Z   sparse-checkout-cone-mode: true
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0180210Z   fetch-depth: 1
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0180580Z   fetch-tags: false
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0181030Z   show-progress: true
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0181430Z   lfs: false
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0181840Z   submodules: false
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0182220Z   set-safe-directory: true
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0182630Z   allow-unsafe-pr-checkout: false
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0183490Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0183930Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.0184400Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5227750Z Syncing repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5229650Z ##[group]Getting Git version info
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5231660Z Working directory is '/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5233310Z [command]/opt/homebrew/bin/git version
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5781710Z git version 2.55.0
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5802960Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5809300Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/c9c7515e-1e04-46d4-bed6-72828edcd8d4/.gitconfig'
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5813580Z Temporarily overriding HOME='/Users/runner/work/_temp/c9c7515e-1e04-46d4-bed6-72828edcd8d4' before making global git config changes
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5816220Z Adding repository directory to the temporary git global config as a safe directory
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5821760Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5925220Z Deleting the contents of '/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5928930Z ##[group]Determining repository object format
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5931090Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5932750Z ##[group]Initializing the repository
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5934780Z [command]/opt/homebrew/bin/git init /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6165670Z hint: Using 'master' as the name for the initial branch. This default branch name
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6168850Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6171170Z hint: to use in all of your new repositories, which will suppress this warning,
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6172800Z hint: call:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6173740Z hint:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6176340Z hint: 	git config --global init.defaultBranch <name>
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6177820Z hint:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6208590Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6210620Z hint: 'development'. The just-created branch can be renamed via this command:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6212620Z hint:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6213440Z hint: 	git branch -m <name>
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6214370Z hint:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6215460Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6217850Z Initialized empty Git repository in /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6221690Z [command]/opt/homebrew/bin/git remote add origin https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6293550Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6296060Z ##[group]Disabling automatic garbage collection
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6297560Z [command]/opt/homebrew/bin/git config --local gc.auto 0
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6372110Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6373330Z ##[group]Setting up auth
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6374470Z Removing SSH command configuration
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6376660Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6447960Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.7662100Z Removing HTTP extra header
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.7665890Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.7748610Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.8929170Z Removing includeIf entries pointing to credentials config files
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.9030010Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:06.9337170Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0720050Z [command]/opt/homebrew/bin/git config --file /Users/runner/work/_temp/git-credentials-9bfbd8c1-5be6-4eea-a919-d33cf53b9879.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0726780Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path /Users/runner/work/_temp/git-credentials-9bfbd8c1-5be6-4eea-a919-d33cf53b9879.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0733710Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path /Users/runner/work/_temp/git-credentials-9bfbd8c1-5be6-4eea-a919-d33cf53b9879.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0756040Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-9bfbd8c1-5be6-4eea-a919-d33cf53b9879.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0787480Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-9bfbd8c1-5be6-4eea-a919-d33cf53b9879.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0867520Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0870210Z ##[group]Fetching the repository
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0875930Z [command]/opt/homebrew/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +0d1bbf73753414c7976e03d074445ed4e7699ced:refs/remotes/pull/108/merge
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.5967980Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.6042740Z  * [new ref]         0d1bbf73753414c7976e03d074445ed4e7699ced -> pull/108/merge
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.6110980Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.6144210Z ##[group]Determining the checkout info
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.6145810Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.6146920Z [command]/opt/homebrew/bin/git sparse-checkout disable
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.6149470Z [command]/opt/homebrew/bin/git config --local --unset-all extensions.worktreeConfig
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.6173020Z ##[group]Checking out the ref
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.6176920Z [command]/opt/homebrew/bin/git checkout --progress --force refs/remotes/pull/108/merge
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.6403050Z HEAD is now at 0d1bbf7 Merge e500f135b3c82ea445a1801e7d1fc002c61b0c1b into 01d4eb2dfd784c44a366b854e720b70fd8cb8f62
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.6411600Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.6507910Z [command]/opt/homebrew/bin/git log -1 --format=%H
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.6576450Z 0d1bbf73753414c7976e03d074445ed4e7699ced
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7103270Z ##[group]Run dtolnay/rust-toolchain@stable
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7104210Z with:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7104830Z   components: rustfmt, clippy
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7105520Z   toolchain: stable
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7106220Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7106800Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7107570Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7276130Z ##[start-action display=Parse toolchain version;id=__dtolnay_rust-toolchain.parse]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7385560Z ##[group]Run if [[ -z $toolchain ]]; then
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7386530Z ^[[36;1mif [[ -z $toolchain ]]; then^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7387830Z ^[[36;1m  # GitHub does not enforce `required: true` inputs itself. https://github.com/actions/runner/issues/1070^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7389240Z ^[[36;1m  echo "'toolchain' is a required input" >&2^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7390070Z ^[[36;1m  exit 1^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7391000Z ^[[36;1melif [[ $toolchain =~ ^stable' '[0-9]+' '(year|month|week|day)s?' 'ago$ ]]; then^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7392260Z ^[[36;1m  if [[ macOS == macOS ]]; then^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7393620Z ^[[36;1m    echo "toolchain=1.$((($(date -v-$(sed 's/stable \([0-9]*\) \(.\).*/\1\2/' <<< $toolchain) +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7395010Z ^[[36;1m  else^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7396080Z ^[[36;1m    echo "toolchain=1.$((($(date --date "${toolchain#stable }" +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7397320Z ^[[36;1m  fi^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7399320Z ^[[36;1melif [[ $toolchain =~ ^stable' 'minus' '[0-9]+' 'releases?$ ]]; then^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7400950Z ^[[36;1m  echo "toolchain=1.$((($(date +%s)/60/60/24-16569)/7/6-${toolchain//[^0-9]/}))" >> $GITHUB_OUTPUT^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7402320Z ^[[36;1melif [[ $toolchain =~ ^1\.[0-9]+$ ]]; then^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7403780Z ^[[36;1m  echo "toolchain=1.$((i=${toolchain#1.}, c=($(date +%s)/60/60/24-16569)/7/6, i+9*i*(10*i<=c)+90*i*(100*i<=c)))" >> $GITHUB_OUTPUT^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7405190Z ^[[36;1melse^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7405960Z ^[[36;1m  echo "toolchain=$toolchain" >> $GITHUB_OUTPUT^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7406870Z ^[[36;1mfi^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7475080Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7476100Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7476760Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7477490Z   toolchain: stable
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7478150Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7932230Z ##[end-action id=__dtolnay_rust-toolchain.parse;outcome=success;conclusion=success;duration_ms=65]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7944510Z ##[start-action display=Construct rustup command line;id=__dtolnay_rust-toolchain.flags]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7995200Z ##[group]Run echo "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7997410Z ^[[36;1mecho "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.7999240Z ^[[36;1mecho "components=$(for c in ${components//,/ }; do echo -n ' --component' $c; done)" >> $GITHUB_OUTPUT^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8000930Z ^[[36;1mecho "downgrade=" >> $GITHUB_OUTPUT^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8059010Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8059900Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8060510Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8061270Z   targets: 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8061960Z   components: rustfmt, clippy
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8062680Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8426980Z ##[end-action id=__dtolnay_rust-toolchain.flags;outcome=success;conclusion=success;duration_ms=48]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8431540Z ##[start-action display=Set $CARGO_HOME;id=__dtolnay_rust-toolchain.__run]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8467130Z ##[group]Run echo CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8468220Z ^[[36;1mecho CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8498660Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8499450Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8500330Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8500960Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8801220Z ##[end-action id=__dtolnay_rust-toolchain.__run;outcome=success;conclusion=success;duration_ms=36]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8805450Z ##[start-action display=Install rustup if needed;id=__dtolnay_rust-toolchain.__run_2]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8847440Z ##[group]Run if ! command -v rustup &>/dev/null; then
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8848290Z ^[[36;1mif ! command -v rustup &>/dev/null; then^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8850020Z ^[[36;1m  curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused --location --silent --show-error --fail https://sh.rustup.rs | sh -s -- --default-toolchain none -y^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8851710Z ^[[36;1m  echo "$CARGO_HOME/bin" >> $GITHUB_PATH^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8852420Z ^[[36;1mfi^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8886360Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8887280Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8887880Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8888660Z   CARGO_HOME: /Users/runner/.cargo
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.8889490Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9212820Z ##[end-action id=__dtolnay_rust-toolchain.__run_2;outcome=success;conclusion=success;duration_ms=40]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9218400Z ##[start-action display=Install rustup if needed on windows;id=__dtolnay_rust-toolchain.__run_3]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9231390Z ##[end-action id=__dtolnay_rust-toolchain.__run_3;outcome=skipped;conclusion=skipped;duration_ms=0]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9243600Z ##[start-action display=rustup toolchain install stable;id=__dtolnay_rust-toolchain.__run_4]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9288280Z ##[group]Run log=$(mktemp)
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9289010Z ^[[36;1mlog=$(mktemp)^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9289760Z ^[[36;1mtrap 'rm -f "$log"' EXIT^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9290520Z ^[[36;1mfor attempt in 1 2 3 4 5; do^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9292120Z ^[[36;1m  if rustup toolchain install stable --component rustfmt --component clippy --profile minimal --no-self-update --force-non-host 2>&1 | tee "$log"; then^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9293930Z ^[[36;1m    break^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9294500Z ^[[36;1m  else^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9295080Z ^[[36;1m    status=$?^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9295680Z ^[[36;1m  fi^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9296470Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' "$log" \^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9297810Z ^[[36;1m      || ! grep -Fq 'this is likely due to an ongoing update of the official release server' "$log"; then^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9299030Z ^[[36;1m    exit "$status"^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9299720Z ^[[36;1m  fi^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9300710Z ^[[36;1m  echo "Retrying rustup toolchain install in 30 seconds (retry $attempt of 4)" >&2^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9301890Z ^[[36;1m  sleep 30^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9302460Z ^[[36;1mdone^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9342040Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9343130Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9343730Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9344420Z   CARGO_HOME: /Users/runner/.cargo
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9345200Z   RUSTUP_PERMIT_COPY_RENAME: 1
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:07.9345880Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:08.4455650Z info: syncing channel updates for stable-aarch64-apple-darwin
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:08.6652230Z info: latest update on 2026-10-01 for version 1.99.0 (b940084d7 2026-09-28)
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:08.6786610Z info: removing previous version of component clippy
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:08.6817850Z info: removing previous version of component rustfmt
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:08.6856670Z info: removing previous version of component cargo
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:08.6979920Z info: removing previous version of component rust-std
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:08.7115240Z info: removing previous version of component rustc
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:08.7272880Z info: downloading 5 components
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:16.7121470Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:16.8831450Z   stable-aarch64-apple-darwin updated - rustc 1.99.0 (b940084d7 2026-09-28) (from rustc 1.98.1 (48a229cea 2026-09-01))
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:16.8865340Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:16.8869570Z info: self-update is disabled for this build of rustup
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:16.8915920Z info: any updates to rustup will need to be fetched with your system package manager
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:16.9438910Z ##[end-action id=__dtolnay_rust-toolchain.__run_4;outcome=success;conclusion=success;duration_ms=9014]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:16.9456660Z ##[start-action display=rustup default stable;id=__dtolnay_rust-toolchain.__run_5]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:16.9550500Z ##[group]Run rustup default stable --force-non-host
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:16.9551100Z ^[[36;1mrustup default stable --force-non-host^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:16.9702880Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:16.9703810Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:16.9704430Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:16.9704780Z   CARGO_HOME: /Users/runner/.cargo
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:16.9705740Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.1410640Z info: using existing install for stable-aarch64-apple-darwin
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.1457860Z info: default toolchain set to stable-aarch64-apple-darwin
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.1459130Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.1974210Z   stable-aarch64-apple-darwin unchanged - rustc 1.99.0 (b940084d7 2026-09-28)
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.1976750Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.2024390Z ##[end-action id=__dtolnay_rust-toolchain.__run_5;outcome=success;conclusion=success;duration_ms=256]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.2032560Z ##[start-action display=Create cachekey;id=__dtolnay_rust-toolchain.rustc-version]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.2111970Z ##[group]Run DATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.2115240Z ^[[36;1mDATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.2117030Z ^[[36;1mHASH=$(rustc +stable --version --verbose | sed -ne 's/^commit-hash: //p')^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.2118500Z ^[[36;1mecho "cachekey=$(echo $DATE$HASH | head -c12)" >> $GITHUB_OUTPUT^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.2212320Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.2213320Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.2214950Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.2216900Z   CARGO_HOME: /Users/runner/.cargo
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.2218150Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.5884110Z ##[end-action id=__dtolnay_rust-toolchain.rustc-version;outcome=success;conclusion=success;duration_ms=384]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.5897040Z ##[start-action display=Disable incremental compilation;id=__dtolnay_rust-toolchain.__run_6]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.5949380Z ##[group]Run if [ -z "${CARGO_INCREMENTAL+set}" ]; then
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.5950720Z ^[[36;1mif [ -z "${CARGO_INCREMENTAL+set}" ]; then^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.5951130Z ^[[36;1m  echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.5951390Z ^[[36;1mfi^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.5992160Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.5992510Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.5992840Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.5993170Z   CARGO_HOME: /Users/runner/.cargo
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.5993470Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.6894920Z ##[end-action id=__dtolnay_rust-toolchain.__run_6;outcome=success;conclusion=success;duration_ms=99]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.6897860Z ##[start-action display=Enable colors in Cargo output;id=__dtolnay_rust-toolchain.__run_7]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.6947370Z ##[group]Run if [ -z "${CARGO_TERM_COLOR+set}" ]; then
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.6947790Z ^[[36;1mif [ -z "${CARGO_TERM_COLOR+set}" ]; then^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.6948080Z ^[[36;1m  echo CARGO_TERM_COLOR=always >> $GITHUB_ENV^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.6948390Z ^[[36;1mfi^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.6990650Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.6990960Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.6991150Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.6991350Z   CARGO_HOME: /Users/runner/.cargo
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.6991570Z   CARGO_INCREMENTAL: 0
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.6991750Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7406280Z ##[end-action id=__dtolnay_rust-toolchain.__run_7;outcome=success;conclusion=success;duration_ms=50]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7409400Z ##[start-action display=Enable Cargo sparse registry;id=__dtolnay_rust-toolchain.__run_8]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7433190Z ##[group]Run # implemented in 1.66, stabilized in 1.68, made default in 1.70
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7433800Z ^[[36;1m# implemented in 1.66, stabilized in 1.68, made default in 1.70^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7434550Z ^[[36;1mif [ -z "${CARGO_REGISTRIES_CRATES_IO_PROTOCOL+set}" -o -f "/Users/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol ]; then^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7435250Z ^[[36;1m  if rustc +stable --version --verbose | grep -q '^release: 1\.6[89]\.'; then^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7435780Z ^[[36;1m    touch "/Users/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7436270Z ^[[36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse >> $GITHUB_ENV^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7436800Z ^[[36;1m  elif rustc +stable --version --verbose | grep -q '^release: 1\.6[67]\.'; then^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7437330Z ^[[36;1m    touch "/Users/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7437930Z ^[[36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git >> $GITHUB_ENV^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7438290Z ^[[36;1m  fi^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7438450Z ^[[36;1mfi^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7475380Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7475700Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7475870Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7476100Z   CARGO_HOME: /Users/runner/.cargo
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7476610Z   CARGO_INCREMENTAL: 0
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.7476800Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.8715830Z ##[end-action id=__dtolnay_rust-toolchain.__run_8;outcome=success;conclusion=success;duration_ms=130]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.8719640Z ##[start-action display=Work around spurious network errors in curl 8.0;id=__dtolnay_rust-toolchain.__run_9]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.8766180Z ##[group]Run # https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.8766980Z ^[[36;1m# https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.8767520Z ^[[36;1mif rustc +stable --version --verbose | grep -q '^release: 1\.7[01]\.'; then^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.8767920Z ^[[36;1m  echo CARGO_HTTP_MULTIPLEXING=false >> $GITHUB_ENV^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.8768200Z ^[[36;1mfi^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.8805620Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.8805960Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.8806150Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.8806470Z   CARGO_HOME: /Users/runner/.cargo
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.8806740Z   CARGO_INCREMENTAL: 0
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:17.8806970Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.0038390Z ##[end-action id=__dtolnay_rust-toolchain.__run_9;outcome=success;conclusion=success;duration_ms=131]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.0047690Z ##[start-action display=rustc +stable --version --verbose;id=__dtolnay_rust-toolchain.__run_10]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.0089010Z ##[group]Run rustc +stable --version --verbose
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.0090380Z ^[[36;1mrustc +stable --version --verbose^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.0187850Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.0188250Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.0188440Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.0188660Z   CARGO_HOME: /Users/runner/.cargo
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.0188940Z   CARGO_INCREMENTAL: 0
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.0189140Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1110480Z rustc 1.99.0 (b940084d7 2026-09-28)
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1110950Z binary: rustc
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1118040Z commit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1118540Z commit-date: 2026-09-28
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1127080Z host: aarch64-apple-darwin
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1127830Z release: 1.99.0
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1128260Z LLVM version: 23.1.1
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1136270Z ##[end-action id=__dtolnay_rust-toolchain.__run_10;outcome=success;conclusion=success;duration_ms=108]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1305430Z ##[group]Run Swatinem/rust-cache@v2
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1306270Z with:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1306710Z   workspaces: rust
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1307190Z   prefix-key: v0-rust
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1307720Z   add-job-id-key: true
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1308260Z   add-rust-environment-hash-key: true
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1308900Z   cache-targets: true
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1309400Z   cache-all-crates: false
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1309950Z   cache-workspace-crates: false
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1310500Z   save-if: true
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1311020Z   cache-provider: github
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1311590Z   cache-bin: true
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1312070Z   lookup-only: false
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1312540Z   cmd-format: {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1312990Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1313430Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1313970Z   CARGO_HOME: /Users/runner/.cargo
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1314560Z   CARGO_INCREMENTAL: 0
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.1315030Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8066510Z ##[group]Cache Configuration
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8072150Z Cache Provider:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8100430Z     github
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8109530Z Workspaces:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8113000Z     /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/rust
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8114250Z Cache Paths:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8114910Z     /Users/runner/.cargo/bin
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8115750Z     /Users/runner/.cargo/.crates.toml
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8118200Z     /Users/runner/.cargo/.crates2.json
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8119160Z     /Users/runner/.cargo/registry
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8140800Z     /Users/runner/.cargo/git
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8166690Z     /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/rust/target
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8167350Z Restore Key:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8169290Z     v0-rust-test-Darwin-arm64-e59a64c1
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8170640Z Cache Key:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8171150Z     v0-rust-test-Darwin-arm64-e59a64c1-061d0a07
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8171580Z .. Prefix:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8171830Z   - v0-rust-test-Darwin-arm64
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8172100Z .. Environment considered:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8172360Z   - Rust Versions:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8172720Z     - 1.99.0 aarch64-apple-darwin b940084d7eb6a299eb4bfeb8e34901bc051e7ac4
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8173100Z   - CARGO_HOME
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8173300Z   - CARGO_INCREMENTAL
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8173520Z   - CARGO_TERM_COLOR
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8184750Z .. Lockfiles considered:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8185900Z   - /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/rust/Cargo.lock
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8187400Z   - /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/rust/Cargo.toml
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8189280Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8189530Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:18.8189720Z ... Restoring cache ...
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:19.0074880Z Cache hit for: v0-rust-test-Darwin-arm64-e59a64c1-061d0a07
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:20.1798070Z Received 37748736 of 65416807 (57.7%), 35.9 MBs/sec
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:20.4251920Z Received 65416807 of 65416807 (100.0%), 49.9 MBs/sec
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:20.4378410Z Cache Size: ~62 MB (65416807 B)
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:20.4581250Z [command]/opt/homebrew/bin/gtar -xf /Users/runner/work/_temp/20207a06-17ed-4483-aae1-9603971e7b03/cache.tzst -P -C /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets --delay-directory-restore --use-compress-program unzstd
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.3877710Z Cache restored successfully
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.3888740Z Restored from cache key "v0-rust-test-Darwin-arm64-e59a64c1-061d0a07" full match: true.
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.4021300Z ##[group]Run cargo fmt --check
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.4021720Z ^[[36;1mcargo fmt --check^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.4100740Z shell: /bin/bash -e {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.4101070Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.4101310Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.4101620Z   CARGO_HOME: /Users/runner/.cargo
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.4101940Z   CARGO_INCREMENTAL: 0
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.4102180Z   CACHE_ON_FAILURE: false
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.4102490Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.7585120Z ##[group]Run cargo clippy --release --all-targets -- -D warnings
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.7585730Z ^[[36;1mcargo clippy --release --all-targets -- -D warnings^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.7625210Z shell: /bin/bash -e {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.7625570Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.7625820Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.7626760Z   CARGO_HOME: /Users/runner/.cargo
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.7627110Z   CARGO_INCREMENTAL: 0
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.7627400Z   CACHE_ON_FAILURE: false
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:21.7627750Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:22.0916860Z ^[[1m^[[92m    Updating^[[0m crates.io index
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:22.8148480Z ^[[1m^[[92m    Checking^[[0m sqlite-vs-doublets v0.2.0 (/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/rust)
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:23.5483220Z ^[[1m^[[92m    Finished^[[0m `release` profile [optimized] target(s) in 1.65s
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:23.5589760Z ##[group]Run cargo test --release
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:23.5590010Z ^[[36;1mcargo test --release^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:23.5624580Z shell: /bin/bash -e {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:23.5624880Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:23.5625090Z   CARGO_TERM_COLOR: always
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:23.5625330Z   CARGO_HOME: /Users/runner/.cargo
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:23.5625550Z   CARGO_INCREMENTAL: 0
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:23.5625750Z   CACHE_ON_FAILURE: false
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:23.5625940Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:23.7128140Z ^[[1m^[[92m   Compiling^[[0m sqlite-vs-doublets v0.2.0 (/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/rust)
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.3661110Z ^[[1m^[[92m    Finished^[[0m `release` profile [optimized] target(s) in 21.73s
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.3770580Z ^[[1m^[[92m     Running^[[0m unittests src/lib.rs (target/release/deps/sqlite_vs_doublets-0e4f0f92a093b7af)
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.3806480Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.3810750Z ^[[1m^[[92m     Running^[[0m unittests src/main.rs (target/release/deps/sqlite_vs_doublets-c23ab7bd9ddca21e)
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.3811270Z running 1 test
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.3830780Z test memory::tests::grow_returns_the_whole_memory ... ok
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.3846310Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.3854090Z ^[[1m^[[92m     Running^[[0m tests/storages.rs (target/release/deps/storages-112c3654bdf0558b)
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.3854760Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.3869930Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.3883940Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.3898870Z running 0 tests
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.3900320Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.3908400Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.3932050Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.3947730Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.4055110Z running 8 tests
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.4258000Z test every_objects_storage_returns_the_stored_posts ... ok
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.4359880Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.4468010Z test links_are_unique_and_reference_created_ids ... ok
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.4573240Z test scattered_visits_every_id_once ... ok
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:45.4674550Z test split_store_keeps_links_updated_to_reference_themselves ... ok
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:47.4150560Z test stores_keep_their_links_when_their_memory_grows ... ok
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T01:59:57.7646470Z test every_links_variant_passes_the_lifecycle ... ok
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:06.1615200Z test every_objects_variant_passes_the_lifecycle ... ok
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:06.1615750Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:06.1616050Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 20.76s
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:06.1616440Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:06.1672530Z ^[[1m^[[92m   Doc-tests^[[0m sqlite_vs_doublets
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:06.3013690Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:06.3015700Z running 0 tests
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:06.3020530Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:06.3021370Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:06.3022010Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:06.3367660Z Post job cleanup.
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:06.9363270Z Cache up-to-date.
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:06.9577830Z Post job cleanup.
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.1783110Z [command]/opt/homebrew/bin/git version
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.2164550Z git version 2.55.0
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.2188520Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/f203280b-6324-4510-9734-24c6f44f6302/.gitconfig'
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.2207860Z Temporarily overriding HOME='/Users/runner/work/_temp/f203280b-6324-4510-9734-24c6f44f6302' before making global git config changes
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.2209430Z Adding repository directory to the temporary git global config as a safe directory
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.2223330Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.2456080Z Removing SSH command configuration
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.2469650Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.2701550Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.4900040Z Removing HTTP extra header
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.5003620Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.5337720Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.7722290Z Removing includeIf entries pointing to credentials config files
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.7825650Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.7927810Z includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.8032820Z includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.8134450Z includeif.gitdir:/github/workspace/.git.path
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.8134880Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.8445670Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.8547480Z /Users/runner/work/_temp/git-credentials-9bfbd8c1-5be6-4eea-a919-d33cf53b9879.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.8853240Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path \/Users\/runner\/work\/_temp\/git\-credentials\-9bfbd8c1\-5be6\-4eea\-a919\-d33cf53b9879\.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.9129940Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.9140130Z /Users/runner/work/_temp/git-credentials-9bfbd8c1-5be6-4eea-a919-d33cf53b9879.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.9448860Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path \/Users\/runner\/work\/_temp\/git\-credentials\-9bfbd8c1\-5be6\-4eea\-a919\-d33cf53b9879\.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.9760780Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:07.9862690Z /github/runner_temp/git-credentials-9bfbd8c1-5be6-4eea-a919-d33cf53b9879.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:08.0169640Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-9bfbd8c1\-5be6\-4eea\-a919\-d33cf53b9879\.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:08.0454970Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:08.0563080Z /github/runner_temp/git-credentials-9bfbd8c1-5be6-4eea-a919-d33cf53b9879.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:08.0868090Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-9bfbd8c1\-5be6\-4eea\-a919\-d33cf53b9879\.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:08.1173200Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:08.1479750Z Removing credentials config '/Users/runner/work/_temp/git-credentials-9bfbd8c1-5be6-4eea-a919-d33cf53b9879.config'
+Test (macos-latest)	UNKNOWN STEP	2026-10-05T02:00:08.1891760Z Cleaning up orphan processes
+Test (ubuntu-latest)	UNKNOWN STEP	﻿2026-10-05T01:58:59.0498808Z Current runner version: '2.337.0'
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0530959Z ##[group]Runner Image Provisioner
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0531965Z Hosted Compute Agent
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0532650Z Version: 20260901.588
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0533385Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0534424Z Build Date: 2026-09-01T19:56:44Z
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0535233Z Worker ID: {d03787b3-235c-468e-b092-b52972f564a3}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0536003Z Azure Region: centralus
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0536669Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0538568Z ##[group]Operating System
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0539240Z Ubuntu
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0539774Z 24.04.5
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0540381Z LTS
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0540982Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0541592Z ##[group]Runner Image
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0542308Z Image: ubuntu-24.04
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0542921Z Version: 20260927.320.1
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0544531Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0546252Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0547267Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0550412Z ##[group]GITHUB_TOKEN Permissions
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0553140Z Actions: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0553772Z ArtifactMetadata: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0554748Z Attestations: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0555361Z Checks: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0556085Z CodeQuality: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0556707Z Contents: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0557277Z CopilotRequests: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0557961Z Deployments: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0558555Z Discussions: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0559190Z Drives: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0559764Z Issues: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0560324Z Metadata: read
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0561022Z Models: read
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0561632Z Packages: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0562265Z Pages: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0562846Z PullRequests: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0563478Z RepositoryProjects: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0564406Z SecurityEvents: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0565009Z Statuses: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0565611Z VulnerabilityAlerts: read
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0566313Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0568494Z Secret source: Actions
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0569569Z Cache mode: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0570649Z Prepare workflow directory
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.0997332Z Prepare all required actions
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.1066402Z Getting action download info
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.3977459Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.4759098Z Download action repository 'dtolnay/rust-toolchain@stable' (SHA:89b12181fb390509a0842a86cc55eeb8eb928c1d)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:58:59.6458520Z Download action repository 'Swatinem/rust-cache@v2' (SHA:6323deb102c322ba6fcbdcafc7e3dddab59af2b6)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.3549129Z Complete job name: Test (ubuntu-latest)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4398999Z ##[group]Run actions/checkout@v7
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4399887Z with:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4400490Z   repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4405093Z   token: ***
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4405548Z   ssh-strict: true
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4406006Z   ssh-user: git
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4406472Z   persist-credentials: true
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4406973Z   clean: true
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4407439Z   sparse-checkout-cone-mode: true
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4407975Z   fetch-depth: 1
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4408406Z   fetch-tags: false
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4408858Z   show-progress: true
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4409313Z   lfs: false
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4409762Z   submodules: false
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4410232Z   set-safe-directory: true
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4410746Z   allow-unsafe-pr-checkout: false
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4411571Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4411994Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4412485Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5466310Z Syncing repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5469074Z ##[group]Getting Git version info
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5470638Z Working directory is '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5472358Z [command]/usr/bin/git version
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5515756Z git version 2.55.0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5537472Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5549465Z Temporarily overriding HOME='/home/runner/work/_temp/8b30bcf2-dcdd-4551-96e2-1c1ee8da331d' before making global git config changes
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5550956Z Adding repository directory to the temporary git global config as a safe directory
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5557308Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5620232Z Deleting the contents of '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5624183Z ##[group]Determining repository object format
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5626986Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5628200Z ##[group]Initializing the repository
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5635173Z [command]/usr/bin/git init /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5735996Z hint: Using 'master' as the name for the initial branch. This default branch name
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5737835Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5739475Z hint: to use in all of your new repositories, which will suppress this warning,
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5740778Z hint: call:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5741660Z hint:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5742550Z hint: 	git config --global init.defaultBranch <name>
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5743333Z hint:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5744251Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5745191Z hint: 'development'. The just-created branch can be renamed via this command:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5745959Z hint:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5746488Z hint: 	git branch -m <name>
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5747259Z hint:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5748293Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5749617Z Initialized empty Git repository in /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5751878Z [command]/usr/bin/git remote add origin https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5798758Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5799573Z ##[group]Disabling automatic garbage collection
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5803272Z [command]/usr/bin/git config --local gc.auto 0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5838812Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5839586Z ##[group]Setting up auth
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5840659Z Removing SSH command configuration
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5845197Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.5882260Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.6267586Z Removing HTTP extra header
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.6286044Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.6419267Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.6574376Z Removing includeIf entries pointing to credentials config files
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.6580689Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.6620703Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.6874375Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-0af30477-4cd4-4bd3-8d31-e8262c661e71.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.6919173Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path /home/runner/work/_temp/git-credentials-0af30477-4cd4-4bd3-8d31-e8262c661e71.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.6959284Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-0af30477-4cd4-4bd3-8d31-e8262c661e71.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.7000526Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-0af30477-4cd4-4bd3-8d31-e8262c661e71.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.7042871Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-0af30477-4cd4-4bd3-8d31-e8262c661e71.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.7077846Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.7079046Z ##[group]Fetching the repository
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:00.7086178Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +0d1bbf73753414c7976e03d074445ed4e7699ced:refs/remotes/pull/108/merge
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2439743Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2441335Z  * [new ref]         0d1bbf73753414c7976e03d074445ed4e7699ced -> pull/108/merge
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2444754Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2446016Z ##[group]Determining the checkout info
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2447233Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2450937Z [command]/usr/bin/git sparse-checkout disable
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2506330Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2543591Z ##[group]Checking out the ref
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2547616Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/108/merge
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2670195Z Note: switching to 'refs/remotes/pull/108/merge'.
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2671103Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2671712Z You are in 'detached HEAD' state. You can look around, make experimental
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2673251Z changes and commit them, and you can discard any commits you make in this
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2675620Z state without impacting any branches by switching back to a branch.
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2677088Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2677924Z If you want to create a new branch to retain commits you create, you may
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2680131Z do so (now or later) by using -c with the switch command. Example:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2681520Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2681832Z   git switch -c <new-branch-name>
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2682492Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2682813Z Or undo this operation with:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2683381Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2683646Z   git switch -
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2684280Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2685184Z Turn off this advice by setting config variable advice.detachedHead to false
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2687278Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2688790Z HEAD is now at 0d1bbf7 Merge e500f135b3c82ea445a1801e7d1fc002c61b0c1b into 01d4eb2dfd784c44a366b854e720b70fd8cb8f62
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2692703Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2743632Z [command]/usr/bin/git log -1 --format=%H
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2778293Z 0d1bbf73753414c7976e03d074445ed4e7699ced
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3371909Z ##[group]Run dtolnay/rust-toolchain@stable
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3372718Z with:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3373247Z   components: rustfmt, clippy
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3373908Z   toolchain: stable
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3374617Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3375105Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3375717Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3453578Z ##[start-action display=Parse toolchain version;id=__dtolnay_rust-toolchain.parse]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3528786Z ##[group]Run if [[ -z $toolchain ]]; then
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3529746Z ^[[36;1mif [[ -z $toolchain ]]; then^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3531251Z ^[[36;1m  # GitHub does not enforce `required: true` inputs itself. https://github.com/actions/runner/issues/1070^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3532949Z ^[[36;1m  echo "'toolchain' is a required input" >&2^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3534307Z ^[[36;1m  exit 1^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3535250Z ^[[36;1melif [[ $toolchain =~ ^stable' '[0-9]+' '(year|month|week|day)s?' 'ago$ ]]; then^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3536524Z ^[[36;1m  if [[ Linux == macOS ]]; then^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3538061Z ^[[36;1m    echo "toolchain=1.$((($(date -v-$(sed 's/stable \([0-9]*\) \(.\).*/\1\2/' <<< $toolchain) +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3539579Z ^[[36;1m  else^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3540735Z ^[[36;1m    echo "toolchain=1.$((($(date --date "${toolchain#stable }" +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3542092Z ^[[36;1m  fi^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3542913Z ^[[36;1melif [[ $toolchain =~ ^stable' 'minus' '[0-9]+' 'releases?$ ]]; then^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3544637Z ^[[36;1m  echo "toolchain=1.$((($(date +%s)/60/60/24-16569)/7/6-${toolchain//[^0-9]/}))" >> $GITHUB_OUTPUT^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3545985Z ^[[36;1melif [[ $toolchain =~ ^1\.[0-9]+$ ]]; then^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3547551Z ^[[36;1m  echo "toolchain=1.$((i=${toolchain#1.}, c=($(date +%s)/60/60/24-16569)/7/6, i+9*i*(10*i<=c)+90*i*(100*i<=c)))" >> $GITHUB_OUTPUT^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3549027Z ^[[36;1melse^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3549683Z ^[[36;1m  echo "toolchain=$toolchain" >> $GITHUB_OUTPUT^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3550536Z ^[[36;1mfi^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3781733Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3782718Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3783280Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3783919Z   toolchain: stable
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3784619Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3956193Z ##[end-action id=__dtolnay_rust-toolchain.parse;outcome=success;conclusion=success;duration_ms=49]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.3972503Z ##[start-action display=Construct rustup command line;id=__dtolnay_rust-toolchain.flags]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4020614Z ##[group]Run echo "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4022483Z ^[[36;1mecho "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4024637Z ^[[36;1mecho "components=$(for c in ${components//,/ }; do echo -n ' --component' $c; done)" >> $GITHUB_OUTPUT^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4026107Z ^[[36;1mecho "downgrade=" >> $GITHUB_OUTPUT^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4097059Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4098001Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4098501Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4099117Z   targets: 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4099635Z   components: rustfmt, clippy
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4100277Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4221196Z ##[end-action id=__dtolnay_rust-toolchain.flags;outcome=success;conclusion=success;duration_ms=24]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4226270Z ##[start-action display=Set $CARGO_HOME;id=__dtolnay_rust-toolchain.__run]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4264359Z ##[group]Run echo CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4265655Z ^[[36;1mecho CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4335094Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4336019Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4336733Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4337337Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4448577Z ##[end-action id=__dtolnay_rust-toolchain.__run;outcome=success;conclusion=success;duration_ms=22]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4453426Z ##[start-action display=Install rustup if needed;id=__dtolnay_rust-toolchain.__run_2]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4500249Z ##[group]Run if ! command -v rustup &>/dev/null; then
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4501233Z ^[[36;1mif ! command -v rustup &>/dev/null; then^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4503644Z ^[[36;1m  curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused --location --silent --show-error --fail https://sh.rustup.rs | sh -s -- --default-toolchain none -y^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4506007Z ^[[36;1m  echo "$CARGO_HOME/bin" >> $GITHUB_PATH^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4506837Z ^[[36;1mfi^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4575431Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4576352Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4576846Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4577510Z   CARGO_HOME: /home/runner/.cargo
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4578171Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4686733Z ##[end-action id=__dtolnay_rust-toolchain.__run_2;outcome=success;conclusion=success;duration_ms=23]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4691735Z ##[start-action display=Install rustup if needed on windows;id=__dtolnay_rust-toolchain.__run_3]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4703867Z ##[end-action id=__dtolnay_rust-toolchain.__run_3;outcome=skipped;conclusion=skipped;duration_ms=0]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4718584Z ##[start-action display=rustup toolchain install stable;id=__dtolnay_rust-toolchain.__run_4]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4756431Z ##[group]Run log=$(mktemp)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4757082Z ^[[36;1mlog=$(mktemp)^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4757677Z ^[[36;1mtrap 'rm -f "$log"' EXIT^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4758362Z ^[[36;1mfor attempt in 1 2 3 4 5; do^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4760282Z ^[[36;1m  if rustup toolchain install stable --component rustfmt --component clippy --profile minimal --no-self-update --force-non-host 2>&1 | tee "$log"; then^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4762328Z ^[[36;1m    break^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4762862Z ^[[36;1m  else^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4763392Z ^[[36;1m    status=$?^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4764109Z ^[[36;1m  fi^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4764883Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' "$log" \^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4766487Z ^[[36;1m      || ! grep -Fq 'this is likely due to an ongoing update of the official release server' "$log"; then^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4767823Z ^[[36;1m    exit "$status"^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4768427Z ^[[36;1m  fi^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4769394Z ^[[36;1m  echo "Retrying rustup toolchain install in 30 seconds (retry $attempt of 4)" >&2^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4770593Z ^[[36;1m  sleep 30^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4771126Z ^[[36;1mdone^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4839461Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4840373Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4840863Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4841493Z   CARGO_HOME: /home/runner/.cargo
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4842191Z   RUSTUP_PERMIT_COPY_RENAME: 1
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4842820Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.6718908Z info: syncing channel updates for stable-x86_64-unknown-linux-gnu
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:01.9869045Z info: latest update on 2026-10-01 for version 1.99.0 (b940084d7 2026-09-28)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:02.0012997Z info: removing previous version of component rustfmt
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:02.0078008Z info: removing previous version of component clippy
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:02.0087654Z info: removing previous version of component cargo
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:02.0181056Z info: removing previous version of component rust-std
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:02.0225816Z info: removing previous version of component rustc
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:02.0316837Z info: downloading 5 components
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7217676Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7293723Z   stable-x86_64-unknown-linux-gnu updated - rustc 1.99.0 (b940084d7 2026-09-28) (from rustc 1.98.1 (48a229cea 2026-09-01))
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7294820Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7374503Z ##[end-action id=__dtolnay_rust-toolchain.__run_4;outcome=success;conclusion=success;duration_ms=9265]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7385013Z ##[start-action display=rustup default stable;id=__dtolnay_rust-toolchain.__run_5]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7419938Z ##[group]Run rustup default stable --force-non-host
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7420404Z ^[[36;1mrustup default stable --force-non-host^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7493631Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7494244Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7494519Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7494832Z   CARGO_HOME: /home/runner/.cargo
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7495148Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7634364Z info: using existing install for stable-x86_64-unknown-linux-gnu
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7639949Z info: default toolchain set to stable-x86_64-unknown-linux-gnu
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7640562Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7707977Z   stable-x86_64-unknown-linux-gnu unchanged - rustc 1.99.0 (b940084d7 2026-09-28)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7708489Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7727575Z ##[end-action id=__dtolnay_rust-toolchain.__run_5;outcome=success;conclusion=success;duration_ms=34]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7730674Z ##[start-action display=Create cachekey;id=__dtolnay_rust-toolchain.rustc-version]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7763033Z ##[group]Run DATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7763928Z ^[[36;1mDATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7764868Z ^[[36;1mHASH=$(rustc +stable --version --verbose | sed -ne 's/^commit-hash: //p')^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7765455Z ^[[36;1mecho "cachekey=$(echo $DATE$HASH | head -c12)" >> $GITHUB_OUTPUT^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7838327Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7838753Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7839014Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7839334Z   CARGO_HOME: /home/runner/.cargo
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.7839651Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8208691Z ##[end-action id=__dtolnay_rust-toolchain.rustc-version;outcome=success;conclusion=success;duration_ms=47]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8211893Z ##[start-action display=Disable incremental compilation;id=__dtolnay_rust-toolchain.__run_6]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8243643Z ##[group]Run if [ -z "${CARGO_INCREMENTAL+set}" ]; then
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8244389Z ^[[36;1mif [ -z "${CARGO_INCREMENTAL+set}" ]; then^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8244798Z ^[[36;1m  echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8245164Z ^[[36;1mfi^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8321455Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8321893Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8322168Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8322487Z   CARGO_HOME: /home/runner/.cargo
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8322825Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8424198Z ##[end-action id=__dtolnay_rust-toolchain.__run_6;outcome=success;conclusion=success;duration_ms=21]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8426999Z ##[start-action display=Enable colors in Cargo output;id=__dtolnay_rust-toolchain.__run_7]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8457668Z ##[group]Run if [ -z "${CARGO_TERM_COLOR+set}" ]; then
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8458123Z ^[[36;1mif [ -z "${CARGO_TERM_COLOR+set}" ]; then^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8458544Z ^[[36;1m  echo CARGO_TERM_COLOR=always >> $GITHUB_ENV^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8458905Z ^[[36;1mfi^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8528810Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8529220Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8529490Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8529810Z   CARGO_HOME: /home/runner/.cargo
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8530120Z   CARGO_INCREMENTAL: 0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8530393Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8629372Z ##[end-action id=__dtolnay_rust-toolchain.__run_7;outcome=success;conclusion=success;duration_ms=20]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8632053Z ##[start-action display=Enable Cargo sparse registry;id=__dtolnay_rust-toolchain.__run_8]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8664578Z ##[group]Run # implemented in 1.66, stabilized in 1.68, made default in 1.70
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8665180Z ^[[36;1m# implemented in 1.66, stabilized in 1.68, made default in 1.70^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8665962Z ^[[36;1mif [ -z "${CARGO_REGISTRIES_CRATES_IO_PROTOCOL+set}" -o -f "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol ]; then^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8666729Z ^[[36;1m  if rustc +stable --version --verbose | grep -q '^release: 1\.6[89]\.'; then^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8667367Z ^[[36;1m    touch "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8667998Z ^[[36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse >> $GITHUB_ENV^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8668572Z ^[[36;1m  elif rustc +stable --version --verbose | grep -q '^release: 1\.6[67]\.'; then^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8669374Z ^[[36;1m    touch "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8669959Z ^[[36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git >> $GITHUB_ENV^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8670376Z ^[[36;1m  fi^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8670631Z ^[[36;1mfi^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8741478Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8741888Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8742153Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8742456Z   CARGO_HOME: /home/runner/.cargo
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8742772Z   CARGO_INCREMENTAL: 0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8743045Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9085136Z ##[end-action id=__dtolnay_rust-toolchain.__run_8;outcome=success;conclusion=success;duration_ms=45]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9088431Z ##[start-action display=Work around spurious network errors in curl 8.0;id=__dtolnay_rust-toolchain.__run_9]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9121264Z ##[group]Run # https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9122128Z ^[[36;1m# https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9122820Z ^[[36;1mif rustc +stable --version --verbose | grep -q '^release: 1\.7[01]\.'; then^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9123345Z ^[[36;1m  echo CARGO_HTTP_MULTIPLEXING=false >> $GITHUB_ENV^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9123720Z ^[[36;1mfi^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9201004Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9201436Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9201700Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9202013Z   CARGO_HOME: /home/runner/.cargo
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9202327Z   CARGO_INCREMENTAL: 0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9202603Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9423846Z ##[end-action id=__dtolnay_rust-toolchain.__run_9;outcome=success;conclusion=success;duration_ms=33]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9429271Z ##[start-action display=rustc +stable --version --verbose;id=__dtolnay_rust-toolchain.__run_10]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9460320Z ##[group]Run rustc +stable --version --verbose
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9460760Z ^[[36;1mrustc +stable --version --verbose^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9536778Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9537219Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9537489Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9537797Z   CARGO_HOME: /home/runner/.cargo
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9538115Z   CARGO_INCREMENTAL: 0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9538397Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9739787Z rustc 1.99.0 (b940084d7 2026-09-28)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9740625Z binary: rustc
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9741133Z commit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9741639Z commit-date: 2026-09-28
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9741943Z host: x86_64-unknown-linux-gnu
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9742273Z release: 1.99.0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9742547Z LLVM version: 23.1.1
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9757030Z ##[end-action id=__dtolnay_rust-toolchain.__run_10;outcome=success;conclusion=success;duration_ms=32]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9909774Z ##[group]Run Swatinem/rust-cache@v2
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9910133Z with:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9910392Z   workspaces: rust
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9910665Z   prefix-key: v0-rust
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9910945Z   add-job-id-key: true
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9911234Z   add-rust-environment-hash-key: true
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9911561Z   cache-targets: true
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9911838Z   cache-all-crates: false
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9912133Z   cache-workspace-crates: false
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9912431Z   save-if: true
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9912707Z   cache-provider: github
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9912983Z   cache-bin: true
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9913241Z   lookup-only: false
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9913499Z   cmd-format: {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9913750Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9914218Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9914541Z   CARGO_HOME: /home/runner/.cargo
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9914852Z   CARGO_INCREMENTAL: 0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:10.9915121Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2457183Z ##[group]Cache Configuration
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2457688Z Cache Provider:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2458433Z     github
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2458726Z Workspaces:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2459295Z     /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/rust
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2459993Z Cache Paths:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2460330Z     /home/runner/.cargo/bin
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2460776Z     /home/runner/.cargo/.crates.toml
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2461182Z     /home/runner/.cargo/.crates2.json
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2461610Z     /home/runner/.cargo/registry
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2462014Z     /home/runner/.cargo/git
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2462691Z     /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/rust/target
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2463419Z Restore Key:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2463762Z     v0-rust-test-Linux-x64-c7b3ef7d
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2464360Z Cache Key:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2464757Z     v0-rust-test-Linux-x64-c7b3ef7d-061d0a07
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2465220Z .. Prefix:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2481103Z   - v0-rust-test-Linux-x64
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2489319Z .. Environment considered:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2492197Z   - Rust Versions:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2511066Z     - 1.99.0 x86_64-unknown-linux-gnu b940084d7eb6a299eb4bfeb8e34901bc051e7ac4
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2512047Z   - CARGO_HOME
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2512659Z   - CARGO_INCREMENTAL
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2513038Z   - CARGO_TERM_COLOR
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2513360Z .. Lockfiles considered:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2513834Z   - /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/rust/Cargo.lock
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2514903Z   - /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/rust/Cargo.toml
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2516112Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2516301Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.2516453Z ... Restoring cache ...
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:11.3850339Z Cache hit for: v0-rust-test-Linux-x64-c7b3ef7d-061d0a07
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.4457208Z Received 69253545 of 69253545 (100.0%), 72.4 MBs/sec
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.4457827Z Cache Size: ~66 MB (69253545 B)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.4483172Z [command]/usr/bin/tar -xf /home/runner/work/_temp/83d934d4-a049-46c5-a90f-1b0f3e942f64/cache.tzst -P -C /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets --use-compress-program unzstd
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.7856981Z Cache restored successfully
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.7892819Z Restored from cache key "v0-rust-test-Linux-x64-c7b3ef7d-061d0a07" full match: true.
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8037168Z ##[group]Run cargo fmt --check
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8037503Z ^[[36;1mcargo fmt --check^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8107549Z shell: /usr/bin/bash -e {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8107823Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8108054Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8108321Z   CARGO_HOME: /home/runner/.cargo
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8108591Z   CARGO_INCREMENTAL: 0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8108825Z   CACHE_ON_FAILURE: false
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8109058Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8795010Z ##[group]Run cargo clippy --release --all-targets -- -D warnings
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8795564Z ^[[36;1mcargo clippy --release --all-targets -- -D warnings^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8865554Z shell: /usr/bin/bash -e {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8865846Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8866081Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8866372Z   CARGO_HOME: /home/runner/.cargo
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8866656Z   CARGO_INCREMENTAL: 0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8866915Z   CACHE_ON_FAILURE: false
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.8867170Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:12.9548010Z ^[[1m^[[92m    Updating^[[0m crates.io index
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:13.3337245Z ^[[1m^[[92m    Checking^[[0m sqlite-vs-doublets v0.2.0 (/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/rust)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:13.5631385Z ^[[1m^[[92m    Finished^[[0m `release` profile [optimized] target(s) in 0.63s
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:13.5751742Z ##[group]Run cargo test --release
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:13.5752095Z ^[[36;1mcargo test --release^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:13.5820812Z shell: /usr/bin/bash -e {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:13.5821086Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:13.5821316Z   CARGO_TERM_COLOR: always
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:13.5821573Z   CARGO_HOME: /home/runner/.cargo
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:13.5822078Z   CARGO_INCREMENTAL: 0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:13.5822312Z   CACHE_ON_FAILURE: false
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:13.5822545Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:13.6523125Z ^[[1m^[[92m   Compiling^[[0m sqlite-vs-doublets v0.2.0 (/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/rust)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7756544Z ^[[1m^[[92m    Finished^[[0m `release` profile [optimized] target(s) in 19.17s
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7793676Z ^[[1m^[[92m     Running^[[0m unittests src/lib.rs (target/release/deps/sqlite_vs_doublets-dc5b97be762ba5e0)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7805264Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7805416Z running 1 test
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7813799Z test memory::tests::grow_returns_the_whole_memory ... ok
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7815276Z ^[[1m^[[92m     Running^[[0m unittests src/main.rs (target/release/deps/sqlite_vs_doublets-828bb1fe22dab8d4)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7815899Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7816256Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7816655Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7822173Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7822466Z running 0 tests
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7822674Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7823069Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7823617Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7824782Z ^[[1m^[[92m     Running^[[0m tests/storages.rs (target/release/deps/storages-7c6b7e288a7711bd)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7836736Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7836945Z running 8 tests
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7955528Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7956679Z test links_are_unique_and_reference_created_ids ... ok
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.7972826Z test scattered_visits_every_id_once ... ok
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.8037100Z test split_store_keeps_links_updated_to_reference_themselves ... ok
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:32.8445308Z test every_objects_storage_returns_the_stored_posts ... ok
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:34.0845330Z test stores_keep_their_links_when_their_memory_grows ... ok
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:46.2785513Z test every_links_variant_passes_the_lifecycle ... ok
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:54.9654659Z test every_objects_variant_passes_the_lifecycle ... ok
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:54.9655105Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:54.9655451Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 22.18s
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:54.9655816Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:54.9675884Z ^[[1m^[[92m   Doc-tests^[[0m sqlite_vs_doublets
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:54.9955784Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:54.9956276Z running 0 tests
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:54.9956531Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:54.9956945Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:54.9957468Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.0079330Z Post job cleanup.
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.1338687Z Cache up-to-date.
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.1533265Z Post job cleanup.
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.2458092Z [command]/usr/bin/git version
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.2504870Z git version 2.55.0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.2543880Z Temporarily overriding HOME='/home/runner/work/_temp/81fff7bd-f839-407e-902e-c1004aa4f711' before making global git config changes
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.2545018Z Adding repository directory to the temporary git global config as a safe directory
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.2549639Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.2585634Z Removing SSH command configuration
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.2592392Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.2629923Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.2889272Z Removing HTTP extra header
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.2895633Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.2933893Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3247137Z Removing includeIf entries pointing to credentials config files
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3256654Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3299607Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3302819Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3304316Z includeif.gitdir:/github/workspace/.git.path
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3305359Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3315594Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3358680Z /home/runner/work/_temp/git-credentials-0af30477-4cd4-4bd3-8d31-e8262c661e71.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3373760Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-0af30477\-4cd4\-4bd3\-8d31\-e8262c661e71\.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3477538Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3522347Z /home/runner/work/_temp/git-credentials-0af30477-4cd4-4bd3-8d31-e8262c661e71.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3534704Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-0af30477\-4cd4\-4bd3\-8d31\-e8262c661e71\.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3586744Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3626698Z /github/runner_temp/git-credentials-0af30477-4cd4-4bd3-8d31-e8262c661e71.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3636361Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-0af30477\-4cd4\-4bd3\-8d31\-e8262c661e71\.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3691163Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3721395Z /github/runner_temp/git-credentials-0af30477-4cd4-4bd3-8d31-e8262c661e71.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3732597Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-0af30477\-4cd4\-4bd3\-8d31\-e8262c661e71\.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.3780513Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.4041580Z Removing credentials config '/home/runner/work/_temp/git-credentials-0af30477-4cd4-4bd3-8d31-e8262c661e71.config'
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-05T01:59:55.4199125Z Cleaning up orphan processes
+Test (windows-latest)	UNKNOWN STEP	﻿2026-10-05T01:59:00.0346199Z Current runner version: '2.337.0'
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0381090Z ##[group]Runner Image Provisioner
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0382434Z Hosted Compute Agent
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0383438Z Version: 20260901.588
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0384646Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0386134Z Build Date: 2026-09-01T19:56:44Z
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0387719Z Worker ID: {6944b454-7545-4121-a082-fda3cfa69234}
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0388644Z Azure Region: eastus2
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0389268Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0390892Z ##[group]Operating System
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0391915Z Microsoft Windows Server 2025
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0392934Z 10.0.26100
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0393434Z Datacenter
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0393952Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0394598Z ##[group]Runner Image
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0395253Z Image: windows-2025-vs2026
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0395831Z Version: 20260925.250.1
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0397272Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260925.250/images/windows/Windows2025-VS2026-Readme.md
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0399445Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260925.250
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0400428Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0403510Z ##[group]GITHUB_TOKEN Permissions
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0405723Z Actions: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0407150Z ArtifactMetadata: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0408205Z Attestations: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0409443Z Checks: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0410368Z CodeQuality: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0411212Z Contents: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0411835Z CopilotRequests: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0412405Z Deployments: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0413029Z Discussions: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0413791Z Drives: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0414332Z Issues: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0414845Z Metadata: read
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0415428Z Models: read
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0415913Z Packages: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0416527Z Pages: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0417059Z PullRequests: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0417636Z RepositoryProjects: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0418207Z SecurityEvents: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0418746Z Statuses: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0419353Z VulnerabilityAlerts: read
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0419983Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0422389Z Secret source: Actions
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0423370Z Cache mode: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.0424094Z Prepare workflow directory
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.1022251Z Prepare all required actions
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.1094792Z Getting action download info
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.2997363Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.4405290Z Download action repository 'dtolnay/rust-toolchain@stable' (SHA:89b12181fb390509a0842a86cc55eeb8eb928c1d)
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:00.6074360Z Download action repository 'Swatinem/rust-cache@v2' (SHA:6323deb102c322ba6fcbdcafc7e3dddab59af2b6)
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.0137359Z Complete job name: Test (windows-latest)
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2190914Z ##[group]Run actions/checkout@v7
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2191909Z with:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2192417Z   repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2196530Z   token: ***
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2196918Z   ssh-strict: true
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2197556Z   ssh-user: git
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2197971Z   persist-credentials: true
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2198530Z   clean: true
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2199038Z   sparse-checkout-cone-mode: true
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2199638Z   fetch-depth: 1
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2200151Z   fetch-tags: false
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2200636Z   show-progress: true
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2201125Z   lfs: false
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2201598Z   submodules: false
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2202108Z   set-safe-directory: true
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2202913Z   allow-unsafe-pr-checkout: false
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2203757Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2204205Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.2204762Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4747612Z Syncing repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4754834Z ##[group]Getting Git version info
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.4756430Z Working directory is 'D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets'
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:01.6103640Z [command]"C:\Program Files\Git\bin\git.exe" version
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.0703298Z git version 2.55.0.windows.5
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.0766746Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.0782702Z Temporarily overriding HOME='D:\a\_temp\4d2638e2-6ce3-4599-8710-7adfea607c44' before making global git config changes
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.0785280Z Adding repository directory to the temporary git global config as a safe directory
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.0796307Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.1500287Z Deleting the contents of 'D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets'
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.1505720Z ##[group]Determining repository object format
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.1507479Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.1508445Z ##[group]Initializing the repository
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.1516251Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.2460618Z Initialized empty Git repository in D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.2505981Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.3364627Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.3365757Z ##[group]Disabling automatic garbage collection
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.3373646Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.3663718Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.3665859Z ##[group]Setting up auth
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.3667030Z Removing SSH command configuration
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.3675206Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:02.3990133Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:04.0444070Z Removing HTTP extra header
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:04.0457488Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:04.0856236Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:04.6366950Z Removing includeIf entries pointing to credentials config files
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:04.6378659Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:04.6684358Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:05.2159776Z [command]"C:\Program Files\Git\bin\git.exe" config --file D:\a\_temp\git-credentials-21ee9198-0e6b-45a9-b4bf-6fbc0fd61e46.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:05.2467299Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path D:\a\_temp\git-credentials-21ee9198-0e6b-45a9-b4bf-6fbc0fd61e46.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:05.2773684Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path D:\a\_temp\git-credentials-21ee9198-0e6b-45a9-b4bf-6fbc0fd61e46.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:05.3129507Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-21ee9198-0e6b-45a9-b4bf-6fbc0fd61e46.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:05.3426578Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-21ee9198-0e6b-45a9-b4bf-6fbc0fd61e46.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:05.3709514Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:05.3710125Z ##[group]Fetching the repository
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:05.3723404Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +0d1bbf73753414c7976e03d074445ed4e7699ced:refs/remotes/pull/108/merge
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.3361733Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.3363416Z  * [new ref]         0d1bbf73753414c7976e03d074445ed4e7699ced -> pull/108/merge
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.3413075Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.3413978Z ##[group]Determining the checkout info
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.3415746Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.3504394Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.3899100Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.4188524Z ##[group]Checking out the ref
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.4196368Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/108/merge
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5019399Z Note: switching to 'refs/remotes/pull/108/merge'.
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5019901Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5020149Z You are in 'detached HEAD' state. You can look around, make experimental
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5021800Z changes and commit them, and you can discard any commits you make in this
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5022459Z state without impacting any branches by switching back to a branch.
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5022762Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5022968Z If you want to create a new branch to retain commits you create, you may
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5023530Z do so (now or later) by using -c with the switch command. Example:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5023849Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5023985Z   git switch -c <new-branch-name>
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5024189Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5024290Z Or undo this operation with:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5024464Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5024548Z   git switch -
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5024696Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5024918Z Turn off this advice by setting config variable advice.detachedHead to false
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5025264Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5025685Z HEAD is now at 0d1bbf7 Merge e500f135b3c82ea445a1801e7d1fc002c61b0c1b into 01d4eb2dfd784c44a366b854e720b70fd8cb8f62
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5565891Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5574722Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.5841338Z 0d1bbf73753414c7976e03d074445ed4e7699ced
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6412198Z ##[group]Run dtolnay/rust-toolchain@stable
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6412560Z with:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6412751Z   components: rustfmt, clippy
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6412993Z   toolchain: stable
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6413198Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6413367Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6413567Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6481304Z ##[start-action display=Parse toolchain version;id=__dtolnay_rust-toolchain.parse]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6667401Z ##[group]Run if [[ -z $toolchain ]]; then
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6667794Z ^[[36;1mif [[ -z $toolchain ]]; then^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6668339Z ^[[36;1m  # GitHub does not enforce `required: true` inputs itself. https://github.com/actions/runner/issues/1070^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6668895Z ^[[36;1m  echo "'toolchain' is a required input" >&2^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6669185Z ^[[36;1m  exit 1^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6669503Z ^[[36;1melif [[ $toolchain =~ ^stable' '[0-9]+' '(year|month|week|day)s?' 'ago$ ]]; then^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6669967Z ^[[36;1m  if [[ Windows == macOS ]]; then^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6670507Z ^[[36;1m    echo "toolchain=1.$((($(date -v-$(sed 's/stable \([0-9]*\) \(.\).*/\1\2/' <<< $toolchain) +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6671276Z ^[[36;1m  else^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6671668Z ^[[36;1m    echo "toolchain=1.$((($(date --date "${toolchain#stable }" +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6672113Z ^[[36;1m  fi^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6672393Z ^[[36;1melif [[ $toolchain =~ ^stable' 'minus' '[0-9]+' 'releases?$ ]]; then^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6672935Z ^[[36;1m  echo "toolchain=1.$((($(date +%s)/60/60/24-16569)/7/6-${toolchain//[^0-9]/}))" >> $GITHUB_OUTPUT^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6673390Z ^[[36;1melif [[ $toolchain =~ ^1\.[0-9]+$ ]]; then^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6673897Z ^[[36;1m  echo "toolchain=1.$((i=${toolchain#1.}, c=($(date +%s)/60/60/24-16569)/7/6, i+9*i*(10*i<=c)+90*i*(100*i<=c)))" >> $GITHUB_OUTPUT^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6674389Z ^[[36;1melse^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6674624Z ^[[36;1m  echo "toolchain=$toolchain" >> $GITHUB_OUTPUT^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6674960Z ^[[36;1mfi^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6698344Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6698773Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6698955Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6699168Z   toolchain: stable
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.6699353Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.9102559Z ##[end-action id=__dtolnay_rust-toolchain.parse;outcome=success;conclusion=success;duration_ms=262]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.9115311Z ##[start-action display=Construct rustup command line;id=__dtolnay_rust-toolchain.flags]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.9266178Z ##[group]Run echo "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.9266830Z ^[[36;1mecho "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.9267480Z ^[[36;1mecho "components=$(for c in ${components//,/ }; do echo -n ' --component' $c; done)" >> $GITHUB_OUTPUT^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.9267951Z ^[[36;1mecho "downgrade=" >> $GITHUB_OUTPUT^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.9285085Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.9285498Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.9285672Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.9285878Z   targets: 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.9286065Z   components: rustfmt, clippy
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.9286283Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.9963422Z ##[end-action id=__dtolnay_rust-toolchain.flags;outcome=success;conclusion=success;duration_ms=84]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:06.9966144Z ##[start-action display=Set $CARGO_HOME;id=__dtolnay_rust-toolchain.__run]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0099073Z ##[group]Run echo CARGO_HOME=${CARGO_HOME:-"$USERPROFILE\.cargo"} >> $GITHUB_ENV
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0099585Z ^[[36;1mecho CARGO_HOME=${CARGO_HOME:-"$USERPROFILE\.cargo"} >> $GITHUB_ENV^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0117020Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0117479Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0117657Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0117876Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0534506Z ##[end-action id=__dtolnay_rust-toolchain.__run;outcome=success;conclusion=success;duration_ms=56]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0536978Z ##[start-action display=Install rustup if needed;id=__dtolnay_rust-toolchain.__run_2]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0549269Z ##[end-action id=__dtolnay_rust-toolchain.__run_2;outcome=skipped;conclusion=skipped;duration_ms=0]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0551660Z ##[start-action display=Install rustup if needed on windows;id=__dtolnay_rust-toolchain.__run_3]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0712060Z ##[group]Run if ! command -v rustup &>/dev/null; then
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0712423Z ^[[36;1mif ! command -v rustup &>/dev/null; then^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0713264Z ^[[36;1m  curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused --location --silent --show-error --fail https://win.rustup.rs/x86_64 --output 'D:\a\_temp\rustup-init.exe'^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0714149Z ^[[36;1m  'D:\a\_temp\rustup-init.exe' --default-toolchain none --no-modify-path -y^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0714574Z ^[[36;1m  echo "$CARGO_HOME\bin" >> $GITHUB_PATH^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0715004Z ^[[36;1mfi^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0731377Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0731779Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0731951Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0732184Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.0732442Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1249631Z ##[end-action id=__dtolnay_rust-toolchain.__run_3;outcome=success;conclusion=success;duration_ms=69]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1262607Z ##[start-action display=rustup toolchain install stable;id=__dtolnay_rust-toolchain.__run_4]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1423153Z ##[group]Run log=$(mktemp)
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1423433Z ^[[36;1mlog=$(mktemp)^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1423683Z ^[[36;1mtrap 'rm -f "$log"' EXIT^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1423929Z ^[[36;1mfor attempt in 1 2 3 4 5; do^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1424594Z ^[[36;1m  if rustup toolchain install stable --component rustfmt --component clippy --profile minimal --no-self-update --force-non-host 2>&1 | tee "$log"; then^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1425263Z ^[[36;1m    break^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1425446Z ^[[36;1m  else^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1425624Z ^[[36;1m    status=$?^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1425810Z ^[[36;1m  fi^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1426088Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' "$log" \^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1426639Z ^[[36;1m      || ! grep -Fq 'this is likely due to an ongoing update of the official release server' "$log"; then^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1427088Z ^[[36;1m    exit "$status"^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1427292Z ^[[36;1m  fi^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1427630Z ^[[36;1m  echo "Retrying rustup toolchain install in 30 seconds (retry $attempt of 4)" >&2^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1428030Z ^[[36;1m  sleep 30^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1428220Z ^[[36;1mdone^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1443669Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1444071Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1444256Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1444499Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1444767Z   RUSTUP_PERMIT_COPY_RENAME: 1
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:07.1444985Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:10.8232145Z info: syncing channel updates for stable-x86_64-pc-windows-msvc
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:11.4883290Z info: latest update on 2026-10-01 for version 1.99.0 (b940084d7 2026-09-28)
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:11.5199779Z info: removing previous version of component rustfmt
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:11.5357973Z info: removing previous version of component clippy
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:11.5674839Z info: removing previous version of component rust-std for target x86_64-pc-windows-gnu
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:11.6941455Z info: removing previous version of component rust-std for target i686-pc-windows-msvc
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:11.7893507Z info: removing previous version of component cargo
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:11.8842051Z info: removing previous version of component rust-std
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:11.9792085Z info: removing previous version of component rustc
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:12.1059750Z info: downloading 7 components
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.4122045Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.4440174Z   stable-x86_64-pc-windows-msvc updated - rustc 1.99.0 (b940084d7 2026-09-28) (from rustc 1.98.1 (48a229cea 2026-09-01))
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.4440719Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.7743739Z ##[end-action id=__dtolnay_rust-toolchain.__run_4;outcome=success;conclusion=success;duration_ms=19648]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.7754002Z ##[start-action display=rustup default stable;id=__dtolnay_rust-toolchain.__run_5]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.7900649Z ##[group]Run rustup default stable --force-non-host
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.7901008Z ^[[36;1mrustup default stable --force-non-host^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.7917889Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.7918299Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.7918470Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.7918700Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.7918958Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.8641610Z info: using existing install for stable-x86_64-pc-windows-msvc
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.8795126Z info: default toolchain set to stable-x86_64-pc-windows-msvc
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.8795555Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.9010726Z   stable-x86_64-pc-windows-msvc unchanged - rustc 1.99.0 (b940084d7 2026-09-28)
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.9011304Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.9095341Z ##[end-action id=__dtolnay_rust-toolchain.__run_5;outcome=success;conclusion=success;duration_ms=134]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.9099120Z ##[start-action display=Create cachekey;id=__dtolnay_rust-toolchain.rustc-version]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.9254199Z ##[group]Run DATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.9255027Z ^[[36;1mDATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.9255654Z ^[[36;1mHASH=$(rustc +stable --version --verbose | sed -ne 's/^commit-hash: //p')^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.9256372Z ^[[36;1mecho "cachekey=$(echo $DATE$HASH | head -c12)" >> $GITHUB_OUTPUT^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.9272554Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.9272946Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.9273118Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.9273350Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:26.9273596Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3092639Z ##[end-action id=__dtolnay_rust-toolchain.rustc-version;outcome=success;conclusion=success;duration_ms=4399]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3095864Z ##[start-action display=Disable incremental compilation;id=__dtolnay_rust-toolchain.__run_6]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3228393Z ##[group]Run if [ -z "${CARGO_INCREMENTAL+set}" ]; then
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3228782Z ^[[36;1mif [ -z "${CARGO_INCREMENTAL+set}" ]; then^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3229091Z ^[[36;1m  echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3229349Z ^[[36;1mfi^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3245286Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3245675Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3245847Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3246081Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3246334Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3637156Z ##[end-action id=__dtolnay_rust-toolchain.__run_6;outcome=success;conclusion=success;duration_ms=54]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3639506Z ##[start-action display=Enable colors in Cargo output;id=__dtolnay_rust-toolchain.__run_7]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3762692Z ##[group]Run if [ -z "${CARGO_TERM_COLOR+set}" ]; then
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3763049Z ^[[36;1mif [ -z "${CARGO_TERM_COLOR+set}" ]; then^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3763376Z ^[[36;1m  echo CARGO_TERM_COLOR=always >> $GITHUB_ENV^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3763814Z ^[[36;1mfi^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3777653Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3778043Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3778252Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3778488Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3778741Z   CARGO_INCREMENTAL: 0
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.3778936Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4167316Z ##[end-action id=__dtolnay_rust-toolchain.__run_7;outcome=success;conclusion=success;duration_ms=52]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4169673Z ##[start-action display=Enable Cargo sparse registry;id=__dtolnay_rust-toolchain.__run_8]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4303635Z ##[group]Run # implemented in 1.66, stabilized in 1.68, made default in 1.70
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4304136Z ^[[36;1m# implemented in 1.66, stabilized in 1.68, made default in 1.70^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4304797Z ^[[36;1mif [ -z "${CARGO_REGISTRIES_CRATES_IO_PROTOCOL+set}" -o -f "D:\a\_temp"/.implicit_cargo_registries_crates_io_protocol ]; then^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4305468Z ^[[36;1m  if rustc +stable --version --verbose | grep -q '^release: 1\.6[89]\.'; then^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4305979Z ^[[36;1m    touch "D:\a\_temp"/.implicit_cargo_registries_crates_io_protocol || true^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4306627Z ^[[36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse >> $GITHUB_ENV^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4307119Z ^[[36;1m  elif rustc +stable --version --verbose | grep -q '^release: 1\.6[67]\.'; then^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4307620Z ^[[36;1m    touch "D:\a\_temp"/.implicit_cargo_registries_crates_io_protocol || true^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4308083Z ^[[36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git >> $GITHUB_ENV^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4308802Z ^[[36;1m  fi^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4309021Z ^[[36;1mfi^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4323364Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4323753Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4323922Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4324228Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4324486Z   CARGO_INCREMENTAL: 0
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.4324672Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.8483895Z ##[end-action id=__dtolnay_rust-toolchain.__run_8;outcome=success;conclusion=success;duration_ms=431]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.8486549Z ##[start-action display=Work around spurious network errors in curl 8.0;id=__dtolnay_rust-toolchain.__run_9]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.8690692Z ##[group]Run # https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.8691428Z ^[[36;1m# https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.8692029Z ^[[36;1mif rustc +stable --version --verbose | grep -q '^release: 1\.7[01]\.'; then^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.8692468Z ^[[36;1m  echo CARGO_HTTP_MULTIPLEXING=false >> $GITHUB_ENV^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.8692758Z ^[[36;1mfi^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.8707888Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.8708293Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.8708467Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.8708696Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.8708960Z   CARGO_INCREMENTAL: 0
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.8709164Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.9760334Z ##[end-action id=__dtolnay_rust-toolchain.__run_9;outcome=success;conclusion=success;duration_ms=127]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.9765356Z ##[start-action display=rustc +stable --version --verbose;id=__dtolnay_rust-toolchain.__run_10]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.9898670Z ##[group]Run rustc +stable --version --verbose
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.9898991Z ^[[36;1mrustc +stable --version --verbose^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.9913702Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.9914092Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.9914261Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.9914493Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.9914742Z   CARGO_INCREMENTAL: 0
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:31.9915095Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.0794137Z rustc 1.99.0 (b940084d7 2026-09-28)
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.0794673Z binary: rustc
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.0795129Z commit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.0795661Z commit-date: 2026-09-28
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.0795936Z host: x86_64-pc-windows-msvc
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.0796217Z release: 1.99.0
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.0798595Z LLVM version: 23.1.1
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.0920250Z ##[end-action id=__dtolnay_rust-toolchain.__run_10;outcome=success;conclusion=success;duration_ms=115]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1180787Z ##[group]Run Swatinem/rust-cache@v2
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1181261Z with:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1181549Z   workspaces: rust
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1181872Z   prefix-key: v0-rust
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1182206Z   add-job-id-key: true
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1182566Z   add-rust-environment-hash-key: true
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1182981Z   cache-targets: true
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1183307Z   cache-all-crates: false
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1183669Z   cache-workspace-crates: false
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1184038Z   save-if: true
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1184335Z   cache-provider: github
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1184666Z   cache-bin: true
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1185208Z   lookup-only: false
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1185514Z   cmd-format: {0}
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1185794Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1186054Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1186424Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1186844Z   CARGO_INCREMENTAL: 0
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:32.1187153Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4327980Z ##[group]Cache Configuration
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4328514Z Cache Provider:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4328829Z     github
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4329107Z Workspaces:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4329650Z     D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\rust
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4330319Z Cache Paths:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4330964Z     C:\Users\runneradmin\.cargo\bin
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4331434Z     C:\Users\runneradmin\.cargo\.crates.toml
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4331932Z     C:\Users\runneradmin\.cargo\.crates2.json
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4332402Z     C:\Users\runneradmin\.cargo\registry
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4332875Z     C:\Users\runneradmin\.cargo\git
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4333571Z     D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\rust\target
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4334279Z Restore Key:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4334607Z     v0-rust-test-Windows_NT-x64-63f58d45
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4334991Z Cache Key:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4335329Z     v0-rust-test-Windows_NT-x64-63f58d45-061d0a07
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4335814Z .. Prefix:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4336140Z   - v0-rust-test-Windows_NT-x64
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4336555Z .. Environment considered:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4336953Z   - Rust Versions:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4337473Z     - 1.99.0 x86_64-pc-windows-msvc b940084d7eb6a299eb4bfeb8e34901bc051e7ac4
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4338108Z   - CARGO_HOME
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4338419Z   - CARGO_INCREMENTAL
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4338761Z   - CARGO_TERM_COLOR
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4339092Z .. Lockfiles considered:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4339727Z   - D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\rust\Cargo.lock
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4340743Z   - D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\rust\Cargo.toml
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4341729Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4341907Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.4342030Z ... Restoring cache ...
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:33.6281536Z Cache hit for: v0-rust-test-Windows_NT-x64-63f58d45-061d0a07
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:34.1156419Z Received 62808173 of 62808173 (100.0%), 134.0 MBs/sec
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:34.1158771Z Cache Size: ~60 MB (62808173 B)
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:34.1186047Z [command]"C:\Program Files\Git\usr\bin\tar.exe" -xf D:/a/_temp/0d5784a8-8658-4bb6-b81e-3b6058d29e72/cache.tzst -P -C D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets --force-local --use-compress-program "zstd -d"
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:35.7143577Z Cache restored successfully
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:35.7197148Z Restored from cache key "v0-rust-test-Windows_NT-x64-63f58d45-061d0a07" full match: true.
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:35.7547808Z ##[group]Run cargo fmt --check
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:35.7548165Z ^[[36;1mcargo fmt --check^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:36.5420052Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:36.5420533Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:36.5420769Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:36.5421076Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:36.5421431Z   CARGO_INCREMENTAL: 0
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:36.5421700Z   CACHE_ON_FAILURE: false
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:36.5421973Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:37.7854942Z ##[group]Run cargo clippy --release --all-targets -- -D warnings
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:37.7855487Z ^[[36;1mcargo clippy --release --all-targets -- -D warnings^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:37.7924915Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:37.7925253Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:37.7925702Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:37.7925946Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:37.7926212Z   CARGO_INCREMENTAL: 0
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:37.7926423Z   CACHE_ON_FAILURE: false
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:37.7926626Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:38.8202301Z ^[[1m^[[92m    Updating^[[0m crates.io index
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:43.6911948Z ^[[1m^[[92m    Checking^[[0m sqlite-vs-doublets v0.2.0 (D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\rust)
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:44.2018957Z ^[[1m^[[92m    Finished^[[0m `release` profile [optimized] target(s) in 5.46s
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:44.8178013Z ##[group]Run cargo test --release
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:44.8178478Z ^[[36;1mcargo test --release^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:44.8249144Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:44.8249483Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:44.8249667Z   CARGO_TERM_COLOR: always
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:44.8249916Z   CARGO_HOME: C:\Users\runneradmin\.cargo
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:44.8250182Z   CARGO_INCREMENTAL: 0
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:44.8250393Z   CACHE_ON_FAILURE: false
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:44.8250601Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T01:59:45.3291172Z ^[[1m^[[92m   Compiling^[[0m sqlite-vs-doublets v0.2.0 (D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\rust)
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6245881Z ^[[1m^[[92m    Finished^[[0m `release` profile [optimized] target(s) in 32.46s
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6283819Z ^[[1m^[[92m     Running^[[0m unittests src\lib.rs (target\release\deps\sqlite_vs_doublets-102aa6a479f97be3.exe)
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6392478Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6392743Z running 1 test
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6401794Z test memory::tests::grow_returns_the_whole_memory ... ok
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6402234Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6402670Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6403275Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6416195Z ^[[1m^[[92m     Running^[[0m unittests src\main.rs (target\release\deps\sqlite_vs_doublets-9a4b43e364dcd962.exe)
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6514146Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6514400Z running 0 tests
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6514660Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6515115Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6515762Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6531376Z ^[[1m^[[92m     Running^[[0m tests\storages.rs (target\release\deps\storages-2daa065b04799e43.exe)
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6629657Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6629897Z running 8 tests
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6763973Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6773310Z test links_are_unique_and_reference_created_ids ... ok
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6803828Z test scattered_visits_every_id_once ... ok
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.6914256Z test split_store_keeps_links_updated_to_reference_themselves ... ok
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:17.7938604Z test every_objects_storage_returns_the_stored_posts ... ok
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:18.9535956Z test stores_keep_their_links_when_their_memory_grows ... ok
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:33.8093570Z test every_links_variant_passes_the_lifecycle ... ok
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.2981114Z test every_objects_variant_passes_the_lifecycle ... ok
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.2981559Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.2981968Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 25.64s
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.2982705Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.3006546Z ^[[1m^[[92m   Doc-tests^[[0m sqlite_vs_doublets
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.3676452Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.3677036Z running 0 tests
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.3677454Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.3678257Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.3679071Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.4946566Z Post job cleanup.
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.6482621Z Cache up-to-date.
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.6781962Z Post job cleanup.
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.8903373Z [command]"C:\Program Files\Git\bin\git.exe" version
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.9219716Z git version 2.55.0.windows.5
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.9298096Z Temporarily overriding HOME='D:\a\_temp\187fe25a-8847-40a0-9190-4ef7f56c6f5c' before making global git config changes
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.9299753Z Adding repository directory to the temporary git global config as a safe directory
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.9314328Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.9675239Z Removing SSH command configuration
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:43.9687576Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:44.0013812Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:44.5448668Z Removing HTTP extra header
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:44.5459746Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:44.5778312Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.0879880Z Removing includeIf entries pointing to credentials config files
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.0891655Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.1158192Z includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.1159464Z includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.1160423Z includeif.gitdir:/github/workspace/.git.path
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.1161011Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.1200141Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.1456648Z D:\a\_temp\git-credentials-21ee9198-0e6b-45a9-b4bf-6fbc0fd61e46.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.1499175Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path D\:\\a\\_temp\\git\-credentials\-21ee9198\-0e6b\-45a9\-b4bf\-6fbc0fd61e46\.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.1794749Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.2044135Z D:\a\_temp\git-credentials-21ee9198-0e6b-45a9-b4bf-6fbc0fd61e46.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.2084079Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path D\:\\a\\_temp\\git\-credentials\-21ee9198\-0e6b\-45a9\-b4bf\-6fbc0fd61e46\.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.2376670Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.2624466Z /github/runner_temp/git-credentials-21ee9198-0e6b-45a9-b4bf-6fbc0fd61e46.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.2664975Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-21ee9198\-0e6b\-45a9\-b4bf\-6fbc0fd61e46\.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.2956253Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.3206929Z /github/runner_temp/git-credentials-21ee9198-0e6b-45a9-b4bf-6fbc0fd61e46.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.3283214Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-21ee9198\-0e6b\-45a9\-b4bf\-6fbc0fd61e46\.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.3580139Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.8886893Z Removing credentials config 'D:\a\_temp\git-credentials-21ee9198-0e6b-45a9-b4bf-6fbc0fd61e46.config'
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.9084808Z Cleaning up orphan processes
+Test (windows-latest)	UNKNOWN STEP	2026-10-05T02:00:45.9766429Z Terminate orphan process: pid (7412) (vctip)

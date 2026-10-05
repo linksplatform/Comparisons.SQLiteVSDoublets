@@ -1,0 +1,1704 @@
+Dependabot	Set up job	﻿2026-10-05T10:03:12.0291320Z Current runner version: '2.337.0'
+Dependabot	Set up job	2026-10-05T10:03:12.0317513Z ##[group]Runner Image Provisioner
+Dependabot	Set up job	2026-10-05T10:03:12.0318574Z Hosted Compute Agent
+Dependabot	Set up job	2026-10-05T10:03:12.0319242Z Version: 20260901.588
+Dependabot	Set up job	2026-10-05T10:03:12.0319955Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+Dependabot	Set up job	2026-10-05T10:03:12.0320745Z Build Date: 2026-09-01T19:56:44Z
+Dependabot	Set up job	2026-10-05T10:03:12.0321524Z Worker ID: {0cd5c3c7-584a-4ee5-806f-11c5a273c294}
+Dependabot	Set up job	2026-10-05T10:03:12.0322287Z Azure Region: westus
+Dependabot	Set up job	2026-10-05T10:03:12.0322913Z ##[endgroup]
+Dependabot	Set up job	2026-10-05T10:03:12.0324605Z ##[group]Operating System
+Dependabot	Set up job	2026-10-05T10:03:12.0325545Z Ubuntu
+Dependabot	Set up job	2026-10-05T10:03:12.0326226Z 24.04.5
+Dependabot	Set up job	2026-10-05T10:03:12.0326774Z LTS
+Dependabot	Set up job	2026-10-05T10:03:12.0327299Z ##[endgroup]
+Dependabot	Set up job	2026-10-05T10:03:12.0327968Z ##[group]Runner Image
+Dependabot	Set up job	2026-10-05T10:03:12.0328632Z Image: ubuntu-24.04
+Dependabot	Set up job	2026-10-05T10:03:12.0329270Z Version: 20260927.320.1
+Dependabot	Set up job	2026-10-05T10:03:12.0330412Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+Dependabot	Set up job	2026-10-05T10:03:12.0332208Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+Dependabot	Set up job	2026-10-05T10:03:12.0333254Z ##[endgroup]
+Dependabot	Set up job	2026-10-05T10:03:12.0334545Z ##[group]GITHUB_TOKEN Permissions
+Dependabot	Set up job	2026-10-05T10:03:12.0337446Z Contents: read
+Dependabot	Set up job	2026-10-05T10:03:12.0338180Z Metadata: read
+Dependabot	Set up job	2026-10-05T10:03:12.0338778Z Packages: read
+Dependabot	Set up job	2026-10-05T10:03:12.0339439Z ##[endgroup]
+Dependabot	Set up job	2026-10-05T10:03:12.0341469Z Secret source: None
+Dependabot	Set up job	2026-10-05T10:03:12.0342529Z Cache mode: read
+Dependabot	Set up job	2026-10-05T10:03:12.0343342Z Prepare workflow directory
+Dependabot	Set up job	2026-10-05T10:03:12.0680994Z Prepare all required actions
+Dependabot	Set up job	2026-10-05T10:03:12.0730678Z Getting action download info
+Dependabot	Set up job	2026-10-05T10:03:12.4595284Z Download action repository 'github/dependabot-action@main' (SHA:ab6aa0616295f786bcb54f052bed6cf9ede07b49)
+Dependabot	Set up job	2026-10-05T10:03:13.0774689Z Complete job name: Dependabot
+Dependabot	Create job directory	﻿2026-10-05T10:03:13.1594534Z ##[group]Run mkdir -p  ./dependabot-job-1609892908-1791194441
+Dependabot	Create job directory	2026-10-05T10:03:13.1596586Z ^[[36;1mmkdir -p  ./dependabot-job-1609892908-1791194441^[[0m
+Dependabot	Create job directory	2026-10-05T10:03:13.1909596Z shell: /usr/bin/bash -e {0}
+Dependabot	Create job directory	2026-10-05T10:03:13.1910689Z ##[endgroup]
+Dependabot	Run Dependabot	﻿2026-10-05T10:03:13.2260024Z ##[group]Run github/dependabot-action@main
+Dependabot	Run Dependabot	2026-10-05T10:03:13.2260751Z env:
+Dependabot	Run Dependabot	2026-10-05T10:03:13.2261200Z   DEPENDABOT_DISABLE_CLEANUP: 1
+Dependabot	Run Dependabot	2026-10-05T10:03:13.2261787Z   DEPENDABOT_ENABLE_CONNECTIVITY_CHECK: 0
+Dependabot	Run Dependabot	2026-10-05T10:03:13.2266155Z   GITHUB_TOKEN: ***
+Dependabot	Run Dependabot	2026-10-05T10:03:13.2267037Z   GITHUB_DEPENDABOT_JOB_TOKEN: ***
+Dependabot	Run Dependabot	2026-10-05T10:03:13.2267978Z   GITHUB_DEPENDABOT_CRED_TOKEN: ***
+Dependabot	Run Dependabot	2026-10-05T10:03:13.2268579Z   GITHUB_REGISTRIES_PROXY: ***
+Dependabot	Run Dependabot	2026-10-05T10:03:13.2269111Z ##[endgroup]
+Dependabot	Run Dependabot	2026-10-05T10:03:13.3992476Z 🤖 ~ starting update ~
+Dependabot	Run Dependabot	2026-10-05T10:03:13.4025704Z Fetching job details
+Dependabot	Run Dependabot	2026-10-05T10:03:13.9615768Z Adding GitHub Packages credential
+Dependabot	Run Dependabot	2026-10-05T10:03:13.9618325Z ##[group]Pulling updater images
+Dependabot	Run Dependabot	2026-10-05T10:03:13.9673122Z Pulling image ghcr.io/dependabot/dependabot-updater-nuget:3fb967ed0f075752453714be5d204455f7e86897 (attempt 1)...
+Dependabot	Run Dependabot	2026-10-05T10:03:14.1992720Z Successfully sent metric (dependabot.action.ghcr_image_pull) to remote API endpoint
+Dependabot	Run Dependabot	2026-10-05T10:04:17.6411788Z Pulled image ghcr.io/dependabot/dependabot-updater-nuget:3fb967ed0f075752453714be5d204455f7e86897
+Dependabot	Run Dependabot	2026-10-05T10:04:17.6423537Z Pulling image ghcr.io/dependabot/proxy:v2.0.20261002203410@sha256:9e7e5a6c5599feb3623ddfc477a470f5666414a5ac30dd31d90a30a2e5a820f8 (attempt 1)...
+Dependabot	Run Dependabot	2026-10-05T10:04:17.8732862Z Successfully sent metric (dependabot.action.ghcr_image_pull) to remote API endpoint
+Dependabot	Run Dependabot	2026-10-05T10:04:18.5821990Z Pulled image ghcr.io/dependabot/proxy:v2.0.20261002203410@sha256:9e7e5a6c5599feb3623ddfc477a470f5666414a5ac30dd31d90a30a2e5a820f8
+Dependabot	Run Dependabot	2026-10-05T10:04:18.5825468Z ##[endgroup]
+Dependabot	Run Dependabot	2026-10-05T10:04:18.5826582Z Starting update process
+Dependabot	Run Dependabot	2026-10-05T10:04:18.7562187Z Created proxy container: 8fe6b7b6833c106ad5db315e989380ad9598a1d1c619755135184a24a952cf2c
+Dependabot	Run Dependabot	2026-10-05T10:04:19.0158951Z   proxy | 2026/10/05 10:04:19 proxy starting, commit: 89e54ca0173c0f86ee438803f340f2c177917098
+Dependabot	Run Dependabot	2026-10-05T10:04:19.0164719Z   proxy | 2026/10/05 10:04:19 Listening (:1080)
+Dependabot	Run Dependabot	2026-10-05T10:04:19.2188916Z Created container: 1265f9a52439e34e070f48afa90846f253592e1b097f788bce762eea89df4c8a
+Dependabot	Run Dependabot	2026-10-05T10:04:19.3236971Z Started container 1265f9a52439e34e070f48afa90846f253592e1b097f788bce762eea89df4c8a
+Dependabot	Run Dependabot	2026-10-05T10:04:19.3594026Z updater | Updating certificates in /etc/ssl/certs...
+Dependabot	Run Dependabot	2026-10-05T10:04:19.9481269Z updater | rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+Dependabot	Run Dependabot	2026-10-05T10:04:19.9530099Z updater | 1 added, 0 removed; done.
+Dependabot	Run Dependabot	2026-10-05T10:04:19.9531195Z updater | Running hooks in /etc/ca-certificates/update.d...
+Dependabot	Run Dependabot	2026-10-05T10:04:19.9543705Z updater | done.
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9259050Z updater | Job: {
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9259643Z   "command": "version",
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9260094Z   "allowed-updates": [
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9260550Z     {
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9261035Z       "dependency-type": "direct",
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9261607Z       "update-type": "all"
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9262165Z     }
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9262607Z   ],
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9263006Z   "commit-message-options": {
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9263588Z     "prefix": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9264172Z     "prefix-development": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9264733Z     "include-scope": null
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9265479Z   },
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9265924Z   "credentials-metadata": [
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9266416Z     {
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9266841Z       "type": "git_source",
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9267375Z       "host": "github.com"
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9267840Z     }
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9268211Z   ],
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9268599Z   "debug": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9269042Z   "dependencies": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9269375Z   "dependency-groups": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9269733Z   "dependency-group-to-refresh": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9270134Z   "existing-pull-requests": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9270547Z   "existing-group-pull-requests": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9270951Z   "experiments": {
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9271317Z     "record-ecosystem-versions": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9271748Z     "record-update-job-unknown-error": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9272142Z     "azure-registry-backup": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9272879Z     "automatic-github-packages-auth": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9273206Z     "blocked-versions": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9273488Z     "workflow-job-summary": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9273767Z     "async-retry": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9274070Z     "enable-npmrc-credential-generation": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9274427Z     "proxy-read-only-git-credentials": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9274800Z     "proxy-egress-observe": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9275378Z     "proxy-egress-enforce": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9275910Z     "maven-wrapper-updater": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9276272Z     "prioritize-scm-source": true
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9276533Z   },
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9276741Z   "ignore-conditions": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9277002Z   "lockfile-only": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9277260Z   "package-manager": "nuget",
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9277626Z   "requirements-update-strategy": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9277939Z   "reject-external-code": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9278215Z   "security-advisories": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9278489Z   "security-updates-only": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9278771Z   "source": {
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9278986Z     "provider": "github",
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9279296Z     "repo": "linksplatform/Comparisons.SQLiteVSDoublets",
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9279644Z     "branch": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9279873Z     "directory": "/csharp",
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9280317Z     "api-endpoint": "https://api.github.com/",
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9280648Z     "hostname": "github.com"
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9280897Z   },
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9281137Z   "updating-a-pull-request": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9281465Z   "update-subdependencies": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9281793Z   "vendor-dependencies": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9282073Z   "enable-beta-ecosystems": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9282347Z   "repo-private": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9282831Z   "multi-ecosystem-update": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9283105Z   "exclude-paths": null
+Dependabot	Run Dependabot	2026-10-05T10:04:20.9283335Z }
+Dependabot	Run Dependabot	2026-10-05T10:04:21.2830136Z updater | 2026/10/05 10:04:21 INFO Running command: git clone --no-tags --depth 1 --recurse-submodules --shallow-submodules https://github.com/linksplatform/Comparisons.SQLiteVSDoublets /home/dependabot/dependabot-updater/repo
+Dependabot	Run Dependabot	2026-10-05T10:04:21.4260603Z   proxy | 2026/10/05 10:04:21 [002] GET https://github.com:443/linksplatform/Comparisons.SQLiteVSDoublets/info/refs?service=git-upload-pack
+Dependabot	Run Dependabot	2026-10-05T10:04:21.4262506Z 2026/10/05 10:04:21 [002] * authenticating git server request (host: github.com)
+Dependabot	Run Dependabot	2026-10-05T10:04:21.6186362Z   proxy | 2026/10/05 10:04:21 [002] 200 https://github.com:443/linksplatform/Comparisons.SQLiteVSDoublets/info/refs?service=git-upload-pack
+Dependabot	Run Dependabot	2026-10-05T10:04:21.6190673Z   proxy | 2026/10/05 10:04:21 [003] POST https://github.com:443/linksplatform/Comparisons.SQLiteVSDoublets/git-upload-pack
+Dependabot	Run Dependabot	2026-10-05T10:04:21.6191770Z   proxy | 2026/10/05 10:04:21 [003] * authenticating git server request (host: github.com)
+Dependabot	Run Dependabot	2026-10-05T10:04:21.7124496Z   proxy | 2026/10/05 10:04:21 [003] 200 https://github.com:443/linksplatform/Comparisons.SQLiteVSDoublets/git-upload-pack
+Dependabot	Run Dependabot	2026-10-05T10:04:21.7148270Z   proxy | 2026/10/05 10:04:21 [004] POST https://github.com:443/linksplatform/Comparisons.SQLiteVSDoublets/git-upload-pack
+Dependabot	Run Dependabot	2026-10-05T10:04:21.7149687Z 2026/10/05 10:04:21 [004] * authenticating git server request (host: github.com)
+Dependabot	Run Dependabot	2026-10-05T10:04:21.8445734Z   proxy | 2026/10/05 10:04:21 [004] 200 https://github.com:443/linksplatform/Comparisons.SQLiteVSDoublets/git-upload-pack
+Dependabot	Run Dependabot	2026-10-05T10:04:22.0966022Z updater | Currently installed SDKs: 8.0.424 9.0.317 10.0.400
+Dependabot	Run Dependabot	2026-10-05T10:04:22.1136943Z updater | Discovering global.json files for SDK install under repo root '/home/dependabot/dependabot-updater/repo'
+Dependabot	Run Dependabot	2026-10-05T10:04:22.2151404Z updater | Discovered global.json files: csharp/global.json
+Dependabot	Run Dependabot	2026-10-05T10:04:22.2155725Z updater |   Processing csharp/global.json (resolved to /home/dependabot/dependabot-updater/repo/csharp/global.json) for SDK version information
+Dependabot	Run Dependabot	2026-10-05T10:04:22.2295951Z updater |     SDK version '10.0.100' added to install list
+Dependabot	Run Dependabot	2026-10-05T10:04:22.2322107Z updater | Installing SDK 10.0.100
+Dependabot	Run Dependabot	2026-10-05T10:04:22.3402087Z   proxy | 2026/10/05 10:04:22 [006] GET https://builds.dotnet.microsoft.com:443/dotnet/Sdk/10.0.100/sdk-productVersion.txt
+Dependabot	Run Dependabot	2026-10-05T10:04:22.3570994Z   proxy | 2026/10/05 10:04:22 [006] 200 https://builds.dotnet.microsoft.com:443/dotnet/Sdk/10.0.100/sdk-productVersion.txt
+Dependabot	Run Dependabot	2026-10-05T10:04:22.3897016Z   proxy | 2026/10/05 10:04:22 [008] GET https://builds.dotnet.microsoft.com:443/dotnet/Sdk/10.0.100/sdk-productVersion.txt
+Dependabot	Run Dependabot	2026-10-05T10:04:22.3899313Z   proxy | 2026/10/05 10:04:22 [008] 200 https://builds.dotnet.microsoft.com:443/dotnet/Sdk/10.0.100/sdk-productVersion.txt (cached)
+Dependabot	Run Dependabot	2026-10-05T10:04:22.4672350Z   proxy | 2026/10/05 10:04:22 [010] GET https://ci.dot.net:443/public/Sdk/10.0.100/sdk-productVersion.txt
+Dependabot	Run Dependabot	2026-10-05T10:04:22.4929016Z   proxy | 2026/10/05 10:04:22 [010] 404 https://ci.dot.net:443/public/Sdk/10.0.100/sdk-productVersion.txt
+Dependabot	Run Dependabot	2026-10-05T10:04:22.5231990Z   proxy | 2026/10/05 10:04:22 [012] GET https://ci.dot.net:443/public/Sdk/10.0.100/productVersion.txt
+Dependabot	Run Dependabot	2026-10-05T10:04:22.5292060Z   proxy | 2026/10/05 10:04:22 [012] 404 https://ci.dot.net:443/public/Sdk/10.0.100/productVersion.txt
+Dependabot	Run Dependabot	2026-10-05T10:04:22.5632809Z   proxy | 2026/10/05 10:04:22 [014] GET https://ci.dot.net:443/public/Sdk/10.0.100/sdk-productVersion.txt
+Dependabot	Run Dependabot	2026-10-05T10:04:22.5634433Z 2026/10/05 10:04:22 [014] 404 https://ci.dot.net:443/public/Sdk/10.0.100/sdk-productVersion.txt (cached)
+Dependabot	Run Dependabot	2026-10-05T10:04:22.5636059Z 2026/10/05 10:04:22 [014] * auth'd git request previously retried, won't retry again. (cached)
+Dependabot	Run Dependabot	2026-10-05T10:04:22.5945757Z   proxy | 2026/10/05 10:04:22 [016] GET https://ci.dot.net:443/public/Sdk/10.0.100/productVersion.txt
+Dependabot	Run Dependabot	2026-10-05T10:04:22.5947289Z   proxy | 2026/10/05 10:04:22 [016] 404 https://ci.dot.net:443/public/Sdk/10.0.100/productVersion.txt (cached)
+Dependabot	Run Dependabot	2026-10-05T10:04:22.5949118Z 2026/10/05 10:04:22 [016] * auth'd git request previously retried, won't retry again. (cached)
+Dependabot	Run Dependabot	2026-10-05T10:04:22.6112154Z updater | dotnet-install: Attempting to download using primary link https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.100/dotnet-sdk-10.0.100-linux-x64.tar.gz
+Dependabot	Run Dependabot	2026-10-05T10:04:22.6414524Z   proxy | 2026/10/05 10:04:22 [018] GET https://builds.dotnet.microsoft.com:443/dotnet/Sdk/10.0.100/dotnet-sdk-10.0.100-linux-x64.tar.gz
+Dependabot	Run Dependabot	2026-10-05T10:04:22.6446260Z   proxy | 2026/10/05 10:04:22 [018] 200 https://builds.dotnet.microsoft.com:443/dotnet/Sdk/10.0.100/dotnet-sdk-10.0.100-linux-x64.tar.gz
+Dependabot	Run Dependabot	2026-10-05T10:04:24.2611433Z   proxy | 2026/10/05 10:04:24 [020] HEAD https://builds.dotnet.microsoft.com:443/dotnet/Sdk/10.0.100/dotnet-sdk-10.0.100-linux-x64.tar.gz
+Dependabot	Run Dependabot	2026-10-05T10:04:24.2668325Z   proxy | 2026/10/05 10:04:24 [020] 200 https://builds.dotnet.microsoft.com:443/dotnet/Sdk/10.0.100/dotnet-sdk-10.0.100-linux-x64.tar.gz
+Dependabot	Run Dependabot	2026-10-05T10:04:24.2696865Z updater | dotnet-install: Remote file https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.100/dotnet-sdk-10.0.100-linux-x64.tar.gz size is 239125653 bytes.
+Dependabot	Run Dependabot	2026-10-05T10:04:24.2700134Z updater | dotnet-install: Extracting archive from https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.100/dotnet-sdk-10.0.100-linux-x64.tar.gz
+Dependabot	Run Dependabot	2026-10-05T10:04:29.4243172Z updater | dotnet-install: Downloaded file size is 239125653 bytes.
+Dependabot	Run Dependabot	2026-10-05T10:04:29.4244698Z dotnet-install: The remote and local file sizes are equal.
+Dependabot	Run Dependabot	2026-10-05T10:04:30.5240521Z updater | dotnet-install: Installed version is 10.0.100
+Dependabot	Run Dependabot	2026-10-05T10:04:30.5292620Z updater | dotnet-install: Adding to current process PATH: `/usr/local/dotnet/current`. Note: This change will be visible only when sourcing script.
+Dependabot	Run Dependabot	2026-10-05T10:04:30.5297338Z updater | dotnet-install: Note that the script does not resolve dependencies during installation.
+Dependabot	Run Dependabot	2026-10-05T10:04:30.5299179Z dotnet-install: To check the list of dependencies, go to https://learn.microsoft.com/dotnet/core/install, select your operating system and check the "Dependencies" section.
+Dependabot	Run Dependabot	2026-10-05T10:04:30.5300812Z dotnet-install: Installation finished successfully.
+Dependabot	Run Dependabot	2026-10-05T10:04:30.5429331Z updater | 8.0.424 [/usr/local/dotnet/current/sdk]
+Dependabot	Run Dependabot	2026-10-05T10:04:30.5429792Z 9.0.317 [/usr/local/dotnet/current/sdk]
+Dependabot	Run Dependabot	2026-10-05T10:04:30.5430154Z 10.0.100 [/usr/local/dotnet/current/sdk]
+Dependabot	Run Dependabot	2026-10-05T10:04:30.5430519Z 10.0.400 [/usr/local/dotnet/current/sdk]
+Dependabot	Run Dependabot	2026-10-05T10:04:30.6830985Z updater | User-level NuGet.Config set to ...
+Dependabot	Run Dependabot	2026-10-05T10:04:30.6881171Z updater | <?xml version="1.0" encoding="utf-8"?>
+Dependabot	Run Dependabot	2026-10-05T10:04:30.6884328Z updater | <configuration>
+Dependabot	Run Dependabot	2026-10-05T10:04:30.6885650Z updater |   <packageSources>
+Dependabot	Run Dependabot	2026-10-05T10:04:30.6886682Z updater |     <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
+Dependabot	Run Dependabot	2026-10-05T10:04:30.6915776Z updater |   </packageSources>
+Dependabot	Run Dependabot	2026-10-05T10:04:30.6916403Z </configuration>
+Dependabot	Run Dependabot	2026-10-05T10:04:30.7026407Z updater | Base commit SHA: d2ee41e17b1bf6a8f3bea6c96827c41311cedb19
+Dependabot	Run Dependabot	2026-10-05T10:04:31.0688258Z updater | 2026/10/05 10:04:31 INFO Starting update job of type group_update_all_versions
+Dependabot	Run Dependabot	2026-10-05T10:04:31.3294838Z   proxy | 2026/10/05 10:04:31 [022] POST /update_jobs/1609892908/increment_metric
+Dependabot	Run Dependabot	2026-10-05T10:04:31.5571333Z   proxy | 2026/10/05 10:04:31 [022] 204 /update_jobs/1609892908/increment_metric
+Dependabot	Run Dependabot	2026-10-05T10:04:31.5785398Z updater | 2026/10/05 10:04:31 INFO Discovering build files in workspace [/home/dependabot/dependabot-updater/repo/csharp].
+Dependabot	Run Dependabot	2026-10-05T10:04:31.5798876Z updater | 2026/10/05 10:04:31 INFO   No dotnet-tools.json file found.
+Dependabot	Run Dependabot	2026-10-05T10:04:31.5813001Z updater | 2026/10/05 10:04:31 INFO   Discovered [global.json] file.
+Dependabot	Run Dependabot	2026-10-05T10:04:31.5880007Z updater | 2026/10/05 10:04:31 INFO   Discovering projects beneath [csharp].
+Dependabot	Run Dependabot	2026-10-05T10:04:31.5885506Z updater | 2026/10/05 10:04:31 INFO     Entry points found: /home/dependabot/dependabot-updater/repo/csharp/SQLiteVSDoublets.slnx
+Dependabot	Run Dependabot	2026-10-05T10:04:31.5924396Z updater | 2026/10/05 10:04:31 INFO     Expanding solution: /home/dependabot/dependabot-updater/repo/csharp/SQLiteVSDoublets.slnx:
+Dependabot	Run Dependabot	2026-10-05T10:04:31.6238978Z updater | 2026/10/05 10:04:31 INFO       Expanded project: /home/dependabot/dependabot-updater/repo/csharp/SQLiteVSDoublets.Tests/SQLiteVSDoublets.Tests.csproj
+Dependabot	Run Dependabot	2026-10-05T10:04:31.6241457Z updater | 2026/10/05 10:04:31 INFO       Expanded project: /home/dependabot/dependabot-updater/repo/csharp/SQLiteVSDoublets/SQLiteVSDoublets.csproj
+Dependabot	Run Dependabot	2026-10-05T10:04:31.6987089Z updater | 2026/10/05 10:04:31 INFO   No packages.config file found.
+Dependabot	Run Dependabot	2026-10-05T10:04:31.6988139Z updater | 2026/10/05 10:04:31 INFO   No packages.config file found.
+Dependabot	Run Dependabot	2026-10-05T10:04:32.2244630Z updater | 2026/10/05 10:04:32 INFO Performing single restore for project /home/dependabot/dependabot-updater/repo/csharp/SQLiteVSDoublets.Tests/SQLiteVSDoublets.Tests.csproj
+Dependabot	Run Dependabot	2026-10-05T10:04:34.0737134Z   proxy | 2026/10/05 10:04:34 [024] GET https://api.nuget.org:443/v3/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.0904078Z   proxy | 2026/10/05 10:04:34 [024] 200 https://api.nuget.org:443/v3/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.1290643Z   proxy | 2026/10/05 10:04:34 [025] GET https://api.nuget.org:443/v3-index/repository-signatures/5.0.0/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.1315673Z   proxy | 2026/10/05 10:04:34 [025] 200 https://api.nuget.org:443/v3-index/repository-signatures/5.0.0/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.2048741Z   proxy | 2026/10/05 10:04:34 [026] GET https://api.nuget.org:443/v3-flatcontainer/platform.data.doublets.sequences/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.2130709Z   proxy | 2026/10/05 10:04:34 [030] GET https://api.nuget.org:443/v3-flatcontainer/xunit.v3/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.2143729Z   proxy | 2026/10/05 10:04:34 [031] GET https://api.nuget.org:443/v3-flatcontainer/platform.data.doublets/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.2149630Z   proxy | 2026/10/05 10:04:34 [032] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.data.sqlite/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.2257015Z   proxy | 2026/10/05 10:04:34 [030] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.v3/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.2471015Z   proxy | 2026/10/05 10:04:34 [033] GET https://api.nuget.org:443/v3-flatcontainer/xunit.v3/4.0.1/xunit.v3.4.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.2503829Z   proxy | 2026/10/05 10:04:34 [033] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.v3/4.0.1/xunit.v3.4.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.2806475Z   proxy | 2026/10/05 10:04:34 [034] GET https://api.nuget.org:443/v3-flatcontainer/xunit.v3.mtp-v2/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.2840817Z   proxy | 2026/10/05 10:04:34 [026] 200 https://api.nuget.org:443/v3-flatcontainer/platform.data.doublets.sequences/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.2893893Z   proxy | 2026/10/05 10:04:34 [035] GET https://api.nuget.org:443/v3-flatcontainer/platform.data.doublets.sequences/0.6.5/platform.data.doublets.sequences.0.6.5.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.2952155Z   proxy | 2026/10/05 10:04:34 [031] 200 https://api.nuget.org:443/v3-flatcontainer/platform.data.doublets/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.2954369Z   proxy | 2026/10/05 10:04:34 [035] 200 https://api.nuget.org:443/v3-flatcontainer/platform.data.doublets.sequences/0.6.5/platform.data.doublets.sequences.0.6.5.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.2979334Z   proxy | 2026/10/05 10:04:34 [036] GET https://api.nuget.org:443/v3-flatcontainer/platform.data.doublets/0.18.1/platform.data.doublets.0.18.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.2987542Z   proxy | 2026/10/05 10:04:34 [032] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.data.sqlite/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3008321Z   proxy | 2026/10/05 10:04:34 [037] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.data.sqlite/10.0.12/microsoft.data.sqlite.10.0.12.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3038714Z   proxy | 2026/10/05 10:04:34 [036] 200 https://api.nuget.org:443/v3-flatcontainer/platform.data.doublets/0.18.1/platform.data.doublets.0.18.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3058781Z   proxy | 2026/10/05 10:04:34 [037] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.data.sqlite/10.0.12/microsoft.data.sqlite.10.0.12.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3077969Z   proxy | 2026/10/05 10:04:34 [038] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.data.sqlite.core/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3100047Z   proxy | 2026/10/05 10:04:34 [039] GET https://api.nuget.org:443/v3-flatcontainer/sqlitepclraw.core/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3101531Z 2026/10/05 10:04:34 [040] GET https://api.nuget.org:443/v3-flatcontainer/sqlitepclraw.bundle_e_sqlite3/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3110526Z   proxy | 2026/10/05 10:04:34 [034] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.v3.mtp-v2/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3150109Z   proxy | 2026/10/05 10:04:34 [047] GET https://api.nuget.org:443/v3-flatcontainer/platform.collections.methods/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3196506Z   proxy | 2026/10/05 10:04:34 [050] GET https://api.nuget.org:443/v3-flatcontainer/platform.memory/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3206872Z   proxy | 2026/10/05 10:04:34 [051] GET https://api.nuget.org:443/v3-flatcontainer/platform.data.sequences/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3225353Z   proxy | 2026/10/05 10:04:34 [052] GET https://api.nuget.org:443/v3-flatcontainer/platform.singletons/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3234323Z   proxy | 2026/10/05 10:04:34 [053] GET https://api.nuget.org:443/v3-flatcontainer/platform.timestamps/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3250095Z   proxy | 2026/10/05 10:04:34 [054] GET https://api.nuget.org:443/v3-flatcontainer/platform.data.doublets.ffi/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3252133Z   proxy | 2026/10/05 10:04:34 [055] GET https://api.nuget.org:443/v3-flatcontainer/platform.data/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3254581Z   proxy | 2026/10/05 10:04:34 [056] GET https://api.nuget.org:443/v3-flatcontainer/platform.random/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3281514Z   proxy | 2026/10/05 10:04:34 [057] GET https://api.nuget.org:443/v3-flatcontainer/xunit.v3.mtp-v2/4.0.1/xunit.v3.mtp-v2.4.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3369953Z   proxy | 2026/10/05 10:04:34 [057] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.v3.mtp-v2/4.0.1/xunit.v3.mtp-v2.4.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3386399Z   proxy | 2026/10/05 10:04:34 [039] 200 https://api.nuget.org:443/v3-flatcontainer/sqlitepclraw.core/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3388385Z 2026/10/05 10:04:34 [038] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.data.sqlite.core/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3405403Z   proxy | 2026/10/05 10:04:34 [040] 200 https://api.nuget.org:443/v3-flatcontainer/sqlitepclraw.bundle_e_sqlite3/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3434978Z   proxy | 2026/10/05 10:04:34 [058] GET https://api.nuget.org:443/v3-flatcontainer/xunit.analyzers/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3443525Z   proxy | 2026/10/05 10:04:34 [060] GET https://api.nuget.org:443/v3-flatcontainer/sqlitepclraw.core/2.1.12/sqlitepclraw.core.2.1.12.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3445870Z 2026/10/05 10:04:34 [059] GET https://api.nuget.org:443/v3-flatcontainer/xunit.v3.core.mtp-v2/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3447016Z 2026/10/05 10:04:34 [061] GET https://api.nuget.org:443/v3-flatcontainer/xunit.v3.assert/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3487632Z   proxy | 2026/10/05 10:04:34 [058] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.analyzers/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3497032Z   proxy | 2026/10/05 10:04:34 [060] 200 https://api.nuget.org:443/v3-flatcontainer/sqlitepclraw.core/2.1.12/sqlitepclraw.core.2.1.12.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3523899Z   proxy | 2026/10/05 10:04:34 [064] GET https://api.nuget.org:443/v3-flatcontainer/sqlitepclraw.bundle_e_sqlite3/2.1.12/sqlitepclraw.bundle_e_sqlite3.2.1.12.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3536368Z   proxy | 2026/10/05 10:04:34 [065] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.data.sqlite.core/10.0.12/microsoft.data.sqlite.core.10.0.12.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3540384Z   proxy | 2026/10/05 10:04:34 [061] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.v3.assert/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3550623Z   proxy | 2026/10/05 10:04:34 [066] GET https://api.nuget.org:443/v3-flatcontainer/xunit.analyzers/2.1.0/xunit.analyzers.2.1.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3559102Z   proxy | 2026/10/05 10:04:34 [064] 200 https://api.nuget.org:443/v3-flatcontainer/sqlitepclraw.bundle_e_sqlite3/2.1.12/sqlitepclraw.bundle_e_sqlite3.2.1.12.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3580829Z   proxy | 2026/10/05 10:04:34 [067] GET https://api.nuget.org:443/v3-flatcontainer/xunit.v3.assert/4.0.1/xunit.v3.assert.4.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3601979Z   proxy | 2026/10/05 10:04:34 [066] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.analyzers/2.1.0/xunit.analyzers.2.1.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3607622Z   proxy | 2026/10/05 10:04:34 [065] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.data.sqlite.core/10.0.12/microsoft.data.sqlite.core.10.0.12.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3625500Z   proxy | 2026/10/05 10:04:34 [067] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.v3.assert/4.0.1/xunit.v3.assert.4.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3685552Z   proxy | 2026/10/05 10:04:34 [068] GET https://api.nuget.org:443/v3-flatcontainer/sqlitepclraw.lib.e_sqlite3/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3686476Z   proxy | 2026/10/05 10:04:34 [069] GET https://api.nuget.org:443/v3-flatcontainer/sqlitepclraw.provider.e_sqlite3/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3806338Z   proxy | 2026/10/05 10:04:34 [059] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.v3.core.mtp-v2/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3818553Z   proxy | 2026/10/05 10:04:34 [070] GET https://api.nuget.org:443/v3-flatcontainer/xunit.v3.core.mtp-v2/4.0.1/xunit.v3.core.mtp-v2.4.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3852550Z   proxy | 2026/10/05 10:04:34 [070] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.v3.core.mtp-v2/4.0.1/xunit.v3.core.mtp-v2.4.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3919519Z   proxy | 2026/10/05 10:04:34 [071] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.testing.extensions.trxreport.abstractions/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3925535Z   proxy | 2026/10/05 10:04:34 [072] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.testing.extensions.telemetry/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3948776Z   proxy | 2026/10/05 10:04:34 [073] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.testing.platform/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3949977Z   proxy | 2026/10/05 10:04:34 [074] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.testing.platform.msbuild/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3975662Z   proxy | 2026/10/05 10:04:34 [072] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.testing.extensions.telemetry/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3984821Z   proxy | 2026/10/05 10:04:34 [069] 200 https://api.nuget.org:443/v3-flatcontainer/sqlitepclraw.provider.e_sqlite3/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3991333Z   proxy | 2026/10/05 10:04:34 [071] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.testing.extensions.trxreport.abstractions/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.3992881Z 2026/10/05 10:04:34 [068] 200 https://api.nuget.org:443/v3-flatcontainer/sqlitepclraw.lib.e_sqlite3/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4003759Z   proxy | 2026/10/05 10:04:34 [077] GET https://api.nuget.org:443/v3-flatcontainer/xunit.v3.runner.inproc.console/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4028715Z   proxy | 2026/10/05 10:04:34 [073] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.testing.platform/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4041065Z   proxy | 2026/10/05 10:04:34 [078] GET https://api.nuget.org:443/v3-flatcontainer/xunit.v3.extensibility.core/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4050921Z   proxy | 2026/10/05 10:04:34 [050] 200 https://api.nuget.org:443/v3-flatcontainer/platform.memory/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4060151Z   proxy | 2026/10/05 10:04:34 [079] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.testing.extensions.telemetry/2.4.0/microsoft.testing.extensions.telemetry.2.4.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4063766Z 2026/10/05 10:04:34 [080] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.testing.platform/2.4.0/microsoft.testing.platform.2.4.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4066222Z 2026/10/05 10:04:34 [081] GET https://api.nuget.org:443/v3-flatcontainer/sqlitepclraw.provider.e_sqlite3/2.1.12/sqlitepclraw.provider.e_sqlite3.2.1.12.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4075652Z   proxy | 2026/10/05 10:04:34 [082] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.testing.extensions.trxreport.abstractions/2.4.0/microsoft.testing.extensions.trxreport.abstractions.2.4.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4078972Z 2026/10/05 10:04:34 [083] GET https://api.nuget.org:443/v3-flatcontainer/platform.memory/0.4.1/platform.memory.0.4.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4081062Z 2026/10/05 10:04:34 [052] 200 https://api.nuget.org:443/v3-flatcontainer/platform.singletons/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4092189Z   proxy | 2026/10/05 10:04:34 [053] 200 https://api.nuget.org:443/v3-flatcontainer/platform.timestamps/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4094897Z 2026/10/05 10:04:34 [077] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.v3.runner.inproc.console/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4096668Z 2026/10/05 10:04:34 [051] 200 https://api.nuget.org:443/v3-flatcontainer/platform.data.sequences/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4098675Z 2026/10/05 10:04:34 [080] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.testing.platform/2.4.0/microsoft.testing.platform.2.4.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4100760Z   proxy | 2026/10/05 10:04:34 [079] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.testing.extensions.telemetry/2.4.0/microsoft.testing.extensions.telemetry.2.4.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4120319Z   proxy | 2026/10/05 10:04:34 [084] GET https://api.nuget.org:443/v3-flatcontainer/platform.singletons/0.3.0/platform.singletons.0.3.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4180956Z   proxy | 2026/10/05 10:04:34 [078] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.v3.extensibility.core/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4182975Z 2026/10/05 10:04:34 [085] GET https://api.nuget.org:443/v3-flatcontainer/sqlitepclraw.lib.e_sqlite3/2.1.12/sqlitepclraw.lib.e_sqlite3.2.1.12.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4185523Z 2026/10/05 10:04:34 [081] 200 https://api.nuget.org:443/v3-flatcontainer/sqlitepclraw.provider.e_sqlite3/2.1.12/sqlitepclraw.provider.e_sqlite3.2.1.12.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4188109Z 2026/10/05 10:04:34 [082] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.testing.extensions.trxreport.abstractions/2.4.0/microsoft.testing.extensions.trxreport.abstractions.2.4.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4190478Z 2026/10/05 10:04:34 [055] 200 https://api.nuget.org:443/v3-flatcontainer/platform.data/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4192311Z 2026/10/05 10:04:34 [054] 200 https://api.nuget.org:443/v3-flatcontainer/platform.data.doublets.ffi/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4197581Z 2026/10/05 10:04:34 [083] 200 https://api.nuget.org:443/v3-flatcontainer/platform.memory/0.4.1/platform.memory.0.4.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4199860Z 2026/10/05 10:04:34 [085] 200 https://api.nuget.org:443/v3-flatcontainer/sqlitepclraw.lib.e_sqlite3/2.1.12/sqlitepclraw.lib.e_sqlite3.2.1.12.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4219067Z 2026/10/05 10:04:34 [086] GET https://api.nuget.org:443/v3-flatcontainer/platform.timestamps/0.3.0/platform.timestamps.0.3.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4221194Z 2026/10/05 10:04:34 [087] GET https://api.nuget.org:443/v3-flatcontainer/xunit.v3.runner.inproc.console/4.0.1/xunit.v3.runner.inproc.console.4.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4223427Z   proxy | 2026/10/05 10:04:34 [088] GET https://api.nuget.org:443/v3-flatcontainer/platform.data.sequences/0.3.2/platform.data.sequences.0.3.2.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4230327Z   proxy | 2026/10/05 10:04:34 [087] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.v3.runner.inproc.console/4.0.1/xunit.v3.runner.inproc.console.4.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4232659Z   proxy | 2026/10/05 10:04:34 [084] 200 https://api.nuget.org:443/v3-flatcontainer/platform.singletons/0.3.0/platform.singletons.0.3.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4234793Z   proxy | 2026/10/05 10:04:34 [047] 200 https://api.nuget.org:443/v3-flatcontainer/platform.collections.methods/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4237187Z   proxy | 2026/10/05 10:04:34 [086] 200 https://api.nuget.org:443/v3-flatcontainer/platform.timestamps/0.3.0/platform.timestamps.0.3.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4337042Z   proxy | 2026/10/05 10:04:34 [089] GET https://api.nuget.org:443/v3-flatcontainer/platform.data/0.16.1/platform.data.0.16.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4400472Z   proxy | 2026/10/05 10:04:34 [089] 200 https://api.nuget.org:443/v3-flatcontainer/platform.data/0.16.1/platform.data.0.16.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4409862Z   proxy | 2026/10/05 10:04:34 [074] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.testing.platform.msbuild/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4412732Z   proxy | 2026/10/05 10:04:34 [090] GET https://api.nuget.org:443/v3-flatcontainer/platform.collections.methods/0.7.3/platform.collections.methods.0.7.3.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4415937Z   proxy | 2026/10/05 10:04:34 [091] GET https://api.nuget.org:443/v3-flatcontainer/xunit.v3.extensibility.core/4.0.1/xunit.v3.extensibility.core.4.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4418100Z   proxy | 2026/10/05 10:04:34 [088] 200 https://api.nuget.org:443/v3-flatcontainer/platform.data.sequences/0.3.2/platform.data.sequences.0.3.2.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4420948Z   proxy | 2026/10/05 10:04:34 [092] GET https://api.nuget.org:443/v3-flatcontainer/platform.data.doublets.ffi/0.9.0/platform.data.doublets.ffi.0.9.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4471840Z   proxy | 2026/10/05 10:04:34 [090] 200 https://api.nuget.org:443/v3-flatcontainer/platform.collections.methods/0.7.3/platform.collections.methods.0.7.3.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4474357Z   proxy | 2026/10/05 10:04:34 [091] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.v3.extensibility.core/4.0.1/xunit.v3.extensibility.core.4.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4664695Z   proxy | 2026/10/05 10:04:34 [092] 200 https://api.nuget.org:443/v3-flatcontainer/platform.data.doublets.ffi/0.9.0/platform.data.doublets.ffi.0.9.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4677537Z   proxy | 2026/10/05 10:04:34 [093] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.testing.platform.msbuild/2.4.0/microsoft.testing.platform.msbuild.2.4.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4740107Z   proxy | 2026/10/05 10:04:34 [094] GET https://api.nuget.org:443/v3-flatcontainer/platform.threading/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4775533Z   proxy | 2026/10/05 10:04:34 [095] GET https://api.nuget.org:443/v3-flatcontainer/platform.setters/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4778002Z 2026/10/05 10:04:34 [096] GET https://api.nuget.org:443/v3-flatcontainer/platform.delegates/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4782271Z 2026/10/05 10:04:34 [093] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.testing.platform.msbuild/2.4.0/microsoft.testing.platform.msbuild.2.4.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4789338Z 2026/10/05 10:04:34 [097] GET https://api.nuget.org:443/v3-flatcontainer/platform.numbers/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4816780Z   proxy | 2026/10/05 10:04:34 [056] 200 https://api.nuget.org:443/v3-flatcontainer/platform.random/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4919083Z   proxy | 2026/10/05 10:04:34 [098] GET https://api.nuget.org:443/v3-flatcontainer/platform.random/0.3.0/platform.random.0.3.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.4956539Z   proxy | 2026/10/05 10:04:34 [099] GET https://api.nuget.org:443/v3-flatcontainer/platform.io/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5010593Z   proxy | 2026/10/05 10:04:34 [098] 200 https://api.nuget.org:443/v3-flatcontainer/platform.random/0.3.0/platform.random.0.3.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5078561Z   proxy | 2026/10/05 10:04:34 [100] GET https://api.nuget.org:443/v3-flatcontainer/platform.interfaces/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5086555Z   proxy | 2026/10/05 10:04:34 [101] GET https://api.nuget.org:443/v3-flatcontainer/platform.reflection/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5089221Z   proxy | 2026/10/05 10:04:34 [102] GET https://api.nuget.org:443/v3-flatcontainer/platform.ranges/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5101507Z   proxy | 2026/10/05 10:04:34 [103] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.applicationinsights/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5208468Z   proxy | 2026/10/05 10:04:34 [104] GET https://api.nuget.org:443/v3-flatcontainer/xunit.v3.common/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5210064Z 2026/10/05 10:04:34 [105] GET https://api.nuget.org:443/v3-flatcontainer/xunit.v3.runner.common/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5252946Z   proxy | 2026/10/05 10:04:34 [103] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.applicationinsights/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5309042Z   proxy | 2026/10/05 10:04:34 [106] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.applicationinsights/2.23.0/microsoft.applicationinsights.2.23.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5311212Z   proxy | 2026/10/05 10:04:34 [104] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.v3.common/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5329644Z   proxy | 2026/10/05 10:04:34 [107] GET https://api.nuget.org:443/v3-flatcontainer/xunit.v3.common/4.0.1/xunit.v3.common.4.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5367208Z   proxy | 2026/10/05 10:04:34 [106] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.applicationinsights/2.23.0/microsoft.applicationinsights.2.23.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5369402Z   proxy | 2026/10/05 10:04:34 [107] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.v3.common/4.0.1/xunit.v3.common.4.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5521791Z   proxy | 2026/10/05 10:04:34 [094] 200 https://api.nuget.org:443/v3-flatcontainer/platform.threading/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5549367Z   proxy | 2026/10/05 10:04:34 [105] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.v3.runner.common/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5577676Z   proxy | 2026/10/05 10:04:34 [108] GET https://api.nuget.org:443/v3-flatcontainer/xunit.v3.runner.common/4.0.1/xunit.v3.runner.common.4.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5585664Z   proxy | 2026/10/05 10:04:34 [109] GET https://api.nuget.org:443/v3-flatcontainer/platform.threading/0.4.0/platform.threading.0.4.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5608359Z   proxy | 2026/10/05 10:04:34 [108] 200 https://api.nuget.org:443/v3-flatcontainer/xunit.v3.runner.common/4.0.1/xunit.v3.runner.common.4.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5616006Z   proxy | 2026/10/05 10:04:34 [095] 200 https://api.nuget.org:443/v3-flatcontainer/platform.setters/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5625513Z   proxy | 2026/10/05 10:04:34 [096] 200 https://api.nuget.org:443/v3-flatcontainer/platform.delegates/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5633366Z   proxy | 2026/10/05 10:04:34 [097] 200 https://api.nuget.org:443/v3-flatcontainer/platform.numbers/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5657325Z   proxy | 2026/10/05 10:04:34 [110] GET https://api.nuget.org:443/v3-flatcontainer/platform.delegates/0.1.1/platform.delegates.0.1.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5678378Z   proxy | 2026/10/05 10:04:34 [111] GET https://api.nuget.org:443/v3-flatcontainer/platform.setters/0.5.0/platform.setters.0.5.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5679895Z 2026/10/05 10:04:34 [112] GET https://api.nuget.org:443/v3-flatcontainer/platform.numbers/0.9.0/platform.numbers.0.9.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5728992Z   proxy | 2026/10/05 10:04:34 [110] 200 https://api.nuget.org:443/v3-flatcontainer/platform.delegates/0.1.1/platform.delegates.0.1.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5731104Z 2026/10/05 10:04:34 [109] 200 https://api.nuget.org:443/v3-flatcontainer/platform.threading/0.4.0/platform.threading.0.4.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5733134Z   proxy | 2026/10/05 10:04:34 [112] 200 https://api.nuget.org:443/v3-flatcontainer/platform.numbers/0.9.0/platform.numbers.0.9.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5740433Z   proxy | 2026/10/05 10:04:34 [111] 200 https://api.nuget.org:443/v3-flatcontainer/platform.setters/0.5.0/platform.setters.0.5.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5934985Z   proxy | 2026/10/05 10:04:34 [100] 200 https://api.nuget.org:443/v3-flatcontainer/platform.interfaces/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5939035Z   proxy | 2026/10/05 10:04:34 [101] 200 https://api.nuget.org:443/v3-flatcontainer/platform.reflection/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5956331Z   proxy | 2026/10/05 10:04:34 [113] GET https://api.nuget.org:443/v3-flatcontainer/platform.interfaces/0.5.0/platform.interfaces.0.5.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5960151Z   proxy | 2026/10/05 10:04:34 [114] GET https://api.nuget.org:443/v3-flatcontainer/platform.reflection/0.7.0/platform.reflection.0.7.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5977254Z   proxy | 2026/10/05 10:04:34 [102] 200 https://api.nuget.org:443/v3-flatcontainer/platform.ranges/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.5990590Z   proxy | 2026/10/05 10:04:34 [115] GET https://api.nuget.org:443/v3-flatcontainer/platform.ranges/0.5.0/platform.ranges.0.5.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6019317Z   proxy | 2026/10/05 10:04:34 [113] 200 https://api.nuget.org:443/v3-flatcontainer/platform.interfaces/0.5.0/platform.interfaces.0.5.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6025399Z   proxy | 2026/10/05 10:04:34 [114] 200 https://api.nuget.org:443/v3-flatcontainer/platform.reflection/0.7.0/platform.reflection.0.7.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6048144Z   proxy | 2026/10/05 10:04:34 [115] 200 https://api.nuget.org:443/v3-flatcontainer/platform.ranges/0.5.0/platform.ranges.0.5.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6078900Z   proxy | 2026/10/05 10:04:34 [116] GET https://api.nuget.org:443/v3-flatcontainer/platform.collections/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6086840Z   proxy | 2026/10/05 10:04:34 [117] GET https://api.nuget.org:443/v3-flatcontainer/platform.converters/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6093635Z   proxy | 2026/10/05 10:04:34 [099] 200 https://api.nuget.org:443/v3-flatcontainer/platform.io/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6108254Z   proxy | 2026/10/05 10:04:34 [118] GET https://api.nuget.org:443/v3-flatcontainer/platform.io/0.5.1/platform.io.0.5.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6157015Z   proxy | 2026/10/05 10:04:34 [118] 200 https://api.nuget.org:443/v3-flatcontainer/platform.io/0.5.1/platform.io.0.5.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6246836Z   proxy | 2026/10/05 10:04:34 [119] GET https://api.nuget.org:443/v3-flatcontainer/system.security.accesscontrol/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6248350Z   proxy | 2026/10/05 10:04:34 [120] GET https://api.nuget.org:443/v3-flatcontainer/platform.unsafe/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6249851Z   proxy | 2026/10/05 10:04:34 [121] GET https://api.nuget.org:443/v3-flatcontainer/platform.threading/0.5.0/platform.threading.0.5.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6251395Z   proxy | 2026/10/05 10:04:34 [122] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.bcl.asyncinterfaces/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6252714Z   proxy | 2026/10/05 10:04:34 [123] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.win32.registry/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6254122Z   proxy | 2026/10/05 10:04:34 [124] GET https://api.nuget.org:443/v3-flatcontainer/platform.exceptions/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6256013Z   proxy | 2026/10/05 10:04:34 [119] 200 https://api.nuget.org:443/v3-flatcontainer/system.security.accesscontrol/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6257692Z   proxy | 2026/10/05 10:04:34 [125] GET https://api.nuget.org:443/v3-flatcontainer/system.security.accesscontrol/6.0.1/system.security.accesscontrol.6.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6302867Z   proxy | 2026/10/05 10:04:34 [122] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.bcl.asyncinterfaces/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6317360Z   proxy | 2026/10/05 10:04:34 [126] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6330723Z   proxy | 2026/10/05 10:04:34 [121] 200 https://api.nuget.org:443/v3-flatcontainer/platform.threading/0.5.0/platform.threading.0.5.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6332642Z   proxy | 2026/10/05 10:04:34 [125] 200 https://api.nuget.org:443/v3-flatcontainer/system.security.accesscontrol/6.0.1/system.security.accesscontrol.6.0.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6338407Z   proxy | 2026/10/05 10:04:34 [123] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.win32.registry/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6362049Z   proxy | 2026/10/05 10:04:34 [127] GET https://api.nuget.org:443/v3-flatcontainer/microsoft.win32.registry/5.0.0/microsoft.win32.registry.5.0.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6366738Z   proxy | 2026/10/05 10:04:34 [126] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6445137Z   proxy | 2026/10/05 10:04:34 [127] 200 https://api.nuget.org:443/v3-flatcontainer/microsoft.win32.registry/5.0.0/microsoft.win32.registry.5.0.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6518638Z   proxy | 2026/10/05 10:04:34 [120] 200 https://api.nuget.org:443/v3-flatcontainer/platform.unsafe/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6531154Z   proxy | 2026/10/05 10:04:34 [128] GET https://api.nuget.org:443/v3-flatcontainer/platform.unsafe/0.6.1/platform.unsafe.0.6.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6586586Z   proxy | 2026/10/05 10:04:34 [128] 200 https://api.nuget.org:443/v3-flatcontainer/platform.unsafe/0.6.1/platform.unsafe.0.6.1.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6841280Z   proxy | 2026/10/05 10:04:34 [117] 200 https://api.nuget.org:443/v3-flatcontainer/platform.converters/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6854706Z   proxy | 2026/10/05 10:04:34 [129] GET https://api.nuget.org:443/v3-flatcontainer/platform.converters/0.4.0/platform.converters.0.4.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6874190Z   proxy | 2026/10/05 10:04:34 [116] 200 https://api.nuget.org:443/v3-flatcontainer/platform.collections/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6887332Z   proxy | 2026/10/05 10:04:34 [130] GET https://api.nuget.org:443/v3-flatcontainer/platform.collections/0.3.2/platform.collections.0.3.2.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6896664Z   proxy | 2026/10/05 10:04:34 [131] GET https://api.nuget.org:443/v3-flatcontainer/platform.collections/0.4.0/platform.collections.0.4.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6907461Z   proxy | 2026/10/05 10:04:34 [129] 200 https://api.nuget.org:443/v3-flatcontainer/platform.converters/0.4.0/platform.converters.0.4.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6946296Z   proxy | 2026/10/05 10:04:34 [130] 200 https://api.nuget.org:443/v3-flatcontainer/platform.collections/0.3.2/platform.collections.0.3.2.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6955976Z   proxy | 2026/10/05 10:04:34 [131] 200 https://api.nuget.org:443/v3-flatcontainer/platform.collections/0.4.0/platform.collections.0.4.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6987123Z   proxy | 2026/10/05 10:04:34 [132] GET https://api.nuget.org:443/v3-flatcontainer/platform.disposables/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6988864Z   proxy | 2026/10/05 10:04:34 [133] GET https://api.nuget.org:443/v3-flatcontainer/platform.random/0.2.0/platform.random.0.2.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6993048Z   proxy | 2026/10/05 10:04:34 [134] GET https://api.nuget.org:443/v3-flatcontainer/platform.ranges/0.3.0/platform.ranges.0.3.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.6997926Z   proxy | 2026/10/05 10:04:34 [135] GET https://api.nuget.org:443/v3-flatcontainer/platform.interfaces/0.4.2/platform.interfaces.0.4.2.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.7026649Z   proxy | 2026/10/05 10:04:34 [136] GET https://api.nuget.org:443/v3-flatcontainer/platform.numbers/0.7.0/platform.numbers.0.7.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.7108974Z   proxy | 2026/10/05 10:04:34 [124] 200 https://api.nuget.org:443/v3-flatcontainer/platform.exceptions/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.7122193Z   proxy | 2026/10/05 10:04:34 [137] GET https://api.nuget.org:443/v3-flatcontainer/platform.exceptions/0.5.0/platform.exceptions.0.5.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.7142923Z   proxy | 2026/10/05 10:04:34 [136] 200 https://api.nuget.org:443/v3-flatcontainer/platform.numbers/0.7.0/platform.numbers.0.7.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.7180727Z   proxy | 2026/10/05 10:04:34 [137] 200 https://api.nuget.org:443/v3-flatcontainer/platform.exceptions/0.5.0/platform.exceptions.0.5.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.7351281Z   proxy | 2026/10/05 10:04:34 [133] 200 https://api.nuget.org:443/v3-flatcontainer/platform.random/0.2.0/platform.random.0.2.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.7390684Z   proxy | 2026/10/05 10:04:34 [135] 200 https://api.nuget.org:443/v3-flatcontainer/platform.interfaces/0.4.2/platform.interfaces.0.4.2.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.7428353Z   proxy | 2026/10/05 10:04:34 [134] 200 https://api.nuget.org:443/v3-flatcontainer/platform.ranges/0.3.0/platform.ranges.0.3.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.7772851Z   proxy | 2026/10/05 10:04:34 [132] 200 https://api.nuget.org:443/v3-flatcontainer/platform.disposables/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:34.7789366Z   proxy | 2026/10/05 10:04:34 [138] GET https://api.nuget.org:443/v3-flatcontainer/platform.disposables/0.3.0/platform.disposables.0.3.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.7791399Z   proxy | 2026/10/05 10:04:34 [139] GET https://api.nuget.org:443/v3-flatcontainer/platform.disposables/0.4.0/platform.disposables.0.4.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.7847613Z   proxy | 2026/10/05 10:04:34 [139] 200 https://api.nuget.org:443/v3-flatcontainer/platform.disposables/0.4.0/platform.disposables.0.4.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:34.8100964Z   proxy | 2026/10/05 10:04:34 [138] 200 https://api.nuget.org:443/v3-flatcontainer/platform.disposables/0.3.0/platform.disposables.0.3.0.nupkg
+Dependabot	Run Dependabot	2026-10-05T10:04:35.1716574Z   proxy | 2026/10/05 10:04:35 [140] GET https://api.nuget.org:443/v3/vulnerabilities/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:35.1731629Z   proxy | 2026/10/05 10:04:35 [140] 200 https://api.nuget.org:443/v3/vulnerabilities/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:35.1801113Z   proxy | 2026/10/05 10:04:35 [141] GET https://api.nuget.org:443/v3-vulnerabilities/2026.09.26.05.43.06/vulnerability.base.json
+Dependabot	Run Dependabot	2026-10-05T10:04:35.1815335Z   proxy | 2026/10/05 10:04:35 [142] GET https://api.nuget.org:443/v3-vulnerabilities/2026.09.26.05.43.06/2026.10.04.23.44.10/vulnerability.update.json
+Dependabot	Run Dependabot	2026-10-05T10:04:35.1831911Z   proxy | 2026/10/05 10:04:35 [141] 200 https://api.nuget.org:443/v3-vulnerabilities/2026.09.26.05.43.06/vulnerability.base.json
+Dependabot	Run Dependabot	2026-10-05T10:04:35.1851482Z   proxy | 2026/10/05 10:04:35 [142] 200 https://api.nuget.org:443/v3-vulnerabilities/2026.09.26.05.43.06/2026.10.04.23.44.10/vulnerability.update.json
+Dependabot	Run Dependabot	2026-10-05T10:04:36.3425508Z updater | 2026/10/05 10:04:36 INFO Re-added SDK managed package [Microsoft.Bcl.AsyncInterfaces/6.0.0] to project [csharp/SQLiteVSDoublets.Tests/SQLiteVSDoublets.Tests.csproj]
+Dependabot	Run Dependabot	2026-10-05T10:04:36.8971524Z updater | 2026/10/05 10:04:36 INFO Performing single restore for project /home/dependabot/dependabot-updater/repo/csharp/SQLiteVSDoublets/SQLiteVSDoublets.csproj
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6065733Z updater | 2026/10/05 10:04:38 INFO Discovery complete.
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6073310Z updater | 2026/10/05 10:04:38 INFO Discovery JSON content:
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6403198Z updater | 2026/10/05 10:04:38 INFO {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6403682Z   "Path": "csharp",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6403973Z   "IsSuccess": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6404262Z   "Projects": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6404554Z     {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6404964Z       "FilePath": "SQLiteVSDoublets.Tests/SQLiteVSDoublets.Tests.csproj",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6406328Z       "IsSuccess": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6406875Z       "Error": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6407405Z       "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6407946Z         "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6408429Z       ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6408938Z       "PackageManagementKind": "Default",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6409595Z       "PackageManagementSpecialFileRelativePath": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6410064Z       "ReferencedProjectPaths": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6410473Z         "../SQLiteVSDoublets/SQLiteVSDoublets.csproj"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6410871Z       ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6411317Z       "ImportedFiles": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6411644Z       "AdditionalFiles": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6411923Z       "Dependencies": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6412175Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6412442Z           "Name": "Microsoft.ApplicationInsights",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6412817Z           "Version": "2.23.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6413096Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6413387Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6413689Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6414000Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6414232Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6414460Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6414731Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6415249Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6415570Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6415782Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6416052Z           "Name": "Microsoft.Bcl.AsyncInterfaces",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6416394Z           "Version": "6.0.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6416662Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6416945Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6417243Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6417528Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6417762Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6418217Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6418495Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6418759Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6419013Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6419219Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6419449Z           "Name": "Microsoft.Data.Sqlite",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6419776Z           "Version": "10.0.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6420045Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6420343Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6420653Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6420922Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6421152Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6421380Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6421645Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6421910Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6422147Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6422325Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6422557Z           "Name": "Microsoft.Data.Sqlite.Core",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6422864Z           "Version": "10.0.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6423115Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6423363Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6423637Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6423879Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6424082Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6424283Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6424535Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6424768Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6424995Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6425755Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6426048Z           "Name": "Microsoft.Testing.Extensions.Telemetry",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6426407Z           "Version": "2.4.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6426655Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6426916Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6427194Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6427435Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6427652Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6427860Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6428113Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6428351Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6428574Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6428994Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6429339Z           "Name": "Microsoft.Testing.Extensions.TrxReport.Abstractions",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6429735Z           "Version": "2.4.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6429980Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6430219Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6430495Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6430731Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6430936Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6431142Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6431381Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6431619Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6431842Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6432027Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6432265Z           "Name": "Microsoft.Testing.Platform",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6432576Z           "Version": "2.4.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6432824Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6433073Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6433342Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6433582Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6433789Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6433995Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6434243Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6434475Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6434688Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6434875Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6435450Z           "Name": "Microsoft.Testing.Platform.MSBuild",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6435813Z           "Version": "2.4.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6436051Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6436301Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6436572Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6436829Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6437042Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6437242Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6437684Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6437928Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6438144Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6438332Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6438552Z           "Name": "Microsoft.Win32.Registry",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6438844Z           "Version": "5.0.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6439081Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6439320Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6439583Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6439858Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6440060Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6440254Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6440500Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6440726Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6440942Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6441149Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6441364Z           "Name": "Platform.Collections",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6441643Z           "Version": "0.4.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6441881Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6442125Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6442386Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6442631Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6442833Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6443031Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6443272Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6443501Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6443721Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6443898Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6444120Z           "Name": "Platform.Collections.Methods",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6444428Z           "Version": "0.7.3",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6444662Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6444907Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6445622Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6445889Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6446104Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6446328Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6446578Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6446848Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6447071Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6447262Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6447475Z           "Name": "Platform.Converters",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6447932Z           "Version": "0.4.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6448181Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6448430Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6448702Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6448941Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6449145Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6449373Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6449614Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6449845Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6450066Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6450242Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6450447Z           "Name": "Platform.Data",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6450722Z           "Version": "0.16.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6450954Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6451223Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6451488Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6451726Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6451925Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6452125Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6452363Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6452610Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6452839Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6453028Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6453239Z           "Name": "Platform.Data.Doublets",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6453530Z           "Version": "0.18.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6453770Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6454010Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6454276Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6454511Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6454714Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6454916Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6455341Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6455598Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6455823Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6456178Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6456415Z           "Name": "Platform.Data.Doublets.FFI",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6456727Z           "Version": "0.9.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6456976Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6457220Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6457487Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6457735Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6457940Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6458140Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6458391Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6458620Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6458845Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6459026Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6459257Z           "Name": "Platform.Data.Doublets.Sequences",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6459581Z           "Version": "0.6.5",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6459810Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6460059Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6460318Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6460558Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6460770Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6460965Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6461203Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6461437Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6461649Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6461837Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6462046Z           "Name": "Platform.Data.Sequences",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6462330Z           "Version": "0.3.2",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6462565Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6462801Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6463067Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6463326Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6463528Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6463733Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6463968Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6464194Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6464411Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6464590Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6464825Z           "Name": "Platform.Delegates",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6465241Z           "Version": "0.1.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6465619Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6465863Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6466124Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6466364Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6466564Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6466762Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6467001Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6467225Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6467435Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6467638Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6467839Z           "Name": "Platform.Disposables",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6468139Z           "Version": "0.4.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6468366Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6468604Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6468866Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6469100Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6469313Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6469508Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6469744Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6469990Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6470210Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6470394Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6470609Z           "Name": "Platform.Exceptions",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6470887Z           "Version": "0.5.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6471133Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6471376Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6471642Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6471885Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6472089Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6472294Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6472534Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6472765Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6472989Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6473188Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6473395Z           "Name": "Platform.Interfaces",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6473843Z           "Version": "0.5.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6474113Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6474356Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6474623Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6474861Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6475192Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6475395Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6475639Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6475867Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6476080Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6476266Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6476461Z           "Name": "Platform.IO",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6476706Z           "Version": "0.5.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6476948Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6477191Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6477477Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6477729Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6477938Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6478149Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6478406Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6478648Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6478871Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6479076Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6479283Z           "Name": "Platform.Memory",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6479552Z           "Version": "0.4.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6479790Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6480045Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6480311Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6480553Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6480754Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6480953Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6481195Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6481424Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6481663Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6481850Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6482060Z           "Name": "Platform.Numbers",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6482340Z           "Version": "0.9.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6482574Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6482821Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6483091Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6483462Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6483671Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6483869Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6484112Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6484351Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6484566Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6484746Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6484953Z           "Name": "Platform.Random",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6485479Z           "Version": "0.3.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6485768Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6486007Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6486269Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6486507Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6486707Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6486910Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6487146Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6487383Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6487604Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6487785Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6487980Z           "Name": "Platform.Ranges",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6488246Z           "Version": "0.5.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6488504Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6488749Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6489006Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6489237Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6489446Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6489642Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6489885Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6490116Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6490331Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6490518Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6490722Z           "Name": "Platform.Reflection",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6491000Z           "Version": "0.7.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6491238Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6491475Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6491922Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6492155Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6492361Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6492564Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6492802Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6493040Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6493252Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6493432Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6493641Z           "Name": "Platform.Setters",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6493902Z           "Version": "0.5.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6494139Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6494386Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6494643Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6494878Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6495263Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6495522Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6495788Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6496062Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6496305Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6496494Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6496695Z           "Name": "Platform.Singletons",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6496977Z           "Version": "0.3.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6497223Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6497484Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6497757Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6497993Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6498203Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6498407Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6498647Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6498886Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6499099Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6499285Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6499492Z           "Name": "Platform.Threading",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6499768Z           "Version": "0.5.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6500008Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6500248Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6500512Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6500760Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6500960Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6501169Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6501558Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6501788Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6502007Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6502184Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6502386Z           "Name": "Platform.Timestamps",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6502664Z           "Version": "0.3.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6502895Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6503167Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6503429Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6503662Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6503866Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6504062Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6504304Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6504531Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6504741Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6504925Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6505256Z           "Name": "Platform.Unsafe",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6505528Z           "Version": "0.6.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6505764Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6506003Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6506270Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6506502Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6506699Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6506902Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6507138Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6507374Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6507588Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6507765Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6507994Z           "Name": "SQLitePCLRaw.bundle_e_sqlite3",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6508294Z           "Version": "2.1.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6508532Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6508771Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6509029Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6509267Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6509467Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6509784Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6510026Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6510262Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6510490Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6510672Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6510875Z           "Name": "SQLitePCLRaw.core",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6511153Z           "Version": "2.1.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6511386Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6511634Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6511890Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6512125Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6512333Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6512526Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6512764Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6512998Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6513210Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6513392Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6513605Z           "Name": "SQLitePCLRaw.lib.e_sqlite3",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6513892Z           "Version": "2.1.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6514133Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6514371Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6514638Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6514893Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6515286Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6515553Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6515791Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6516020Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6516239Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6516417Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6516649Z           "Name": "SQLitePCLRaw.provider.e_sqlite3",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6516956Z           "Version": "2.1.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6517190Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6517432Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6517691Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6517928Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6518129Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6518328Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6518583Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6518823Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6519187Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6519380Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6519612Z           "Name": "System.Security.AccessControl",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6519933Z           "Version": "6.0.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6520178Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6520430Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6520706Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6520948Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6521166Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6521370Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6521614Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6521849Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6522067Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6522245Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6522450Z           "Name": "xunit.analyzers",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6522711Z           "Version": "2.1.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6522950Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6523195Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6523457Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6523705Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6523933Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6524148Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6524392Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6524623Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6524844Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6525277Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6525637Z           "Name": "xunit.v3",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6525897Z           "Version": "4.0.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6526149Z           "Type": "PackageReference",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6526434Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6526698Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6526933Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6527145Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6527342Z           "IsTopLevel": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6527580Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6527975Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6528191Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6528379Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6528581Z           "Name": "xunit.v3.assert",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6528843Z           "Version": "4.0.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6529114Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6529354Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6529624Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6529861Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6530062Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6530267Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6530504Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6530732Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6530951Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6531128Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6531325Z           "Name": "xunit.v3.common",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6531582Z           "Version": "4.0.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6531813Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6532055Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6532318Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6532555Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6532760Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6532951Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6533194Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6533423Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6533633Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6533819Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6534021Z           "Name": "xunit.v3.core.mtp-v2",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6534307Z           "Version": "4.0.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6534538Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6534777Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6535192Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6535549Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6535763Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6535964Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6536211Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6536456Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6536704Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6536891Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6537118Z           "Name": "xunit.v3.extensibility.core",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6537587Z           "Version": "4.0.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6538118Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6556562Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6556901Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6557165Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6557393Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6557612Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6557873Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6558127Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6558356Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6558549Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6558754Z           "Name": "xunit.v3.mtp-v2",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6559030Z           "Version": "4.0.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6559308Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6559561Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6559837Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6560103Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6560312Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6560524Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6560773Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6561007Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6561235Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6561425Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6561642Z           "Name": "xunit.v3.runner.common",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6561934Z           "Version": "4.0.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6562175Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6562433Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6562706Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6562946Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6563171Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6563378Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6563627Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6563866Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6564084Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6564281Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6564713Z           "Name": "xunit.v3.runner.inproc.console",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6565192Z           "Version": "4.0.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6565580Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6565839Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6566127Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6566371Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6566581Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6566789Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6567030Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6567278Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6567497Z         }
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6567681Z       ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6567887Z       "HasNoWarnNU1701": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6568144Z       "DependencyGraph": {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6568395Z         "xunit.v3/4.0.1": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6568638Z           "xunit.v3.mtp-v2/4.0.1"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6568880Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6569096Z         "sqlite-vs-doublets/1.0.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6569390Z           "Microsoft.Data.Sqlite/10.0.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6569719Z           "Platform.Data.Doublets.Sequences/0.6.5",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6570061Z           "Platform.Data.Doublets/0.18.1"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6570341Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6570559Z         "Platform.Reflection/0.7.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6570847Z           "Platform.Collections/0.4.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6571126Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6571334Z         "Platform.Ranges/0.5.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6571620Z           "Platform.Exceptions/0.5.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6571886Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6572120Z         "Microsoft.ApplicationInsights/2.23.0": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6572437Z         "Platform.Random/0.3.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6572707Z           "Platform.Ranges/0.5.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6572950Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6573175Z         "Platform.Data.Doublets.FFI/0.9.0": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6573516Z         "Platform.Data.Sequences/0.3.2": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6573804Z         "xunit.analyzers/2.1.0": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6574167Z         "Microsoft.Testing.Extensions.Telemetry/2.4.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6574535Z           "Microsoft.ApplicationInsights/2.23.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6575262Z           "Microsoft.Testing.Platform/2.4.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6575595Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6575815Z         "Microsoft.Win32.Registry/5.0.0": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6576125Z         "xunit.v3.runner.common/4.0.1": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6576418Z           "Microsoft.Win32.Registry/5.0.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6576728Z           "System.Security.AccessControl/6.0.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6577152Z           "xunit.v3.common/4.0.1"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6577554Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6577773Z         "Platform.Timestamps/0.3.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6578132Z           "Platform.Interfaces/0.5.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6578571Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6578954Z         "Platform.Collections.Methods/0.7.3": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6579439Z           "Platform.Numbers/0.9.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6579883Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6580298Z         "Microsoft.Testing.Platform.MSBuild/2.4.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6580843Z           "Microsoft.Testing.Platform/2.4.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6581299Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6581653Z         "xunit.v3.core.mtp-v2/4.0.1": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6582179Z           "Microsoft.Testing.Extensions.Telemetry/2.4.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6583225Z           "Microsoft.Testing.Extensions.TrxReport.Abstractions/2.4.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6584139Z           "Microsoft.Testing.Platform.MSBuild/2.4.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6584500Z           "Microsoft.Testing.Platform/2.4.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6584816Z           "xunit.v3.extensibility.core/4.0.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6585278Z           "xunit.v3.runner.inproc.console/4.0.1"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6585561Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6585767Z         "Platform.Numbers/0.9.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6586051Z           "Platform.Converters/0.4.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6586308Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6586769Z         "Platform.Data/0.16.1": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6587034Z           "Platform.Delegates/0.1.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6587310Z           "Platform.Numbers/0.9.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6587611Z           "Platform.Setters/0.5.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6587877Z           "Platform.Threading/0.5.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6588130Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6588361Z         "xunit.v3.runner.inproc.console/4.0.1": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6588688Z           "xunit.v3.extensibility.core/4.0.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6589003Z           "xunit.v3.runner.common/4.0.1"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6589273Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6589498Z         "Microsoft.Data.Sqlite.Core/10.0.12": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6589813Z           "SQLitePCLRaw.core/2.1.12"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6590068Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6590282Z         "SQLitePCLRaw.core/2.1.12": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6590569Z         "Platform.Data.Doublets/0.18.1": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6590879Z           "Platform.Collections.Methods/0.7.3",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6591212Z           "Platform.Data.Doublets.FFI/0.9.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6591509Z           "Platform.Data/0.16.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6591784Z           "Platform.Memory/0.4.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6592049Z           "Platform.Random/0.3.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6592319Z           "Platform.Singletons/0.3.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6592614Z           "Platform.Timestamps/0.3.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6592875Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6593081Z         "Platform.Threading/0.5.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6593367Z           "Platform.Collections/0.4.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6593628Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6593841Z         "Platform.IO/0.5.1": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6594108Z           "Platform.Threading/0.5.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6594380Z           "Platform.Unsafe/0.6.1"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6594632Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6594852Z         "xunit.v3.extensibility.core/4.0.1": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6595293Z           "xunit.v3.common/4.0.1"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6595539Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6595772Z         "Microsoft.Bcl.AsyncInterfaces/6.0.0": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6596089Z         "Platform.Memory/0.4.1": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6596491Z           "Platform.IO/0.5.1"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6596731Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6596934Z         "Platform.Converters/0.4.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6597207Z           "Platform.Reflection/0.7.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6597462Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6597670Z         "Platform.Disposables/0.4.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6597952Z           "Platform.Exceptions/0.5.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6598208Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6598430Z         "System.Security.AccessControl/6.0.1": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6598740Z         "Platform.Unsafe/0.6.1": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6598997Z           "Platform.Numbers/0.9.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6599242Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6599447Z         "xunit.v3.assert/4.0.1": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6599716Z         "Platform.Singletons/0.3.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6599996Z           "Platform.Reflection/0.7.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6600252Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6600470Z         "SQLitePCLRaw.lib.e_sqlite3/2.1.12": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6600878Z         "Microsoft.Testing.Extensions.TrxReport.Abstractions/2.4.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6601288Z           "Microsoft.Testing.Platform/2.4.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6601569Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6601800Z         "SQLitePCLRaw.provider.e_sqlite3/2.1.12": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6602112Z           "SQLitePCLRaw.core/2.1.12"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6602369Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6602577Z         "Platform.Exceptions/0.5.0": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6602882Z         "Microsoft.Testing.Platform/2.4.0": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6603217Z         "Platform.Data.Doublets.Sequences/0.6.5": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6603534Z           "Platform.Data.Doublets/0.18.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6603836Z           "Platform.Data.Sequences/0.3.2"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6604107Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6604314Z         "Platform.Interfaces/0.5.0": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6604729Z         "Platform.Collections/0.4.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6605635Z           "Platform.Disposables/0.4.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6606161Z           "Platform.Interfaces/0.5.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6606642Z           "Platform.Random/0.3.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6607014Z           "Platform.Ranges/0.5.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6607269Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6607473Z         "Platform.Setters/0.5.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6607754Z           "Platform.Delegates/0.1.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6608032Z           "Platform.Interfaces/0.5.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6608283Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6608485Z         "xunit.v3.common/4.0.1": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6608788Z           "Microsoft.Bcl.AsyncInterfaces/6.0.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6609087Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6609311Z         "SQLitePCLRaw.bundle_e_sqlite3/2.1.12": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6609631Z           "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6609957Z           "SQLitePCLRaw.provider.e_sqlite3/2.1.12"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6610266Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6610475Z         "xunit.v3.mtp-v2/4.0.1": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6610739Z           "xunit.analyzers/2.1.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6611003Z           "xunit.v3.assert/4.0.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6611273Z           "xunit.v3.core.mtp-v2/4.0.1"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6611538Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6611742Z         "Platform.Delegates/0.1.1": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6612036Z         "Microsoft.Data.Sqlite/10.0.12": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6612345Z           "Microsoft.Data.Sqlite.Core/10.0.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6612678Z           "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6612985Z           "SQLitePCLRaw.core/2.1.12"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6613238Z         ]
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6613424Z       }
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6613604Z     },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6613793Z     {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6614056Z       "FilePath": "SQLiteVSDoublets/SQLiteVSDoublets.csproj",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6614405Z       "IsSuccess": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6614640Z       "Error": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6614881Z       "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6615426Z         "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6615904Z       ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6616130Z       "PackageManagementKind": "Default",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6616505Z       "PackageManagementSpecialFileRelativePath": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6616869Z       "ReferencedProjectPaths": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6617152Z       "ImportedFiles": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6617403Z       "AdditionalFiles": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6617649Z       "Dependencies": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6617872Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6618084Z           "Name": "Microsoft.Data.Sqlite",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6618366Z           "Version": "10.0.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6618635Z           "Type": "PackageReference",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6618923Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6619196Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6619439Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6619649Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6619864Z           "IsTopLevel": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6620110Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6620349Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6620579Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6620761Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6620990Z           "Name": "Microsoft.Data.Sqlite.Core",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6621284Z           "Version": "10.0.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6621526Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6621778Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6622044Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6622286Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6622496Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6622704Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6622953Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6623191Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6623409Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6623597Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6623807Z           "Name": "Platform.Collections",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6624095Z           "Version": "0.4.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6624454Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6624694Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6624963Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6625333Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6625540Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6625738Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6625976Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6626210Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6626429Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6626609Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6626834Z           "Name": "Platform.Collections.Methods",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6627135Z           "Version": "0.7.3",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6627373Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6627611Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6627869Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6628112Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6628314Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6628521Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6628762Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6628993Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6629216Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6629403Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6629611Z           "Name": "Platform.Converters",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6629893Z           "Version": "0.4.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6630133Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6630379Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6630644Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6630878Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6631086Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6631289Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6631543Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6631775Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6631995Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6632183Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6632382Z           "Name": "Platform.Data",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6632637Z           "Version": "0.16.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6632878Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6633120Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6633393Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6633748Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6633948Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6634149Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6634384Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6634619Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6634832Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6635119Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6635337Z           "Name": "Platform.Data.Doublets",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6635619Z           "Version": "0.18.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6635866Z           "Type": "PackageReference",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6636145Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6636404Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6636644Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6636846Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6637047Z           "IsTopLevel": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6637290Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6637520Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6637749Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6637930Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6638147Z           "Name": "Platform.Data.Doublets.FFI",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6638447Z           "Version": "0.9.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6638681Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6638919Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6639187Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6639422Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6639629Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6639826Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6640067Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6640320Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6640534Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6640719Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6640948Z           "Name": "Platform.Data.Doublets.Sequences",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6641257Z           "Version": "0.6.5",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6641508Z           "Type": "PackageReference",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6641791Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6642168Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6642407Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6642617Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6642823Z           "IsTopLevel": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6643058Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6643284Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6643505Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6643685Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6643897Z           "Name": "Platform.Data.Sequences",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6644180Z           "Version": "0.3.2",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6644414Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6644659Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6644919Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6645404Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6645621Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6645816Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6646060Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6646294Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6646511Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6646699Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6646909Z           "Name": "Platform.Delegates",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6647190Z           "Version": "0.1.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6647419Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6647660Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6647929Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6648164Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6648366Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6648576Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6648819Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6649057Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6649272Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6649457Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6649684Z           "Name": "Platform.Disposables",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6649972Z           "Version": "0.4.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6650218Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6650462Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6650727Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6650984Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6651194Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6651399Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6651790Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6652020Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6652238Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6652420Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6652627Z           "Name": "Platform.Exceptions",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6652911Z           "Version": "0.5.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6653142Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6653384Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6653647Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6653880Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6654086Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6654283Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6654520Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6654761Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6654976Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6655300Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6655507Z           "Name": "Platform.Interfaces",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6655778Z           "Version": "0.5.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6656022Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6656264Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6656529Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6656819Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6657024Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6657234Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6657469Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6657700Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6657924Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6658106Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6658308Z           "Name": "Platform.IO",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6658556Z           "Version": "0.5.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6658789Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6659041Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6659300Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6659541Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6659908Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6660106Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6660356Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6660594Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6660807Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6660994Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6661195Z           "Name": "Platform.Memory",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6661460Z           "Version": "0.4.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6661693Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6661937Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6662203Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6662436Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6662642Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6662837Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6663072Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6663308Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6663527Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6663709Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6663921Z           "Name": "Platform.Numbers",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6664191Z           "Version": "0.9.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6664445Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6664693Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6664963Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6665325Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6665532Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6665743Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6665986Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6666224Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6666448Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6666631Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6666832Z           "Name": "Platform.Random",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6667101Z           "Version": "0.3.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6667342Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6667592Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6667861Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6668102Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6668318Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6668521Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6668764Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6669007Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6669226Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6669544Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6669742Z           "Name": "Platform.Ranges",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6669999Z           "Version": "0.5.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6670239Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6670477Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6670741Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6670974Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6671173Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6671377Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6671615Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6671846Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6672070Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6672251Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6672462Z           "Name": "Platform.Reflection",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6672735Z           "Version": "0.7.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6672968Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6673218Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6673480Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6673724Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6673924Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6674158Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6674405Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6674639Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6674855Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6675148Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6675351Z           "Name": "Platform.Setters",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6675618Z           "Version": "0.5.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6675853Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6676094Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6676371Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6676608Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6676826Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6677029Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6677272Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6677640Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6677859Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6678040Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6678253Z           "Name": "Platform.Singletons",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6678537Z           "Version": "0.3.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6678775Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6679015Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6679275Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6679513Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6679715Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6679917Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6680153Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6680387Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6680609Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6680789Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6680991Z           "Name": "Platform.Threading",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6681266Z           "Version": "0.5.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6681510Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6681754Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6682019Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6682255Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6682467Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6682672Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6682919Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6683149Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6683362Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6683550Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6683757Z           "Name": "Platform.Timestamps",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6684037Z           "Version": "0.3.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6684280Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6684520Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6684786Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6685246Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6685478Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6685680Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6685916Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6686153Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6686371Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6686558Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6686762Z           "Name": "Platform.Unsafe",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6686849Z           "Version": "0.6.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6687082Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6687182Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6687274Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6687358Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6687438Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6687533Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6687619Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6687708Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6687789Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6687863Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6687989Z           "Name": "SQLitePCLRaw.bundle_e_sqlite3",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6688080Z           "Version": "2.1.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6688170Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6688263Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6688355Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6688443Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6688520Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6688614Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6688710Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6688794Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6688880Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6688961Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6689069Z           "Name": "SQLitePCLRaw.core",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6689154Z           "Version": "2.1.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6689243Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6689342Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6689432Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6689519Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6689600Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6689694Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6689779Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6689867Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6689948Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6690024Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6690142Z           "Name": "SQLitePCLRaw.lib.e_sqlite3",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6690354Z           "Version": "2.1.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6690439Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6690543Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6690641Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6690726Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6690802Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6690897Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6690988Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6691071Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6691152Z         },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6691231Z         {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6691363Z           "Name": "SQLitePCLRaw.provider.e_sqlite3",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6691447Z           "Version": "2.1.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6691541Z           "Type": "Unknown",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6691641Z           "EvaluationResult": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6691731Z           "TargetFrameworks": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6691818Z             "net10.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6691904Z           ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6691991Z           "IsTopLevel": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6692082Z           "IsUpdate": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6692177Z           "InfoUrl": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6692259Z         }
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6692335Z       ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6692430Z       "HasNoWarnNU1701": false,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6692530Z       "DependencyGraph": {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6692636Z         "Platform.Reflection/0.7.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6692745Z           "Platform.Collections/0.4.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6692829Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6692934Z         "Platform.Ranges/0.5.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6693036Z           "Platform.Exceptions/0.5.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6693121Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6693220Z         "Platform.Random/0.3.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6693316Z           "Platform.Ranges/0.5.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6693401Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6693525Z         "Platform.Data.Doublets.FFI/0.9.0": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6693632Z         "Platform.Data.Sequences/0.3.2": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6693743Z         "Platform.Timestamps/0.3.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6693849Z           "Platform.Interfaces/0.5.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6694020Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6694133Z         "Platform.Collections.Methods/0.7.3": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6694236Z           "Platform.Numbers/0.9.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6694321Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6694413Z         "Platform.Numbers/0.9.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6694515Z           "Platform.Converters/0.4.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6694597Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6694693Z         "Platform.Data/0.16.1": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6694788Z           "Platform.Delegates/0.1.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6694884Z           "Platform.Numbers/0.9.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6694980Z           "Platform.Setters/0.5.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6695201Z           "Platform.Threading/0.5.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6695284Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6695400Z         "Microsoft.Data.Sqlite.Core/10.0.12": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6695504Z           "SQLitePCLRaw.core/2.1.12"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6695579Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6695703Z   updater |       "SQLitePCLRaw.core/2.1.12": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6695813Z         "Platform.Data.Doublets/0.18.1": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6695926Z           "Platform.Collections.Methods/0.7.3",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6696042Z           "Platform.Data.Doublets.FFI/0.9.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6696139Z           "Platform.Data/0.16.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6696235Z           "Platform.Memory/0.4.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6696329Z           "Platform.Random/0.3.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6696433Z           "Platform.Singletons/0.3.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6696535Z           "Platform.Timestamps/0.3.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6696611Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6696714Z         "Platform.Threading/0.5.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6696819Z           "Platform.Collections/0.4.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6696894Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6696989Z         "Platform.IO/0.5.1": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6697090Z           "Platform.Threading/0.5.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6697308Z           "Platform.Unsafe/0.6.1"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6697386Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6697485Z         "Platform.Memory/0.4.1": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6697581Z           "Platform.IO/0.5.1"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6697657Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6697757Z         "Platform.Converters/0.4.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6697858Z           "Platform.Reflection/0.7.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6697939Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6698041Z         "Platform.Disposables/0.4.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6698143Z           "Platform.Exceptions/0.5.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6698225Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6698316Z         "Platform.Unsafe/0.6.1": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6698415Z           "Platform.Numbers/0.9.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6698497Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6698596Z         "Platform.Singletons/0.3.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6698700Z           "Platform.Reflection/0.7.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6698782Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6698898Z         "SQLitePCLRaw.lib.e_sqlite3/2.1.12": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6699022Z         "SQLitePCLRaw.provider.e_sqlite3/2.1.12": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6699129Z           "SQLitePCLRaw.core/2.1.12"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6699211Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6699312Z         "Platform.Exceptions/0.5.0": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6699442Z         "Platform.Data.Doublets.Sequences/0.6.5": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6699553Z           "Platform.Data.Doublets/0.18.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6699663Z           "Platform.Data.Sequences/0.3.2"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6699740Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6699845Z         "Platform.Interfaces/0.5.0": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6699952Z         "Platform.Collections/0.4.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6700050Z           "Platform.Disposables/0.4.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6700154Z           "Platform.Interfaces/0.5.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6700253Z           "Platform.Random/0.3.0",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6700351Z           "Platform.Ranges/0.5.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6700426Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6700528Z         "Platform.Setters/0.5.0": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6700634Z           "Platform.Delegates/0.1.1",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6700854Z           "Platform.Interfaces/0.5.0"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6700938Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6701058Z         "SQLitePCLRaw.bundle_e_sqlite3/2.1.12": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6701177Z           "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6701295Z           "SQLitePCLRaw.provider.e_sqlite3/2.1.12"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6701380Z         ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6701483Z         "Platform.Delegates/0.1.1": [],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6701584Z         "Microsoft.Data.Sqlite/10.0.12": [
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6701700Z           "Microsoft.Data.Sqlite.Core/10.0.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6701813Z           "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6701914Z           "SQLitePCLRaw.core/2.1.12"
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6701992Z         ]
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6702080Z       }
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6702162Z     }
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6702237Z   ],
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6702331Z   "GlobalJson": {
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6702440Z     "FilePath": "global.json",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6702527Z     "IsSuccess": true,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6702622Z     "Dependencies": []
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6702703Z   },
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6702805Z   "DotNetToolsJson": null,
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6702902Z   "SolutionDirectory": "csharp",
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6702988Z   "Error": null
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6703072Z }
+Dependabot	Run Dependabot	2026-10-05T10:04:38.6703326Z   proxy | 2026/10/05 10:04:38 [143] POST /update_jobs/1609892908/update_dependency_list
+Dependabot	Run Dependabot	2026-10-05T10:04:38.8238768Z   proxy | 2026/10/05 10:04:38 [143] 204 /update_jobs/1609892908/update_dependency_list
+Dependabot	Run Dependabot	2026-10-05T10:04:38.8326231Z updater | 2026/10/05 10:04:38 INFO Starting dependency update for microsoft.applicationinsights/2.23.0
+Dependabot	Run Dependabot	2026-10-05T10:04:38.8549095Z updater | 2026/10/05 10:04:38 INFO Starting dependency update for microsoft.bcl.asyncinterfaces/6.0.0
+Dependabot	Run Dependabot	2026-10-05T10:04:38.8569119Z updater | 2026/10/05 10:04:38 INFO Starting dependency update for microsoft.data.sqlite/10.0.12
+Dependabot	Run Dependabot	2026-10-05T10:04:38.8604586Z updater | 2026/10/05 10:04:38 INFO Starting analysis of Microsoft.Data.Sqlite...
+Dependabot	Run Dependabot	2026-10-05T10:04:38.8957638Z updater | 2026/10/05 10:04:38 INFO   Determining multi-dependency property.
+Dependabot	Run Dependabot	2026-10-05T10:04:38.8992639Z updater | 2026/10/05 10:04:38 INFO   Finding updated version.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.0042904Z   proxy | 2026/10/05 10:04:39 [145] GET https://api.nuget.org:443/v3/registration5-gz-semver2/microsoft.data.sqlite/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.0585433Z   proxy | 2026/10/05 10:04:39 [145] 200 https://api.nuget.org:443/v3/registration5-gz-semver2/microsoft.data.sqlite/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.0761183Z   proxy | 2026/10/05 10:04:39 [146] GET https://api.nuget.org:443/v3/registration5-gz-semver2/microsoft.data.sqlite/page/1.0.0-beta1/3.1.14.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.0835261Z   proxy | 2026/10/05 10:04:39 [151] GET https://api.nuget.org:443/v3/registration5-gz-semver2/microsoft.data.sqlite/page/3.1.15/6.0.8.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.0846187Z   proxy | 2026/10/05 10:04:39 [152] GET https://api.nuget.org:443/v3/registration5-gz-semver2/microsoft.data.sqlite/page/6.0.9/8.0.0-rc.2.23480.1.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.0849511Z   proxy | 2026/10/05 10:04:39 [153] GET https://api.nuget.org:443/v3/registration5-gz-semver2/microsoft.data.sqlite/page/8.0.0/10.0.0-preview.3.25171.6.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.0870330Z   proxy | 2026/10/05 10:04:39 [154] GET https://api.nuget.org:443/v3/registration5-gz-semver2/microsoft.data.sqlite/page/10.0.0-preview.4.25258.110/11.0.0-rc.1.26425.128.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.1282465Z   proxy | 2026/10/05 10:04:39 [146] 200 https://api.nuget.org:443/v3/registration5-gz-semver2/microsoft.data.sqlite/page/1.0.0-beta1/3.1.14.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.1431613Z   proxy | 2026/10/05 10:04:39 [153] 200 https://api.nuget.org:443/v3/registration5-gz-semver2/microsoft.data.sqlite/page/8.0.0/10.0.0-preview.3.25171.6.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.1458438Z   proxy | 2026/10/05 10:04:39 [154] 200 https://api.nuget.org:443/v3/registration5-gz-semver2/microsoft.data.sqlite/page/10.0.0-preview.4.25258.110/11.0.0-rc.1.26425.128.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.1640776Z   proxy | 2026/10/05 10:04:39 [151] 200 https://api.nuget.org:443/v3/registration5-gz-semver2/microsoft.data.sqlite/page/3.1.15/6.0.8.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.1805200Z   proxy | 2026/10/05 10:04:39 [152] 200 https://api.nuget.org:443/v3/registration5-gz-semver2/microsoft.data.sqlite/page/6.0.9/8.0.0-rc.2.23480.1.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.1952898Z updater | 2026/10/05 10:04:39 INFO   Finding updated peer dependencies.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.1953563Z updater | 2026/10/05 10:04:39 INFO Analysis complete.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.1959045Z updater | 2026/10/05 10:04:39 INFO No updatable version found for Microsoft.Data.Sqlite in /csharp/SQLiteVSDoublets/SQLiteVSDoublets.csproj.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.1970470Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for microsoft.data.sqlite.core/10.0.12
+Dependabot	Run Dependabot	2026-10-05T10:04:39.1989557Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for microsoft.testing.extensions.telemetry/2.4.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.2006375Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for microsoft.testing.extensions.trxreport.abstractions/2.4.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.2024411Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for microsoft.testing.platform/2.4.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.2042340Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for microsoft.testing.platform.msbuild/2.4.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.2060283Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for microsoft.win32.registry/5.0.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.2078553Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.collections/0.4.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.2095373Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.collections.methods/0.7.3
+Dependabot	Run Dependabot	2026-10-05T10:04:39.2114883Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.converters/0.4.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.2132483Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.data/0.16.1
+Dependabot	Run Dependabot	2026-10-05T10:04:39.2150343Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.data.doublets/0.18.1
+Dependabot	Run Dependabot	2026-10-05T10:04:39.2158301Z updater | 2026/10/05 10:04:39 INFO Starting analysis of Platform.Data.Doublets...
+Dependabot	Run Dependabot	2026-10-05T10:04:39.2164551Z updater | 2026/10/05 10:04:39 INFO   Determining multi-dependency property.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.2166177Z updater | 2026/10/05 10:04:39 INFO   Finding updated version.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.2227091Z   proxy | 2026/10/05 10:04:39 [156] GET https://api.nuget.org:443/v3/registration5-gz-semver2/platform.data.doublets/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.3084424Z   proxy | 2026/10/05 10:04:39 [156] 200 https://api.nuget.org:443/v3/registration5-gz-semver2/platform.data.doublets/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.3203162Z updater | 2026/10/05 10:04:39 INFO   Finding updated peer dependencies.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.3203915Z 2026/10/05 10:04:39 INFO Analysis complete.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.3204956Z 2026/10/05 10:04:39 INFO No updatable version found for Platform.Data.Doublets in /csharp/SQLiteVSDoublets/SQLiteVSDoublets.csproj.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.3218057Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.data.doublets.ffi/0.9.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.3237229Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.data.doublets.sequences/0.6.5
+Dependabot	Run Dependabot	2026-10-05T10:04:39.3244522Z updater | 2026/10/05 10:04:39 INFO Starting analysis of Platform.Data.Doublets.Sequences...
+Dependabot	Run Dependabot	2026-10-05T10:04:39.3250856Z updater | 2026/10/05 10:04:39 INFO   Determining multi-dependency property.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.3251697Z updater | 2026/10/05 10:04:39 INFO   Finding updated version.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.3308020Z   proxy | 2026/10/05 10:04:39 [158] GET https://api.nuget.org:443/v3/registration5-gz-semver2/platform.data.doublets.sequences/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4101084Z   proxy | 2026/10/05 10:04:39 [158] 200 https://api.nuget.org:443/v3/registration5-gz-semver2/platform.data.doublets.sequences/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4132262Z updater | 2026/10/05 10:04:39 INFO   Finding updated peer dependencies.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4133457Z 2026/10/05 10:04:39 INFO Analysis complete.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4135680Z 2026/10/05 10:04:39 INFO No updatable version found for Platform.Data.Doublets.Sequences in /csharp/SQLiteVSDoublets/SQLiteVSDoublets.csproj.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4146303Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.data.sequences/0.3.2
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4167047Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.delegates/0.1.1
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4185432Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.disposables/0.4.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4202899Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.exceptions/0.5.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4221640Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.interfaces/0.5.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4239606Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.io/0.5.1
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4258308Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.memory/0.4.1
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4319904Z   proxy | 2026/10/05 10:04:39 [159] WARN: Cannot read request from mitm'd client api.nuget.org:443 read tcp 172.19.0.2:1080->172.19.0.3:46164: read: connection reset by peer
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4321871Z   proxy | 2026/10/05 10:04:39 [160] WARN: Cannot read request from mitm'd client api.nuget.org:443 read tcp 172.19.0.2:1080->172.19.0.3:46180: read: connection reset by peer
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4323716Z 2026/10/05 10:04:39 [161] WARN: Cannot read request from mitm'd client api.nuget.org:443 read tcp 172.19.0.2:1080->172.19.0.3:46182: read: connection reset by peer
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4325779Z   proxy | 2026/10/05 10:04:39 [162] WARN: Cannot read request from mitm'd client api.nuget.org:443 read tcp 172.19.0.2:1080->172.19.0.3:46186: read: connection reset by peer
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4327516Z 2026/10/05 10:04:39 [163] WARN: Cannot read request from mitm'd client api.nuget.org:443 read tcp 172.19.0.2:1080->172.19.0.3:46198: read: connection reset by peer
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4329095Z   proxy | 2026/10/05 10:04:39 [164] WARN: Cannot read request from mitm'd client api.nuget.org:443 read tcp 172.19.0.2:1080->172.19.0.3:46158: read: connection reset by peer
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4330142Z   proxy | 2026/10/05 10:04:39 [165] WARN: Cannot read request from mitm'd client api.nuget.org:443 read tcp 172.19.0.2:1080->172.19.0.3:46148: read: connection reset by peer
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4350201Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.numbers/0.9.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4367262Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.random/0.3.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4388334Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.ranges/0.5.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4406373Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.reflection/0.7.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4424702Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.setters/0.5.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4443207Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.singletons/0.3.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4462312Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.threading/0.5.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4481265Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.timestamps/0.3.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4499257Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for platform.unsafe/0.6.1
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4515459Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for sqlitepclraw.bundle_e_sqlite3/2.1.12
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4533542Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for sqlitepclraw.core/2.1.12
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4550131Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for sqlitepclraw.lib.e_sqlite3/2.1.12
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4566870Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for sqlitepclraw.provider.e_sqlite3/2.1.12
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4585152Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for system.security.accesscontrol/6.0.1
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4603903Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for xunit.analyzers/2.1.0
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4623634Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for xunit.v3/4.0.1
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4632006Z updater | 2026/10/05 10:04:39 INFO Starting analysis of xunit.v3...
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4638317Z updater | 2026/10/05 10:04:39 INFO   Determining multi-dependency property.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4639820Z updater | 2026/10/05 10:04:39 INFO   Finding updated version.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.4704200Z   proxy | 2026/10/05 10:04:39 [167] GET https://api.nuget.org:443/v3/registration5-gz-semver2/xunit.v3/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.5225323Z   proxy | 2026/10/05 10:04:39 [167] 200 https://api.nuget.org:443/v3/registration5-gz-semver2/xunit.v3/index.json
+Dependabot	Run Dependabot	2026-10-05T10:04:39.5272121Z updater | 2026/10/05 10:04:39 INFO   Finding updated peer dependencies.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.5273179Z 2026/10/05 10:04:39 INFO Analysis complete.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.5274400Z 2026/10/05 10:04:39 INFO No updatable version found for xunit.v3 in /csharp/SQLiteVSDoublets.Tests/SQLiteVSDoublets.Tests.csproj.
+Dependabot	Run Dependabot	2026-10-05T10:04:39.5285778Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for xunit.v3.assert/4.0.1
+Dependabot	Run Dependabot	2026-10-05T10:04:39.5304165Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for xunit.v3.common/4.0.1
+Dependabot	Run Dependabot	2026-10-05T10:04:39.5321511Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for xunit.v3.core.mtp-v2/4.0.1
+Dependabot	Run Dependabot	2026-10-05T10:04:39.5339067Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for xunit.v3.extensibility.core/4.0.1
+Dependabot	Run Dependabot	2026-10-05T10:04:39.5358797Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for xunit.v3.mtp-v2/4.0.1
+Dependabot	Run Dependabot	2026-10-05T10:04:39.5379061Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for xunit.v3.runner.common/4.0.1
+Dependabot	Run Dependabot	2026-10-05T10:04:39.5397346Z updater | 2026/10/05 10:04:39 INFO Starting dependency update for xunit.v3.runner.inproc.console/4.0.1
+Dependabot	Run Dependabot	2026-10-05T10:04:39.5438300Z   proxy | 2026/10/05 10:04:39 [168] PATCH /update_jobs/1609892908/mark_as_processed
+Dependabot	Run Dependabot	2026-10-05T10:04:39.7086332Z   proxy | 2026/10/05 10:04:39 [168] 204 /update_jobs/1609892908/mark_as_processed
+Dependabot	Run Dependabot	2026-10-05T10:04:41.7869178Z Cleaned up container 1265f9a52439e34e070f48afa90846f253592e1b097f788bce762eea89df4c8a
+Dependabot	Run Dependabot	2026-10-05T10:04:41.7996545Z   proxy | 2026/10/05 10:04:41 3/127 calls cached (2%)
+Dependabot	Run Dependabot	2026-10-05T10:04:41.7997556Z   proxy | 2026/10/05 10:04:41 Posting metrics to remote API endpoint
+Dependabot	Run Dependabot	2026-10-05T10:04:42.0885827Z 🤖 ~ finished ~
+Dependabot	Post Run Dependabot	﻿2026-10-05T10:04:42.1040370Z Post job cleanup.
+Dependabot	Complete job	﻿2026-10-05T10:04:42.2521650Z Cleaning up orphan processes

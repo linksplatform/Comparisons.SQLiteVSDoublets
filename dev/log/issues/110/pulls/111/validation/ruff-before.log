@@ -1,0 +1,107 @@
+I001 [*] Import block is un-sorted or un-formatted
+ --> experiments/ci/collect_evidence.py:3:1
+  |
+1 |   """Collect reproducible GitHub CI evidence for issue 110 without logging tokens."""
+2 |
+3 | / import concurrent.futures
+4 | | import json
+5 | | from pathlib import Path
+6 | | import subprocess
+7 | | import sys
+  | |__________^
+help: Organize imports
+  |
+4 | import json
+  - from pathlib import Path
+5 | import subprocess
+6 | import sys
+  -
+7 + from pathlib import Path
+8 |
+  |
+
+I001 [*] Import block is un-sorted or un-formatted
+ --> scripts/benchmark_ci.py:3:1
+  |
+1 |   """Plan bounded benchmark jobs and verify all artifacts before publication."""
+2 |
+3 | / import argparse
+4 | | import itertools
+5 | | import json
+6 | | from pathlib import Path
+7 | | import sys
+8 | |
+9 | | import benchmark_report
+  | |_______________________^
+help: Organize imports
+  |
+5 | import json
+6 + import sys
+7 | from pathlib import Path
+  - import sys
+8 |
+  |
+
+B905 `zip()` without an explicit `strict=` parameter
+   --> scripts/benchmark_report.py:313:36
+    |
+311 |                     1, len(sizes), figsize=(6 * len(sizes), 5), squeeze=False, sharey=False
+312 |                 )
+313 |                 for axis, count in zip(axes[0], sizes):
+    |                                    ^^^^^^^^^^^^^^^^^^^
+314 |                     results = reports[(category, language, bits, count)]["results"]
+315 |                     width = 0.8 / len(results)
+    |
+help: Add explicit value for parameter `strict=`
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> scripts/publish_benchmarks.py:3:1
+   |
+ 1 |   """Publish validated benchmark results, recomputing documents after a lost race."""
+ 2 |
+ 3 | / import argparse
+ 4 | | import json
+ 5 | | from pathlib import Path
+ 6 | | import shutil
+ 7 | | import subprocess
+ 8 | | import tempfile
+ 9 | |
+10 | | import benchmark_ci
+11 | | import benchmark_report
+   | |_______________________^
+help: Organize imports
+  |
+4 | import json
+  - from pathlib import Path
+5 | import shutil
+6 | import subprocess
+7 | import tempfile
+8 + from pathlib import Path
+9 |
+  |
+
+I001 [*] Import block is un-sorted or un-formatted
+ --> scripts/test_benchmark_ci.py:3:1
+  |
+1 |   """Regression tests for complete, current-run benchmark artifacts."""
+2 |
+3 | / import json
+4 | | from pathlib import Path
+5 | | import tempfile
+6 | | import unittest
+7 | |
+8 | | import benchmark_ci as ci
+9 | | from test_benchmark_report import sample
+  | |________________________________________^
+help: Organize imports
+  |
+3 | import json
+  - from pathlib import Path
+4 | import tempfile
+5 | import unittest
+6 + from pathlib import Path
+7 |
+  |
+
+Found 5 errors.
+[*] 4 fixable with the `--fix` option (1 hidden fix can be enabled with the `--unsafe-fixes` option).

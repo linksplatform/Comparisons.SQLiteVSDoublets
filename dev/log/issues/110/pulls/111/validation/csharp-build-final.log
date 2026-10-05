@@ -1,0 +1,11 @@
+  Determining projects to restore...
+  Restored /tmp/gh-issue-solver-1791195897867/csharp/SQLiteVSDoublets.Tests/SQLiteVSDoublets.Tests.csproj (in 1.16 sec).
+  Restored /tmp/gh-issue-solver-1791195897867/csharp/SQLiteVSDoublets/SQLiteVSDoublets.csproj (in 1.17 sec).
+  SQLiteVSDoublets -> /tmp/gh-issue-solver-1791195897867/csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll
+  SQLiteVSDoublets.Tests -> /tmp/gh-issue-solver-1791195897867/csharp/SQLiteVSDoublets.Tests/bin/Release/net10.0/SQLiteVSDoublets.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:18.08

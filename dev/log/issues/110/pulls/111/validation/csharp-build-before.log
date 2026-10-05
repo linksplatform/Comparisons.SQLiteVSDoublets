@@ -1,0 +1,28 @@
+
+Welcome to .NET 10.0!
+---------------------
+SDK Version: 10.0.112
+
+----------------
+Installed an ASP.NET Core HTTPS development certificate.
+To trust the certificate, run 'dotnet dev-certs https --trust'
+Learn about HTTPS: https://aka.ms/dotnet-https
+
+----------------
+Write your first app: https://aka.ms/dotnet-hello-world
+Find out what's new: https://aka.ms/dotnet-whats-new
+Explore documentation: https://aka.ms/dotnet-docs
+Report issues and find source on GitHub: https://github.com/dotnet/core
+Use 'dotnet --help' to see available commands or visit: https://aka.ms/dotnet-cli
+--------------------------------------------------------------------------------------
+  Determining projects to restore...
+  Restored /tmp/gh-issue-solver-1791195897867/csharp/SQLiteVSDoublets/SQLiteVSDoublets.csproj (in 24.66 sec).
+  Restored /tmp/gh-issue-solver-1791195897867/csharp/SQLiteVSDoublets.Tests/SQLiteVSDoublets.Tests.csproj (in 24.65 sec).
+  SQLiteVSDoublets -> /tmp/gh-issue-solver-1791195897867/csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll
+  SQLiteVSDoublets.Tests -> /tmp/gh-issue-solver-1791195897867/csharp/SQLiteVSDoublets.Tests/bin/Release/net10.0/SQLiteVSDoublets.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:01:53.19

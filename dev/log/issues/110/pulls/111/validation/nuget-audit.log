@@ -1,0 +1,75 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+{
+  "version": 1,
+  "parameters": "--vulnerable --include-transitive",
+  "sources": [
+    "https://api.nuget.org/v3/index.json"
+  ],
+  "projects": [
+    {
+      "path": "/tmp/gh-issue-solver-1791195897867/csharp/SQLiteVSDoublets/SQLiteVSDoublets.csproj"
+    }
+  ]
+}
+
+{
+  "version": 1,
+  "parameters": "--vulnerable --include-transitive",
+  "sources": [
+    "https://api.nuget.org/v3/index.json"
+  ],
+  "projects": [
+    {
+      "path": "/tmp/gh-issue-solver-1791195897867/csharp/SQLiteVSDoublets.Tests/SQLiteVSDoublets.Tests.csproj"
+    }
+  ]
+}
+
+{
+  "version": 1,
+  "parameters": "--vulnerable --include-transitive",
+  "sources": [
+    "https://api.nuget.org/v3/index.json"
+  ],
+  "projects": [
+    {
+      "path": "/tmp/gh-issue-solver-1791195897867/experiments/csharp_objects_profile/csharp_objects_profile.csproj"
+    }
+  ]
+}
+
+{
+  "version": 1,
+  "parameters": "--vulnerable --include-transitive",
+  "sources": [
+    "https://api.nuget.org/v3/index.json"
+  ],
+  "projects": [
+    {
+      "path": "/tmp/gh-issue-solver-1791195897867/experiments/csharp_split_linked_list/csharp_split_linked_list.csproj"
+    }
+  ]
+}
+
+{
+  "version": 1,
+  "parameters": "--vulnerable --include-transitive",
+  "sources": [
+    "https://api.nuget.org/v3/index.json"
+  ],
+  "projects": [
+    {
+      "path": "/tmp/gh-issue-solver-1791195897867/experiments/csharp_tree_delete/csharp_tree_delete.csproj"
+    }
+  ]
+}
+

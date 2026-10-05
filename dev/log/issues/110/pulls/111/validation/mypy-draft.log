@@ -1,0 +1,13 @@
+scripts/benchmark_report.py:266: error: Value of type "object" is not indexable  [index]
+scripts/benchmark_report.py:268: error: "object" has no attribute "format"  [attr-defined]
+scripts/benchmark_report.py:270: error: "object" has no attribute "format"  [attr-defined]
+scripts/benchmark_report.py:273: error: List item 0 has incompatible type "object"; expected "str"  [list-item]
+scripts/benchmark_report.py:278: error: Value of type "object" is not indexable  [index]
+scripts/benchmark_report.py:287: error: "object" has no attribute "format"  [attr-defined]
+scripts/benchmark_report.py:288: error: Value of type "object" is not indexable  [index]
+scripts/benchmark_report.py:312: error: Value of type "object" is not indexable  [index]
+scripts/benchmark_report.py:333: error: Value of type "object" is not indexable  [index]
+scripts/benchmark_report.py:339: error: "object" has no attribute "format"  [attr-defined]
+scripts/test_benchmark_report.py:16: error: Incompatible types in assignment (expression has type "list[Any]", variable has type "tuple[Any, ...]")  [assignment]
+scripts/test_benchmark_report.py:61: error: "object" not callable  [operator]
+Found 12 errors in 2 files (checked 6 source files)

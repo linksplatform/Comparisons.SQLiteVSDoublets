@@ -1,0 +1,53 @@
+SQLite_Memory #1: create 5443 ns/op, query_all 1591 ns/op, query_by_id 4140 ns/op, query_by_from_to 5769 ns/op, query_by_from 7062 ns/op, query_by_to 5470 ns/op, update 8224 ns/op, delete 5814 ns/op
+SQLite_Memory #2: create 4846 ns/op, query_all 2142 ns/op, query_by_id 4581 ns/op, query_by_from_to 5260 ns/op, query_by_from 7218 ns/op, query_by_to 6402 ns/op, update 7740 ns/op, delete 6831 ns/op
+SQLite_Memory #3: create 8154 ns/op, query_all 2369 ns/op, query_by_id 6928 ns/op, query_by_from_to 4917 ns/op, query_by_from 9281 ns/op, query_by_to 8058 ns/op, update 9190 ns/op, delete 8084 ns/op
+SQLite_File #1: create 18884 ns/op, query_all 1067 ns/op, query_by_id 2714 ns/op, query_by_from_to 3004 ns/op, query_by_from 3693 ns/op, query_by_to 3445 ns/op, update 20296 ns/op, delete 13003 ns/op
+SQLite_File #2: create 18057 ns/op, query_all 972 ns/op, query_by_id 2477 ns/op, query_by_from_to 3094 ns/op, query_by_from 4794 ns/op, query_by_to 6403 ns/op, update 12714 ns/op, delete 11903 ns/op
+SQLite_File #3: create 21467 ns/op, query_all 1136 ns/op, query_by_id 2559 ns/op, query_by_from_to 5002 ns/op, query_by_from 3344 ns/op, query_by_to 2920 ns/op, update 20271 ns/op, delete 25444 ns/op
+SystemDataSQLite_Memory #1: create 9730 ns/op, query_all 1857 ns/op, query_by_id 7526 ns/op, query_by_from_to 12782 ns/op, query_by_from 12436 ns/op, query_by_to 9644 ns/op, update 12745 ns/op, delete 13824 ns/op
+SystemDataSQLite_Memory #2: create 17101 ns/op, query_all 2060 ns/op, query_by_id 13282 ns/op, query_by_from_to 10391 ns/op, query_by_from 9522 ns/op, query_by_to 15046 ns/op, update 15577 ns/op, delete 7736 ns/op
+SystemDataSQLite_Memory #3: create 30507 ns/op, query_all 2094 ns/op, query_by_id 6957 ns/op, query_by_from_to 7762 ns/op, query_by_from 8276 ns/op, query_by_to 12026 ns/op, update 14146 ns/op, delete 8809 ns/op
+SystemDataSQLite_File #1: create 8301 ns/op, query_all 937 ns/op, query_by_id 2731 ns/op, query_by_from_to 3102 ns/op, query_by_from 5175 ns/op, query_by_to 7404 ns/op, update 61328 ns/op, delete 42776 ns/op
+SystemDataSQLite_File #2: create 21020 ns/op, query_all 925 ns/op, query_by_id 13663 ns/op, query_by_from_to 15936 ns/op, query_by_from 6833 ns/op, query_by_to 6663 ns/op, update 18115 ns/op, delete 25469 ns/op
+SystemDataSQLite_File #3: create 22688 ns/op, query_all 817 ns/op, query_by_id 7298 ns/op, query_by_from_to 3168 ns/op, query_by_from 3305 ns/op, query_by_to 3315 ns/op, update 19280 ns/op, delete 13262 ns/op
+SQLite_Memory #1: create 4730 ns/op, query_all 908 ns/op, query_by_id 2862 ns/op, query_by_from_to 5514 ns/op, query_by_from 4083 ns/op, query_by_to 3439 ns/op, update 12755 ns/op, delete 4896 ns/op
+SQLite_Memory #2: create 7896 ns/op, query_all 2897 ns/op, query_by_id 3306 ns/op, query_by_from_to 4310 ns/op, query_by_from 6902 ns/op, query_by_to 3476 ns/op, update 6966 ns/op, delete 4651 ns/op
+SQLite_Memory #3: create 6280 ns/op, query_all 950 ns/op, query_by_id 2962 ns/op, query_by_from_to 4020 ns/op, query_by_from 3983 ns/op, query_by_to 5742 ns/op, update 8095 ns/op, delete 4585 ns/op
+SQLite_File #1: create 14778 ns/op, query_all 1025 ns/op, query_by_id 2964 ns/op, query_by_from_to 3169 ns/op, query_by_from 3690 ns/op, query_by_to 5786 ns/op, update 21126 ns/op, delete 14582 ns/op
+SQLite_File #2: create 14816 ns/op, query_all 836 ns/op, query_by_id 2404 ns/op, query_by_from_to 2846 ns/op, query_by_from 3662 ns/op, query_by_to 3843 ns/op, update 15078 ns/op, delete 13699 ns/op
+SQLite_File #3: create 31562 ns/op, query_all 931 ns/op, query_by_id 2458 ns/op, query_by_from_to 2915 ns/op, query_by_from 2132 ns/op, query_by_to 2938 ns/op, update 19516 ns/op, delete 37552 ns/op
+SystemDataSQLite_Memory #1: create 7775 ns/op, query_all 1557 ns/op, query_by_id 10154 ns/op, query_by_from_to 26314 ns/op, query_by_from 16693 ns/op, query_by_to 62866 ns/op, update 62056 ns/op, delete 12830 ns/op
+SystemDataSQLite_Memory #2: create 8710 ns/op, query_all 1652 ns/op, query_by_id 7959 ns/op, query_by_from_to 7088 ns/op, query_by_from 8803 ns/op, query_by_to 8206 ns/op, update 7803 ns/op, delete 5367 ns/op
+SystemDataSQLite_Memory #3: create 10054 ns/op, query_all 2394 ns/op, query_by_id 3834 ns/op, query_by_from_to 4105 ns/op, query_by_from 4349 ns/op, query_by_to 4297 ns/op, update 6059 ns/op, delete 4640 ns/op
+SystemDataSQLite_File #1: create 12342 ns/op, query_all 822 ns/op, query_by_id 2662 ns/op, query_by_from_to 3280 ns/op, query_by_from 5996 ns/op, query_by_to 5254 ns/op, update 18966 ns/op, delete 13918 ns/op
+SystemDataSQLite_File #2: create 27016 ns/op, query_all 777 ns/op, query_by_id 2854 ns/op, query_by_from_to 3977 ns/op, query_by_from 7156 ns/op, query_by_to 4385 ns/op, update 30240 ns/op, delete 19919 ns/op
+SystemDataSQLite_File #3: create 23025 ns/op, query_all 1214 ns/op, query_by_id 3440 ns/op, query_by_from_to 3905 ns/op, query_by_from 3862 ns/op, query_by_to 3775 ns/op, update 26438 ns/op, delete 12567 ns/op
+SQLite_Memory #1: create 20417 ns/op, read_all 9379 ns/op, read_by_id 16348 ns/op, delete 7416 ns/op
+SQLite_Memory #2: create 13352 ns/op, read_all 7562 ns/op, read_by_id 13385 ns/op, delete 4697 ns/op
+SQLite_Memory #3: create 15356 ns/op, read_all 7443 ns/op, read_by_id 13862 ns/op, delete 5371 ns/op
+SQLite_File #1: create 22007 ns/op, read_all 12559 ns/op, read_by_id 12720 ns/op, delete 27702 ns/op
+SQLite_File #2: create 22546 ns/op, read_all 7391 ns/op, read_by_id 11878 ns/op, delete 20685 ns/op
+SQLite_File #3: create 21392 ns/op, read_all 8332 ns/op, read_by_id 11136 ns/op, delete 17120 ns/op
+SystemDataSQLite_Memory #1: create 9541 ns/op, read_all 7462 ns/op, read_by_id 11449 ns/op, delete 2920 ns/op
+SystemDataSQLite_Memory #2: create 9050 ns/op, read_all 9358 ns/op, read_by_id 15647 ns/op, delete 3391 ns/op
+SystemDataSQLite_Memory #3: create 12842 ns/op, read_all 8210 ns/op, read_by_id 13133 ns/op, delete 3475 ns/op
+SystemDataSQLite_File #1: create 28181 ns/op, read_all 12800 ns/op, read_by_id 12222 ns/op, delete 25953 ns/op
+SystemDataSQLite_File #2: create 30448 ns/op, read_all 20889 ns/op, read_by_id 13532 ns/op, delete 41925 ns/op
+SystemDataSQLite_File #3: create 67465 ns/op, read_all 10889 ns/op, read_by_id 13694 ns/op, delete 109686 ns/op
+SQLite_Memory #1: create 17110 ns/op, read_all 9943 ns/op, read_by_id 12655 ns/op, delete 4077 ns/op
+SQLite_Memory #2: create 11740 ns/op, read_all 8255 ns/op, read_by_id 13664 ns/op, delete 3595 ns/op
+SQLite_Memory #3: create 17919 ns/op, read_all 9519 ns/op, read_by_id 13277 ns/op, delete 3579 ns/op
+SQLite_File #1: create 21227 ns/op, read_all 7881 ns/op, read_by_id 10918 ns/op, delete 23760 ns/op
+SQLite_File #2: create 30894 ns/op, read_all 9571 ns/op, read_by_id 10655 ns/op, delete 26518 ns/op
+SQLite_File #3: create 89267 ns/op, read_all 8554 ns/op, read_by_id 10714 ns/op, delete 23044 ns/op
+SystemDataSQLite_Memory #1: create 9598 ns/op, read_all 8675 ns/op, read_by_id 10988 ns/op, delete 3058 ns/op
+SystemDataSQLite_Memory #2: create 33426 ns/op, read_all 8041 ns/op, read_by_id 11604 ns/op, delete 3274 ns/op
+SystemDataSQLite_Memory #3: create 9222 ns/op, read_all 7466 ns/op, read_by_id 25716 ns/op, delete 7529 ns/op
+SystemDataSQLite_File #1: create 21064 ns/op, read_all 8551 ns/op, read_by_id 14246 ns/op, delete 18850 ns/op
+SystemDataSQLite_File #2: create 22121 ns/op, read_all 7892 ns/op, read_by_id 17286 ns/op, delete 33216 ns/op
+SystemDataSQLite_File #3: create 29550 ns/op, read_all 9667 ns/op, read_by_id 12341 ns/op, delete 23480 ns/op
+.
+----------------------------------------------------------------------
+Ran 1 test in 22.951s
+
+OK

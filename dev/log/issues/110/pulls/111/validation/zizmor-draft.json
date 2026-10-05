@@ -1,0 +1,758 @@
+[
+  {
+    "ident": "dependabot-cooldown",
+    "desc": "insufficient cooldown in Dependabot updates",
+    "url": "https://docs.zizmor.sh/audits/#dependabot-cooldown",
+    "determinations": {
+      "confidence": "High",
+      "severity": "Medium",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/dependabot.yml"
+            }
+          },
+          "annotation": "insufficient implicit default-days (less than 7)",
+          "route": {
+            "route": [
+              {
+                "Key": "updates"
+              },
+              {
+                "Index": 0
+              },
+              {
+                "Key": "package-ecosystem"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 2,
+              "column": 2
+            },
+            "end_point": {
+              "row": 2,
+              "column": 26
+            },
+            "offset_span": {
+              "start": 22,
+              "end": 46
+            }
+          },
+          "feature": "package-ecosystem: nuget",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "add cooldown configuration",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/dependabot.yml"
+          }
+        },
+        "disposition": "safe"
+      }
+    ]
+  },
+  {
+    "ident": "dependabot-cooldown",
+    "desc": "insufficient cooldown in Dependabot updates",
+    "url": "https://docs.zizmor.sh/audits/#dependabot-cooldown",
+    "determinations": {
+      "confidence": "High",
+      "severity": "Medium",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/dependabot.yml"
+            }
+          },
+          "annotation": "insufficient implicit default-days (less than 7)",
+          "route": {
+            "route": [
+              {
+                "Key": "updates"
+              },
+              {
+                "Index": 1
+              },
+              {
+                "Key": "package-ecosystem"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 7,
+              "column": 2
+            },
+            "end_point": {
+              "row": 7,
+              "column": 26
+            },
+            "offset_span": {
+              "start": 135,
+              "end": 159
+            }
+          },
+          "feature": "package-ecosystem: cargo",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "add cooldown configuration",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/dependabot.yml"
+          }
+        },
+        "disposition": "safe"
+      }
+    ]
+  },
+  {
+    "ident": "dependabot-cooldown",
+    "desc": "insufficient cooldown in Dependabot updates",
+    "url": "https://docs.zizmor.sh/audits/#dependabot-cooldown",
+    "determinations": {
+      "confidence": "High",
+      "severity": "Medium",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/dependabot.yml"
+            }
+          },
+          "annotation": "insufficient implicit default-days (less than 7)",
+          "route": {
+            "route": [
+              {
+                "Key": "updates"
+              },
+              {
+                "Index": 2
+              },
+              {
+                "Key": "package-ecosystem"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 12,
+              "column": 2
+            },
+            "end_point": {
+              "row": 12,
+              "column": 35
+            },
+            "offset_span": {
+              "start": 246,
+              "end": 279
+            }
+          },
+          "feature": "package-ecosystem: github-actions",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "add cooldown configuration",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/dependabot.yml"
+          }
+        },
+        "disposition": "safe"
+      }
+    ]
+  },
+  {
+    "ident": "dangerous-triggers",
+    "desc": "use of fundamentally insecure workflow trigger",
+    "url": "https://docs.zizmor.sh/audits/#dangerous-triggers",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/AutoMerge.yml"
+            }
+          },
+          "annotation": "pull_request_target is almost always used insecurely",
+          "route": {
+            "route": [
+              {
+                "Key": "on"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 2,
+              "column": 0
+            },
+            "end_point": {
+              "row": 4,
+              "column": 42
+            },
+            "offset_span": {
+              "start": 18,
+              "end": 87
+            }
+          },
+          "feature": "on:\n  pull_request_target:\n    types: [opened, reopened, synchronize]",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "self-repository",
+    "desc": "use GitHub's dedicated self-repository syntax",
+    "url": "https://docs.zizmor.sh/audits/#self-repository",
+    "determinations": {
+      "confidence": "High",
+      "severity": "Low",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "report-tests"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 41,
+              "column": 8
+            },
+            "end_point": {
+              "row": 41,
+              "column": 42
+            },
+            "offset_span": {
+              "start": 1249,
+              "end": 1283
+            }
+          },
+          "feature": "uses: ./.github/actions/prepare-ci",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "use '$/...' instead of './...'",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "report-tests"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "./.github/actions/prepare-ci"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 41,
+              "column": 14
+            },
+            "end_point": {
+              "row": 41,
+              "column": 42
+            },
+            "offset_span": {
+              "start": 1255,
+              "end": 1283
+            }
+          },
+          "feature": "./.github/actions/prepare-ci",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "rewrite './...' to '$/...'",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/benchmarks.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "self-repository",
+    "desc": "use GitHub's dedicated self-repository syntax",
+    "url": "https://docs.zizmor.sh/audits/#self-repository",
+    "determinations": {
+      "confidence": "High",
+      "severity": "Low",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 79,
+              "column": 8
+            },
+            "end_point": {
+              "row": 79,
+              "column": 42
+            },
+            "offset_span": {
+              "start": 2891,
+              "end": 2925
+            }
+          },
+          "feature": "uses: ./.github/actions/prepare-ci",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "use '$/...' instead of './...'",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "./.github/actions/prepare-ci"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 79,
+              "column": 14
+            },
+            "end_point": {
+              "row": 79,
+              "column": 42
+            },
+            "offset_span": {
+              "start": 2897,
+              "end": 2925
+            }
+          },
+          "feature": "./.github/actions/prepare-ci",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "rewrite './...' to '$/...'",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/benchmarks.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "self-repository",
+    "desc": "use GitHub's dedicated self-repository syntax",
+    "url": "https://docs.zizmor.sh/audits/#self-repository",
+    "determinations": {
+      "confidence": "High",
+      "severity": "Low",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/csharp.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 35,
+              "column": 8
+            },
+            "end_point": {
+              "row": 35,
+              "column": 42
+            },
+            "offset_span": {
+              "start": 785,
+              "end": 819
+            }
+          },
+          "feature": "uses: ./.github/actions/prepare-ci",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/csharp.yml"
+            }
+          },
+          "annotation": "use '$/...' instead of './...'",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "./.github/actions/prepare-ci"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 35,
+              "column": 14
+            },
+            "end_point": {
+              "row": 35,
+              "column": 42
+            },
+            "offset_span": {
+              "start": 791,
+              "end": 819
+            }
+          },
+          "feature": "./.github/actions/prepare-ci",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "rewrite './...' to '$/...'",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/csharp.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "self-repository",
+    "desc": "use GitHub's dedicated self-repository syntax",
+    "url": "https://docs.zizmor.sh/audits/#self-repository",
+    "determinations": {
+      "confidence": "High",
+      "severity": "Low",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 38,
+              "column": 8
+            },
+            "end_point": {
+              "row": 38,
+              "column": 42
+            },
+            "offset_span": {
+              "start": 810,
+              "end": 844
+            }
+          },
+          "feature": "uses: ./.github/actions/prepare-ci",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "use '$/...' instead of './...'",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "./.github/actions/prepare-ci"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 38,
+              "column": 14
+            },
+            "end_point": {
+              "row": 38,
+              "column": 42
+            },
+            "offset_span": {
+              "start": 816,
+              "end": 844
+            }
+          },
+          "feature": "./.github/actions/prepare-ci",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "rewrite './...' to '$/...'",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/rust.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  }
+]

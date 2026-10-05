@@ -1,0 +1,30 @@
+3b19ef1f0d4ea8a0b54792ce2c8c800b4aec5a7c 2026-10-05T10:25:00+00:00 Initial commit with task details
+d2ee41e17b1bf6a8f3bea6c96827c41311cedb19 2026-10-05T17:03:50+07:00 Merge pull request #109 from linksplatform/dependabot/github_actions/egor-tensin/setup-clang-2
+5f6b07325c69f08633405b8e42d2e52be37da9c0 2026-10-05T10:03:01+00:00 Bump egor-tensin/setup-clang from 1 to 2
+f61d5832f1a08991b4bb952e7d581ea99d9dd5d3 2026-10-05T17:00:35+07:00 Merge pull request #108 from linksplatform/issue-107-bce58c21006b
+e500f135b3c82ea445a1801e7d1fc002c61b0c1b 2026-10-05T01:58:47+00:00 README: why 10,000,000 links and 1,000,000 blog posts are the largest sizes
+f199649e23d9d84374eddc16d7b00012b38c39d4 2026-10-05T01:20:17+00:00 Report: one-line docstrings, which Codacy's D212 and D213 both accept
+9b9cb321c84d7a4a55ff217475b0b1742ff11b32 2026-10-05T01:15:41+00:00 README: note the linked list of the C# split stores
+4e140b648252416af82dcbd0fa0809669675fa28 2026-10-05T01:15:41+00:00 Objects: share strings and checksum without allocations, so only the stores are timed
+58c75400b9e919f32efd34507d71da8150f36823 2026-10-05T01:15:41+00:00 Harness: warm up for at least a second in both languages
+0c0366f7d01593d1215d66dfcb9b10682db08e27 2026-10-05T01:14:09+00:00 SQLite: read the inserted id with last_insert_rowid in both languages, BEGIN IMMEDIATE in Rust
+1346e64355b49a5eea8be33b4b8d3127f1ebbee2 2026-10-05T00:42:01+00:00 Fix the Codacy SonarC# issues
+4e9cec44c832a377ccdbd331d59c2950c041fe6c 2026-10-05T00:36:12+00:00 Make the READMEs pass markdownlint (Codacy MD013, MD022, MD024)
+ea040a2d5b178799cf9dad7b8580be647dea19ea 2026-10-05T00:27:48+00:00 CI: actions/checkout v7 in the auto-merge and C++ workflows
+579071be3d7bcc4af072b5a168f56570b3e840d0 2026-10-05T00:26:52+00:00 Report: round to three significant digits before choosing the unit, so 999.6 ns is 1 µs instead of 1e+03 ns
+760128c04110642f9b9ec6e9b5e55d135046fa86 2026-10-05T00:24:44+00:00 Fix CodeFactor issues: declare arithmetic precedence in Dataset.cs, split the tree delete experiment into methods
+910061493993de6cccfa10972908983e9f325242 2026-10-04T20:00:04+00:00 Update benchmark results [skip ci]
+4a91975c94f273fec4f3e37cda0b6227caf06e4f 2026-10-04T19:31:26+00:00 Run the full benchmarks only on main; skip objects at 100,000,000 records too
+e965c93db0a3f2894e02ddf2d2d17cc79c68a87d 2026-10-04T18:52:35+00:00 Rust: keep the whole memory after doublets grow it
+b8c842ed6f0b4dc84c78159b17a101e55ea33b7c 2026-10-04T18:32:02+00:00 Temporarily run the full benchmarks on the pull request branch
+2ac09f4d691e9cfe308350ca5658e82f8e1f45d6 2026-10-04T18:27:25+00:00 Remove the placeholder file
+48d7fa090e1a05ada32e9820cfdce6dcfe7efbb6 2026-10-04T18:25:29+00:00 README: methodology, local runs, notes and one generated results section; compare interquartile ranges
+4d83c843ff9818cd05e04e1f229a8700972a5bd6 2026-10-04T18:21:28+00:00 CI: stable Rust and .NET 10 checks, benchmark matrix that publishes README results; dependabot for cargo and actions
+105f9a652366a711dba5f262b500222d420d8939 2026-10-04T18:18:12+00:00 Less default work for objects: one blog post takes hundreds of links
+40e676babcbe202d5b486fadba85428e283412b6 2026-10-04T18:14:50+00:00 Report script: README sections in the category/language/bits/size hierarchy
+ab531107ad10c9a4e36fa762065c8ed669d634c8 2026-10-04T18:13:46+00:00 C#: AVL index trees for the united store; delete and tree experiments
+4f8d0c5ab15e0115d6b07aaac77e5d99e76a67cb 2026-10-04T17:40:24+00:00 Rust: external references for objects stores, clamp repetitions to 1..=10
+29ec139538dab708e2096317b617c47378e0059d 2026-10-04T17:40:19+00:00 Rewrite C# benchmarks on net10.0 with the same lifecycle as Rust
+229ae26adab9780393ac24f8b0b09ebca1bd6a25 2026-10-04T17:05:53+00:00 Rewrite Rust benchmarks on stable doublets 0.5.0 and rusqlite 0.40
+12eccc9879a9efef85a794087c80cde991114df9 2026-10-04T16:28:09+00:00 Initial commit with task details
+01d4eb2dfd784c44a366b854e720b70fd8cb8f62 2026-09-19T18:46:04+00:00 Update Rust benchmark results [skip ci]

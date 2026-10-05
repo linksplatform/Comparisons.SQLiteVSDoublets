@@ -1,0 +1,666 @@
+Test (windows-latest)	UNKNOWN STEP	﻿2026-10-04T19:31:36.8797909Z Current runner version: '2.337.0'
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8835472Z ##[group]Runner Image Provisioner
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8836817Z Hosted Compute Agent
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8837916Z Version: 20260901.588
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8839001Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8840325Z Build Date: 2026-09-01T19:56:44Z
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8841565Z Worker ID: {494f6ca8-52ef-426b-8a5a-c8374c62c25c}
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8842773Z Azure Region: eastus
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8843754Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8846116Z ##[group]Operating System
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8847150Z Microsoft Windows Server 2025
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8848148Z 10.0.26100
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8848922Z Datacenter
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8849728Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8850553Z ##[group]Runner Image
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8852005Z Image: windows-2025-vs2026
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8853020Z Version: 20260925.250.1
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8855419Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260925.250/images/windows/Windows2025-VS2026-Readme.md
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8858556Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260925.250
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8860397Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8866198Z ##[group]GITHUB_TOKEN Permissions
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8869093Z Actions: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8870063Z ArtifactMetadata: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8871517Z Attestations: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8872547Z Checks: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8873525Z CodeQuality: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8874469Z Contents: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8875399Z CopilotRequests: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8876415Z Deployments: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8877461Z Discussions: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8878405Z Drives: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8879286Z Issues: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8880232Z Metadata: read
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8881197Z Models: read
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8882177Z Packages: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8883124Z Pages: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8884056Z PullRequests: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8885187Z RepositoryProjects: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8886245Z SecurityEvents: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8887209Z Statuses: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8888124Z VulnerabilityAlerts: read
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8889127Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8892466Z Secret source: Actions
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8893981Z Cache mode: write
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.8895098Z Prepare workflow directory
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.9311118Z Prepare all required actions
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:36.9358982Z Getting action download info
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.0953506Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.2324684Z Download action repository 'actions/setup-dotnet@v6' (SHA:a98b56852c35b8e3190ac28c8c2271da59106c68)
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.5956544Z Complete job name: Test (windows-latest)
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.7478680Z ##[group]Run actions/checkout@v7
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.7479670Z with:
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.7480181Z   repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.7484238Z   token: ***
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.7485018Z   ssh-strict: true
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.7485494Z   ssh-user: git
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.7485906Z   persist-credentials: true
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.7486355Z   clean: true
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.7486761Z   sparse-checkout-cone-mode: true
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.7487246Z   fetch-depth: 1
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.7487643Z   fetch-tags: false
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.7488063Z   show-progress: true
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.7488471Z   lfs: false
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.7488847Z   submodules: false
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.7489256Z   set-safe-directory: true
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.7489722Z   allow-unsafe-pr-checkout: false
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.7490472Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.8997152Z Syncing repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.9001042Z ##[group]Getting Git version info
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:37.9002991Z Working directory is 'D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets'
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.0113205Z [command]"C:\Program Files\Git\bin\git.exe" version
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.4063128Z git version 2.55.0.windows.5
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.4124352Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.4144237Z Temporarily overriding HOME='D:\a\_temp\702a372f-e1ad-4dfb-a8e5-2971cb06427b' before making global git config changes
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.4146870Z Adding repository directory to the temporary git global config as a safe directory
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.4155630Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.4821024Z Deleting the contents of 'D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets'
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.4825716Z ##[group]Determining repository object format
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.4828140Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.4830341Z ##[group]Initializing the repository
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.4837936Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.5712140Z Initialized empty Git repository in D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.5756815Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.6371392Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.6373356Z ##[group]Disabling automatic garbage collection
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.6379865Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.6674211Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.6676611Z ##[group]Setting up auth
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.6678881Z Removing SSH command configuration
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.6687011Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:38.6999257Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:40.1830224Z Removing HTTP extra header
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:40.1839875Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:40.2140413Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:40.7643872Z Removing includeIf entries pointing to credentials config files
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:40.7653988Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:40.7953534Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:41.3232766Z [command]"C:\Program Files\Git\bin\git.exe" config --file D:\a\_temp\git-credentials-2db6cd20-4db0-4d8b-bc85-5c6ffc877fbd.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:41.3534256Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path D:\a\_temp\git-credentials-2db6cd20-4db0-4d8b-bc85-5c6ffc877fbd.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:41.3841808Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path D:\a\_temp\git-credentials-2db6cd20-4db0-4d8b-bc85-5c6ffc877fbd.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:41.4218585Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-2db6cd20-4db0-4d8b-bc85-5c6ffc877fbd.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:41.4552503Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-2db6cd20-4db0-4d8b-bc85-5c6ffc877fbd.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:41.4882263Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:41.4883851Z ##[group]Fetching the repository
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:41.4896073Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +6a203cb291cd35bc4e0d6a4754341aae043c4938:refs/remotes/pull/108/merge
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.3993616Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.3995400Z  * [new ref]         6a203cb291cd35bc4e0d6a4754341aae043c4938 -> pull/108/merge
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.4041231Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.4042234Z ##[group]Determining the checkout info
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.4043451Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.4053570Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.4510778Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.4799472Z ##[group]Checking out the ref
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.4807567Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/108/merge
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5523268Z Note: switching to 'refs/remotes/pull/108/merge'.
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5523911Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5524366Z You are in 'detached HEAD' state. You can look around, make experimental
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5525414Z changes and commit them, and you can discard any commits you make in this
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5526512Z state without impacting any branches by switching back to a branch.
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5527057Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5527482Z If you want to create a new branch to retain commits you create, you may
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5528398Z do so (now or later) by using -c with the switch command. Example:
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5529042Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5529385Z   git switch -c <new-branch-name>
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5529783Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5529963Z Or undo this operation with:
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5530324Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5530538Z   git switch -
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5568853Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5569319Z Turn off this advice by setting config variable advice.detachedHead to false
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5569943Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5570699Z HEAD is now at 6a203cb Merge 4a91975c94f273fec4f3e37cda0b6227caf06e4f into 01d4eb2dfd784c44a366b854e720b70fd8cb8f62
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.5671738Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.6139117Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.6417075Z 6a203cb291cd35bc4e0d6a4754341aae043c4938
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.6930733Z ##[group]Run actions/setup-dotnet@v6
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.6931180Z with:
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.6931510Z   global-json-file: csharp/global.json
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.6931796Z   cache: false
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:42.6931977Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:43.0038689Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\a\_actions\actions\setup-dotnet\v6\externals\install-dotnet.ps1' -SkipNonVersionedFiles -Runtime dotnet -Channel LTS
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:44.3027445Z dotnet-install: .NET Core Runtime with version '10.0.12' is already installed.
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:44.4903398Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\a\_actions\actions\setup-dotnet\v6\externals\install-dotnet.ps1' -SkipNonVersionedFiles -Channel 10.0
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:45.5687670Z dotnet-install: .NET Core SDK with version '10.0.401' is already installed.
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:45.7096138Z ##[group]Run dotnet build -c Release -warnaserror
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:45.7096637Z ^[[36;1mdotnet build -c Release -warnaserror^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:45.7519782Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:45.7520486Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:45.7520839Z   DOTNET_ROOT: C:\Program Files\dotnet
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:45.7521331Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:31:55.6520796Z   Determining projects to restore...
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:04.5240135Z   Restored D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\csharp\SQLiteVSDoublets\SQLiteVSDoublets.csproj (in 7.12 sec).
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:05.2260149Z   Restored D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\csharp\SQLiteVSDoublets.Tests\SQLiteVSDoublets.Tests.csproj (in 7.83 sec).
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:12.0627018Z   SQLiteVSDoublets -> D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\csharp\SQLiteVSDoublets\bin\Release\net10.0\sqlite-vs-doublets.dll
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:12.8906627Z   SQLiteVSDoublets.Tests -> D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\csharp\SQLiteVSDoublets.Tests\bin\Release\net10.0\SQLiteVSDoublets.Tests.dll
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:12.9116837Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:12.9126258Z Build succeeded.
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:12.9132889Z     0 Warning(s)
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:12.9133268Z     0 Error(s)
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:12.9134652Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:12.9134916Z Time Elapsed 00:00:22.49
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:13.6379405Z ##[group]Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:13.6380048Z ^[[36;1mdotnet test --project SQLiteVSDoublets.Tests -c Release --no-build^[[0m
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:13.6463318Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:13.6463903Z env:
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:13.6464222Z   DOTNET_ROOT: C:\Program Files\dotnet
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:13.6464651Z ##[endgroup]
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:15.1783400Z Running tests from D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\csharp\SQLiteVSDoublets.Tests\bin\Release\net10.0\SQLiteVSDoublets.Tests.dll (net10.0|x64)
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:23.7790083Z ^[[mD:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\csharp\SQLiteVSDoublets.Tests\bin\Release\net10.0\SQLiteVSDoublets.Tests.dll (net10.0|x64) ^[[32mpassed^[[m ^[[90m(8s 602ms)^[[m
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:23.7841167Z 
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:23.7849973Z ^[[32mTest run summary: Passed!
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:23.7851248Z ^[[m  total: 28
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:23.7851942Z   failed: 0
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:23.7852431Z ^[[32m  succeeded: 28
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:23.7852808Z ^[[m  skipped: 0
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:23.7853201Z   duration: 9s 001ms
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:23.9513961Z Post job cleanup.
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:24.1241363Z Post job cleanup.
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:24.3637307Z [command]"C:\Program Files\Git\bin\git.exe" version
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:24.3955632Z git version 2.55.0.windows.5
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:24.4028091Z Temporarily overriding HOME='D:\a\_temp\de6bdece-b3f8-4fb1-b61d-3557b89ea83b' before making global git config changes
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:24.4029448Z Adding repository directory to the temporary git global config as a safe directory
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:24.4040569Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:24.4398653Z Removing SSH command configuration
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:24.4414998Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:24.4738329Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.0440878Z Removing HTTP extra header
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.0451810Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.0765719Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.6293974Z Removing includeIf entries pointing to credentials config files
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.6304582Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.6571645Z includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.6573595Z includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.6574864Z includeif.gitdir:/github/workspace/.git.path
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.6575706Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.6615026Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.6879943Z D:\a\_temp\git-credentials-2db6cd20-4db0-4d8b-bc85-5c6ffc877fbd.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.6925392Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path D\:\\a\\_temp\\git\-credentials\-2db6cd20\-4db0\-4d8b\-bc85\-5c6ffc877fbd\.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.7269983Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.7529412Z D:\a\_temp\git-credentials-2db6cd20-4db0-4d8b-bc85-5c6ffc877fbd.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.7569596Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path D\:\\a\\_temp\\git\-credentials\-2db6cd20\-4db0\-4d8b\-bc85\-5c6ffc877fbd\.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.7869856Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.8124701Z /github/runner_temp/git-credentials-2db6cd20-4db0-4d8b-bc85-5c6ffc877fbd.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.8163337Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-2db6cd20\-4db0\-4d8b\-bc85\-5c6ffc877fbd\.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.8455356Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.8707387Z /github/runner_temp/git-credentials-2db6cd20-4db0-4d8b-bc85-5c6ffc877fbd.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.8752884Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-2db6cd20\-4db0\-4d8b\-bc85\-5c6ffc877fbd\.config
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:25.9055841Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:26.4597750Z Removing credentials config 'D:\a\_temp\git-credentials-2db6cd20-4db0-4d8b-bc85-5c6ffc877fbd.config'
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:26.4788878Z Cleaning up orphan processes
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:26.4969793Z Terminate orphan process: pid (5840) (dotnet)
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:26.5192063Z Terminate orphan process: pid (8944) (conhost)
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:26.5787631Z Terminate orphan process: pid (3328) (VBCSCompiler)
+Test (windows-latest)	UNKNOWN STEP	2026-10-04T19:32:26.5862050Z Terminate orphan process: pid (1764) (conhost)
+Test (macos-latest)	UNKNOWN STEP	﻿2026-10-04T19:31:42.8812840Z Current runner version: '2.337.0'
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8850630Z ##[group]Runner Image Provisioner
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8851480Z Hosted Compute Agent
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8851940Z Version: 20260828.587
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8852450Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8853220Z Build Date: 2026-08-28T16:44:25Z
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8853780Z Worker ID: {010d3f46-153e-4597-a7be-b53cf007e0e2}
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8854310Z Azure Region: westus
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8854750Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8856090Z ##[group]Operating System
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8856550Z macOS
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8856990Z 26.6.2
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8857410Z 25G83
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8857780Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8858140Z ##[group]Runner Image
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8858560Z Image: macos-26-arm64
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8859070Z Version: 20260907.0351.1
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8860070Z Included Software: https://github.com/actions/runner-images/blob/macos-26-arm64/20260907.0351/images/macos/macos-26-arm64-Readme.md
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8861290Z Image Release: https://github.com/actions/runner-images/releases/tag/macos-26-arm64%2F20260907.0351
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8862040Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8864460Z ##[group]GITHUB_TOKEN Permissions
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8866630Z Actions: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8867120Z ArtifactMetadata: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8867680Z Attestations: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8868150Z Checks: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8868590Z CodeQuality: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8868960Z Contents: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8869490Z CopilotRequests: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8869880Z Deployments: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8870460Z Discussions: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8870890Z Drives: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8871320Z Issues: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8871770Z Metadata: read
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8872260Z Models: read
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8872690Z Packages: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8873070Z Pages: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8873580Z PullRequests: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8873980Z RepositoryProjects: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8874390Z SecurityEvents: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8874780Z Statuses: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8875200Z VulnerabilityAlerts: read
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8875660Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8877860Z Secret source: Actions
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8878640Z Cache mode: write
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.8879230Z Prepare workflow directory
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.9318720Z Prepare all required actions
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:42.9359760Z Getting action download info
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:43.3067460Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:43.9533600Z Download action repository 'actions/setup-dotnet@v6' (SHA:a98b56852c35b8e3190ac28c8c2271da59106c68)
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5134730Z Complete job name: Test (macos-latest)
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5595740Z ##[group]Run actions/checkout@v7
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5596500Z with:
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5596940Z   repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5599930Z   token: ***
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5600300Z   ssh-strict: true
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5600640Z   ssh-user: git
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5601010Z   persist-credentials: true
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5601390Z   clean: true
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5601800Z   sparse-checkout-cone-mode: true
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5602280Z   fetch-depth: 1
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5620130Z   fetch-tags: false
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5620590Z   show-progress: true
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5620930Z   lfs: false
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5621240Z   submodules: false
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5621580Z   set-safe-directory: true
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5621950Z   allow-unsafe-pr-checkout: false
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:44.5622900Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.1110490Z Syncing repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.1113850Z ##[group]Getting Git version info
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.1114640Z Working directory is '/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.1115730Z [command]/opt/homebrew/bin/git version
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.1823550Z git version 2.55.0
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.1847920Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.1854260Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/a5e250a8-7b9b-46f0-989a-86de9c7e1f15/.gitconfig'
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.1862290Z Temporarily overriding HOME='/Users/runner/work/_temp/a5e250a8-7b9b-46f0-989a-86de9c7e1f15' before making global git config changes
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.1866990Z Adding repository directory to the temporary git global config as a safe directory
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.1868640Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2042840Z Deleting the contents of '/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2050670Z ##[group]Determining repository object format
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2053310Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2055280Z ##[group]Initializing the repository
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2059470Z [command]/opt/homebrew/bin/git init /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2460500Z hint: Using 'master' as the name for the initial branch. This default branch name
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2486300Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2490450Z hint: to use in all of your new repositories, which will suppress this warning,
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2491870Z hint: call:
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2492800Z hint:
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2507540Z hint: 	git config --global init.defaultBranch <name>
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2511930Z hint:
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2512790Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2513970Z hint: 'development'. The just-created branch can be renamed via this command:
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2514770Z hint:
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2515360Z hint: 	git branch -m <name>
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2515930Z hint:
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2516540Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2538980Z Initialized empty Git repository in /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2592290Z [command]/opt/homebrew/bin/git remote add origin https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2648460Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2650610Z ##[group]Disabling automatic garbage collection
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2652440Z [command]/opt/homebrew/bin/git config --local gc.auto 0
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2751730Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2752630Z ##[group]Setting up auth
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2753490Z Removing SSH command configuration
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2766260Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.2869220Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.4405960Z Removing HTTP extra header
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.4414220Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.4515150Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.6440870Z Removing includeIf entries pointing to credentials config files
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.6544280Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.6849800Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.8002200Z [command]/opt/homebrew/bin/git config --file /Users/runner/work/_temp/git-credentials-9d0cb45c-3e7c-4ad9-949c-a70d9c4bc38e.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.8106440Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path /Users/runner/work/_temp/git-credentials-9d0cb45c-3e7c-4ad9-949c-a70d9c4bc38e.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.8203300Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path /Users/runner/work/_temp/git-credentials-9d0cb45c-3e7c-4ad9-949c-a70d9c4bc38e.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.8284460Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-9d0cb45c-3e7c-4ad9-949c-a70d9c4bc38e.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.8383900Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-9d0cb45c-3e7c-4ad9-949c-a70d9c4bc38e.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.8475810Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.8477180Z ##[group]Fetching the repository
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:45.8491260Z [command]/opt/homebrew/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +6a203cb291cd35bc4e0d6a4754341aae043c4938:refs/remotes/pull/108/merge
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.3925360Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.3928250Z  * [new ref]         6a203cb291cd35bc4e0d6a4754341aae043c4938 -> pull/108/merge
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.3932390Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.3933980Z ##[group]Determining the checkout info
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.3935780Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.3956460Z [command]/opt/homebrew/bin/git sparse-checkout disable
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.4074870Z [command]/opt/homebrew/bin/git config --local --unset-all extensions.worktreeConfig
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.4157200Z ##[group]Checking out the ref
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.4159890Z [command]/opt/homebrew/bin/git checkout --progress --force refs/remotes/pull/108/merge
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.4381140Z HEAD is now at 6a203cb Merge 4a91975c94f273fec4f3e37cda0b6227caf06e4f into 01d4eb2dfd784c44a366b854e720b70fd8cb8f62
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.4446270Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.4504220Z [command]/opt/homebrew/bin/git log -1 --format=%H
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.4671700Z 6a203cb291cd35bc4e0d6a4754341aae043c4938
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.5121580Z ##[group]Run actions/setup-dotnet@v6
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.5122550Z with:
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.5123220Z   global-json-file: csharp/global.json
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.5124070Z   cache: false
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.5124660Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:46.7093300Z [command]/Users/runner/work/_actions/actions/setup-dotnet/v6/externals/install-dotnet.sh --skip-non-versioned-files --runtime dotnet --channel LTS
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:47.3172830Z dotnet-install: Attempting to download using aka.ms link https://builds.dotnet.microsoft.com/dotnet/Runtime/10.0.12/dotnet-runtime-10.0.12-osx-arm64.tar.gz
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:48.4147910Z dotnet-install: Remote file https://builds.dotnet.microsoft.com/dotnet/Runtime/10.0.12/dotnet-runtime-10.0.12-osx-arm64.tar.gz size is 33249724 bytes.
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:48.4150760Z dotnet-install: Extracting archive from https://builds.dotnet.microsoft.com/dotnet/Runtime/10.0.12/dotnet-runtime-10.0.12-osx-arm64.tar.gz
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:49.1452330Z dotnet-install: Downloaded file size is 33249724 bytes.
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:49.1453170Z dotnet-install: The remote and local file sizes are equal.
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:49.1720160Z dotnet-install: Installed version is 10.0.12
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:49.1821010Z dotnet-install: Adding to current process PATH: `/Users/runner/.dotnet`. Note: This change will be visible only when sourcing script.
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:49.1821820Z dotnet-install: Note that the script does not resolve dependencies during installation.
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:49.1823000Z dotnet-install: To check the list of dependencies, go to https://learn.microsoft.com/dotnet/core/install, select your operating system and check the "Dependencies" section.
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:49.1825240Z dotnet-install: Installation finished successfully.
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:49.1856670Z [command]/Users/runner/work/_actions/actions/setup-dotnet/v6/externals/install-dotnet.sh --skip-non-versioned-files --channel 10.0
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:49.7462870Z dotnet-install: Attempting to download using aka.ms link https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.401/dotnet-sdk-10.0.401-osx-arm64.tar.gz
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:54.7282670Z dotnet-install: Remote file https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.401/dotnet-sdk-10.0.401-osx-arm64.tar.gz size is 230753980 bytes.
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:31:54.7384940Z dotnet-install: Extracting archive from https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.401/dotnet-sdk-10.0.401-osx-arm64.tar.gz
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:03.4070510Z dotnet-install: Downloaded file size is 230753980 bytes.
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:03.4072810Z dotnet-install: The remote and local file sizes are equal.
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:03.8618800Z dotnet-install: Installed version is 10.0.401
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:03.8790880Z dotnet-install: Adding to current process PATH: `/Users/runner/.dotnet`. Note: This change will be visible only when sourcing script.
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:03.8792020Z dotnet-install: Note that the script does not resolve dependencies during installation.
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:03.8798440Z dotnet-install: To check the list of dependencies, go to https://learn.microsoft.com/dotnet/core/install, select your operating system and check the "Dependencies" section.
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:03.8800390Z dotnet-install: Installation finished successfully.
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:03.9322890Z ##[group]Run dotnet build -c Release -warnaserror
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:03.9323450Z ^[[36;1mdotnet build -c Release -warnaserror^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:03.9400950Z shell: /bin/bash -e {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:03.9401380Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:03.9401660Z   DOTNET_ROOT: /Users/runner/.dotnet
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:03.9402310Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:06.6078480Z   Determining projects to restore...
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:09.0887080Z   Restored /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets.Tests/SQLiteVSDoublets.Tests.csproj (in 2.24 sec).
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:09.0974740Z   Restored /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets/SQLiteVSDoublets.csproj (in 2.24 sec).
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:12.4644430Z   SQLiteVSDoublets -> /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:13.7559750Z   SQLiteVSDoublets.Tests -> /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets.Tests/bin/Release/net10.0/SQLiteVSDoublets.Tests.dll
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:13.8347030Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:13.8492080Z Build succeeded.
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:13.8538990Z     0 Warning(s)
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:13.8659890Z     0 Error(s)
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:13.8758870Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:13.8865770Z Time Elapsed 00:00:07.82
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:13.9184560Z ##[group]Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:13.9185240Z ^[[36;1mdotnet test --project SQLiteVSDoublets.Tests -c Release --no-build^[[0m
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:13.9235440Z shell: /bin/bash -e {0}
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:13.9235710Z env:
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:13.9236030Z   DOTNET_ROOT: /Users/runner/.dotnet
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:13.9236400Z ##[endgroup]
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:16.6437360Z Running tests from /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets.Tests/bin/Release/net10.0/SQLiteVSDoublets.Tests.dll (net10.0|arm64)
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:25.1995860Z ^[[m/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets.Tests/bin/Release/net10.0/SQLiteVSDoublets.Tests.dll (net10.0|arm64) ^[[32mpassed^[[m ^[[90m(8s 561ms)^[[m
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:25.2098870Z 
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:25.2196100Z ^[[32mTest run summary: Passed!
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:25.2295590Z ^[[m  total: 28
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:25.2327880Z   failed: 0
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:25.2336520Z ^[[32m  succeeded: 28
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:25.2345740Z ^[[m  skipped: 0
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:25.2350250Z   duration: 10s 147ms
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:25.2676590Z Post job cleanup.
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:25.8533020Z Post job cleanup.
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:25.9726750Z [command]/opt/homebrew/bin/git version
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:25.9933000Z git version 2.55.0
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:25.9952740Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/6d890fb2-4f3e-45ba-b5ac-50db2bed5bbc/.gitconfig'
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:25.9961090Z Temporarily overriding HOME='/Users/runner/work/_temp/6d890fb2-4f3e-45ba-b5ac-50db2bed5bbc' before making global git config changes
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:25.9961870Z Adding repository directory to the temporary git global config as a safe directory
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:25.9965430Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.0080910Z Removing SSH command configuration
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.0086160Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.0157620Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.1147300Z Removing HTTP extra header
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.1150920Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.1229140Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2161090Z Removing includeIf entries pointing to credentials config files
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2165440Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2230200Z includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2332350Z includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2434890Z includeif.gitdir:/github/workspace/.git.path
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2536150Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2634030Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2634900Z /Users/runner/work/_temp/git-credentials-9d0cb45c-3e7c-4ad9-949c-a70d9c4bc38e.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2636500Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path \/Users\/runner\/work\/_temp\/git\-credentials\-9d0cb45c\-3e7c\-4ad9\-949c\-a70d9c4bc38e\.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2638370Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2639300Z /Users/runner/work/_temp/git-credentials-9d0cb45c-3e7c-4ad9-949c-a70d9c4bc38e.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2640880Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path \/Users\/runner\/work\/_temp\/git\-credentials\-9d0cb45c\-3e7c\-4ad9\-949c\-a70d9c4bc38e\.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2757620Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2781820Z /github/runner_temp/git-credentials-9d0cb45c-3e7c-4ad9-949c-a70d9c4bc38e.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2788570Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-9d0cb45c\-3e7c\-4ad9\-949c\-a70d9c4bc38e\.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2827740Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2890500Z /github/runner_temp/git-credentials-9d0cb45c-3e7c-4ad9-949c-a70d9c4bc38e.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2897080Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-9d0cb45c\-3e7c\-4ad9\-949c\-a70d9c4bc38e\.config
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.2971880Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.3803970Z Removing credentials config '/Users/runner/work/_temp/git-credentials-9d0cb45c-3e7c-4ad9-949c-a70d9c4bc38e.config'
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.3889990Z Cleaning up orphan processes
+Test (macos-latest)	UNKNOWN STEP	2026-10-04T19:32:26.9748030Z Terminate orphan process: pid (2570) (VBCSCompiler)
+Test (ubuntu-latest)	UNKNOWN STEP	﻿2026-10-04T19:31:55.9335137Z Current runner version: '2.337.0'
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9360365Z ##[group]Runner Image Provisioner
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9361344Z Hosted Compute Agent
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9362089Z Version: 20260901.588
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9362832Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9363565Z Build Date: 2026-09-01T19:56:44Z
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9364369Z Worker ID: {7b2a470e-a3ba-4284-b102-2a8935a23ef7}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9365102Z Azure Region: eastus
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9365710Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9367545Z ##[group]Operating System
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9368328Z Ubuntu
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9369213Z 24.04.5
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9369741Z LTS
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9370319Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9371074Z ##[group]Runner Image
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9371689Z Image: ubuntu-24.04
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9372421Z Version: 20260927.320.1
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9373706Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9375364Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9376417Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9379921Z ##[group]GITHUB_TOKEN Permissions
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9382369Z Actions: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9383109Z ArtifactMetadata: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9383777Z Attestations: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9384467Z Checks: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9385040Z CodeQuality: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9385816Z Contents: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9386431Z CopilotRequests: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9387074Z Deployments: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9387740Z Discussions: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9388307Z Drives: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9389184Z Issues: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9389830Z Metadata: read
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9390510Z Models: read
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9391152Z Packages: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9391812Z Pages: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9392348Z PullRequests: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9393021Z RepositoryProjects: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9393718Z SecurityEvents: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9394434Z Statuses: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9395026Z VulnerabilityAlerts: read
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9395633Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9397825Z Secret source: Actions
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9399073Z Cache mode: write
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9399939Z Prepare workflow directory
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9800312Z Prepare all required actions
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:55.9849603Z Getting action download info
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.2023587Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.3185694Z Download action repository 'actions/setup-dotnet@v6' (SHA:a98b56852c35b8e3190ac28c8c2271da59106c68)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6019943Z Complete job name: Test (ubuntu-latest)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6783302Z ##[group]Run actions/checkout@v7
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6784194Z with:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6784764Z   repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6788698Z   token: ***
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6789180Z   ssh-strict: true
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6789633Z   ssh-user: git
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6790090Z   persist-credentials: true
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6790590Z   clean: true
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6791053Z   sparse-checkout-cone-mode: true
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6791584Z   fetch-depth: 1
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6792026Z   fetch-tags: false
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6792477Z   show-progress: true
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6792934Z   lfs: false
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6793358Z   submodules: false
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6793821Z   set-safe-directory: true
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6794337Z   allow-unsafe-pr-checkout: false
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.6795127Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.7834571Z Syncing repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.7837324Z ##[group]Getting Git version info
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.7839133Z Working directory is '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.7841316Z [command]/usr/bin/git version
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.7932181Z git version 2.55.0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.7955565Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.7966223Z Temporarily overriding HOME='/home/runner/work/_temp/99d7cf09-5c8b-48a9-b87b-5f92abf3054b' before making global git config changes
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.7968738Z Adding repository directory to the temporary git global config as a safe directory
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.7973892Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8025308Z Deleting the contents of '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8028343Z ##[group]Determining repository object format
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8030302Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8031577Z ##[group]Initializing the repository
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8035051Z [command]/usr/bin/git init /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8151797Z hint: Using 'master' as the name for the initial branch. This default branch name
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8153576Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8155097Z hint: to use in all of your new repositories, which will suppress this warning,
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8156279Z hint: call:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8156898Z hint:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8157744Z hint: 	git config --global init.defaultBranch <name>
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8159017Z hint:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8159937Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8161425Z hint: 'development'. The just-created branch can be renamed via this command:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8162751Z hint:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8163475Z hint: 	git branch -m <name>
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8164249Z hint:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8165268Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8167374Z Initialized empty Git repository in /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8170943Z [command]/usr/bin/git remote add origin https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8228366Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8229943Z ##[group]Disabling automatic garbage collection
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8231323Z [command]/usr/bin/git config --local gc.auto 0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8266200Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8267580Z ##[group]Setting up auth
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8268802Z Removing SSH command configuration
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8272902Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8315361Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8751253Z Removing HTTP extra header
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8756721Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.8792019Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.9019990Z Removing includeIf entries pointing to credentials config files
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.9022522Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.9059763Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.9306063Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-215584fa-9b42-4b8d-879c-673e97bb9904.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.9358846Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path /home/runner/work/_temp/git-credentials-215584fa-9b42-4b8d-879c-673e97bb9904.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.9406766Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-215584fa-9b42-4b8d-879c-673e97bb9904.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.9453945Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-215584fa-9b42-4b8d-879c-673e97bb9904.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.9497742Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-215584fa-9b42-4b8d-879c-673e97bb9904.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.9536799Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.9538761Z ##[group]Fetching the repository
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:56.9546527Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +6a203cb291cd35bc4e0d6a4754341aae043c4938:refs/remotes/pull/108/merge
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1591071Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1593352Z  * [new ref]         6a203cb291cd35bc4e0d6a4754341aae043c4938 -> pull/108/merge
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1598183Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1600607Z ##[group]Determining the checkout info
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1602884Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1605020Z [command]/usr/bin/git sparse-checkout disable
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1661717Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1694661Z ##[group]Checking out the ref
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1699900Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/108/merge
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1809913Z Note: switching to 'refs/remotes/pull/108/merge'.
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1817525Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1818770Z You are in 'detached HEAD' state. You can look around, make experimental
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1820861Z changes and commit them, and you can discard any commits you make in this
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1822964Z state without impacting any branches by switching back to a branch.
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1824151Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1824993Z If you want to create a new branch to retain commits you create, you may
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1826917Z do so (now or later) by using -c with the switch command. Example:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1828173Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1829142Z   git switch -c <new-branch-name>
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1830034Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1830548Z Or undo this operation with:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1831411Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1831858Z   git switch -
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1832491Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1833282Z Turn off this advice by setting config variable advice.detachedHead to false
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1834270Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1835782Z HEAD is now at 6a203cb Merge 4a91975c94f273fec4f3e37cda0b6227caf06e4f into 01d4eb2dfd784c44a366b854e720b70fd8cb8f62
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1840286Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1873679Z [command]/usr/bin/git log -1 --format=%H
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.1902277Z 6a203cb291cd35bc4e0d6a4754341aae043c4938
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.2253529Z ##[group]Run actions/setup-dotnet@v6
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.2254313Z with:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.2254835Z   global-json-file: csharp/global.json
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.2255470Z   cache: false
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.2255983Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.3591353Z [command]/home/runner/work/_actions/actions/setup-dotnet/v6/externals/install-dotnet.sh --skip-non-versioned-files --runtime dotnet --channel LTS
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.6899005Z dotnet-install: .NET Core Runtime with version '10.0.12' is already installed.
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.6925332Z [command]/home/runner/work/_actions/actions/setup-dotnet/v6/externals/install-dotnet.sh --skip-non-versioned-files --channel 10.0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.9150899Z dotnet-install: .NET Core SDK with version '10.0.401' is already installed.
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.9313286Z ##[group]Run dotnet build -c Release -warnaserror
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.9313843Z ^[[36;1mdotnet build -c Release -warnaserror^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.9599761Z shell: /usr/bin/bash -e {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.9600446Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.9600783Z   DOTNET_ROOT: /usr/share/dotnet
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:31:57.9601176Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:03.0940925Z   Determining projects to restore...
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:05.5582647Z   Restored /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets/SQLiteVSDoublets.csproj (in 1.77 sec).
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:05.5607940Z   Restored /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets.Tests/SQLiteVSDoublets.Tests.csproj (in 1.77 sec).
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:10.8782376Z   SQLiteVSDoublets -> /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:11.5486182Z   SQLiteVSDoublets.Tests -> /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets.Tests/bin/Release/net10.0/SQLiteVSDoublets.Tests.dll
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:11.5779776Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:11.5780924Z Build succeeded.
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:11.5781456Z     0 Warning(s)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:11.5786354Z     0 Error(s)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:11.5787107Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:11.5787790Z Time Elapsed 00:00:10.07
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:11.6125053Z ##[group]Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:11.6125692Z ^[[36;1mdotnet test --project SQLiteVSDoublets.Tests -c Release --no-build^[[0m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:11.6194189Z shell: /usr/bin/bash -e {0}
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:11.6194627Z env:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:11.6195070Z   DOTNET_ROOT: /usr/share/dotnet
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:11.6195334Z ##[endgroup]
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:12.8229447Z Running tests from /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets.Tests/bin/Release/net10.0/SQLiteVSDoublets.Tests.dll (net10.0|x64)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.3636032Z ^[[m/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets.Tests/bin/Release/net10.0/SQLiteVSDoublets.Tests.dll (net10.0|x64) ^[[32mpassed^[[m ^[[90m(7s 544ms)^[[m
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.3680971Z 
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.3690369Z ^[[32mTest run summary: Passed!
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.3691206Z ^[[m  total: 28
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.3691783Z   failed: 0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.3692067Z ^[[32m  succeeded: 28
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.3692316Z ^[[m  skipped: 0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.3692567Z   duration: 7s 860ms
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.3930756Z Post job cleanup.
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.5227239Z Post job cleanup.
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6135776Z [command]/usr/bin/git version
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6184977Z git version 2.55.0
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6230023Z Temporarily overriding HOME='/home/runner/work/_temp/875dc836-00a1-4f81-8360-0c89a5193556' before making global git config changes
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6232166Z Adding repository directory to the temporary git global config as a safe directory
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6237324Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6276460Z Removing SSH command configuration
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6285345Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6331277Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6593666Z Removing HTTP extra header
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6601011Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6648278Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6908923Z Removing includeIf entries pointing to credentials config files
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6916533Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6953211Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6955387Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6956802Z includeif.gitdir:/github/workspace/.git.path
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6957885Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6965342Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.6993734Z /home/runner/work/_temp/git-credentials-215584fa-9b42-4b8d-879c-673e97bb9904.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.7005650Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-215584fa\-9b42\-4b8d\-879c\-673e97bb9904\.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.7062128Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.7093822Z /home/runner/work/_temp/git-credentials-215584fa-9b42-4b8d-879c-673e97bb9904.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.7104151Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-215584fa\-9b42\-4b8d\-879c\-673e97bb9904\.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.7144105Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.7175371Z /github/runner_temp/git-credentials-215584fa-9b42-4b8d-879c-673e97bb9904.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.7185101Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-215584fa\-9b42\-4b8d\-879c\-673e97bb9904\.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.7221621Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.7248088Z /github/runner_temp/git-credentials-215584fa-9b42-4b8d-879c-673e97bb9904.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.7257677Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-215584fa\-9b42\-4b8d\-879c\-673e97bb9904\.config
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.7295953Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.7521796Z Removing credentials config '/home/runner/work/_temp/git-credentials-215584fa-9b42-4b8d-879c-673e97bb9904.config'
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.7687118Z Cleaning up orphan processes
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.8035506Z Terminate orphan process: pid (2503) (dotnet)
+Test (ubuntu-latest)	UNKNOWN STEP	2026-10-04T19:32:20.8071588Z Terminate orphan process: pid (2536) (VBCSCompiler)

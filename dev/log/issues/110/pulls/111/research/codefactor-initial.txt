@@ -1,0 +1,156 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e5]:
+      - link "Homepage" [ref=e6] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e13]:
+        - list [ref=e14]:
+          - listitem [ref=e15]:
+            - link "Features" [ref=e16] [cursor=pointer]:
+              - /url: /features
+          - listitem [ref=e17]:
+            - link "Pricing" [ref=e18] [cursor=pointer]:
+              - /url: /pricing
+          - listitem [ref=e19]:
+            - link "Contact" [ref=e20] [cursor=pointer]:
+              - /url: /contact
+        - list [ref=e21]:
+          - generic [ref=e22]: "Login with:"
+          - generic [ref=e23]:
+            - button [ref=e24] [cursor=pointer]:
+              - img "GitHub" [ref=e25]
+            - button [ref=e26] [cursor=pointer]:
+              - img "Bitbucket" [ref=e27]
+    - generic [ref=e29]:
+      - generic [ref=e30]:
+        - generic [ref=e31]:
+          - generic "Default branch main" [ref=e33]: main
+          - link "Comparisons.SQLiteVSDoublets" [ref=e35] [cursor=pointer]:
+            - /url: /repository/github/linksplatform/comparisons.sqlitevsdoublets
+        - generic [ref=e36]:
+          - img "Repository badge with APlus rating" [ref=e38] [cursor=pointer]
+          - link [ref=e39] [cursor=pointer]:
+            - /url: https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+            - img "View on GitHub" [ref=e40]
+      - separator [ref=e41]
+      - list [ref=e42]:
+        - listitem [ref=e43]:
+          - link "0 issues" [ref=e44] [cursor=pointer]:
+            - /url: /repository/github/linksplatform/comparisons.sqlitevsdoublets/issues
+        - listitem [ref=e45]:
+          - link "2 pull requests" [ref=e46] [cursor=pointer]:
+            - /url: /repository/github/linksplatform/comparisons.sqlitevsdoublets/pulls
+        - listitem [ref=e47]:
+          - link "24 files" [ref=e48] [cursor=pointer]:
+            - /url: /repository/github/linksplatform/comparisons.sqlitevsdoublets/files
+        - listitem [ref=e49]:
+          - link "1 active branch" [ref=e50] [cursor=pointer]:
+            - /url: /repository/github/linksplatform/comparisons.sqlitevsdoublets/branches
+    - generic [ref=e51]:
+      - generic [ref=e53]:
+        - generic [ref=e54]: Open
+        - heading [level=2] [ref=e55]:
+          - text: "[WIP] Check for all false positives, false negatives, warnings and errors in CI/CD and fix them all"
+          - link "#111" [ref=e56] [cursor=pointer]:
+            - /url: https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/pull/111
+      - generic [ref=e57]:
+        - generic [ref=e58]:
+          - img "Author avatar" [ref=e59]
+          - text: konard
+        - text: wants to merge changes into
+        - generic [ref=e60]: main
+        - text: from
+        - generic [ref=e61]: issue-110-e1f96d946132
+        - link "3 new issues" [ref=e62] [cursor=pointer]:
+          - /url: /repository/github/linksplatform/comparisons.sqlitevsdoublets/pull/111
+      - generic [ref=e63]:
+        - navigation [ref=e64]:
+          - list [ref=e65]:
+            - listitem [ref=e66]:
+              - generic [ref=e67] [cursor=pointer]: All Languages
+            - listitem [ref=e68]:
+              - generic [ref=e69] [cursor=pointer]: Complexity 1
+            - listitem [ref=e70]:
+              - generic [ref=e71] [cursor=pointer]: Security 2
+        - generic [ref=e72]:
+          - heading "All issues" [level=1] [ref=e75]
+          - button "Actions" [ref=e78] [cursor=pointer]
+        - generic [ref=e79]:
+          - generic [ref=e80]:
+            - generic [ref=e83]:
+              - 'img "Severity: Minor" [ref=e84]'
+              - text: Complex Method
+              - generic [ref=e85]: complexity = 16
+            - generic [ref=e90]:
+              - generic [ref=e91]:
+                - text: Found in
+                - link "scripts\\benchmark_report.py:138-169" [ref=e93] [cursor=pointer]:
+                  - /url: https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/blob/73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4/scripts/benchmark_report.py#L138-L169
+              - generic [ref=e94]:
+                - generic [ref=e95]:
+                  - link "138" [ref=e96] [cursor=pointer]:
+                    - /url: https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/blob/73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4/scripts/benchmark_report.py#L138
+                  - link "139" [ref=e97] [cursor=pointer]:
+                    - /url: https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/blob/73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4/scripts/benchmark_report.py#L139
+                  - link "140" [ref=e98] [cursor=pointer]:
+                    - /url: https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/blob/73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4/scripts/benchmark_report.py#L140
+                  - link "141" [ref=e99] [cursor=pointer]:
+                    - /url: https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/blob/73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4/scripts/benchmark_report.py#L141
+                  - link "142" [ref=e100] [cursor=pointer]:
+                    - /url: https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/blob/73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4/scripts/benchmark_report.py#L142
+                - generic [ref=e101]:
+                  - generic [ref=e102]: "def validate(report, path):"
+                  - text: "\"\"\"Reject incomplete measurements before publishing tables or charts.\"\"\" try: category = report[\"category\"] if category not in CATEGORIES or report[\"language\"] not in LANGUAGES:"
+          - generic [ref=e103]:
+            - generic [ref=e106]:
+              - 'img "Severity: Major" [ref=e107]'
+              - text: Use of unsafe yaml load. Allows instantiation of arbitrary objects. Consider yaml.safe_load().
+              - generic [ref=e108]: lines of code = 1
+            - generic [ref=e113]:
+              - generic [ref=e114]:
+                - text: Found in
+                - link "scripts\\ci_checks.py:68" [ref=e116] [cursor=pointer]:
+                  - /url: https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/blob/73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4/scripts/ci_checks.py#L68
+              - generic [ref=e117]:
+                - link "68" [ref=e119] [cursor=pointer]:
+                  - /url: https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/blob/73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4/scripts/ci_checks.py#L68
+                - generic [ref=e120]: workflow = yaml.load(path.read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
+          - generic [ref=e121]:
+            - generic [ref=e124]:
+              - 'img "Severity: Major" [ref=e125]'
+              - text: Use of unsafe yaml load. Allows instantiation of arbitrary objects. Consider yaml.safe_load().
+              - generic [ref=e126]: lines of code = 1
+            - generic [ref=e131]:
+              - generic [ref=e132]:
+                - text: Found in
+                - link "scripts\\check_pipeline_status.py:34" [ref=e134] [cursor=pointer]:
+                  - /url: https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/blob/73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4/scripts/check_pipeline_status.py#L34
+              - generic [ref=e135]:
+                - link "34" [ref=e137] [cursor=pointer]:
+                  - /url: https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/blob/73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4/scripts/check_pipeline_status.py#L34
+                - generic [ref=e138]: workflow = yaml.load(Path(os.environ["WORKFLOW_FILE"]).read_text(), Loader=yaml.BaseLoader)
+  - contentinfo [ref=e139]:
+    - generic [ref=e141]:
+      - list [ref=e143]:
+        - listitem [ref=e144]:
+          - link "Security" [ref=e145] [cursor=pointer]:
+            - /url: /security
+        - listitem [ref=e146]:
+          - link "Terms" [ref=e147] [cursor=pointer]:
+            - /url: /terms
+        - listitem [ref=e148]:
+          - link "Privacy" [ref=e149] [cursor=pointer]:
+            - /url: /privacy
+        - listitem [ref=e150]:
+          - link "Contact" [ref=e151] [cursor=pointer]:
+            - /url: /contact
+      - link [ref=e154] [cursor=pointer]:
+        - /url: https://x.com/codefactor_io
+      - generic [ref=e158]: © 2026 CodeFactor
+  - generic [ref=e161]:
+    - paragraph [ref=e162]:
+      - text: We use cookies in order to offer you the most relevant information. See our
+      - link "Privacy Policy" [ref=e163] [cursor=pointer]:
+        - /url: /privacy
+      - text: .
+    - button "Ok, got it!" [ref=e164] [cursor=pointer]

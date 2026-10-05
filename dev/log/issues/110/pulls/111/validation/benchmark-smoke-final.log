@@ -1,0 +1,88 @@
+Running links-rust-32-1000.json
+SQLite_Memory #1: create 2096 ns/op, query_all 301 ns/op, query_by_id 944 ns/op, query_by_from_to 1068 ns/op, query_by_from 1129 ns/op, query_by_to 1095 ns/op, update 3808 ns/op, delete 2411 ns/op
+SQLite_File #1: create 12276 ns/op, query_all 380 ns/op, query_by_id 1315 ns/op, query_by_from_to 1168 ns/op, query_by_from 1251 ns/op, query_by_to 1203 ns/op, update 10845 ns/op, delete 25957 ns/op
+Doublets_United_Volatile #1: create 265 ns/op, query_all 2 ns/op, query_by_id 6 ns/op, query_by_from_to 100 ns/op, query_by_from 93 ns/op, query_by_to 92 ns/op, update 658 ns/op, delete 276 ns/op
+Doublets_United_NonVolatile #1: create 418 ns/op, query_all 2 ns/op, query_by_id 6 ns/op, query_by_from_to 98 ns/op, query_by_from 129 ns/op, query_by_to 122 ns/op, update 903 ns/op, delete 387 ns/op
+Doublets_Split_Volatile #1: create 155 ns/op, query_all 6 ns/op, query_by_id 6 ns/op, query_by_from_to 57 ns/op, query_by_from 33 ns/op, query_by_to 33 ns/op, update 203 ns/op, delete 543 ns/op
+Doublets_Split_NonVolatile #1: create 228 ns/op, query_all 6 ns/op, query_by_id 6 ns/op, query_by_from_to 58 ns/op, query_by_from 47 ns/op, query_by_to 33 ns/op, update 189 ns/op, delete 555 ns/op
+Running links-rust-64-1000.json
+SQLite_Memory #1: create 2108 ns/op, query_all 311 ns/op, query_by_id 930 ns/op, query_by_from_to 1035 ns/op, query_by_from 1199 ns/op, query_by_to 1152 ns/op, update 4292 ns/op, delete 2572 ns/op
+SQLite_File #1: create 10338 ns/op, query_all 388 ns/op, query_by_id 959 ns/op, query_by_from_to 1074 ns/op, query_by_from 1184 ns/op, query_by_to 1026 ns/op, update 18862 ns/op, delete 16594 ns/op
+Doublets_United_Volatile #1: create 333 ns/op, query_all 2 ns/op, query_by_id 6 ns/op, query_by_from_to 98 ns/op, query_by_from 119 ns/op, query_by_to 156 ns/op, update 879 ns/op, delete 404 ns/op
+Doublets_United_NonVolatile #1: create 1203 ns/op, query_all 5 ns/op, query_by_id 7 ns/op, query_by_from_to 100 ns/op, query_by_from 125 ns/op, query_by_to 132 ns/op, update 1273 ns/op, delete 341 ns/op
+Doublets_Split_Volatile #1: create 171 ns/op, query_all 7 ns/op, query_by_id 6 ns/op, query_by_from_to 152 ns/op, query_by_from 36 ns/op, query_by_to 35 ns/op, update 211 ns/op, delete 536 ns/op
+Doublets_Split_NonVolatile #1: create 264 ns/op, query_all 6 ns/op, query_by_id 7 ns/op, query_by_from_to 59 ns/op, query_by_from 34 ns/op, query_by_to 34 ns/op, update 210 ns/op, delete 541 ns/op
+Running objects-rust-32-1000.json
+SQLite_Memory #1: create 2168 ns/op, read_all 1133 ns/op, read_by_id 1784 ns/op, delete 1649 ns/op
+SQLite_File #1: create 15989 ns/op, read_all 1257 ns/op, read_by_id 1789 ns/op, delete 13142 ns/op
+Doublets_United_Volatile_Cached #1: create 6791 ns/op, read_all 1793 ns/op, read_by_id 1287 ns/op, delete 4069 ns/op
+Doublets_United_Volatile_Uncached #1: create 143420 ns/op, read_all 13920 ns/op, read_by_id 24887 ns/op, delete 6476 ns/op
+Doublets_United_NonVolatile_Cached #1: create 7342 ns/op, read_all 1745 ns/op, read_by_id 1235 ns/op, delete 4112 ns/op
+Doublets_United_NonVolatile_Uncached #1: create 129586 ns/op, read_all 12519 ns/op, read_by_id 12634 ns/op, delete 4046 ns/op
+Doublets_Split_Volatile_Cached #1: create 5944 ns/op, read_all 1425 ns/op, read_by_id 547 ns/op, delete 2325 ns/op
+Doublets_Split_Volatile_Uncached #1: create 77522 ns/op, read_all 23074 ns/op, read_by_id 25129 ns/op, delete 2205 ns/op
+Doublets_Split_NonVolatile_Cached #1: create 9894 ns/op, read_all 1683 ns/op, read_by_id 747 ns/op, delete 2721 ns/op
+Doublets_Split_NonVolatile_Uncached #1: create 79490 ns/op, read_all 21253 ns/op, read_by_id 24690 ns/op, delete 2455 ns/op
+Running objects-rust-64-1000.json
+SQLite_Memory #1: create 1848 ns/op, read_all 930 ns/op, read_by_id 1657 ns/op, delete 1392 ns/op
+SQLite_File #1: create 9649 ns/op, read_all 1385 ns/op, read_by_id 1893 ns/op, delete 11932 ns/op
+Doublets_United_Volatile_Cached #1: create 6673 ns/op, read_all 1581 ns/op, read_by_id 1174 ns/op, delete 3915 ns/op
+Doublets_United_Volatile_Uncached #1: create 104641 ns/op, read_all 13779 ns/op, read_by_id 15489 ns/op, delete 4435 ns/op
+Doublets_United_NonVolatile_Cached #1: create 7820 ns/op, read_all 2271 ns/op, read_by_id 1491 ns/op, delete 4321 ns/op
+Doublets_United_NonVolatile_Uncached #1: create 108867 ns/op, read_all 13239 ns/op, read_by_id 15507 ns/op, delete 4471 ns/op
+Doublets_Split_Volatile_Cached #1: create 5725 ns/op, read_all 1421 ns/op, read_by_id 610 ns/op, delete 2306 ns/op
+Doublets_Split_Volatile_Uncached #1: create 90126 ns/op, read_all 22908 ns/op, read_by_id 23656 ns/op, delete 2644 ns/op
+Doublets_Split_NonVolatile_Cached #1: create 6319 ns/op, read_all 1106 ns/op, read_by_id 565 ns/op, delete 2415 ns/op
+Doublets_Split_NonVolatile_Uncached #1: create 82340 ns/op, read_all 25234 ns/op, read_by_id 24265 ns/op, delete 2575 ns/op
+Running links-csharp-32-1000.json
+SQLite_Memory #1: create 5345 ns/op, query_all 1060 ns/op, query_by_id 2793 ns/op, query_by_from_to 3272 ns/op, query_by_from 3306 ns/op, query_by_to 3649 ns/op, update 5408 ns/op, delete 4626 ns/op
+SQLite_File #1: create 13262 ns/op, query_all 1823 ns/op, query_by_id 2039 ns/op, query_by_from_to 2213 ns/op, query_by_from 2474 ns/op, query_by_to 2906 ns/op, update 17129 ns/op, delete 13377 ns/op
+SystemDataSQLite_Memory #1: create 8041 ns/op, query_all 1731 ns/op, query_by_id 7051 ns/op, query_by_from_to 8936 ns/op, query_by_from 7466 ns/op, query_by_to 7306 ns/op, update 9279 ns/op, delete 7272 ns/op
+SystemDataSQLite_File #1: create 13901 ns/op, query_all 1051 ns/op, query_by_id 2806 ns/op, query_by_from_to 3071 ns/op, query_by_from 2582 ns/op, query_by_to 2537 ns/op, update 14044 ns/op, delete 12124 ns/op
+Doublets_United_Volatile #1: create 2388 ns/op, query_all 41 ns/op, query_by_id 261 ns/op, query_by_from_to 431 ns/op, query_by_from 396 ns/op, query_by_to 429 ns/op, update 4896 ns/op, delete 5253 ns/op
+Doublets_United_NonVolatile #1: create 1721 ns/op, query_all 35 ns/op, query_by_id 182 ns/op, query_by_from_to 278 ns/op, query_by_from 489 ns/op, query_by_to 284 ns/op, update 2981 ns/op, delete 2590 ns/op
+Doublets_Split_Volatile #1: create 1497 ns/op, query_all 268 ns/op, query_by_id 1768 ns/op, query_by_from_to 557 ns/op, query_by_from 508 ns/op, query_by_to 706 ns/op, update 1530 ns/op, delete 2212 ns/op
+Doublets_Split_NonVolatile #1: create 835 ns/op, query_all 21 ns/op, query_by_id 169 ns/op, query_by_from_to 139 ns/op, query_by_from 144 ns/op, query_by_to 122 ns/op, update 342 ns/op, delete 782 ns/op
+Running links-csharp-64-1000.json
+SQLite_Memory #1: create 5953 ns/op, query_all 7429 ns/op, query_by_id 4739 ns/op, query_by_from_to 4897 ns/op, query_by_from 6937 ns/op, query_by_to 7756 ns/op, update 8719 ns/op, delete 5763 ns/op
+SQLite_File #1: create 15841 ns/op, query_all 1027 ns/op, query_by_id 2488 ns/op, query_by_from_to 2820 ns/op, query_by_from 3045 ns/op, query_by_to 3108 ns/op, update 17195 ns/op, delete 22918 ns/op
+SystemDataSQLite_Memory #1: create 8127 ns/op, query_all 4502 ns/op, query_by_id 7425 ns/op, query_by_from_to 7640 ns/op, query_by_from 7421 ns/op, query_by_to 9054 ns/op, update 12416 ns/op, delete 8306 ns/op
+SystemDataSQLite_File #1: create 25529 ns/op, query_all 1171 ns/op, query_by_id 3030 ns/op, query_by_from_to 3120 ns/op, query_by_from 3845 ns/op, query_by_to 5497 ns/op, update 25794 ns/op, delete 22592 ns/op
+Doublets_United_Volatile #1: create 5264 ns/op, query_all 515 ns/op, query_by_id 1584 ns/op, query_by_from_to 1822 ns/op, query_by_from 2212 ns/op, query_by_to 2350 ns/op, update 14294 ns/op, delete 8093 ns/op
+Doublets_United_NonVolatile #1: create 2650 ns/op, query_all 33 ns/op, query_by_id 339 ns/op, query_by_from_to 394 ns/op, query_by_from 393 ns/op, query_by_to 281 ns/op, update 6129 ns/op, delete 3100 ns/op
+Doublets_Split_Volatile #1: create 2082 ns/op, query_all 1056 ns/op, query_by_id 2549 ns/op, query_by_from_to 607 ns/op, query_by_from 565 ns/op, query_by_to 570 ns/op, update 1442 ns/op, delete 1816 ns/op
+Doublets_Split_NonVolatile #1: create 2444 ns/op, query_all 19564 ns/op, query_by_id 923 ns/op, query_by_from_to 641 ns/op, query_by_from 508 ns/op, query_by_to 662 ns/op, update 3302 ns/op, delete 2933 ns/op
+Running objects-csharp-32-1000.json
+SQLite_Memory #1: create 12414 ns/op, read_all 8248 ns/op, read_by_id 10811 ns/op, delete 3458 ns/op
+SQLite_File #1: create 44080 ns/op, read_all 10162 ns/op, read_by_id 12761 ns/op, delete 23393 ns/op
+SystemDataSQLite_Memory #1: create 13306 ns/op, read_all 6080 ns/op, read_by_id 10881 ns/op, delete 3172 ns/op
+SystemDataSQLite_File #1: create 45972 ns/op, read_all 10586 ns/op, read_by_id 15066 ns/op, delete 28894 ns/op
+Doublets_United_Volatile_Cached #1: create 67254 ns/op, read_all 54121 ns/op, read_by_id 11876 ns/op, delete 47123 ns/op
+Doublets_United_Volatile_Uncached #1: create 320286 ns/op, read_all 725643 ns/op, read_by_id 672014 ns/op, delete 11771 ns/op
+Doublets_United_NonVolatile_Cached #1: create 34030 ns/op, read_all 28384 ns/op, read_by_id 7768 ns/op, delete 15182 ns/op
+Doublets_United_NonVolatile_Uncached #1: create 399470 ns/op, read_all 705605 ns/op, read_by_id 755492 ns/op, delete 12514 ns/op
+Doublets_Split_Volatile_Cached #1: create 31660 ns/op, read_all 35057 ns/op, read_by_id 8755 ns/op, delete 7405 ns/op
+Doublets_Split_Volatile_Uncached #1: create 306630 ns/op, read_all 835634 ns/op, read_by_id 944416 ns/op, delete 6550 ns/op
+Doublets_Split_NonVolatile_Cached #1: create 22446 ns/op, read_all 31049 ns/op, read_by_id 7292 ns/op, delete 6454 ns/op
+Doublets_Split_NonVolatile_Uncached #1: create 287348 ns/op, read_all 1101607 ns/op, read_by_id 909293 ns/op, delete 5828 ns/op
+Running objects-csharp-64-1000.json
+SQLite_Memory #1: create 29695 ns/op, read_all 22604 ns/op, read_by_id 24960 ns/op, delete 9001 ns/op
+SQLite_File #1: create 25395 ns/op, read_all 10000 ns/op, read_by_id 8617 ns/op, delete 27763 ns/op
+SystemDataSQLite_Memory #1: create 9731 ns/op, read_all 7505 ns/op, read_by_id 13590 ns/op, delete 3236 ns/op
+SystemDataSQLite_File #1: create 36459 ns/op, read_all 9895 ns/op, read_by_id 12897 ns/op, delete 24866 ns/op
+Doublets_United_Volatile_Cached #1: create 90377 ns/op, read_all 52033 ns/op, read_by_id 10089 ns/op, delete 42462 ns/op
+Doublets_United_Volatile_Uncached #1: create 440656 ns/op, read_all 908153 ns/op, read_by_id 825346 ns/op, delete 17157 ns/op
+Doublets_United_NonVolatile_Cached #1: create 44837 ns/op, read_all 26296 ns/op, read_by_id 9051 ns/op, delete 16273 ns/op
+Doublets_United_NonVolatile_Uncached #1: create 322145 ns/op, read_all 743500 ns/op, read_by_id 824322 ns/op, delete 18532 ns/op
+Doublets_Split_Volatile_Cached #1: create 25889 ns/op, read_all 28704 ns/op, read_by_id 8910 ns/op, delete 7384 ns/op
+Doublets_Split_Volatile_Uncached #1: create 268692 ns/op, read_all 993086 ns/op, read_by_id 948244 ns/op, delete 10002 ns/op
+Doublets_Split_NonVolatile_Cached #1: create 47702 ns/op, read_all 28563 ns/op, read_by_id 7739 ns/op, delete 7356 ns/op
+Doublets_Split_NonVolatile_Uncached #1: create 294692 ns/op, read_all 985581 ns/op, read_by_id 880304 ns/op, delete 8159 ns/op
+Verified links-rust-32-1000.json from 73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4
+Verified links-rust-64-1000.json from 73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4
+Verified objects-rust-32-1000.json from 73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4
+Verified objects-rust-64-1000.json from 73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4
+Verified links-csharp-32-1000.json from 73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4
+Verified links-csharp-64-1000.json from 73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4
+Verified objects-csharp-32-1000.json from 73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4
+Verified objects-csharp-64-1000.json from 73c7cff736c444a5d9dc1e8f0b6143ad2e04c1f4

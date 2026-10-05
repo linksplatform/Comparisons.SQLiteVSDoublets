@@ -1,0 +1,14 @@
+[workspace]
+resolver = "2"
+
+members = [
+    "doublets",
+
+    # internal
+    "integration"
+]
+# in global rework
+exclude = [
+    "doublets-decorators",
+    "doublets-ffi",
+]

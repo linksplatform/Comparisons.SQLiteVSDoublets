@@ -1,0 +1,843 @@
+Test (macos-latest)	Set up job	﻿2026-10-05T10:18:41.4145880Z Current runner version: '2.337.0'
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4162940Z ##[group]Runner Image Provisioner
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4163520Z Hosted Compute Agent
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4163920Z Version: 20260828.587
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4164330Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4164930Z Build Date: 2026-08-28T16:44:25Z
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4165590Z Worker ID: {7f96fd4b-d349-497b-a84a-efecc0769dbf}
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4166160Z Azure Region: westus
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4166570Z ##[endgroup]
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4167470Z ##[group]Operating System
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4167950Z macOS
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4168370Z 26.6.2
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4168730Z 25G83
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4169070Z ##[endgroup]
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4169430Z ##[group]Runner Image
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4169820Z Image: macos-26-arm64
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4170200Z Version: 20260907.0351.1
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4170940Z Included Software: https://github.com/actions/runner-images/blob/macos-26-arm64/20260907.0351/images/macos/macos-26-arm64-Readme.md
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4172280Z Image Release: https://github.com/actions/runner-images/releases/tag/macos-26-arm64%2F20260907.0351
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4172950Z ##[endgroup]
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4175150Z ##[group]GITHUB_TOKEN Permissions
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4176500Z Actions: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4176930Z ArtifactMetadata: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4177330Z Attestations: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4177770Z Checks: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4178200Z CodeQuality: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4178590Z Contents: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4178980Z CopilotRequests: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4179380Z Deployments: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4179810Z Discussions: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4180350Z Drives: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4180810Z Issues: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4181250Z Metadata: read
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4181670Z Models: read
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4182050Z Packages: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4182490Z Pages: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4182910Z PullRequests: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4183410Z RepositoryProjects: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4183860Z SecurityEvents: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4184310Z Statuses: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4184820Z VulnerabilityAlerts: read
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4185260Z ##[endgroup]
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4186910Z Secret source: Actions
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4187530Z Cache mode: write
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4187980Z Prepare workflow directory
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4473430Z Prepare all required actions
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.4511720Z Getting action download info
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.7429090Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+Test (macos-latest)	Set up job	2026-10-05T10:18:41.9701030Z Download action repository 'actions/setup-dotnet@v6' (SHA:a98b56852c35b8e3190ac28c8c2271da59106c68)
+Test (macos-latest)	Set up job	2026-10-05T10:18:42.8399070Z Complete job name: Test (macos-latest)
+Test (macos-latest)	Run actions/checkout@v7	﻿2026-10-05T10:18:42.9135250Z ##[group]Run actions/checkout@v7
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:42.9137580Z with:
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:42.9138100Z   repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:42.9141450Z   token: ***
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:42.9141880Z   ssh-strict: true
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:42.9142260Z   ssh-user: git
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:42.9142630Z   persist-credentials: true
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:42.9143040Z   clean: true
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:42.9143490Z   sparse-checkout-cone-mode: true
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:42.9144020Z   fetch-depth: 1
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:42.9144380Z   fetch-tags: false
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:42.9144740Z   show-progress: true
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:42.9145150Z   lfs: false
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:42.9145550Z   submodules: false
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:42.9146040Z   set-safe-directory: true
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:42.9146560Z   allow-unsafe-pr-checkout: false
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:42.9147570Z ##[endgroup]
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.3639160Z Syncing repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.3641740Z ##[group]Getting Git version info
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.3643370Z Working directory is '/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.3645570Z [command]/opt/homebrew/bin/git version
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4168040Z git version 2.55.0
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4179870Z ##[endgroup]
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4186800Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/b31835d7-7212-48d5-ae39-6efe8cb5105b/.gitconfig'
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4191640Z Temporarily overriding HOME='/Users/runner/work/_temp/b31835d7-7212-48d5-ae39-6efe8cb5105b' before making global git config changes
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4194700Z Adding repository directory to the temporary git global config as a safe directory
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4197880Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4300630Z Deleting the contents of '/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4303780Z ##[group]Determining repository object format
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4305570Z ##[endgroup]
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4307170Z ##[group]Initializing the repository
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4309250Z [command]/opt/homebrew/bin/git init /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4778590Z hint: Using 'master' as the name for the initial branch. This default branch name
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4781620Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4783550Z hint: to use in all of your new repositories, which will suppress this warning,
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4785520Z hint: call:
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4786360Z hint:
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4787320Z hint: 	git config --global init.defaultBranch <name>
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4788500Z hint:
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4789560Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4791170Z hint: 'development'. The just-created branch can be renamed via this command:
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4792710Z hint:
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4793630Z hint: 	git branch -m <name>
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4795410Z hint:
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4796760Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4799560Z Initialized empty Git repository in /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4803720Z [command]/opt/homebrew/bin/git remote add origin https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4897220Z ##[endgroup]
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4900470Z ##[group]Disabling automatic garbage collection
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4902460Z [command]/opt/homebrew/bin/git config --local gc.auto 0
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4996610Z ##[endgroup]
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.4998640Z ##[group]Setting up auth
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.5000520Z Removing SSH command configuration
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.5003050Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.5063470Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.6325120Z Removing HTTP extra header
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.6333080Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.6406540Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.7392760Z Removing includeIf entries pointing to credentials config files
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.7397450Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.7705690Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.8502180Z [command]/opt/homebrew/bin/git config --file /Users/runner/work/_temp/git-credentials-d8c3e5cd-40cc-4b43-b890-9984430b3871.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.8631450Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path /Users/runner/work/_temp/git-credentials-d8c3e5cd-40cc-4b43-b890-9984430b3871.config
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.8701710Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path /Users/runner/work/_temp/git-credentials-d8c3e5cd-40cc-4b43-b890-9984430b3871.config
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.8809910Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-d8c3e5cd-40cc-4b43-b890-9984430b3871.config
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.8892960Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-d8c3e5cd-40cc-4b43-b890-9984430b3871.config
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.8967330Z ##[endgroup]
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.8968630Z ##[group]Fetching the repository
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:43.8972360Z [command]/opt/homebrew/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +1348c2a334b23b338c3c3813267c0df96a9f69b7:refs/remotes/pull/100/merge
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:44.4178850Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:44.4190480Z  * [new ref]         1348c2a334b23b338c3c3813267c0df96a9f69b7 -> pull/100/merge
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:44.4234950Z ##[endgroup]
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:44.4236570Z ##[group]Determining the checkout info
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:44.4238030Z ##[endgroup]
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:44.4238900Z [command]/opt/homebrew/bin/git sparse-checkout disable
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:44.4290620Z [command]/opt/homebrew/bin/git config --local --unset-all extensions.worktreeConfig
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:44.4369230Z ##[group]Checking out the ref
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:44.4372440Z [command]/opt/homebrew/bin/git checkout --progress --force refs/remotes/pull/100/merge
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:44.4612760Z HEAD is now at 1348c2a Merge bb09b12fa0e703b1c79f4e635bf08b0c3087bcbe into d2ee41e17b1bf6a8f3bea6c96827c41311cedb19
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:44.4630300Z ##[endgroup]
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:44.4744720Z [command]/opt/homebrew/bin/git log -1 --format=%H
+Test (macos-latest)	Run actions/checkout@v7	2026-10-05T10:18:44.4824270Z 1348c2a334b23b338c3c3813267c0df96a9f69b7
+Test (macos-latest)	Run actions/setup-dotnet@v6	﻿2026-10-05T10:18:44.5187070Z ##[group]Run actions/setup-dotnet@v6
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:44.5187940Z with:
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:44.5188580Z   global-json-file: csharp/global.json
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:44.5189330Z   cache: false
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:44.5190000Z ##[endgroup]
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:44.6975540Z [command]/Users/runner/work/_actions/actions/setup-dotnet/v6/externals/install-dotnet.sh --skip-non-versioned-files --runtime dotnet --channel LTS
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:45.3082930Z dotnet-install: Attempting to download using aka.ms link https://builds.dotnet.microsoft.com/dotnet/Runtime/10.0.12/dotnet-runtime-10.0.12-osx-arm64.tar.gz
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:46.3447150Z dotnet-install: Remote file https://builds.dotnet.microsoft.com/dotnet/Runtime/10.0.12/dotnet-runtime-10.0.12-osx-arm64.tar.gz size is 33249724 bytes.
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:46.3450560Z dotnet-install: Extracting archive from https://builds.dotnet.microsoft.com/dotnet/Runtime/10.0.12/dotnet-runtime-10.0.12-osx-arm64.tar.gz
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:46.8094440Z dotnet-install: Downloaded file size is 33249724 bytes.
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:46.8098270Z dotnet-install: The remote and local file sizes are equal.
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:46.8382800Z dotnet-install: Installed version is 10.0.12
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:46.8496610Z dotnet-install: Adding to current process PATH: `/Users/runner/.dotnet`. Note: This change will be visible only when sourcing script.
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:46.8499080Z dotnet-install: Note that the script does not resolve dependencies during installation.
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:46.8501330Z dotnet-install: To check the list of dependencies, go to https://learn.microsoft.com/dotnet/core/install, select your operating system and check the "Dependencies" section.
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:46.8503270Z dotnet-install: Installation finished successfully.
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:46.8536280Z [command]/Users/runner/work/_actions/actions/setup-dotnet/v6/externals/install-dotnet.sh --skip-non-versioned-files --channel 10.0
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:47.3317430Z dotnet-install: Attempting to download using aka.ms link https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.401/dotnet-sdk-10.0.401-osx-arm64.tar.gz
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:51.6022860Z dotnet-install: Remote file https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.401/dotnet-sdk-10.0.401-osx-arm64.tar.gz size is 230753980 bytes.
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:51.6129130Z dotnet-install: Extracting archive from https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.401/dotnet-sdk-10.0.401-osx-arm64.tar.gz
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:57.5183810Z dotnet-install: Downloaded file size is 230753980 bytes.
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:57.5186430Z dotnet-install: The remote and local file sizes are equal.
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:57.9107330Z dotnet-install: Installed version is 10.0.401
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:57.9195380Z dotnet-install: Adding to current process PATH: `/Users/runner/.dotnet`. Note: This change will be visible only when sourcing script.
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:57.9197570Z dotnet-install: Note that the script does not resolve dependencies during installation.
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:57.9200760Z dotnet-install: To check the list of dependencies, go to https://learn.microsoft.com/dotnet/core/install, select your operating system and check the "Dependencies" section.
+Test (macos-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:57.9202460Z dotnet-install: Installation finished successfully.
+Test (macos-latest)	Run dotnet build -c Release -warnaserror	﻿2026-10-05T10:18:57.9576610Z ##[group]Run dotnet build -c Release -warnaserror
+Test (macos-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:57.9577180Z ^[[36;1mdotnet build -c Release -warnaserror^[[0m
+Test (macos-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:57.9641920Z shell: /bin/bash -e {0}
+Test (macos-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:57.9642490Z env:
+Test (macos-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:57.9642820Z   DOTNET_ROOT: /Users/runner/.dotnet
+Test (macos-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:57.9643230Z ##[endgroup]
+Test (macos-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:00.0657200Z   Determining projects to restore...
+Test (macos-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:02.1536990Z   Restored /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets/SQLiteVSDoublets.csproj (in 1.8 sec).
+Test (macos-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:02.1538310Z   Restored /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets.Tests/SQLiteVSDoublets.Tests.csproj (in 1.8 sec).
+Test (macos-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:04.7870800Z   SQLiteVSDoublets -> /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll
+Test (macos-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:05.3372150Z   SQLiteVSDoublets.Tests -> /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets.Tests/bin/Release/net10.0/SQLiteVSDoublets.Tests.dll
+Test (macos-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:05.3738130Z 
+Test (macos-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:05.3813740Z Build succeeded.
+Test (macos-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:05.3859380Z     0 Warning(s)
+Test (macos-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:05.3906360Z     0 Error(s)
+Test (macos-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:05.3907050Z 
+Test (macos-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:05.3916230Z Time Elapsed 00:00:05.96
+Test (macos-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	﻿2026-10-05T10:19:05.3980260Z ##[group]Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build
+Test (macos-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:05.3981670Z ^[[36;1mdotnet test --project SQLiteVSDoublets.Tests -c Release --no-build^[[0m
+Test (macos-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:05.4020030Z shell: /bin/bash -e {0}
+Test (macos-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:05.4020380Z env:
+Test (macos-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:05.4020610Z   DOTNET_ROOT: /Users/runner/.dotnet
+Test (macos-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:05.4020830Z ##[endgroup]
+Test (macos-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:06.2114820Z Running tests from /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets.Tests/bin/Release/net10.0/SQLiteVSDoublets.Tests.dll (net10.0|arm64)
+Test (macos-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:50.0181620Z ^[[m/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets.Tests/bin/Release/net10.0/SQLiteVSDoublets.Tests.dll (net10.0|arm64) ^[[32mpassed^[[m ^[[90m(43s 784ms)^[[m
+Test (macos-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:50.0220210Z 
+Test (macos-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:50.0233330Z ^[[32mTest run summary: Passed!
+Test (macos-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:50.0235080Z ^[[m  total: 37
+Test (macos-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:50.0236300Z   failed: 0
+Test (macos-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:50.0238770Z ^[[32m  succeeded: 37
+Test (macos-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:50.0260150Z ^[[m  skipped: 0
+Test (macos-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:50.0261330Z   duration: 44s 067ms
+Test (macos-latest)	Check SQLite provider reports	﻿2026-10-05T10:19:50.0603080Z ##[group]Run python ../experiments/system_data_sqlite/check_reports.py
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:50.0603700Z ^[[36;1mpython ../experiments/system_data_sqlite/check_reports.py^[[0m
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:50.0838750Z shell: /bin/bash -e {0}
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:50.0839230Z env:
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:50.0839480Z   DOTNET_ROOT: /Users/runner/.dotnet
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:50.0840110Z ##[endgroup]
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:51.5958530Z SQLite_Memory #1: create 1222 ns/op, query_all 272 ns/op, query_by_id 796 ns/op, query_by_from_to 1163 ns/op, query_by_from 931 ns/op, query_by_to 936 ns/op, update 2216 ns/op, delete 1677 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:51.6063820Z SQLite_Memory #2: create 1198 ns/op, query_all 239 ns/op, query_by_id 671 ns/op, query_by_from_to 816 ns/op, query_by_from 828 ns/op, query_by_to 810 ns/op, update 2096 ns/op, delete 1700 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:51.6177230Z SQLite_Memory #3: create 1119 ns/op, query_all 239 ns/op, query_by_id 722 ns/op, query_by_from_to 837 ns/op, query_by_from 1063 ns/op, query_by_to 1098 ns/op, update 2372 ns/op, delete 1742 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:52.6543840Z SQLite_File #1: create 5151 ns/op, query_all 564 ns/op, query_by_id 1210 ns/op, query_by_from_to 1029 ns/op, query_by_from 1063 ns/op, query_by_to 931 ns/op, update 2805 ns/op, delete 2435 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:52.6699000Z SQLite_File #2: create 1632 ns/op, query_all 275 ns/op, query_by_id 760 ns/op, query_by_from_to 952 ns/op, query_by_from 873 ns/op, query_by_to 799 ns/op, update 3604 ns/op, delete 2894 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:52.6858000Z SQLite_File #3: create 2162 ns/op, query_all 283 ns/op, query_by_id 793 ns/op, query_by_from_to 838 ns/op, query_by_from 970 ns/op, query_by_to 1471 ns/op, update 3152 ns/op, delete 2487 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:53.7545670Z SystemDataSQLite_Memory #1: create 2886 ns/op, query_all 707 ns/op, query_by_id 1880 ns/op, query_by_from_to 2566 ns/op, query_by_from 5228 ns/op, query_by_to 6569 ns/op, update 3799 ns/op, delete 3119 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:53.7890150Z SystemDataSQLite_Memory #2: create 4045 ns/op, query_all 615 ns/op, query_by_id 2206 ns/op, query_by_from_to 2710 ns/op, query_by_from 3365 ns/op, query_by_to 6305 ns/op, update 4782 ns/op, delete 5938 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:53.8208910Z SystemDataSQLite_Memory #3: create 5255 ns/op, query_all 685 ns/op, query_by_id 2298 ns/op, query_by_from_to 2819 ns/op, query_by_from 2508 ns/op, query_by_to 4785 ns/op, update 4509 ns/op, delete 3558 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:54.8422490Z SystemDataSQLite_File #1: create 2212 ns/op, query_all 289 ns/op, query_by_id 826 ns/op, query_by_from_to 935 ns/op, query_by_from 891 ns/op, query_by_to 971 ns/op, update 2981 ns/op, delete 2393 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:54.8565220Z SystemDataSQLite_File #2: create 1786 ns/op, query_all 248 ns/op, query_by_id 712 ns/op, query_by_from_to 860 ns/op, query_by_from 840 ns/op, query_by_to 843 ns/op, update 2626 ns/op, delete 2591 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:54.8708590Z SystemDataSQLite_File #3: create 1859 ns/op, query_all 239 ns/op, query_by_id 711 ns/op, query_by_from_to 907 ns/op, query_by_from 910 ns/op, query_by_to 836 ns/op, update 2807 ns/op, delete 2155 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:55.9624630Z SQLite_Memory #1: create 2246 ns/op, query_all 371 ns/op, query_by_id 777 ns/op, query_by_from_to 876 ns/op, query_by_from 965 ns/op, query_by_to 1271 ns/op, update 2580 ns/op, delete 1874 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:55.9785260Z SQLite_Memory #2: create 1512 ns/op, query_all 326 ns/op, query_by_id 1908 ns/op, query_by_from_to 1872 ns/op, query_by_from 1434 ns/op, query_by_to 1123 ns/op, update 3073 ns/op, delete 1894 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:55.9912140Z SQLite_Memory #3: create 1175 ns/op, query_all 302 ns/op, query_by_id 798 ns/op, query_by_from_to 970 ns/op, query_by_from 1574 ns/op, query_by_to 1650 ns/op, update 2679 ns/op, delete 1753 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:57.0146510Z SQLite_File #1: create 1789 ns/op, query_all 376 ns/op, query_by_id 952 ns/op, query_by_from_to 973 ns/op, query_by_from 1069 ns/op, query_by_to 918 ns/op, update 2895 ns/op, delete 2604 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:57.0290150Z SQLite_File #2: create 1786 ns/op, query_all 271 ns/op, query_by_id 948 ns/op, query_by_from_to 913 ns/op, query_by_from 855 ns/op, query_by_to 833 ns/op, update 3425 ns/op, delete 2213 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:57.0420180Z SQLite_File #3: create 1636 ns/op, query_all 256 ns/op, query_by_id 771 ns/op, query_by_from_to 831 ns/op, query_by_from 895 ns/op, query_by_to 780 ns/op, update 2624 ns/op, delete 2434 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:58.0919830Z SystemDataSQLite_Memory #1: create 4534 ns/op, query_all 403 ns/op, query_by_id 1764 ns/op, query_by_from_to 3266 ns/op, query_by_from 1912 ns/op, query_by_to 1831 ns/op, update 3003 ns/op, delete 2426 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:58.1151490Z SystemDataSQLite_Memory #2: create 2683 ns/op, query_all 586 ns/op, query_by_id 2327 ns/op, query_by_from_to 2640 ns/op, query_by_from 2572 ns/op, query_by_to 2368 ns/op, update 3518 ns/op, delete 2800 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:58.1400770Z SystemDataSQLite_Memory #3: create 2578 ns/op, query_all 500 ns/op, query_by_id 2296 ns/op, query_by_from_to 2645 ns/op, query_by_from 3686 ns/op, query_by_to 2630 ns/op, update 4333 ns/op, delete 3084 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:59.1676920Z SystemDataSQLite_File #1: create 1792 ns/op, query_all 250 ns/op, query_by_id 844 ns/op, query_by_from_to 1219 ns/op, query_by_from 905 ns/op, query_by_to 964 ns/op, update 2513 ns/op, delete 2054 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:59.1809330Z SystemDataSQLite_File #2: create 1903 ns/op, query_all 234 ns/op, query_by_id 709 ns/op, query_by_from_to 1113 ns/op, query_by_from 852 ns/op, query_by_to 832 ns/op, update 2400 ns/op, delete 1897 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:19:59.1941470Z SystemDataSQLite_File #3: create 1778 ns/op, query_all 238 ns/op, query_by_id 800 ns/op, query_by_from_to 1072 ns/op, query_by_from 858 ns/op, query_by_to 831 ns/op, update 2327 ns/op, delete 2256 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:00.2945180Z SQLite_Memory #1: create 4235 ns/op, read_all 3452 ns/op, read_by_id 4182 ns/op, delete 1066 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:00.3135200Z SQLite_Memory #2: create 3843 ns/op, read_all 3187 ns/op, read_by_id 4383 ns/op, delete 922 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:00.3478990Z SQLite_Memory #3: create 3662 ns/op, read_all 3132 ns/op, read_by_id 17585 ns/op, delete 3143 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:01.3939830Z SQLite_File #1: create 5903 ns/op, read_all 3105 ns/op, read_by_id 3854 ns/op, delete 3874 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:01.4172880Z SQLite_File #2: create 6154 ns/op, read_all 3218 ns/op, read_by_id 3788 ns/op, delete 3433 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:01.4396400Z SQLite_File #3: create 5622 ns/op, read_all 3062 ns/op, read_by_id 3726 ns/op, delete 3397 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:02.5073210Z SystemDataSQLite_Memory #1: create 5641 ns/op, read_all 5834 ns/op, read_by_id 6113 ns/op, delete 7894 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:02.5328540Z SystemDataSQLite_Memory #2: create 5268 ns/op, read_all 3607 ns/op, read_by_id 5804 ns/op, delete 2173 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:02.5590150Z SystemDataSQLite_Memory #3: create 5637 ns/op, read_all 3909 ns/op, read_by_id 5880 ns/op, delete 2399 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:03.6026430Z SystemDataSQLite_File #1: create 7797 ns/op, read_all 3251 ns/op, read_by_id 4002 ns/op, delete 3615 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:03.6269730Z SystemDataSQLite_File #2: create 5406 ns/op, read_all 3297 ns/op, read_by_id 4140 ns/op, delete 3588 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:03.6622760Z SystemDataSQLite_File #3: create 10193 ns/op, read_all 5262 ns/op, read_by_id 4872 ns/op, delete 5236 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:04.7666790Z SQLite_Memory #1: create 4798 ns/op, read_all 3346 ns/op, read_by_id 3860 ns/op, delete 1012 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:04.7872000Z SQLite_Memory #2: create 4083 ns/op, read_all 3404 ns/op, read_by_id 3994 ns/op, delete 1022 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:04.8076240Z SQLite_Memory #3: create 4179 ns/op, read_all 3562 ns/op, read_by_id 4441 ns/op, delete 1091 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:05.8478530Z SQLite_File #1: create 4775 ns/op, read_all 6877 ns/op, read_by_id 7630 ns/op, delete 3154 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:05.8872660Z SQLite_File #2: create 10685 ns/op, read_all 2939 ns/op, read_by_id 3935 ns/op, delete 15163 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:05.9098350Z SQLite_File #3: create 5158 ns/op, read_all 3159 ns/op, read_by_id 3799 ns/op, delete 3347 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:06.9418900Z SystemDataSQLite_Memory #1: create 5168 ns/op, read_all 4006 ns/op, read_by_id 6572 ns/op, delete 2407 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:06.9721700Z SystemDataSQLite_Memory #2: create 5301 ns/op, read_all 3862 ns/op, read_by_id 6366 ns/op, delete 2382 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:07.0025950Z SystemDataSQLite_Memory #3: create 6764 ns/op, read_all 3550 ns/op, read_by_id 5618 ns/op, delete 2362 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:08.0276940Z SystemDataSQLite_File #1: create 6814 ns/op, read_all 3173 ns/op, read_by_id 4771 ns/op, delete 3846 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:08.0517430Z SystemDataSQLite_File #2: create 5534 ns/op, read_all 3185 ns/op, read_by_id 4323 ns/op, delete 3665 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:08.0746560Z SystemDataSQLite_File #3: create 4979 ns/op, read_all 2917 ns/op, read_by_id 4046 ns/op, delete 3244 ns/op
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:08.0875970Z .
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:08.0879000Z ----------------------------------------------------------------------
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:08.0881290Z Ran 1 test in 17.558s
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:08.0882290Z 
+Test (macos-latest)	Check SQLite provider reports	2026-10-05T10:20:08.0883330Z OK
+Test (macos-latest)	Post Run actions/setup-dotnet@v6	﻿2026-10-05T10:20:08.1124470Z Post job cleanup.
+Test (macos-latest)	Post Run actions/checkout@v7	﻿2026-10-05T10:20:08.7095860Z Post job cleanup.
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:08.8650720Z [command]/opt/homebrew/bin/git version
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:08.9003090Z git version 2.55.0
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:08.9033520Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/1abf6f0b-e707-42a5-ba7d-16c88c9132d1/.gitconfig'
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:08.9043780Z Temporarily overriding HOME='/Users/runner/work/_temp/1abf6f0b-e707-42a5-ba7d-16c88c9132d1' before making global git config changes
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:08.9044740Z Adding repository directory to the temporary git global config as a safe directory
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:08.9048460Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:08.9215510Z Removing SSH command configuration
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:08.9221790Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:08.9464480Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.1146050Z Removing HTTP extra header
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.1246790Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.1542230Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.3285910Z Removing includeIf entries pointing to credentials config files
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.3377740Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.3378930Z includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.3379860Z includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.3380570Z includeif.gitdir:/github/workspace/.git.path
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.3380970Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.3382420Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.3419140Z /Users/runner/work/_temp/git-credentials-d8c3e5cd-40cc-4b43-b890-9984430b3871.config
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.3501920Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path \/Users\/runner\/work\/_temp\/git\-credentials\-d8c3e5cd\-40cc\-4b43\-b890\-9984430b3871\.config
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.3803880Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.3995930Z /Users/runner/work/_temp/git-credentials-d8c3e5cd-40cc-4b43-b890-9984430b3871.config
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.4195610Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path \/Users\/runner\/work\/_temp\/git\-credentials\-d8c3e5cd\-40cc\-4b43\-b890\-9984430b3871\.config
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.4548080Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.4746370Z /github/runner_temp/git-credentials-d8c3e5cd-40cc-4b43-b890-9984430b3871.config
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.4968800Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-d8c3e5cd\-40cc\-4b43\-b890\-9984430b3871\.config
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.5551050Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.5758300Z /github/runner_temp/git-credentials-d8c3e5cd-40cc-4b43-b890-9984430b3871.config
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.6202150Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-d8c3e5cd\-40cc\-4b43\-b890\-9984430b3871\.config
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:09.6625560Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Test (macos-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:10.1256970Z Removing credentials config '/Users/runner/work/_temp/git-credentials-d8c3e5cd-40cc-4b43-b890-9984430b3871.config'
+Test (macos-latest)	Complete job	﻿2026-10-05T10:20:10.1823730Z Cleaning up orphan processes
+Test (macos-latest)	Complete job	2026-10-05T10:20:11.4141270Z Terminate orphan process: pid (1700) (VBCSCompiler)
+Test (windows-latest)	Set up job	﻿2026-10-05T10:18:36.1007497Z Current runner version: '2.337.0'
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1068493Z ##[group]Runner Image Provisioner
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1069118Z Hosted Compute Agent
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1069498Z Version: 20260901.588
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1070416Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1070960Z Build Date: 2026-09-01T19:56:44Z
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1071795Z Worker ID: {bc3e0023-5cd3-4b86-a7f3-ccfb93a1f592}
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1072351Z Azure Region: centralus
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1072819Z ##[endgroup]
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1073839Z ##[group]Operating System
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1074247Z Microsoft Windows Server 2025
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1074631Z 10.0.26100
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1074948Z Datacenter
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1075319Z ##[endgroup]
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1075627Z ##[group]Runner Image
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1075996Z Image: windows-2025-vs2026
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1076347Z Version: 20260925.250.1
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1077060Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260925.250/images/windows/Windows2025-VS2026-Readme.md
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1078303Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260925.250
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1078917Z ##[endgroup]
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1080734Z ##[group]GITHUB_TOKEN Permissions
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1081986Z Actions: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1082320Z ArtifactMetadata: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1082669Z Attestations: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1082978Z Checks: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1083275Z CodeQuality: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1083584Z Contents: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1083940Z CopilotRequests: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1084265Z Deployments: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1084562Z Discussions: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1084908Z Drives: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1085236Z Issues: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1085546Z Metadata: read
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1085885Z Models: read
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1086172Z Packages: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1086511Z Pages: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1086872Z PullRequests: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1087251Z RepositoryProjects: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1087593Z SecurityEvents: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1087904Z Statuses: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1088207Z VulnerabilityAlerts: read
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1088553Z ##[endgroup]
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1090179Z Secret source: Actions
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1090672Z Cache mode: write
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1091068Z Prepare workflow directory
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1451553Z Prepare all required actions
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.1484062Z Getting action download info
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.3872948Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+Test (windows-latest)	Set up job	2026-10-05T10:18:36.6125232Z Download action repository 'actions/setup-dotnet@v6' (SHA:a98b56852c35b8e3190ac28c8c2271da59106c68)
+Test (windows-latest)	Set up job	2026-10-05T10:18:37.1162457Z Complete job name: Test (windows-latest)
+Test (windows-latest)	Run actions/checkout@v7	﻿2026-10-05T10:18:37.2205244Z ##[group]Run actions/checkout@v7
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.2206023Z with:
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.2206334Z   repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.2208757Z   token: ***
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.2208997Z   ssh-strict: true
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.2209251Z   ssh-user: git
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.2209503Z   persist-credentials: true
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.2209775Z   clean: true
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.2210026Z   sparse-checkout-cone-mode: true
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.2210325Z   fetch-depth: 1
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.2210567Z   fetch-tags: false
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.2210822Z   show-progress: true
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.2211073Z   lfs: false
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.2211324Z   submodules: false
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.2211580Z   set-safe-directory: true
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.2211868Z   allow-unsafe-pr-checkout: false
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.2212509Z ##[endgroup]
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.3336008Z Syncing repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.3337427Z ##[group]Getting Git version info
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.3338059Z Working directory is 'D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets'
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.3778585Z [command]"C:\Program Files\Git\bin\git.exe" version
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.7096010Z git version 2.55.0.windows.5
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.7141966Z ##[endgroup]
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.7154529Z Temporarily overriding HOME='D:\a\_temp\d2db42c7-1496-4dbb-881c-d92c1ba524f6' before making global git config changes
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.7157387Z Adding repository directory to the temporary git global config as a safe directory
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.7163829Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.7697863Z Deleting the contents of 'D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets'
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.7700967Z ##[group]Determining repository object format
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.7702804Z ##[endgroup]
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.7703964Z ##[group]Initializing the repository
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.7709107Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.8345535Z Initialized empty Git repository in D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.8373638Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.8839490Z ##[endgroup]
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.8840646Z ##[group]Disabling automatic garbage collection
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.8845938Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.9043677Z ##[endgroup]
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.9044693Z ##[group]Setting up auth
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.9045431Z Removing SSH command configuration
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.9050595Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:37.9239946Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:39.1359131Z Removing HTTP extra header
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:39.1369061Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:39.1589922Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:39.5850100Z Removing includeIf entries pointing to credentials config files
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:39.5857644Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:39.6061062Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:40.0071880Z [command]"C:\Program Files\Git\bin\git.exe" config --file D:\a\_temp\git-credentials-f8342148-1f26-4538-ae4e-b1b9c19cf893.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:40.0306384Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path D:\a\_temp\git-credentials-f8342148-1f26-4538-ae4e-b1b9c19cf893.config
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:40.0516603Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path D:\a\_temp\git-credentials-f8342148-1f26-4538-ae4e-b1b9c19cf893.config
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:40.0762513Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-f8342148-1f26-4538-ae4e-b1b9c19cf893.config
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:40.0960104Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-f8342148-1f26-4538-ae4e-b1b9c19cf893.config
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:40.1158405Z ##[endgroup]
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:40.1158960Z ##[group]Fetching the repository
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:40.1167548Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +1348c2a334b23b338c3c3813267c0df96a9f69b7:refs/remotes/pull/100/merge
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.2124892Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.2126458Z  * [new ref]         1348c2a334b23b338c3c3813267c0df96a9f69b7 -> pull/100/merge
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.2168161Z ##[endgroup]
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.2168917Z ##[group]Determining the checkout info
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.2169390Z ##[endgroup]
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.2179059Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.2532284Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.2747444Z ##[group]Checking out the ref
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.2756371Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/100/merge
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3340842Z Note: switching to 'refs/remotes/pull/100/merge'.
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3341292Z 
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3341525Z You are in 'detached HEAD' state. You can look around, make experimental
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3342003Z changes and commit them, and you can discard any commits you make in this
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3342456Z state without impacting any branches by switching back to a branch.
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3342655Z 
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3342866Z If you want to create a new branch to retain commits you create, you may
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3343223Z do so (now or later) by using -c with the switch command. Example:
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3343394Z 
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3343513Z   git switch -c <new-branch-name>
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3343812Z 
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3343895Z Or undo this operation with:
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3344059Z 
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3344132Z   git switch -
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3344243Z 
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3344390Z Turn off this advice by setting config variable advice.detachedHead to false
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3344622Z 
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3344882Z HEAD is now at 1348c2a Merge bb09b12fa0e703b1c79f4e635bf08b0c3087bcbe into d2ee41e17b1bf6a8f3bea6c96827c41311cedb19
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3432376Z ##[endgroup]
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3752382Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+Test (windows-latest)	Run actions/checkout@v7	2026-10-05T10:18:41.3943563Z 1348c2a334b23b338c3c3813267c0df96a9f69b7
+Test (windows-latest)	Run actions/setup-dotnet@v6	﻿2026-10-05T10:18:41.4347913Z ##[group]Run actions/setup-dotnet@v6
+Test (windows-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:41.4348270Z with:
+Test (windows-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:41.4348415Z   global-json-file: csharp/global.json
+Test (windows-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:41.4348581Z   cache: false
+Test (windows-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:41.4348702Z ##[endgroup]
+Test (windows-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:41.6290962Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\a\_actions\actions\setup-dotnet\v6\externals\install-dotnet.ps1' -SkipNonVersionedFiles -Runtime dotnet -Channel LTS
+Test (windows-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:42.6673404Z dotnet-install: .NET Core Runtime with version '10.0.12' is already installed.
+Test (windows-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:42.7677967Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\a\_actions\actions\setup-dotnet\v6\externals\install-dotnet.ps1' -SkipNonVersionedFiles -Channel 10.0
+Test (windows-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:43.4837900Z dotnet-install: .NET Core SDK with version '10.0.401' is already installed.
+Test (windows-latest)	Run dotnet build -c Release -warnaserror	﻿2026-10-05T10:18:43.5625683Z ##[group]Run dotnet build -c Release -warnaserror
+Test (windows-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:43.5625999Z ^[[36;1mdotnet build -c Release -warnaserror^[[0m
+Test (windows-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:43.6024065Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Test (windows-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:43.6024299Z env:
+Test (windows-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:43.6024771Z   DOTNET_ROOT: C:\Program Files\dotnet
+Test (windows-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:43.6024924Z ##[endgroup]
+Test (windows-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:51.1078785Z   Determining projects to restore...
+Test (windows-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:00.7734458Z   Restored D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\csharp\SQLiteVSDoublets\SQLiteVSDoublets.csproj (in 8.06 sec).
+Test (windows-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:01.4021583Z   Restored D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\csharp\SQLiteVSDoublets.Tests\SQLiteVSDoublets.Tests.csproj (in 8.73 sec).
+Test (windows-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:06.8552944Z   SQLiteVSDoublets -> D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\csharp\SQLiteVSDoublets\bin\Release\net10.0\sqlite-vs-doublets.dll
+Test (windows-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:07.7184405Z   SQLiteVSDoublets.Tests -> D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\csharp\SQLiteVSDoublets.Tests\bin\Release\net10.0\SQLiteVSDoublets.Tests.dll
+Test (windows-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:07.7372174Z 
+Test (windows-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:07.7377403Z Build succeeded.
+Test (windows-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:07.7384660Z     0 Warning(s)
+Test (windows-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:07.7385276Z     0 Error(s)
+Test (windows-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:07.7386304Z 
+Test (windows-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:07.7386509Z Time Elapsed 00:00:20.27
+Test (windows-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	﻿2026-10-05T10:19:08.1242672Z ##[group]Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build
+Test (windows-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:08.1243061Z ^[[36;1mdotnet test --project SQLiteVSDoublets.Tests -c Release --no-build^[[0m
+Test (windows-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:08.1291126Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Test (windows-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:08.1291342Z env:
+Test (windows-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:08.1291486Z   DOTNET_ROOT: C:\Program Files\dotnet
+Test (windows-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:08.1291643Z ##[endgroup]
+Test (windows-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:09.0781580Z Running tests from D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\csharp\SQLiteVSDoublets.Tests\bin\Release\net10.0\SQLiteVSDoublets.Tests.dll (net10.0|x64)
+Test (windows-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:52.2215096Z ^[[mD:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets\csharp\SQLiteVSDoublets.Tests\bin\Release\net10.0\SQLiteVSDoublets.Tests.dll (net10.0|x64) ^[[32mpassed^[[m ^[[90m(43s 144ms)^[[m
+Test (windows-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:52.2244934Z 
+Test (windows-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:52.2251439Z ^[[32mTest run summary: Passed!
+Test (windows-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:52.2251864Z ^[[m  total: 37
+Test (windows-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:52.2252210Z   failed: 0
+Test (windows-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:52.2252911Z ^[[32m  succeeded: 37
+Test (windows-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:52.2253121Z ^[[m  skipped: 0
+Test (windows-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:52.2253616Z   duration: 43s 372ms
+Test (windows-latest)	Check SQLite provider reports	﻿2026-10-05T10:19:52.3295177Z ##[group]Run python ../experiments/system_data_sqlite/check_reports.py
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:52.3295553Z ^[[36;1mpython ../experiments/system_data_sqlite/check_reports.py^[[0m
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:52.3344644Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:52.3344869Z env:
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:52.3345005Z   DOTNET_ROOT: C:\Program Files\dotnet
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:52.3345165Z ##[endgroup]
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:54.6391347Z SQLite_Memory #1: create 1099 ns/op, query_all 312 ns/op, query_by_id 658 ns/op, query_by_from_to 742 ns/op, query_by_from 836 ns/op, query_by_to 807 ns/op, update 1974 ns/op, delete 1338 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:54.6493177Z SQLite_Memory #2: create 1086 ns/op, query_all 329 ns/op, query_by_id 671 ns/op, query_by_from_to 735 ns/op, query_by_from 819 ns/op, query_by_to 815 ns/op, update 1939 ns/op, delete 1314 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:54.6591606Z SQLite_Memory #3: create 1064 ns/op, query_all 334 ns/op, query_by_id 660 ns/op, query_by_from_to 737 ns/op, query_by_from 827 ns/op, query_by_to 805 ns/op, update 1944 ns/op, delete 1310 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:55.9134454Z SQLite_File #1: create 23617 ns/op, query_all 438 ns/op, query_by_id 818 ns/op, query_by_from_to 892 ns/op, query_by_from 908 ns/op, query_by_to 938 ns/op, update 26279 ns/op, delete 23302 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:56.0465693Z SQLite_File #2: create 22635 ns/op, query_all 416 ns/op, query_by_id 725 ns/op, query_by_from_to 839 ns/op, query_by_from 879 ns/op, query_by_to 882 ns/op, update 27637 ns/op, delete 25379 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:56.1891300Z SQLite_File #3: create 23388 ns/op, query_all 415 ns/op, query_by_id 724 ns/op, query_by_from_to 855 ns/op, query_by_from 869 ns/op, query_by_to 856 ns/op, update 34907 ns/op, delete 28332 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:57.2192332Z SystemDataSQLite_Memory #1: create 2121 ns/op, query_all 398 ns/op, query_by_id 1625 ns/op, query_by_from_to 2170 ns/op, query_by_from 2616 ns/op, query_by_to 2751 ns/op, update 4504 ns/op, delete 3143 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:57.2390218Z SystemDataSQLite_Memory #2: create 2145 ns/op, query_all 409 ns/op, query_by_id 1638 ns/op, query_by_from_to 2180 ns/op, query_by_from 1891 ns/op, query_by_to 1874 ns/op, update 3183 ns/op, delete 2574 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:57.2583907Z SystemDataSQLite_Memory #3: create 2125 ns/op, query_all 404 ns/op, query_by_id 1629 ns/op, query_by_from_to 2161 ns/op, query_by_from 1876 ns/op, query_by_to 1864 ns/op, update 3154 ns/op, delete 2572 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:58.5068501Z SystemDataSQLite_File #1: create 22080 ns/op, query_all 298 ns/op, query_by_id 680 ns/op, query_by_from_to 830 ns/op, query_by_from 782 ns/op, query_by_to 773 ns/op, update 24750 ns/op, delete 22259 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:58.6316758Z SystemDataSQLite_File #2: create 20763 ns/op, query_all 307 ns/op, query_by_id 676 ns/op, query_by_from_to 844 ns/op, query_by_from 791 ns/op, query_by_to 778 ns/op, update 24681 ns/op, delete 22480 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:58.7551282Z SystemDataSQLite_File #3: create 21155 ns/op, query_all 298 ns/op, query_by_id 663 ns/op, query_by_from_to 802 ns/op, query_by_from 833 ns/op, query_by_to 772 ns/op, update 25381 ns/op, delete 22793 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:59.8386132Z SQLite_Memory #1: create 1130 ns/op, query_all 319 ns/op, query_by_id 653 ns/op, query_by_from_to 784 ns/op, query_by_from 816 ns/op, query_by_to 811 ns/op, update 1968 ns/op, delete 1357 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:59.8495047Z SQLite_Memory #2: create 1120 ns/op, query_all 316 ns/op, query_by_id 648 ns/op, query_by_from_to 790 ns/op, query_by_from 821 ns/op, query_by_to 834 ns/op, update 1942 ns/op, delete 1347 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:19:59.8598565Z SQLite_Memory #3: create 1111 ns/op, query_all 312 ns/op, query_by_id 675 ns/op, query_by_from_to 748 ns/op, query_by_from 808 ns/op, query_by_to 828 ns/op, update 1987 ns/op, delete 1372 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:01.0203783Z SQLite_File #1: create 22092 ns/op, query_all 438 ns/op, query_by_id 739 ns/op, query_by_from_to 850 ns/op, query_by_from 889 ns/op, query_by_to 902 ns/op, update 25100 ns/op, delete 23339 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:01.1537585Z SQLite_File #2: create 23948 ns/op, query_all 423 ns/op, query_by_id 744 ns/op, query_by_from_to 822 ns/op, query_by_from 870 ns/op, query_by_to 869 ns/op, update 27055 ns/op, delete 26287 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:01.3186154Z SQLite_File #3: create 24124 ns/op, query_all 427 ns/op, query_by_id 746 ns/op, query_by_from_to 820 ns/op, query_by_from 879 ns/op, query_by_to 873 ns/op, update 61978 ns/op, delete 22828 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:02.3452967Z SystemDataSQLite_Memory #1: create 2165 ns/op, query_all 397 ns/op, query_by_id 1642 ns/op, query_by_from_to 2160 ns/op, query_by_from 1893 ns/op, query_by_to 1880 ns/op, update 3212 ns/op, delete 2385 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:02.3641326Z SystemDataSQLite_Memory #2: create 2190 ns/op, query_all 395 ns/op, query_by_id 1640 ns/op, query_by_from_to 2155 ns/op, query_by_from 1882 ns/op, query_by_to 1891 ns/op, update 3246 ns/op, delete 2416 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:02.3900095Z SystemDataSQLite_Memory #3: create 2984 ns/op, query_all 608 ns/op, query_by_id 2383 ns/op, query_by_from_to 3045 ns/op, query_by_from 2844 ns/op, query_by_to 2795 ns/op, update 4435 ns/op, delete 2982 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:03.5837349Z SystemDataSQLite_File #1: create 23646 ns/op, query_all 252 ns/op, query_by_id 690 ns/op, query_by_from_to 780 ns/op, query_by_from 760 ns/op, query_by_to 777 ns/op, update 25626 ns/op, delete 23290 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:03.7173741Z SystemDataSQLite_File #2: create 26576 ns/op, query_all 263 ns/op, query_by_id 650 ns/op, query_by_from_to 804 ns/op, query_by_from 785 ns/op, query_by_to 779 ns/op, update 24872 ns/op, delete 22634 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:03.8559188Z SystemDataSQLite_File #3: create 22728 ns/op, query_all 245 ns/op, query_by_id 672 ns/op, query_by_from_to 783 ns/op, query_by_from 777 ns/op, query_by_to 772 ns/op, update 25327 ns/op, delete 35119 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:04.9741571Z SQLite_Memory #1: create 2946 ns/op, read_all 2340 ns/op, read_by_id 2635 ns/op, delete 1088 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:04.9893616Z SQLite_Memory #2: create 2902 ns/op, read_all 2313 ns/op, read_by_id 2652 ns/op, delete 1084 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:05.0035853Z SQLite_Memory #3: create 2864 ns/op, read_all 2268 ns/op, read_by_id 2631 ns/op, delete 1067 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:06.1594591Z SQLite_File #1: create 33998 ns/op, read_all 2692 ns/op, read_by_id 2843 ns/op, delete 31280 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:06.2669281Z SQLite_File #2: create 33849 ns/op, read_all 7142 ns/op, read_by_id 7428 ns/op, delete 33440 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:06.3691788Z SQLite_File #3: create 36830 ns/op, read_all 2725 ns/op, read_by_id 3041 ns/op, delete 32266 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:07.3944718Z SystemDataSQLite_Memory #1: create 2907 ns/op, read_all 2203 ns/op, read_by_id 2668 ns/op, delete 1012 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:07.4084824Z SystemDataSQLite_Memory #2: create 2877 ns/op, read_all 2078 ns/op, read_by_id 2582 ns/op, delete 917 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:07.4231457Z SystemDataSQLite_Memory #3: create 2871 ns/op, read_all 2418 ns/op, read_by_id 2973 ns/op, delete 962 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:08.5785569Z SystemDataSQLite_File #1: create 44072 ns/op, read_all 2448 ns/op, read_by_id 2939 ns/op, delete 38436 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:08.6827465Z SystemDataSQLite_File #2: create 38900 ns/op, read_all 2465 ns/op, read_by_id 2936 ns/op, delete 38431 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:08.7814604Z SystemDataSQLite_File #3: create 35398 ns/op, read_all 2436 ns/op, read_by_id 2864 ns/op, delete 34556 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:09.8718544Z SQLite_Memory #1: create 2831 ns/op, read_all 2376 ns/op, read_by_id 2710 ns/op, delete 1087 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:09.8871168Z SQLite_Memory #2: create 2890 ns/op, read_all 2366 ns/op, read_by_id 2724 ns/op, delete 1137 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:09.9018862Z SQLite_Memory #3: create 2820 ns/op, read_all 2339 ns/op, read_by_id 2706 ns/op, delete 1060 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:11.0761395Z SQLite_File #1: create 39411 ns/op, read_all 6475 ns/op, read_by_id 3059 ns/op, delete 31696 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:11.1785300Z SQLite_File #2: create 37159 ns/op, read_all 3389 ns/op, read_by_id 4283 ns/op, delete 33534 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:11.2716578Z SQLite_File #3: create 33953 ns/op, read_all 2552 ns/op, read_by_id 2876 ns/op, delete 32061 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:12.2896608Z SystemDataSQLite_Memory #1: create 2797 ns/op, read_all 2090 ns/op, read_by_id 2609 ns/op, delete 995 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:12.3041821Z SystemDataSQLite_Memory #2: create 2638 ns/op, read_all 2400 ns/op, read_by_id 2924 ns/op, delete 1019 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:12.3255210Z SystemDataSQLite_Memory #3: create 4273 ns/op, read_all 3642 ns/op, read_by_id 4668 ns/op, delete 1547 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:13.4455227Z SystemDataSQLite_File #1: create 41229 ns/op, read_all 2418 ns/op, read_by_id 5048 ns/op, delete 37636 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:13.5748231Z SystemDataSQLite_File #2: create 45174 ns/op, read_all 2292 ns/op, read_by_id 2869 ns/op, delete 50242 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:13.6829101Z SystemDataSQLite_File #3: create 40413 ns/op, read_all 2494 ns/op, read_by_id 2950 ns/op, delete 36579 ns/op
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:13.7038882Z .
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:13.7039346Z ----------------------------------------------------------------------
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:13.7040062Z Ran 1 test in 20.140s
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:13.7040165Z 
+Test (windows-latest)	Check SQLite provider reports	2026-10-05T10:20:13.7040212Z OK
+Test (windows-latest)	Post Run actions/setup-dotnet@v6	﻿2026-10-05T10:20:13.8025988Z Post job cleanup.
+Test (windows-latest)	Post Run actions/checkout@v7	﻿2026-10-05T10:20:13.9292367Z Post job cleanup.
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.0370738Z [command]"C:\Program Files\Git\bin\git.exe" version
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.0559773Z git version 2.55.0.windows.5
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.0605560Z Temporarily overriding HOME='D:\a\_temp\b51c505c-d4b2-47c8-8a90-efb531fa5e37' before making global git config changes
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.0606024Z Adding repository directory to the temporary git global config as a safe directory
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.0612839Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\Comparisons.SQLiteVSDoublets\Comparisons.SQLiteVSDoublets
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.0821918Z Removing SSH command configuration
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.0829505Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.1034834Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.5283757Z Removing HTTP extra header
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.5291805Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.5532442Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.9660454Z Removing includeIf entries pointing to credentials config files
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.9674539Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.9862328Z includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.9863080Z includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.9863575Z includeif.gitdir:/github/workspace/.git.path
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.9863954Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:14.9896065Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:15.0074712Z D:\a\_temp\git-credentials-f8342148-1f26-4538-ae4e-b1b9c19cf893.config
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:15.0110624Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path D\:\\a\\_temp\\git\-credentials\-f8342148\-1f26\-4538\-ae4e\-b1b9c19cf893\.config
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:15.0388649Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:15.0577328Z D:\a\_temp\git-credentials-f8342148-1f26-4538-ae4e-b1b9c19cf893.config
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:15.0615283Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path D\:\\a\\_temp\\git\-credentials\-f8342148\-1f26\-4538\-ae4e\-b1b9c19cf893\.config
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:15.0838218Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:15.1007002Z /github/runner_temp/git-credentials-f8342148-1f26-4538-ae4e-b1b9c19cf893.config
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:15.1036607Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-f8342148\-1f26\-4538\-ae4e\-b1b9c19cf893\.config
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:15.1234793Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:15.1402368Z /github/runner_temp/git-credentials-f8342148-1f26-4538-ae4e-b1b9c19cf893.config
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:15.1431434Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-f8342148\-1f26\-4538\-ae4e\-b1b9c19cf893\.config
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:15.1626996Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Test (windows-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:15.5727139Z Removing credentials config 'D:\a\_temp\git-credentials-f8342148-1f26-4538-ae4e-b1b9c19cf893.config'
+Test (windows-latest)	Complete job	﻿2026-10-05T10:20:15.5916898Z Cleaning up orphan processes
+Test (windows-latest)	Complete job	2026-10-05T10:20:15.6045266Z Terminate orphan process: pid (4760) (dotnet)
+Test (windows-latest)	Complete job	2026-10-05T10:20:15.6120026Z Terminate orphan process: pid (6344) (conhost)
+Test (windows-latest)	Complete job	2026-10-05T10:20:15.6477480Z Terminate orphan process: pid (9248) (VBCSCompiler)
+Test (windows-latest)	Complete job	2026-10-05T10:20:15.6555090Z Terminate orphan process: pid (8664) (conhost)
+Test (ubuntu-latest)	Set up job	﻿2026-10-05T10:18:45.7671172Z Current runner version: '2.337.0'
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7691311Z ##[group]Runner Image Provisioner
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7692133Z Hosted Compute Agent
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7692630Z Version: 20260901.588
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7693144Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7693775Z Build Date: 2026-09-01T19:56:44Z
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7694330Z Worker ID: {7a98b915-453b-410d-96db-b77b56990dd4}
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7694996Z Azure Region: westcentralus
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7695713Z ##[endgroup]
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7697075Z ##[group]Operating System
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7697660Z Ubuntu
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7698119Z 24.04.5
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7698518Z LTS
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7698992Z ##[endgroup]
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7699444Z ##[group]Runner Image
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7699933Z Image: ubuntu-24.04
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7700405Z Version: 20260927.320.1
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7701298Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7702717Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7703519Z ##[endgroup]
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7706231Z ##[group]GITHUB_TOKEN Permissions
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7708036Z Actions: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7708544Z ArtifactMetadata: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7709027Z Attestations: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7709559Z Checks: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7710045Z CodeQuality: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7710577Z Contents: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7711090Z CopilotRequests: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7711545Z Deployments: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7712071Z Discussions: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7712515Z Drives: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7712969Z Issues: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7713417Z Metadata: read
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7713916Z Models: read
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7714389Z Packages: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7714897Z Pages: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7715473Z PullRequests: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7715957Z RepositoryProjects: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7716464Z SecurityEvents: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7716996Z Statuses: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7717450Z VulnerabilityAlerts: read
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7717908Z ##[endgroup]
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7719590Z Secret source: Actions
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7720339Z Cache mode: write
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.7720997Z Prepare workflow directory
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.8038659Z Prepare all required actions
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:45.8076323Z Getting action download info
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:46.1023138Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:46.5336875Z Download action repository 'actions/setup-dotnet@v6' (SHA:a98b56852c35b8e3190ac28c8c2271da59106c68)
+Test (ubuntu-latest)	Set up job	2026-10-05T10:18:47.4934994Z Complete job name: Test (ubuntu-latest)
+Test (ubuntu-latest)	Run actions/checkout@v7	﻿2026-10-05T10:18:47.5527573Z ##[group]Run actions/checkout@v7
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.5528259Z with:
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.5528687Z   repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.5531744Z   token: ***
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.5532124Z   ssh-strict: true
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.5532484Z   ssh-user: git
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.5532850Z   persist-credentials: true
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.5533234Z   clean: true
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.5533585Z   sparse-checkout-cone-mode: true
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.5533988Z   fetch-depth: 1
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.5534326Z   fetch-tags: false
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.5534682Z   show-progress: true
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.5535028Z   lfs: false
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.5535492Z   submodules: false
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.5535870Z   set-safe-directory: true
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.5536258Z   allow-unsafe-pr-checkout: false
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.5536871Z ##[endgroup]
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6324089Z Syncing repository: linksplatform/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6325992Z ##[group]Getting Git version info
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6326861Z Working directory is '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6327863Z [command]/usr/bin/git version
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6447089Z git version 2.55.0
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6464261Z ##[endgroup]
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6473997Z Temporarily overriding HOME='/home/runner/work/_temp/3afa59e9-33d1-46d8-a0c3-76ba70903b01' before making global git config changes
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6475883Z Adding repository directory to the temporary git global config as a safe directory
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6479393Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6520688Z Deleting the contents of '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6524010Z ##[group]Determining repository object format
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6525530Z ##[endgroup]
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6526516Z ##[group]Initializing the repository
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6530031Z [command]/usr/bin/git init /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6598981Z hint: Using 'master' as the name for the initial branch. This default branch name
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6599831Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6600924Z hint: to use in all of your new repositories, which will suppress this warning,
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6601541Z hint: call:
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6602072Z hint:
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6602743Z hint: 	git config --global init.defaultBranch <name>
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6603527Z hint:
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6604246Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6605533Z hint: 'development'. The just-created branch can be renamed via this command:
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6606532Z hint:
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6607084Z hint: 	git branch -m <name>
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6607668Z hint:
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6608482Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6610103Z Initialized empty Git repository in /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6617845Z [command]/usr/bin/git remote add origin https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6670585Z ##[endgroup]
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6671551Z ##[group]Disabling automatic garbage collection
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6672375Z [command]/usr/bin/git config --local gc.auto 0
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6691820Z ##[endgroup]
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6692856Z ##[group]Setting up auth
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6693697Z Removing SSH command configuration
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6696669Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.6724188Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.7249228Z Removing HTTP extra header
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.7255177Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.7287834Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.7480959Z Removing includeIf entries pointing to credentials config files
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.7485853Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.7516742Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.7705084Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-6de30650-cdc1-476c-a36e-b78f1a8b3841.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.7738538Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path /home/runner/work/_temp/git-credentials-6de30650-cdc1-476c-a36e-b78f1a8b3841.config
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.7767812Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-6de30650-cdc1-476c-a36e-b78f1a8b3841.config
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.7798948Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-6de30650-cdc1-476c-a36e-b78f1a8b3841.config
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.7828854Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-6de30650-cdc1-476c-a36e-b78f1a8b3841.config
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.7856681Z ##[endgroup]
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.7857570Z ##[group]Fetching the repository
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:47.7861141Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +1348c2a334b23b338c3c3813267c0df96a9f69b7:refs/remotes/pull/100/merge
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4059811Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4062205Z  * [new ref]         1348c2a334b23b338c3c3813267c0df96a9f69b7 -> pull/100/merge
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4066453Z ##[endgroup]
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4067415Z ##[group]Determining the checkout info
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4068445Z ##[endgroup]
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4069326Z [command]/usr/bin/git sparse-checkout disable
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4115225Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4146717Z ##[group]Checking out the ref
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4149146Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/100/merge
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4247087Z Note: switching to 'refs/remotes/pull/100/merge'.
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4248042Z 
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4248870Z You are in 'detached HEAD' state. You can look around, make experimental
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4250705Z changes and commit them, and you can discard any commits you make in this
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4252202Z state without impacting any branches by switching back to a branch.
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4253023Z 
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4253715Z If you want to create a new branch to retain commits you create, you may
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4255120Z do so (now or later) by using -c with the switch command. Example:
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4255971Z 
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4256391Z   git switch -c <new-branch-name>
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4256940Z 
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4257367Z Or undo this operation with:
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4258627Z 
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4259022Z   git switch -
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4259507Z 
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4260423Z Turn off this advice by setting config variable advice.detachedHead to false
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4261441Z 
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4262772Z HEAD is now at 1348c2a Merge bb09b12fa0e703b1c79f4e635bf08b0c3087bcbe into d2ee41e17b1bf6a8f3bea6c96827c41311cedb19
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4308295Z ##[endgroup]
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4310752Z [command]/usr/bin/git log -1 --format=%H
+Test (ubuntu-latest)	Run actions/checkout@v7	2026-10-05T10:18:48.4334751Z 1348c2a334b23b338c3c3813267c0df96a9f69b7
+Test (ubuntu-latest)	Run actions/setup-dotnet@v6	﻿2026-10-05T10:18:48.4609849Z ##[group]Run actions/setup-dotnet@v6
+Test (ubuntu-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:48.4610921Z with:
+Test (ubuntu-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:48.4611774Z   global-json-file: csharp/global.json
+Test (ubuntu-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:48.4612844Z   cache: false
+Test (ubuntu-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:48.4613665Z ##[endgroup]
+Test (ubuntu-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:48.5708957Z [command]/home/runner/work/_actions/actions/setup-dotnet/v6/externals/install-dotnet.sh --skip-non-versioned-files --runtime dotnet --channel LTS
+Test (ubuntu-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:48.8613304Z dotnet-install: .NET Core Runtime with version '10.0.12' is already installed.
+Test (ubuntu-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:48.8633381Z [command]/home/runner/work/_actions/actions/setup-dotnet/v6/externals/install-dotnet.sh --skip-non-versioned-files --channel 10.0
+Test (ubuntu-latest)	Run actions/setup-dotnet@v6	2026-10-05T10:18:49.1750108Z dotnet-install: .NET Core SDK with version '10.0.401' is already installed.
+Test (ubuntu-latest)	Run dotnet build -c Release -warnaserror	﻿2026-10-05T10:18:49.1923730Z ##[group]Run dotnet build -c Release -warnaserror
+Test (ubuntu-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:49.1924881Z ^[[36;1mdotnet build -c Release -warnaserror^[[0m
+Test (ubuntu-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:49.2138509Z shell: /usr/bin/bash -e {0}
+Test (ubuntu-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:49.2139583Z env:
+Test (ubuntu-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:49.2140223Z   DOTNET_ROOT: /usr/share/dotnet
+Test (ubuntu-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:49.2141028Z ##[endgroup]
+Test (ubuntu-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:53.0156402Z   Determining projects to restore...
+Test (ubuntu-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:55.0431894Z   Restored /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets/SQLiteVSDoublets.csproj (in 1.51 sec).
+Test (ubuntu-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:18:55.0448847Z   Restored /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets.Tests/SQLiteVSDoublets.Tests.csproj (in 1.51 sec).
+Test (ubuntu-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:00.3354397Z   SQLiteVSDoublets -> /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll
+Test (ubuntu-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:01.2730532Z   SQLiteVSDoublets.Tests -> /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets.Tests/bin/Release/net10.0/SQLiteVSDoublets.Tests.dll
+Test (ubuntu-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:01.2989560Z 
+Test (ubuntu-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:01.2997324Z Build succeeded.
+Test (ubuntu-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:01.3006894Z     0 Warning(s)
+Test (ubuntu-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:01.3026286Z     0 Error(s)
+Test (ubuntu-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:01.3033255Z 
+Test (ubuntu-latest)	Run dotnet build -c Release -warnaserror	2026-10-05T10:19:01.3066068Z Time Elapsed 00:00:09.40
+Test (ubuntu-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	﻿2026-10-05T10:19:01.3324097Z ##[group]Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build
+Test (ubuntu-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:01.3324587Z ^[[36;1mdotnet test --project SQLiteVSDoublets.Tests -c Release --no-build^[[0m
+Test (ubuntu-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:01.3381023Z shell: /usr/bin/bash -e {0}
+Test (ubuntu-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:01.3381242Z env:
+Test (ubuntu-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:01.3381414Z   DOTNET_ROOT: /usr/share/dotnet
+Test (ubuntu-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:01.3381620Z ##[endgroup]
+Test (ubuntu-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:02.1846600Z Running tests from /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets.Tests/bin/Release/net10.0/SQLiteVSDoublets.Tests.dll (net10.0|x64)
+Test (ubuntu-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:44.5943531Z ^[[m/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets.Tests/bin/Release/net10.0/SQLiteVSDoublets.Tests.dll (net10.0|x64) ^[[32mpassed^[[m ^[[90m(42s 412ms)^[[m
+Test (ubuntu-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:44.5980684Z 
+Test (ubuntu-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:44.5988491Z ^[[32mTest run summary: Passed!
+Test (ubuntu-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:44.5988970Z ^[[m  total: 37
+Test (ubuntu-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:44.5989385Z   failed: 0
+Test (ubuntu-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:44.5989769Z ^[[32m  succeeded: 37
+Test (ubuntu-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:44.5990069Z ^[[m  skipped: 0
+Test (ubuntu-latest)	Run dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build	2026-10-05T10:19:44.5990366Z   duration: 42s 658ms
+Test (ubuntu-latest)	Check SQLite provider reports	﻿2026-10-05T10:19:44.6140879Z ##[group]Run python ../experiments/system_data_sqlite/check_reports.py
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:44.6141310Z ^[[36;1mpython ../experiments/system_data_sqlite/check_reports.py^[[0m
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:44.6197672Z shell: /usr/bin/bash -e {0}
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:44.6197889Z env:
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:44.6198055Z   DOTNET_ROOT: /usr/share/dotnet
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:44.6198268Z ##[endgroup]
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:45.7121263Z SQLite_Memory #1: create 1374 ns/op, query_all 342 ns/op, query_by_id 851 ns/op, query_by_from_to 994 ns/op, query_by_from 1066 ns/op, query_by_to 1055 ns/op, update 2475 ns/op, delete 1820 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:45.7240880Z SQLite_Memory #2: create 1393 ns/op, query_all 324 ns/op, query_by_id 850 ns/op, query_by_from_to 995 ns/op, query_by_from 1059 ns/op, query_by_to 1057 ns/op, update 2479 ns/op, delete 1829 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:45.7356390Z SQLite_Memory #3: create 1379 ns/op, query_all 333 ns/op, query_by_id 840 ns/op, query_by_from_to 984 ns/op, query_by_from 1049 ns/op, query_by_to 1052 ns/op, update 2450 ns/op, delete 1798 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:46.7688272Z SQLite_File #1: create 3466 ns/op, query_all 359 ns/op, query_by_id 929 ns/op, query_by_from_to 1052 ns/op, query_by_from 1099 ns/op, query_by_to 1112 ns/op, update 3440 ns/op, delete 2624 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:46.7860355Z SQLite_File #2: create 2291 ns/op, query_all 371 ns/op, query_by_id 869 ns/op, query_by_from_to 1047 ns/op, query_by_from 1084 ns/op, query_by_to 1087 ns/op, update 3453 ns/op, delete 2751 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:46.8030888Z SQLite_File #3: create 2350 ns/op, query_all 363 ns/op, query_by_id 884 ns/op, query_by_from_to 1037 ns/op, query_by_from 1084 ns/op, query_by_to 1088 ns/op, update 3347 ns/op, delete 2707 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:47.8536590Z SystemDataSQLite_Memory #1: create 3152 ns/op, query_all 646 ns/op, query_by_id 2433 ns/op, query_by_from_to 3150 ns/op, query_by_from 2953 ns/op, query_by_to 2884 ns/op, update 4282 ns/op, delete 3402 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:47.8801014Z SystemDataSQLite_Memory #2: create 3807 ns/op, query_all 657 ns/op, query_by_id 2435 ns/op, query_by_from_to 3211 ns/op, query_by_from 2896 ns/op, query_by_to 2905 ns/op, update 4301 ns/op, delete 3436 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:47.9056741Z SystemDataSQLite_Memory #3: create 3136 ns/op, query_all 664 ns/op, query_by_id 2431 ns/op, query_by_from_to 3228 ns/op, query_by_from 2905 ns/op, query_by_to 2897 ns/op, update 4257 ns/op, delete 3376 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:48.9283279Z SystemDataSQLite_File #1: create 2324 ns/op, query_all 280 ns/op, query_by_id 958 ns/op, query_by_from_to 1141 ns/op, query_by_from 1123 ns/op, query_by_to 1105 ns/op, update 3743 ns/op, delete 2788 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:48.9463529Z SystemDataSQLite_File #2: create 2462 ns/op, query_all 283 ns/op, query_by_id 952 ns/op, query_by_from_to 1170 ns/op, query_by_from 1137 ns/op, query_by_to 1113 ns/op, update 3543 ns/op, delete 2834 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:48.9643419Z SystemDataSQLite_File #3: create 2367 ns/op, query_all 320 ns/op, query_by_id 970 ns/op, query_by_from_to 1147 ns/op, query_by_from 1144 ns/op, query_by_to 1112 ns/op, update 3414 ns/op, delete 2909 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:50.0299147Z SQLite_Memory #1: create 1397 ns/op, query_all 324 ns/op, query_by_id 833 ns/op, query_by_from_to 1039 ns/op, query_by_from 1042 ns/op, query_by_to 1049 ns/op, update 2468 ns/op, delete 1799 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:50.0419970Z SQLite_Memory #2: create 1409 ns/op, query_all 325 ns/op, query_by_id 841 ns/op, query_by_from_to 999 ns/op, query_by_from 1044 ns/op, query_by_to 1055 ns/op, update 2486 ns/op, delete 1817 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:50.0534511Z SQLite_Memory #3: create 1394 ns/op, query_all 334 ns/op, query_by_id 823 ns/op, query_by_from_to 991 ns/op, query_by_from 1044 ns/op, query_by_to 1052 ns/op, update 2461 ns/op, delete 1797 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:51.0856970Z SQLite_File #1: create 2510 ns/op, query_all 345 ns/op, query_by_id 814 ns/op, query_by_from_to 961 ns/op, query_by_from 1020 ns/op, query_by_to 1006 ns/op, update 3410 ns/op, delete 2762 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:51.1037566Z SQLite_File #2: create 2358 ns/op, query_all 363 ns/op, query_by_id 800 ns/op, query_by_from_to 932 ns/op, query_by_from 1012 ns/op, query_by_to 997 ns/op, update 3326 ns/op, delete 2740 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:51.1218604Z SQLite_File #3: create 2461 ns/op, query_all 503 ns/op, query_by_id 1049 ns/op, query_by_from_to 1019 ns/op, query_by_from 1029 ns/op, query_by_to 1006 ns/op, update 3297 ns/op, delete 3192 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:52.1457827Z SystemDataSQLite_Memory #1: create 2139 ns/op, query_all 270 ns/op, query_by_id 1406 ns/op, query_by_from_to 2058 ns/op, query_by_from 1580 ns/op, query_by_to 1566 ns/op, update 3219 ns/op, delete 2467 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:52.1623574Z SystemDataSQLite_Memory #2: create 2118 ns/op, query_all 288 ns/op, query_by_id 1396 ns/op, query_by_from_to 2048 ns/op, query_by_from 1572 ns/op, query_by_to 1563 ns/op, update 3206 ns/op, delete 2406 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:52.1789774Z SystemDataSQLite_Memory #3: create 2120 ns/op, query_all 267 ns/op, query_by_id 1413 ns/op, query_by_from_to 2065 ns/op, query_by_from 1570 ns/op, query_by_to 1575 ns/op, update 3228 ns/op, delete 2411 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:53.3197792Z SystemDataSQLite_File #1: create 2398 ns/op, query_all 284 ns/op, query_by_id 946 ns/op, query_by_from_to 1165 ns/op, query_by_from 1134 ns/op, query_by_to 1148 ns/op, update 6840 ns/op, delete 2927 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:53.3385792Z SystemDataSQLite_File #2: create 3142 ns/op, query_all 283 ns/op, query_by_id 943 ns/op, query_by_from_to 1166 ns/op, query_by_from 1122 ns/op, query_by_to 1112 ns/op, update 3358 ns/op, delete 2860 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:53.3823151Z SystemDataSQLite_File #3: create 27049 ns/op, query_all 294 ns/op, query_by_id 953 ns/op, query_by_from_to 1171 ns/op, query_by_from 1121 ns/op, query_by_to 1111 ns/op, update 3994 ns/op, delete 2772 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:54.4509238Z SQLite_Memory #1: create 3588 ns/op, read_all 3006 ns/op, read_by_id 3582 ns/op, delete 995 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:54.4684168Z SQLite_Memory #2: create 3578 ns/op, read_all 3003 ns/op, read_by_id 3569 ns/op, delete 990 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:54.4852456Z SQLite_Memory #3: create 3557 ns/op, read_all 2980 ns/op, read_by_id 3607 ns/op, delete 970 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:55.5253877Z SQLite_File #1: create 6927 ns/op, read_all 3253 ns/op, read_by_id 3743 ns/op, delete 5156 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:55.5512797Z SQLite_File #2: create 7018 ns/op, read_all 3257 ns/op, read_by_id 3645 ns/op, delete 5224 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:55.5773347Z SQLite_File #3: create 7114 ns/op, read_all 3228 ns/op, read_by_id 3704 ns/op, delete 5311 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:56.5974241Z SystemDataSQLite_Memory #1: create 4536 ns/op, read_all 3137 ns/op, read_by_id 4264 ns/op, delete 1079 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:56.6148279Z SystemDataSQLite_Memory #2: create 3724 ns/op, read_all 2809 ns/op, read_by_id 3672 ns/op, delete 1060 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:56.6323371Z SystemDataSQLite_Memory #3: create 3722 ns/op, read_all 2838 ns/op, read_by_id 3844 ns/op, delete 1082 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:57.6633385Z SystemDataSQLite_File #1: create 6715 ns/op, read_all 2818 ns/op, read_by_id 3686 ns/op, delete 3668 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:57.6873969Z SystemDataSQLite_File #2: create 6616 ns/op, read_all 2825 ns/op, read_by_id 3687 ns/op, delete 3767 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:57.7133777Z SystemDataSQLite_File #3: create 8441 ns/op, read_all 2846 ns/op, read_by_id 3694 ns/op, delete 3692 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:58.7837424Z SQLite_Memory #1: create 3569 ns/op, read_all 2983 ns/op, read_by_id 3580 ns/op, delete 989 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:58.8011653Z SQLite_Memory #2: create 3574 ns/op, read_all 2969 ns/op, read_by_id 3554 ns/op, delete 988 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:58.8182122Z SQLite_Memory #3: create 3582 ns/op, read_all 3054 ns/op, read_by_id 3597 ns/op, delete 990 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:59.8635540Z SQLite_File #1: create 7008 ns/op, read_all 3220 ns/op, read_by_id 3513 ns/op, delete 3606 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:59.9031058Z SQLite_File #2: create 6957 ns/op, read_all 3228 ns/op, read_by_id 3579 ns/op, delete 19069 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:19:59.9275237Z SQLite_File #3: create 7320 ns/op, read_all 3258 ns/op, read_by_id 3525 ns/op, delete 3572 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:20:00.9540738Z SystemDataSQLite_Memory #1: create 3537 ns/op, read_all 2826 ns/op, read_by_id 3719 ns/op, delete 1044 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:20:00.9709600Z SystemDataSQLite_Memory #2: create 3551 ns/op, read_all 2823 ns/op, read_by_id 3666 ns/op, delete 1044 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:20:00.9879276Z SystemDataSQLite_Memory #3: create 3577 ns/op, read_all 2821 ns/op, read_by_id 3665 ns/op, delete 1040 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:20:02.0154219Z SystemDataSQLite_File #1: create 6775 ns/op, read_all 2874 ns/op, read_by_id 3780 ns/op, delete 3566 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:20:02.0393713Z SystemDataSQLite_File #2: create 6561 ns/op, read_all 2889 ns/op, read_by_id 3757 ns/op, delete 3589 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:20:02.0672557Z SystemDataSQLite_File #3: create 6502 ns/op, read_all 2874 ns/op, read_by_id 3754 ns/op, delete 7333 ns/op
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:20:02.0846104Z .
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:20:02.0846512Z ----------------------------------------------------------------------
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:20:02.0846997Z Ran 1 test in 17.418s
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:20:02.0847195Z 
+Test (ubuntu-latest)	Check SQLite provider reports	2026-10-05T10:20:02.0847289Z OK
+Test (ubuntu-latest)	Post Run actions/setup-dotnet@v6	﻿2026-10-05T10:20:02.1001084Z Post job cleanup.
+Test (ubuntu-latest)	Post Run actions/checkout@v7	﻿2026-10-05T10:20:02.2049399Z Post job cleanup.
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.2767680Z [command]/usr/bin/git version
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.2802723Z git version 2.55.0
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.2830163Z Temporarily overriding HOME='/home/runner/work/_temp/f0a50b33-4dbd-4d72-8b9e-3f3347530baf' before making global git config changes
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.2831257Z Adding repository directory to the temporary git global config as a safe directory
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.2834163Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.2860482Z Removing SSH command configuration
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.2865827Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.2897053Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3103405Z Removing HTTP extra header
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3107964Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3140280Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3346737Z Removing includeIf entries pointing to credentials config files
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3353240Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3381737Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3382901Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3383870Z includeif.gitdir:/github/workspace/.git.path
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3384468Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3391824Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3415138Z /home/runner/work/_temp/git-credentials-6de30650-cdc1-476c-a36e-b78f1a8b3841.config
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3424104Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-6de30650\-cdc1\-476c\-a36e\-b78f1a8b3841\.config
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3481441Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3509986Z /home/runner/work/_temp/git-credentials-6de30650-cdc1-476c-a36e-b78f1a8b3841.config
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3517133Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-6de30650\-cdc1\-476c\-a36e\-b78f1a8b3841\.config
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3550398Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3574165Z /github/runner_temp/git-credentials-6de30650-cdc1-476c-a36e-b78f1a8b3841.config
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3580697Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-6de30650\-cdc1\-476c\-a36e\-b78f1a8b3841\.config
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3613705Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3635716Z /github/runner_temp/git-credentials-6de30650-cdc1-476c-a36e-b78f1a8b3841.config
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3641057Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-6de30650\-cdc1\-476c\-a36e\-b78f1a8b3841\.config
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3672456Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Test (ubuntu-latest)	Post Run actions/checkout@v7	2026-10-05T10:20:02.3862196Z Removing credentials config '/home/runner/work/_temp/git-credentials-6de30650-cdc1-476c-a36e-b78f1a8b3841.config'
+Test (ubuntu-latest)	Complete job	﻿2026-10-05T10:20:02.4010122Z Cleaning up orphan processes
+Test (ubuntu-latest)	Complete job	2026-10-05T10:20:02.4246896Z Terminate orphan process: pid (2407) (dotnet)
+Test (ubuntu-latest)	Complete job	2026-10-05T10:20:02.4270078Z Terminate orphan process: pid (2449) (VBCSCompiler)

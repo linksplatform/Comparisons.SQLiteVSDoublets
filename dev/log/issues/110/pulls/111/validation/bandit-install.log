@@ -1,0 +1,14 @@
+Collecting bandit
+  Downloading bandit-1.9.4-py3-none-any.whl.metadata (7.1 kB)
+Requirement already satisfied: PyYAML>=5.3.1 in /tmp/issue-110-ci-tools/lib/python3.14/site-packages (from bandit) (6.0.3)
+Collecting stevedore>=1.20.0 (from bandit)
+  Downloading stevedore-5.9.1-py3-none-any.whl.metadata (2.3 kB)
+Requirement already satisfied: rich in /tmp/issue-110-ci-tools/lib/python3.14/site-packages (from bandit) (15.0.0)
+Requirement already satisfied: markdown-it-py>=2.2.0 in /tmp/issue-110-ci-tools/lib/python3.14/site-packages (from rich->bandit) (4.2.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /tmp/issue-110-ci-tools/lib/python3.14/site-packages (from rich->bandit) (2.21.0)
+Requirement already satisfied: mdurl~=0.1 in /tmp/issue-110-ci-tools/lib/python3.14/site-packages (from markdown-it-py>=2.2.0->rich->bandit) (0.1.2)
+Downloading bandit-1.9.4-py3-none-any.whl (134 kB)
+Downloading stevedore-5.9.1-py3-none-any.whl (54 kB)
+Installing collected packages: stevedore, bandit
+
+Successfully installed bandit-1.9.4 stevedore-5.9.1

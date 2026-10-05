@@ -1,0 +1,348 @@
+auto-merge	UNKNOWN STEP	﻿2026-10-04T18:33:39.7958226Z Current runner version: '2.337.0'
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7984146Z ##[group]Runner Image Provisioner
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7985557Z Hosted Compute Agent
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7986295Z Version: 20260901.588
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7987014Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7987871Z Build Date: 2026-09-01T19:56:44Z
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7988595Z Worker ID: {e9a5b9e5-2805-409b-b374-2b8d25e9b13f}
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7989392Z Azure Region: westus
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7990043Z ##[endgroup]
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7991671Z ##[group]Operating System
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7992448Z Ubuntu
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7993029Z 24.04.5
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7993543Z LTS
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7994133Z ##[endgroup]
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7994969Z ##[group]Runner Image
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7995669Z Image: ubuntu-24.04
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7996343Z Version: 20260927.320.1
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7997688Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.7999280Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8000353Z ##[endgroup]
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8003489Z ##[group]GITHUB_TOKEN Permissions
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8006288Z Actions: write
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8006943Z ArtifactMetadata: write
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8007641Z Attestations: write
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8008292Z Checks: write
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8008875Z CodeQuality: write
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8009556Z Contents: write
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8010121Z CopilotRequests: write
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8010844Z Deployments: write
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8011469Z Discussions: write
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8012037Z Drives: write
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8012632Z Issues: write
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8013175Z Metadata: read
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8013977Z Models: read
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8014936Z Packages: write
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8015528Z Pages: write
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8016162Z PullRequests: write
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8016783Z RepositoryProjects: write
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8017425Z SecurityEvents: write
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8018155Z Statuses: write
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8018731Z VulnerabilityAlerts: read
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8019382Z ##[endgroup]
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8021658Z Secret source: Actions
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8022758Z Cache mode: read
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8023497Z Prepare workflow directory
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8381759Z Prepare all required actions
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:39.8437329Z Getting action download info
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:40.2241017Z Download action repository 'actions/checkout@v2' (SHA:0717577d45739eb3c851188b29f50ed6c0b2194e)
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:40.6322076Z Download action repository 'ahmadnassri/action-dependabot-auto-merge@v2' (SHA:45fc124d949b19b6b8bf6645b6c9d55f4f9ac61a)
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:41.0052408Z Complete job name: auto-merge
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:41.0563602Z ##[group]Pull down action image 'ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6'
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:41.0681384Z ##[command]/usr/bin/docker pull ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:41.6859088Z 2.6.6: Pulling from ahmadnassri/action-dependabot-auto-merge
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:41.8450693Z c158987b0551: Pulling fs layer
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:41.8451955Z 27ae9ce8b069: Pulling fs layer
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:41.8453033Z ab5501735aae: Pulling fs layer
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:41.8454079Z 9ce0a5833ea2: Pulling fs layer
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:41.8455481Z 50992d27cc59: Pulling fs layer
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:41.8456555Z 4f4fb700ef54: Pulling fs layer
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:41.8457628Z 86b6187bfb6b: Pulling fs layer
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:41.8458673Z 16a9b0b01bb9: Pulling fs layer
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:41.8459712Z 9ce0a5833ea2: Waiting
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:41.8460717Z 50992d27cc59: Waiting
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:41.8461723Z 4f4fb700ef54: Waiting
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:41.8462749Z 86b6187bfb6b: Waiting
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:41.8463843Z 16a9b0b01bb9: Waiting
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:42.0892388Z c158987b0551: Verifying Checksum
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:42.0896079Z c158987b0551: Download complete
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:42.1277340Z ab5501735aae: Verifying Checksum
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:42.1279707Z ab5501735aae: Download complete
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:42.2175023Z c158987b0551: Pull complete
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:42.3028293Z 9ce0a5833ea2: Verifying Checksum
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:42.3029261Z 9ce0a5833ea2: Download complete
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:42.3989298Z 50992d27cc59: Verifying Checksum
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:42.3990526Z 50992d27cc59: Download complete
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:42.4353970Z 4f4fb700ef54: Verifying Checksum
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:42.4359709Z 4f4fb700ef54: Download complete
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:42.6292226Z 86b6187bfb6b: Download complete
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:42.7225503Z 16a9b0b01bb9: Verifying Checksum
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:42.7226095Z 16a9b0b01bb9: Download complete
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:43.2592733Z 27ae9ce8b069: Verifying Checksum
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:43.2593483Z 27ae9ce8b069: Download complete
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:47.7620479Z 27ae9ce8b069: Pull complete
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:47.8197552Z ab5501735aae: Pull complete
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:47.8321349Z 9ce0a5833ea2: Pull complete
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:47.8445932Z 50992d27cc59: Pull complete
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:47.8524568Z 4f4fb700ef54: Pull complete
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:47.8677491Z 86b6187bfb6b: Pull complete
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.0896663Z 16a9b0b01bb9: Pull complete
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.0935471Z Digest: sha256:23911f794fd35017a9ed9e7b527bf5bb9b39db009c90c9fb52b50a21bc4ccb55
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.0946659Z Status: Downloaded newer image for ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.0956344Z ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.0977599Z ##[endgroup]
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.1289968Z ##[group]Run actions/checkout@v2
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.1290611Z with:
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.1290927Z   repository: linksplatform/Comparisons.SQLiteVSDoublets
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.1293376Z   token: ***
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.1293601Z   ssh-strict: true
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.1293836Z   persist-credentials: true
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.1294086Z   clean: true
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.1294283Z   fetch-depth: 1
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.1294689Z   lfs: false
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.1294886Z   submodules: false
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.1295134Z   set-safe-directory: true
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.1295395Z   allow-unsafe-pr-checkout: false
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.1295909Z ##[endgroup]
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2351966Z (node:2215) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2353324Z (Use `node --trace-deprecation ...` to show where the warning was created)
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2481613Z Syncing repository: linksplatform/Comparisons.SQLiteVSDoublets
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2483323Z ##[group]Getting Git version info
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2483908Z Working directory is '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2485457Z [command]/usr/bin/git version
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2534284Z git version 2.55.0
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2556217Z ##[endgroup]
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2570997Z Temporarily overriding HOME='/home/runner/work/_temp/22a9c252-18cd-4575-9c9e-657da0dcc645' before making global git config changes
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2571900Z Adding repository directory to the temporary git global config as a safe directory
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2577515Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2631878Z Deleting the contents of '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2637278Z ##[group]Initializing the repository
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2641798Z [command]/usr/bin/git init /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2754066Z hint: Using 'master' as the name for the initial branch. This default branch name
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2755444Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2756400Z hint: to use in all of your new repositories, which will suppress this warning,
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2757087Z hint: call:
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2757418Z hint:
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2757915Z hint: 	git config --global init.defaultBranch <name>
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2758930Z hint:
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2759455Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2760322Z hint: 'development'. The just-created branch can be renamed via this command:
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2761022Z hint:
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2761399Z hint: 	git branch -m <name>
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2761715Z hint:
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2762090Z hint: Disable this message with "git config set advice.defaultBranchName false"
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2762879Z Initialized empty Git repository in /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2769417Z [command]/usr/bin/git remote add origin https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2827507Z ##[endgroup]
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2828055Z ##[group]Disabling automatic garbage collection
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2831426Z [command]/usr/bin/git config --local gc.auto 0
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2865546Z ##[endgroup]
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2866077Z ##[group]Setting up auth
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2871898Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.2905826Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.3267935Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.3298395Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.3529665Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.3569410Z ##[endgroup]
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.3570387Z ##[group]Fetching the repository
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.3577993Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +01d4eb2dfd784c44a366b854e720b70fd8cb8f62:refs/remotes/origin/main
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6664076Z remote: Enumerating objects: 86, done.        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6665858Z remote: Counting objects:   1% (1/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6666511Z remote: Counting objects:   2% (2/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6667110Z remote: Counting objects:   3% (3/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6667744Z remote: Counting objects:   4% (4/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6668312Z remote: Counting objects:   5% (5/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6668910Z remote: Counting objects:   6% (6/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6669477Z remote: Counting objects:   8% (7/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6670094Z remote: Counting objects:   9% (8/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6670639Z remote: Counting objects:  10% (9/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6671184Z remote: Counting objects:  11% (10/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6671778Z remote: Counting objects:  12% (11/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6672330Z remote: Counting objects:  13% (12/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6672882Z remote: Counting objects:  15% (13/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6673494Z remote: Counting objects:  16% (14/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6674036Z remote: Counting objects:  17% (15/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6674910Z remote: Counting objects:  18% (16/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6675515Z remote: Counting objects:  19% (17/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6676083Z remote: Counting objects:  20% (18/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6676635Z remote: Counting objects:  22% (19/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6677238Z remote: Counting objects:  23% (20/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6677760Z remote: Counting objects:  24% (21/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6678284Z remote: Counting objects:  25% (22/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6678834Z remote: Counting objects:  26% (23/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6679388Z remote: Counting objects:  27% (24/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6680271Z remote: Counting objects:  29% (25/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6680828Z remote: Counting objects:  30% (26/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6681378Z remote: Counting objects:  31% (27/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6681935Z remote: Counting objects:  32% (28/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6682534Z remote: Counting objects:  33% (29/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6683094Z remote: Counting objects:  34% (30/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6683631Z remote: Counting objects:  36% (31/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6684229Z remote: Counting objects:  37% (32/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6685368Z remote: Counting objects:  38% (33/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6686280Z remote: Counting objects:  39% (34/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6687111Z remote: Counting objects:  40% (35/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6688115Z remote: Counting objects:  41% (36/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6688929Z remote: Counting objects:  43% (37/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6689750Z remote: Counting objects:  44% (38/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6690646Z remote: Counting objects:  45% (39/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6691184Z remote: Counting objects:  46% (40/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6691657Z remote: Counting objects:  47% (41/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6692234Z remote: Counting objects:  48% (42/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6692847Z remote: Counting objects:  50% (43/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6693724Z remote: Counting objects:  51% (44/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6694323Z remote: Counting objects:  52% (45/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6695151Z remote: Counting objects:  53% (46/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6695692Z remote: Counting objects:  54% (47/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6696212Z remote: Counting objects:  55% (48/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6696743Z remote: Counting objects:  56% (49/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6697268Z remote: Counting objects:  58% (50/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6697792Z remote: Counting objects:  59% (51/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6698343Z remote: Counting objects:  60% (52/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6698763Z remote: Counting objects:  61% (53/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6699097Z remote: Counting objects:  62% (54/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6699421Z remote: Counting objects:  63% (55/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6699845Z remote: Counting objects:  65% (56/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6700402Z remote: Counting objects:  66% (57/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6701005Z remote: Counting objects:  67% (58/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6701537Z remote: Counting objects:  68% (59/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6702062Z remote: Counting objects:  69% (60/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6702627Z remote: Counting objects:  70% (61/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6702942Z remote: Counting objects:  72% (62/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6703395Z remote: Counting objects:  73% (63/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6703938Z remote: Counting objects:  74% (64/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6704705Z remote: Counting objects:  75% (65/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6705077Z remote: Counting objects:  76% (66/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6705376Z remote: Counting objects:  77% (67/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6705678Z remote: Counting objects:  79% (68/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6705971Z remote: Counting objects:  80% (69/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6706265Z remote: Counting objects:  81% (70/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6706564Z remote: Counting objects:  82% (71/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6706862Z remote: Counting objects:  83% (72/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6707193Z remote: Counting objects:  84% (73/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6777509Z remote: Counting objects:  86% (74/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6778145Z remote: Counting objects:  87% (75/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6778760Z remote: Counting objects:  88% (76/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6779356Z remote: Counting objects:  89% (77/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6779859Z remote: Counting objects:  90% (78/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6780471Z remote: Counting objects:  91% (79/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6780788Z remote: Counting objects:  93% (80/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6781081Z remote: Counting objects:  94% (81/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6781380Z remote: Counting objects:  95% (82/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6781677Z remote: Counting objects:  96% (83/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6781975Z remote: Counting objects:  97% (84/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6782293Z remote: Counting objects:  98% (85/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6782589Z remote: Counting objects: 100% (86/86)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6782910Z remote: Counting objects: 100% (86/86), done.        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6783250Z remote: Compressing objects:   1% (1/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6783571Z remote: Compressing objects:   2% (2/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6783888Z remote: Compressing objects:   4% (3/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6784199Z remote: Compressing objects:   5% (4/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6784734Z remote: Compressing objects:   7% (5/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6785071Z remote: Compressing objects:   8% (6/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6785395Z remote: Compressing objects:   9% (7/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6785714Z remote: Compressing objects:  11% (8/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6786059Z remote: Compressing objects:  12% (9/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6786387Z remote: Compressing objects:  14% (10/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6786901Z remote: Compressing objects:  15% (11/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6787240Z remote: Compressing objects:  16% (12/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6787571Z remote: Compressing objects:  18% (13/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6787900Z remote: Compressing objects:  19% (14/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6788225Z remote: Compressing objects:  21% (15/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6788549Z remote: Compressing objects:  22% (16/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6788874Z remote: Compressing objects:  23% (17/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6789213Z remote: Compressing objects:  25% (18/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6789563Z remote: Compressing objects:  26% (19/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6789897Z remote: Compressing objects:  28% (20/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6790239Z remote: Compressing objects:  29% (21/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6790595Z remote: Compressing objects:  30% (22/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6790919Z remote: Compressing objects:  32% (23/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6791248Z remote: Compressing objects:  33% (24/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6791576Z remote: Compressing objects:  35% (25/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6791906Z remote: Compressing objects:  36% (26/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6792226Z remote: Compressing objects:  38% (27/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6792552Z remote: Compressing objects:  39% (28/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6792879Z remote: Compressing objects:  40% (29/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6793200Z remote: Compressing objects:  42% (30/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6793527Z remote: Compressing objects:  43% (31/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6793858Z remote: Compressing objects:  45% (32/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6794185Z remote: Compressing objects:  46% (33/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6794676Z remote: Compressing objects:  47% (34/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6795001Z remote: Compressing objects:  49% (35/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6795323Z remote: Compressing objects:  50% (36/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6795651Z remote: Compressing objects:  52% (37/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6795977Z remote: Compressing objects:  53% (38/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6796295Z remote: Compressing objects:  54% (39/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6796622Z remote: Compressing objects:  56% (40/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6796943Z remote: Compressing objects:  57% (41/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6797264Z remote: Compressing objects:  59% (42/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6797587Z remote: Compressing objects:  60% (43/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6798369Z remote: Compressing objects:  61% (44/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6798705Z remote: Compressing objects:  63% (45/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6799030Z remote: Compressing objects:  64% (46/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6799362Z remote: Compressing objects:  66% (47/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6799688Z remote: Compressing objects:  67% (48/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6800052Z remote: Compressing objects:  69% (49/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6800414Z remote: Compressing objects:  70% (50/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6800796Z remote: Compressing objects:  71% (51/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6801121Z remote: Compressing objects:  73% (52/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6801444Z remote: Compressing objects:  74% (53/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6801766Z remote: Compressing objects:  76% (54/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6802099Z remote: Compressing objects:  77% (55/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6802423Z remote: Compressing objects:  78% (56/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6802767Z remote: Compressing objects:  80% (57/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6803099Z remote: Compressing objects:  81% (58/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6803425Z remote: Compressing objects:  83% (59/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6803757Z remote: Compressing objects:  84% (60/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6804095Z remote: Compressing objects:  85% (61/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6804745Z remote: Compressing objects:  87% (62/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6805109Z remote: Compressing objects:  88% (63/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6805441Z remote: Compressing objects:  90% (64/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6805825Z remote: Compressing objects:  91% (65/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6806155Z remote: Compressing objects:  92% (66/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6806487Z remote: Compressing objects:  94% (67/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6806815Z remote: Compressing objects:  95% (68/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6807141Z remote: Compressing objects:  97% (69/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6807473Z remote: Compressing objects:  98% (70/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6807794Z remote: Compressing objects: 100% (71/71)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.6808150Z remote: Compressing objects: 100% (71/71), done.        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7294929Z remote: Total 86 (delta 12), reused 56 (delta 8), pack-reused 0 (from 0)        
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7441833Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7448302Z  * [new ref]         01d4eb2dfd784c44a366b854e720b70fd8cb8f62 -> origin/main
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7449697Z ##[endgroup]
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7450556Z ##[group]Determining the checkout info
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7451309Z ##[endgroup]
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7451956Z ##[group]Checking out the ref
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7456011Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7580874Z Switched to a new branch 'main'
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7586479Z branch 'main' set up to track 'origin/main'.
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7591436Z ##[endgroup]
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7632496Z [command]/usr/bin/git log -1 --format='%H'
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7658937Z '01d4eb2dfd784c44a366b854e720b70fd8cb8f62'
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7920804Z ##[group]Run ahmadnassri/action-dependabot-auto-merge@v2
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7921197Z with:
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7921400Z   target: minor
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7921842Z   github-token: ***
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7922082Z   config: .github/auto-merge.yml
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7922341Z   command: merge
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7922544Z   botName: dependabot
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7922757Z   approve: true
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.7922955Z ##[endgroup]
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:48.8022399Z ##[command]/usr/bin/docker run --name ghcrioahmadnassriactiondependabotautomerge266_107749 --label 2aea40 --workdir /github/workspace --rm -e "INPUT_TARGET" -e "INPUT_GITHUB-TOKEN" -e "INPUT_CONFIG" -e "INPUT_COMMAND" -e "INPUT_BOTNAME" -e "INPUT_APPROVE" -e "HOME" -e "GITHUB_JOB" -e "GITHUB_REF" -e "GITHUB_SHA" -e "GITHUB_REPOSITORY" -e "GITHUB_REPOSITORY_OWNER" -e "GITHUB_REPOSITORY_OWNER_ID" -e "GITHUB_RUN_ID" -e "GITHUB_RUN_NUMBER" -e "GITHUB_RETENTION_DAYS" -e "GITHUB_RUN_ATTEMPT" -e "GITHUB_ACTOR_ID" -e "GITHUB_ACTOR" -e "GITHUB_WORKFLOW" -e "GITHUB_HEAD_REF" -e "GITHUB_BASE_REF" -e "GITHUB_EVENT_NAME" -e "GITHUB_SERVER_URL" -e "GITHUB_API_URL" -e "GITHUB_GRAPHQL_URL" -e "GITHUB_REF_NAME" -e "GITHUB_REF_PROTECTED" -e "GITHUB_REF_TYPE" -e "GITHUB_WORKFLOW_REF" -e "GITHUB_WORKFLOW_SHA" -e "GITHUB_REPOSITORY_ID" -e "GITHUB_TRIGGERING_ACTOR" -e "GITHUB_WORKSPACE" -e "GITHUB_ACTION" -e "GITHUB_EVENT_PATH" -e "GITHUB_ACTION_REPOSITORY" -e "GITHUB_ACTION_REF" -e "GITHUB_PATH" -e "GITHUB_ENV" -e "GITHUB_STEP_SUMMARY" -e "GITHUB_STATE" -e "GITHUB_OUTPUT" -e "GITHUB_ARTIFACTS" -e "GITHUB_ARTIFACTS_LIST" -e "RUNNER_OS" -e "RUNNER_ARCH" -e "RUNNER_NAME" -e "RUNNER_ENVIRONMENT" -e "RUNNER_TOOL_CACHE" -e "RUNNER_TEMP" -e "RUNNER_WORKSPACE" -e "ACTIONS_RUNTIME_URL" -e "ACTIONS_RUNTIME_TOKEN" -e "ACTIONS_CACHE_URL" -e "ACTIONS_RESULTS_URL" -e "ACTIONS_CACHE_MODE" -e "ACTIONS_ORCHESTRATION_ID" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work/_temp":"/github/runner_temp" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" -v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands" -v "/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets":"/github/workspace" ghcr.io/ahmadnassri/action-dependabot-auto-merge:2.6.6
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:49.2469010Z ##[warning]exiting early - expected PR by "dependabot[bot]", found "konard" instead
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:49.3450198Z Post job cleanup.
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:49.4407165Z (node:2410) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:49.4407951Z (Use `node --trace-deprecation ...` to show where the warning was created)
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:49.4440459Z [command]/usr/bin/git version
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:49.4481529Z git version 2.55.0
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:49.4522643Z Temporarily overriding HOME='/home/runner/work/_temp/2a33bb87-e101-48a8-9f33-29c00e0cedd3' before making global git config changes
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:49.4523612Z Adding repository directory to the temporary git global config as a safe directory
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:49.4527852Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:49.4567672Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:49.4604152Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:49.4837950Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:49.4870301Z http.https://github.com/.extraheader
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:49.4879069Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:49.4912963Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:49.5315625Z Cleaning up orphan processes
+auto-merge	UNKNOWN STEP	2026-10-04T18:33:49.5711325Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v2. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

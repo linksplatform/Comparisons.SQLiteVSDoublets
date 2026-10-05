@@ -1,0 +1,2612 @@
+diff --git a/.github/actions/prepare-ci/action.yml b/.github/actions/prepare-ci/action.yml
+new file mode 100644
+index 0000000..99508d0
+--- /dev/null
++++ b/.github/actions/prepare-ci/action.yml
+@@ -0,0 +1,27 @@
++name: Prepare CI merge
++description: Merge the current PR base into the checked-out revision
++inputs:
++  base-sha:
++    description: Replay a previously validated base commit for benchmark matrix consistency
++    required: false
++outputs:
++  base-sha:
++    description: Base commit used for this merge
++    value: ${{ steps.merge.outputs.base }}
++runs:
++  using: composite
++  steps:
++    - name: Merge current base for pull requests
++      id: merge
++      if: github.event_name == 'pull_request'
++      shell: bash
++      env:
++        BASE_REF: ${{ github.base_ref }}
++        BASE_SHA: ${{ inputs.base-sha }}
++      run: |
++        git config user.email 'github-actions[bot]@users.noreply.github.com'
++        git config user.name 'github-actions[bot]'
++        git fetch origin "$BASE_REF"
++        base="${BASE_SHA:-origin/$BASE_REF}"
++        echo "base=$(git rev-parse "$base")" >> "$GITHUB_OUTPUT"
++        git merge --no-edit "$base"
+diff --git a/.github/dependabot.yml b/.github/dependabot.yml
+index f87be70..c5693a1 100644
+--- a/.github/dependabot.yml
++++ b/.github/dependabot.yml
+@@ -1,16 +1,37 @@
+ version: 2
+ updates:
+ - package-ecosystem: nuget
+-  directory: "/csharp"
++  directories:
++    - "/csharp"
++    - "/experiments/csharp_objects_profile"
++    - "/experiments/csharp_split_linked_list"
++    - "/experiments/csharp_tree_delete"
++    - "/experiments/system_data_sqlite"
+   schedule:
+     interval: daily
+   open-pull-requests-limit: 10
++  cooldown:
++    default-days: 7
+ - package-ecosystem: cargo
+-  directory: "/rust"
++  directories:
++    - "/rust"
++    - "/experiments/unit_store_growth"
++    - "/experiments/sqlite_returning"
++    - "/experiments/split_store_delete"
+   schedule:
+     interval: daily
+   open-pull-requests-limit: 10
++  cooldown:
++    default-days: 7
+ - package-ecosystem: github-actions
+   directory: "/"
+   schedule:
+     interval: weekly
++  cooldown:
++    default-days: 7
++- package-ecosystem: pip
++  directory: "/scripts"
++  schedule:
++    interval: weekly
++  cooldown:
++    default-days: 7
+diff --git a/.github/workflows/AutoMerge.yml b/.github/workflows/AutoMerge.yml
+index 7b8c981..d495862 100644
+--- a/.github/workflows/AutoMerge.yml
++++ b/.github/workflows/AutoMerge.yml
+@@ -1,14 +1,34 @@
+ name: auto-merge
+ 
+ on:
+-  pull_request_target:
++  pull_request_target: # zizmor: ignore[dangerous-triggers] metadata only; no checkout or PR code execution
++    types: [opened, reopened, synchronize]
++
++permissions:
++  contents: read
+ 
+ jobs:
+   auto-merge:
+-    runs-on: ubuntu-latest
++    if: github.event.pull_request.user.login == 'dependabot[bot]'
++    runs-on: ubuntu-24.04
++    timeout-minutes: 5
++    permissions:
++      contents: write
++      pull-requests: write
++    concurrency:
++      group: main-writer-${{ github.repository }}-main
++      cancel-in-progress: false
+     steps:
+-      - uses: actions/checkout@v7
+-      - uses: ahmadnassri/action-dependabot-auto-merge@v2
++      # Action updates can use v1/v2 titles which the old parser rejected.
++      - uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3
++        id: metadata
+         with:
+-          target: minor
+-          github-token: ${{ secrets.DEPENDABOT_AUTO_MERGE_TOKEN }}
++          github-token: ${{ secrets.GITHUB_TOKEN }}
++      - name: Enable auto-merge for patch and minor updates
++        if: >-
++          steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
++          steps.metadata.outputs.update-type == 'version-update:semver-minor'
++        env:
++          GH_TOKEN: ${{ secrets.DEPENDABOT_AUTO_MERGE_TOKEN || github.token }}
++          PR_URL: ${{ github.event.pull_request.html_url }}
++        run: gh pr merge --auto --squash "$PR_URL"
+diff --git a/.github/workflows/benchmarks.yml b/.github/workflows/benchmarks.yml
+index 1144167..b875fe7 100644
+--- a/.github/workflows/benchmarks.yml
++++ b/.github/workflows/benchmarks.yml
+@@ -1,136 +1,238 @@
+ name: Benchmarks
+ 
+-# Every job measures one README table (language, category, bits, size) with all its variants on one runner,
+-# so that the variants of a table are compared on the same machine. Pull requests run the whole pipeline
+-# on small sizes; pushes to main publish the results to README.md and README.ru.md.
+ on:
+   push:
+     branches: [main]
+-    paths: ['rust/**', 'csharp/**', 'scripts/**', '.github/workflows/benchmarks.yml']
++    paths: ['rust/**', 'csharp/**', 'scripts/**', 'pyproject.toml', '.github/actions/**', '.github/workflows/benchmarks.yml']
+   pull_request:
+-    paths: ['rust/**', 'csharp/**', 'scripts/**', '.github/workflows/benchmarks.yml']
++    paths: ['rust/**', 'csharp/**', 'scripts/**', 'pyproject.toml', '.github/actions/**', '.github/workflows/benchmarks.yml']
+   workflow_dispatch:
+     inputs:
+       sizes:
+-        description: JSON array of sizes (objects skip 10,000,000 and 100,000,000)
++        description: JSON sizes (1..10,000,000; objects stop at 1,000,000)
+         default: '[100000, 1000000, 10000000]'
++      verbose:
++        description: Print artifact diagnostics and Rust backtraces
++        type: boolean
++        default: false
+ 
+-concurrency:
+-  group: ${{ github.workflow }}-${{ github.ref }}
+-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
++permissions:
++  contents: read
+ 
+ env:
+   CARGO_TERM_COLOR: always
++  SOURCE_SHA: ${{ github.sha }}
+ 
+ jobs:
+   report-tests:
+-    name: Report script tests
+-    runs-on: ubuntu-latest
++    name: Report script tests and benchmark plan
++    runs-on: ubuntu-24.04
+     timeout-minutes: 10
++    concurrency:
++      group: check-${{ github.workflow }}-${{ github.ref }}-report-tests
++      cancel-in-progress: true
++    outputs:
++      matrix: ${{ steps.plan.outputs.matrix }}
++      sizes: ${{ steps.plan.outputs.sizes }}
++      tree: ${{ steps.plan.outputs.tree }}
++      base: ${{ steps.prepare.outputs.base-sha || github.sha }}
+     steps:
+-      - uses: actions/checkout@v7
+-      - uses: actions/setup-python@v7
++      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
++        with:
++          fetch-depth: 0
++          persist-credentials: false
++      - uses: ./.github/actions/prepare-ci # zizmor: ignore[self-repository] actionlint 1.7.12 lacks $/ syntax
++        id: prepare
++      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+         with:
+           python-version: '3.13'
+-      - run: pip install -r scripts/requirements.txt
++      - run: pip install -r scripts/requirements.txt PyYAML==6.0.3
+       - run: python -m unittest discover -s scripts -v
+       - run: npx --yes markdownlint-cli@0.49.1 README.md README.ru.md
++      - name: Validate sizes and emit matrix
++        id: plan
++        env:
++          SIZES: ${{ inputs.sizes || (github.event_name == 'pull_request' && '[1000]') || '[100000, 1000000, 10000000]' }}
++        run: |
++          matrix=$(python scripts/benchmark_ci.py matrix --sizes "$SIZES")
++          sizes=$(jq -c . <<< "$SIZES")
++          {
++            echo "matrix=$matrix"
++            echo "sizes=$sizes"
++            echo "tree=$(git rev-parse 'HEAD^{tree}')"
++          } >> "$GITHUB_OUTPUT"
+ 
+   benchmark:
+     name: ${{ matrix.language }} ${{ matrix.category }} ${{ matrix.bits }} bit ${{ matrix.size }}
+-    runs-on: ubuntu-latest
++    needs: report-tests
++    runs-on: ubuntu-24.04
+     timeout-minutes: 355
++    concurrency:
++      group: check-${{ github.workflow }}-${{ github.ref }}-${{ matrix.language }}-${{ matrix.category }}-${{ matrix.bits }}-${{ matrix.size }}
++      cancel-in-progress: true
+     strategy:
+       fail-fast: false
+-      matrix:
+-        language: [rust, csharp]
+-        category: [links, objects]
+-        bits: [32, 64]
+-        size: ${{ fromJSON(inputs.sizes || (github.event_name == 'pull_request' && '[1000]') || '[100000, 1000000, 10000000]') }}
+-        exclude:
+-          # One million blog posts already take an hour in C#; ten millions would not fit into a job.
+-          - category: objects
+-            size: 10000000
+-          - category: objects
+-            size: 100000000
++      matrix: ${{ fromJSON(needs.report-tests.outputs.matrix) }}
++    env:
++      LANGUAGE: ${{ matrix.language }}
++      CATEGORY: ${{ matrix.category }}
++      BITS: ${{ matrix.bits }}
++      SIZE: ${{ matrix.size }}
++      RUST_BACKTRACE: ${{ inputs.verbose && 'full' || '0' }}
+     steps:
+-      - uses: actions/checkout@v7
++      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
++        with:
++          fetch-depth: 0
++          persist-credentials: false
++      - uses: ./.github/actions/prepare-ci # zizmor: ignore[self-repository] actionlint 1.7.12 lacks $/ syntax
++        with:
++          base-sha: ${{ needs.report-tests.outputs.base }}
+       - if: matrix.language == 'rust'
+-        uses: dtolnay/rust-toolchain@stable
++        uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
++        with:
++          toolchain: stable
+       - if: matrix.language == 'rust'
+-        uses: Swatinem/rust-cache@v2
++        uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2
+         with:
+           workspaces: rust
++          save-if: ${{ github.ref == 'refs/heads/main' }}
+       - if: matrix.language == 'rust'
+-        run: |
+-          cargo build --release --manifest-path rust/Cargo.toml
+-          echo "BENCHMARK=rust/target/release/sqlite-vs-doublets" >> "$GITHUB_ENV"
++        run: cargo build --locked --release --manifest-path rust/Cargo.toml
+       - if: matrix.language == 'csharp'
+-        uses: actions/setup-dotnet@v6
++        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+         with:
+           global-json-file: csharp/global.json
+       - if: matrix.language == 'csharp'
+-        run: |
+-          dotnet build -c Release csharp/SQLiteVSDoublets
+-          echo "BENCHMARK=dotnet csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll" >> "$GITHUB_ENV"
++        run: dotnet build -c Release -warnaserror csharp/SQLiteVSDoublets
+       - name: Benchmark
+         run: |
+-          name=${{ matrix.category }}-${{ matrix.language }}-${{ matrix.bits }}-${{ matrix.size }}
++          name="$CATEGORY-$LANGUAGE-$BITS-$SIZE"
+           echo "NAME=$name" >> "$GITHUB_ENV"
+-          $BENCHMARK ${{ matrix.category }} ${{ matrix.bits }} ${{ matrix.size }} \
++          if [ "$LANGUAGE" = rust ]; then
++            benchmark=(rust/target/release/sqlite-vs-doublets)
++          else
++            benchmark=(dotnet csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll)
++          fi
++          "${benchmark[@]}" "$CATEGORY" "$BITS" "$SIZE" \
+             --directory "$RUNNER_TEMP/storage" --output "$RUNNER_TEMP/measured.json"
+           machine="$(. /etc/os-release && echo "$PRETTY_NAME"), $(lscpu | sed -n 's/^Model name: *//p' | head -1)"
+           machine="$machine, $(nproc) cores, $(awk '/^MemTotal/ { printf "%.0f", $2 / 1048576 }' /proc/meminfo) GiB"
+           mkdir results
+           jq --arg run_url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" \
++            --arg source_sha "$SOURCE_SHA" --arg tree_sha "$(git rev-parse 'HEAD^{tree}')" \
+             --arg date "$(date -u +%Y-%m-%d)" --arg machine "$machine" \
+-            '. + {run_url: $run_url, date: $date, machine: $machine}' \
++            '. + {run_url: $run_url, source_sha: $source_sha, tree_sha: $tree_sha, date: $date, machine: $machine}' \
+             "$RUNNER_TEMP/measured.json" > "results/$name.json"
+-      - uses: actions/upload-artifact@v7
++      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+         with:
+           name: results-${{ env.NAME }}
+           path: results/${{ env.NAME }}.json
++          if-no-files-found: error
++          retention-days: 14
+ 
+   report:
+     name: Report
+     needs: [report-tests, benchmark]
+-    # Publishes the finished tables even if some jobs failed; the missing ones keep their previous results.
+-    if: ${{ !cancelled() && needs.report-tests.result == 'success' }}
+-    runs-on: ubuntu-latest
++    if: ${{ !cancelled() && needs.report-tests.result == 'success' && needs.benchmark.result == 'success' }}
++    runs-on: ubuntu-24.04
+     timeout-minutes: 15
+-    permissions:
+-      contents: write
++    concurrency:
++      group: check-${{ github.workflow }}-${{ github.ref }}-report
++      cancel-in-progress: true
++    env:
++      SIZES: ${{ needs.report-tests.outputs.sizes }}
++      EXPECTED_TREE: ${{ needs.report-tests.outputs.tree }}
++      CI_VERBOSE: ${{ inputs.verbose && 'true' || 'false' }}
+     steps:
+-      - uses: actions/checkout@v7
++      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+         with:
+-          ref: ${{ github.event_name == 'pull_request' && github.sha || github.ref_name }}
+-      - uses: actions/setup-python@v7
++          fetch-depth: 0
++          persist-credentials: false
++      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+         with:
+           python-version: '3.13'
+       - run: pip install -r scripts/requirements.txt
+-      - uses: actions/download-artifact@v8
++      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+         with:
+           pattern: results-*
+           merge-multiple: true
+-          path: ${{ github.event_name == 'pull_request' && format('{0}/results', runner.temp) || 'docs/benchmarks/results' }}
+-      - if: github.event_name == 'pull_request'
+-        name: Check the report
++          path: ${{ runner.temp }}/results
++      - name: Verify every current-run artifact
++        run: |
++          args=()
++          if [ "$CI_VERBOSE" = true ]; then args+=(--verbose); fi
++          python scripts/benchmark_ci.py verify --directory "$RUNNER_TEMP/results" \
++            --sizes "$SIZES" --sha "$SOURCE_SHA" --tree "$EXPECTED_TREE" "${args[@]}"
++      - name: Check the report
+         run: |
+           python scripts/benchmark_report.py "$RUNNER_TEMP/results" >> "$GITHUB_STEP_SUMMARY"
+-          python scripts/benchmark_report.py "$RUNNER_TEMP/results" --readme README.md --readme README.ru.md
+-          npx --yes markdownlint-cli@0.49.1 README.md README.ru.md
+-      - if: github.event_name != 'pull_request'
+-        name: Publish the report
++          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
++            python scripts/benchmark_report.py "$RUNNER_TEMP/results" --readme README.md --readme README.ru.md
++            npx --yes markdownlint-cli@0.49.1 README.md README.ru.md
++          fi
++
++  publish:
++    name: Publish benchmark results
++    needs: [report-tests, report]
++    if: ${{ !cancelled() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.report.result == 'success' }}
++    runs-on: ubuntu-24.04
++    timeout-minutes: 15
++    permissions:
++      contents: write
++    concurrency:
++      group: main-writer-${{ github.repository }}-main
++      cancel-in-progress: false
++    env:
++      SIZES: ${{ needs.report-tests.outputs.sizes }}
++      EXPECTED_TREE: ${{ needs.report-tests.outputs.tree }}
++      CI_VERBOSE: ${{ inputs.verbose && 'true' || 'false' }}
++    steps:
++      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
++        with:
++          fetch-depth: 0
++          persist-credentials: false
++      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
++        with:
++          python-version: '3.13'
++      - run: pip install -r scripts/requirements.txt
++      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
++        with:
++          pattern: results-*
++          merge-multiple: true
++          path: ${{ runner.temp }}/results
++      - name: Publish the report
++        env:
++          GH_TOKEN: ${{ github.token }}
+         run: |
+-          python scripts/benchmark_report.py docs/benchmarks/results \
+-            --readme README.md --readme README.ru.md --charts docs/benchmarks
+-          git config user.email 'linksplatform@gmail.com'
+-          git config user.name 'LinksPlatformBencher'
+-          git add README.md README.ru.md docs/benchmarks
+-          git diff --staged --quiet && exit 0
+-          git commit -m 'Update benchmark results [skip ci]'
+-          for attempt in 1 2 3; do
+-            git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && exit 0
+-            sleep 10
+-          done
+-          exit 1
++          gh auth setup-git
++          args=()
++          if [ "$CI_VERBOSE" = true ]; then args+=(--verbose); fi
++          python scripts/benchmark_ci.py verify --directory "$RUNNER_TEMP/results" \
++            --sizes "$SIZES" --sha "$SOURCE_SHA" --tree "$EXPECTED_TREE" "${args[@]}"
++          python scripts/publish_benchmarks.py "$RUNNER_TEMP/results" \
++            --sizes "$SIZES" --sha "$SOURCE_SHA" "${args[@]}"
++
++  pipeline-status:
++    name: Pipeline Status
++    needs: [report-tests, benchmark, report, publish]
++    if: ${{ !cancelled() }}
++    runs-on: ubuntu-24.04
++    timeout-minutes: 5
++    defaults:
++      run:
++        working-directory: .
++    steps:
++      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
++        with:
++          persist-credentials: false
++      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
++        with:
++          python-version: '3.13'
++      - run: python -m pip install PyYAML==6.0.3
++      - name: Check terminal status
++        env:
++          NEEDS_JSON: ${{ toJSON(needs) }}
++          WORKFLOW_FILE: .github/workflows/benchmarks.yml
++          RUN_REF: ${{ github.ref }}
++          RUN_SHA: ${{ github.sha }}
++        run: python scripts/check_pipeline_status.py
+diff --git a/.github/workflows/cpp.yml b/.github/workflows/cpp.yml
+deleted file mode 100644
+index 048238a..0000000
+--- a/.github/workflows/cpp.yml
++++ /dev/null
+@@ -1,93 +0,0 @@
+-name: cpp
+-
+-on:
+-  push:
+-    branches: main
+-    paths:
+-      - 'cpp/**'
+-      - '.github/workflows/cpp.yml'
+-
+-env:
+-  NUGETTOKEN: ${{ secrets.NUGET_TOKEN }}
+-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+-  SCRIPTS_BASE_URL: https://raw.githubusercontent.com/linksplatform/Scripts/main/MultiProjectRepository
+-
+-defaults:
+-  run:
+-    working-directory: cpp
+-
+-jobs:
+-  test:
+-    runs-on: ubuntu-latest
+-    steps:
+-      - uses: actions/checkout@v7
+-        with:
+-          submodules: true
+-      - name: Setup clang
+-        uses: egor-tensin/setup-clang@v2
+-        with:
+-          version: 13
+-          platform: x64
+-      - name: Install conan
+-        run: pip install conan
+-      - name: Setup conan
+-        run: |
+-          conan profile new linksplatform --detect
+-          conan profile update settings.compiler=clang linksplatform
+-          conan profile update settings.compiler.version=13 linksplatform
+-          conan profile update settings.compiler.libcxx=libstdc++11 linksplatform
+-          conan profile update env.CXX=clang++ linksplatform
+-          conan profile show linksplatform
+-      - name: Instll conan packages
+-        run: |
+-          if [ -f "install-local-conan-dependencies.sh" ]; then
+-              echo "install-local-conan-dependencies.sh exists."
+-              chmod +x ./install-local-conan-dependencies.sh
+-              ./install-local-conan-dependencies.sh
+-          fi
+-      - name: Test and scan-build
+-        run: |
+-          CXX=clang++
+-          cmake_flags="-DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++ -DLINKS_PLATFORM_TESTS=TRUE"
+-          cmake_build_dir="build"
+-          mkdir $cmake_build_dir && cd $cmake_build_dir
+-          conan install .. -pr=linksplatform --build=missing
+-          cmake .. "$cmake_flags"
+-          cmake --build .
+-          ls
+-  pushToNuget:
+-    runs-on: ubuntu-latest
+-    needs: test
+-    steps:
+-    - uses: actions/checkout@v7
+-      with:
+-        submodules: true
+-    - name: Read package information
+-      run: |
+-        export REPOSITORY_NAME=$(basename ${{ github.repository }})
+-        wget "$SCRIPTS_BASE_URL/read_cpp_package_info.sh"
+-        bash ./read_cpp_package_info.sh
+-    - name: Publish NuGet package
+-      run: |
+-        export REPOSITORY_NAME=$(basename ${{ github.repository }})
+-        wget "$SCRIPTS_BASE_URL/push-cpp-nuget.sh"
+-        bash ./push-cpp-nuget.sh
+-  publiseRelease:
+-    runs-on: ubuntu-latest
+-    needs: test
+-    steps:
+-      - uses: actions/checkout@v7
+-        with:
+-          submodules: true
+-      - name: Read project information
+-        run: |
+-          export REPOSITORY_NAME=$(basename ${{ github.repository }})
+-          wget "$SCRIPTS_BASE_URL/read_cpp_package_info.sh"
+-          bash ./read_cpp_package_info.sh
+-      - name: Publish release
+-        run: |
+-          export REPOSITORY_NAME=$(basename ${{ github.repository }})
+-          wget "$SCRIPTS_BASE_URL/publish-release.sh"
+-          chmod +x ./publish-release.sh
+-          wget "$SCRIPTS_BASE_URL/publish-cpp-release.sh"
+-          bash ./publish-cpp-release.sh
+diff --git a/.github/workflows/csharp.yml b/.github/workflows/csharp.yml
+index 9dd11a3..09af40f 100644
+--- a/.github/workflows/csharp.yml
++++ b/.github/workflows/csharp.yml
+@@ -1,11 +1,15 @@
+ name: C#
+ 
+ on:
++  workflow_dispatch:
+   push:
+     branches: [main]
+-    paths: ['csharp/**', 'experiments/system_data_sqlite/**', '.github/workflows/csharp.yml']
++    paths: ['csharp/**', 'experiments/**/*.cs', 'experiments/**/*.csproj', 'experiments/system_data_sqlite/**', '.github/workflows/csharp.yml', '.github/actions/**']
+   pull_request:
+-    paths: ['csharp/**', 'experiments/system_data_sqlite/**', '.github/workflows/csharp.yml']
++    paths: ['csharp/**', 'experiments/**/*.cs', 'experiments/**/*.csproj', 'experiments/system_data_sqlite/**', '.github/workflows/csharp.yml', '.github/actions/**']
++
++permissions:
++  contents: read
+ 
+ concurrency:
+   group: ${{ github.workflow }}-${{ github.ref }}
+@@ -23,13 +27,50 @@ jobs:
+     strategy:
+       fail-fast: false
+       matrix:
+-        os: [ubuntu-latest, macos-latest, windows-latest]
++        os: [ubuntu-24.04, macos-15, windows-2025]
+     steps:
+-      - uses: actions/checkout@v7
+-      - uses: actions/setup-dotnet@v6
++      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
++        with:
++          fetch-depth: 0
++          persist-credentials: false
++      - uses: ./.github/actions/prepare-ci # zizmor: ignore[self-repository] actionlint 1.7.12 lacks $/ syntax
++      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+         with:
+           global-json-file: csharp/global.json
++      - run: dotnet format whitespace SQLiteVSDoublets.slnx --verify-no-changes
++      - name: Format every C# experiment
++        shell: bash
++        run: |
++          while IFS= read -r project; do
++            dotnet format whitespace "../$project" --verify-no-changes
++          done < <(git -C .. ls-files 'experiments/**/*.csproj')
+       - run: dotnet build -c Release -warnaserror
+-      - run: dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build
++      - run: dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m
++
+       - name: Check SQLite provider reports
+         run: python ../experiments/system_data_sqlite/check_reports.py
++
++  pipeline-status:
++    name: Pipeline Status
++    needs: [test]
++    if: ${{ !cancelled() }}
++    runs-on: ubuntu-24.04
++    timeout-minutes: 5
++    defaults:
++      run:
++        working-directory: .
++    steps:
++      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
++        with:
++          persist-credentials: false
++      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
++        with:
++          python-version: '3.13'
++      - run: python -m pip install PyYAML==6.0.3
++      - name: Check terminal status
++        env:
++          NEEDS_JSON: ${{ toJSON(needs) }}
++          WORKFLOW_FILE: .github/workflows/csharp.yml
++          RUN_REF: ${{ github.ref }}
++          RUN_SHA: ${{ github.sha }}
++        run: python scripts/check_pipeline_status.py
+diff --git a/.github/workflows/dependencies.yml b/.github/workflows/dependencies.yml
+new file mode 100644
+index 0000000..a38312d
+--- /dev/null
++++ b/.github/workflows/dependencies.yml
+@@ -0,0 +1,72 @@
++name: Dependency audit
++
++on:
++  workflow_dispatch:
++  schedule:
++    - cron: '17 4 * * 1'
++  push:
++    branches: [main]
++    paths: ['**/Cargo.toml', '**/Cargo.lock', '**/*.csproj', 'csharp/global.json', 'scripts/requirements*.txt', 'scripts/audit_dotnet.py', '.github/workflows/dependencies.yml', '.github/actions/**']
++  pull_request:
++    paths: ['**/Cargo.toml', '**/Cargo.lock', '**/*.csproj', 'csharp/global.json', 'scripts/requirements*.txt', 'scripts/audit_dotnet.py', '.github/workflows/dependencies.yml', '.github/actions/**']
++
++permissions:
++  contents: read
++
++concurrency:
++  group: ${{ github.workflow }}-${{ github.ref }}
++  cancel-in-progress: true
++
++jobs:
++  audit:
++    runs-on: ubuntu-24.04
++    timeout-minutes: 20
++    steps:
++      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
++        with:
++          fetch-depth: 0
++          persist-credentials: false
++      - uses: ./.github/actions/prepare-ci # zizmor: ignore[self-repository] actionlint 1.7.12 lacks $/ syntax
++      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
++        with:
++          python-version: '3.13'
++      - run: python -m pip install pip-audit==2.10.1
++      - run: pip-audit -r scripts/requirements.txt -r scripts/requirements-ci.txt
++      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
++        with:
++          toolchain: stable
++      - run: cargo install cargo-audit --version 0.22.2 --locked
++      - name: Audit every Rust dependency tree
++        run: |
++          while IFS= read -r lockfile; do
++            cargo audit --file "$lockfile" --deny warnings
++          done < <(git ls-files '**/Cargo.lock')
++      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
++        with:
++          global-json-file: csharp/global.json
++      - run: python scripts/audit_dotnet.py
++
++  pipeline-status:
++    name: Pipeline Status
++    needs: [audit]
++    if: ${{ !cancelled() }}
++    runs-on: ubuntu-24.04
++    timeout-minutes: 5
++    defaults:
++      run:
++        working-directory: .
++    steps:
++      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
++        with:
++          persist-credentials: false
++      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
++        with:
++          python-version: '3.13'
++      - run: python -m pip install PyYAML==6.0.3
++      - name: Check terminal status
++        env:
++          NEEDS_JSON: ${{ toJSON(needs) }}
++          WORKFLOW_FILE: .github/workflows/dependencies.yml
++          RUN_REF: ${{ github.ref }}
++          RUN_SHA: ${{ github.sha }}
++        run: python scripts/check_pipeline_status.py
+diff --git a/.github/workflows/quality.yml b/.github/workflows/quality.yml
+new file mode 100644
+index 0000000..f0dd8af
+--- /dev/null
++++ b/.github/workflows/quality.yml
+@@ -0,0 +1,85 @@
++name: CI quality
++
++on:
++  workflow_dispatch:
++  push:
++    branches: [main]
++    paths: ['.github/**', 'scripts/**', 'experiments/**', 'pyproject.toml', 'README*.md', 'CONTRIBUTING.md', 'cpp/**', '.secretlintrc.json', '.pre-commit-config.yaml']
++  pull_request:
++    paths: ['.github/**', 'scripts/**', 'experiments/**', 'pyproject.toml', 'README*.md', 'CONTRIBUTING.md', 'cpp/**', '.secretlintrc.json', '.pre-commit-config.yaml']
++
++permissions:
++  contents: read
++
++concurrency:
++  group: ${{ github.workflow }}-${{ github.ref }}
++  cancel-in-progress: true
++
++jobs:
++  workflows:
++    runs-on: ubuntu-24.04
++    timeout-minutes: 10
++    steps:
++      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
++        with:
++          fetch-depth: 0
++          persist-credentials: false
++      - uses: ./.github/actions/prepare-ci # zizmor: ignore[self-repository] actionlint 1.7.12 lacks $/ syntax
++      - name: Actionlint and ShellCheck
++        run: docker run --rm -v "$PWD:/repo" -w /repo rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667 -color
++      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
++        with:
++          python-version: '3.13'
++      - run: python -m pip install zizmor==1.30.1
++      - name: Workflow security
++        run: |
++          zizmor --offline --min-severity medium .github
++          zizmor --offline --persona pedantic --min-severity high --min-confidence high .github
++
++  python:
++    needs: workflows
++    runs-on: ubuntu-24.04
++    timeout-minutes: 15
++    steps:
++      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
++        with:
++          fetch-depth: 0
++          persist-credentials: false
++      - uses: ./.github/actions/prepare-ci # zizmor: ignore[self-repository] actionlint 1.7.12 lacks $/ syntax
++      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
++        with:
++          python-version: '3.13'
++      - run: python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt
++      - run: ruff check scripts experiments
++      - run: ruff format --check scripts experiments
++      - run: mypy scripts
++      - run: python scripts/ci_checks.py
++      - run: python -m unittest discover -s scripts -v
++      - run: npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md cpp/README.md
++      - name: Scan maintained source for secrets
++        run: git ls-files -z -- ':!dev/log/**' ':!docs/benchmarks/**' ':!*.png' | xargs -0 npx --yes -p secretlint@13.0.7 -p @secretlint/secretlint-rule-preset-recommend@13.0.7 secretlint
++
++  pipeline-status:
++    name: Pipeline Status
++    needs: [workflows, python]
++    if: ${{ !cancelled() }}
++    runs-on: ubuntu-24.04
++    timeout-minutes: 5
++    defaults:
++      run:
++        working-directory: .
++    steps:
++      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
++        with:
++          persist-credentials: false
++      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
++        with:
++          python-version: '3.13'
++      - run: python -m pip install PyYAML==6.0.3
++      - name: Check terminal status
++        env:
++          NEEDS_JSON: ${{ toJSON(needs) }}
++          WORKFLOW_FILE: .github/workflows/quality.yml
++          RUN_REF: ${{ github.ref }}
++          RUN_SHA: ${{ github.sha }}
++        run: python scripts/check_pipeline_status.py
+diff --git a/.github/workflows/rust.yml b/.github/workflows/rust.yml
+index 2123a32..097e74b 100644
+--- a/.github/workflows/rust.yml
++++ b/.github/workflows/rust.yml
+@@ -1,11 +1,15 @@
+ name: Rust
+ 
+ on:
++  workflow_dispatch:
+   push:
+     branches: [main]
+-    paths: ['rust/**', '.github/workflows/rust.yml']
++    paths: ['rust/**', 'experiments/**/*.rs', 'experiments/**/Cargo.toml', 'experiments/**/Cargo.lock', '.github/workflows/rust.yml', '.github/actions/**']
+   pull_request:
+-    paths: ['rust/**', '.github/workflows/rust.yml']
++    paths: ['rust/**', 'experiments/**/*.rs', 'experiments/**/Cargo.toml', 'experiments/**/Cargo.lock', '.github/workflows/rust.yml', '.github/actions/**']
++
++permissions:
++  contents: read
+ 
+ concurrency:
+   group: ${{ github.workflow }}-${{ github.ref }}
+@@ -26,15 +30,51 @@ jobs:
+     strategy:
+       fail-fast: false
+       matrix:
+-        os: [ubuntu-latest, macos-latest, windows-latest]
++        os: [ubuntu-24.04, macos-15, windows-2025]
+     steps:
+-      - uses: actions/checkout@v7
+-      - uses: dtolnay/rust-toolchain@stable
++      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
++        with:
++          fetch-depth: 0
++          persist-credentials: false
++      - uses: ./.github/actions/prepare-ci # zizmor: ignore[self-repository] actionlint 1.7.12 lacks $/ syntax
++      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
+         with:
+           components: rustfmt, clippy
+-      - uses: Swatinem/rust-cache@v2
++          toolchain: stable
++      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2
+         with:
+           workspaces: rust
+-      - run: cargo fmt --check
+-      - run: cargo clippy --release --all-targets -- -D warnings
+-      - run: cargo test --release
++      - name: Format every Rust crate
++        shell: bash
++        run: |
++          cargo fmt --check
++          while IFS= read -r manifest; do
++            cargo fmt --manifest-path "../$manifest" --check
++          done < <(git -C .. ls-files 'experiments/**/Cargo.toml')
++      - run: cargo clippy --locked --release --all-targets -- -D warnings
++      - run: cargo test --locked --release
++
++  pipeline-status:
++    name: Pipeline Status
++    needs: [test]
++    if: ${{ !cancelled() }}
++    runs-on: ubuntu-24.04
++    timeout-minutes: 5
++    defaults:
++      run:
++        working-directory: .
++    steps:
++      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
++        with:
++          persist-credentials: false
++      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
++        with:
++          python-version: '3.13'
++      - run: python -m pip install PyYAML==6.0.3
++      - name: Check terminal status
++        env:
++          NEEDS_JSON: ${{ toJSON(needs) }}
++          WORKFLOW_FILE: .github/workflows/rust.yml
++          RUN_REF: ${{ github.ref }}
++          RUN_SHA: ${{ github.sha }}
++        run: python scripts/check_pipeline_status.py
+diff --git a/.github/zizmor.yml b/.github/zizmor.yml
+new file mode 100644
+index 0000000..2fcbb54
+--- /dev/null
++++ b/.github/zizmor.yml
+@@ -0,0 +1,5 @@
++rules:
++  unpinned-uses:
++    config:
++      policies:
++        '*': hash-pin
+diff --git a/.gitignore b/.gitignore
+index e5c9ab8..b166f3e 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -9,9 +9,11 @@ cpp/*.exe
+ 
+ # Common temporary files
+ __pycache__/
++.venv/
+ *.py[cod]
+ *.tmp
+ *.log
++!dev/log/issues/**/*.log
+ *.swp
+ *~
+ .DS_Store
+diff --git a/.pre-commit-config.yaml b/.pre-commit-config.yaml
+new file mode 100644
+index 0000000..b52c8cd
+--- /dev/null
++++ b/.pre-commit-config.yaml
+@@ -0,0 +1,23 @@
++repos:
++  - repo: https://github.com/astral-sh/ruff-pre-commit
++    rev: v0.16.10
++    hooks:
++      - id: ruff-check
++        args: [--fix]
++        files: ^(scripts|experiments)/.*\.py$
++      - id: ruff-format
++        files: ^(scripts|experiments)/.*\.py$
++  - repo: local
++    hooks:
++      - id: rustfmt
++        name: Rust formatting
++        entry: cargo fmt --manifest-path rust/Cargo.toml --check
++        language: system
++        files: ^rust/.*\.rs$
++        pass_filenames: false
++      - id: dotnet-format
++        name: C# whitespace formatting
++        entry: dotnet format whitespace csharp/SQLiteVSDoublets.slnx --verify-no-changes
++        language: system
++        files: ^csharp/.*\.cs$
++        pass_filenames: false
+diff --git a/.secretlintrc.json b/.secretlintrc.json
+new file mode 100644
+index 0000000..42656a2
+--- /dev/null
++++ b/.secretlintrc.json
+@@ -0,0 +1,3 @@
++{
++  "rules": [{"id": "@secretlint/secretlint-rule-preset-recommend"}]
++}
+diff --git a/CONTRIBUTING.md b/CONTRIBUTING.md
+new file mode 100644
+index 0000000..fce8a9a
+--- /dev/null
++++ b/CONTRIBUTING.md
+@@ -0,0 +1,64 @@
++# Contributing
++
++Use a pull request and keep changes focused on the benchmark comparison. CI checks
++the current merge tree, uses fixed runner versions, and checks formatting before
++tests. Documentation and Python changes have their own validation workflow.
++
++## Local checks
++
++Use the SDK from `csharp/global.json`, stable Rust, Python 3.13 or later, and Node.js
++for Markdown and secret checks. Create a virtual environment before installing
++the Python tools:
++
++```sh
++python -m venv .venv
++. .venv/bin/activate
++python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt
++ruff check scripts experiments
++ruff format --check scripts experiments
++mypy scripts
++python scripts/ci_checks.py
++python -m unittest discover -s scripts -v
++cargo fmt --manifest-path rust/Cargo.toml --check
++cargo clippy --manifest-path rust/Cargo.toml --locked --release \
++  --all-targets -- -D warnings
++cargo test --manifest-path rust/Cargo.toml --locked --release
++dotnet format whitespace csharp/SQLiteVSDoublets.slnx --verify-no-changes
++dotnet build csharp/SQLiteVSDoublets.slnx -c Release -warnaserror
++(cd csharp && dotnet test --project SQLiteVSDoublets.Tests -c Release \
++  --no-build -- --timeout 10m)
++npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md cpp/README.md
++```
++
++Workflow validation also runs actionlint with ShellCheck and zizmor. The pinned
++actionlint container command is in `.github/workflows/quality.yml`. Run both
++zizmor commands from that workflow locally when changing automation. Optional
++pre-commit hooks are configured in `.pre-commit-config.yaml`.
++
++## Dependencies and diagnostics
++
++Language workflows also verify formatting in every Rust and C# experiment;
++the Python formatting commands cover all experiment scripts.
++
++The dependency workflow audits Python, every committed Rust lockfile (including
++experiments), and direct and transitive NuGet packages weekly and on relevant
++changes. Run `pip-audit -r scripts/requirements.txt -r scripts/requirements-ci.txt`,
++`cargo audit --file <Cargo.lock> --deny warnings`, and
++`python scripts/audit_dotnet.py` locally with the workflow tool versions.
++
++Benchmark inputs are bounded to ten million links and one million objects,
++with at most 32 requested sizes (256 jobs). The
++workflow's `verbose` input enables full Rust backtraces and artifact/publication
++diagnostics; the default is off. Missing, stale, duplicate, or invalid reports
++fail validation. Publication retries only concurrent branch updates and rebuilds
++reports from the newly fetched branch on every retry.
++
++This repository contains benchmark executables, without a package release or
++container deployment pipeline. Package changesets, registry credentials, and
++container build steps should be added with an actual distributable component.
++The C++ directory is a placeholder; see [its prerequisites](cpp/README.md).
++
++Immutable investigation evidence is preserved in
++[the issue 110 investigation](dev/log/issues/110/pulls/111/ANALYSIS.md).
++Downloaded upstream logs and snapshots are excluded from source formatting and
++secret scanning so historical third-party output is preserved unchanged.
+diff --git a/cpp/README.md b/cpp/README.md
+new file mode 100644
+index 0000000..a77e203
+--- /dev/null
++++ b/cpp/README.md
+@@ -0,0 +1,9 @@
++# C++ placeholder
++
++This directory contains an empty Conan manifest and no C++ implementation,
++`CMakeLists.txt`, tests, or package metadata. The obsolete build and release
++workflow was retired in issue #110; it could not build or publish this tree.
++
++A future C++ implementation must add a real build target and tests before
++enabling CI. Use a supported Clang version on a pinned runner, Conan 2 profiles
++and generators, pull request validation, and release jobs gated on passing tests.
+diff --git a/experiments/ci/collect_evidence.py b/experiments/ci/collect_evidence.py
+new file mode 100644
+index 0000000..49b2fa6
+--- /dev/null
++++ b/experiments/ci/collect_evidence.py
+@@ -0,0 +1,125 @@
++"""Collect reproducible GitHub CI evidence for issue 110 without logging tokens."""
++
++import concurrent.futures
++import json
++import subprocess
++import sys
++from pathlib import Path
++
++ROOT = Path(__file__).resolve().parents[2]
++OUT = ROOT / "dev/log/issues/110/pulls/111"
++REPO = "linksplatform/Comparisons.SQLiteVSDoublets"
++
++
++def capture(name, *args):
++    path = OUT / name
++    path.parent.mkdir(parents=True, exist_ok=True)
++    result = subprocess.run(args, capture_output=True, text=True, check=False)
++    path.write_text(result.stdout)
++    if result.returncode:
++        path.with_suffix(path.suffix + ".error.txt").write_text(result.stderr)
++    print(f"{name}: exit {result.returncode}, {len(result.stdout)} bytes", flush=True)
++    return result
++
++
++def main():
++    queries = {
++        "issue-110.json": [
++            "gh",
++            "issue",
++            "view",
++            "110",
++            "--repo",
++            REPO,
++            "--json",
++            "number,title,body,comments,createdAt,updatedAt,state,author,url",
++        ],
++        "pr-111.json": [
++            "gh",
++            "pr",
++            "view",
++            "111",
++            "--repo",
++            REPO,
++            "--json",
++            "number,title,body,comments,createdAt,updatedAt,state,isDraft,headRefName,baseRefName,commits,statusCheckRollup,url",
++        ],
++        "issue-comments.json": ["gh", "api", f"repos/{REPO}/issues/110/comments", "--paginate", "--slurp"],
++        "pr-comments.json": ["gh", "api", f"repos/{REPO}/issues/111/comments", "--paginate", "--slurp"],
++        "pr-review-comments.json": ["gh", "api", f"repos/{REPO}/pulls/111/comments", "--paginate", "--slurp"],
++        "pr-reviews.json": ["gh", "api", f"repos/{REPO}/pulls/111/reviews", "--paginate", "--slurp"],
++        "recent-pulls.json": [
++            "gh",
++            "api",
++            f"repos/{REPO}/pulls?state=closed&sort=updated&direction=desc&per_page=20",
++        ],
++        "recent-runs.json": [
++            "gh",
++            "api",
++            f"repos/{REPO}/actions/runs?created=>=2026-10-03&per_page=100",
++            "--paginate",
++            "--slurp",
++        ],
++        "branch-runs.json": [
++            "gh",
++            "run",
++            "list",
++            "--repo",
++            REPO,
++            "--branch",
++            "issue-110-e1f96d946132",
++            "--limit",
++            "5",
++            "--json",
++            "databaseId,conclusion,createdAt,headSha,status,workflowName",
++        ],
++        "repository.json": ["gh", "api", f"repos/{REPO}"],
++        "pr.diff": ["gh", "pr", "diff", "111", "--repo", REPO],
++    }
++    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
++        futures = [pool.submit(capture, f"github/{name}", *args) for name, args in queries.items()]
++        for future in futures:
++            future.result()
++    pages = json.loads((OUT / "github/recent-runs.json").read_text())
++    ids = {run["id"] for page in pages for run in page["workflow_runs"]}
++    ids.update([37294124568, 37293779105, 37293771868, 37293771766, 37293771933])
++
++    def collect_run(run_id):
++        prefix = f"ci-logs/{run_id}"
++        metadata = capture(prefix + ".json", "gh", "api", f"repos/{REPO}/actions/runs/{run_id}")
++        jobs = capture(
++            prefix + "-jobs.json",
++            "gh",
++            "api",
++            f"repos/{REPO}/actions/runs/{run_id}/jobs?filter=all&per_page=100",
++            "--paginate",
++            "--slurp",
++        )
++        if metadata.returncode == 0 and json.loads(metadata.stdout)["status"] == "completed":
++            capture(prefix + ".log", "gh", "run", "view", str(run_id), "--repo", REPO, "--log")
++        else:
++            if jobs.returncode == 0:
++                pages = json.loads(jobs.stdout)
++                for page in pages:
++                    for job in page["jobs"]:
++                        if job["status"] != "completed":
++                            continue
++                        result = subprocess.run(
++                            ["gh", "api", f"repos/{REPO}/actions/jobs/{job['id']}/logs"],
++                            capture_output=True,
++                            check=False,
++                        )
++                        if result.returncode == 0:
++                            (OUT / f"{prefix}-job-{job['id']}.log").write_bytes(result.stdout)
++                        else:
++                            (OUT / f"{prefix}-job-{job['id']}.error.txt").write_bytes(result.stderr)
++            print(f"run {run_id}: preserved available job logs; refresh after completion", flush=True)
++
++    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
++        for future in [pool.submit(collect_run, run_id) for run_id in sorted(ids)]:
++            future.result()
++    return 0
++
++
++if __name__ == "__main__":
++    sys.exit(main())
+diff --git a/experiments/ci/run_smoke.py b/experiments/ci/run_smoke.py
+new file mode 100644
+index 0000000..c80aae4
+--- /dev/null
++++ b/experiments/ci/run_smoke.py
+@@ -0,0 +1,51 @@
++"""Run all eight small benchmark cells and validate their real JSON artifacts."""
++
++import json
++import subprocess
++import sys
++import tempfile
++from pathlib import Path
++
++ROOT = Path(__file__).resolve().parents[2]
++sys.path.insert(0, str(ROOT / "scripts"))
++import benchmark_ci as ci  # noqa: E402
++
++OUT = ROOT / "dev/log/issues/110/pulls/111/validation/smoke-results"
++
++
++def main():
++    OUT.mkdir(parents=True, exist_ok=True)
++    sha = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
++    for row in ci.matrix([1000]):
++        binary = (
++            [str(ROOT / "rust/target/release/sqlite-vs-doublets")]
++            if row["language"] == "rust"
++            else ["dotnet", str(ROOT / "csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll")]
++        )
++        output = OUT / ci.filename(row)
++        with tempfile.TemporaryDirectory(prefix="benchmark-smoke-") as directory:
++            print(f"Running {output.name}", flush=True)
++            subprocess.run(
++                [
++                    *binary,
++                    row["category"],
++                    str(row["bits"]),
++                    str(row["size"]),
++                    "--repetitions",
++                    "1",
++                    "--directory",
++                    directory,
++                    "--output",
++                    str(output),
++                ],
++                cwd=ROOT,
++                check=True,
++            )
++        data = json.loads(output.read_text())
++        data.update(source_sha=sha, machine="local bounded smoke test", date="2026-10-05")
++        output.write_text(json.dumps(data, indent=2) + "\n")
++    ci.verify(OUT, [1000], sha, verbose=True)
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/experiments/split_store_delete/src/main.rs b/experiments/split_store_delete/src/main.rs
+index d440380..dc45266 100644
+--- a/experiments/split_store_delete/src/main.rs
++++ b/experiments/split_store_delete/src/main.rs
+@@ -25,15 +25,35 @@ fn run<D: Doublets<u32>>(mut store: D, steps: &[Step]) -> u32 {
+ 
+ fn main() {
+     let scenarios: [(&str, Vec<Step>); 6] = [
+-        ("point: update to itself, delete", vec![("create", 1, 1, 1), ("update", 1, 1, 1), ("delete", 1, 0, 0)]),
+-        ("point: delete", vec![("create", 1, 1, 1), ("delete", 1, 0, 0)]),
++        (
++            "point: update to itself, delete",
++            vec![
++                ("create", 1, 1, 1),
++                ("update", 1, 1, 1),
++                ("delete", 1, 0, 0),
++            ],
++        ),
++        (
++            "point: delete",
++            vec![("create", 1, 1, 1), ("delete", 1, 0, 0)],
++        ),
+         (
+             "swap a link that references itself, delete",
+-            vec![("create", 1, 1, 1), ("create", 2, 1, 2), ("update", 2, 2, 1), ("delete", 2, 0, 0), ("delete", 1, 0, 0)],
++            vec![
++                ("create", 1, 1, 1),
++                ("create", 2, 1, 2),
++                ("update", 2, 2, 1),
++                ("delete", 2, 0, 0),
++                ("delete", 1, 0, 0),
++            ],
+         ),
+         (
+             "swap a link that references itself, no delete",
+-            vec![("create", 1, 1, 1), ("create", 2, 1, 2), ("update", 2, 2, 1)],
++            vec![
++                ("create", 1, 1, 1),
++                ("create", 2, 1, 2),
++                ("update", 2, 2, 1),
++            ],
+         ),
+         (
+             "swap links without self references, delete",
+@@ -51,7 +71,14 @@ fn main() {
+         ),
+         (
+             "create a link that references itself, delete",
+-            vec![("create", 1, 1, 1), ("create", 2, 1, 2), ("create", 3, 3, 1), ("delete", 2, 0, 0), ("delete", 3, 0, 0), ("delete", 1, 0, 0)],
++            vec![
++                ("create", 1, 1, 1),
++                ("create", 2, 1, 2),
++                ("create", 3, 3, 1),
++                ("delete", 2, 0, 0),
++                ("delete", 3, 0, 0),
++                ("delete", 1, 0, 0),
++            ],
+         ),
+     ];
+     let kind = std::env::args().nth(1).unwrap_or_default();
+@@ -70,12 +97,20 @@ fn main() {
+                 }
+                 eprintln!("after {operation} {id} {from} {to}:");
+                 for link in 1..=3 {
+-                    eprintln!("  {link}: {:?} {:?} unused={}", store.get_data_part(link), store.get_index_part(link), store.is_unused(link));
++                    eprintln!(
++                        "  {link}: {:?} {:?} unused={}",
++                        store.get_data_part(link),
++                        store.get_index_part(link),
++                        store.is_unused(link)
++                    );
+                 }
+             }
+             store.count()
+         }
+-        _ => run(split::Store::<u32, _, _>::new(Global::new(), Global::new()).unwrap(), steps),
++        _ => run(
++            split::Store::<u32, _, _>::new(Global::new(), Global::new()).unwrap(),
++            steps,
++        ),
+     };
+     println!("ok, count = {count}");
+ }
+diff --git a/experiments/system_data_sqlite/check_reports.py b/experiments/system_data_sqlite/check_reports.py
+index b562297..52926be 100644
+--- a/experiments/system_data_sqlite/check_reports.py
++++ b/experiments/system_data_sqlite/check_reports.py
+@@ -3,6 +3,7 @@
+ 
+ import json
+ import shutil
++
+ # Only this repository's fixed benchmark command is executed.
+ import subprocess  # nosec B404
+ import tempfile
+@@ -13,7 +14,16 @@
+ BENCHMARK = ROOT / "csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll"
+ VARIANTS = ("SQLite_Memory", "SQLite_File", "SystemDataSQLite_Memory", "SystemDataSQLite_File")
+ OPERATIONS = {
+-    "links": {"create", "query_all", "query_by_id", "query_by_from_to", "query_by_from", "query_by_to", "update", "delete"},
++    "links": {
++        "create",
++        "query_all",
++        "query_by_id",
++        "query_by_from_to",
++        "query_by_from",
++        "query_by_to",
++        "update",
++        "delete",
++    },
+     "objects": {"create", "read_all", "read_by_id", "delete"},
+ }
+ 
+@@ -31,25 +41,54 @@ def test_reports(self):
+                     with self.subTest(category=category, bits=bits):
+                         output = Path(directory) / f"{category}-{bits}.json"
+                         # Arguments are constants and owned temporary paths; no shell is used.
+-                        subprocess.run([  # nosec B603
+-                            dotnet, str(BENCHMARK), category, str(bits), "1000",
+-                            "--repetitions", "3", "--variants", ",".join(VARIANTS),
+-                            "--directory", directory, "--output", str(output),
+-                        ], check=True)
++                        subprocess.run(
++                            [  # nosec B603
++                                dotnet,
++                                str(BENCHMARK),
++                                category,
++                                str(bits),
++                                "1000",
++                                "--repetitions",
++                                "3",
++                                "--variants",
++                                ",".join(VARIANTS),
++                                "--directory",
++                                directory,
++                                "--output",
++                                str(output),
++                            ],
++                            check=True,
++                        )
+                         report = json.loads(output.read_text(encoding="utf-8"))
+                         self.assertEqual(
+-                            (report["language"], report["category"], report["bits"], report["size"], report["repetitions"]),
++                            (
++                                report["language"],
++                                report["category"],
++                                report["bits"],
++                                report["size"],
++                                report["repetitions"],
++                            ),
+                             ("C#", category, bits, 1000, 3),
+                         )
+                         providers = report["sqlite_providers"]
+                         self.assertEqual(set(providers), {"Microsoft.Data.Sqlite", "System.Data.SQLite"})
+                         self.assertTrue(all(provider["provider_version"] for provider in providers.values()))
+-                        self.assertEqual({provider["sqlite_version"] for provider in providers.values()}, {report["sqlite_version"]})
++                        self.assertEqual(
++                            {provider["sqlite_version"] for provider in providers.values()},
++                            {report["sqlite_version"]},
++                        )
+                         self.assertEqual([result["variant"] for result in report["results"]], list(VARIANTS))
+                         for result in report["results"]:
+                             self.assertEqual(set(result["operations"]), operations)
+-                            self.assertTrue(all(len(operation["samples_ns"]) == 3 for operation in result["operations"].values()))
+-                            self.assertEqual(result["file_bytes"] is None, result["variant"].endswith("_Memory"))
++                            self.assertTrue(
++                                all(
++                                    len(operation["samples_ns"]) == 3
++                                    for operation in result["operations"].values()
++                                )
++                            )
++                            self.assertEqual(
++                                result["file_bytes"] is None, result["variant"].endswith("_Memory")
++                            )
+                             if result["file_bytes"] is not None:
+                                 self.assertGreater(result["file_bytes"], 0)
+ 
+diff --git a/pyproject.toml b/pyproject.toml
+new file mode 100644
+index 0000000..0d46e10
+--- /dev/null
++++ b/pyproject.toml
+@@ -0,0 +1,12 @@
++[tool.ruff]
++target-version = "py313"
++line-length = 110
++include = ["scripts/**/*.py", "experiments/**/*.py"]
++
++[tool.ruff.lint]
++select = ["E4", "E7", "E9", "F", "I", "B", "UP"]
++
++[tool.mypy]
++files = ["scripts"]
++check_untyped_defs = true
++ignore_missing_imports = true
+diff --git a/scripts/audit_dotnet.py b/scripts/audit_dotnet.py
+new file mode 100644
+index 0000000..7eec6b5
+--- /dev/null
++++ b/scripts/audit_dotnet.py
+@@ -0,0 +1,60 @@
++"""Fail CI on direct or transitive NuGet vulnerabilities (dotnet itself exits zero)."""
++
++import json
++import subprocess
++from pathlib import Path
++
++
++def vulnerabilities(report):
++    if report.get("errors") or not report.get("projects"):
++        raise ValueError("NuGet audit did not produce a complete project report")
++    found = []
++    for project in report["projects"]:
++        for framework in project.get("frameworks", []):
++            for group in ("topLevelPackages", "transitivePackages"):
++                for package in framework.get(group, []):
++                    for advisory in package.get("vulnerabilities", []):
++                        found.append(
++                            (project["path"], package["id"], advisory["severity"], advisory["advisoryurl"])
++                        )
++    return found
++
++
++def main():
++    root = Path(__file__).resolve().parents[1]
++    projects = sorted(
++        path
++        for directory in ("csharp", "experiments")
++        for path in (root / directory).rglob("*.csproj")
++        if not any(part in ("bin", "obj") for part in path.parts)
++    )
++    if not projects:
++        raise SystemExit("No NuGet projects found")
++    findings = []
++    for project in projects:
++        subprocess.run(["dotnet", "restore", str(project), "-warnaserror"], check=True)
++        result = subprocess.run(
++            [
++                "dotnet",
++                "list",
++                str(project),
++                "package",
++                "--vulnerable",
++                "--include-transitive",
++                "--format",
++                "json",
++            ],
++            capture_output=True,
++            text=True,
++            check=True,
++        )
++        print(result.stdout)
++        findings.extend(vulnerabilities(json.loads(result.stdout)))
++    for path, package, severity, url in findings:
++        print(f"{path}: {package}: {severity}: {url}")
++    if findings:
++        raise SystemExit("NuGet dependency audit failed")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/scripts/benchmark_ci.py b/scripts/benchmark_ci.py
+new file mode 100644
+index 0000000..55feaa5
+--- /dev/null
++++ b/scripts/benchmark_ci.py
+@@ -0,0 +1,107 @@
++"""Plan bounded benchmark jobs and verify all artifacts before publication."""
++
++import argparse
++import itertools
++import json
++import sys
++from pathlib import Path
++
++import benchmark_report
++
++VARIANTS = {
++    "links": {"SQLite_Memory", "SQLite_File"}
++    | {
++        f"Doublets_{layout}_{durability}"
++        for layout, durability in itertools.product(("United", "Split"), ("Volatile", "NonVolatile"))
++    },
++    "objects": {"SQLite_Memory", "SQLite_File"}
++    | {
++        f"Doublets_{layout}_{durability}_{cache}"
++        for layout, durability, cache in itertools.product(
++            ("United", "Split"), ("Volatile", "NonVolatile"), ("Cached", "Uncached")
++        )
++    },
++}
++
++
++def expected_variants(category, language):
++    """C# also benchmarks the System.Data.SQLite provider introduced on main."""
++    variants = VARIANTS[category]
++    if language in ("C#", "csharp"):
++        variants = variants | {"SystemDataSQLite_Memory", "SystemDataSQLite_File"}
++    return variants
++
++
++def matrix(sizes):
++    if not isinstance(sizes, list) or not 1 <= len(sizes) <= 32:
++        raise ValueError("sizes must contain between 1 and 32 integers (at most 256 jobs)")
++    if any(type(size) is not int or not 1 <= size <= 10000000 for size in sizes):
++        raise ValueError("sizes must be integers between 1 and 10,000,000")
++    if len(sizes) != len(set(sizes)):
++        raise ValueError("sizes must be unique")
++    return [
++        dict(language=language, category=category, bits=bits, size=size)
++        for language, category, bits, size in itertools.product(
++            ("rust", "csharp"), ("links", "objects"), (32, 64), sizes
++        )
++        if category != "objects" or size <= 1000000
++    ]
++
++
++def filename(row):
++    return f"{row['category']}-{row['language']}-{row['bits']}-{row['size']}.json"
++
++
++def verify(directory, sizes, sha, verbose=False, tree=None):
++    rows = matrix(sizes)
++    expected = {filename(row) for row in rows}
++    actual = {path.name for path in directory.glob("*.json")}
++    if expected - actual:
++        raise ValueError(f"Missing benchmark artifacts: {sorted(expected - actual)}")
++    if actual - expected:
++        raise ValueError(f"Unexpected benchmark artifacts: {sorted(actual - expected)}")
++    benchmark_report.load(directory)
++    for row in rows:
++        path = directory / filename(row)
++        data = json.loads(path.read_text(encoding="utf-8"))
++        if data.get("source_sha") != sha:
++            raise ValueError(f"{path}: source_sha does not match measured commit {sha}")
++        if tree is not None and data.get("tree_sha") != tree:
++            raise ValueError(f"{path}: tree_sha differs from the validated merge tree {tree}")
++        identity = (data["category"], data["language"], data["bits"], data["size"])
++        expected_identity = (
++            row["category"],
++            "Rust" if row["language"] == "rust" else "C#",
++            row["bits"],
++            row["size"],
++        )
++        if identity != expected_identity:
++            raise ValueError(f"{path}: table identity {identity} differs from {expected_identity}")
++        variants = {result["variant"] for result in data["results"]}
++        if variants != expected_variants(row["category"], row["language"]):
++            raise ValueError(f"{path}: storage variants differ from the complete benchmark plan")
++        if verbose:
++            print(f"Verified {path.name} from {sha}", file=sys.stderr)
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("command", choices=("matrix", "verify"))
++    parser.add_argument("--sizes", required=True, help="JSON array of benchmark sizes")
++    parser.add_argument("--directory", type=Path)
++    parser.add_argument("--sha")
++    parser.add_argument("--tree")
++    parser.add_argument("--verbose", action="store_true")
++    args = parser.parse_args()
++    sizes = json.loads(args.sizes)
++    if args.command == "matrix":
++        print(json.dumps({"include": matrix(sizes)}, separators=(",", ":")))
++    else:
++        if args.directory is None or not args.sha:
++            parser.error("verify requires --directory and --sha")
++        verify(args.directory, sizes, args.sha, args.verbose, args.tree)
++        print(f"Verified all {len(matrix(sizes))} benchmark artifacts")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/scripts/benchmark_report.py b/scripts/benchmark_report.py
+index 7bdc188..0b1fe54 100644
+--- a/scripts/benchmark_report.py
++++ b/scripts/benchmark_report.py
+@@ -10,9 +10,11 @@
+ 
+ import argparse
+ import json
++import math
+ import re
+ import statistics
+ from pathlib import Path
++from typing import Any
+ 
+ START_MARKER = "<!--BENCHMARK_RESULTS_START-->"
+ END_MARKER = "<!--BENCHMARK_RESULTS_END-->"
+@@ -46,7 +48,7 @@ def russian_plural(count, one, few, many):
+     return few if 2 <= count % 10 <= 4 and not 12 <= count % 100 <= 14 else many
+ 
+ 
+-TEXT = {
++TEXT: dict[str, dict[str, Any]] = {
+     "en": {
+         "category": {
+             "links": "Doublets vs SQLite as storage for links",
+@@ -123,13 +125,50 @@ def load(directory):
+     reports = {}
+     for path in sorted(Path(directory).glob("*.json")):
+         report = json.loads(path.read_text(encoding="utf-8"))
++        validate(report, path)
+         key = (report["category"], report["language"], report["bits"], report["size"])
+         if key in reports:
+             raise ValueError(f"{path} duplicates the results of {key}")
+         reports[key] = report
++    if not reports:
++        raise ValueError(f"No benchmark reports found in {directory}")
+     return reports
+ 
+ 
++def validate(report, path):
++    """Reject incomplete measurements before publishing tables or charts."""
++    try:
++        category = report["category"]
++        if category not in CATEGORIES or report["language"] not in LANGUAGES:
++            raise ValueError("unknown category or language")
++        if report["bits"] not in BITS or type(report["size"]) is not int or report["size"] <= 0:
++            raise ValueError("invalid bits or size")
++        if type(report["repetitions"]) is not int or report["repetitions"] <= 0:
++            raise ValueError("invalid repetitions")
++        if not report["sqlite_version"]:
++            raise ValueError("missing SQLite version")
++        variants = [result["variant"] for result in report["results"]]
++        if len(variants) != len(set(variants)):
++            raise ValueError("duplicate variants")
++        if not {"SQLite_Memory", "SQLite_File"}.issubset(variants):
++            raise ValueError("missing SQLite baseline")
++        for result in report["results"]:
++            if set(result["operations"]) != set(OPERATIONS[category]):
++                raise ValueError("missing or unexpected operations")
++            for measurement in result["operations"].values():
++                values = [measurement[key] for key in ("median_ns", "min_ns", "max_ns")]
++                values += measurement["samples_ns"]
++                if not measurement["samples_ns"] or any(
++                    type(value) not in (int, float) or not math.isfinite(value) or value <= 0
++                    for value in values
++                ):
++                    raise ValueError("measurements must be finite and positive")
++                if not measurement["min_ns"] <= measurement["median_ns"] <= measurement["max_ns"]:
++                    raise ValueError("median must be between min and max")
++    except (KeyError, TypeError, ValueError) as error:
++        raise ValueError(f"Invalid benchmark report {path}: {error}") from error
++
++
+ def baseline(variant):
+     """Compare with Microsoft.Data.Sqlite of the same durability, including the System.Data.SQLite provider."""
+     if variant.startswith("SQLite"):
+@@ -175,7 +214,9 @@ def comparison(measured, reference, text):
+     # are not called a difference.
+     (low, high), (reference_low, reference_high) = quartiles(measured), quartiles(reference)
+     overlapping = low <= reference_high and reference_low <= high
+-    ratio = max(measured["median_ns"], reference["median_ns"]) / min(measured["median_ns"], reference["median_ns"])
++    ratio = max(measured["median_ns"], reference["median_ns"]) / min(
++        measured["median_ns"], reference["median_ns"]
++    )
+     if overlapping or ratio < 1 + NOISE:
+         return text["same"]
+     if measured["median_ns"] <= reference["median_ns"]:
+@@ -186,7 +227,11 @@ def comparison(measured, reference, text):
+ def table(report, text):
+     operations = OPERATIONS[report["category"]]
+     by_variant = {result["variant"]: result for result in report["results"]}
+-    header = [text["storage"], *(text["operations"][operation] for operation in operations), text["file_size"]]
++    header = [
++        text["storage"],
++        *(text["operations"][operation] for operation in operations),
++        text["file_size"],
++    ]
+     lines = ["| " + " | ".join(header) + " |", "| --- |" + " ---: |" * (len(header) - 1)]
+     for variant, result in by_variant.items():
+         reference = by_variant.get(baseline(variant))
+@@ -242,7 +287,9 @@ def section(reports, language_code, charts_link):
+                     ]
+                 if charts_link is not None:
+                     name = chart_name(category, language, bits)
+-                    title = text["chart"].format(language=language, bits=bits, category=text["nouns"][category])
++                    title = text["chart"].format(
++                        language=language, bits=bits, category=text["nouns"][category]
++                    )
+                     lines += [f"![{title}]({charts_link}/{name})", ""]
+     return "\n".join(lines).rstrip() + "\n"
+ 
+@@ -274,7 +321,7 @@ def charts(reports, directory):
+                 figure, axes = plt.subplots(
+                     1, len(sizes), figsize=(6 * len(sizes), 5), squeeze=False, sharey=False
+                 )
+-                for axis, count in zip(axes[0], sizes):
++                for axis, count in zip(axes[0], sizes, strict=True):
+                     results = reports[(category, language, bits, count)]["results"]
+                     width = 0.8 / len(results)
+                     for index, result in enumerate(results):
+@@ -312,7 +359,11 @@ def main(arguments=None):
+         charts(reports, options.charts)
+     for readme in options.readme:
+         language_code = "ru" if readme.name.endswith(".ru.md") else "en"
+-        link = None if options.charts is None else options.charts.resolve().relative_to(readme.resolve().parent).as_posix()
++        link = (
++            None
++            if options.charts is None
++            else options.charts.resolve().relative_to(readme.resolve().parent).as_posix()
++        )
+         document = readme.read_text(encoding="utf-8")
+         readme.write_text(replace_section(document, section(reports, language_code, link)), encoding="utf-8")
+     if not options.readme:
+diff --git a/scripts/check_pipeline_status.py b/scripts/check_pipeline_status.py
+new file mode 100644
+index 0000000..fe34baf
+--- /dev/null
++++ b/scripts/check_pipeline_status.py
+@@ -0,0 +1,51 @@
++"""Make failed jobs and unexpected timeouts visible in the terminal status check."""
++
++import json
++import os
++import subprocess
++from pathlib import Path
++
++import yaml
++
++
++def failures(needs, workflow, superseded=False):
++    if not needs:
++        raise ValueError("Empty pipeline status")
++    failed = []
++    for name, details in needs.items():
++        result = details.get("result", "unknown")
++        if result in ("success", "skipped"):
++            continue
++        policy = (
++            workflow.get("jobs", {})
++            .get(name, {})
++            .get("concurrency", workflow.get("concurrency", {}))
++            .get("cancel-in-progress")
++        )
++        if result == "cancelled" and superseded and policy == "true":
++            print(f"{name}: superseded reader cancelled as configured")
++            continue
++        failed.append(f"{name}: {result}")
++    return failed
++
++
++def main():
++    needs = json.loads(os.environ["NEEDS_JSON"])
++    workflow = yaml.load(Path(os.environ["WORKFLOW_FILE"]).read_text(), Loader=yaml.BaseLoader)
++    superseded = False
++    if any(details.get("result") == "cancelled" for details in needs.values()):
++        remote = subprocess.run(
++            ["git", "ls-remote", "origin", os.environ["RUN_REF"]],
++            capture_output=True,
++            text=True,
++            check=True,
++        ).stdout.split()
++        superseded = bool(remote and remote[0] != os.environ["RUN_SHA"])
++    errors = failures(needs, workflow, superseded)
++    if errors:
++        raise SystemExit("Pipeline failed: " + "; ".join(errors))
++    print("Pipeline passed")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/scripts/ci_checks.py b/scripts/ci_checks.py
+new file mode 100644
+index 0000000..d42a371
+--- /dev/null
++++ b/scripts/ci_checks.py
+@@ -0,0 +1,99 @@
++"""Check repository CI invariants and local documentation links."""
++
++import re
++from pathlib import Path
++
++import yaml
++
++ROOT = Path(__file__).resolve().parents[1]
++WRITER_GROUP = "main-writer-${{ github.repository }}-main"
++DOCUMENT_SECTIONS = {
++    "README.md": (
++        "## Benchmarks",
++        "## Original comparison",
++        "<!--BENCHMARK_RESULTS_START-->",
++        "<!--BENCHMARK_RESULTS_END-->",
++    ),
++    "README.ru.md": (
++        "## Тесты производительности",
++        "## Исходное сравнение",
++        "<!--BENCHMARK_RESULTS_START-->",
++        "<!--BENCHMARK_RESULTS_END-->",
++    ),
++    "CONTRIBUTING.md": ("## Local checks", "## Dependencies and diagnostics"),
++    "cpp/README.md": ("# C++ placeholder",),
++}
++
++
++def workflow_errors(workflow):
++    errors = []
++    if workflow.get("permissions") != {"contents": "read"}:
++        errors.append("workflow must default to contents: read")
++    for name, job in workflow.get("jobs", {}).items():
++        if not job.get("timeout-minutes"):
++            errors.append(f"{name}: missing job timeout")
++        matrix = job.get("strategy", {}).get("matrix", {})
++        runners = [job.get("runs-on", "")] + (matrix.get("os", []) if isinstance(matrix, dict) else [])
++        if any("latest" in runner for runner in runners):
++            errors.append(f"{name}: mutable runner label")
++        if job.get("continue-on-error"):
++            errors.append(f"{name}: continue-on-error hides failed checks")
++        writes = "write" in job.get("permissions", {}).values()
++        if writes:
++            concurrency = job.get("concurrency", {})
++            if concurrency.get("group") != WRITER_GROUP or concurrency.get("cancel-in-progress") != "false":
++                errors.append(f"{name}: writer must serialize without cancellation")
++            if "concurrency" in workflow:
++                errors.append(f"{name}: workflow concurrency can cancel a writer")
++        if "pull_request_target" in workflow.get("on", {}):
++            if any("checkout@" in step.get("uses", "") for step in job.get("steps", [])):
++                errors.append(f"{name}: privileged pull_request_target must not check out code")
++    return errors
++
++
++def local_link_errors(document, root=ROOT):
++    errors = []
++    for link in re.findall(r"!?\[[^\]]*\]\(([^\s)]+)(?:\s+[^)]*)?\)", document.read_text(encoding="utf-8")):
++        if re.match(r"\w+://|mailto:|#", link):
++            continue
++        target = link.split("#", 1)[0].split("?", 1)[0]
++        if target and not (document.parent / target).exists():
++            errors.append(f"{document.relative_to(root)}: missing local link {target}")
++    return errors
++
++
++def main():
++    errors = []
++    for path in sorted((ROOT / ".github/workflows").glob("*.yml")):
++        workflow = yaml.load(path.read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
++        errors += [f"{path.name}: {error}" for error in workflow_errors(workflow)]
++    if (ROOT / ".github/workflows/cpp.yml").exists() and not (ROOT / "cpp/CMakeLists.txt").exists():
++        errors.append("C++ build workflow has no CMake project")
++    for directory in ("scripts", "rust/src", "rust/tests", "csharp", "experiments"):
++        for path in (ROOT / directory).rglob("*"):
++            if path.suffix not in (".py", ".rs", ".cs", ".sh") or any(
++                part in ("bin", "obj", "target") for part in path.parts
++            ):
++                continue
++            lines = len(path.read_text(encoding="utf-8").splitlines())
++            if lines > 1500:
++                errors.append(f"{path.relative_to(ROOT)}: {lines} lines exceeds 1500")
++    for name, sections in DOCUMENT_SECTIONS.items():
++        path = ROOT / name
++        if not path.is_file():
++            errors.append(f"Missing required document: {name}")
++            continue
++        errors += local_link_errors(path)
++        content = path.read_text(encoding="utf-8")
++        errors += [
++            f"{name}: missing required section {section}" for section in sections if section not in content
++        ]
++        if len(path.read_text(encoding="utf-8").splitlines()) > 2500:
++            errors.append(f"{name}: exceeds 2500 lines")
++    if errors:
++        raise SystemExit("\n".join(errors))
++    print("Workflow policies, source line limits, and local documentation links passed")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/scripts/publish_benchmarks.py b/scripts/publish_benchmarks.py
+new file mode 100644
+index 0000000..56c0866
+--- /dev/null
++++ b/scripts/publish_benchmarks.py
+@@ -0,0 +1,112 @@
++"""Publish validated benchmark results, recomputing documents after a lost race."""
++
++import argparse
++import json
++import shutil
++import subprocess
++import tempfile
++from pathlib import Path
++
++import benchmark_ci
++import benchmark_report
++
++
++def is_race(message):
++    blocked = ("GH006", "GH013", "protected branch", "rule violations", "pre-receive hook declined")
++    return not any(item in message for item in blocked) and any(
++        item in message for item in ("non-fast-forward", "fetch first")
++    )
++
++
++def git(*args, cwd=None, check=True):
++    result = subprocess.run(["git", *args], cwd=cwd, capture_output=True, text=True, check=False)
++    if result.returncode and check:
++        raise RuntimeError(f"git {args[0]} failed:\n{result.stdout}{result.stderr}")
++    return result
++
++
++def publish(directory, sizes, sha, branch="main", verbose=False):
++    benchmark_ci.verify(directory, sizes, sha, verbose)
++    root = Path(git("rev-parse", "--show-toplevel").stdout.strip())
++    for attempt in range(1, 4):
++        git("fetch", "origin", branch, cwd=root)
++        # New source must be measured before its documentation is replaced.
++        changed = git(
++            "diff",
++            "--name-only",
++            sha,
++            f"origin/{branch}",
++            "--",
++            "rust",
++            "csharp",
++            "scripts",
++            ".github/workflows/benchmarks.yml",
++            cwd=root,
++        ).stdout.strip()
++        if changed:
++            raise RuntimeError(f"Benchmark source changed since {sha}; rerun benchmarks:\n{changed}")
++        with tempfile.TemporaryDirectory(prefix="benchmark-publish-") as temporary:
++            worktree = Path(temporary) / "report"
++            git("worktree", "add", "--detach", str(worktree), f"origin/{branch}", cwd=root)
++            try:
++                results = worktree / "docs/benchmarks/results"
++                results.mkdir(parents=True, exist_ok=True)
++                for path in directory.glob("*.json"):
++                    shutil.copy2(path, results / path.name)
++                reports = benchmark_report.load(results)
++                benchmark_report.charts(reports, worktree / "docs/benchmarks")
++                for name in ("README.md", "README.ru.md"):
++                    readme = worktree / name
++                    text = benchmark_report.section(
++                        reports, "ru" if ".ru." in name else "en", "docs/benchmarks"
++                    )
++                    readme.write_text(
++                        benchmark_report.replace_section(readme.read_text(encoding="utf-8"), text),
++                        encoding="utf-8",
++                    )
++                subprocess.run(
++                    ["npx", "--yes", "markdownlint-cli@0.49.1", "README.md", "README.ru.md"],
++                    cwd=worktree,
++                    check=True,
++                )
++                git("add", "README.md", "README.ru.md", "docs/benchmarks", cwd=worktree)
++                if git("diff", "--staged", "--quiet", cwd=worktree, check=False).returncode == 0:
++                    print("Benchmark report is already current")
++                    return
++                git(
++                    "-c",
++                    "user.email=linksplatform@gmail.com",
++                    "-c",
++                    "user.name=LinksPlatformBencher",
++                    "commit",
++                    "-m",
++                    "Update benchmark results [skip ci]",
++                    cwd=worktree,
++                )
++                pushed = git("push", "origin", f"HEAD:{branch}", cwd=worktree, check=False)
++                message = pushed.stdout + pushed.stderr
++                if pushed.returncode == 0:
++                    print(f"Published benchmark report on attempt {attempt}")
++                    return
++                if not is_race(message) or attempt == 3:
++                    raise RuntimeError(f"Benchmark publication failed:\n{message}")
++                print(f"Publication lost a branch race on attempt {attempt}; fetching and regenerating")
++                if verbose:
++                    print(message)
++            finally:
++                git("worktree", "remove", "--force", str(worktree), cwd=root)
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("directory", type=Path)
++    parser.add_argument("--sizes", required=True)
++    parser.add_argument("--sha", required=True)
++    parser.add_argument("--branch", default="main")
++    parser.add_argument("--verbose", action="store_true")
++    args = parser.parse_args()
++    publish(args.directory.resolve(), json.loads(args.sizes), args.sha, args.branch, args.verbose)
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/scripts/requirements-ci.txt b/scripts/requirements-ci.txt
+new file mode 100644
+index 0000000..d1b1d60
+--- /dev/null
++++ b/scripts/requirements-ci.txt
+@@ -0,0 +1,6 @@
++ruff==0.16.10
++mypy==2.4.0
++PyYAML==6.0.3
++types-PyYAML==6.0.12.20250915
++pip-audit==2.10.1
++zizmor==1.30.1
+diff --git a/scripts/test_audit_dotnet.py b/scripts/test_audit_dotnet.py
+new file mode 100644
+index 0000000..514dc4f
+--- /dev/null
++++ b/scripts/test_audit_dotnet.py
+@@ -0,0 +1,42 @@
++"""NuGet's successful process exit is not proof of a clean dependency graph."""
++
++import unittest
++
++from audit_dotnet import vulnerabilities
++
++
++class AuditTests(unittest.TestCase):
++    def test_transitive_advisories_fail_the_audit(self):
++        report = {
++            "projects": [
++                {
++                    "path": "tests.csproj",
++                    "frameworks": [
++                        {
++                            "transitivePackages": [
++                                {
++                                    "id": "Vulnerable.Package",
++                                    "vulnerabilities": [
++                                        {"severity": "High", "advisoryurl": "https://example.org/advisory"}
++                                    ],
++                                }
++                            ]
++                        }
++                    ],
++                }
++            ]
++        }
++        self.assertEqual(vulnerabilities(report)[0][1], "Vulnerable.Package")
++
++    def test_clean_graph_is_accepted(self):
++        self.assertEqual(vulnerabilities({"projects": [{"path": "app.csproj", "frameworks": []}]}), [])
++
++    def test_incomplete_audit_is_rejected(self):
++        reports: list[dict] = [{}, {"projects": []}, {"errors": ["offline"], "projects": [{}]}]
++        for report in reports:
++            with self.subTest(report=report), self.assertRaises(ValueError):
++                vulnerabilities(report)
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/scripts/test_benchmark_ci.py b/scripts/test_benchmark_ci.py
+new file mode 100644
+index 0000000..09df74c
+--- /dev/null
++++ b/scripts/test_benchmark_ci.py
+@@ -0,0 +1,109 @@
++"""Regression tests for complete, current-run benchmark artifacts."""
++
++import copy
++import json
++import tempfile
++import unittest
++from pathlib import Path
++
++import benchmark_ci as ci
++from test_benchmark_report import sample
++
++
++def complete_sample(category, language, bits, size, **extra):
++    data = sample(category, language, bits, size, **extra)
++    measured = data["results"][0]
++    data["results"] = [
++        dict(copy.deepcopy(measured), variant=variant)
++        for variant in sorted(ci.expected_variants(category, language))
++    ]
++    return data
++
++
++class ArtifactTests(unittest.TestCase):
++    def setUp(self):
++        temporary = tempfile.TemporaryDirectory()
++        self.addCleanup(temporary.cleanup)
++        self.root = Path(temporary.name)
++        self.sha = "a" * 40
++        for row in ci.matrix([1000]):
++            data = complete_sample(
++                row["category"],
++                "Rust" if row["language"] == "rust" else "C#",
++                row["bits"],
++                1000,
++                source_sha=self.sha,
++            )
++            (self.root / ci.filename(row)).write_text(json.dumps(data), encoding="utf-8")
++
++    def test_complete_current_run(self):
++        ci.verify(self.root, [1000], self.sha)
++
++    def test_missing_artifact_fails_even_when_other_tables_are_valid(self):
++        next(self.root.glob("*.json")).unlink()
++        with self.assertRaisesRegex(ValueError, "Missing"):
++            ci.verify(self.root, [1000], self.sha)
++
++    def test_missing_storage_variant_fails_even_with_valid_baselines(self):
++        path = next(self.root.glob("*.json"))
++        data = json.loads(path.read_text())
++        data["results"] = [result for result in data["results"] if result["variant"].startswith("SQLite")]
++        path.write_text(json.dumps(data), encoding="utf-8")
++        with self.assertRaisesRegex(ValueError, "variants"):
++            ci.verify(self.root, [1000], self.sha)
++
++    def test_stale_result_is_not_a_substitute_for_a_failed_job(self):
++        path = next(self.root.glob("*.json"))
++        data = json.loads(path.read_text())
++        data["source_sha"] = "b" * 40
++        path.write_text(json.dumps(data), encoding="utf-8")
++        with self.assertRaisesRegex(ValueError, "source_sha"):
++            ci.verify(self.root, [1000], self.sha)
++
++    def test_different_merge_trees_are_rejected(self):
++        for path in self.root.glob("*.json"):
++            data = json.loads(path.read_text())
++            data["tree_sha"] = "b" * 40
++            path.write_text(json.dumps(data), encoding="utf-8")
++        with self.assertRaisesRegex(ValueError, "tree_sha"):
++            ci.verify(self.root, [1000], self.sha, tree="c" * 40)
++
++    def test_wrong_table_cannot_hide_behind_expected_filename(self):
++        path = next(self.root.glob("*.json"))
++        data = json.loads(path.read_text())
++        data["size"] = 2000
++        path.write_text(json.dumps(data), encoding="utf-8")
++        with self.assertRaisesRegex(ValueError, "table identity"):
++            ci.verify(self.root, [1000], self.sha)
++
++    def test_extra_old_artifacts_are_rejected(self):
++        (self.root / "stale.json").write_text("{}", encoding="utf-8")
++        with self.assertRaisesRegex(ValueError, "Unexpected"):
++            ci.verify(self.root, [1000], self.sha)
++
++
++class MatrixTests(unittest.TestCase):
++    def test_csharp_preserves_both_sqlite_providers(self):
++        for category in ("links", "objects"):
++            self.assertEqual(
++                ci.expected_variants(category, "C#") - ci.expected_variants(category, "Rust"),
++                {"SystemDataSQLite_Memory", "SystemDataSQLite_File"},
++            )
++
++    def test_default_matrix_preserves_twenty_tables(self):
++        rows = ci.matrix([100000, 1000000, 10000000])
++        self.assertEqual(len(rows), 20)
++        self.assertFalse(any(row["category"] == "objects" and row["size"] > 1000000 for row in rows))
++
++    def test_invalid_or_unbounded_inputs_fail_before_starting_jobs(self):
++        for sizes in ([], [0], [-1], [True], [1.5], [1000, 1000], [100000000], "1000"):
++            with self.subTest(sizes=sizes), self.assertRaises(ValueError):
++                ci.matrix(sizes)
++
++    def test_matrix_cannot_exceed_github_job_limit(self):
++        with self.assertRaisesRegex(ValueError, "256 jobs"):
++            ci.matrix(list(range(1, 34)))
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/scripts/test_benchmark_report.py b/scripts/test_benchmark_report.py
+index 311207d..a82eb11 100644
+--- a/scripts/test_benchmark_report.py
++++ b/scripts/test_benchmark_report.py
+@@ -13,8 +13,8 @@
+ 
+ 
+ def measurement(median, *samples):
+-    samples = sorted(samples or [median])
+-    return {"median_ns": median, "min_ns": samples[0], "max_ns": samples[-1], "samples_ns": samples}
++    ordered = sorted(samples or [median])
++    return {"median_ns": median, "min_ns": ordered[0], "max_ns": ordered[-1], "samples_ns": ordered}
+ 
+ 
+ def results(category, variants, file_bytes=None):
+@@ -57,8 +57,10 @@ def test_sizes(self):
+ 
+     def test_russian_plurals(self):
+         repetitions = report.TEXT["ru"]["repetitions"]
+-        self.assertEqual([repetitions(count) for count in (1, 3, 5, 11, 21)],
+-                         ["1 повтор", "3 повтора", "5 повторов", "11 повторов", "21 повтор"])
++        self.assertEqual(
++            [repetitions(count) for count in (1, 3, 5, 11, 21)],
++            ["1 повтор", "3 повтора", "5 повторов", "11 повторов", "21 повтор"],
++        )
+ 
+ 
+ class ComparisonTests(unittest.TestCase):
+@@ -77,16 +79,24 @@ def test_clear_differences(self):
+     def test_system_data_sqlite_is_compared_with_the_matching_provider_storage(self):
+         self.assertEqual(report.baseline("SystemDataSQLite_Memory"), "SQLite_Memory")
+         self.assertEqual(report.baseline("SystemDataSQLite_File"), "SQLite_File")
+-        data = results("objects", {
+-            "SQLite_Memory": 1000, "SQLite_File": 2000,
+-            "SystemDataSQLite_Memory": 500, "SystemDataSQLite_File": 500,
+-        })
++        data = results(
++            "objects",
++            {
++                "SQLite_Memory": 1000,
++                "SQLite_File": 2000,
++                "SystemDataSQLite_Memory": 500,
++                "SystemDataSQLite_File": 500,
++            },
++        )
+         table = report.table(data, self.text).splitlines()
+         self.assertEqual(table[4].count("2× faster"), 4)
+         self.assertEqual(table[5].count("4× faster"), 4)
+ 
+     def test_overlapping_interquartile_ranges_are_not_a_difference(self):
+-        measured, reference = measurement(150, 90, 100, 150, 200, 300), measurement(190, 150, 180, 190, 210, 260)
++        measured, reference = (
++            measurement(150, 90, 100, 150, 200, 300),
++            measurement(190, 150, 180, 190, 210, 260),
++        )
+         self.assertEqual(report.quartiles(measured), (100, 200))
+         self.assertEqual(report.comparison(measured, reference, self.text), "≈ same")
+ 
+@@ -116,38 +126,50 @@ def test_hierarchy_is_category_language_bits_size(self):
+             ("links", "Rust", 64, 100_000): sample(),
+             ("objects", "C#", 32, 100_000): sample("objects", "C#", 32),
+         }
+-        headings = [line for line in report.section(reports, "en", "docs").splitlines() if line.startswith("#")]
+-        self.assertEqual(headings, [
+-            "## Doublets vs SQLite as storage for links",
+-            "### Rust doublets vs SQLite",
+-            "#### 32 bit address/id space benchmarks",
+-            "#### 64 bit address/id space benchmarks",
+-            "##### 100,000 links",
+-            "##### 1,000,000 links",
+-            "### C# doublets vs SQLite",
+-            "#### 32 bit address/id space benchmarks",
+-            "#### 64 bit address/id space benchmarks",
+-            "## Doublets vs SQLite as storage for objects",
+-            "### Rust doublets vs SQLite",
+-            "#### 32 bit address/id space benchmarks",
+-            "#### 64 bit address/id space benchmarks",
+-            "### C# doublets vs SQLite",
+-            "#### 32 bit address/id space benchmarks",
+-            "##### 100,000 blog posts",
+-            "#### 64 bit address/id space benchmarks",
+-        ])
++        headings = [
++            line for line in report.section(reports, "en", "docs").splitlines() if line.startswith("#")
++        ]
++        self.assertEqual(
++            headings,
++            [
++                "## Doublets vs SQLite as storage for links",
++                "### Rust doublets vs SQLite",
++                "#### 32 bit address/id space benchmarks",
++                "#### 64 bit address/id space benchmarks",
++                "##### 100,000 links",
++                "##### 1,000,000 links",
++                "### C# doublets vs SQLite",
++                "#### 32 bit address/id space benchmarks",
++                "#### 64 bit address/id space benchmarks",
++                "## Doublets vs SQLite as storage for objects",
++                "### Rust doublets vs SQLite",
++                "#### 32 bit address/id space benchmarks",
++                "#### 64 bit address/id space benchmarks",
++                "### C# doublets vs SQLite",
++                "#### 32 bit address/id space benchmarks",
++                "##### 100,000 blog posts",
++                "#### 64 bit address/id space benchmarks",
++            ],
++        )
+ 
+     def test_missing_groups_and_provenance(self):
+         url = "https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/1"
+-        reports = {("links", "Rust", 64, 100_000): sample(run_url=url, date="2026-10-04", machine="ubuntu-24.04")}
++        reports = {
++            ("links", "Rust", 64, 100_000): sample(run_url=url, date="2026-10-04", machine="ubuntu-24.04")
++        }
+         text = report.section(reports, "en", None)
+         self.assertEqual(text.count("_No results yet._"), 7)
+-        self.assertIn(f"_3 repetitions after a warm-up, median time per operation. SQLite 3.53.2, ubuntu-24.04, "
+-                      f"[GitHub Actions run]({url}) on 2026-10-04._", text)
++        self.assertIn(
++            f"_3 repetitions after a warm-up, median time per operation. SQLite 3.53.2, ubuntu-24.04, "
++            f"[GitHub Actions run]({url}) on 2026-10-04._",
++            text,
++        )
+         self.assertNotIn("![", text)
+ 
+     def test_charts_are_linked_per_category_language_and_bits(self):
+-        text = report.section({("objects", "C#", 32, 100_000): sample("objects", "C#", 32)}, "ru", "docs/benchmarks")
++        text = report.section(
++            {("objects", "C#", 32, 100_000): sample("objects", "C#", 32)}, "ru", "docs/benchmarks"
++        )
+         self.assertIn("(docs/benchmarks/objects-csharp-32.png)", text)
+         self.assertIn("## Дуплеты против SQLite как хранилище объектов", text)
+         self.assertIn("локальный запуск", text)
+@@ -161,16 +183,20 @@ def setUp(self):
+ 
+     def test_only_the_marked_section_is_replaced(self):
+         document = f"before\n{report.START_MARKER}\nold\n{report.END_MARKER}\nafter\n"
+-        self.assertEqual(report.replace_section(document, "new\n"),
+-                         f"before\n{report.START_MARKER}\n{report.LINT_OFF}\nnew\n{report.LINT_ON}\n"
+-                         f"{report.END_MARKER}\nafter\n")
++        self.assertEqual(
++            report.replace_section(document, "new\n"),
++            f"before\n{report.START_MARKER}\n{report.LINT_OFF}\nnew\n{report.LINT_ON}\n"
++            f"{report.END_MARKER}\nafter\n",
++        )
+         with self.assertRaises(ValueError):
+             report.replace_section("no markers", "new\n")
+ 
+     def test_usage_starts_with_the_summary(self):
+         with contextlib.redirect_stdout(io.StringIO()) as output, self.assertRaises(SystemExit):
+             report.main(["--help"])
+-        self.assertIn("Turns the benchmark JSON reports into the README results sections and charts.", output.getvalue())
++        self.assertIn(
++            "Turns the benchmark JSON reports into the README results sections and charts.", output.getvalue()
++        )
+ 
+     def test_duplicate_reports_are_rejected(self):
+         for name in ("a.json", "b.json"):
+@@ -178,6 +204,26 @@ def test_duplicate_reports_are_rejected(self):
+         with self.assertRaises(ValueError):
+             report.load(self.root)
+ 
++    def test_empty_artifact_download_cannot_generate_a_successful_report(self):
++        with self.assertRaisesRegex(ValueError, "No benchmark reports"):
++            report.load(self.root)
++
++    def test_incomplete_and_nonfinite_measurements_are_rejected(self):
++        for broken in ("missing operation", "missing baseline", "NaN", "negative"):
++            with self.subTest(broken=broken):
++                data = sample()
++                if broken == "missing operation":
++                    del data["results"][0]["operations"]["create"]
++                elif broken == "missing baseline":
++                    data["results"] = data["results"][2:]
++                else:
++                    data["results"][0]["operations"]["create"]["median_ns"] = (
++                        float("nan") if broken == "NaN" else -1
++                    )
++                (self.root / "broken.json").write_text(json.dumps(data), encoding="utf-8")
++                with self.assertRaises(ValueError):
++                    report.load(self.root)
++
+     @unittest.skipUnless(importlib.util.find_spec("matplotlib"), "matplotlib is not installed")
+     def test_main_updates_readmes_and_writes_charts(self):
+         results_directory = self.root / "results"
+@@ -185,11 +231,24 @@ def test_main_updates_readmes_and_writes_charts(self):
+         for index, data in enumerate((sample(), sample(size=1_000_000), sample("objects", "C#", 32))):
+             (results_directory / f"{index}.json").write_text(json.dumps(data), encoding="utf-8")
+         for name in ("README.md", "README.ru.md"):
+-            (self.root / name).write_text(f"intro\n{report.START_MARKER}\n{report.END_MARKER}\n", encoding="utf-8")
+-        report.main([str(results_directory), "--readme", str(self.root / "README.md"),
+-                     "--readme", str(self.root / "README.ru.md"), "--charts", str(self.root / "docs")])
+-        self.assertEqual(sorted(path.name for path in (self.root / "docs").iterdir()),
+-                         ["links-rust-64.png", "objects-csharp-32.png"])
++            (self.root / name).write_text(
++                f"intro\n{report.START_MARKER}\n{report.END_MARKER}\n", encoding="utf-8"
++            )
++        report.main(
++            [
++                str(results_directory),
++                "--readme",
++                str(self.root / "README.md"),
++                "--readme",
++                str(self.root / "README.ru.md"),
++                "--charts",
++                str(self.root / "docs"),
++            ]
++        )
++        self.assertEqual(
++            sorted(path.name for path in (self.root / "docs").iterdir()),
++            ["links-rust-64.png", "objects-csharp-32.png"],
++        )
+         english = (self.root / "README.md").read_text(encoding="utf-8")
+         self.assertIn("![Rust doublets vs SQLite, 64 bit, links](docs/links-rust-64.png)", english)
+         self.assertIn("Дуплеты на C# против SQLite", (self.root / "README.ru.md").read_text(encoding="utf-8"))
+diff --git a/scripts/test_check_pipeline_status.py b/scripts/test_check_pipeline_status.py
+new file mode 100644
+index 0000000..bcd9d9d
+--- /dev/null
++++ b/scripts/test_check_pipeline_status.py
+@@ -0,0 +1,33 @@
++"""A cancelled writer or an unproven timeout must never become a green pipeline."""
++
++import unittest
++
++from check_pipeline_status import failures
++
++
++class StatusTests(unittest.TestCase):
++    def test_success_and_intentional_skips(self):
++        self.assertEqual(failures({"test": {"result": "success"}, "publish": {"result": "skipped"}}, {}), [])
++
++    def test_timeout_or_failure_fails_current_run(self):
++        for result in ("failure", "cancelled", "unknown"):
++            self.assertTrue(failures({"test": {"result": result}}, {}))
++
++    def test_only_proven_superseded_cancellable_readers_are_accepted(self):
++        workflow = {
++            "jobs": {
++                "test": {"concurrency": {"cancel-in-progress": "true"}},
++                "publish": {"concurrency": {"cancel-in-progress": "false"}},
++            }
++        }
++        self.assertEqual(failures({"test": {"result": "cancelled"}}, workflow, True), [])
++        self.assertTrue(failures({"publish": {"result": "cancelled"}}, workflow, True))
++        self.assertTrue(failures({"test": {"result": "cancelled"}}, workflow, False))
++
++    def test_empty_status_is_an_error(self):
++        with self.assertRaises(ValueError):
++            failures({}, {})
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/scripts/test_ci_checks.py b/scripts/test_ci_checks.py
+new file mode 100644
+index 0000000..7fb8872
+--- /dev/null
++++ b/scripts/test_ci_checks.py
+@@ -0,0 +1,58 @@
++"""Behavioral checks for CI permission and cancellation policies."""
++
++import copy
++import tempfile
++import unittest
++from pathlib import Path
++from typing import Any
++
++import ci_checks as ci
++
++
++class PolicyTests(unittest.TestCase):
++    def setUp(self):
++        self.workflow: dict[str, Any] = {
++            "permissions": {"contents": "read"},
++            "jobs": {"test": {"runs-on": "ubuntu-24.04", "timeout-minutes": "10"}},
++        }
++
++    def test_read_only_workflow(self):
++        self.assertEqual(ci.workflow_errors(self.workflow), [])
++
++    def test_writer_cannot_be_cancelled_or_race_another_workflow(self):
++        job = self.workflow["jobs"]["test"]
++        job["permissions"] = {"contents": "write"}
++        self.assertTrue(ci.workflow_errors(self.workflow))
++        job["concurrency"] = {"group": ci.WRITER_GROUP, "cancel-in-progress": "false"}
++        self.assertEqual(ci.workflow_errors(self.workflow), [])
++        self.workflow["concurrency"] = {"cancel-in-progress": "true"}
++        self.assertTrue(ci.workflow_errors(self.workflow))
++
++    def test_matrix_runner_aliases_are_checked(self):
++        self.workflow["jobs"]["test"]["strategy"] = {"matrix": {"os": ["windows-latest"]}}
++        self.assertIn("mutable runner", " ".join(ci.workflow_errors(self.workflow)))
++
++    def test_privileged_event_rejects_checkout(self):
++        self.workflow["on"] = {"pull_request_target": {}}
++        self.workflow["jobs"]["test"]["steps"] = [{"uses": "actions/checkout@" + "a" * 40}]
++        self.assertIn("must not check out", " ".join(ci.workflow_errors(self.workflow)))
++
++    def test_failure_suppression_is_rejected(self):
++        broken = copy.deepcopy(self.workflow)
++        broken["jobs"]["test"]["continue-on-error"] = "true"
++        self.assertIn("hides failed checks", " ".join(ci.workflow_errors(broken)))
++
++    def test_local_missing_link_is_a_failure(self):
++        with tempfile.TemporaryDirectory() as temporary:
++            root = Path(temporary)
++            path = root / "README.md"
++            path.write_text(
++                "[code](missing.py) [web](https://example.com) [section](#local)", encoding="utf-8"
++            )
++            self.assertEqual(len(ci.local_link_errors(path, root)), 1)
++            (root / "missing.py").touch()
++            self.assertEqual(ci.local_link_errors(path, root), [])
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/scripts/test_publish_benchmarks.py b/scripts/test_publish_benchmarks.py
+new file mode 100644
+index 0000000..d47c04c
+--- /dev/null
++++ b/scripts/test_publish_benchmarks.py
+@@ -0,0 +1,129 @@
++"""A write rejection must retain its actual cause and retry only lost races."""
++
++import json
++import os
++import subprocess
++import tempfile
++import unittest
++from pathlib import Path
++from unittest.mock import patch
++
++import benchmark_ci
++import benchmark_report
++import publish_benchmarks as publish
++from test_benchmark_ci import complete_sample
++
++
++class PushTests(unittest.TestCase):
++    def test_only_non_fast_forward_can_be_retried(self):
++        self.assertTrue(publish.is_race("! [rejected] HEAD -> main (non-fast-forward)"))
++        self.assertTrue(publish.is_race("! [rejected] HEAD -> main (fetch first)"))
++        for error in (
++            "remote: error: GH013: Repository rule violations found\n! [rejected] (non-fast-forward)",
++            "remote: error: GH006: Protected branch update failed\n! [rejected] (fetch first)",
++            "fatal: Authentication failed",
++            "Could not resolve host: github.com",
++            "remote: Permission denied",
++            "pre-receive hook declined",
++        ):
++            with self.subTest(error=error):
++                self.assertFalse(publish.is_race(error))
++
++
++class PublicationTests(unittest.TestCase):
++    """Exercise real Git races against a temporary bare origin; never contact GitHub."""
++
++    def setUp(self):
++        temporary = tempfile.TemporaryDirectory()
++        self.addCleanup(temporary.cleanup)
++        self.root = Path(temporary.name)
++        self.origin = self.root / "origin.git"
++        self.local = self.root / "local"
++        self.other = self.root / "other"
++        self.command("init", "--bare", "--initial-branch=main", str(self.origin))
++        self.command("clone", str(self.origin), str(self.local))
++        for name in ("README.md", "README.ru.md"):
++            (self.local / name).write_text(
++                f"# Benchmarks\n\n{benchmark_report.START_MARKER}\nold\n{benchmark_report.END_MARKER}\n"
++            )
++        (self.local / "scripts").mkdir()
++        (self.local / "scripts/source.py").write_text("version = 1\n")
++        self.commit(self.local, "Initial source")
++        self.command("push", "origin", "main", cwd=self.local)
++        self.sha = self.command("rev-parse", "HEAD", cwd=self.local).stdout.strip()
++        self.command("clone", str(self.origin), str(self.other))
++        self.inputs = self.root / "inputs"
++        self.inputs.mkdir()
++        for row in benchmark_ci.matrix([1000]):
++            data = complete_sample(
++                row["category"],
++                "Rust" if row["language"] == "rust" else "C#",
++                row["bits"],
++                1000,
++                source_sha=self.sha,
++            )
++            (self.inputs / benchmark_ci.filename(row)).write_text(json.dumps(data))
++        previous = Path.cwd()
++        os.chdir(self.local)
++        self.addCleanup(os.chdir, previous)
++
++    def command(self, *args, cwd=None):
++        return subprocess.run(["git", *args], cwd=cwd, capture_output=True, text=True, check=True)
++
++    def commit(self, directory, message):
++        self.command("add", ".", cwd=directory)
++        self.command(
++            "-c",
++            "user.name=Test",
++            "-c",
++            "user.email=test@example.org",
++            "commit",
++            "-m",
++            message,
++            cwd=directory,
++        )
++
++    def test_lost_race_refetches_and_preserves_intervening_commit(self):
++        original = publish.git
++        pushes = []
++
++        def race(*args, **kwargs):
++            if args[0] == "push":
++                pushes.append(args)
++                if len(pushes) == 1:
++                    readme = self.other / "README.md"
++                    readme.write_text(readme.read_text() + "\nIntervening documentation update.\n")
++                    self.commit(self.other, "Concurrent documentation")
++                    self.command("push", "origin", "main", cwd=self.other)
++            return original(*args, **kwargs)
++
++        # Git remains real. Avoid invoking network-dependent Markdown tooling here.
++        actual_run = subprocess.run
++        with (
++            patch.object(publish, "git", side_effect=race),
++            patch.object(publish.benchmark_report, "charts"),
++            patch.object(publish.subprocess, "run", wraps=subprocess.run) as run,
++        ):
++            run.side_effect = lambda args, **kw: (
++                subprocess.CompletedProcess(args, 0) if args[0] == "npx" else actual_run(args, **kw)
++            )
++            publish.publish(self.inputs, [1000], self.sha)
++        self.assertEqual(len(pushes), 2)
++        readme = self.command("--git-dir", str(self.origin), "show", "main:README.md").stdout
++        self.assertIn("Intervening documentation update", readme)
++        self.assertNotIn("\nold\n", readme)
++        log = self.command("--git-dir", str(self.origin), "log", "--format=%s", "main").stdout
++        self.assertIn("Concurrent documentation", log)
++
++    def test_new_source_requires_new_measurements(self):
++        (self.other / "scripts/source.py").write_text("version = 2\n")
++        self.commit(self.other, "Changed benchmark source")
++        self.command("push", "origin", "main", cwd=self.other)
++        with self.assertRaisesRegex(RuntimeError, "source changed"):
++            publish.publish(self.inputs, [1000], self.sha)
++        count = self.command("--git-dir", str(self.origin), "rev-list", "--count", "main").stdout.strip()
++        self.assertEqual(count, "2")
++
++
++if __name__ == "__main__":
++    unittest.main()

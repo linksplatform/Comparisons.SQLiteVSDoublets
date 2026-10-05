@@ -1,0 +1,4325 @@
+[
+  {
+    "ident": "artipacked",
+    "desc": "credential persistence through GitHub Actions artifacts",
+    "url": "https://docs.zizmor.sh/audits/#artipacked",
+    "determinations": {
+      "confidence": "Low",
+      "severity": "Low",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/AutoMerge.yml"
+            }
+          },
+          "annotation": "does not set persist-credentials: false",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "auto-merge"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 9,
+              "column": 8
+            },
+            "end_point": {
+              "row": 9,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 112,
+              "end": 137
+            }
+          },
+          "feature": "uses: actions/checkout@v7",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "set persist-credentials: false",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/AutoMerge.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "excessive-permissions",
+    "desc": "overly broad permissions",
+    "url": "https://docs.zizmor.sh/audits/#excessive-permissions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Medium",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/AutoMerge.yml"
+            }
+          },
+          "annotation": "this job",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "auto-merge"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 6,
+              "column": 2
+            },
+            "end_point": {
+              "row": 14,
+              "column": 0
+            },
+            "offset_span": {
+              "start": 54,
+              "end": 301
+            }
+          },
+          "feature": "  auto-merge:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v7\n      - uses: ahmadnassri/action-dependabot-auto-merge@v2\n        with:\n          target: minor\n          github-token: ${{ secrets.DEPENDABOT_AUTO_MERGE_TOKEN }}\n",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/AutoMerge.yml"
+            }
+          },
+          "annotation": "default permissions used due to no permissions: block",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "auto-merge"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 6,
+              "column": 2
+            },
+            "end_point": {
+              "row": 14,
+              "column": 0
+            },
+            "offset_span": {
+              "start": 54,
+              "end": 301
+            }
+          },
+          "feature": "  auto-merge:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v7\n      - uses: ahmadnassri/action-dependabot-auto-merge@v2\n        with:\n          target: minor\n          github-token: ${{ secrets.DEPENDABOT_AUTO_MERGE_TOKEN }}\n",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "dangerous-triggers",
+    "desc": "use of fundamentally insecure workflow trigger",
+    "url": "https://docs.zizmor.sh/audits/#dangerous-triggers",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/AutoMerge.yml"
+            }
+          },
+          "annotation": "pull_request_target is almost always used insecurely",
+          "route": {
+            "route": [
+              {
+                "Key": "on"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 2,
+              "column": 0
+            },
+            "end_point": {
+              "row": 3,
+              "column": 22
+            },
+            "offset_span": {
+              "start": 18,
+              "end": 44
+            }
+          },
+          "feature": "on:\n  pull_request_target:",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/AutoMerge.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "auto-merge"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 9,
+              "column": 8
+            },
+            "end_point": {
+              "row": 9,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 112,
+              "end": 137
+            }
+          },
+          "feature": "uses: actions/checkout@v7",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/AutoMerge.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "auto-merge"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "actions/checkout@v7"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 9,
+              "column": 14
+            },
+            "end_point": {
+              "row": 9,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 118,
+              "end": 137
+            }
+          },
+          "feature": "actions/checkout@v7",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/AutoMerge.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "auto-merge"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 10,
+              "column": 8
+            },
+            "end_point": {
+              "row": 14,
+              "column": 0
+            },
+            "offset_span": {
+              "start": 146,
+              "end": 301
+            }
+          },
+          "feature": "uses: ahmadnassri/action-dependabot-auto-merge@v2\n        with:\n          target: minor\n          github-token: ${{ secrets.DEPENDABOT_AUTO_MERGE_TOKEN }}\n",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/AutoMerge.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "auto-merge"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "ahmadnassri/action-dependabot-auto-merge@v2"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 10,
+              "column": 14
+            },
+            "end_point": {
+              "row": 10,
+              "column": 57
+            },
+            "offset_span": {
+              "start": 152,
+              "end": 195
+            }
+          },
+          "feature": "ahmadnassri/action-dependabot-auto-merge@v2",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "artipacked",
+    "desc": "credential persistence through GitHub Actions artifacts",
+    "url": "https://docs.zizmor.sh/audits/#artipacked",
+    "determinations": {
+      "confidence": "Low",
+      "severity": "Low",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "does not set persist-credentials: false",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "report-tests"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 30,
+              "column": 8
+            },
+            "end_point": {
+              "row": 30,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 997,
+              "end": 1022
+            }
+          },
+          "feature": "uses: actions/checkout@v7",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "set persist-credentials: false",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/benchmarks.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "artipacked",
+    "desc": "credential persistence through GitHub Actions artifacts",
+    "url": "https://docs.zizmor.sh/audits/#artipacked",
+    "determinations": {
+      "confidence": "Low",
+      "severity": "Low",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "does not set persist-credentials: false",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 56,
+              "column": 8
+            },
+            "end_point": {
+              "row": 56,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 1975,
+              "end": 2000
+            }
+          },
+          "feature": "uses: actions/checkout@v7",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "set persist-credentials: false",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/benchmarks.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "artipacked",
+    "desc": "credential persistence through GitHub Actions artifacts",
+    "url": "https://docs.zizmor.sh/audits/#artipacked",
+    "determinations": {
+      "confidence": "Low",
+      "severity": "Low",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "does not set persist-credentials: false",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "report"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 103,
+              "column": 8
+            },
+            "end_point": {
+              "row": 105,
+              "column": 90
+            },
+            "offset_span": {
+              "start": 4175,
+              "end": 4305
+            }
+          },
+          "feature": "uses: actions/checkout@v7\n        with:\n          ref: ${{ github.event_name == 'pull_request' && github.sha || github.ref_name }}",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "set persist-credentials: false",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/benchmarks.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "excessive-permissions",
+    "desc": "overly broad permissions",
+    "url": "https://docs.zizmor.sh/audits/#excessive-permissions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Medium",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "default permissions used due to no permissions: block",
+          "route": {
+            "route": []
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 0,
+              "column": 0
+            },
+            "end_point": {
+              "row": 136,
+              "column": 0
+            },
+            "offset_span": {
+              "start": 0,
+              "end": 5769
+            }
+          },
+          "feature": "name: Benchmarks\n\n# Every job measures one README table (language, category, bits, size) with all its variants on one runner,\n# so that the variants of a table are compared on the same machine. Pull requests run the whole pipeline\n# on small sizes; pushes to main publish the results to README.md and README.ru.md.\non:\n  push:\n    branches: [main]\n    paths: ['rust/**', 'csharp/**', 'scripts/**', '.github/workflows/benchmarks.yml']\n  pull_request:\n    paths: ['rust/**', 'csharp/**', 'scripts/**', '.github/workflows/benchmarks.yml']\n  workflow_dispatch:\n    inputs:\n      sizes:\n        description: JSON array of sizes (objects skip 10,000,000 and 100,000,000)\n        default: '[100000, 1000000, 10000000]'\n\nconcurrency:\n  group: ${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: ${{ github.event_name == 'pull_request' }}\n\nenv:\n  CARGO_TERM_COLOR: always\n\njobs:\n  report-tests:\n    name: Report script tests\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    steps:\n      - uses: actions/checkout@v7\n      - uses: actions/setup-python@v7\n        with:\n          python-version: '3.13'\n      - run: pip install -r scripts/requirements.txt\n      - run: python -m unittest discover -s scripts -v\n      - run: npx --yes markdownlint-cli@0.49.1 README.md README.ru.md\n\n  benchmark:\n    name: ${{ matrix.language }} ${{ matrix.category }} ${{ matrix.bits }} bit ${{ matrix.size }}\n    runs-on: ubuntu-latest\n    timeout-minutes: 355\n    strategy:\n      fail-fast: false\n      matrix:\n        language: [rust, csharp]\n        category: [links, objects]\n        bits: [32, 64]\n        size: ${{ fromJSON(inputs.sizes || (github.event_name == 'pull_request' && '[1000]') || '[100000, 1000000, 10000000]') }}\n        exclude:\n          # One million blog posts already take an hour in C#; ten millions would not fit into a job.\n          - category: objects\n            size: 10000000\n          - category: objects\n            size: 100000000\n    steps:\n      - uses: actions/checkout@v7\n      - if: matrix.language == 'rust'\n        uses: dtolnay/rust-toolchain@stable\n      - if: matrix.language == 'rust'\n        uses: Swatinem/rust-cache@v2\n        with:\n          workspaces: rust\n      - if: matrix.language == 'rust'\n        run: |\n          cargo build --release --manifest-path rust/Cargo.toml\n          echo \"BENCHMARK=rust/target/release/sqlite-vs-doublets\" >> \"$GITHUB_ENV\"\n      - if: matrix.language == 'csharp'\n        uses: actions/setup-dotnet@v6\n        with:\n          global-json-file: csharp/global.json\n      - if: matrix.language == 'csharp'\n        run: |\n          dotnet build -c Release csharp/SQLiteVSDoublets\n          echo \"BENCHMARK=dotnet csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll\" >> \"$GITHUB_ENV\"\n      - name: Benchmark\n        run: |\n          name=${{ matrix.category }}-${{ matrix.language }}-${{ matrix.bits }}-${{ matrix.size }}\n          echo \"NAME=$name\" >> \"$GITHUB_ENV\"\n          $BENCHMARK ${{ matrix.category }} ${{ matrix.bits }} ${{ matrix.size }} \\\n            --directory \"$RUNNER_TEMP/storage\" --output \"$RUNNER_TEMP/measured.json\"\n          machine=\"$(. /etc/os-release && echo \"$PRETTY_NAME\"), $(lscpu | sed -n 's/^Model name: *//p' | head -1)\"\n          machine=\"$machine, $(nproc) cores, $(awk '/^MemTotal/ { printf \"%.0f\", $2 / 1048576 }' /proc/meminfo) GiB\"\n          mkdir results\n          jq --arg run_url \"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\" \\\n            --arg date \"$(date -u +%Y-%m-%d)\" --arg machine \"$machine\" \\\n            '. + {run_url: $run_url, date: $date, machine: $machine}' \\\n            \"$RUNNER_TEMP/measured.json\" > \"results/$name.json\"\n      - uses: actions/upload-artifact@v7\n        with:\n          name: results-${{ env.NAME }}\n          path: results/${{ env.NAME }}.json\n\n  report:\n    name: Report\n    needs: [report-tests, benchmark]\n    # Publishes the finished tables even if some jobs failed; the missing ones keep their previous results.\n    if: ${{ !cancelled() && needs.report-tests.result == 'success' }}\n    runs-on: ubuntu-latest\n    timeout-minutes: 15\n    permissions:\n      contents: write\n    steps:\n      - uses: actions/checkout@v7\n        with:\n          ref: ${{ github.event_name == 'pull_request' && github.sha || github.ref_name }}\n      - uses: actions/setup-python@v7\n        with:\n          python-version: '3.13'\n      - run: pip install -r scripts/requirements.txt\n      - uses: actions/download-artifact@v8\n        with:\n          pattern: results-*\n          merge-multiple: true\n          path: ${{ github.event_name == 'pull_request' && format('{0}/results', runner.temp) || 'docs/benchmarks/results' }}\n      - if: github.event_name == 'pull_request'\n        name: Check the report\n        run: |\n          python scripts/benchmark_report.py \"$RUNNER_TEMP/results\" >> \"$GITHUB_STEP_SUMMARY\"\n          python scripts/benchmark_report.py \"$RUNNER_TEMP/results\" --readme README.md --readme README.ru.md\n          npx --yes markdownlint-cli@0.49.1 README.md README.ru.md\n      - if: github.event_name != 'pull_request'\n        name: Publish the report\n        run: |\n          python scripts/benchmark_report.py docs/benchmarks/results \\\n            --readme README.md --readme README.ru.md --charts docs/benchmarks\n          git config user.email 'linksplatform@gmail.com'\n          git config user.name 'LinksPlatformBencher'\n          git add README.md README.ru.md docs/benchmarks\n          git diff --staged --quiet && exit 0\n          git commit -m 'Update benchmark results [skip ci]'\n          for attempt in 1 2 3; do\n            git pull --rebase origin \"$GITHUB_REF_NAME\" && git push origin \"HEAD:$GITHUB_REF_NAME\" && exit 0\n            sleep 10\n          done\n          exit 1\n",
+          "comments": [
+            "# Every job measures one README table (language, category, bits, size) with all its variants on one runner,",
+            "# so that the variants of a table are compared on the same machine. Pull requests run the whole pipeline",
+            "# on small sizes; pushes to main publish the results to README.md and README.ru.md.",
+            "# One million blog posts already take an hour in C#; ten millions would not fit into a job.",
+            "# Publishes the finished tables even if some jobs failed; the missing ones keep their previous results."
+          ]
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "excessive-permissions",
+    "desc": "overly broad permissions",
+    "url": "https://docs.zizmor.sh/audits/#excessive-permissions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Medium",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this job",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "report-tests"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 25,
+              "column": 2
+            },
+            "end_point": {
+              "row": 36,
+              "column": 69
+            },
+            "offset_span": {
+              "start": 883,
+              "end": 1285
+            }
+          },
+          "feature": "  report-tests:\n    name: Report script tests\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    steps:\n      - uses: actions/checkout@v7\n      - uses: actions/setup-python@v7\n        with:\n          python-version: '3.13'\n      - run: pip install -r scripts/requirements.txt\n      - run: python -m unittest discover -s scripts -v\n      - run: npx --yes markdownlint-cli@0.49.1 README.md README.ru.md",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "default permissions used due to no permissions: block",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "report-tests"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 25,
+              "column": 2
+            },
+            "end_point": {
+              "row": 36,
+              "column": 69
+            },
+            "offset_span": {
+              "start": 883,
+              "end": 1285
+            }
+          },
+          "feature": "  report-tests:\n    name: Report script tests\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    steps:\n      - uses: actions/checkout@v7\n      - uses: actions/setup-python@v7\n        with:\n          python-version: '3.13'\n      - run: pip install -r scripts/requirements.txt\n      - run: python -m unittest discover -s scripts -v\n      - run: npx --yes markdownlint-cli@0.49.1 README.md README.ru.md",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "excessive-permissions",
+    "desc": "overly broad permissions",
+    "url": "https://docs.zizmor.sh/audits/#excessive-permissions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Medium",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this job",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 38,
+              "column": 2
+            },
+            "end_point": {
+              "row": 91,
+              "column": 44
+            },
+            "offset_span": {
+              "start": 1289,
+              "end": 3822
+            }
+          },
+          "feature": "  benchmark:\n    name: ${{ matrix.language }} ${{ matrix.category }} ${{ matrix.bits }} bit ${{ matrix.size }}\n    runs-on: ubuntu-latest\n    timeout-minutes: 355\n    strategy:\n      fail-fast: false\n      matrix:\n        language: [rust, csharp]\n        category: [links, objects]\n        bits: [32, 64]\n        size: ${{ fromJSON(inputs.sizes || (github.event_name == 'pull_request' && '[1000]') || '[100000, 1000000, 10000000]') }}\n        exclude:\n          # One million blog posts already take an hour in C#; ten millions would not fit into a job.\n          - category: objects\n            size: 10000000\n          - category: objects\n            size: 100000000\n    steps:\n      - uses: actions/checkout@v7\n      - if: matrix.language == 'rust'\n        uses: dtolnay/rust-toolchain@stable\n      - if: matrix.language == 'rust'\n        uses: Swatinem/rust-cache@v2\n        with:\n          workspaces: rust\n      - if: matrix.language == 'rust'\n        run: |\n          cargo build --release --manifest-path rust/Cargo.toml\n          echo \"BENCHMARK=rust/target/release/sqlite-vs-doublets\" >> \"$GITHUB_ENV\"\n      - if: matrix.language == 'csharp'\n        uses: actions/setup-dotnet@v6\n        with:\n          global-json-file: csharp/global.json\n      - if: matrix.language == 'csharp'\n        run: |\n          dotnet build -c Release csharp/SQLiteVSDoublets\n          echo \"BENCHMARK=dotnet csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll\" >> \"$GITHUB_ENV\"\n      - name: Benchmark\n        run: |\n          name=${{ matrix.category }}-${{ matrix.language }}-${{ matrix.bits }}-${{ matrix.size }}\n          echo \"NAME=$name\" >> \"$GITHUB_ENV\"\n          $BENCHMARK ${{ matrix.category }} ${{ matrix.bits }} ${{ matrix.size }} \\\n            --directory \"$RUNNER_TEMP/storage\" --output \"$RUNNER_TEMP/measured.json\"\n          machine=\"$(. /etc/os-release && echo \"$PRETTY_NAME\"), $(lscpu | sed -n 's/^Model name: *//p' | head -1)\"\n          machine=\"$machine, $(nproc) cores, $(awk '/^MemTotal/ { printf \"%.0f\", $2 / 1048576 }' /proc/meminfo) GiB\"\n          mkdir results\n          jq --arg run_url \"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\" \\\n            --arg date \"$(date -u +%Y-%m-%d)\" --arg machine \"$machine\" \\\n            '. + {run_url: $run_url, date: $date, machine: $machine}' \\\n            \"$RUNNER_TEMP/measured.json\" > \"results/$name.json\"\n      - uses: actions/upload-artifact@v7\n        with:\n          name: results-${{ env.NAME }}\n          path: results/${{ env.NAME }}.json",
+          "comments": [
+            "# One million blog posts already take an hour in C#; ten millions would not fit into a job."
+          ]
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "default permissions used due to no permissions: block",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 38,
+              "column": 2
+            },
+            "end_point": {
+              "row": 91,
+              "column": 44
+            },
+            "offset_span": {
+              "start": 1289,
+              "end": 3822
+            }
+          },
+          "feature": "  benchmark:\n    name: ${{ matrix.language }} ${{ matrix.category }} ${{ matrix.bits }} bit ${{ matrix.size }}\n    runs-on: ubuntu-latest\n    timeout-minutes: 355\n    strategy:\n      fail-fast: false\n      matrix:\n        language: [rust, csharp]\n        category: [links, objects]\n        bits: [32, 64]\n        size: ${{ fromJSON(inputs.sizes || (github.event_name == 'pull_request' && '[1000]') || '[100000, 1000000, 10000000]') }}\n        exclude:\n          # One million blog posts already take an hour in C#; ten millions would not fit into a job.\n          - category: objects\n            size: 10000000\n          - category: objects\n            size: 100000000\n    steps:\n      - uses: actions/checkout@v7\n      - if: matrix.language == 'rust'\n        uses: dtolnay/rust-toolchain@stable\n      - if: matrix.language == 'rust'\n        uses: Swatinem/rust-cache@v2\n        with:\n          workspaces: rust\n      - if: matrix.language == 'rust'\n        run: |\n          cargo build --release --manifest-path rust/Cargo.toml\n          echo \"BENCHMARK=rust/target/release/sqlite-vs-doublets\" >> \"$GITHUB_ENV\"\n      - if: matrix.language == 'csharp'\n        uses: actions/setup-dotnet@v6\n        with:\n          global-json-file: csharp/global.json\n      - if: matrix.language == 'csharp'\n        run: |\n          dotnet build -c Release csharp/SQLiteVSDoublets\n          echo \"BENCHMARK=dotnet csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll\" >> \"$GITHUB_ENV\"\n      - name: Benchmark\n        run: |\n          name=${{ matrix.category }}-${{ matrix.language }}-${{ matrix.bits }}-${{ matrix.size }}\n          echo \"NAME=$name\" >> \"$GITHUB_ENV\"\n          $BENCHMARK ${{ matrix.category }} ${{ matrix.bits }} ${{ matrix.size }} \\\n            --directory \"$RUNNER_TEMP/storage\" --output \"$RUNNER_TEMP/measured.json\"\n          machine=\"$(. /etc/os-release && echo \"$PRETTY_NAME\"), $(lscpu | sed -n 's/^Model name: *//p' | head -1)\"\n          machine=\"$machine, $(nproc) cores, $(awk '/^MemTotal/ { printf \"%.0f\", $2 / 1048576 }' /proc/meminfo) GiB\"\n          mkdir results\n          jq --arg run_url \"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\" \\\n            --arg date \"$(date -u +%Y-%m-%d)\" --arg machine \"$machine\" \\\n            '. + {run_url: $run_url, date: $date, machine: $machine}' \\\n            \"$RUNNER_TEMP/measured.json\" > \"results/$name.json\"\n      - uses: actions/upload-artifact@v7\n        with:\n          name: results-${{ env.NAME }}\n          path: results/${{ env.NAME }}.json",
+          "comments": [
+            "# One million blog posts already take an hour in C#; ten millions would not fit into a job."
+          ]
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "template-injection",
+    "desc": "code injection via template expansion",
+    "url": "https://docs.zizmor.sh/audits/#template-injection",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Medium",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 6
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 75,
+              "column": 8
+            },
+            "end_point": {
+              "row": 87,
+              "column": 63
+            },
+            "offset_span": {
+              "start": 2777,
+              "end": 3682
+            }
+          },
+          "feature": "name: Benchmark\n        run: |\n          name=${{ matrix.category }}-${{ matrix.language }}-${{ matrix.bits }}-${{ matrix.size }}\n          echo \"NAME=$name\" >> \"$GITHUB_ENV\"\n          $BENCHMARK ${{ matrix.category }} ${{ matrix.bits }} ${{ matrix.size }} \\\n            --directory \"$RUNNER_TEMP/storage\" --output \"$RUNNER_TEMP/measured.json\"\n          machine=\"$(. /etc/os-release && echo \"$PRETTY_NAME\"), $(lscpu | sed -n 's/^Model name: *//p' | head -1)\"\n          machine=\"$machine, $(nproc) cores, $(awk '/^MemTotal/ { printf \"%.0f\", $2 / 1048576 }' /proc/meminfo) GiB\"\n          mkdir results\n          jq --arg run_url \"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\" \\\n            --arg date \"$(date -u +%Y-%m-%d)\" --arg machine \"$machine\" \\\n            '. + {run_url: $run_url, date: $date, machine: $machine}' \\\n            \"$RUNNER_TEMP/measured.json\" > \"results/$name.json\"",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "may expand into attacker-controllable code",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 6
+              },
+              {
+                "Key": "run"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 71,
+              "fragment": {
+                "Raw": "matrix.size"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 77,
+              "column": 84
+            },
+            "end_point": {
+              "row": 77,
+              "column": 95
+            },
+            "offset_span": {
+              "start": 2892,
+              "end": 2903
+            }
+          },
+          "feature": "|\n          name=${{ matrix.category }}-${{ matrix.language }}-${{ matrix.bits }}-${{ matrix.size }}\n          echo \"NAME=$name\" >> \"$GITHUB_ENV\"\n          $BENCHMARK ${{ matrix.category }} ${{ matrix.bits }} ${{ matrix.size }} \\\n            --directory \"$RUNNER_TEMP/storage\" --output \"$RUNNER_TEMP/measured.json\"\n          machine=\"$(. /etc/os-release && echo \"$PRETTY_NAME\"), $(lscpu | sed -n 's/^Model name: *//p' | head -1)\"\n          machine=\"$machine, $(nproc) cores, $(awk '/^MemTotal/ { printf \"%.0f\", $2 / 1048576 }' /proc/meminfo) GiB\"\n          mkdir results\n          jq --arg run_url \"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\" \\\n            --arg date \"$(date -u +%Y-%m-%d)\" --arg machine \"$machine\" \\\n            '. + {run_url: $run_url, date: $date, machine: $machine}' \\\n            \"$RUNNER_TEMP/measured.json\" > \"results/$name.json\"",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this run block",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 6
+              },
+              {
+                "Key": "run"
+              }
+            ]
+          },
+          "feature_kind": "KeyOnly",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 76,
+              "column": 8
+            },
+            "end_point": {
+              "row": 76,
+              "column": 11
+            },
+            "offset_span": {
+              "start": 2801,
+              "end": 2804
+            }
+          },
+          "feature": "run",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "replace expression with environment variable",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/benchmarks.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "template-injection",
+    "desc": "code injection via template expansion",
+    "url": "https://docs.zizmor.sh/audits/#template-injection",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Medium",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 6
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 75,
+              "column": 8
+            },
+            "end_point": {
+              "row": 87,
+              "column": 63
+            },
+            "offset_span": {
+              "start": 2777,
+              "end": 3682
+            }
+          },
+          "feature": "name: Benchmark\n        run: |\n          name=${{ matrix.category }}-${{ matrix.language }}-${{ matrix.bits }}-${{ matrix.size }}\n          echo \"NAME=$name\" >> \"$GITHUB_ENV\"\n          $BENCHMARK ${{ matrix.category }} ${{ matrix.bits }} ${{ matrix.size }} \\\n            --directory \"$RUNNER_TEMP/storage\" --output \"$RUNNER_TEMP/measured.json\"\n          machine=\"$(. /etc/os-release && echo \"$PRETTY_NAME\"), $(lscpu | sed -n 's/^Model name: *//p' | head -1)\"\n          machine=\"$machine, $(nproc) cores, $(awk '/^MemTotal/ { printf \"%.0f\", $2 / 1048576 }' /proc/meminfo) GiB\"\n          mkdir results\n          jq --arg run_url \"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\" \\\n            --arg date \"$(date -u +%Y-%m-%d)\" --arg machine \"$machine\" \\\n            '. + {run_url: $run_url, date: $date, machine: $machine}' \\\n            \"$RUNNER_TEMP/measured.json\" > \"results/$name.json\"",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "may expand into attacker-controllable code",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 6
+              },
+              {
+                "Key": "run"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 178,
+              "fragment": {
+                "Raw": "matrix.size"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 79,
+              "column": 67
+            },
+            "end_point": {
+              "row": 79,
+              "column": 78
+            },
+            "offset_span": {
+              "start": 3019,
+              "end": 3030
+            }
+          },
+          "feature": "|\n          name=${{ matrix.category }}-${{ matrix.language }}-${{ matrix.bits }}-${{ matrix.size }}\n          echo \"NAME=$name\" >> \"$GITHUB_ENV\"\n          $BENCHMARK ${{ matrix.category }} ${{ matrix.bits }} ${{ matrix.size }} \\\n            --directory \"$RUNNER_TEMP/storage\" --output \"$RUNNER_TEMP/measured.json\"\n          machine=\"$(. /etc/os-release && echo \"$PRETTY_NAME\"), $(lscpu | sed -n 's/^Model name: *//p' | head -1)\"\n          machine=\"$machine, $(nproc) cores, $(awk '/^MemTotal/ { printf \"%.0f\", $2 / 1048576 }' /proc/meminfo) GiB\"\n          mkdir results\n          jq --arg run_url \"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\" \\\n            --arg date \"$(date -u +%Y-%m-%d)\" --arg machine \"$machine\" \\\n            '. + {run_url: $run_url, date: $date, machine: $machine}' \\\n            \"$RUNNER_TEMP/measured.json\" > \"results/$name.json\"",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this run block",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 6
+              },
+              {
+                "Key": "run"
+              }
+            ]
+          },
+          "feature_kind": "KeyOnly",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 76,
+              "column": 8
+            },
+            "end_point": {
+              "row": 76,
+              "column": 11
+            },
+            "offset_span": {
+              "start": 2801,
+              "end": 2804
+            }
+          },
+          "feature": "run",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "replace expression with environment variable",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/benchmarks.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "report-tests"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 30,
+              "column": 8
+            },
+            "end_point": {
+              "row": 30,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 997,
+              "end": 1022
+            }
+          },
+          "feature": "uses: actions/checkout@v7",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "report-tests"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "actions/checkout@v7"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 30,
+              "column": 14
+            },
+            "end_point": {
+              "row": 30,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 1003,
+              "end": 1022
+            }
+          },
+          "feature": "actions/checkout@v7",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "report-tests"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 31,
+              "column": 8
+            },
+            "end_point": {
+              "row": 33,
+              "column": 32
+            },
+            "offset_span": {
+              "start": 1031,
+              "end": 1107
+            }
+          },
+          "feature": "uses: actions/setup-python@v7\n        with:\n          python-version: '3.13'",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "report-tests"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "actions/setup-python@v7"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 31,
+              "column": 14
+            },
+            "end_point": {
+              "row": 31,
+              "column": 37
+            },
+            "offset_span": {
+              "start": 1037,
+              "end": 1060
+            }
+          },
+          "feature": "actions/setup-python@v7",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 56,
+              "column": 8
+            },
+            "end_point": {
+              "row": 56,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 1975,
+              "end": 2000
+            }
+          },
+          "feature": "uses: actions/checkout@v7",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "actions/checkout@v7"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 56,
+              "column": 14
+            },
+            "end_point": {
+              "row": 56,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 1981,
+              "end": 2000
+            }
+          },
+          "feature": "actions/checkout@v7",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 57,
+              "column": 8
+            },
+            "end_point": {
+              "row": 58,
+              "column": 43
+            },
+            "offset_span": {
+              "start": 2009,
+              "end": 2082
+            }
+          },
+          "feature": "if: matrix.language == 'rust'\n        uses: dtolnay/rust-toolchain@stable",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "dtolnay/rust-toolchain@stable"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 58,
+              "column": 14
+            },
+            "end_point": {
+              "row": 58,
+              "column": 43
+            },
+            "offset_span": {
+              "start": 2053,
+              "end": 2082
+            }
+          },
+          "feature": "dtolnay/rust-toolchain@stable",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 59,
+              "column": 8
+            },
+            "end_point": {
+              "row": 62,
+              "column": 26
+            },
+            "offset_span": {
+              "start": 2091,
+              "end": 2198
+            }
+          },
+          "feature": "if: matrix.language == 'rust'\n        uses: Swatinem/rust-cache@v2\n        with:\n          workspaces: rust",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "Swatinem/rust-cache@v2"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 60,
+              "column": 14
+            },
+            "end_point": {
+              "row": 60,
+              "column": 36
+            },
+            "offset_span": {
+              "start": 2135,
+              "end": 2157
+            }
+          },
+          "feature": "Swatinem/rust-cache@v2",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 4
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 67,
+              "column": 8
+            },
+            "end_point": {
+              "row": 70,
+              "column": 46
+            },
+            "offset_span": {
+              "start": 2407,
+              "end": 2537
+            }
+          },
+          "feature": "if: matrix.language == 'csharp'\n        uses: actions/setup-dotnet@v6\n        with:\n          global-json-file: csharp/global.json",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 4
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "actions/setup-dotnet@v6"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 68,
+              "column": 14
+            },
+            "end_point": {
+              "row": 68,
+              "column": 37
+            },
+            "offset_span": {
+              "start": 2453,
+              "end": 2476
+            }
+          },
+          "feature": "actions/setup-dotnet@v6",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 7
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 88,
+              "column": 8
+            },
+            "end_point": {
+              "row": 91,
+              "column": 44
+            },
+            "offset_span": {
+              "start": 3691,
+              "end": 3822
+            }
+          },
+          "feature": "uses: actions/upload-artifact@v7\n        with:\n          name: results-${{ env.NAME }}\n          path: results/${{ env.NAME }}.json",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "benchmark"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 7
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "actions/upload-artifact@v7"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 88,
+              "column": 14
+            },
+            "end_point": {
+              "row": 88,
+              "column": 40
+            },
+            "offset_span": {
+              "start": 3697,
+              "end": 3723
+            }
+          },
+          "feature": "actions/upload-artifact@v7",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "report"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 103,
+              "column": 8
+            },
+            "end_point": {
+              "row": 105,
+              "column": 90
+            },
+            "offset_span": {
+              "start": 4175,
+              "end": 4305
+            }
+          },
+          "feature": "uses: actions/checkout@v7\n        with:\n          ref: ${{ github.event_name == 'pull_request' && github.sha || github.ref_name }}",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "report"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "actions/checkout@v7"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 103,
+              "column": 14
+            },
+            "end_point": {
+              "row": 103,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 4181,
+              "end": 4200
+            }
+          },
+          "feature": "actions/checkout@v7",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "report"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 106,
+              "column": 8
+            },
+            "end_point": {
+              "row": 108,
+              "column": 32
+            },
+            "offset_span": {
+              "start": 4314,
+              "end": 4390
+            }
+          },
+          "feature": "uses: actions/setup-python@v7\n        with:\n          python-version: '3.13'",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "report"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "actions/setup-python@v7"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 106,
+              "column": 14
+            },
+            "end_point": {
+              "row": 106,
+              "column": 37
+            },
+            "offset_span": {
+              "start": 4320,
+              "end": 4343
+            }
+          },
+          "feature": "actions/setup-python@v7",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "report"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 3
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 110,
+              "column": 8
+            },
+            "end_point": {
+              "row": 114,
+              "column": 125
+            },
+            "offset_span": {
+              "start": 4452,
+              "end": 4686
+            }
+          },
+          "feature": "uses: actions/download-artifact@v8\n        with:\n          pattern: results-*\n          merge-multiple: true\n          path: ${{ github.event_name == 'pull_request' && format('{0}/results', runner.temp) || 'docs/benchmarks/results' }}",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/benchmarks.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "report"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 3
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "actions/download-artifact@v8"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 110,
+              "column": 14
+            },
+            "end_point": {
+              "row": 110,
+              "column": 42
+            },
+            "offset_span": {
+              "start": 4458,
+              "end": 4486
+            }
+          },
+          "feature": "actions/download-artifact@v8",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "artipacked",
+    "desc": "credential persistence through GitHub Actions artifacts",
+    "url": "https://docs.zizmor.sh/audits/#artipacked",
+    "determinations": {
+      "confidence": "Low",
+      "severity": "Low",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "does not set persist-credentials: false",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 22,
+              "column": 8
+            },
+            "end_point": {
+              "row": 24,
+              "column": 26
+            },
+            "offset_span": {
+              "start": 407,
+              "end": 473
+            }
+          },
+          "feature": "uses: actions/checkout@v7\n        with:\n          submodules: true",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "set persist-credentials: false",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/cpp.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "artipacked",
+    "desc": "credential persistence through GitHub Actions artifacts",
+    "url": "https://docs.zizmor.sh/audits/#artipacked",
+    "determinations": {
+      "confidence": "Low",
+      "severity": "Low",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "does not set persist-credentials: false",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "pushToNuget"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 61,
+              "column": 6
+            },
+            "end_point": {
+              "row": 63,
+              "column": 24
+            },
+            "offset_span": {
+              "start": 1865,
+              "end": 1927
+            }
+          },
+          "feature": "uses: actions/checkout@v7\n      with:\n        submodules: true",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "set persist-credentials: false",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/cpp.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "artipacked",
+    "desc": "credential persistence through GitHub Actions artifacts",
+    "url": "https://docs.zizmor.sh/audits/#artipacked",
+    "determinations": {
+      "confidence": "Low",
+      "severity": "Low",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "does not set persist-credentials: false",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "publiseRelease"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 78,
+              "column": 8
+            },
+            "end_point": {
+              "row": 80,
+              "column": 26
+            },
+            "offset_span": {
+              "start": 2423,
+              "end": 2489
+            }
+          },
+          "feature": "uses: actions/checkout@v7\n        with:\n          submodules: true",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "set persist-credentials: false",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/cpp.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "excessive-permissions",
+    "desc": "overly broad permissions",
+    "url": "https://docs.zizmor.sh/audits/#excessive-permissions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Medium",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "default permissions used due to no permissions: block",
+          "route": {
+            "route": []
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 0,
+              "column": 0
+            },
+            "end_point": {
+              "row": 93,
+              "column": 0
+            },
+            "offset_span": {
+              "start": 0,
+              "end": 3023
+            }
+          },
+          "feature": "name: cpp\n\non:\n  push:\n    branches: main\n    paths:\n      - 'cpp/**'\n      - '.github/workflows/cpp.yml'\n\nenv:\n  NUGETTOKEN: ${{ secrets.NUGET_TOKEN }}\n  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}\n  SCRIPTS_BASE_URL: https://raw.githubusercontent.com/linksplatform/Scripts/main/MultiProjectRepository\n\ndefaults:\n  run:\n    working-directory: cpp\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v7\n        with:\n          submodules: true\n      - name: Setup clang\n        uses: egor-tensin/setup-clang@v2\n        with:\n          version: 13\n          platform: x64\n      - name: Install conan\n        run: pip install conan\n      - name: Setup conan\n        run: |\n          conan profile new linksplatform --detect\n          conan profile update settings.compiler=clang linksplatform\n          conan profile update settings.compiler.version=13 linksplatform\n          conan profile update settings.compiler.libcxx=libstdc++11 linksplatform\n          conan profile update env.CXX=clang++ linksplatform\n          conan profile show linksplatform\n      - name: Instll conan packages\n        run: |\n          if [ -f \"install-local-conan-dependencies.sh\" ]; then\n              echo \"install-local-conan-dependencies.sh exists.\"\n              chmod +x ./install-local-conan-dependencies.sh\n              ./install-local-conan-dependencies.sh\n          fi\n      - name: Test and scan-build\n        run: |\n          CXX=clang++\n          cmake_flags=\"-DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++ -DLINKS_PLATFORM_TESTS=TRUE\"\n          cmake_build_dir=\"build\"\n          mkdir $cmake_build_dir && cd $cmake_build_dir\n          conan install .. -pr=linksplatform --build=missing\n          cmake .. \"$cmake_flags\"\n          cmake --build .\n          ls\n  pushToNuget:\n    runs-on: ubuntu-latest\n    needs: test\n    steps:\n    - uses: actions/checkout@v7\n      with:\n        submodules: true\n    - name: Read package information\n      run: |\n        export REPOSITORY_NAME=$(basename ${{ github.repository }})\n        wget \"$SCRIPTS_BASE_URL/read_cpp_package_info.sh\"\n        bash ./read_cpp_package_info.sh\n    - name: Publish NuGet package\n      run: |\n        export REPOSITORY_NAME=$(basename ${{ github.repository }})\n        wget \"$SCRIPTS_BASE_URL/push-cpp-nuget.sh\"\n        bash ./push-cpp-nuget.sh\n  publiseRelease:\n    runs-on: ubuntu-latest\n    needs: test\n    steps:\n      - uses: actions/checkout@v7\n        with:\n          submodules: true\n      - name: Read project information\n        run: |\n          export REPOSITORY_NAME=$(basename ${{ github.repository }})\n          wget \"$SCRIPTS_BASE_URL/read_cpp_package_info.sh\"\n          bash ./read_cpp_package_info.sh\n      - name: Publish release\n        run: |\n          export REPOSITORY_NAME=$(basename ${{ github.repository }})\n          wget \"$SCRIPTS_BASE_URL/publish-release.sh\"\n          chmod +x ./publish-release.sh\n          wget \"$SCRIPTS_BASE_URL/publish-cpp-release.sh\"\n          bash ./publish-cpp-release.sh\n",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "excessive-permissions",
+    "desc": "overly broad permissions",
+    "url": "https://docs.zizmor.sh/audits/#excessive-permissions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Medium",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "this job",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 19,
+              "column": 2
+            },
+            "end_point": {
+              "row": 56,
+              "column": 12
+            },
+            "offset_span": {
+              "start": 355,
+              "end": 1789
+            }
+          },
+          "feature": "  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v7\n        with:\n          submodules: true\n      - name: Setup clang\n        uses: egor-tensin/setup-clang@v2\n        with:\n          version: 13\n          platform: x64\n      - name: Install conan\n        run: pip install conan\n      - name: Setup conan\n        run: |\n          conan profile new linksplatform --detect\n          conan profile update settings.compiler=clang linksplatform\n          conan profile update settings.compiler.version=13 linksplatform\n          conan profile update settings.compiler.libcxx=libstdc++11 linksplatform\n          conan profile update env.CXX=clang++ linksplatform\n          conan profile show linksplatform\n      - name: Instll conan packages\n        run: |\n          if [ -f \"install-local-conan-dependencies.sh\" ]; then\n              echo \"install-local-conan-dependencies.sh exists.\"\n              chmod +x ./install-local-conan-dependencies.sh\n              ./install-local-conan-dependencies.sh\n          fi\n      - name: Test and scan-build\n        run: |\n          CXX=clang++\n          cmake_flags=\"-DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++ -DLINKS_PLATFORM_TESTS=TRUE\"\n          cmake_build_dir=\"build\"\n          mkdir $cmake_build_dir && cd $cmake_build_dir\n          conan install .. -pr=linksplatform --build=missing\n          cmake .. \"$cmake_flags\"\n          cmake --build .\n          ls",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "default permissions used due to no permissions: block",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 19,
+              "column": 2
+            },
+            "end_point": {
+              "row": 56,
+              "column": 12
+            },
+            "offset_span": {
+              "start": 355,
+              "end": 1789
+            }
+          },
+          "feature": "  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v7\n        with:\n          submodules: true\n      - name: Setup clang\n        uses: egor-tensin/setup-clang@v2\n        with:\n          version: 13\n          platform: x64\n      - name: Install conan\n        run: pip install conan\n      - name: Setup conan\n        run: |\n          conan profile new linksplatform --detect\n          conan profile update settings.compiler=clang linksplatform\n          conan profile update settings.compiler.version=13 linksplatform\n          conan profile update settings.compiler.libcxx=libstdc++11 linksplatform\n          conan profile update env.CXX=clang++ linksplatform\n          conan profile show linksplatform\n      - name: Instll conan packages\n        run: |\n          if [ -f \"install-local-conan-dependencies.sh\" ]; then\n              echo \"install-local-conan-dependencies.sh exists.\"\n              chmod +x ./install-local-conan-dependencies.sh\n              ./install-local-conan-dependencies.sh\n          fi\n      - name: Test and scan-build\n        run: |\n          CXX=clang++\n          cmake_flags=\"-DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++ -DLINKS_PLATFORM_TESTS=TRUE\"\n          cmake_build_dir=\"build\"\n          mkdir $cmake_build_dir && cd $cmake_build_dir\n          conan install .. -pr=linksplatform --build=missing\n          cmake .. \"$cmake_flags\"\n          cmake --build .\n          ls",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "excessive-permissions",
+    "desc": "overly broad permissions",
+    "url": "https://docs.zizmor.sh/audits/#excessive-permissions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Medium",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "this job",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "pushToNuget"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 57,
+              "column": 2
+            },
+            "end_point": {
+              "row": 73,
+              "column": 32
+            },
+            "offset_span": {
+              "start": 1792,
+              "end": 2342
+            }
+          },
+          "feature": "  pushToNuget:\n    runs-on: ubuntu-latest\n    needs: test\n    steps:\n    - uses: actions/checkout@v7\n      with:\n        submodules: true\n    - name: Read package information\n      run: |\n        export REPOSITORY_NAME=$(basename ${{ github.repository }})\n        wget \"$SCRIPTS_BASE_URL/read_cpp_package_info.sh\"\n        bash ./read_cpp_package_info.sh\n    - name: Publish NuGet package\n      run: |\n        export REPOSITORY_NAME=$(basename ${{ github.repository }})\n        wget \"$SCRIPTS_BASE_URL/push-cpp-nuget.sh\"\n        bash ./push-cpp-nuget.sh",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "default permissions used due to no permissions: block",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "pushToNuget"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 57,
+              "column": 2
+            },
+            "end_point": {
+              "row": 73,
+              "column": 32
+            },
+            "offset_span": {
+              "start": 1792,
+              "end": 2342
+            }
+          },
+          "feature": "  pushToNuget:\n    runs-on: ubuntu-latest\n    needs: test\n    steps:\n    - uses: actions/checkout@v7\n      with:\n        submodules: true\n    - name: Read package information\n      run: |\n        export REPOSITORY_NAME=$(basename ${{ github.repository }})\n        wget \"$SCRIPTS_BASE_URL/read_cpp_package_info.sh\"\n        bash ./read_cpp_package_info.sh\n    - name: Publish NuGet package\n      run: |\n        export REPOSITORY_NAME=$(basename ${{ github.repository }})\n        wget \"$SCRIPTS_BASE_URL/push-cpp-nuget.sh\"\n        bash ./push-cpp-nuget.sh",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "excessive-permissions",
+    "desc": "overly broad permissions",
+    "url": "https://docs.zizmor.sh/audits/#excessive-permissions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Medium",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "this job",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "publiseRelease"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 74,
+              "column": 2
+            },
+            "end_point": {
+              "row": 93,
+              "column": 0
+            },
+            "offset_span": {
+              "start": 2345,
+              "end": 3023
+            }
+          },
+          "feature": "  publiseRelease:\n    runs-on: ubuntu-latest\n    needs: test\n    steps:\n      - uses: actions/checkout@v7\n        with:\n          submodules: true\n      - name: Read project information\n        run: |\n          export REPOSITORY_NAME=$(basename ${{ github.repository }})\n          wget \"$SCRIPTS_BASE_URL/read_cpp_package_info.sh\"\n          bash ./read_cpp_package_info.sh\n      - name: Publish release\n        run: |\n          export REPOSITORY_NAME=$(basename ${{ github.repository }})\n          wget \"$SCRIPTS_BASE_URL/publish-release.sh\"\n          chmod +x ./publish-release.sh\n          wget \"$SCRIPTS_BASE_URL/publish-cpp-release.sh\"\n          bash ./publish-cpp-release.sh\n",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "default permissions used due to no permissions: block",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "publiseRelease"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 74,
+              "column": 2
+            },
+            "end_point": {
+              "row": 93,
+              "column": 0
+            },
+            "offset_span": {
+              "start": 2345,
+              "end": 3023
+            }
+          },
+          "feature": "  publiseRelease:\n    runs-on: ubuntu-latest\n    needs: test\n    steps:\n      - uses: actions/checkout@v7\n        with:\n          submodules: true\n      - name: Read project information\n        run: |\n          export REPOSITORY_NAME=$(basename ${{ github.repository }})\n          wget \"$SCRIPTS_BASE_URL/read_cpp_package_info.sh\"\n          bash ./read_cpp_package_info.sh\n      - name: Publish release\n        run: |\n          export REPOSITORY_NAME=$(basename ${{ github.repository }})\n          wget \"$SCRIPTS_BASE_URL/publish-release.sh\"\n          chmod +x ./publish-release.sh\n          wget \"$SCRIPTS_BASE_URL/publish-cpp-release.sh\"\n          bash ./publish-cpp-release.sh\n",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 22,
+              "column": 8
+            },
+            "end_point": {
+              "row": 24,
+              "column": 26
+            },
+            "offset_span": {
+              "start": 407,
+              "end": 473
+            }
+          },
+          "feature": "uses: actions/checkout@v7\n        with:\n          submodules: true",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "actions/checkout@v7"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 22,
+              "column": 14
+            },
+            "end_point": {
+              "row": 22,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 413,
+              "end": 432
+            }
+          },
+          "feature": "actions/checkout@v7",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 25,
+              "column": 8
+            },
+            "end_point": {
+              "row": 29,
+              "column": 23
+            },
+            "offset_span": {
+              "start": 482,
+              "end": 600
+            }
+          },
+          "feature": "name: Setup clang\n        uses: egor-tensin/setup-clang@v2\n        with:\n          version: 13\n          platform: x64",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "egor-tensin/setup-clang@v2"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 26,
+              "column": 14
+            },
+            "end_point": {
+              "row": 26,
+              "column": 40
+            },
+            "offset_span": {
+              "start": 514,
+              "end": 540
+            }
+          },
+          "feature": "egor-tensin/setup-clang@v2",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "pushToNuget"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 61,
+              "column": 6
+            },
+            "end_point": {
+              "row": 63,
+              "column": 24
+            },
+            "offset_span": {
+              "start": 1865,
+              "end": 1927
+            }
+          },
+          "feature": "uses: actions/checkout@v7\n      with:\n        submodules: true",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "pushToNuget"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "actions/checkout@v7"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 61,
+              "column": 12
+            },
+            "end_point": {
+              "row": 61,
+              "column": 31
+            },
+            "offset_span": {
+              "start": 1871,
+              "end": 1890
+            }
+          },
+          "feature": "actions/checkout@v7",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "publiseRelease"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 78,
+              "column": 8
+            },
+            "end_point": {
+              "row": 80,
+              "column": 26
+            },
+            "offset_span": {
+              "start": 2423,
+              "end": 2489
+            }
+          },
+          "feature": "uses: actions/checkout@v7\n        with:\n          submodules: true",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/cpp.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "publiseRelease"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "actions/checkout@v7"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 78,
+              "column": 14
+            },
+            "end_point": {
+              "row": 78,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 2429,
+              "end": 2448
+            }
+          },
+          "feature": "actions/checkout@v7",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "artipacked",
+    "desc": "credential persistence through GitHub Actions artifacts",
+    "url": "https://docs.zizmor.sh/audits/#artipacked",
+    "determinations": {
+      "confidence": "Low",
+      "severity": "Low",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/csharp.yml"
+            }
+          },
+          "annotation": "does not set persist-credentials: false",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 27,
+              "column": 8
+            },
+            "end_point": {
+              "row": 27,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 543,
+              "end": 568
+            }
+          },
+          "feature": "uses: actions/checkout@v7",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "set persist-credentials: false",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/csharp.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "excessive-permissions",
+    "desc": "overly broad permissions",
+    "url": "https://docs.zizmor.sh/audits/#excessive-permissions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Medium",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/csharp.yml"
+            }
+          },
+          "annotation": "this job",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 18,
+              "column": 2
+            },
+            "end_point": {
+              "row": 33,
+              "column": 0
+            },
+            "offset_span": {
+              "start": 321,
+              "end": 798
+            }
+          },
+          "feature": "  test:\n    name: Test (${{ matrix.os }})\n    runs-on: ${{ matrix.os }}\n    timeout-minutes: 30\n    strategy:\n      fail-fast: false\n      matrix:\n        os: [ubuntu-latest, macos-latest, windows-latest]\n    steps:\n      - uses: actions/checkout@v7\n      - uses: actions/setup-dotnet@v6\n        with:\n          global-json-file: csharp/global.json\n      - run: dotnet build -c Release -warnaserror\n      - run: dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build\n",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/csharp.yml"
+            }
+          },
+          "annotation": "default permissions used due to no permissions: block",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 18,
+              "column": 2
+            },
+            "end_point": {
+              "row": 33,
+              "column": 0
+            },
+            "offset_span": {
+              "start": 321,
+              "end": 798
+            }
+          },
+          "feature": "  test:\n    name: Test (${{ matrix.os }})\n    runs-on: ${{ matrix.os }}\n    timeout-minutes: 30\n    strategy:\n      fail-fast: false\n      matrix:\n        os: [ubuntu-latest, macos-latest, windows-latest]\n    steps:\n      - uses: actions/checkout@v7\n      - uses: actions/setup-dotnet@v6\n        with:\n          global-json-file: csharp/global.json\n      - run: dotnet build -c Release -warnaserror\n      - run: dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build\n",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/csharp.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 27,
+              "column": 8
+            },
+            "end_point": {
+              "row": 27,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 543,
+              "end": 568
+            }
+          },
+          "feature": "uses: actions/checkout@v7",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/csharp.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "actions/checkout@v7"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 27,
+              "column": 14
+            },
+            "end_point": {
+              "row": 27,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 549,
+              "end": 568
+            }
+          },
+          "feature": "actions/checkout@v7",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/csharp.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 28,
+              "column": 8
+            },
+            "end_point": {
+              "row": 30,
+              "column": 46
+            },
+            "offset_span": {
+              "start": 577,
+              "end": 667
+            }
+          },
+          "feature": "uses: actions/setup-dotnet@v6\n        with:\n          global-json-file: csharp/global.json",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/csharp.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "actions/setup-dotnet@v6"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 28,
+              "column": 14
+            },
+            "end_point": {
+              "row": 28,
+              "column": 37
+            },
+            "offset_span": {
+              "start": 583,
+              "end": 606
+            }
+          },
+          "feature": "actions/setup-dotnet@v6",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "artipacked",
+    "desc": "credential persistence through GitHub Actions artifacts",
+    "url": "https://docs.zizmor.sh/audits/#artipacked",
+    "determinations": {
+      "confidence": "Low",
+      "severity": "Low",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "does not set persist-credentials: false",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 30,
+              "column": 8
+            },
+            "end_point": {
+              "row": 30,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 568,
+              "end": 593
+            }
+          },
+          "feature": "uses: actions/checkout@v7",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "set persist-credentials: false",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/rust.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  },
+  {
+    "ident": "excessive-permissions",
+    "desc": "overly broad permissions",
+    "url": "https://docs.zizmor.sh/audits/#excessive-permissions",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "Medium",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this job",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 21,
+              "column": 2
+            },
+            "end_point": {
+              "row": 40,
+              "column": 0
+            },
+            "offset_span": {
+              "start": 346,
+              "end": 898
+            }
+          },
+          "feature": "  test:\n    name: Test (${{ matrix.os }})\n    runs-on: ${{ matrix.os }}\n    timeout-minutes: 30\n    strategy:\n      fail-fast: false\n      matrix:\n        os: [ubuntu-latest, macos-latest, windows-latest]\n    steps:\n      - uses: actions/checkout@v7\n      - uses: dtolnay/rust-toolchain@stable\n        with:\n          components: rustfmt, clippy\n      - uses: Swatinem/rust-cache@v2\n        with:\n          workspaces: rust\n      - run: cargo fmt --check\n      - run: cargo clippy --release --all-targets -- -D warnings\n      - run: cargo test --release\n",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "default permissions used due to no permissions: block",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 21,
+              "column": 2
+            },
+            "end_point": {
+              "row": 40,
+              "column": 0
+            },
+            "offset_span": {
+              "start": 346,
+              "end": 898
+            }
+          },
+          "feature": "  test:\n    name: Test (${{ matrix.os }})\n    runs-on: ${{ matrix.os }}\n    timeout-minutes: 30\n    strategy:\n      fail-fast: false\n      matrix:\n        os: [ubuntu-latest, macos-latest, windows-latest]\n    steps:\n      - uses: actions/checkout@v7\n      - uses: dtolnay/rust-toolchain@stable\n        with:\n          components: rustfmt, clippy\n      - uses: Swatinem/rust-cache@v2\n        with:\n          workspaces: rust\n      - run: cargo fmt --check\n      - run: cargo clippy --release --all-targets -- -D warnings\n      - run: cargo test --release\n",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 30,
+              "column": 8
+            },
+            "end_point": {
+              "row": 30,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 568,
+              "end": 593
+            }
+          },
+          "feature": "uses: actions/checkout@v7",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "actions/checkout@v7"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 30,
+              "column": 14
+            },
+            "end_point": {
+              "row": 30,
+              "column": 33
+            },
+            "offset_span": {
+              "start": 574,
+              "end": 593
+            }
+          },
+          "feature": "actions/checkout@v7",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 31,
+              "column": 8
+            },
+            "end_point": {
+              "row": 33,
+              "column": 37
+            },
+            "offset_span": {
+              "start": 602,
+              "end": 689
+            }
+          },
+          "feature": "uses: dtolnay/rust-toolchain@stable\n        with:\n          components: rustfmt, clippy",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 1
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "dtolnay/rust-toolchain@stable"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 31,
+              "column": 14
+            },
+            "end_point": {
+              "row": 31,
+              "column": 43
+            },
+            "offset_span": {
+              "start": 608,
+              "end": 637
+            }
+          },
+          "feature": "dtolnay/rust-toolchain@stable",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "unpinned-uses",
+    "desc": "unpinned action reference",
+    "url": "https://docs.zizmor.sh/audits/#unpinned-uses",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 34,
+              "column": 8
+            },
+            "end_point": {
+              "row": 36,
+              "column": 26
+            },
+            "offset_span": {
+              "start": 698,
+              "end": 767
+            }
+          },
+          "feature": "uses: Swatinem/rust-cache@v2\n        with:\n          workspaces: rust",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/rust.yml"
+            }
+          },
+          "annotation": "action is not pinned to a hash (required by blanket policy)",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "test"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 2
+              },
+              {
+                "Key": "uses"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 0,
+              "fragment": {
+                "Raw": "Swatinem/rust-cache@v2"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 34,
+              "column": 14
+            },
+            "end_point": {
+              "row": 34,
+              "column": 36
+            },
+            "offset_span": {
+              "start": 704,
+              "end": 726
+            }
+          },
+          "feature": "Swatinem/rust-cache@v2",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  }
+]

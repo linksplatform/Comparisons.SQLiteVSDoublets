@@ -1,0 +1,410 @@
+test	Set up job	﻿2026-10-05T10:00:44.6691784Z Current runner version: '2.337.0'
+test	Set up job	2026-10-05T10:00:44.6717063Z ##[group]Runner Image Provisioner
+test	Set up job	2026-10-05T10:00:44.6717933Z Hosted Compute Agent
+test	Set up job	2026-10-05T10:00:44.6718664Z Version: 20260901.588
+test	Set up job	2026-10-05T10:00:44.6719304Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+test	Set up job	2026-10-05T10:00:44.6720065Z Build Date: 2026-09-01T19:56:44Z
+test	Set up job	2026-10-05T10:00:44.6720758Z Worker ID: {94ce3f4a-d239-43e7-ab38-f31905e5f846}
+test	Set up job	2026-10-05T10:00:44.6721467Z Azure Region: westus2
+test	Set up job	2026-10-05T10:00:44.6722112Z ##[endgroup]
+test	Set up job	2026-10-05T10:00:44.6724001Z ##[group]Operating System
+test	Set up job	2026-10-05T10:00:44.6724738Z Ubuntu
+test	Set up job	2026-10-05T10:00:44.6725281Z 24.04.5
+test	Set up job	2026-10-05T10:00:44.6725795Z LTS
+test	Set up job	2026-10-05T10:00:44.6726664Z ##[endgroup]
+test	Set up job	2026-10-05T10:00:44.6727248Z ##[group]Runner Image
+test	Set up job	2026-10-05T10:00:44.6727864Z Image: ubuntu-24.04
+test	Set up job	2026-10-05T10:00:44.6728510Z Version: 20260927.320.1
+test	Set up job	2026-10-05T10:00:44.6729589Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+test	Set up job	2026-10-05T10:00:44.6731432Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+test	Set up job	2026-10-05T10:00:44.6732417Z ##[endgroup]
+test	Set up job	2026-10-05T10:00:44.6735695Z ##[group]GITHUB_TOKEN Permissions
+test	Set up job	2026-10-05T10:00:44.6738305Z Actions: write
+test	Set up job	2026-10-05T10:00:44.6738980Z ArtifactMetadata: write
+test	Set up job	2026-10-05T10:00:44.6739604Z Attestations: write
+test	Set up job	2026-10-05T10:00:44.6740231Z Checks: write
+test	Set up job	2026-10-05T10:00:44.6740784Z CodeQuality: write
+test	Set up job	2026-10-05T10:00:44.6741353Z Contents: write
+test	Set up job	2026-10-05T10:00:44.6741975Z CopilotRequests: write
+test	Set up job	2026-10-05T10:00:44.6742560Z Deployments: write
+test	Set up job	2026-10-05T10:00:44.6743197Z Discussions: write
+test	Set up job	2026-10-05T10:00:44.6743742Z Drives: write
+test	Set up job	2026-10-05T10:00:44.6744282Z Issues: write
+test	Set up job	2026-10-05T10:00:44.6744875Z Metadata: read
+test	Set up job	2026-10-05T10:00:44.6745512Z Models: read
+test	Set up job	2026-10-05T10:00:44.6746354Z Packages: write
+test	Set up job	2026-10-05T10:00:44.6746955Z Pages: write
+test	Set up job	2026-10-05T10:00:44.6747539Z PullRequests: write
+test	Set up job	2026-10-05T10:00:44.6748204Z RepositoryProjects: write
+test	Set up job	2026-10-05T10:00:44.6748833Z SecurityEvents: write
+test	Set up job	2026-10-05T10:00:44.6749444Z Statuses: write
+test	Set up job	2026-10-05T10:00:44.6750035Z VulnerabilityAlerts: read
+test	Set up job	2026-10-05T10:00:44.6750662Z ##[endgroup]
+test	Set up job	2026-10-05T10:00:44.6752756Z Secret source: Actions
+test	Set up job	2026-10-05T10:00:44.6753733Z Cache mode: write
+test	Set up job	2026-10-05T10:00:44.6754751Z Prepare workflow directory
+test	Set up job	2026-10-05T10:00:44.7309826Z Prepare all required actions
+test	Set up job	2026-10-05T10:00:44.7359503Z Getting action download info
+test	Set up job	2026-10-05T10:00:45.1300835Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+test	Set up job	2026-10-05T10:00:45.2317910Z Download action repository 'egor-tensin/setup-clang@v1' (SHA:ef434b41eb33a70396fb336b1bae39c76d740c3d)
+test	Set up job	2026-10-05T10:00:45.5548637Z Complete job name: test
+test	Run actions/checkout@v7	﻿2026-10-05T10:00:45.6263019Z ##[group]Run actions/checkout@v7
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6263937Z with:
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6264391Z   submodules: true
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6264974Z   repository: linksplatform/Comparisons.SQLiteVSDoublets
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6269228Z   token: ***
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6269703Z   ssh-strict: true
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6270170Z   ssh-user: git
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6270645Z   persist-credentials: true
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6271146Z   clean: true
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6271616Z   sparse-checkout-cone-mode: true
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6272152Z   fetch-depth: 1
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6272596Z   fetch-tags: false
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6273052Z   show-progress: true
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6273527Z   lfs: false
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6273970Z   set-safe-directory: true
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6274492Z   allow-unsafe-pr-checkout: false
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6275267Z env:
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6275705Z   NUGETTOKEN: 
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6279712Z   GITHUB_TOKEN: ***
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6280591Z   SCRIPTS_BASE_URL: https://raw.githubusercontent.com/linksplatform/Scripts/main/MultiProjectRepository
+test	Run actions/checkout@v7	2026-10-05T10:00:45.6281585Z ##[endgroup]
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7311499Z Syncing repository: linksplatform/Comparisons.SQLiteVSDoublets
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7314331Z ##[group]Getting Git version info
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7316655Z Working directory is '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7332325Z [command]/usr/bin/git version
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7533232Z git version 2.55.0
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7561754Z ##[endgroup]
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7581223Z Temporarily overriding HOME='/home/runner/work/_temp/5599d7ae-00b2-4b1a-9c29-abbb19b8a3eb' before making global git config changes
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7583981Z Adding repository directory to the temporary git global config as a safe directory
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7588711Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7650900Z Deleting the contents of '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7656436Z ##[group]Determining repository object format
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7664500Z ##[endgroup]
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7665331Z ##[group]Initializing the repository
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7666787Z [command]/usr/bin/git init /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7834997Z hint: Using 'master' as the name for the initial branch. This default branch name
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7837112Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7843107Z hint: to use in all of your new repositories, which will suppress this warning,
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7844783Z hint: call:
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7845840Z hint:
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7847282Z hint: 	git config --global init.defaultBranch <name>
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7848719Z hint:
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7850077Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7852009Z hint: 'development'. The just-created branch can be renamed via this command:
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7853469Z hint:
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7854369Z hint: 	git branch -m <name>
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7855494Z hint:
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7857274Z hint: Disable this message with "git config set advice.defaultBranchName false"
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7860272Z Initialized empty Git repository in /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7872983Z [command]/usr/bin/git remote add origin https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7924182Z ##[endgroup]
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7925704Z ##[group]Disabling automatic garbage collection
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7934327Z [command]/usr/bin/git config --local gc.auto 0
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7968130Z ##[endgroup]
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7969891Z ##[group]Setting up auth
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7971323Z Removing SSH command configuration
+test	Run actions/checkout@v7	2026-10-05T10:00:45.7985061Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test	Run actions/checkout@v7	2026-10-05T10:00:45.8017208Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test	Run actions/checkout@v7	2026-10-05T10:00:45.8457311Z Removing HTTP extra header
+test	Run actions/checkout@v7	2026-10-05T10:00:45.8463851Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test	Run actions/checkout@v7	2026-10-05T10:00:45.8501673Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test	Run actions/checkout@v7	2026-10-05T10:00:45.8727274Z Removing includeIf entries pointing to credentials config files
+test	Run actions/checkout@v7	2026-10-05T10:00:45.8740678Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test	Run actions/checkout@v7	2026-10-05T10:00:45.8769279Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	Run actions/checkout@v7	2026-10-05T10:00:45.9003254Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-36412d08-433b-4219-a08e-92ac6a046e21.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+test	Run actions/checkout@v7	2026-10-05T10:00:45.9043386Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path /home/runner/work/_temp/git-credentials-36412d08-433b-4219-a08e-92ac6a046e21.config
+test	Run actions/checkout@v7	2026-10-05T10:00:45.9076803Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-36412d08-433b-4219-a08e-92ac6a046e21.config
+test	Run actions/checkout@v7	2026-10-05T10:00:45.9117523Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-36412d08-433b-4219-a08e-92ac6a046e21.config
+test	Run actions/checkout@v7	2026-10-05T10:00:45.9153842Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-36412d08-433b-4219-a08e-92ac6a046e21.config
+test	Run actions/checkout@v7	2026-10-05T10:00:45.9184647Z ##[endgroup]
+test	Run actions/checkout@v7	2026-10-05T10:00:45.9185477Z ##[group]Fetching the repository
+test	Run actions/checkout@v7	2026-10-05T10:00:45.9191706Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +f61d5832f1a08991b4bb952e7d581ea99d9dd5d3:refs/remotes/origin/main
+test	Run actions/checkout@v7	2026-10-05T10:00:46.2771770Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+test	Run actions/checkout@v7	2026-10-05T10:00:46.2772909Z  * [new ref]         f61d5832f1a08991b4bb952e7d581ea99d9dd5d3 -> origin/main
+test	Run actions/checkout@v7	2026-10-05T10:00:46.2782009Z [command]/usr/bin/git branch --list --remote origin/main
+test	Run actions/checkout@v7	2026-10-05T10:00:46.2810817Z   origin/main
+test	Run actions/checkout@v7	2026-10-05T10:00:46.2820028Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+test	Run actions/checkout@v7	2026-10-05T10:00:46.2846638Z f61d5832f1a08991b4bb952e7d581ea99d9dd5d3
+test	Run actions/checkout@v7	2026-10-05T10:00:46.2851283Z ##[endgroup]
+test	Run actions/checkout@v7	2026-10-05T10:00:46.2852334Z ##[group]Determining the checkout info
+test	Run actions/checkout@v7	2026-10-05T10:00:46.2853605Z ##[endgroup]
+test	Run actions/checkout@v7	2026-10-05T10:00:46.2856939Z [command]/usr/bin/git sparse-checkout disable
+test	Run actions/checkout@v7	2026-10-05T10:00:46.2914292Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+test	Run actions/checkout@v7	2026-10-05T10:00:46.2949149Z ##[group]Checking out the ref
+test	Run actions/checkout@v7	2026-10-05T10:00:46.2952693Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+test	Run actions/checkout@v7	2026-10-05T10:00:46.3102383Z Switched to a new branch 'main'
+test	Run actions/checkout@v7	2026-10-05T10:00:46.3122292Z branch 'main' set up to track 'origin/main'.
+test	Run actions/checkout@v7	2026-10-05T10:00:46.3130336Z ##[endgroup]
+test	Run actions/checkout@v7	2026-10-05T10:00:46.3131645Z ##[group]Setting up auth for fetching submodules
+test	Run actions/checkout@v7	2026-10-05T10:00:46.3137035Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-36412d08-433b-4219-a08e-92ac6a046e21.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+test	Run actions/checkout@v7	2026-10-05T10:00:46.3190440Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-36412d08-433b-4219-a08e-92ac6a046e21.config
+test	Run actions/checkout@v7	2026-10-05T10:00:46.3234338Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+test	Run actions/checkout@v7	2026-10-05T10:00:46.3284089Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+test	Run actions/checkout@v7	2026-10-05T10:00:46.3327330Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-15116341@github.com:
+test	Run actions/checkout@v7	2026-10-05T10:00:46.3363324Z ##[endgroup]
+test	Run actions/checkout@v7	2026-10-05T10:00:46.3364412Z ##[group]Fetching submodules
+test	Run actions/checkout@v7	2026-10-05T10:00:46.3367863Z [command]/usr/bin/git submodule sync
+test	Run actions/checkout@v7	2026-10-05T10:00:46.3621866Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+test	Run actions/checkout@v7	2026-10-05T10:00:46.3872470Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+test	Run actions/checkout@v7	2026-10-05T10:00:46.4101898Z ##[endgroup]
+test	Run actions/checkout@v7	2026-10-05T10:00:46.4103321Z ##[group]Persisting credentials for submodules
+test	Run actions/checkout@v7	2026-10-05T10:00:46.4108006Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+test	Run actions/checkout@v7	2026-10-05T10:00:46.4335058Z [command]/usr/bin/git submodule foreach git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	Run actions/checkout@v7	2026-10-05T10:00:46.4564360Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+test	Run actions/checkout@v7	2026-10-05T10:00:46.4794459Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'org-15116341@github.com:'
+test	Run actions/checkout@v7	2026-10-05T10:00:46.5067189Z ##[endgroup]
+test	Run actions/checkout@v7	2026-10-05T10:00:46.5123370Z [command]/usr/bin/git log -1 --format=%H
+test	Run actions/checkout@v7	2026-10-05T10:00:46.5153613Z f61d5832f1a08991b4bb952e7d581ea99d9dd5d3
+test	Setup clang	﻿2026-10-05T10:00:46.5731884Z ##[group]Run egor-tensin/setup-clang@v1
+test	Setup clang	2026-10-05T10:00:46.5733248Z with:
+test	Setup clang	2026-10-05T10:00:46.5734255Z   version: 13
+test	Setup clang	2026-10-05T10:00:46.5735307Z   platform: x64
+test	Setup clang	2026-10-05T10:00:46.5736623Z   cygwin: 0
+test	Setup clang	2026-10-05T10:00:46.5737647Z   cc: 1
+test	Setup clang	2026-10-05T10:00:46.5738651Z   hardlinks: 0
+test	Setup clang	2026-10-05T10:00:46.5739675Z env:
+test	Setup clang	2026-10-05T10:00:46.5740662Z   NUGETTOKEN: 
+test	Setup clang	2026-10-05T10:00:46.5749843Z   GITHUB_TOKEN: ***
+test	Setup clang	2026-10-05T10:00:46.5751733Z   SCRIPTS_BASE_URL: https://raw.githubusercontent.com/linksplatform/Scripts/main/MultiProjectRepository
+test	Setup clang	2026-10-05T10:00:46.5753744Z ##[endgroup]
+test	Setup clang	2026-10-05T10:00:46.5855602Z ##[start-action display=Run New-Variable os -Value 'Linux' -Option Constant;id=__egor-tensin_setup-clang.install]
+test	Setup clang	2026-10-05T10:00:46.5920795Z ##[group]Run New-Variable os -Value 'Linux' -Option Constant
+test	Setup clang	2026-10-05T10:00:46.5922993Z ^[[36;1mNew-Variable os -Value 'Linux' -Option Constant^[[0m
+test	Setup clang	2026-10-05T10:00:46.5924243Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.5925432Z ^[[36;1mNew-Variable linux_host -Value ($os -eq 'Linux') -Option Constant^[[0m
+test	Setup clang	2026-10-05T10:00:46.5927447Z ^[[36;1mNew-Variable cygwin_host -Value ('0' -eq '1') -Option Constant^[[0m
+test	Setup clang	2026-10-05T10:00:46.5929418Z ^[[36;1mNew-Variable windows_host -Value ($os -eq 'Windows' -and !$cygwin_host) -Option Constant^[[0m
+test	Setup clang	2026-10-05T10:00:46.5931016Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.5932046Z ^[[36;1mNew-Variable version -Value ('13') -Option Constant^[[0m
+test	Setup clang	2026-10-05T10:00:46.5933697Z ^[[36;1mNew-Variable latest -Value ($version -eq 'latest') -Option Constant^[[0m
+test	Setup clang	2026-10-05T10:00:46.5935457Z ^[[36;1mNew-Variable x64 -Value ('x64' -eq 'x64') -Option Constant^[[0m
+test	Setup clang	2026-10-05T10:00:46.5936897Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.5937736Z ^[[36;1mfunction Locate-Choco {^[[0m
+test	Setup clang	2026-10-05T10:00:46.5939054Z ^[[36;1m    $path = Get-Command 'choco' -ErrorAction SilentlyContinue^[[0m
+test	Setup clang	2026-10-05T10:00:46.5940458Z ^[[36;1m    if ($path) {^[[0m
+test	Setup clang	2026-10-05T10:00:46.5941445Z ^[[36;1m        $path.Path^[[0m
+test	Setup clang	2026-10-05T10:00:46.5942381Z ^[[36;1m    } else {^[[0m
+test	Setup clang	2026-10-05T10:00:46.5943559Z ^[[36;1m        Join-Path ${env:ProgramData} 'chocolatey' 'bin' 'choco'^[[0m
+test	Setup clang	2026-10-05T10:00:46.5944865Z ^[[36;1m    }^[[0m
+test	Setup clang	2026-10-05T10:00:46.5945681Z ^[[36;1m}^[[0m
+test	Setup clang	2026-10-05T10:00:46.5946669Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.5947523Z ^[[36;1mfunction Install-Package {^[[0m
+test	Setup clang	2026-10-05T10:00:46.5948538Z ^[[36;1m    param(^[[0m
+test	Setup clang	2026-10-05T10:00:46.5949797Z ^[[36;1m        [Parameter(Mandatory=$true, ValueFromRemainingArguments=$true)]^[[0m
+test	Setup clang	2026-10-05T10:00:46.5951341Z ^[[36;1m        [string[]] $Packages^[[0m
+test	Setup clang	2026-10-05T10:00:46.5952370Z ^[[36;1m    )^[[0m
+test	Setup clang	2026-10-05T10:00:46.5953175Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.5954007Z ^[[36;1m    if ($script:linux_host) {^[[0m
+test	Setup clang	2026-10-05T10:00:46.5955094Z ^[[36;1m        sudo apt-get update^[[0m
+test	Setup clang	2026-10-05T10:00:46.5956924Z ^[[36;1m        sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends $Packages^[[0m
+test	Setup clang	2026-10-05T10:00:46.5958729Z ^[[36;1m    } elseif ($script:cygwin_host) {^[[0m
+test	Setup clang	2026-10-05T10:00:46.5959861Z ^[[36;1m        $choco = Locate-Choco^[[0m
+test	Setup clang	2026-10-05T10:00:46.5961201Z ^[[36;1m        & $choco install $Packages -y --no-progress --source=cygwin^[[0m
+test	Setup clang	2026-10-05T10:00:46.5962633Z ^[[36;1m    } elseif ($script:windows_host) {^[[0m
+test	Setup clang	2026-10-05T10:00:46.5963772Z ^[[36;1m        $choco = Locate-Choco^[[0m
+test	Setup clang	2026-10-05T10:00:46.5965143Z ^[[36;1m        & $choco upgrade $Packages -y --no-progress --allow-downgrade^[[0m
+test	Setup clang	2026-10-05T10:00:46.5966636Z ^[[36;1m    } else {^[[0m
+test	Setup clang	2026-10-05T10:00:46.5967867Z ^[[36;1m        throw "Sorry, installing packages is unsupported on $script:os"^[[0m
+test	Setup clang	2026-10-05T10:00:46.5969455Z ^[[36;1m    }^[[0m
+test	Setup clang	2026-10-05T10:00:46.5970255Z ^[[36;1m}^[[0m
+test	Setup clang	2026-10-05T10:00:46.5971032Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.5971911Z ^[[36;1mfunction Format-UpstreamVersion {^[[0m
+test	Setup clang	2026-10-05T10:00:46.5973062Z ^[[36;1m    param(^[[0m
+test	Setup clang	2026-10-05T10:00:46.5974014Z ^[[36;1m        [Parameter(Mandatory=$true)]^[[0m
+test	Setup clang	2026-10-05T10:00:46.5975148Z ^[[36;1m        [string] $Version^[[0m
+test	Setup clang	2026-10-05T10:00:46.5976266Z ^[[36;1m    )^[[0m
+test	Setup clang	2026-10-05T10:00:46.5977099Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.5977947Z ^[[36;1m    switch -Exact ($Version) {^[[0m
+test	Setup clang	2026-10-05T10:00:46.5979521Z ^[[36;1m        # Since version 7, they dropped the .0 suffix. The earliest^[[0m
+test	Setup clang	2026-10-05T10:00:46.5981220Z ^[[36;1m        # version supported is 3.9 on Bionic; versions 4, 5 and 6 are^[[0m
+test	Setup clang	2026-10-05T10:00:46.5982748Z ^[[36;1m        # mapped to LLVM-friendly 4.0, 5.0 and 6.0.^[[0m
+test	Setup clang	2026-10-05T10:00:46.5983943Z ^[[36;1m        '4' { '4.0' }^[[0m
+test	Setup clang	2026-10-05T10:00:46.5984913Z ^[[36;1m        '5' { '5.0' }^[[0m
+test	Setup clang	2026-10-05T10:00:46.5986119Z ^[[36;1m        '6' { '6.0' }^[[0m
+test	Setup clang	2026-10-05T10:00:46.5987159Z ^[[36;1m        default { $Version }^[[0m
+test	Setup clang	2026-10-05T10:00:46.5988177Z ^[[36;1m    }^[[0m
+test	Setup clang	2026-10-05T10:00:46.5988988Z ^[[36;1m}^[[0m
+test	Setup clang	2026-10-05T10:00:46.5989782Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.5990622Z ^[[36;1mfunction Format-AptLine {^[[0m
+test	Setup clang	2026-10-05T10:00:46.5991643Z ^[[36;1m    param(^[[0m
+test	Setup clang	2026-10-05T10:00:46.5992620Z ^[[36;1m        [Parameter(Mandatory=$true)]^[[0m
+test	Setup clang	2026-10-05T10:00:46.5993750Z ^[[36;1m        [string] $Version^[[0m
+test	Setup clang	2026-10-05T10:00:46.5994740Z ^[[36;1m    )^[[0m
+test	Setup clang	2026-10-05T10:00:46.5995562Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.5996809Z ^[[36;1m    if (!(Get-Command lsb_release -ErrorAction SilentlyContinue)) {^[[0m
+test	Setup clang	2026-10-05T10:00:46.5998744Z ^[[36;1m        throw "Couldn't find lsb_release; LLVM only provides repositories for Debian/Ubuntu"^[[0m
+test	Setup clang	2026-10-05T10:00:46.6000334Z ^[[36;1m    }^[[0m
+test	Setup clang	2026-10-05T10:00:46.6001241Z ^[[36;1m    $codename = lsb_release -sc^[[0m
+test	Setup clang	2026-10-05T10:00:46.6002271Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.6003515Z ^[[36;1m    "deb http://apt.llvm.org/$codename/ llvm-toolchain-$codename-$Version main"^[[0m
+test	Setup clang	2026-10-05T10:00:46.6004992Z ^[[36;1m}^[[0m
+test	Setup clang	2026-10-05T10:00:46.6005771Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.6006725Z ^[[36;1mfunction Add-UpstreamRepo {^[[0m
+test	Setup clang	2026-10-05T10:00:46.6007747Z ^[[36;1m    param(^[[0m
+test	Setup clang	2026-10-05T10:00:46.6008703Z ^[[36;1m        [Parameter(Mandatory=$true)]^[[0m
+test	Setup clang	2026-10-05T10:00:46.6009815Z ^[[36;1m        [string] $Version^[[0m
+test	Setup clang	2026-10-05T10:00:46.6010796Z ^[[36;1m    )^[[0m
+test	Setup clang	2026-10-05T10:00:46.6011599Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.6012839Z ^[[36;1m    wget -qO - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -^[[0m
+test	Setup clang	2026-10-05T10:00:46.6014428Z ^[[36;1m    $apt_line = Format-AptLine $Version^[[0m
+test	Setup clang	2026-10-05T10:00:46.6015752Z ^[[36;1m    sudo add-apt-repository --yes --update $apt_line^[[0m
+test	Setup clang	2026-10-05T10:00:46.6017114Z ^[[36;1m}^[[0m
+test	Setup clang	2026-10-05T10:00:46.6017897Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.6018685Z ^[[36;1m$clang = 'clang'^[[0m
+test	Setup clang	2026-10-05T10:00:46.6019621Z ^[[36;1m$clangxx = 'clang++'^[[0m
+test	Setup clang	2026-10-05T10:00:46.6020552Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.6021348Z ^[[36;1mif ($linux_host) {^[[0m
+test	Setup clang	2026-10-05T10:00:46.6022310Z ^[[36;1m    $pkg_clang = 'clang'^[[0m
+test	Setup clang	2026-10-05T10:00:46.6023315Z ^[[36;1m    $pkg_llvm = 'llvm'^[[0m
+test	Setup clang	2026-10-05T10:00:46.6024300Z ^[[36;1m    $pkg_gxx = 'g++'^[[0m
+test	Setup clang	2026-10-05T10:00:46.6025215Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.6026193Z ^[[36;1m    if (!$latest) {^[[0m
+test	Setup clang	2026-10-05T10:00:46.6027355Z ^[[36;1m        $pkg_version = Format-UpstreamVersion $version^[[0m
+test	Setup clang	2026-10-05T10:00:46.6028676Z ^[[36;1m        Add-UpstreamRepo $pkg_version^[[0m
+test	Setup clang	2026-10-05T10:00:46.6029755Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.6030674Z ^[[36;1m        $pkg_clang = "$pkg_clang-$pkg_version"^[[0m
+test	Setup clang	2026-10-05T10:00:46.6031938Z ^[[36;1m        $pkg_llvm = "$pkg_llvm-$pkg_version"^[[0m
+test	Setup clang	2026-10-05T10:00:46.6033024Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.6033899Z ^[[36;1m        $clang = "$clang-$pkg_version"^[[0m
+test	Setup clang	2026-10-05T10:00:46.6035101Z ^[[36;1m        $clangxx = "$clangxx-$pkg_version"^[[0m
+test	Setup clang	2026-10-05T10:00:46.6036578Z ^[[36;1m    }^[[0m
+test	Setup clang	2026-10-05T10:00:46.6037620Z ^[[36;1m    if (!$x64) {^[[0m
+test	Setup clang	2026-10-05T10:00:46.6038598Z ^[[36;1m        $pkg_gxx = 'g++-multilib'^[[0m
+test	Setup clang	2026-10-05T10:00:46.6039643Z ^[[36;1m    }^[[0m
+test	Setup clang	2026-10-05T10:00:46.6040615Z ^[[36;1m    $packages = $pkg_clang,$pkg_llvm,$pkg_gxx^[[0m
+test	Setup clang	2026-10-05T10:00:46.6041751Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.6042598Z ^[[36;1m    Install-Package $packages^[[0m
+test	Setup clang	2026-10-05T10:00:46.6043685Z ^[[36;1m} elseif ($cygwin_host) {^[[0m
+test	Setup clang	2026-10-05T10:00:46.6044685Z ^[[36;1m    if (!$x64) {^[[0m
+test	Setup clang	2026-10-05T10:00:46.6045597Z ^[[36;1m        echo @'^[[0m
+test	Setup clang	2026-10-05T10:00:46.6046770Z ^[[36;1m::warning ::^[[0m
+test	Setup clang	2026-10-05T10:00:46.6047925Z ^[[36;1m32-bit-targeting Clang is unavailable on 64-bit Cygwin.^[[0m
+test	Setup clang	2026-10-05T10:00:46.6049285Z ^[[36;1mPlease use 32-bit Cygwin instead.^[[0m
+test	Setup clang	2026-10-05T10:00:46.6050647Z ^[[36;1mIf you _are_ using 32-bit Cygwin, please ignore this message.^[[0m
+test	Setup clang	2026-10-05T10:00:46.6051938Z ^[[36;1m'@^[[0m
+test	Setup clang	2026-10-05T10:00:46.6052723Z ^[[36;1m    }^[[0m
+test	Setup clang	2026-10-05T10:00:46.6053519Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.6054604Z ^[[36;1m    # IDK why, but without libiconv-devel, even a "Hello, world!"^[[0m
+test	Setup clang	2026-10-05T10:00:46.6056373Z ^[[36;1m    # C++ app cannot be compiled as of December 2020. Also, libstdc++^[[0m
+test	Setup clang	2026-10-05T10:00:46.6057978Z ^[[36;1m    # is required; it's simpler to install gcc-g++ for all the^[[0m
+test	Setup clang	2026-10-05T10:00:46.6059301Z ^[[36;1m    # dependencies.^[[0m
+test	Setup clang	2026-10-05T10:00:46.6060460Z ^[[36;1m    Install-Package clang gcc-g++ libiconv-devel llvm^[[0m
+test	Setup clang	2026-10-05T10:00:46.6061743Z ^[[36;1m} elseif ($windows_host) {^[[0m
+test	Setup clang	2026-10-05T10:00:46.6062793Z ^[[36;1m    Install-Package llvm^[[0m
+test	Setup clang	2026-10-05T10:00:46.6063761Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.6064729Z ^[[36;1m    $bin_dir = Join-Path $env:ProgramFiles LLVM bin^[[0m
+test	Setup clang	2026-10-05T10:00:46.6066115Z ^[[36;1m    echo $bin_dir >> $env:GITHUB_PATH^[[0m
+test	Setup clang	2026-10-05T10:00:46.6067196Z ^[[36;1m} else {^[[0m
+test	Setup clang	2026-10-05T10:00:46.6068280Z ^[[36;1m    throw "Sorry, installing Clang is unsupported on $os"^[[0m
+test	Setup clang	2026-10-05T10:00:46.6069544Z ^[[36;1m}^[[0m
+test	Setup clang	2026-10-05T10:00:46.6070317Z ^[[36;1m^[[0m
+test	Setup clang	2026-10-05T10:00:46.6071259Z ^[[36;1mecho "clang=$clang"     >> $env:GITHUB_OUTPUT^[[0m
+test	Setup clang	2026-10-05T10:00:46.6072555Z ^[[36;1mecho "clangxx=$clangxx" >> $env:GITHUB_OUTPUT^[[0m
+test	Setup clang	2026-10-05T10:00:46.6102310Z shell: /usr/bin/pwsh -command ". '{0}'"
+test	Setup clang	2026-10-05T10:00:46.6103405Z env:
+test	Setup clang	2026-10-05T10:00:46.6104167Z   NUGETTOKEN: 
+test	Setup clang	2026-10-05T10:00:46.6112466Z   GITHUB_TOKEN: ***
+test	Setup clang	2026-10-05T10:00:46.6114059Z   SCRIPTS_BASE_URL: https://raw.githubusercontent.com/linksplatform/Scripts/main/MultiProjectRepository
+test	Setup clang	2026-10-05T10:00:46.6115781Z ##[endgroup]
+test	Setup clang	2026-10-05T10:00:48.0103268Z Warning: apt-key is deprecated. Manage keyring files in trusted.gpg.d instead (see apt-key(8)).
+test	Setup clang	2026-10-05T10:00:48.1424474Z OK
+test	Setup clang	2026-10-05T10:00:49.2180398Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+test	Setup clang	2026-10-05T10:00:49.2326743Z Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+test	Setup clang	2026-10-05T10:00:49.2518842Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+test	Setup clang	2026-10-05T10:00:49.2547647Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+test	Setup clang	2026-10-05T10:00:49.2631001Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+test	Setup clang	2026-10-05T10:00:49.2724165Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+test	Setup clang	2026-10-05T10:00:49.3637871Z Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [511 kB]
+test	Setup clang	2026-10-05T10:00:49.3892405Z Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [12.6 kB]
+test	Setup clang	2026-10-05T10:00:49.3933620Z Get:10 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [458 kB]
+test	Setup clang	2026-10-05T10:00:49.4128999Z Ign:7 https://apt.llvm.org/noble llvm-toolchain-noble-13 InRelease
+test	Setup clang	2026-10-05T10:00:49.4564261Z Err:11 https://apt.llvm.org/noble llvm-toolchain-noble-13 Release
+test	Setup clang	2026-10-05T10:00:49.4566300Z   404  Not Found [IP: 151.101.22.49 443]
+test	Setup clang	2026-10-05T10:00:49.4807033Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1364 kB]
+test	Setup clang	2026-10-05T10:00:49.4928526Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [304 kB]
+test	Setup clang	2026-10-05T10:00:49.4955609Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [181 kB]
+test	Setup clang	2026-10-05T10:00:49.4986786Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1699 kB]
+test	Setup clang	2026-10-05T10:00:49.5068538Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [341 kB]
+test	Setup clang	2026-10-05T10:00:49.5094399Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+test	Setup clang	2026-10-05T10:00:49.5137245Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1720 kB]
+test	Setup clang	2026-10-05T10:00:49.5220136Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [394 kB]
+test	Setup clang	2026-10-05T10:00:49.5249426Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+test	Setup clang	2026-10-05T10:00:49.5403982Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5776 B]
+test	Setup clang	2026-10-05T10:00:49.5837286Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
+test	Setup clang	2026-10-05T10:00:49.5948645Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1069 kB]
+test	Setup clang	2026-10-05T10:00:49.6011894Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [221 kB]
+test	Setup clang	2026-10-05T10:00:49.6036070Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.4 kB]
+test	Setup clang	2026-10-05T10:00:49.6051588Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1216 kB]
+test	Setup clang	2026-10-05T10:00:49.6141152Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [244 kB]
+test	Setup clang	2026-10-05T10:00:49.6148337Z Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.4 kB]
+test	Setup clang	2026-10-05T10:00:49.6169362Z Get:29 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1566 kB]
+test	Setup clang	2026-10-05T10:00:49.6250485Z Get:30 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [361 kB]
+test	Setup clang	2026-10-05T10:00:55.2766526Z Reading package lists...
+test	Setup clang	2026-10-05T10:00:55.2861689Z E: The repository 'http://apt.llvm.org/noble llvm-toolchain-noble-13 Release' does not have a Release file.
+test	Setup clang	2026-10-05T10:00:55.2873438Z Repository: 'deb http://apt.llvm.org/noble/ llvm-toolchain-noble-13 main'
+test	Setup clang	2026-10-05T10:00:55.2874149Z Description:
+test	Setup clang	2026-10-05T10:00:55.2874700Z Archive for codename: llvm-toolchain-noble-13 components: main
+test	Setup clang	2026-10-05T10:00:55.2875467Z More info: http://apt.llvm.org/noble/
+test	Setup clang	2026-10-05T10:00:55.2875918Z Adding repository.
+test	Setup clang	2026-10-05T10:00:55.2876804Z Adding deb entry to /etc/apt/sources.list.d/archive_uri-http_apt_llvm_org_noble_-noble.list
+test	Setup clang	2026-10-05T10:00:55.2877564Z Adding disabled deb-src entry to /etc/apt/sources.list.d/archive_uri-http_apt_llvm_org_noble_-noble.list
+test	Setup clang	2026-10-05T10:00:55.4119593Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+test	Setup clang	2026-10-05T10:00:55.4528730Z Hit:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease
+test	Setup clang	2026-10-05T10:00:55.5313618Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+test	Setup clang	2026-10-05T10:00:55.5328170Z Hit:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease
+test	Setup clang	2026-10-05T10:00:55.5357075Z Hit:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease
+test	Setup clang	2026-10-05T10:00:55.5386927Z Hit:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease
+test	Setup clang	2026-10-05T10:00:55.6545087Z Ign:7 https://apt.llvm.org/noble llvm-toolchain-noble-13 InRelease
+test	Setup clang	2026-10-05T10:00:55.6776624Z Err:8 https://apt.llvm.org/noble llvm-toolchain-noble-13 Release
+test	Setup clang	2026-10-05T10:00:55.6777341Z   404  Not Found [IP: 151.101.22.49 443]
+test	Setup clang	2026-10-05T10:00:56.7754621Z Reading package lists...
+test	Setup clang	2026-10-05T10:00:56.7837082Z E: The repository 'http://apt.llvm.org/noble llvm-toolchain-noble-13 Release' does not have a Release file.
+test	Setup clang	2026-10-05T10:00:56.8189715Z Reading package lists...
+test	Setup clang	2026-10-05T10:00:57.0230709Z Building dependency tree...
+test	Setup clang	2026-10-05T10:00:57.0238457Z Reading state information...
+test	Setup clang	2026-10-05T10:00:57.0409408Z Package clang-13 is not available, but is referred to by another package.
+test	Setup clang	2026-10-05T10:00:57.0410568Z This may mean that the package is missing, has been obsoleted, or
+test	Setup clang	2026-10-05T10:00:57.0411156Z is only available from another source
+test	Setup clang	2026-10-05T10:00:57.0411485Z 
+test	Setup clang	2026-10-05T10:00:57.0416997Z E: Package 'clang-13' has no installation candidate
+test	Setup clang	2026-10-05T10:00:57.0417581Z E: Unable to locate package llvm-13
+test	Setup clang	2026-10-05T10:00:57.1457473Z ##[error]Process completed with exit code 1.
+test	Setup clang	2026-10-05T10:00:57.1490092Z ##[end-action id=__egor-tensin_setup-clang.install;outcome=failure;conclusion=failure;duration_ms=10563]
+test	Setup clang	2026-10-05T10:00:57.1504358Z ##[start-action display=Run New-Variable os -Value 'Linux' -Option Constant;id=__egor-tensin_setup-clang.__run]
+test	Setup clang	2026-10-05T10:00:57.1508389Z ##[end-action id=__egor-tensin_setup-clang.__run;outcome=skipped;conclusion=skipped;duration_ms=0]
+test	Setup clang	2026-10-05T10:00:57.1512725Z ##[start-action display=Run New-Variable cygwin_host -Value ('0' -eq '1') -Option Constant;id=__egor-tensin_setup-clang.__run_2]
+test	Setup clang	2026-10-05T10:00:57.1515318Z ##[end-action id=__egor-tensin_setup-clang.__run_2;outcome=skipped;conclusion=skipped;duration_ms=0]
+test	Post Run actions/checkout@v7	﻿2026-10-05T10:00:57.1697943Z Post job cleanup.
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.2579994Z [command]/usr/bin/git version
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.2622955Z git version 2.55.0
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.2661735Z Temporarily overriding HOME='/home/runner/work/_temp/9a5f9489-71d5-447b-b3f0-038cdd412e34' before making global git config changes
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.2663060Z Adding repository directory to the temporary git global config as a safe directory
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.2667838Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.2701316Z Removing SSH command configuration
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.2708396Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.2745667Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.2990919Z Removing HTTP extra header
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.2998153Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3037613Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3295973Z Removing includeIf entries pointing to credentials config files
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3305237Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3338603Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3340211Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3341394Z includeif.gitdir:/github/workspace/.git.path
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3342243Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3348952Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3377767Z /home/runner/work/_temp/git-credentials-36412d08-433b-4219-a08e-92ac6a046e21.config
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3391019Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-36412d08\-433b\-4219\-a08e\-92ac6a046e21\.config
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3432288Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3473786Z /home/runner/work/_temp/git-credentials-36412d08-433b-4219-a08e-92ac6a046e21.config
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3499092Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-36412d08\-433b\-4219\-a08e\-92ac6a046e21\.config
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3527112Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3562849Z /github/runner_temp/git-credentials-36412d08-433b-4219-a08e-92ac6a046e21.config
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3615934Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-36412d08\-433b\-4219\-a08e\-92ac6a046e21\.config
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3623525Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3657299Z /github/runner_temp/git-credentials-36412d08-433b-4219-a08e-92ac6a046e21.config
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3669039Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-36412d08\-433b\-4219\-a08e\-92ac6a046e21\.config
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3716976Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	Post Run actions/checkout@v7	2026-10-05T10:00:57.3964582Z Removing credentials config '/home/runner/work/_temp/git-credentials-36412d08-433b-4219-a08e-92ac6a046e21.config'
+test	Complete job	﻿2026-10-05T10:00:57.4148393Z Cleaning up orphan processes

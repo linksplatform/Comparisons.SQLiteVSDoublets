@@ -1,0 +1,21 @@
+test_publish_benchmarks (unittest.loader._FailedTest.test_publish_benchmarks) ... ERROR
+
+======================================================================
+ERROR: test_publish_benchmarks (unittest.loader._FailedTest.test_publish_benchmarks)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_publish_benchmarks
+Traceback (most recent call last):
+  File "/home/box/.pyenv/versions/3.14.7/lib/python3.14/unittest/loader.py", line 433, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "/home/box/.pyenv/versions/3.14.7/lib/python3.14/unittest/loader.py", line 374, in _get_module_from_name
+    __import__(name)
+    ~~~~~~~~~~^^^^^^
+  File "/tmp/gh-issue-solver-1791195897867/scripts/test_publish_benchmarks.py", line 5, in <module>
+    import publish_benchmarks as publish
+ModuleNotFoundError: No module named 'publish_benchmarks'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

@@ -10,9 +10,11 @@
 
 import argparse
 import json
+import math
 import re
 import statistics
 from pathlib import Path
+from typing import Any
 
 START_MARKER = "<!--BENCHMARK_RESULTS_START-->"
 END_MARKER = "<!--BENCHMARK_RESULTS_END-->"
@@ -46,7 +48,7 @@ def russian_plural(count, one, few, many):
     return few if 2 <= count % 10 <= 4 and not 12 <= count % 100 <= 14 else many
 
 
-TEXT = {
+TEXT: dict[str, dict[str, Any]] = {
     "en": {
         "category": {
             "links": "Doublets vs SQLite as storage for links",
@@ -123,11 +125,66 @@ def load(directory):
     reports = {}
     for path in sorted(Path(directory).glob("*.json")):
         report = json.loads(path.read_text(encoding="utf-8"))
+        validate(report, path)
         key = (report["category"], report["language"], report["bits"], report["size"])
         if key in reports:
             raise ValueError(f"{path} duplicates the results of {key}")
         reports[key] = report
+    if not reports:
+        raise ValueError(f"No benchmark reports found in {directory}")
     return reports
+
+
+def validate(report, path):
+    """Reject incomplete measurements before publishing tables or charts."""
+    try:
+        validate_metadata(report)
+        validate_variants(report["results"])
+        for result in report["results"]:
+            if set(result["operations"]) != set(OPERATIONS[report["category"]]):
+                raise ValueError("missing or unexpected operations")
+            for measurement in result["operations"].values():
+                validate_measurement(measurement)
+    except (KeyError, TypeError, ValueError) as error:
+        raise ValueError(f"Invalid benchmark report {path}: {error}") from error
+
+
+def validate_metadata(report):
+    if report["category"] not in CATEGORIES or report["language"] not in LANGUAGES:
+        raise ValueError("unknown category or language")
+    if report["bits"] not in BITS or not positive_integer(report["size"]):
+        raise ValueError("invalid bits or size")
+    if not positive_integer(report["repetitions"]):
+        raise ValueError("invalid repetitions")
+    if not report["sqlite_version"]:
+        raise ValueError("missing SQLite version")
+
+
+def validate_variants(results):
+    variants = [result["variant"] for result in results]
+    if len(variants) != len(set(variants)):
+        raise ValueError("duplicate variants")
+    if not {"SQLite_Memory", "SQLite_File"}.issubset(variants):
+        raise ValueError("missing SQLite baseline")
+
+
+def positive_integer(value):
+    return isinstance(value, int) and not isinstance(value, bool) and value > 0
+
+
+def validate_measurement(measurement):
+    values = [measurement[key] for key in ("median_ns", "min_ns", "max_ns")]
+    values += measurement["samples_ns"]
+    if not measurement["samples_ns"] or any(
+        not isinstance(value, (int, float))
+        or isinstance(value, bool)
+        or not math.isfinite(value)
+        or value <= 0
+        for value in values
+    ):
+        raise ValueError("measurements must be finite and positive")
+    if not measurement["min_ns"] <= measurement["median_ns"] <= measurement["max_ns"]:
+        raise ValueError("median must be between min and max")
 
 
 def baseline(variant):
@@ -175,7 +232,9 @@ def comparison(measured, reference, text):
     # are not called a difference.
     (low, high), (reference_low, reference_high) = quartiles(measured), quartiles(reference)
     overlapping = low <= reference_high and reference_low <= high
-    ratio = max(measured["median_ns"], reference["median_ns"]) / min(measured["median_ns"], reference["median_ns"])
+    ratio = max(measured["median_ns"], reference["median_ns"]) / min(
+        measured["median_ns"], reference["median_ns"]
+    )
     if overlapping or ratio < 1 + NOISE:
         return text["same"]
     if measured["median_ns"] <= reference["median_ns"]:
@@ -186,7 +245,11 @@ def comparison(measured, reference, text):
 def table(report, text):
     operations = OPERATIONS[report["category"]]
     by_variant = {result["variant"]: result for result in report["results"]}
-    header = [text["storage"], *(text["operations"][operation] for operation in operations), text["file_size"]]
+    header = [
+        text["storage"],
+        *(text["operations"][operation] for operation in operations),
+        text["file_size"],
+    ]
     lines = ["| " + " | ".join(header) + " |", "| --- |" + " ---: |" * (len(header) - 1)]
     for variant, result in by_variant.items():
         reference = by_variant.get(baseline(variant))
@@ -242,7 +305,9 @@ def section(reports, language_code, charts_link):
                     ]
                 if charts_link is not None:
                     name = chart_name(category, language, bits)
-                    title = text["chart"].format(language=language, bits=bits, category=text["nouns"][category])
+                    title = text["chart"].format(
+                        language=language, bits=bits, category=text["nouns"][category]
+                    )
                     lines += [f"![{title}]({charts_link}/{name})", ""]
     return "\n".join(lines).rstrip() + "\n"
 
@@ -274,7 +339,7 @@ def charts(reports, directory):
                 figure, axes = plt.subplots(
                     1, len(sizes), figsize=(6 * len(sizes), 5), squeeze=False, sharey=False
                 )
-                for axis, count in zip(axes[0], sizes):
+                for axis, count in zip(axes[0], sizes, strict=True):
                     results = reports[(category, language, bits, count)]["results"]
                     width = 0.8 / len(results)
                     for index, result in enumerate(results):
@@ -312,7 +377,11 @@ def main(arguments=None):
         charts(reports, options.charts)
     for readme in options.readme:
         language_code = "ru" if readme.name.endswith(".ru.md") else "en"
-        link = None if options.charts is None else options.charts.resolve().relative_to(readme.resolve().parent).as_posix()
+        link = (
+            None
+            if options.charts is None
+            else options.charts.resolve().relative_to(readme.resolve().parent).as_posix()
+        )
         document = readme.read_text(encoding="utf-8")
         readme.write_text(replace_section(document, section(reports, language_code, link)), encoding="utf-8")
     if not options.readme:

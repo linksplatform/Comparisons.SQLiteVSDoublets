@@ -1,11 +1,15 @@
 name: Rust
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
-    paths: ['rust/**', '.github/workflows/rust.yml']
+    paths: ['rust/**', 'experiments/**/*.rs', 'experiments/**/Cargo.toml', 'experiments/**/Cargo.lock', '.github/workflows/rust.yml', '.github/actions/**', 'scripts/check_pipeline_status.py', 'scripts/ci_process.py', 'scripts/workflow_yaml.py']
   pull_request:
-    paths: ['rust/**', '.github/workflows/rust.yml']
+    paths: ['rust/**', 'experiments/**/*.rs', 'experiments/**/Cargo.toml', 'experiments/**/Cargo.lock', '.github/workflows/rust.yml', '.github/actions/**', 'scripts/check_pipeline_status.py', 'scripts/ci_process.py', 'scripts/workflow_yaml.py']
+
+permissions:
+  contents: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -26,15 +30,51 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-24.04, macos-15, windows-2025]
     steps:
-      - uses: actions/checkout@v7
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/prepare-ci # zizmor: ignore[self-repository] actionlint 1.7.12 lacks $/ syntax
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
         with:
           components: rustfmt, clippy
-      - uses: Swatinem/rust-cache@v2
+          toolchain: stable
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2
         with:
           workspaces: rust
-      - run: cargo fmt --check
-      - run: cargo clippy --release --all-targets -- -D warnings
-      - run: cargo test --release
+      - name: Format every Rust crate
+        shell: bash
+        run: |
+          cargo fmt --check
+          while IFS= read -r manifest; do
+            cargo fmt --manifest-path "../$manifest" --check
+          done < <(git -C .. ls-files 'experiments/**/Cargo.toml')
+      - run: cargo clippy --locked --release --all-targets -- -D warnings
+      - run: cargo test --locked --release
+
+  pipeline-status:
+    name: Pipeline Status
+    needs: [test]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.13'
+      - run: python -m pip install PyYAML==6.0.3
+      - name: Check terminal status
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          WORKFLOW_FILE: .github/workflows/rust.yml
+          RUN_REF: ${{ github.ref }}
+          RUN_SHA: ${{ github.sha }}
+        run: python scripts/check_pipeline_status.py

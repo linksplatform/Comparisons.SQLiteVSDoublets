@@ -36,7 +36,9 @@ def index(directory):
                     if SECRET.search(line):
                         raise ValueError(f"Unredacted token pattern in {relative}:{line_number}")
                     if path.suffix == ".log" and DIAGNOSTIC.search(line):
-                        diagnostics.append({"path": relative, "line": line_number, "text": line[:1000]})
+                        # Keep the readable index within GitHub's per-file diff budget;
+                        # original, unabridged lines remain in the archived logs.
+                        diagnostics.append({"path": relative, "line": line_number, "text": line[:500]})
     (directory / "manifest.json").write_text(json.dumps(files, indent=2) + "\n", encoding="utf-8")
     (directory / "diagnostic-index.json").write_text(
         json.dumps(diagnostics, indent=2) + "\n", encoding="utf-8"

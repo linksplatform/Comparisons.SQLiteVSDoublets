@@ -1,2 +1,0 @@
-[tester]	WARNING	nosec encountered (B603), but no failed test on file experiments/ci/run_smoke.py:19
-[tester]	WARNING	nosec encountered (B603), but no failed test on file scripts/check_pipeline_status.py:39

@@ -24,3 +24,10 @@ target/
 # .NET build output
 bin/
 obj/
+
+# Raw investigation files are preserved in the verified compressed archive.
+/dev/log/issues/110/pulls/111/ci-logs/
+/dev/log/issues/110/pulls/111/github/
+/dev/log/issues/110/pulls/111/research/
+/dev/log/issues/110/pulls/111/templates/
+/dev/log/issues/110/pulls/111/validation/

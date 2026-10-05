@@ -1,6 +1,0 @@
-MSBUILD : error MSB1001: Unknown switch.
-    Full command line: '/usr/lib/dotnet/sdk/10.0.112/MSBuild.dll -maxcpucount --verbosity:m -tlp:default=auto --property:VSTestNoBuild=true --property:Configuration=Release --property:NuGetInteractive=false --property:VSTestCLIRunSettings="--timeout;10m" --property:VSTestArtifactsProcessingMode=collect --property:VSTestSessionCorrelationId=9230_dc28ea64-b3ae-4f02-80bd-89c961c5f219 --target:VSTest -nodereuse:false -nologo --project csharp/SQLiteVSDoublets.Tests'
-  Switches appended by response files:
-Switch: --project
-
-For switch syntax, type "MSBuild -help"

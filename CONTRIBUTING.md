@@ -21,6 +21,8 @@ mypy scripts
 bandit -r scripts experiments -q
 python scripts/ci_checks.py
 python -m unittest discover -s scripts -v
+python -m unittest discover -s experiments/ci -v
+python experiments/ci/package_evidence.py dev/log/issues/110/pulls/111 --verify
 cargo fmt --manifest-path rust/Cargo.toml --check
 cargo clippy --manifest-path rust/Cargo.toml --locked --release \
   --all-targets -- -D warnings

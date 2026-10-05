@@ -16,6 +16,11 @@ named in the issue. Unfinished runs have metadata/job records; GitHub does not
 provide a completed-run log until the run ends. Refresh with
 `python experiments/ci/collect_evidence.py`.
 
+Raw directories are preserved byte-for-byte in `raw-evidence.tar.gz`; extract
+them using the commands in [README.md](README.md). All original paths and
+hashes below remain valid. CI verifies every archived member against the
+manifest. Readable analysis, plans and indexes remain separate files.
+
 The initial completed-log corpus contains 67 run logs. Completed job logs
 from unfinished runs are also preserved via the job-log API. Logs were inspected in
 chunks of at most 1,500 lines. `ci-logs/diagnostics.json` records diagnostic
@@ -73,6 +78,7 @@ the semantic comparison below; snapshot archives preserve the complete source.
 | Oct 5, 12:08:22 | Revision `0dba0f5` separates nested Git-output parsing after successful checks exposed two spurious unused-annotation warnings. A three-case Bandit probe reproduces the warning and verifies the workaround; confirmation and a code-fix suggestion are posted on existing upstream issue 1041. |
 | Oct 5, 12:15–12:19 | Evidence revision `4311b79` passes all five maintained workflows and CodeFactor. Main benchmark run 37297329698 completes and publishes `4528bc4`, including both C# SQLite providers; the new default branch is merged without altering its results. Codacy temporarily posts ACTION_REQUIRED while its API reports analysis in progress and zero new issues. |
 | Oct 5, final collection | An actual job-log download reproduces GitHub CLI's terminal-escape refusal: exit 1 and zero bytes. Adding its documented `--allow-escape-sequences` option returns exit 0 and 23,091 bytes. The collector uses the option for all raw job downloads and retries earlier affected files while retaining the original errors. |
+| Oct 5, 12:27:38 | All analyzers succeed at `741dffc`, but Codacy's PR comparison against new main `4528bc4` fails in Diff after 60,008 ms and then Deltas; its check is ACTION_REQUIRED with no annotations. The 680-file evidence changeset also reproduces GitHub's HTTP 406 diff limit. Raw evidence is packaged without changing its bytes, and CI verifies every archived file's size/hash. |
 
 ## Root causes and solution choices
 
@@ -425,11 +431,45 @@ validates their exact source SHA and common tree. The measured PR merge commit
 `github/implementation-measured-merge.json`. This distinguishes GitHub's synthetic
 measured merge from the PR-head SHA stored in workflow run metadata.
 
-GitHub's complete PR-diff endpoint returns HTTP 406 above 300 changed files
-because the immutable evidence archive exceeds that limit. The failure is
-preserved in `github/pr-final-diff.error.txt`; review uses paginated
+GitHub's complete PR-diff endpoint initially returns HTTP 406 above 300 changed
+files because the individually tracked evidence exceeds that limit. The failure is
+preserved in `github/pr-final-diff.error.txt`; initial review uses paginated
 `github/pr-files.json` and `github/pr-final-source.diff`, generated from the
 merged default branch with the evidence directory excluded. The source diff
 was read in bounded chunks. The removed C++ automation had no build target;
 working Rust/C# comparisons, provider checks, historical reports and existing
 memory-growth workarounds remain present.
+
+The final check reveals a second consequence of the oversized evidence diff.
+`research/codacy-741-commit-logs.json` records all analyzer steps as successful,
+and `codacy-741-issues.json` reports zero findings. The separate PR log
+`codacy-741-pr-logs.json` records Diff failing after exactly 60,008 ms, followed
+by Deltas failing. The backend supplies no exception text, so the exact internal
+failure is unknown; associating it with the oversized comparison is an inference
+supported by the concurrent HTTP 406 reproduction and the successful commit
+analysis. [GitHub's documented limits](https://docs.github.com/en/repositories/creating-and-managing-repositories/repository-limits)
+include 300 files, 20,000 loaded lines and 1 MB of raw diff data.
+
+Options: omit collected evidence, change service settings, or preserve it in a
+compressed archive that keeps the actual source diff reviewable. The chosen
+solution packages all original directories with the standard-library tar/gzip
+components, retains every original byte/path, ignores only extracted copies,
+and adds a hosted integrity check. The verifier streams every archived file,
+checks its original SHA-256 and size, and rejects missing, unexpected or duplicate
+members. `manifest.json` also records the compressed archive's hash. This reduces
+the PR's final file count without rewriting history or changing analyzer gates.
+
+The package regression suite has six cases: original binary/text round-trip,
+same-length byte corruption, missing files, unexpected files, duplicate files,
+and an unextracted checkout. The latter fails before the guard is added
+(`validation/packaging-unextracted-reproduction.log`); packaging now checks all
+five raw directories before opening the archive, preserving the existing bundle
+on an incomplete checkout. All 61 Python tests pass locally.
+
+The packaged collection contains 666 original raw files (12,854,036 compressed
+bytes). Verification succeeds with only the tracked archive and manifest,
+matching a fresh CI checkout. The staged PR diff contains 52 files and 13,847
+lines / 754,444 bytes, within the documented review limits. All original
+raw-member hashes pass; the readable diagnostic index uses 500-character
+excerpts, with the earlier full index and unabridged logs preserved in the
+archive. Final service checks are repeated at the pushed revision.

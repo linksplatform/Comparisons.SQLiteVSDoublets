@@ -28,6 +28,10 @@ class StatusTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             failures({}, {})
 
+    def test_yaml_boolean_cancellation_policy(self):
+        workflow = {"concurrency": {"cancel-in-progress": True}}
+        self.assertEqual(failures({"test": {"result": "cancelled"}}, workflow, True), [])
+
 
 if __name__ == "__main__":
     unittest.main()

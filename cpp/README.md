@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD043 -->
 # C++ placeholder
 
 This directory contains an empty Conan manifest and no C++ implementation,

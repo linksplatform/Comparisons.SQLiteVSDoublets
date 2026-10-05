@@ -2,7 +2,7 @@
 
 import json
 import os
-import subprocess
+import subprocess  # nosec B404 # Git integration tests use only disposable local repositories and no shell.
 import tempfile
 import unittest
 from pathlib import Path
@@ -11,6 +11,7 @@ from unittest.mock import patch
 import benchmark_ci
 import benchmark_report
 import publish_benchmarks as publish
+from ci_process import executable
 from test_benchmark_ci import complete_sample
 
 
@@ -68,7 +69,9 @@ class PublicationTests(unittest.TestCase):
         self.addCleanup(os.chdir, previous)
 
     def command(self, *args, cwd=None):
-        return subprocess.run(["git", *args], cwd=cwd, capture_output=True, text=True, check=True)
+        return subprocess.run(  # nosec B603 # fixed test commands and temporary paths, no untrusted inputs.
+            [executable("git"), *args], cwd=cwd, capture_output=True, text=True, check=True
+        )
 
     def commit(self, directory, message):
         self.command("add", ".", cwd=directory)
@@ -105,7 +108,9 @@ class PublicationTests(unittest.TestCase):
             patch.object(publish.subprocess, "run", wraps=subprocess.run) as run,
         ):
             run.side_effect = lambda args, **kw: (
-                subprocess.CompletedProcess(args, 0) if args[0] == "npx" else actual_run(args, **kw)
+                subprocess.CompletedProcess(args, 0)
+                if Path(args[0]).name in ("npx", "npx.cmd")
+                else actual_run(args, **kw)
             )
             publish.publish(self.inputs, [1000], self.sha)
         self.assertEqual(len(pushes), 2)

@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['csharp/**', 'experiments/**/*.cs', 'experiments/**/*.csproj', 'experiments/system_data_sqlite/**', '.github/workflows/csharp.yml', '.github/actions/**']
+    paths: ['csharp/**', 'experiments/**/*.cs', 'experiments/**/*.csproj', 'experiments/system_data_sqlite/**', '.github/workflows/csharp.yml', '.github/actions/**', 'scripts/check_pipeline_status.py', 'scripts/ci_process.py', 'scripts/workflow_yaml.py']
   pull_request:
-    paths: ['csharp/**', 'experiments/**/*.cs', 'experiments/**/*.csproj', 'experiments/system_data_sqlite/**', '.github/workflows/csharp.yml', '.github/actions/**']
+    paths: ['csharp/**', 'experiments/**/*.cs', 'experiments/**/*.csproj', 'experiments/system_data_sqlite/**', '.github/workflows/csharp.yml', '.github/actions/**', 'scripts/check_pipeline_status.py', 'scripts/ci_process.py', 'scripts/workflow_yaml.py']
 
 permissions:
   contents: read

@@ -1,8 +1,10 @@
 """Fail CI on direct or transitive NuGet vulnerabilities (dotnet itself exits zero)."""
 
 import json
-import subprocess
+import subprocess  # nosec B404 # all calls use a resolved tool and argument lists without a shell.
 from pathlib import Path
+
+from ci_process import executable
 
 
 def vulnerabilities(report):
@@ -32,10 +34,12 @@ def main():
         raise SystemExit("No NuGet projects found")
     findings = []
     for project in projects:
-        subprocess.run(["dotnet", "restore", str(project), "-warnaserror"], check=True)
-        result = subprocess.run(
+        subprocess.run(  # nosec B603 # tracked project paths are separate arguments to the fixed restore command.
+            [executable("dotnet"), "restore", str(project), "-warnaserror"], check=True
+        )
+        result = subprocess.run(  # nosec B603 # fixed audit options and a tracked project path; no shell.
             [
-                "dotnet",
+                executable("dotnet"),
                 "list",
                 str(project),
                 "package",

@@ -3,9 +3,9 @@ name: Benchmarks
 on:
   push:
     branches: [main]
-    paths: ['rust/**', 'csharp/**', 'scripts/**', 'pyproject.toml', '.github/actions/**', '.github/workflows/benchmarks.yml']
+    paths: ['rust/**', 'csharp/**', 'scripts/**', 'pyproject.toml', '.github/actions/**', '.github/workflows/benchmarks.yml', '.markdownlint.json']
   pull_request:
-    paths: ['rust/**', 'csharp/**', 'scripts/**', 'pyproject.toml', '.github/actions/**', '.github/workflows/benchmarks.yml']
+    paths: ['rust/**', 'csharp/**', 'scripts/**', 'pyproject.toml', '.github/actions/**', '.github/workflows/benchmarks.yml', '.markdownlint.json']
   workflow_dispatch:
     inputs:
       sizes:

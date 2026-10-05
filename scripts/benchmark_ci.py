@@ -35,7 +35,9 @@ def expected_variants(category, language):
 def matrix(sizes):
     if not isinstance(sizes, list) or not 1 <= len(sizes) <= 32:
         raise ValueError("sizes must contain between 1 and 32 integers (at most 256 jobs)")
-    if any(type(size) is not int or not 1 <= size <= 10000000 for size in sizes):
+    if any(
+        not isinstance(size, int) or isinstance(size, bool) or not 1 <= size <= 10000000 for size in sizes
+    ):
         raise ValueError("sizes must be integers between 1 and 10,000,000")
     if len(sizes) != len(set(sizes)):
         raise ValueError("sizes must be unique")

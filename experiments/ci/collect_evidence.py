@@ -2,19 +2,23 @@
 
 import concurrent.futures
 import json
-import subprocess
+import subprocess  # nosec B404 # collector invokes the authenticated CLI with fixed API paths and no shell.
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "dev/log/issues/110/pulls/111"
 REPO = "linksplatform/Comparisons.SQLiteVSDoublets"
+sys.path.insert(0, str(ROOT / "scripts"))
+from ci_process import executable  # noqa: E402
 
 
 def capture(name, *args):
     path = OUT / name
     path.parent.mkdir(parents=True, exist_ok=True)
-    result = subprocess.run(args, capture_output=True, text=True, check=False)
+    result = subprocess.run(  # nosec B603 # all callers construct fixed CLI/API queries as argument lists.
+        [executable(args[0]), *args[1:]], capture_output=True, text=True, check=False
+    )
     path.write_text(result.stdout)
     if result.returncode:
         path.with_suffix(path.suffix + ".error.txt").write_text(result.stderr)
@@ -104,8 +108,8 @@ def main():
                     for job in page["jobs"]:
                         if job["status"] != "completed":
                             continue
-                        result = subprocess.run(
-                            ["gh", "api", f"repos/{REPO}/actions/jobs/{job['id']}/logs"],
+                        result = subprocess.run(  # nosec B603 # fixed API path and numeric job ID, no shell.
+                            [executable("gh"), "api", f"repos/{REPO}/actions/jobs/{job['id']}/logs"],
                             capture_output=True,
                             check=False,
                         )

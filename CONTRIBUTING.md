@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD043 -->
 # Contributing
 
 Use a pull request and keep changes focused on the benchmark comparison. CI checks
@@ -17,6 +18,7 @@ python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt
 ruff check scripts experiments
 ruff format --check scripts experiments
 mypy scripts
+bandit -r scripts experiments -q
 python scripts/ci_checks.py
 python -m unittest discover -s scripts -v
 cargo fmt --manifest-path rust/Cargo.toml --check

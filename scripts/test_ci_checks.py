@@ -42,6 +42,10 @@ class PolicyTests(unittest.TestCase):
         broken["jobs"]["test"]["continue-on-error"] = "true"
         self.assertIn("hides failed checks", " ".join(ci.workflow_errors(broken)))
 
+    def test_explicit_false_does_not_suppress_failures(self):
+        self.workflow["jobs"]["test"]["continue-on-error"] = "false"
+        self.assertEqual(ci.workflow_errors(self.workflow), [])
+
     def test_local_missing_link_is_a_failure(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

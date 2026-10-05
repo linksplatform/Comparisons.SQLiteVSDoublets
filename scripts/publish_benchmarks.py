@@ -3,12 +3,13 @@
 import argparse
 import json
 import shutil
-import subprocess
+import subprocess  # nosec B404 # resolved CI tools use argument lists; no subprocess enables a shell.
 import tempfile
 from pathlib import Path
 
 import benchmark_ci
 import benchmark_report
+from ci_process import executable
 
 
 def is_race(message):
@@ -19,7 +20,10 @@ def is_race(message):
 
 
 def git(*args, cwd=None, check=True):
-    result = subprocess.run(["git", *args], cwd=cwd, capture_output=True, text=True, check=False)
+    # Callers supply fixed Git operations and separately validated artifact/CI metadata.
+    result = subprocess.run(  # nosec B603 # argument-list invocation, no shell or command from PR data.
+        [executable("git"), *args], cwd=cwd, capture_output=True, text=True, check=False
+    )
     if result.returncode and check:
         raise RuntimeError(f"git {args[0]} failed:\n{result.stdout}{result.stderr}")
     return result
@@ -64,8 +68,8 @@ def publish(directory, sizes, sha, branch="main", verbose=False):
                         benchmark_report.replace_section(readme.read_text(encoding="utf-8"), text),
                         encoding="utf-8",
                     )
-                subprocess.run(
-                    ["npx", "--yes", "markdownlint-cli@0.49.1", "README.md", "README.ru.md"],
+                subprocess.run(  # nosec B603 # fixed versioned Markdown tool and document names, no shell.
+                    [executable("npx"), "--yes", "markdownlint-cli@0.49.1", "README.md", "README.ru.md"],
                     cwd=worktree,
                     check=True,
                 )

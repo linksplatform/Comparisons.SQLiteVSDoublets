@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['rust/**', 'experiments/**/*.rs', 'experiments/**/Cargo.toml', 'experiments/**/Cargo.lock', '.github/workflows/rust.yml', '.github/actions/**']
+    paths: ['rust/**', 'experiments/**/*.rs', 'experiments/**/Cargo.toml', 'experiments/**/Cargo.lock', '.github/workflows/rust.yml', '.github/actions/**', 'scripts/check_pipeline_status.py', 'scripts/ci_process.py', 'scripts/workflow_yaml.py']
   pull_request:
-    paths: ['rust/**', 'experiments/**/*.rs', 'experiments/**/Cargo.toml', 'experiments/**/Cargo.lock', '.github/workflows/rust.yml', '.github/actions/**']
+    paths: ['rust/**', 'experiments/**/*.rs', 'experiments/**/Cargo.toml', 'experiments/**/Cargo.lock', '.github/workflows/rust.yml', '.github/actions/**', 'scripts/check_pipeline_status.py', 'scripts/ci_process.py', 'scripts/workflow_yaml.py']
 
 permissions:
   contents: read

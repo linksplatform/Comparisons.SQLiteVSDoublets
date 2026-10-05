@@ -2,10 +2,11 @@
 
 import json
 import os
-import subprocess
+import subprocess  # nosec B404 # only a fixed git query is executed, without a shell.
 from pathlib import Path
 
-import yaml
+from ci_process import executable
+from workflow_yaml import load_workflow
 
 
 def failures(needs, workflow, superseded=False):
@@ -22,7 +23,7 @@ def failures(needs, workflow, superseded=False):
             .get("concurrency", workflow.get("concurrency", {}))
             .get("cancel-in-progress")
         )
-        if result == "cancelled" and superseded and policy == "true":
+        if result == "cancelled" and superseded and str(policy).lower() == "true":
             print(f"{name}: superseded reader cancelled as configured")
             continue
         failed.append(f"{name}: {result}")
@@ -31,11 +32,12 @@ def failures(needs, workflow, superseded=False):
 
 def main():
     needs = json.loads(os.environ["NEEDS_JSON"])
-    workflow = yaml.load(Path(os.environ["WORKFLOW_FILE"]).read_text(), Loader=yaml.BaseLoader)
+    workflow = load_workflow(Path(os.environ["WORKFLOW_FILE"]).read_text())
     superseded = False
     if any(details.get("result") == "cancelled" for details in needs.values()):
+        # GitHub's ref is a separate argument to this fixed read-only query; no shell.
         remote = subprocess.run(
-            ["git", "ls-remote", "origin", os.environ["RUN_REF"]],
+            [executable("git"), "ls-remote", "origin", os.environ["RUN_REF"]],
             capture_output=True,
             text=True,
             check=True,

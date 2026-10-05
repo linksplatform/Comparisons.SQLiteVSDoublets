@@ -3,7 +3,7 @@
 import re
 from pathlib import Path
 
-import yaml
+from workflow_yaml import load_workflow
 
 ROOT = Path(__file__).resolve().parents[1]
 WRITER_GROUP = "main-writer-${{ github.repository }}-main"
@@ -36,12 +36,15 @@ def workflow_errors(workflow):
         runners = [job.get("runs-on", "")] + (matrix.get("os", []) if isinstance(matrix, dict) else [])
         if any("latest" in runner for runner in runners):
             errors.append(f"{name}: mutable runner label")
-        if job.get("continue-on-error"):
+        if str(job.get("continue-on-error")).lower() == "true":
             errors.append(f"{name}: continue-on-error hides failed checks")
         writes = "write" in job.get("permissions", {}).values()
         if writes:
             concurrency = job.get("concurrency", {})
-            if concurrency.get("group") != WRITER_GROUP or concurrency.get("cancel-in-progress") != "false":
+            if (
+                concurrency.get("group") != WRITER_GROUP
+                or str(concurrency.get("cancel-in-progress")).lower() != "false"
+            ):
                 errors.append(f"{name}: writer must serialize without cancellation")
             if "concurrency" in workflow:
                 errors.append(f"{name}: workflow concurrency can cancel a writer")
@@ -65,7 +68,7 @@ def local_link_errors(document, root=ROOT):
 def main():
     errors = []
     for path in sorted((ROOT / ".github/workflows").glob("*.yml")):
-        workflow = yaml.load(path.read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
+        workflow = load_workflow(path.read_text(encoding="utf-8"))
         errors += [f"{path.name}: {error}" for error in workflow_errors(workflow)]
     if (ROOT / ".github/workflows/cpp.yml").exists() and not (ROOT / "cpp/CMakeLists.txt").exists():
         errors.append("C++ build workflow has no CMake project")

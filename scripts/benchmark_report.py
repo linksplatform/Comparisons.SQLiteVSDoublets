@@ -138,35 +138,53 @@ def load(directory):
 def validate(report, path):
     """Reject incomplete measurements before publishing tables or charts."""
     try:
-        category = report["category"]
-        if category not in CATEGORIES or report["language"] not in LANGUAGES:
-            raise ValueError("unknown category or language")
-        if report["bits"] not in BITS or type(report["size"]) is not int or report["size"] <= 0:
-            raise ValueError("invalid bits or size")
-        if type(report["repetitions"]) is not int or report["repetitions"] <= 0:
-            raise ValueError("invalid repetitions")
-        if not report["sqlite_version"]:
-            raise ValueError("missing SQLite version")
-        variants = [result["variant"] for result in report["results"]]
-        if len(variants) != len(set(variants)):
-            raise ValueError("duplicate variants")
-        if not {"SQLite_Memory", "SQLite_File"}.issubset(variants):
-            raise ValueError("missing SQLite baseline")
+        validate_metadata(report)
+        validate_variants(report["results"])
         for result in report["results"]:
-            if set(result["operations"]) != set(OPERATIONS[category]):
+            if set(result["operations"]) != set(OPERATIONS[report["category"]]):
                 raise ValueError("missing or unexpected operations")
             for measurement in result["operations"].values():
-                values = [measurement[key] for key in ("median_ns", "min_ns", "max_ns")]
-                values += measurement["samples_ns"]
-                if not measurement["samples_ns"] or any(
-                    type(value) not in (int, float) or not math.isfinite(value) or value <= 0
-                    for value in values
-                ):
-                    raise ValueError("measurements must be finite and positive")
-                if not measurement["min_ns"] <= measurement["median_ns"] <= measurement["max_ns"]:
-                    raise ValueError("median must be between min and max")
+                validate_measurement(measurement)
     except (KeyError, TypeError, ValueError) as error:
         raise ValueError(f"Invalid benchmark report {path}: {error}") from error
+
+
+def validate_metadata(report):
+    if report["category"] not in CATEGORIES or report["language"] not in LANGUAGES:
+        raise ValueError("unknown category or language")
+    if report["bits"] not in BITS or not positive_integer(report["size"]):
+        raise ValueError("invalid bits or size")
+    if not positive_integer(report["repetitions"]):
+        raise ValueError("invalid repetitions")
+    if not report["sqlite_version"]:
+        raise ValueError("missing SQLite version")
+
+
+def validate_variants(results):
+    variants = [result["variant"] for result in results]
+    if len(variants) != len(set(variants)):
+        raise ValueError("duplicate variants")
+    if not {"SQLite_Memory", "SQLite_File"}.issubset(variants):
+        raise ValueError("missing SQLite baseline")
+
+
+def positive_integer(value):
+    return isinstance(value, int) and not isinstance(value, bool) and value > 0
+
+
+def validate_measurement(measurement):
+    values = [measurement[key] for key in ("median_ns", "min_ns", "max_ns")]
+    values += measurement["samples_ns"]
+    if not measurement["samples_ns"] or any(
+        not isinstance(value, (int, float))
+        or isinstance(value, bool)
+        or not math.isfinite(value)
+        or value <= 0
+        for value in values
+    ):
+        raise ValueError("measurements must be finite and positive")
+    if not measurement["min_ns"] <= measurement["median_ns"] <= measurement["max_ns"]:
+        raise ValueError("median must be between min and max")
 
 
 def baseline(variant):

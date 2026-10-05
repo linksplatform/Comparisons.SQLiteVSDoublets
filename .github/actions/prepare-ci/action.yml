@@ -1,0 +1,27 @@
+name: Prepare CI merge
+description: Merge the current PR base into the checked-out revision
+inputs:
+  base-sha:
+    description: Replay a previously validated base commit for benchmark matrix consistency
+    required: false
+outputs:
+  base-sha:
+    description: Base commit used for this merge
+    value: ${{ steps.merge.outputs.base }}
+runs:
+  using: composite
+  steps:
+    - name: Merge current base for pull requests
+      id: merge
+      if: github.event_name == 'pull_request'
+      shell: bash
+      env:
+        BASE_REF: ${{ github.base_ref }}
+        BASE_SHA: ${{ inputs.base-sha }}
+      run: |
+        git config user.email 'github-actions[bot]@users.noreply.github.com'
+        git config user.name 'github-actions[bot]'
+        git fetch origin "$BASE_REF"
+        base="${BASE_SHA:-origin/$BASE_REF}"
+        echo "base=$(git rev-parse "$base")" >> "$GITHUB_OUTPUT"
+        git merge --no-edit "$base"

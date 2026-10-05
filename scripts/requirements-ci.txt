@@ -1,0 +1,6 @@
+ruff==0.16.10
+mypy==2.4.0
+PyYAML==6.0.3
+types-PyYAML==6.0.12.20250915
+pip-audit==2.10.1
+zizmor==1.30.1

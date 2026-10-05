@@ -13,8 +13,8 @@ import benchmark_report as report
 
 
 def measurement(median, *samples):
-    samples = sorted(samples or [median])
-    return {"median_ns": median, "min_ns": samples[0], "max_ns": samples[-1], "samples_ns": samples}
+    ordered = sorted(samples or [median])
+    return {"median_ns": median, "min_ns": ordered[0], "max_ns": ordered[-1], "samples_ns": ordered}
 
 
 def results(category, variants, file_bytes=None):
@@ -57,8 +57,10 @@ class FormattingTests(unittest.TestCase):
 
     def test_russian_plurals(self):
         repetitions = report.TEXT["ru"]["repetitions"]
-        self.assertEqual([repetitions(count) for count in (1, 3, 5, 11, 21)],
-                         ["1 повтор", "3 повтора", "5 повторов", "11 повторов", "21 повтор"])
+        self.assertEqual(
+            [repetitions(count) for count in (1, 3, 5, 11, 21)],
+            ["1 повтор", "3 повтора", "5 повторов", "11 повторов", "21 повтор"],
+        )
 
 
 class ComparisonTests(unittest.TestCase):
@@ -75,7 +77,10 @@ class ComparisonTests(unittest.TestCase):
         self.assertEqual(report.comparison(measurement(1), measurement(1000), self.text), "1000× faster")
 
     def test_overlapping_interquartile_ranges_are_not_a_difference(self):
-        measured, reference = measurement(150, 90, 100, 150, 200, 300), measurement(190, 150, 180, 190, 210, 260)
+        measured, reference = (
+            measurement(150, 90, 100, 150, 200, 300),
+            measurement(190, 150, 180, 190, 210, 260),
+        )
         self.assertEqual(report.quartiles(measured), (100, 200))
         self.assertEqual(report.comparison(measured, reference, self.text), "≈ same")
 
@@ -105,38 +110,50 @@ class SectionTests(unittest.TestCase):
             ("links", "Rust", 64, 100_000): sample(),
             ("objects", "C#", 32, 100_000): sample("objects", "C#", 32),
         }
-        headings = [line for line in report.section(reports, "en", "docs").splitlines() if line.startswith("#")]
-        self.assertEqual(headings, [
-            "## Doublets vs SQLite as storage for links",
-            "### Rust doublets vs SQLite",
-            "#### 32 bit address/id space benchmarks",
-            "#### 64 bit address/id space benchmarks",
-            "##### 100,000 links",
-            "##### 1,000,000 links",
-            "### C# doublets vs SQLite",
-            "#### 32 bit address/id space benchmarks",
-            "#### 64 bit address/id space benchmarks",
-            "## Doublets vs SQLite as storage for objects",
-            "### Rust doublets vs SQLite",
-            "#### 32 bit address/id space benchmarks",
-            "#### 64 bit address/id space benchmarks",
-            "### C# doublets vs SQLite",
-            "#### 32 bit address/id space benchmarks",
-            "##### 100,000 blog posts",
-            "#### 64 bit address/id space benchmarks",
-        ])
+        headings = [
+            line for line in report.section(reports, "en", "docs").splitlines() if line.startswith("#")
+        ]
+        self.assertEqual(
+            headings,
+            [
+                "## Doublets vs SQLite as storage for links",
+                "### Rust doublets vs SQLite",
+                "#### 32 bit address/id space benchmarks",
+                "#### 64 bit address/id space benchmarks",
+                "##### 100,000 links",
+                "##### 1,000,000 links",
+                "### C# doublets vs SQLite",
+                "#### 32 bit address/id space benchmarks",
+                "#### 64 bit address/id space benchmarks",
+                "## Doublets vs SQLite as storage for objects",
+                "### Rust doublets vs SQLite",
+                "#### 32 bit address/id space benchmarks",
+                "#### 64 bit address/id space benchmarks",
+                "### C# doublets vs SQLite",
+                "#### 32 bit address/id space benchmarks",
+                "##### 100,000 blog posts",
+                "#### 64 bit address/id space benchmarks",
+            ],
+        )
 
     def test_missing_groups_and_provenance(self):
         url = "https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/1"
-        reports = {("links", "Rust", 64, 100_000): sample(run_url=url, date="2026-10-04", machine="ubuntu-24.04")}
+        reports = {
+            ("links", "Rust", 64, 100_000): sample(run_url=url, date="2026-10-04", machine="ubuntu-24.04")
+        }
         text = report.section(reports, "en", None)
         self.assertEqual(text.count("_No results yet._"), 7)
-        self.assertIn(f"_3 repetitions after a warm-up, median time per operation. SQLite 3.53.2, ubuntu-24.04, "
-                      f"[GitHub Actions run]({url}) on 2026-10-04._", text)
+        self.assertIn(
+            f"_3 repetitions after a warm-up, median time per operation. SQLite 3.53.2, ubuntu-24.04, "
+            f"[GitHub Actions run]({url}) on 2026-10-04._",
+            text,
+        )
         self.assertNotIn("![", text)
 
     def test_charts_are_linked_per_category_language_and_bits(self):
-        text = report.section({("objects", "C#", 32, 100_000): sample("objects", "C#", 32)}, "ru", "docs/benchmarks")
+        text = report.section(
+            {("objects", "C#", 32, 100_000): sample("objects", "C#", 32)}, "ru", "docs/benchmarks"
+        )
         self.assertIn("(docs/benchmarks/objects-csharp-32.png)", text)
         self.assertIn("## Дуплеты против SQLite как хранилище объектов", text)
         self.assertIn("локальный запуск", text)
@@ -150,22 +167,46 @@ class DocumentTests(unittest.TestCase):
 
     def test_only_the_marked_section_is_replaced(self):
         document = f"before\n{report.START_MARKER}\nold\n{report.END_MARKER}\nafter\n"
-        self.assertEqual(report.replace_section(document, "new\n"),
-                         f"before\n{report.START_MARKER}\n{report.LINT_OFF}\nnew\n{report.LINT_ON}\n"
-                         f"{report.END_MARKER}\nafter\n")
+        self.assertEqual(
+            report.replace_section(document, "new\n"),
+            f"before\n{report.START_MARKER}\n{report.LINT_OFF}\nnew\n{report.LINT_ON}\n"
+            f"{report.END_MARKER}\nafter\n",
+        )
         with self.assertRaises(ValueError):
             report.replace_section("no markers", "new\n")
 
     def test_usage_starts_with_the_summary(self):
         with contextlib.redirect_stdout(io.StringIO()) as output, self.assertRaises(SystemExit):
             report.main(["--help"])
-        self.assertIn("Turns the benchmark JSON reports into the README results sections and charts.", output.getvalue())
+        self.assertIn(
+            "Turns the benchmark JSON reports into the README results sections and charts.", output.getvalue()
+        )
 
     def test_duplicate_reports_are_rejected(self):
         for name in ("a.json", "b.json"):
             (self.root / name).write_text(json.dumps(sample()), encoding="utf-8")
         with self.assertRaises(ValueError):
             report.load(self.root)
+
+    def test_empty_artifact_download_cannot_generate_a_successful_report(self):
+        with self.assertRaisesRegex(ValueError, "No benchmark reports"):
+            report.load(self.root)
+
+    def test_incomplete_and_nonfinite_measurements_are_rejected(self):
+        for broken in ("missing operation", "missing baseline", "NaN", "negative"):
+            with self.subTest(broken=broken):
+                data = sample()
+                if broken == "missing operation":
+                    del data["results"][0]["operations"]["create"]
+                elif broken == "missing baseline":
+                    data["results"] = data["results"][2:]
+                else:
+                    data["results"][0]["operations"]["create"]["median_ns"] = (
+                        float("nan") if broken == "NaN" else -1
+                    )
+                (self.root / "broken.json").write_text(json.dumps(data), encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    report.load(self.root)
 
     @unittest.skipUnless(importlib.util.find_spec("matplotlib"), "matplotlib is not installed")
     def test_main_updates_readmes_and_writes_charts(self):
@@ -174,11 +215,24 @@ class DocumentTests(unittest.TestCase):
         for index, data in enumerate((sample(), sample(size=1_000_000), sample("objects", "C#", 32))):
             (results_directory / f"{index}.json").write_text(json.dumps(data), encoding="utf-8")
         for name in ("README.md", "README.ru.md"):
-            (self.root / name).write_text(f"intro\n{report.START_MARKER}\n{report.END_MARKER}\n", encoding="utf-8")
-        report.main([str(results_directory), "--readme", str(self.root / "README.md"),
-                     "--readme", str(self.root / "README.ru.md"), "--charts", str(self.root / "docs")])
-        self.assertEqual(sorted(path.name for path in (self.root / "docs").iterdir()),
-                         ["links-rust-64.png", "objects-csharp-32.png"])
+            (self.root / name).write_text(
+                f"intro\n{report.START_MARKER}\n{report.END_MARKER}\n", encoding="utf-8"
+            )
+        report.main(
+            [
+                str(results_directory),
+                "--readme",
+                str(self.root / "README.md"),
+                "--readme",
+                str(self.root / "README.ru.md"),
+                "--charts",
+                str(self.root / "docs"),
+            ]
+        )
+        self.assertEqual(
+            sorted(path.name for path in (self.root / "docs").iterdir()),
+            ["links-rust-64.png", "objects-csharp-32.png"],
+        )
         english = (self.root / "README.md").read_text(encoding="utf-8")
         self.assertIn("![Rust doublets vs SQLite, 64 bit, links](docs/links-rust-64.png)", english)
         self.assertIn("Дуплеты на C# против SQLite", (self.root / "README.ru.md").read_text(encoding="utf-8"))

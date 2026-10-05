@@ -1,0 +1,23 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.10
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+        files: ^(scripts|experiments/ci)/.*\.py$
+      - id: ruff-format
+        files: ^(scripts|experiments/ci)/.*\.py$
+  - repo: local
+    hooks:
+      - id: rustfmt
+        name: Rust formatting
+        entry: cargo fmt --manifest-path rust/Cargo.toml --check
+        language: system
+        files: ^rust/.*\.rs$
+        pass_filenames: false
+      - id: dotnet-format
+        name: C# whitespace formatting
+        entry: dotnet format whitespace csharp/SQLiteVSDoublets.slnx --verify-no-changes
+        language: system
+        files: ^csharp/.*\.cs$
+        pass_filenames: false

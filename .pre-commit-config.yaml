@@ -4,9 +4,9 @@ repos:
     hooks:
       - id: ruff-check
         args: [--fix]
-        files: ^(scripts|experiments/ci)/.*\.py$
+        files: ^(scripts|experiments)/.*\.py$
       - id: ruff-format
-        files: ^(scripts|experiments/ci)/.*\.py$
+        files: ^(scripts|experiments)/.*\.py$
   - repo: local
     hooks:
       - id: rustfmt

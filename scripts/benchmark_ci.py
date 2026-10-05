@@ -24,6 +24,14 @@ VARIANTS = {
 }
 
 
+def expected_variants(category, language):
+    """C# also benchmarks the System.Data.SQLite provider introduced on main."""
+    variants = VARIANTS[category]
+    if language in ("C#", "csharp"):
+        variants = variants | {"SystemDataSQLite_Memory", "SystemDataSQLite_File"}
+    return variants
+
+
 def matrix(sizes):
     if not isinstance(sizes, list) or not 1 <= len(sizes) <= 32:
         raise ValueError("sizes must contain between 1 and 32 integers (at most 256 jobs)")
@@ -70,7 +78,7 @@ def verify(directory, sizes, sha, verbose=False, tree=None):
         if identity != expected_identity:
             raise ValueError(f"{path}: table identity {identity} differs from {expected_identity}")
         variants = {result["variant"] for result in data["results"]}
-        if variants != VARIANTS[row["category"]]:
+        if variants != expected_variants(row["category"], row["language"]):
             raise ValueError(f"{path}: storage variants differ from the complete benchmark plan")
         if verbose:
             print(f"Verified {path.name} from {sha}", file=sys.stderr)

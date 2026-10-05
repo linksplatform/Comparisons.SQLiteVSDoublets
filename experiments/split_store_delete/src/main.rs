@@ -25,15 +25,35 @@ fn run<D: Doublets<u32>>(mut store: D, steps: &[Step]) -> u32 {
 
 fn main() {
     let scenarios: [(&str, Vec<Step>); 6] = [
-        ("point: update to itself, delete", vec![("create", 1, 1, 1), ("update", 1, 1, 1), ("delete", 1, 0, 0)]),
-        ("point: delete", vec![("create", 1, 1, 1), ("delete", 1, 0, 0)]),
+        (
+            "point: update to itself, delete",
+            vec![
+                ("create", 1, 1, 1),
+                ("update", 1, 1, 1),
+                ("delete", 1, 0, 0),
+            ],
+        ),
+        (
+            "point: delete",
+            vec![("create", 1, 1, 1), ("delete", 1, 0, 0)],
+        ),
         (
             "swap a link that references itself, delete",
-            vec![("create", 1, 1, 1), ("create", 2, 1, 2), ("update", 2, 2, 1), ("delete", 2, 0, 0), ("delete", 1, 0, 0)],
+            vec![
+                ("create", 1, 1, 1),
+                ("create", 2, 1, 2),
+                ("update", 2, 2, 1),
+                ("delete", 2, 0, 0),
+                ("delete", 1, 0, 0),
+            ],
         ),
         (
             "swap a link that references itself, no delete",
-            vec![("create", 1, 1, 1), ("create", 2, 1, 2), ("update", 2, 2, 1)],
+            vec![
+                ("create", 1, 1, 1),
+                ("create", 2, 1, 2),
+                ("update", 2, 2, 1),
+            ],
         ),
         (
             "swap links without self references, delete",
@@ -51,7 +71,14 @@ fn main() {
         ),
         (
             "create a link that references itself, delete",
-            vec![("create", 1, 1, 1), ("create", 2, 1, 2), ("create", 3, 3, 1), ("delete", 2, 0, 0), ("delete", 3, 0, 0), ("delete", 1, 0, 0)],
+            vec![
+                ("create", 1, 1, 1),
+                ("create", 2, 1, 2),
+                ("create", 3, 3, 1),
+                ("delete", 2, 0, 0),
+                ("delete", 3, 0, 0),
+                ("delete", 1, 0, 0),
+            ],
         ),
     ];
     let kind = std::env::args().nth(1).unwrap_or_default();
@@ -70,12 +97,20 @@ fn main() {
                 }
                 eprintln!("after {operation} {id} {from} {to}:");
                 for link in 1..=3 {
-                    eprintln!("  {link}: {:?} {:?} unused={}", store.get_data_part(link), store.get_index_part(link), store.is_unused(link));
+                    eprintln!(
+                        "  {link}: {:?} {:?} unused={}",
+                        store.get_data_part(link),
+                        store.get_index_part(link),
+                        store.is_unused(link)
+                    );
                 }
             }
             store.count()
         }
-        _ => run(split::Store::<u32, _, _>::new(Global::new(), Global::new()).unwrap(), steps),
+        _ => run(
+            split::Store::<u32, _, _>::new(Global::new(), Global::new()).unwrap(),
+            steps,
+        ),
     };
     println!("ok, count = {count}");
 }

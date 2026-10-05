@@ -14,8 +14,8 @@ the Python tools:
 python -m venv .venv
 . .venv/bin/activate
 python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt
-ruff check scripts experiments/ci
-ruff format --check scripts experiments/ci
+ruff check scripts experiments
+ruff format --check scripts experiments
 mypy scripts
 python scripts/ci_checks.py
 python -m unittest discover -s scripts -v
@@ -37,13 +37,17 @@ pre-commit hooks are configured in `.pre-commit-config.yaml`.
 
 ## Dependencies and diagnostics
 
+Language workflows also verify formatting in every Rust and C# experiment;
+the Python formatting commands cover all experiment scripts.
+
 The dependency workflow audits Python, every committed Rust lockfile (including
 experiments), and direct and transitive NuGet packages weekly and on relevant
 changes. Run `pip-audit -r scripts/requirements.txt -r scripts/requirements-ci.txt`,
 `cargo audit --file <Cargo.lock> --deny warnings`, and
 `python scripts/audit_dotnet.py` locally with the workflow tool versions.
 
-Benchmark inputs are bounded to ten million links and one million objects. The
+Benchmark inputs are bounded to ten million links and one million objects,
+with at most 32 requested sizes (256 jobs). The
 workflow's `verbose` input enables full Rust backtraces and artifact/publication
 diagnostics; the default is off. Missing, stale, duplicate, or invalid reports
 fail validation. Publication retries only concurrent branch updates and rebuilds

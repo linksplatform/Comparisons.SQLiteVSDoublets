@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['csharp/**', '.github/workflows/csharp.yml', '.github/actions/**']
+    paths: ['csharp/**', 'experiments/**/*.cs', 'experiments/**/*.csproj', 'experiments/system_data_sqlite/**', '.github/workflows/csharp.yml', '.github/actions/**']
   pull_request:
-    paths: ['csharp/**', '.github/workflows/csharp.yml', '.github/actions/**']
+    paths: ['csharp/**', 'experiments/**/*.cs', 'experiments/**/*.csproj', 'experiments/system_data_sqlite/**', '.github/workflows/csharp.yml', '.github/actions/**']
 
 permissions:
   contents: read
@@ -38,8 +38,17 @@ jobs:
         with:
           global-json-file: csharp/global.json
       - run: dotnet format whitespace SQLiteVSDoublets.slnx --verify-no-changes
+      - name: Format every C# experiment
+        shell: bash
+        run: |
+          while IFS= read -r project; do
+            dotnet format whitespace "../$project" --verify-no-changes
+          done < <(git -C .. ls-files 'experiments/**/*.csproj')
       - run: dotnet build -c Release -warnaserror
       - run: dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m
+
+      - name: Check SQLite provider reports
+        run: python ../experiments/system_data_sqlite/check_reports.py
 
   pipeline-status:
     name: Pipeline Status

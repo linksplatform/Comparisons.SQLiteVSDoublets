@@ -6,6 +6,7 @@ updates:
     - "/experiments/csharp_objects_profile"
     - "/experiments/csharp_split_linked_list"
     - "/experiments/csharp_tree_delete"
+    - "/experiments/system_data_sqlite"
   schedule:
     interval: daily
   open-pull-requests-limit: 10

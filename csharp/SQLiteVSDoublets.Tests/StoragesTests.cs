@@ -31,6 +31,13 @@ public class StoragesTests
 
     public static TheoryData<string> ObjectsVariants => [.. Harness.ObjectsVariants];
 
+    [Theory, InlineData("SystemDataSQLite_Memory"), InlineData("SystemDataSQLite_File")]
+    public void SystemDataSQLiteVariantsAreRegistered(string variant)
+    {
+        Assert.Contains(variant, Harness.LinksVariants);
+        Assert.Contains(variant, Harness.ObjectsVariants);
+    }
+
     [Theory, MemberData(nameof(LinksVariants))]
     public void EveryLinksVariantPassesTheLifecycle(string variant)
     {
@@ -103,9 +110,31 @@ public class StoragesTests
     {
         RoundTrip(SQLiteBlogPosts<uint>.InMemory());
         RoundTrip(SQLiteBlogPosts<ulong>.InMemory());
+        RoundTrip(SQLiteBlogPosts<uint>.InMemory(SQLiteProvider.SystemDataSQLite));
+        RoundTrip(SQLiteBlogPosts<ulong>.InMemory(SQLiteProvider.SystemDataSQLite));
         RoundTrip(new DoubletsBlogPosts<uint>(Harness.United<uint>(new HeapResizableDirectMemory(), external: true), cached));
         RoundTrip(new DoubletsBlogPosts<ulong>(Harness.United<ulong>(new HeapResizableDirectMemory(), external: true), cached));
         RoundTrip(new DoubletsBlogPosts<uint>(Harness.Split<uint>(new HeapResizableDirectMemory(), new HeapResizableDirectMemory(), external: true), cached));
         RoundTrip(new DoubletsBlogPosts<ulong>(Harness.Split<ulong>(new HeapResizableDirectMemory(), new HeapResizableDirectMemory(), external: true), cached));
     }
+
+    [Theory, InlineData(SQLiteProvider.MicrosoftDataSqlite), InlineData(SQLiteProvider.SystemDataSQLite)]
+    public void SQLiteCommandsCanBeReusedAfterRollback(SQLiteProvider provider)
+    {
+        using var links = SQLiteLinks<ulong>.InMemory(provider);
+        Assert.Throws<InvalidOperationException>(() => links.Transaction<int>(() =>
+        {
+            links.Create(1, 2);
+            throw new InvalidOperationException("roll back the inserted link");
+        }));
+        Assert.Equal(0UL, links.Count());
+        Assert.Null(links.Search(1, 2));
+        var id = links.Transaction(() => links.Create(3, 4));
+        Assert.Equal(new Link<ulong>(id, 3, 4), links.Get(id));
+        Assert.Equal(1UL, links.Count());
+    }
+
+    [Fact]
+    public void BothSQLiteProvidersUseTheSameNativeEngine() =>
+        Assert.Equal(SQLiteStorage.Version(SQLiteProvider.MicrosoftDataSqlite), SQLiteStorage.Version(SQLiteProvider.SystemDataSQLite));
 }

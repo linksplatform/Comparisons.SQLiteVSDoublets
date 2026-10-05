@@ -170,9 +170,11 @@ def validate(report, path):
 
 
 def baseline(variant):
-    """Doublets are compared with SQLite of the same durability: volatile with memory, non-volatile with file."""
+    """Compare with Microsoft.Data.Sqlite of the same durability, including the System.Data.SQLite provider."""
     if variant.startswith("SQLite"):
         return None
+    if variant.startswith("SystemDataSQLite_"):
+        return variant.replace("SystemDataSQLite_", "SQLite_", 1)
     return "SQLite_File" if "_NonVolatile" in variant else "SQLite_Memory"
 
 

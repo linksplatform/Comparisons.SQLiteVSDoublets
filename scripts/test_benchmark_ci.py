@@ -14,7 +14,8 @@ def complete_sample(category, language, bits, size, **extra):
     data = sample(category, language, bits, size, **extra)
     measured = data["results"][0]
     data["results"] = [
-        dict(copy.deepcopy(measured), variant=variant) for variant in sorted(ci.VARIANTS[category])
+        dict(copy.deepcopy(measured), variant=variant)
+        for variant in sorted(ci.expected_variants(category, language))
     ]
     return data
 
@@ -82,6 +83,13 @@ class ArtifactTests(unittest.TestCase):
 
 
 class MatrixTests(unittest.TestCase):
+    def test_csharp_preserves_both_sqlite_providers(self):
+        for category in ("links", "objects"):
+            self.assertEqual(
+                ci.expected_variants(category, "C#") - ci.expected_variants(category, "Rust"),
+                {"SystemDataSQLite_Memory", "SystemDataSQLite_File"},
+            )
+
     def test_default_matrix_preserves_twenty_tables(self):
         rows = ci.matrix([100000, 1000000, 10000000])
         self.assertEqual(len(rows), 20)

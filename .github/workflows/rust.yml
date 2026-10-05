@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['rust/**', '.github/workflows/rust.yml', '.github/actions/**']
+    paths: ['rust/**', 'experiments/**/*.rs', 'experiments/**/Cargo.toml', 'experiments/**/Cargo.lock', '.github/workflows/rust.yml', '.github/actions/**']
   pull_request:
-    paths: ['rust/**', '.github/workflows/rust.yml', '.github/actions/**']
+    paths: ['rust/**', 'experiments/**/*.rs', 'experiments/**/Cargo.toml', 'experiments/**/Cargo.lock', '.github/workflows/rust.yml', '.github/actions/**']
 
 permissions:
   contents: read
@@ -44,7 +44,13 @@ jobs:
       - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2
         with:
           workspaces: rust
-      - run: cargo fmt --check
+      - name: Format every Rust crate
+        shell: bash
+        run: |
+          cargo fmt --check
+          while IFS= read -r manifest; do
+            cargo fmt --manifest-path "../$manifest" --check
+          done < <(git -C .. ls-files 'experiments/**/Cargo.toml')
       - run: cargo clippy --locked --release --all-targets -- -D warnings
       - run: cargo test --locked --release
 

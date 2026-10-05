@@ -53,6 +53,28 @@ rows compare with Microsoft.Data.Sqlite of the same durability. Published
 tables from older runs include only the providers measured in those runs;
 the next Benchmarks run adds the new rows.
 
+C# object benchmarks also support `PostgreSQL_EFCore` using
+[Npgsql.EntityFrameworkCore.PostgreSQL](https://www.npgsql.org/efcore/).
+Set `POSTGRESQL_CONNECTION_STRING` to include it in the default object comparison;
+embedded benchmarks work without a PostgreSQL server. Explicitly selecting it
+without configuration fails with a setup message. Both id widths use the same
+deterministic posts, scattered point reads, validated operations, warm-ups and
+transaction boundaries as the other object stores. EF saves one post at a time,
+clears tracking after each save, reads without tracking and deletes by id.
+Each warm-up and repetition creates and drops its own generated schema; the
+database and other schemas remain intact. The configured user needs permission
+to connect and create schemas in a benchmark database.
+
+PostgreSQL is a server database and EF Core adds ORM and network costs. Its row
+shows absolute timings without an embedded-storage speed ratio. `server_bytes`
+measures the benchmark table, indexes and TOAST storage after creation, shown in
+a separate server-relations column; it excludes shared WAL, server memory and
+local client files. JSON and generated tables record PostgreSQL, Npgsql EF Core
+and EF Core versions. Existing published measurements stay intact. CI adds a
+pinned PostgreSQL service to each C# object benchmark job so all compared
+variants still run on the same machine. Set `POSTGRESQL_VERBOSE=1` to log EF
+diagnostics to stderr; logging is off by default and sensitive values are disabled.
+
 Every repetition runs on a fresh store in an empty directory, after discarded
 warm-up repetitions on up to 10,000 records that run for at least a second, so
 the .NET JIT has already optimized the code. Each operation is one
@@ -93,6 +115,23 @@ dotnet run -c Release --project csharp/SQLiteVSDoublets -- \
   --output results/links-csharp-64-1000.json
 # print the tables, add --readme README.md --charts docs/benchmarks to update
 python3 scripts/benchmark_report.py results
+```
+
+Run a bounded PostgreSQL comparison:
+
+```bash
+docker run -d --name benchmark-postgres -p 127.0.0.1:5432:5432 \
+  -e POSTGRES_USER=benchmark -e POSTGRES_PASSWORD=benchmark \
+  -e POSTGRES_DB=benchmark postgres:18.3
+export POSTGRESQL_CONNECTION_STRING='Host=127.0.0.1;Database=benchmark;Username=benchmark;Password=benchmark'
+dotnet run -c Release --project csharp/SQLiteVSDoublets -- \
+  objects 64 1000 --repetitions 3 \
+  --variants SQLite_Memory,SQLite_File,PostgreSQL_EFCore \
+  --output results/objects-csharp-64-1000.json
+python3 scripts/benchmark_report.py results
+python3 experiments/postgresql/check_reports.py
+docker stop benchmark-postgres
+docker rm benchmark-postgres
 ```
 
 Notes:

@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['csharp/**', 'experiments/**/*.cs', 'experiments/**/*.csproj', 'experiments/system_data_sqlite/**', '.github/workflows/csharp.yml', '.github/actions/**', 'scripts/check_pipeline_status.py', 'scripts/ci_process.py', 'scripts/workflow_yaml.py']
+    paths: ['csharp/**', 'experiments/**/*.cs', 'experiments/**/*.csproj', 'experiments/system_data_sqlite/**', 'experiments/postgresql/**', '.github/workflows/csharp.yml', '.github/actions/**', 'scripts/check_pipeline_status.py', 'scripts/ci_process.py', 'scripts/workflow_yaml.py']
   pull_request:
-    paths: ['csharp/**', 'experiments/**/*.cs', 'experiments/**/*.csproj', 'experiments/system_data_sqlite/**', '.github/workflows/csharp.yml', '.github/actions/**', 'scripts/check_pipeline_status.py', 'scripts/ci_process.py', 'scripts/workflow_yaml.py']
+    paths: ['csharp/**', 'experiments/**/*.cs', 'experiments/**/*.csproj', 'experiments/system_data_sqlite/**', 'experiments/postgresql/**', '.github/workflows/csharp.yml', '.github/actions/**', 'scripts/check_pipeline_status.py', 'scripts/ci_process.py', 'scripts/workflow_yaml.py']
 
 permissions:
   contents: read
@@ -50,9 +50,40 @@ jobs:
       - name: Check SQLite provider reports
         run: python ../experiments/system_data_sqlite/check_reports.py
 
+  postgresql:
+    name: PostgreSQL integration
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:18.3@sha256:7e32e9833a6fb1c92c32552794cb6ed569d51b445a54907d35fc112ef39684db
+        env:
+          POSTGRES_USER: benchmark
+          POSTGRES_PASSWORD: benchmark
+          POSTGRES_DB: benchmark
+        ports: ['5432:5432']
+        options: --health-cmd "pg_isready -U benchmark" --health-interval 5s --health-timeout 5s --health-retries 12
+    env:
+      POSTGRESQL_CONNECTION_STRING: Host=127.0.0.1;Database=benchmark;Username=benchmark;Password=benchmark
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/prepare-ci # zizmor: ignore[self-repository] actionlint 1.7.12 lacks $/ syntax
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          global-json-file: csharp/global.json
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.13'
+      - run: dotnet build -c Release -warnaserror
+      - run: dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --filter-class '*PostgreSQLTests' --timeout 5m
+      - run: python ../experiments/postgresql/check_reports.py
+
   pipeline-status:
     name: Pipeline Status
-    needs: [test]
+    needs: [test, postgresql]
     if: ${{ !cancelled() }}
     runs-on: ubuntu-24.04
     timeout-minutes: 5

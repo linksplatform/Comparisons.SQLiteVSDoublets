@@ -31,6 +31,7 @@ public static class Harness
 
     public static readonly string[] ObjectsVariants =
     [
+        "PostgreSQL_EFCore",
         "SQLite_Memory",
         "SQLite_File",
         "SystemDataSQLite_Memory",
@@ -225,6 +226,8 @@ public static class Harness
 
     public sealed record Measurement(string Variant, ulong? FileBytes, List<(string Operation, List<double> Samples)> Operations)
     {
+        public ulong? ServerBytes { get; init; }
+
         public JsonObject ToJson()
         {
             var operations = new JsonObject();
@@ -241,7 +244,12 @@ public static class Harness
                     ["samples_ns"] = new JsonArray(samples.Select(sample => (JsonNode)sample).ToArray()),
                 };
             }
-            return new JsonObject { ["variant"] = Variant, ["file_bytes"] = FileBytes, ["operations"] = operations };
+            var result = new JsonObject { ["variant"] = Variant, ["file_bytes"] = FileBytes, ["operations"] = operations };
+            if (ServerBytes is not null)
+            {
+                result["server_bytes"] = ServerBytes;
+            }
+            return result;
         }
     }
 
@@ -258,7 +266,8 @@ public static class Harness
         int repetitions,
         string directory,
         Func<string, TStorage> open,
-        Func<TStorage, ulong, Action, List<(string, TimeSpan)>> lifecycle)
+        Func<TStorage, ulong, Action, List<(string, TimeSpan)>> lifecycle,
+        Func<TStorage, ulong>? serverBytes = null)
         where TStorage : IDisposable
     {
         (List<(string, TimeSpan)>, ulong) Run(ulong size)
@@ -269,11 +278,15 @@ public static class Harness
             GC.WaitForPendingFinalizers();
             ulong fileBytes = 0;
             List<(string, TimeSpan)> timings;
-            using (var storage = open(workspace))
+            try
             {
-                timings = lifecycle(storage, size, () => fileBytes = DirectoryBytes(workspace));
+                using var storage = open(workspace);
+                timings = lifecycle(storage, size, () => fileBytes = serverBytes?.Invoke(storage) ?? DirectoryBytes(workspace));
             }
-            Directory.Delete(workspace, true);
+            finally
+            {
+                Directory.Delete(workspace, true);
+            }
             return (timings, fileBytes);
         }
 
@@ -288,7 +301,9 @@ public static class Harness
         {
             var (timings, fileBytes) = Run(n);
             Console.Error.WriteLine($"{variant} #{repetition}: {Summary(timings, n)}");
-            measurement = measurement with { FileBytes = fileBytes > 0 ? fileBytes : null };
+            measurement = serverBytes is null
+                ? measurement with { FileBytes = fileBytes > 0 ? fileBytes : null }
+                : measurement with { ServerBytes = fileBytes };
             foreach (var (operation, elapsed) in timings)
             {
                 var nsPerOperation = elapsed.TotalNanoseconds / n;
@@ -346,6 +361,12 @@ public static class Harness
     public static Measurement MeasureObjects<T>(string variant, ulong n, int repetitions, string directory)
         where T : struct, IBinaryInteger<T>, IUnsignedNumber<T>, IMinMaxValue<T>
     {
+        if (variant == "PostgreSQL_EFCore")
+        {
+            return Measure(variant, n, repetitions, directory,
+                _ => new PostgreSQLBlogPosts<T>(PostgreSQLBlogPosts<T>.ConnectionString()),
+                ObjectsLifecycle, storage => storage.ServerBytes());
+        }
         var cached = variant.EndsWith("_Cached");
         Func<string, IBlogPostsStorage<T>> open = variant.Replace("_Uncached", "").Replace("_Cached", "") switch
         {

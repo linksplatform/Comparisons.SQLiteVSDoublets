@@ -29,7 +29,7 @@ public class StoragesTests
 
     public static TheoryData<string> LinksVariants => [.. Harness.LinksVariants];
 
-    public static TheoryData<string> ObjectsVariants => [.. Harness.ObjectsVariants];
+    public static TheoryData<string> ObjectsVariants => [.. Harness.ObjectsVariants.Where(variant => variant != "PostgreSQL_EFCore")];
 
     [Theory, InlineData("SystemDataSQLite_Memory"), InlineData("SystemDataSQLite_File")]
     public void SystemDataSQLiteVariantsAreRegistered(string variant)

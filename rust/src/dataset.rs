@@ -1,5 +1,7 @@
 //! Deterministic data shared by every storage and by the C# implementation.
 
+use std::sync::{Arc, LazyLock};
+
 const GOLDEN_GAMMA: u64 = 0x9E37_79B9_7F4A_7C15;
 
 pub fn splitmix64(x: u64) -> u64 {
@@ -53,10 +55,11 @@ fn gcd(a: u64, b: u64) -> u64 {
     if b == 0 { a } else { gcd(b, a % b) }
 }
 
+/// Strings are shared like in C#, so neither the dataset nor a sequences cache copies them.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct BlogPost {
-    pub title: String,
-    pub content: String,
+    pub title: Arc<str>,
+    pub content: Arc<str>,
     /// Seconds since the Unix epoch.
     pub publication_date: u64,
 }
@@ -79,10 +82,12 @@ const PARAGRAPHS: [&str; 5] = [
     "Ut a eleifend augue, eget posuere augue. Proin purus neque, pretium condimentum ipsum ut, venenatis tincidunt nunc. In vitae odio in justo pharetra tincidunt. Maecenas vel tellus interdum, suscipit tellus sit amet, cursus justo. Mauris sollicitudin euismod molestie. Cras eros nisi, molestie vel elementum ut, consequat ac nunc. In consectetur nulla vitae interdum elementum. Praesent faucibus magna et iaculis congue. Curabitur convallis cursus porttitor. Praesent hendrerit justo ut sem convallis sollicitudin eu at odio.",
 ];
 
+static CONTENTS: LazyLock<[Arc<str>; 5]> = LazyLock::new(|| PARAGRAPHS.map(Arc::from));
+
 pub fn blog_post(i: u64) -> BlogPost {
     BlogPost {
-        title: format!("Blog post {i}"),
-        content: PARAGRAPHS[(i % 5) as usize].to_owned(),
+        title: format!("Blog post {i}").into(),
+        content: Arc::clone(&CONTENTS[(i % 5) as usize]),
         publication_date: SEPTEMBER_2020 + splitmix64(i) % THIRTY_DAYS,
     }
 }

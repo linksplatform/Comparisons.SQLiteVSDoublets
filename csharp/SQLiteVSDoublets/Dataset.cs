@@ -110,9 +110,13 @@ public sealed record BlogPost(string Title, string Content, ulong PublicationDat
     private static ulong Bytes(string text)
     {
         ulong sum = 0;
-        foreach (var b in Encoding.UTF8.GetBytes(text))
+        Span<byte> utf8 = stackalloc byte[4];
+        foreach (var rune in text.EnumerateRunes())
         {
-            sum += b;
+            foreach (var b in utf8[..rune.EncodeToUtf8(utf8)])
+            {
+                sum += b;
+            }
         }
         return sum;
     }

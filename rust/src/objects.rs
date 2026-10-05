@@ -4,7 +4,7 @@ use doublets::{
     data::{AddrToRaw, Flow, LinkReference, RawToAddr},
 };
 use rusqlite::{Connection, OptionalExtension, params};
-use std::{collections::HashMap, marker::PhantomData, path::Path};
+use std::{collections::HashMap, marker::PhantomData, path::Path, sync::Arc};
 
 pub trait BlogPostsStorage<T> {
     fn create(&mut self, post: &BlogPost) -> T;
@@ -134,8 +134,8 @@ pub struct DoubletsBlogPosts<T, D> {
 
 #[derive(Default)]
 struct SequencesCache<T> {
-    sequences: HashMap<String, T>,
-    strings: HashMap<T, String>,
+    sequences: HashMap<Arc<str>, T>,
+    strings: HashMap<T, Arc<str>>,
 }
 
 impl<T: LinkReference, D: Doublets<T>> DoubletsBlogPosts<T, D> {
@@ -157,11 +157,11 @@ impl<T: LinkReference, D: Doublets<T>> DoubletsBlogPosts<T, D> {
         }
     }
 
-    fn sequence(&mut self, string: &str) -> T {
+    fn sequence(&mut self, string: &Arc<str>) -> T {
         if let Some(sequence) = self
             .cache
             .as_ref()
-            .and_then(|cache| cache.sequences.get(string))
+            .and_then(|cache| cache.sequences.get(&**string))
         {
             return *sequence;
         }
@@ -185,7 +185,7 @@ impl<T: LinkReference, D: Doublets<T>> DoubletsBlogPosts<T, D> {
             .get_or_create(balanced, self.unicode_sequence)
             .unwrap();
         if let Some(cache) = &mut self.cache {
-            cache.sequences.insert(string.to_owned(), sequence);
+            cache.sequences.insert(Arc::clone(string), sequence);
         }
         sequence
     }
@@ -204,24 +204,24 @@ impl<T: LinkReference, D: Doublets<T>> DoubletsBlogPosts<T, D> {
         layer[0]
     }
 
-    fn string(&mut self, sequence: T) -> String {
+    fn string(&mut self, sequence: T) -> Arc<str> {
         if let Some(string) = self
             .cache
             .as_ref()
             .and_then(|cache| cache.strings.get(&sequence))
         {
-            return string.clone();
+            return Arc::clone(string);
         }
         if sequence == self.unicode_sequence {
-            return String::new();
+            return Arc::default();
         }
         let mut utf16 = Vec::new();
         self.walk(self.source(sequence), |symbol| {
             utf16.push(RawToAddr.convert(self.source(symbol)).try_into().unwrap());
         });
-        let string = String::from_utf16(&utf16).unwrap();
+        let string: Arc<str> = String::from_utf16(&utf16).unwrap().into();
         if let Some(cache) = &mut self.cache {
-            cache.strings.insert(sequence, string.clone());
+            cache.strings.insert(sequence, Arc::clone(&string));
         }
         string
     }

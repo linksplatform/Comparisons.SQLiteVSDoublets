@@ -144,7 +144,7 @@ fn round_trip<T: LinkReference>(mut posts: impl BlogPostsStorage<T>) {
         publication_date: 0,
     });
     inputs.push(BlogPost {
-        title: String::new(),
+        title: "".into(),
         content: "ab".into(),
         publication_date: u32::MAX as u64 / 2,
     });

@@ -21,7 +21,7 @@ public static class Dataset
     /// </summary>
     public static (ulong From, ulong To) Link(ulong i)
     {
-        var from = 1 + SplitMix64(2 * i) % i;
+        var from = 1 + (SplitMix64(2 * i) % i);
         return (from, i + 1 - from);
     }
 
@@ -57,7 +57,7 @@ public static class Dataset
         }
         for (ulong k = 0; k < n; k++)
         {
-            yield return 1 + k * stride % n;
+            yield return 1 + ((k * stride) % n);
         }
     }
 
@@ -76,7 +76,7 @@ public static class Dataset
     ];
 
     public static BlogPost BlogPost(ulong i) =>
-        new($"Blog post {i}", Paragraphs[i % 5], September2020 + SplitMix64(i) % ThirtyDays);
+        new($"Blog post {i}", Paragraphs[i % 5], September2020 + (SplitMix64(i) % ThirtyDays));
 
     public static ulong BlogPostsChecksum(ulong n)
     {

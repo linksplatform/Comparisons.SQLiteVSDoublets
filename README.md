@@ -95,6 +95,10 @@ Notes:
   degenerate when many links share a source or a target, which makes each
   blog post creation linear in the number of posts
   ([experiments/csharp_objects_profile](experiments/csharp_objects_profile)).
+- The C# split stores keep the default linked list of the internal sources,
+  which doublets 0.5.0 (Rust) does not have; it makes the C# updates faster
+  and the other operations take about the same time
+  ([experiments/csharp_split_linked_list](experiments/csharp_split_linked_list)).
 - Objects stores use external references for numbers and Unicode symbols, so
   raw values never collide with link ids.
 - Reading a string without the cache walks its sequence link by link; in C#

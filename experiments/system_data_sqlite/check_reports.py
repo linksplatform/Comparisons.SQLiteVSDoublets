@@ -2,7 +2,9 @@
 """Check bounded C# provider benchmarks and their JSON reports on every supported OS."""
 
 import json
-import subprocess
+import shutil
+# Only this repository's fixed benchmark command is executed.
+import subprocess  # nosec B404
 import tempfile
 import unittest
 from pathlib import Path
@@ -21,13 +23,16 @@ class ProviderReportsTests(unittest.TestCase):
 
     def test_reports(self):
         """Run both categories and id sizes with memory and file storage for each provider."""
+        dotnet = shutil.which("dotnet")
+        self.assertIsNotNone(dotnet, "dotnet must be installed to run the benchmark")
         with tempfile.TemporaryDirectory() as directory:
             for category, operations in OPERATIONS.items():
                 for bits in (32, 64):
                     with self.subTest(category=category, bits=bits):
                         output = Path(directory) / f"{category}-{bits}.json"
-                        subprocess.run([
-                            "dotnet", str(BENCHMARK), category, str(bits), "1000",
+                        # Arguments are constants and owned temporary paths; no shell is used.
+                        subprocess.run([  # nosec B603
+                            dotnet, str(BENCHMARK), category, str(bits), "1000",
                             "--repetitions", "3", "--variants", ",".join(VARIANTS),
                             "--directory", directory, "--output", str(output),
                         ], check=True)

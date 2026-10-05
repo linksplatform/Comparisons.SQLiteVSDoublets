@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD043 -->
+
 # System.Data.SQLite native library probe
 
 System.Data.SQLite 2.0.4 contains the managed provider and requires a native

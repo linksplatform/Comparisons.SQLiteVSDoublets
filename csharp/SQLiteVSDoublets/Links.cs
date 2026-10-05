@@ -38,9 +38,13 @@ public sealed class SQLiteLinks<T> : SQLiteStorage, ILinksStorage<T> where T : s
     private readonly DbCommand _eachWithFrom;
     private readonly DbCommand _eachWithTo;
 
-    public static SQLiteLinks<T> Open(string path, SQLiteProvider provider = SQLiteProvider.MicrosoftDataSqlite) => new(path, provider);
+    public static SQLiteLinks<T> Open(string path) => Open(path, SQLiteProvider.MicrosoftDataSqlite);
 
-    public static SQLiteLinks<T> InMemory(SQLiteProvider provider = SQLiteProvider.MicrosoftDataSqlite) => new(":memory:", provider);
+    public static SQLiteLinks<T> Open(string path, SQLiteProvider provider) => new(path, provider);
+
+    public static SQLiteLinks<T> InMemory() => InMemory(SQLiteProvider.MicrosoftDataSqlite);
+
+    public static SQLiteLinks<T> InMemory(SQLiteProvider provider) => new(":memory:", provider);
 
     private SQLiteLinks(string path, SQLiteProvider provider) : base(path, "links", """
         CREATE TABLE links (id INTEGER PRIMARY KEY, "from" INTEGER NOT NULL, "to" INTEGER NOT NULL);

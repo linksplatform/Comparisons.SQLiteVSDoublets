@@ -32,9 +32,13 @@ public sealed class SQLiteBlogPosts<T> : SQLiteStorage, IBlogPostsStorage<T> whe
     private readonly DbCommand _each;
     private readonly DbCommand _delete;
 
-    public static SQLiteBlogPosts<T> Open(string path, SQLiteProvider provider = SQLiteProvider.MicrosoftDataSqlite) => new(path, provider);
+    public static SQLiteBlogPosts<T> Open(string path) => Open(path, SQLiteProvider.MicrosoftDataSqlite);
 
-    public static SQLiteBlogPosts<T> InMemory(SQLiteProvider provider = SQLiteProvider.MicrosoftDataSqlite) => new(":memory:", provider);
+    public static SQLiteBlogPosts<T> Open(string path, SQLiteProvider provider) => new(path, provider);
+
+    public static SQLiteBlogPosts<T> InMemory() => InMemory(SQLiteProvider.MicrosoftDataSqlite);
+
+    public static SQLiteBlogPosts<T> InMemory(SQLiteProvider provider) => new(":memory:", provider);
 
     private SQLiteBlogPosts(string path, SQLiteProvider provider) : base(path, "blog_posts",
         "CREATE TABLE blog_posts (id INTEGER PRIMARY KEY, title TEXT NOT NULL, content TEXT NOT NULL, publication_date INTEGER NOT NULL)", provider)

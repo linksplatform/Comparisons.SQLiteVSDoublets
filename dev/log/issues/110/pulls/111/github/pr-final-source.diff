@@ -1122,10 +1122,10 @@ index 0000000..cd49717
 +    main()
 diff --git a/experiments/ci/collect_evidence.py b/experiments/ci/collect_evidence.py
 new file mode 100644
-index 0000000..1eced6d
+index 0000000..56efce2
 --- /dev/null
 +++ b/experiments/ci/collect_evidence.py
-@@ -0,0 +1,129 @@
+@@ -0,0 +1,152 @@
 +"""Collect reproducible GitHub CI evidence for issue 110 without logging tokens."""
 +
 +import concurrent.futures
@@ -1152,6 +1152,25 @@ index 0000000..1eced6d
 +        path.with_suffix(path.suffix + ".error.txt").write_text(result.stderr)
 +    print(f"{name}: exit {result.returncode}, {len(result.stdout)} bytes", flush=True)
 +    return result
++
++
++def capture_job_log(run_id, job_id):
++    prefix = OUT / f"ci-logs/{run_id}-job-{job_id}"
++    result = subprocess.run(  # nosec B603 # fixed API path and numeric job ID, no shell.
++        [
++            executable("gh"),
++            "api",
++            "--allow-escape-sequences",
++            f"repos/{REPO}/actions/jobs/{job_id}/logs",
++        ],
++        capture_output=True,
++        check=False,
++    )
++    if result.returncode == 0:
++        prefix.with_suffix(".log").write_bytes(result.stdout)
++    else:
++        prefix.with_suffix(".error.txt").write_bytes(result.stderr)
++    print(f"job {job_id}: exit {result.returncode}, {len(result.stdout)} bytes", flush=True)
 +
 +
 +def main():
@@ -1236,19 +1255,23 @@ index 0000000..1eced6d
 +                    for job in page["jobs"]:
 +                        if job["status"] != "completed":
 +                            continue
-+                        result = subprocess.run(  # nosec B603 # fixed API path and numeric job ID, no shell.
-+                            [executable("gh"), "api", f"repos/{REPO}/actions/jobs/{job['id']}/logs"],
-+                            capture_output=True,
-+                            check=False,
-+                        )
-+                        if result.returncode == 0:
-+                            (OUT / f"{prefix}-job-{job['id']}.log").write_bytes(result.stdout)
-+                        else:
-+                            (OUT / f"{prefix}-job-{job['id']}.error.txt").write_bytes(result.stderr)
++                        capture_job_log(run_id, job["id"])
 +            print(f"run {run_id}: preserved available job logs; refresh after completion", flush=True)
 +
 +    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
 +        for future in [pool.submit(collect_run, run_id) for run_id in sorted(ids)]:
++            future.result()
++    # Keep the original error as evidence and recover downloads from earlier runs,
++    # including jobs whose workflow has now completed and has a combined log.
++    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
++        futures = []
++        for path in (OUT / "ci-logs").glob("*-job-*.error.txt"):
++            if "terminal escape sequences" not in path.read_text():
++                continue
++            run_id, job_id = path.name.removesuffix(".error.txt").split("-job-")
++            if run_id.isdigit() and job_id.isdigit():
++                futures.append(pool.submit(capture_job_log, int(run_id), int(job_id)))
++        for future in futures:
 +            future.result()
 +    return 0
 +

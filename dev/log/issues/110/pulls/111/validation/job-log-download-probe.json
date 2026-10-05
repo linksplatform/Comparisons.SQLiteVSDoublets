@@ -1,0 +1,19 @@
+{
+  "job_id": 111734629650,
+  "before": {
+    "argv": [
+      "gh",
+      "api",
+      "repos/linksplatform/Comparisons.SQLiteVSDoublets/actions/jobs/111734629650/logs"
+    ],
+    "exit": 1,
+    "stdout_bytes": 0,
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway\n"
+  },
+  "after": {
+    "additional_argument": "--allow-escape-sequences",
+    "exit": 0,
+    "stdout_bytes": 23091,
+    "stderr_bytes": 0
+  }
+}

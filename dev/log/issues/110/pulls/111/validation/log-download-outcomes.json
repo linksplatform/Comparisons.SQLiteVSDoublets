@@ -1,0 +1,157 @@
+[
+  {
+    "path": "ci-logs/37224809082.log.error.txt",
+    "error": "log not found: 111506013315",
+    "recovered_job_log": null
+  },
+  {
+    "path": "ci-logs/37247563255.log.error.txt",
+    "error": "log not found: 111568536437",
+    "recovered_job_log": null
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734629650.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734629836.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734629916.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734629938.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734629948.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734629968.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734629970.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734629989.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734630008.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734630009.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734630069.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734630087.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734630095.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734630101.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734630123.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734630127.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734630146.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734630160.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734630188.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37306378813-job-111750940509.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37306378813-job-111750940706.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37306378845-job-111750940932.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37306378845-job-111751107519.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37306378845-job-111751107613.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37306378845-job-111751107642.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37306378845-job-111751107677.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37306378845-job-111751107700.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37306378845-job-111751107905.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  },
+  {
+    "path": "ci-logs/37306378845-job-111751107920.error.txt",
+    "error": "the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+    "recovered_job_log": true
+  }
+]

@@ -29,8 +29,10 @@ logs here; experiments and reusable regression checks live under `experiments/ci
   analyze every unsuccessful run, fix causes, and wait for checks to finish.
 
 All implementation checks pass on `0dba0f522015bd5200c885d4267f96f4b510cef6`;
-PR 111 is ready for review. The final evidence-only commit is checked again
-at its own pushed head before completion. Archived run/check metadata identifies
+PR 111 is ready for review. Final collection also recovers all 29 terminal-escape-blocked job logs and
+merges main result commit `4528bc4`; schema, Markdown, lint/security and all
+55 Python checks pass again. The final PR revision is checked again at its
+own pushed head before completion. Archived run/check metadata identifies
 the implementation revision explicitly.
 
 ## Scope assumptions

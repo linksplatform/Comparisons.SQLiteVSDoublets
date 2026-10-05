@@ -71,6 +71,8 @@ the semantic comparison below; snapshot archives preserve the complete source.
 | Oct 5, 11:49:43 | Revision `ffd5966` includes the archive. Rust, C#, dependency audits and benchmarks pass. Quality run 37305441174 fails on two B603 warnings; Codacy reports the same two locations and CodeFactor passes. |
 | Oct 5, 11:58:24 | Revision `7d7f9bc` adds narrow explanations for the two fixed Git queries. Python 3.13.15 local checks pass, including all 55 tests; the fresh hosted quality, CodeFactor and Codacy checks pass. |
 | Oct 5, 12:08:22 | Revision `0dba0f5` separates nested Git-output parsing after successful checks exposed two spurious unused-annotation warnings. A three-case Bandit probe reproduces the warning and verifies the workaround; confirmation and a code-fix suggestion are posted on existing upstream issue 1041. |
+| Oct 5, 12:15–12:19 | Evidence revision `4311b79` passes all five maintained workflows and CodeFactor. Main benchmark run 37297329698 completes and publishes `4528bc4`, including both C# SQLite providers; the new default branch is merged without altering its results. Codacy temporarily posts ACTION_REQUIRED while its API reports analysis in progress and zero new issues. |
+| Oct 5, final collection | An actual job-log download reproduces GitHub CLI's terminal-escape refusal: exit 1 and zero bytes. Adding its documented `--allow-escape-sequences` option returns exit 0 and 23,091 bytes. The collector uses the option for all raw job downloads and retries earlier affected files while retaining the original errors. |
 
 ## Root causes and solution choices
 
@@ -378,7 +380,22 @@ GitHub check for `0dba0f5`. GitHub reports the PR merge state as CLEAN.
 Main-only publication
 is intentionally skipped on the pull request. `github/implementation-final-*`
 preserves exact check conclusions, run timestamps/SHAs and ready-for-review
-state; the final evidence-only revision is checked again before completion.
+state; the final PR revision is checked again before completion.
+
+The subsequent main result commit `4528bc4` is merged as `9505fbc`. Its 20
+reports are preserved separately in `validation/main-result-snapshot-4528bc4`;
+schema validation passes and the C# reports retain all 8 link / 12 object
+variants. The original historical snapshot is retained. README formatting,
+local links, all 55 Python tests and the warning-free security scan pass again.
+
+Raw job logs may contain ANSI terminal controls. GitHub CLI refuses to emit
+these without its explicit `--allow-escape-sequences` option, even when stdout
+is redirected. `validation/job-log-download-probe.json` records the exact
+before/after command outcomes, and `research/gh-api-help.txt` documents the
+option. The collector now applies it and recovers previously affected jobs;
+the original `.error.txt` files remain evidence alongside successful `.log`
+downloads. Two cancelled historical jobs have no available log, with their
+actual `log not found` responses preserved rather than claiming recovery.
 
 The remaining B603 findings in `quality-37305441174.log:717–771` identify
 `experiments/ci/run_smoke.py:19` and `scripts/check_pipeline_status.py:39`.

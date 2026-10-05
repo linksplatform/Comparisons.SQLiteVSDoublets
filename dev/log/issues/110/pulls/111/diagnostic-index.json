@@ -2285,6 +2285,106 @@
     "text": "Test (macos-latest)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build\t2026-10-05T10:34:51.7286650Z   failed: 0\n"
   },
   {
+    "path": "ci-logs/37297329698-job-111734629836.log",
+    "line": 217,
+    "text": "2026-10-05T11:11:55.6429127Z \u001b[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\\u001b[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734629916.log",
+    "line": 217,
+    "text": "2026-10-05T11:12:31.4269083Z \u001b[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\\u001b[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734629938.log",
+    "line": 217,
+    "text": "2026-10-05T11:11:55.8759811Z \u001b[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\\u001b[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734629989.log",
+    "line": 217,
+    "text": "2026-10-05T11:11:57.6976137Z \u001b[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\\u001b[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734630009.log",
+    "line": 217,
+    "text": "2026-10-05T11:11:56.5088952Z \u001b[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\\u001b[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734630069.log",
+    "line": 217,
+    "text": "2026-10-05T11:11:55.8641568Z \u001b[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\\u001b[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734630087.log",
+    "line": 217,
+    "text": "2026-10-05T11:11:55.6537104Z \u001b[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\\u001b[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734630101.log",
+    "line": 217,
+    "text": "2026-10-05T11:11:56.3656055Z \u001b[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\\u001b[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734630146.log",
+    "line": 217,
+    "text": "2026-10-05T11:11:56.5616387Z \u001b[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\\u001b[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698-job-111734630160.log",
+    "line": 217,
+    "text": "2026-10-05T11:12:18.1638850Z \u001b[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\\u001b[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698.log",
+    "line": 473,
+    "text": "rust objects 64 bit 1000000\tUNKNOWN STEP\t2026-10-05T11:11:55.6429127Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698.log",
+    "line": 974,
+    "text": "rust objects 64 bit 100000\tUNKNOWN STEP\t2026-10-05T11:12:31.4269083Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698.log",
+    "line": 1514,
+    "text": "rust links 32 bit 1000000\tUNKNOWN STEP\t2026-10-05T11:11:55.8759811Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698.log",
+    "line": 2932,
+    "text": "rust objects 32 bit 1000000\tUNKNOWN STEP\t2026-10-05T11:11:57.6976137Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698.log",
+    "line": 3719,
+    "text": "rust links 64 bit 10000000\tRun dtolnay/rust-toolchain@stable\t2026-10-05T11:11:56.5088946Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698.log",
+    "line": 4215,
+    "text": "rust links 64 bit 100000\tUNKNOWN STEP\t2026-10-05T11:11:55.8641568Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698.log",
+    "line": 4765,
+    "text": "rust links 64 bit 1000000\tUNKNOWN STEP\t2026-10-05T11:11:55.6537104Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698.log",
+    "line": 5581,
+    "text": "rust objects 32 bit 100000\tUNKNOWN STEP\t2026-10-05T11:11:56.3656055Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698.log",
+    "line": 6983,
+    "text": "rust links 32 bit 100000\tUNKNOWN STEP\t2026-10-05T11:11:56.5616387Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37297329698.log",
+    "line": 7793,
+    "text": "rust links 32 bit 10000000\tRun dtolnay/rust-toolchain@stable\t2026-10-05T11:12:18.1638846Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
     "path": "ci-logs/37302745606.log",
     "line": 188,
     "text": "auto-merge\tRun ahmadnassri/action-dependabot-auto-merge@v2\t2026-10-05T11:24:50.7814424Z ##[warning]exiting early - expected PR by \"dependabot[bot]\", found \"konard\" instead\n"
@@ -2590,6 +2690,16 @@
     "text": "auto-merge\tRun ahmadnassri/action-dependabot-auto-merge@v2\t2026-10-05T11:58:34.6689275Z ##[warning]exiting early - expected PR by \"dependabot[bot]\", found \"konard\" instead\n"
   },
   {
+    "path": "ci-logs/37306378813-job-111750940509.log",
+    "line": 246,
+    "text": "2026-10-05T11:59:44.8029599Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37306378813-job-111750940706.log",
+    "line": 248,
+    "text": "2026-10-05T12:00:00.7124610Z   failed: 0\n"
+  },
+  {
     "path": "ci-logs/37306378813.log",
     "line": 246,
     "text": "Test (ubuntu-24.04)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T11:59:44.8029596Z   failed: 0\n"
@@ -2608,6 +2718,21 @@
     "path": "ci-logs/37306378835.log",
     "line": 419,
     "text": "audit\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:58:46.5391427Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37306378845-job-111751107613.log",
+    "line": 327,
+    "text": "2026-10-05T11:59:00.9348470Z \u001b[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\\u001b[0m\n"
+  },
+  {
+    "path": "ci-logs/37306378845-job-111751107700.log",
+    "line": 327,
+    "text": "2026-10-05T11:59:01.7075464Z \u001b[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\\u001b[0m\n"
+  },
+  {
+    "path": "ci-logs/37306378845-job-111751107920.log",
+    "line": 327,
+    "text": "2026-10-05T11:59:00.9885123Z \u001b[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\\u001b[0m\n"
   },
   {
     "path": "ci-logs/37306378845.log",
@@ -2863,6 +2988,141 @@
     "path": "ci-logs/37307467957.log",
     "line": 891,
     "text": "Test (macos-15)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T12:09:56.4465070Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37308332534.log",
+    "line": 190,
+    "text": "auto-merge\tRun ahmadnassri/action-dependabot-auto-merge@v2\t2026-10-05T12:16:09.1659210Z ##[warning]exiting early - expected PR by \"dependabot[bot]\", found \"konard\" instead\n"
+  },
+  {
+    "path": "ci-logs/37308336389.log",
+    "line": 419,
+    "text": "audit\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:16:25.0267108Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 265,
+    "text": "Test (windows-2025)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:16:17.7450007Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 484,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T12:17:12.8776862Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 490,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T12:17:12.8861738Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 495,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T12:17:12.9688708Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 504,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T12:17:40.3181278Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 27.42s\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 510,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T12:17:40.3735218Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 807,
+    "text": "Test (ubuntu-24.04)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:16:07.8656633Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 1025,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T12:16:38.4518834Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 1030,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T12:16:38.4524682Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 1035,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T12:16:38.4657891Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 1044,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T12:17:00.9306857Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 22.48s\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 1050,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T12:17:00.9595181Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 1330,
+    "text": "Test (macos-15)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:16:16.9005120Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 1550,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T12:16:58.3040410Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 1556,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T12:16:58.3149880Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 1561,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T12:16:58.4160910Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 1569,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T12:17:19.0508300Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 20.73s\n"
+  },
+  {
+    "path": "ci-logs/37308336462.log",
+    "line": 1575,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T12:17:19.4140490Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37308336521.log",
+    "line": 248,
+    "text": "Test (macos-15)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T12:17:35.6540620Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37308336521.log",
+    "line": 562,
+    "text": "Test (windows-2025)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T12:17:39.7663701Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37308336521.log",
+    "line": 889,
+    "text": "Test (ubuntu-24.04)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T12:17:28.9930529Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37308336637.log",
+    "line": 734,
+    "text": "rust links 32 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:16:36.5548580Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37308336637.log",
+    "line": 1540,
+    "text": "rust objects 32 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:16:34.8066943Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37308336637.log",
+    "line": 2806,
+    "text": "rust links 64 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:16:35.3013533Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37308336637.log",
+    "line": 4492,
+    "text": "rust objects 64 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:16:35.7965001Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
   },
   {
     "path": "ci-logs/benchmarks-37302748167.log",

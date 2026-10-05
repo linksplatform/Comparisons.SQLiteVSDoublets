@@ -26,6 +26,25 @@ def capture(name, *args):
     return result
 
 
+def capture_job_log(run_id, job_id):
+    prefix = OUT / f"ci-logs/{run_id}-job-{job_id}"
+    result = subprocess.run(  # nosec B603 # fixed API path and numeric job ID, no shell.
+        [
+            executable("gh"),
+            "api",
+            "--allow-escape-sequences",
+            f"repos/{REPO}/actions/jobs/{job_id}/logs",
+        ],
+        capture_output=True,
+        check=False,
+    )
+    if result.returncode == 0:
+        prefix.with_suffix(".log").write_bytes(result.stdout)
+    else:
+        prefix.with_suffix(".error.txt").write_bytes(result.stderr)
+    print(f"job {job_id}: exit {result.returncode}, {len(result.stdout)} bytes", flush=True)
+
+
 def main():
     queries = {
         "issue-110.json": [
@@ -108,19 +127,23 @@ def main():
                     for job in page["jobs"]:
                         if job["status"] != "completed":
                             continue
-                        result = subprocess.run(  # nosec B603 # fixed API path and numeric job ID, no shell.
-                            [executable("gh"), "api", f"repos/{REPO}/actions/jobs/{job['id']}/logs"],
-                            capture_output=True,
-                            check=False,
-                        )
-                        if result.returncode == 0:
-                            (OUT / f"{prefix}-job-{job['id']}.log").write_bytes(result.stdout)
-                        else:
-                            (OUT / f"{prefix}-job-{job['id']}.error.txt").write_bytes(result.stderr)
+                        capture_job_log(run_id, job["id"])
             print(f"run {run_id}: preserved available job logs; refresh after completion", flush=True)
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
         for future in [pool.submit(collect_run, run_id) for run_id in sorted(ids)]:
+            future.result()
+    # Keep the original error as evidence and recover downloads from earlier runs,
+    # including jobs whose workflow has now completed and has a combined log.
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+        futures = []
+        for path in (OUT / "ci-logs").glob("*-job-*.error.txt"):
+            if "terminal escape sequences" not in path.read_text():
+                continue
+            run_id, job_id = path.name.removesuffix(".error.txt").split("-job-")
+            if run_id.isdigit() and job_id.isdigit():
+                futures.append(pool.submit(capture_job_log, int(run_id), int(job_id)))
+        for future in futures:
             future.result()
     return 0
 

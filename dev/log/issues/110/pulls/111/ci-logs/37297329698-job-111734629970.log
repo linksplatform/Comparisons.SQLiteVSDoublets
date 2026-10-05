@@ -1,0 +1,308 @@
+﻿2026-10-05T11:11:52.0428631Z Current runner version: '2.337.0'
+2026-10-05T11:11:52.0450040Z ##[group]Runner Image Provisioner
+2026-10-05T11:11:52.0450860Z Hosted Compute Agent
+2026-10-05T11:11:52.0451437Z Version: 20260901.588
+2026-10-05T11:11:52.0452041Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+2026-10-05T11:11:52.0452894Z Build Date: 2026-09-01T19:56:44Z
+2026-10-05T11:11:52.0453520Z Worker ID: {bc51aa37-1015-46cc-b749-4dd23ccc3cff}
+2026-10-05T11:11:52.0454159Z Azure Region: centralus
+2026-10-05T11:11:52.0454708Z ##[endgroup]
+2026-10-05T11:11:52.0455871Z ##[group]Operating System
+2026-10-05T11:11:52.0456492Z Ubuntu
+2026-10-05T11:11:52.0456949Z 24.04.5
+2026-10-05T11:11:52.0457379Z LTS
+2026-10-05T11:11:52.0457869Z ##[endgroup]
+2026-10-05T11:11:52.0458372Z ##[group]Runner Image
+2026-10-05T11:11:52.0458904Z Image: ubuntu-24.04
+2026-10-05T11:11:52.0459407Z Version: 20260927.320.1
+2026-10-05T11:11:52.0460585Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-05T11:11:52.0462030Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+2026-10-05T11:11:52.0463206Z ##[endgroup]
+2026-10-05T11:11:52.0466428Z ##[group]GITHUB_TOKEN Permissions
+2026-10-05T11:11:52.0468788Z Actions: write
+2026-10-05T11:11:52.0469460Z ArtifactMetadata: write
+2026-10-05T11:11:52.0470019Z Attestations: write
+2026-10-05T11:11:52.0470563Z Checks: write
+2026-10-05T11:11:52.0471058Z CodeQuality: write
+2026-10-05T11:11:52.0471568Z Contents: write
+2026-10-05T11:11:52.0472081Z CopilotRequests: write
+2026-10-05T11:11:52.0472634Z Deployments: write
+2026-10-05T11:11:52.0473339Z Discussions: write
+2026-10-05T11:11:52.0473855Z Drives: write
+2026-10-05T11:11:52.0474337Z Issues: write
+2026-10-05T11:11:52.0474856Z Metadata: read
+2026-10-05T11:11:52.0475381Z Models: read
+2026-10-05T11:11:52.0475857Z Packages: write
+2026-10-05T11:11:52.0476322Z Pages: write
+2026-10-05T11:11:52.0476776Z PullRequests: write
+2026-10-05T11:11:52.0477325Z RepositoryProjects: write
+2026-10-05T11:11:52.0477914Z SecurityEvents: write
+2026-10-05T11:11:52.0478420Z Statuses: write
+2026-10-05T11:11:52.0478900Z VulnerabilityAlerts: read
+2026-10-05T11:11:52.0479395Z ##[endgroup]
+2026-10-05T11:11:52.0481179Z Secret source: Actions
+2026-10-05T11:11:52.0481941Z Cache mode: write
+2026-10-05T11:11:52.0482550Z Prepare workflow directory
+2026-10-05T11:11:52.1548899Z Prepare all required actions
+2026-10-05T11:11:52.1592881Z Getting action download info
+2026-10-05T11:11:52.4380258Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-10-05T11:11:52.5361417Z Download action repository 'dtolnay/rust-toolchain@stable' (SHA:89b12181fb390509a0842a86cc55eeb8eb928c1d)
+2026-10-05T11:11:52.6973276Z Download action repository 'Swatinem/rust-cache@v2' (SHA:6323deb102c322ba6fcbdcafc7e3dddab59af2b6)
+2026-10-05T11:11:53.1916244Z Download action repository 'actions/setup-dotnet@v6' (SHA:a98b56852c35b8e3190ac28c8c2271da59106c68)
+2026-10-05T11:11:53.8703978Z Download action repository 'actions/upload-artifact@v7' (SHA:043fb46d1a93c77aae656e7c1c64a875d1fc6a0a)
+2026-10-05T11:11:54.3456941Z Complete job name: csharp objects 32 bit 100000
+2026-10-05T11:11:54.6158298Z ##[group]Run actions/checkout@v7
+2026-10-05T11:11:54.6159405Z with:
+2026-10-05T11:11:54.6160264Z   repository: linksplatform/Comparisons.SQLiteVSDoublets
+2026-10-05T11:11:54.6167739Z   token: ***
+2026-10-05T11:11:54.6168443Z   ssh-strict: true
+2026-10-05T11:11:54.6169150Z   ssh-user: git
+2026-10-05T11:11:54.6169872Z   persist-credentials: true
+2026-10-05T11:11:54.6170649Z   clean: true
+2026-10-05T11:11:54.6171375Z   sparse-checkout-cone-mode: true
+2026-10-05T11:11:54.6172203Z   fetch-depth: 1
+2026-10-05T11:11:54.6173136Z   fetch-tags: false
+2026-10-05T11:11:54.6173888Z   show-progress: true
+2026-10-05T11:11:54.6174613Z   lfs: false
+2026-10-05T11:11:54.6175279Z   submodules: false
+2026-10-05T11:11:54.6176002Z   set-safe-directory: true
+2026-10-05T11:11:54.6176808Z   allow-unsafe-pr-checkout: false
+2026-10-05T11:11:54.6177831Z env:
+2026-10-05T11:11:54.6178738Z   CARGO_TERM_COLOR: always
+2026-10-05T11:11:54.6179486Z ##[endgroup]
+2026-10-05T11:11:54.7098511Z Syncing repository: linksplatform/Comparisons.SQLiteVSDoublets
+2026-10-05T11:11:54.7101704Z ##[group]Getting Git version info
+2026-10-05T11:11:54.7103961Z Working directory is '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+2026-10-05T11:11:54.7106903Z [command]/usr/bin/git version
+2026-10-05T11:11:54.7131255Z git version 2.55.0
+2026-10-05T11:11:54.7147710Z ##[endgroup]
+2026-10-05T11:11:54.7155504Z Temporarily overriding HOME='/home/runner/work/_temp/43249997-ab2c-40e7-bd8c-c35da34591b9' before making global git config changes
+2026-10-05T11:11:54.7158712Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-05T11:11:54.7163084Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+2026-10-05T11:11:54.7205694Z Deleting the contents of '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+2026-10-05T11:11:54.7209417Z ##[group]Determining repository object format
+2026-10-05T11:11:54.7211197Z ##[endgroup]
+2026-10-05T11:11:54.7212606Z ##[group]Initializing the repository
+2026-10-05T11:11:54.7216591Z [command]/usr/bin/git init /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+2026-10-05T11:11:54.7308373Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-05T11:11:54.7310400Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-05T11:11:54.7312290Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-05T11:11:54.7314109Z hint: call:
+2026-10-05T11:11:54.7315109Z hint:
+2026-10-05T11:11:54.7316467Z hint: 	git config --global init.defaultBranch <name>
+2026-10-05T11:11:54.7317657Z hint:
+2026-10-05T11:11:54.7318740Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-05T11:11:54.7320503Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-05T11:11:54.7322229Z hint:
+2026-10-05T11:11:54.7323289Z hint: 	git branch -m <name>
+2026-10-05T11:11:54.7324256Z hint:
+2026-10-05T11:11:54.7325426Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-05T11:11:54.7328440Z Initialized empty Git repository in /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/
+2026-10-05T11:11:54.7333763Z [command]/usr/bin/git remote add origin https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+2026-10-05T11:11:54.7413730Z ##[endgroup]
+2026-10-05T11:11:54.7415207Z ##[group]Disabling automatic garbage collection
+2026-10-05T11:11:54.7416601Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-05T11:11:54.7442124Z ##[endgroup]
+2026-10-05T11:11:54.7443804Z ##[group]Setting up auth
+2026-10-05T11:11:54.7444864Z Removing SSH command configuration
+2026-10-05T11:11:54.7448432Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-05T11:11:54.7474833Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-05T11:11:54.7763457Z Removing HTTP extra header
+2026-10-05T11:11:54.7768029Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-05T11:11:54.7809156Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-05T11:11:54.7988444Z Removing includeIf entries pointing to credentials config files
+2026-10-05T11:11:54.7990837Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-05T11:11:54.8016968Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-05T11:11:54.8177139Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-f7095970-ee92-4994-87a0-fea1ba4accdf.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-05T11:11:54.8206146Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path /home/runner/work/_temp/git-credentials-f7095970-ee92-4994-87a0-fea1ba4accdf.config
+2026-10-05T11:11:54.8230091Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-f7095970-ee92-4994-87a0-fea1ba4accdf.config
+2026-10-05T11:11:54.8258437Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-f7095970-ee92-4994-87a0-fea1ba4accdf.config
+2026-10-05T11:11:54.8284650Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-f7095970-ee92-4994-87a0-fea1ba4accdf.config
+2026-10-05T11:11:54.8307825Z ##[endgroup]
+2026-10-05T11:11:54.8309099Z ##[group]Fetching the repository
+2026-10-05T11:11:54.8313042Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2c43a22adbefaff47f5d189676851c80a33534e3:refs/remotes/origin/main
+2026-10-05T11:11:55.3020302Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+2026-10-05T11:11:55.3020882Z  * [new ref]         2c43a22adbefaff47f5d189676851c80a33534e3 -> origin/main
+2026-10-05T11:11:55.3030220Z [command]/usr/bin/git branch --list --remote origin/main
+2026-10-05T11:11:55.3051492Z   origin/main
+2026-10-05T11:11:55.3057771Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+2026-10-05T11:11:55.3076852Z 2c43a22adbefaff47f5d189676851c80a33534e3
+2026-10-05T11:11:55.3079085Z ##[endgroup]
+2026-10-05T11:11:55.3079564Z ##[group]Determining the checkout info
+2026-10-05T11:11:55.3080148Z ##[endgroup]
+2026-10-05T11:11:55.3085412Z [command]/usr/bin/git sparse-checkout disable
+2026-10-05T11:11:55.3128258Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-05T11:11:55.3151579Z ##[group]Checking out the ref
+2026-10-05T11:11:55.3154516Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-10-05T11:11:55.3254936Z Switched to a new branch 'main'
+2026-10-05T11:11:55.3259389Z branch 'main' set up to track 'origin/main'.
+2026-10-05T11:11:55.3263334Z ##[endgroup]
+2026-10-05T11:11:55.3297110Z [command]/usr/bin/git log -1 --format=%H
+2026-10-05T11:11:55.3316247Z 2c43a22adbefaff47f5d189676851c80a33534e3
+2026-10-05T11:11:55.4655092Z ##[group]Run actions/setup-dotnet@v6
+2026-10-05T11:11:55.4655374Z with:
+2026-10-05T11:11:55.4655582Z   global-json-file: csharp/global.json
+2026-10-05T11:11:55.4655828Z   cache: false
+2026-10-05T11:11:55.4656012Z env:
+2026-10-05T11:11:55.4656195Z   CARGO_TERM_COLOR: always
+2026-10-05T11:11:55.4656419Z ##[endgroup]
+2026-10-05T11:11:55.5781417Z [command]/home/runner/work/_actions/actions/setup-dotnet/v6/externals/install-dotnet.sh --skip-non-versioned-files --runtime dotnet --channel LTS
+2026-10-05T11:11:55.8530206Z dotnet-install: .NET Core Runtime with version '10.0.12' is already installed.
+2026-10-05T11:11:55.8549498Z [command]/home/runner/work/_actions/actions/setup-dotnet/v6/externals/install-dotnet.sh --skip-non-versioned-files --channel 10.0
+2026-10-05T11:11:56.0877160Z dotnet-install: .NET Core SDK with version '10.0.401' is already installed.
+2026-10-05T11:11:56.1485452Z ##[group]Run dotnet build -c Release csharp/SQLiteVSDoublets
+2026-10-05T11:11:56.1486004Z [36;1mdotnet build -c Release csharp/SQLiteVSDoublets[0m
+2026-10-05T11:11:56.1486531Z [36;1mecho "BENCHMARK=dotnet csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll" >> "$GITHUB_ENV"[0m
+2026-10-05T11:11:56.1663974Z shell: /usr/bin/bash -e {0}
+2026-10-05T11:11:56.1664279Z env:
+2026-10-05T11:11:56.1664643Z   CARGO_TERM_COLOR: always
+2026-10-05T11:11:56.1664893Z   DOTNET_ROOT: /usr/share/dotnet
+2026-10-05T11:11:56.1665141Z ##[endgroup]
+2026-10-05T11:12:00.4564747Z   Determining projects to restore...
+2026-10-05T11:12:02.4110043Z   Restored /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets/SQLiteVSDoublets.csproj (in 1.44 sec).
+2026-10-05T11:12:06.8838877Z   SQLiteVSDoublets -> /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll
+2026-10-05T11:12:06.9015341Z 
+2026-10-05T11:12:06.9023053Z Build succeeded.
+2026-10-05T11:12:06.9023676Z     0 Warning(s)
+2026-10-05T11:12:06.9023932Z     0 Error(s)
+2026-10-05T11:12:06.9024080Z 
+2026-10-05T11:12:06.9024286Z Time Elapsed 00:00:07.56
+2026-10-05T11:12:06.9355401Z ##[group]Run name=objects-csharp-32-100000
+2026-10-05T11:12:06.9355766Z [36;1mname=objects-csharp-32-100000[0m
+2026-10-05T11:12:06.9356117Z [36;1mecho "NAME=$name" >> "$GITHUB_ENV"[0m
+2026-10-05T11:12:06.9356404Z [36;1m$BENCHMARK objects 32 100000 \[0m
+2026-10-05T11:12:06.9356886Z [36;1m  --directory "$RUNNER_TEMP/storage" --output "$RUNNER_TEMP/measured.json"[0m
+2026-10-05T11:12:06.9357451Z [36;1mmachine="$(. /etc/os-release && echo "$PRETTY_NAME"), $(lscpu | sed -n 's/^Model name: *//p' | head -1)"[0m
+2026-10-05T11:12:06.9358029Z [36;1mmachine="$machine, $(nproc) cores, $(awk '/^MemTotal/ { printf "%.0f", $2 / 1048576 }' /proc/meminfo) GiB"[0m
+2026-10-05T11:12:06.9358419Z [36;1mmkdir results[0m
+2026-10-05T11:12:06.9358755Z [36;1mjq --arg run_url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" \[0m
+2026-10-05T11:12:06.9359189Z [36;1m  --arg date "$(date -u +%Y-%m-%d)" --arg machine "$machine" \[0m
+2026-10-05T11:12:06.9359591Z [36;1m  '. + {run_url: $run_url, date: $date, machine: $machine}' \[0m
+2026-10-05T11:12:06.9359948Z [36;1m  "$RUNNER_TEMP/measured.json" > "results/$name.json"[0m
+2026-10-05T11:12:06.9394883Z shell: /usr/bin/bash -e {0}
+2026-10-05T11:12:06.9395169Z env:
+2026-10-05T11:12:06.9395375Z   CARGO_TERM_COLOR: always
+2026-10-05T11:12:06.9395604Z   DOTNET_ROOT: /usr/share/dotnet
+2026-10-05T11:12:06.9395955Z   BENCHMARK: dotnet csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll
+2026-10-05T11:12:06.9396313Z ##[endgroup]
+2026-10-05T11:12:10.4718432Z SQLite_Memory #1: create 5184 ns/op, read_all 4179 ns/op, read_by_id 5525 ns/op, delete 2026 ns/op
+2026-10-05T11:12:12.7846961Z SQLite_Memory #2: create 5092 ns/op, read_all 4207 ns/op, read_by_id 5585 ns/op, delete 1998 ns/op
+2026-10-05T11:12:15.1014098Z SQLite_Memory #3: create 5051 ns/op, read_all 4188 ns/op, read_by_id 5549 ns/op, delete 2053 ns/op
+2026-10-05T11:12:17.4214661Z SQLite_Memory #4: create 5000 ns/op, read_all 4189 ns/op, read_by_id 5594 ns/op, delete 2064 ns/op
+2026-10-05T11:12:19.7224803Z SQLite_Memory #5: create 5040 ns/op, read_all 4149 ns/op, read_by_id 5597 ns/op, delete 2025 ns/op
+2026-10-05T11:12:24.6494874Z SQLite_File #1: create 9317 ns/op, read_all 4159 ns/op, read_by_id 5970 ns/op, delete 10389 ns/op
+2026-10-05T11:12:28.2975255Z SQLite_File #2: create 9523 ns/op, read_all 4148 ns/op, read_by_id 6068 ns/op, delete 10392 ns/op
+2026-10-05T11:12:31.9608310Z SQLite_File #3: create 9643 ns/op, read_all 4204 ns/op, read_by_id 5982 ns/op, delete 10422 ns/op
+2026-10-05T11:12:35.6188907Z SQLite_File #4: create 9440 ns/op, read_all 4216 ns/op, read_by_id 5986 ns/op, delete 10490 ns/op
+2026-10-05T11:12:39.2564617Z SQLite_File #5: create 9447 ns/op, read_all 4187 ns/op, read_by_id 6010 ns/op, delete 10351 ns/op
+2026-10-05T11:12:42.6036192Z SystemDataSQLite_Memory #1: create 4897 ns/op, read_all 3976 ns/op, read_by_id 5620 ns/op, delete 2248 ns/op
+2026-10-05T11:12:44.8982887Z SystemDataSQLite_Memory #2: create 4763 ns/op, read_all 3987 ns/op, read_by_id 5595 ns/op, delete 2246 ns/op
+2026-10-05T11:12:47.2036760Z SystemDataSQLite_Memory #3: create 4739 ns/op, read_all 3999 ns/op, read_by_id 5688 ns/op, delete 2331 ns/op
+2026-10-05T11:12:49.4939599Z SystemDataSQLite_Memory #4: create 4730 ns/op, read_all 3996 ns/op, read_by_id 5618 ns/op, delete 2227 ns/op
+2026-10-05T11:12:51.8027117Z SystemDataSQLite_Memory #5: create 4759 ns/op, read_all 4050 ns/op, read_by_id 5645 ns/op, delete 2267 ns/op
+2026-10-05T11:12:56.6597979Z SystemDataSQLite_File #1: create 9172 ns/op, read_all 4039 ns/op, read_by_id 6060 ns/op, delete 9801 ns/op
+2026-10-05T11:13:00.1906164Z SystemDataSQLite_File #2: create 9114 ns/op, read_all 4054 ns/op, read_by_id 6015 ns/op, delete 9779 ns/op
+2026-10-05T11:13:03.7830505Z SystemDataSQLite_File #3: create 9261 ns/op, read_all 4095 ns/op, read_by_id 6142 ns/op, delete 9892 ns/op
+2026-10-05T11:13:07.3157489Z SystemDataSQLite_File #4: create 9179 ns/op, read_all 4014 ns/op, read_by_id 5991 ns/op, delete 9782 ns/op
+2026-10-05T11:13:10.8618721Z SystemDataSQLite_File #5: create 9265 ns/op, read_all 3986 ns/op, read_by_id 6038 ns/op, delete 9810 ns/op
+2026-10-05T11:13:16.8859953Z Doublets_United_Volatile_Cached #1: create 16721 ns/op, read_all 11451 ns/op, read_by_id 5202 ns/op, delete 9733 ns/op
+2026-10-05T11:13:21.6937132Z Doublets_United_Volatile_Cached #2: create 16596 ns/op, read_all 10811 ns/op, read_by_id 5255 ns/op, delete 8984 ns/op
+2026-10-05T11:13:26.4508718Z Doublets_United_Volatile_Cached #3: create 16531 ns/op, read_all 10791 ns/op, read_by_id 5170 ns/op, delete 8803 ns/op
+2026-10-05T11:13:31.1945017Z Doublets_United_Volatile_Cached #4: create 16359 ns/op, read_all 10656 ns/op, read_by_id 5212 ns/op, delete 8909 ns/op
+2026-10-05T11:13:35.9952472Z Doublets_United_Volatile_Cached #5: create 16567 ns/op, read_all 10800 ns/op, read_by_id 5217 ns/op, delete 9248 ns/op
+2026-10-05T11:15:00.4670907Z Doublets_United_Volatile_Uncached #1: create 155862 ns/op, read_all 295684 ns/op, read_by_id 302073 ns/op, delete 8614 ns/op
+2026-10-05T11:16:17.6724033Z Doublets_United_Volatile_Uncached #2: create 153783 ns/op, read_all 300175 ns/op, read_by_id 302869 ns/op, delete 8960 ns/op
+2026-10-05T11:17:35.1039648Z Doublets_United_Volatile_Uncached #3: create 153946 ns/op, read_all 302418 ns/op, read_by_id 303098 ns/op, delete 8570 ns/op
+2026-10-05T11:18:52.0214251Z Doublets_United_Volatile_Uncached #4: create 153695 ns/op, read_all 299670 ns/op, read_by_id 300800 ns/op, delete 8708 ns/op
+2026-10-05T11:20:08.2130055Z Doublets_United_Volatile_Uncached #5: create 153608 ns/op, read_all 297059 ns/op, read_by_id 296603 ns/op, delete 8445 ns/op
+2026-10-05T11:20:14.4997458Z Doublets_United_NonVolatile_Cached #1: create 16943 ns/op, read_all 10752 ns/op, read_by_id 5265 ns/op, delete 9111 ns/op
+2026-10-05T11:20:19.5200399Z Doublets_United_NonVolatile_Cached #2: create 16666 ns/op, read_all 10810 ns/op, read_by_id 5418 ns/op, delete 9728 ns/op
+2026-10-05T11:20:24.4737343Z Doublets_United_NonVolatile_Cached #3: create 16860 ns/op, read_all 10767 ns/op, read_by_id 5200 ns/op, delete 9196 ns/op
+2026-10-05T11:20:29.4192113Z Doublets_United_NonVolatile_Cached #4: create 16753 ns/op, read_all 10718 ns/op, read_by_id 5315 ns/op, delete 9275 ns/op
+2026-10-05T11:20:34.4187555Z Doublets_United_NonVolatile_Cached #5: create 16679 ns/op, read_all 10790 ns/op, read_by_id 5308 ns/op, delete 9831 ns/op
+2026-10-05T11:21:59.3472322Z Doublets_United_NonVolatile_Uncached #1: create 158310 ns/op, read_all 297686 ns/op, read_by_id 299433 ns/op, delete 9299 ns/op
+2026-10-05T11:23:16.9271905Z Doublets_United_NonVolatile_Uncached #2: create 158000 ns/op, read_all 299979 ns/op, read_by_id 300362 ns/op, delete 9972 ns/op
+2026-10-05T11:24:34.4059834Z Doublets_United_NonVolatile_Uncached #3: create 158254 ns/op, read_all 296719 ns/op, read_by_id 302228 ns/op, delete 10028 ns/op
+2026-10-05T11:25:52.5498125Z Doublets_United_NonVolatile_Uncached #4: create 158851 ns/op, read_all 299540 ns/op, read_by_id 305637 ns/op, delete 9848 ns/op
+2026-10-05T11:27:10.6508045Z Doublets_United_NonVolatile_Uncached #5: create 158996 ns/op, read_all 302006 ns/op, read_by_id 302485 ns/op, delete 10034 ns/op
+2026-10-05T11:27:15.7060667Z Doublets_Split_Volatile_Cached #1: create 10698 ns/op, read_all 12701 ns/op, read_by_id 5404 ns/op, delete 5334 ns/op
+2026-10-05T11:27:19.7575357Z Doublets_Split_Volatile_Cached #2: create 10669 ns/op, read_all 12647 ns/op, read_by_id 5535 ns/op, delete 5403 ns/op
+2026-10-05T11:27:23.7686166Z Doublets_Split_Volatile_Cached #3: create 10598 ns/op, read_all 12624 ns/op, read_by_id 5348 ns/op, delete 5180 ns/op
+2026-10-05T11:27:27.7721862Z Doublets_Split_Volatile_Cached #4: create 10565 ns/op, read_all 12703 ns/op, read_by_id 5313 ns/op, delete 5149 ns/op
+2026-10-05T11:27:31.8024199Z Doublets_Split_Volatile_Cached #5: create 10518 ns/op, read_all 12585 ns/op, read_by_id 5449 ns/op, delete 5332 ns/op
+2026-10-05T11:29:15.6572089Z Doublets_Split_Volatile_Uncached #1: create 113428 ns/op, read_all 408090 ns/op, read_by_id 410545 ns/op, delete 5391 ns/op
+2026-10-05T11:30:50.0757684Z Doublets_Split_Volatile_Uncached #2: create 112930 ns/op, read_all 407936 ns/op, read_by_id 411807 ns/op, delete 5203 ns/op
+2026-10-05T11:32:24.1688385Z Doublets_Split_Volatile_Uncached #3: create 112919 ns/op, read_all 408027 ns/op, read_by_id 408480 ns/op, delete 5188 ns/op
+2026-10-05T11:33:58.1964316Z Doublets_Split_Volatile_Uncached #4: create 113134 ns/op, read_all 406446 ns/op, read_by_id 409239 ns/op, delete 5180 ns/op
+2026-10-05T11:35:32.7320988Z Doublets_Split_Volatile_Uncached #5: create 113067 ns/op, read_all 410233 ns/op, read_by_id 410403 ns/op, delete 5323 ns/op
+2026-10-05T11:35:38.2364167Z Doublets_Split_NonVolatile_Cached #1: create 11252 ns/op, read_all 12825 ns/op, read_by_id 5484 ns/op, delete 5692 ns/op
+2026-10-05T11:35:42.5242596Z Doublets_Split_NonVolatile_Cached #2: create 11172 ns/op, read_all 12637 ns/op, read_by_id 5589 ns/op, delete 5666 ns/op
+2026-10-05T11:35:46.8124966Z Doublets_Split_NonVolatile_Cached #3: create 11243 ns/op, read_all 12632 ns/op, read_by_id 5542 ns/op, delete 5592 ns/op
+2026-10-05T11:35:51.0674096Z Doublets_Split_NonVolatile_Cached #4: create 11281 ns/op, read_all 12679 ns/op, read_by_id 5444 ns/op, delete 5435 ns/op
+2026-10-05T11:35:55.3406688Z Doublets_Split_NonVolatile_Cached #5: create 11160 ns/op, read_all 12670 ns/op, read_by_id 5509 ns/op, delete 5585 ns/op
+2026-10-05T11:37:39.2773236Z Doublets_Split_NonVolatile_Uncached #1: create 114454 ns/op, read_all 407713 ns/op, read_by_id 409528 ns/op, delete 5737 ns/op
+2026-10-05T11:39:13.6014240Z Doublets_Split_NonVolatile_Uncached #2: create 114911 ns/op, read_all 405980 ns/op, read_by_id 408918 ns/op, delete 5733 ns/op
+2026-10-05T11:40:48.1949118Z Doublets_Split_NonVolatile_Uncached #3: create 114595 ns/op, read_all 407980 ns/op, read_by_id 409832 ns/op, delete 5804 ns/op
+2026-10-05T11:42:22.6621029Z Doublets_Split_NonVolatile_Uncached #4: create 114420 ns/op, read_all 406716 ns/op, read_by_id 410172 ns/op, delete 5686 ns/op
+2026-10-05T11:43:57.4377822Z Doublets_Split_NonVolatile_Uncached #5: create 114560 ns/op, read_all 408583 ns/op, read_by_id 411225 ns/op, delete 5617 ns/op
+2026-10-05T11:43:57.4925655Z ##[group]Run actions/upload-artifact@v7
+2026-10-05T11:43:57.4925920Z with:
+2026-10-05T11:43:57.4926128Z   name: results-objects-csharp-32-100000
+2026-10-05T11:43:57.4926416Z   path: results/objects-csharp-32-100000.json
+2026-10-05T11:43:57.4926674Z   if-no-files-found: warn
+2026-10-05T11:43:57.4926889Z   compression-level: 6
+2026-10-05T11:43:57.4927082Z   overwrite: false
+2026-10-05T11:43:57.4927277Z   include-hidden-files: false
+2026-10-05T11:43:57.4927488Z   archive: true
+2026-10-05T11:43:57.4927661Z env:
+2026-10-05T11:43:57.4927836Z   CARGO_TERM_COLOR: always
+2026-10-05T11:43:57.4928056Z   DOTNET_ROOT: /usr/share/dotnet
+2026-10-05T11:43:57.4928387Z   BENCHMARK: dotnet csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll
+2026-10-05T11:43:57.4928744Z   NAME: objects-csharp-32-100000
+2026-10-05T11:43:57.4928954Z ##[endgroup]
+2026-10-05T11:43:57.6074652Z With the provided path, there will be 1 file uploaded
+2026-10-05T11:43:57.6086433Z Artifact name is valid!
+2026-10-05T11:43:57.6087068Z Root directory input is valid!
+2026-10-05T11:43:57.8891426Z Uploading artifact: results-objects-csharp-32-100000.zip
+2026-10-05T11:43:57.8934121Z Beginning upload of artifact content to blob storage
+2026-10-05T11:43:58.0638441Z Uploaded bytes 2874
+2026-10-05T11:43:58.1041516Z Finished uploading artifact content to blob storage!
+2026-10-05T11:43:58.1043222Z SHA256 digest of uploaded artifact is 8fb64a2385b92727ef5988b39b5279eb702af4502d965f982bccf3ba49355fb0
+2026-10-05T11:43:58.1043822Z Finalizing artifact upload
+2026-10-05T11:43:58.4869807Z Artifact results-objects-csharp-32-100000 successfully finalized. Artifact ID 11342823887
+2026-10-05T11:43:58.4870891Z Artifact results-objects-csharp-32-100000 has been successfully uploaded! Final size is 2874 bytes. Artifact ID is 11342823887
+2026-10-05T11:43:58.4873717Z Artifact download URL: https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37297329698/artifacts/11342823887
+2026-10-05T11:43:58.5252855Z Post job cleanup.
+2026-10-05T11:43:58.6778284Z Post job cleanup.
+2026-10-05T11:43:58.7498696Z [command]/usr/bin/git version
+2026-10-05T11:43:58.7541723Z git version 2.55.0
+2026-10-05T11:43:58.7568059Z Temporarily overriding HOME='/home/runner/work/_temp/eedb86ba-4e29-4fed-b725-7000a2d85c87' before making global git config changes
+2026-10-05T11:43:58.7569614Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-05T11:43:58.7572619Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+2026-10-05T11:43:58.7598724Z Removing SSH command configuration
+2026-10-05T11:43:58.7605053Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-05T11:43:58.7632270Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-05T11:43:58.7824175Z Removing HTTP extra header
+2026-10-05T11:43:58.7825047Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-05T11:43:58.7848910Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-05T11:43:58.8064079Z Removing includeIf entries pointing to credentials config files
+2026-10-05T11:43:58.8064836Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-05T11:43:58.8069122Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+2026-10-05T11:43:58.8070441Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+2026-10-05T11:43:58.8071412Z includeif.gitdir:/github/workspace/.git.path
+2026-10-05T11:43:58.8072047Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-05T11:43:58.8105350Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+2026-10-05T11:43:58.8122945Z /home/runner/work/_temp/git-credentials-f7095970-ee92-4994-87a0-fea1ba4accdf.config
+2026-10-05T11:43:58.8133056Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-f7095970\-ee92\-4994\-87a0\-fea1ba4accdf\.config
+2026-10-05T11:43:58.8173011Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+2026-10-05T11:43:58.8187969Z /home/runner/work/_temp/git-credentials-f7095970-ee92-4994-87a0-fea1ba4accdf.config
+2026-10-05T11:43:58.8203254Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-f7095970\-ee92\-4994\-87a0\-fea1ba4accdf\.config
+2026-10-05T11:43:58.8231132Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-05T11:43:58.8248124Z /github/runner_temp/git-credentials-f7095970-ee92-4994-87a0-fea1ba4accdf.config
+2026-10-05T11:43:58.8256165Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-f7095970\-ee92\-4994\-87a0\-fea1ba4accdf\.config
+2026-10-05T11:43:58.8282664Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-05T11:43:58.8300188Z /github/runner_temp/git-credentials-f7095970-ee92-4994-87a0-fea1ba4accdf.config
+2026-10-05T11:43:58.8309499Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-f7095970\-ee92\-4994\-87a0\-fea1ba4accdf\.config
+2026-10-05T11:43:58.8336158Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-05T11:43:58.8543312Z Removing credentials config '/home/runner/work/_temp/git-credentials-f7095970-ee92-4994-87a0-fea1ba4accdf.config'
+2026-10-05T11:43:58.8689852Z Cleaning up orphan processes

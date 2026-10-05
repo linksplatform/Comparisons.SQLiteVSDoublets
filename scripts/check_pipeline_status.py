@@ -36,7 +36,7 @@ def main():
     superseded = False
     if any(details.get("result") == "cancelled" for details in needs.values()):
         # GitHub's ref is a separate argument to this fixed read-only query; no shell.
-        remote = subprocess.run(
+        remote = subprocess.run(  # nosec B603 # resolved Git executable, fixed query and separate ref argument.
             [executable("git"), "ls-remote", "origin", os.environ["RUN_REF"]],
             capture_output=True,
             text=True,

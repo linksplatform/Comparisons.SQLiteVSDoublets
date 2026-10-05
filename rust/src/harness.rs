@@ -42,6 +42,7 @@ pub const OBJECTS_VARIANTS: [&str; 10] = [
 ];
 
 pub const WARM_UP_SIZE: u64 = 10_000;
+pub const WARM_UP_TIME: Duration = Duration::from_secs(1);
 
 type Timings = Vec<(&'static str, Duration)>;
 
@@ -294,7 +295,8 @@ fn directory_bytes(directory: &Path) -> u64 {
         .sum()
 }
 
-/// Times `lifecycle` on `repetitions` fresh stores opened in empty directories, after one discarded warm-up.
+/// Times `lifecycle` on `repetitions` fresh stores opened in empty directories,
+/// after discarded warm-ups that run for at least [`WARM_UP_TIME`], like in C#.
 fn measure<S>(
     variant: &'static str,
     n: u64,
@@ -303,18 +305,8 @@ fn measure<S>(
     open: impl Fn(&Path) -> S,
     lifecycle: fn(&mut S, u64, &mut dyn FnMut()) -> Timings,
 ) -> Measurement {
-    let mut measurement = Measurement {
-        variant,
-        file_bytes: None,
-        operations: Vec::new(),
-    };
-    for repetition in 0..=repetitions {
-        let size = if repetition == 0 {
-            n.min(WARM_UP_SIZE)
-        } else {
-            n
-        };
-        let workspace = directory.join(format!("{variant}-{repetition}"));
+    let run = |size| {
+        let workspace = directory.join(variant);
         fs::create_dir_all(&workspace).unwrap();
         let mut storage = open(&workspace);
         let mut file_bytes = 0;
@@ -323,9 +315,20 @@ fn measure<S>(
         });
         drop(storage);
         fs::remove_dir_all(&workspace).unwrap();
-        if repetition == 0 {
-            continue;
-        }
+        (timings, file_bytes)
+    };
+    let warm_up = Instant::now();
+    run(n.min(WARM_UP_SIZE));
+    while warm_up.elapsed() < WARM_UP_TIME {
+        run(n.min(WARM_UP_SIZE));
+    }
+    let mut measurement = Measurement {
+        variant,
+        file_bytes: None,
+        operations: Vec::new(),
+    };
+    for repetition in 1..=repetitions {
+        let (timings, file_bytes) = run(n);
         eprintln!("{variant} #{repetition}: {}", summary(&timings, n));
         measurement.file_bytes = (file_bytes > 0).then_some(file_bytes);
         for (operation, elapsed) in timings {

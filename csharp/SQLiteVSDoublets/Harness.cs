@@ -43,6 +43,8 @@ public static class Harness
 
     public static ulong WarmUpSize => 10_000;
 
+    public static TimeSpan WarmUpTime => TimeSpan.FromSeconds(1);
+
     /// <summary>Count and order-sensitive checksum of the records an operation has seen.</summary>
     public record struct Tally(ulong Count, ulong Checksum)
     {
@@ -244,7 +246,7 @@ public static class Harness
 
     /// <summary>
     /// Times <paramref name="lifecycle"/> on <paramref name="repetitions"/> fresh stores opened in empty directories,
-    /// after one discarded warm-up.
+    /// after discarded warm-ups that run for at least <see cref="WarmUpTime"/>, so the JIT has optimized the code.
     /// </summary>
     private static Measurement Measure<TStorage>(
         string variant,
@@ -255,11 +257,9 @@ public static class Harness
         Func<TStorage, ulong, Action, List<(string, TimeSpan)>> lifecycle)
         where TStorage : IDisposable
     {
-        var measurement = new Measurement(variant, null, []);
-        for (var repetition = 0; repetition <= repetitions; repetition++)
+        (List<(string, TimeSpan)>, ulong) Run(ulong size)
         {
-            var size = repetition == 0 ? Math.Min(n, WarmUpSize) : n;
-            var workspace = Path.Combine(directory, $"{variant}-{repetition}");
+            var workspace = Path.Combine(directory, variant);
             Directory.CreateDirectory(workspace);
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -270,10 +270,19 @@ public static class Harness
                 timings = lifecycle(storage, size, () => fileBytes = DirectoryBytes(workspace));
             }
             Directory.Delete(workspace, true);
-            if (repetition == 0)
-            {
-                continue;
-            }
+            return (timings, fileBytes);
+        }
+
+        var warmUp = Stopwatch.StartNew();
+        do
+        {
+            Run(Math.Min(n, WarmUpSize));
+        }
+        while (warmUp.Elapsed < WarmUpTime);
+        var measurement = new Measurement(variant, null, []);
+        for (var repetition = 1; repetition <= repetitions; repetition++)
+        {
+            var (timings, fileBytes) = Run(n);
             Console.Error.WriteLine($"{variant} #{repetition}: {Summary(timings, n)}");
             measurement = measurement with { FileBytes = fileBytes > 0 ? fileBytes : null };
             foreach (var (operation, elapsed) in timings)

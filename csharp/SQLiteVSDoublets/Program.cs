@@ -49,6 +49,7 @@ var report = new JsonObject
     ["size"] = size,
     ["repetitions"] = repetitions,
     ["warm_up_size"] = Math.Min(size, Harness.WarmUpSize),
+    ["warm_up_seconds"] = Harness.WarmUpTime.TotalSeconds,
     ["sqlite_version"] = (string)version.ExecuteScalar()!,
     ["results"] = new JsonArray(measurements.Select(measurement => (JsonNode)measurement.ToJson()).ToArray()),
 };

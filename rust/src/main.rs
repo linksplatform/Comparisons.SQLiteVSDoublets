@@ -72,6 +72,7 @@ fn main() {
         "size": size,
         "repetitions": repetitions,
         "warm_up_size": size.min(harness::WARM_UP_SIZE),
+        "warm_up_seconds": harness::WARM_UP_TIME.as_secs_f64(),
         "sqlite_version": rusqlite::version(),
         "results": measurements.iter().map(Measurement::to_json).collect::<Vec<_>>(),
     });

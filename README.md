@@ -42,8 +42,9 @@ with index trees) and split (separate data and index arrays), each volatile
 with SQLite of the same durability: volatile with `SQLite Memory`,
 non-volatile with `SQLite File`.
 
-Every repetition runs on a fresh store in an empty directory, after one
-discarded warm-up repetition on up to 10,000 records. Each operation is one
+Every repetition runs on a fresh store in an empty directory, after discarded
+warm-up repetitions on up to 10,000 records that run for at least a second, so
+the .NET JIT has already optimized the code. Each operation is one
 timed transaction over all records, point operations visit the records in a
 scattered order, and each result is checked against the expected count and
 order-sensitive checksum, so a storage that loses, duplicates or mixes up

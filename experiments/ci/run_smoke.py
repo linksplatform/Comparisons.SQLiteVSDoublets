@@ -16,9 +16,10 @@ OUT = ROOT / "dev/log/issues/110/pulls/111/validation/smoke-results"
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    sha = subprocess.run(  # nosec B603 # resolved Git executable and fixed read-only arguments.
+    revision = subprocess.run(  # nosec B603 # resolved Git executable and fixed read-only arguments.
         [executable("git"), "rev-parse", "HEAD"], cwd=ROOT, text=True, capture_output=True, check=True
-    ).stdout.strip()
+    )
+    sha = revision.stdout.strip()
     for row in ci.matrix([1000]):
         binary = (
             [str(ROOT / "rust/target/release/sqlite-vs-doublets")]

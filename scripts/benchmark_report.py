@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
-"""
-Turns the benchmark JSON reports into the README results sections and charts.
+"""Turns the benchmark JSON reports into the README results sections and charts."""
 
-Usage: benchmark_report.py RESULTS_DIR [--readme README.md] [--readme README.ru.md] [--charts DIR]
-
-Every JSON report (written by `rust` and `csharp` with `--output`) is one table: a language,
-a category (links or objects), an address/id space (32 or 64 bit) and a size, measured on one machine.
-The README section between the markers is regenerated in the hierarchy
-category -> language -> bits -> size, and charts are written per category, language and bits.
-"""
+# Usage: benchmark_report.py RESULTS_DIR [--readme README.md] [--readme README.ru.md] [--charts DIR]
+#
+# Every JSON report (written by `rust` and `csharp` with `--output`) is one table: a language,
+# a category (links or objects), an address/id space (32 or 64 bit) and a size, measured on one machine.
+# The README section between the markers is regenerated in the hierarchy
+# category -> language -> bits -> size, and charts are written per category, language and bits.
 
 import argparse
 import json
@@ -170,12 +168,9 @@ def quartiles(measured):
 
 
 def comparison(measured, reference, text):
-    """
-    How `measured` compares with `reference`.
-
-    Overlapping interquartile ranges and medians within NOISE of each other (single samples have no range)
-    are not called a difference.
-    """
+    """How `measured` compares with `reference`."""
+    # Overlapping interquartile ranges and medians within NOISE of each other (single samples have no range)
+    # are not called a difference.
     (low, high), (reference_low, reference_high) = quartiles(measured), quartiles(reference)
     overlapping = low <= reference_high and reference_low <= high
     ratio = max(measured["median_ns"], reference["median_ns"]) / min(measured["median_ns"], reference["median_ns"])
@@ -305,7 +300,7 @@ def charts(reports, directory):
 
 
 def main(arguments=None):
-    parser = argparse.ArgumentParser(description=__doc__.strip().splitlines()[0])
+    parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("results", type=Path, help="directory with the JSON reports")
     parser.add_argument("--readme", type=Path, action="append", default=[], help="README to update in place")
     parser.add_argument("--charts", type=Path, help="directory for the charts, relative to the READMEs")

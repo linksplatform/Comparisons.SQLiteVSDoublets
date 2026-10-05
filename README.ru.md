@@ -1,45 +1,111 @@
-[![Rust](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/rust.yml/badge.svg)](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/rust.yml) [![C#](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/csharp.yml/badge.svg)](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/csharp.yml) [![Benchmarks](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/benchmarks.yml/badge.svg)](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/benchmarks.yml)
-
 # Comparisons.SQLiteVSDoublets ([english version](README.md))
+
+[![Rust](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/rust.yml/badge.svg)](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/rust.yml)
+[![C#](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/csharp.yml/badge.svg)](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/csharp.yml)
+[![Benchmarks](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/benchmarks.yml/badge.svg)](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/workflows/benchmarks.yml)
 
 ![Сравнение моделей данных](https://github.com/LinksPlatform/Documentation/raw/master/doc/ModelsComparison/relational_model_vs_associative_model_vs_links_ru.png)
 
-Сравнение SQLite и Дуплетов ПлатформыСвязей на базовых операциях встроенных баз данных со связями и объектоподобными структурами.
+Сравнение SQLite и Дуплетов ПлатформыСвязей на базовых операциях встроенных
+баз данных со связями и объектоподобными структурами.
 
-Основано на примерах из https://github.com/FahaoTang/dotnetcore-examples и https://github.com/Konard/LinksPlatform
+Основано на примерах из <https://github.com/FahaoTang/dotnetcore-examples> и
+<https://github.com/Konard/LinksPlatform>
 
 ## Тесты производительности
 
-Rust ([doublets](https://crates.io/crates/doublets) и [rusqlite](https://crates.io/crates/rusqlite) со встроенной SQLite) и C# ([Platform.Data.Doublets](https://www.nuget.org/packages/Platform.Data.Doublets), [Platform.Data.Doublets.Sequences](https://www.nuget.org/packages/Platform.Data.Doublets.Sequences) и [Microsoft.Data.Sqlite](https://www.nuget.org/packages/Microsoft.Data.Sqlite)) выполняют одинаковую нагрузку на одинаковых детерминированных данных с 32-битными (`u32`/`uint`) и 64-битными (`u64`/`ulong`) идентификаторами:
+Rust ([doublets](https://crates.io/crates/doublets) и
+[rusqlite](https://crates.io/crates/rusqlite) со встроенной SQLite) и C#
+([Platform.Data.Doublets](https://www.nuget.org/packages/Platform.Data.Doublets),
+[Platform.Data.Doublets.Sequences](https://www.nuget.org/packages/Platform.Data.Doublets.Sequences)
+и [Microsoft.Data.Sqlite](https://www.nuget.org/packages/Microsoft.Data.Sqlite))
+выполняют одинаковую нагрузку на одинаковых детерминированных данных
+с 32-битными (`u32`/`uint`) и 64-битными (`u64`/`ulong`) идентификаторами:
 
-- **Связи**: SQLite хранит таблицу `links(id INTEGER PRIMARY KEY, "from", "to")` с индексами `("from", "to")` и `("to", "from")`; Дуплеты хранят сами связи. Операции: создание, чтение всех, чтение по id, поиск по `(from, to)`, чтение по `from`, чтение по `to`, обновление (обмен `from` и `to`) и удаление.
-- **Объекты**: записи блога с заголовком, содержимым и датой публикации. SQLite хранит таблицу `blog_posts(id, title, content, publication_date)`; Дуплеты хранят каждую запись в виде связей, а строки — в виде последовательностей символов Юникода, как это делает [Platform.Data.Doublets.Sequences](https://github.com/linksplatform/Data.Doublets.Sequences). Операции: создание, чтение всех, чтение по id и удаление. Каждое хранилище Дуплетов проверяется с кэшем последовательностей строк и без него (`Cached`/`Uncached`).
+- **Связи**: SQLite хранит таблицу
+  `links(id INTEGER PRIMARY KEY, "from", "to")` с индексами `("from", "to")`
+  и `("to", "from")`; Дуплеты хранят сами связи. Операции: создание, чтение
+  всех, чтение по id, поиск по `(from, to)`, чтение по `from`, чтение по `to`,
+  обновление (обмен `from` и `to`) и удаление.
+- **Объекты**: записи блога с заголовком, содержимым и датой публикации.
+  SQLite хранит таблицу `blog_posts(id, title, content, publication_date)`;
+  Дуплеты хранят каждую запись в виде связей, а строки — в виде
+  последовательностей символов Юникода, как это делает
+  [Platform.Data.Doublets.Sequences](https://github.com/linksplatform/Data.Doublets.Sequences).
+  Операции: создание, чтение всех, чтение по id и удаление. Каждое хранилище
+  Дуплетов проверяется с кэшем последовательностей строк и без него
+  (`Cached`/`Uncached`).
 
-Хранилища: SQLite в памяти и в файле; Дуплеты объединённые (один массив связей с деревьями индексов) и разделённые (отдельные массивы данных и индексов), каждое энергозависимое (в памяти) и энергонезависимое (в отображаемых в память файлах). Дуплеты сравниваются с SQLite той же надёжности хранения: энергозависимые с `SQLite Memory`, энергонезависимые с `SQLite File`.
+Хранилища: SQLite в памяти и в файле; Дуплеты объединённые (один массив связей
+с деревьями индексов) и разделённые (отдельные массивы данных и индексов),
+каждое энергозависимое (в памяти) и энергонезависимое (в отображаемых в память
+файлах). Дуплеты сравниваются с SQLite той же надёжности хранения:
+энергозависимые с `SQLite Memory`, энергонезависимые с `SQLite File`.
 
-Каждый повтор выполняется на новом хранилище в пустой папке после одного отбрасываемого прогревочного повтора на не более чем 10 000 записей. Каждая операция — одна измеряемая транзакция по всем записям, точечные операции обходят записи в перемешанном порядке, а каждый результат сверяется с ожидаемым количеством и зависящей от порядка контрольной суммой, поэтому хранилище, которое теряет, дублирует или путает записи, завершает запуск ошибкой, а не попадает в отчёт как быстрое. Число повторов — `3 000 000 / размер` для связей и `500 000 / размер` для объектов, но от 1 до 10. В таблицах указано медианное время одной операции; разница указывается, только если межквартильные диапазоны (средняя половина) повторов не пересекаются и медианы отличаются больше чем на 5%, иначе пишется `≈ так же`. Размер файлов измеряется после создания; файлы Дуплетов — заранее выделенные отображаемые в память файлы, поэтому для небольших хранилищ показан размер предварительного выделения.
+Каждый повтор выполняется на новом хранилище в пустой папке после одного
+отбрасываемого прогревочного повтора на не более чем 10 000 записей. Каждая
+операция — одна измеряемая транзакция по всем записям, точечные операции
+обходят записи в перемешанном порядке, а каждый результат сверяется
+с ожидаемым количеством и зависящей от порядка контрольной суммой, поэтому
+хранилище, которое теряет, дублирует или путает записи, завершает запуск
+ошибкой, а не попадает в отчёт как быстрое. Число повторов —
+`3 000 000 / размер` для связей и `500 000 / размер` для объектов, но от 1
+до 10. В таблицах указано медианное время одной операции; разница указывается,
+только если межквартильные диапазоны (средняя половина) повторов
+не пересекаются и медианы отличаются больше чем на 5%, иначе пишется
+`≈ так же`. Размер файлов измеряется после создания; файлы Дуплетов — заранее
+выделенные отображаемые в память файлы, поэтому для небольших хранилищ показан
+размер предварительного выделения.
 
-Каждая таблица измеряется отдельной задачей GitHub Actions со всеми вариантами на одной машине в [workflow Benchmarks](.github/workflows/benchmarks.yml): связи на 100 000, 1 000 000 и 10 000 000 записей, объекты на 100 000 и 1 000 000 записей (большие размеры не укладываются в 6-часовое ограничение задачи). Pull request проверяют весь процесс на 1 000 записей, а push в `main` обновляет результаты ниже. Workflow можно запустить и вручную с другими размерами.
+Каждая таблица измеряется отдельной задачей GitHub Actions со всеми вариантами
+на одной машине в [workflow Benchmarks](.github/workflows/benchmarks.yml):
+связи на 100 000, 1 000 000 и 10 000 000 записей, объекты на 100 000
+и 1 000 000 записей (большие размеры не укладываются в 6-часовое ограничение
+задачи). Pull request проверяют весь процесс на 1 000 записей, а push в `main`
+обновляет результаты ниже. Workflow можно запустить и вручную с другими
+размерами.
 
 Локальный запуск:
 
 ```bash
 mkdir -p results
-cargo run --release --manifest-path rust/Cargo.toml -- links 64 100000 --output results/links-rust-64-100000.json
-dotnet run -c Release --project csharp/SQLiteVSDoublets -- objects 32 1000 --variants SQLite_File,Doublets_Split_NonVolatile_Cached
-python3 scripts/benchmark_report.py results  # печатает таблицы, добавьте --readme README.ru.md --charts docs/benchmarks для обновления этого файла
+cargo run --release --manifest-path rust/Cargo.toml -- \
+  links 64 100000 --output results/links-rust-64-100000.json
+dotnet run -c Release --project csharp/SQLiteVSDoublets -- \
+  objects 32 1000 --variants SQLite_File,Doublets_Split_NonVolatile_Cached
+# печатает таблицы, для обновления этого файла добавьте
+# --readme README.ru.md --charts docs/benchmarks
+python3 scripts/benchmark_report.py results
 ```
 
 Замечания:
 
-- Разделённые хранилища doublets 0.5.0 (Rust) теряют связь, обновлённую так, чтобы она ссылалась на саму себя, поэтому тест сначала обновляет связь до `(0, 0)` — состояния, в котором связи создаются ([experiments/split_store_delete](experiments/split_store_delete)).
-- Хранилища doublets 0.5.0 (Rust) принимают часть памяти, которую `platform-mem` 0.3.0 возвращает после её увеличения, за всю память, поэтому хранилище ломается после 1 040 384 связей; тесты оборачивают память в [`memory::Whole`](rust/src/memory.rs), которая возвращает всю память ([experiments/unit_store_growth](experiments/unit_store_growth)).
-- В C# связи удаляются через `Delete(id, handler: null)`, который сбрасывает связь перед удалением; простой `Delete(id)` оставляет связь в деревьях индексов, и последующий поиск ломается ([experiments/csharp_tree_delete](experiments/csharp_tree_delete)).
-- Объединённые хранилища на C# используют АВЛ-деревья индексов: деревья по умолчанию, сбалансированные по размеру, вырождаются, когда много связей имеют общее начало или конец, и создание каждой записи блога становится линейным по числу записей ([experiments/csharp_objects_profile](experiments/csharp_objects_profile)).
-- Хранилища объектов используют внешние ссылки для чисел и символов Юникода, поэтому исходные значения никогда не совпадают с идентификаторами связей.
-- Чтение строки без кэша обходит её последовательность связь за связью; в C# каждый вызов `GetSource`/`GetTarget` из `Platform.Data` выделяет обработчик и список, поэтому чтение без кэша на C# значительно медленнее, чем на Rust.
+- Разделённые хранилища doublets 0.5.0 (Rust) теряют связь, обновлённую так,
+  чтобы она ссылалась на саму себя, поэтому тест сначала обновляет связь
+  до `(0, 0)` — состояния, в котором связи создаются
+  ([experiments/split_store_delete](experiments/split_store_delete)).
+- Хранилища doublets 0.5.0 (Rust) принимают часть памяти, которую
+  `platform-mem` 0.3.0 возвращает после её увеличения, за всю память, поэтому
+  хранилище ломается после 1 040 384 связей; тесты оборачивают память
+  в [`memory::Whole`](rust/src/memory.rs), которая возвращает всю память
+  ([experiments/unit_store_growth](experiments/unit_store_growth)).
+- В C# связи удаляются через `Delete(id, handler: null)`, который сбрасывает
+  связь перед удалением; простой `Delete(id)` оставляет связь в деревьях
+  индексов, и последующий поиск ломается
+  ([experiments/csharp_tree_delete](experiments/csharp_tree_delete)).
+- Объединённые хранилища на C# используют АВЛ-деревья индексов: деревья
+  по умолчанию, сбалансированные по размеру, вырождаются, когда много связей
+  имеют общее начало или конец, и создание каждой записи блога становится
+  линейным по числу записей
+  ([experiments/csharp_objects_profile](experiments/csharp_objects_profile)).
+- Хранилища объектов используют внешние ссылки для чисел и символов Юникода,
+  поэтому исходные значения никогда не совпадают с идентификаторами связей.
+- Чтение строки без кэша обходит её последовательность связь за связью; в C#
+  каждый вызов `GetSource`/`GetTarget` из `Platform.Data` выделяет обработчик
+  и список, поэтому чтение без кэша на C# значительно медленнее, чем на Rust.
 
 <!--BENCHMARK_RESULTS_START-->
+<!-- markdownlint-disable MD013 MD024 -->
 ## Дуплеты против SQLite как хранилище связей
 
 ### Дуплеты на Rust против SQLite
@@ -51,7 +117,7 @@ python3 scripts/benchmark_report.py results  # печатает таблицы, 
 _10 повторов после прогрева, медианное время одной операции. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Поиск (from, to) | Чтение по from | Чтение по to | Обновление | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 1.72 µs | 125 ns | 606 ns | 693 ns | 765 ns | 766 ns | 3.36 µs | 2.17 µs | — |
 | SQLite File | 2.09 µs | 128 ns | 621 ns | 727 ns | 782 ns | 790 ns | 12.3 µs | 6.04 µs | 4.4 MiB |
 | Doublets United Volatile | 458 ns (в 3.76× быстрее) | 1.91 ns (в 65.7× быстрее) | 5.72 ns (в 106× быстрее) | 194 ns (в 3.57× быстрее) | 248 ns (в 3.09× быстрее) | 267 ns (в 2.86× быстрее) | 1.24 µs (в 2.72× быстрее) | 459 ns (в 4.72× быстрее) | — |
@@ -64,7 +130,7 @@ _10 повторов после прогрева, медианное время 
 _3 повтора после прогрева, медианное время одной операции. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Поиск (from, to) | Чтение по from | Чтение по to | Обновление | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 2.39 µs | 124 ns | 874 ns | 983 ns | 997 ns | 1 µs | 6.48 µs | 4.26 µs | — |
 | SQLite File | 5.76 µs | 128 ns | 1.96 µs | 1.9 µs | 1.92 µs | 1.91 µs | 19 µs | 10.6 µs | 48.2 MiB |
 | Doublets United Volatile | 755 ns (в 3.16× быстрее) | 1.84 ns (в 67.5× быстрее) | 20.7 ns (в 42.2× быстрее) | 417 ns (в 2.36× быстрее) | 579 ns (в 1.72× быстрее) | 620 ns (в 1.61× быстрее) | 2.39 µs (в 2.71× быстрее) | 828 ns (в 5.14× быстрее) | — |
@@ -77,7 +143,7 @@ _3 повтора после прогрева, медианное время о�
 _1 повтор после прогрева, медианное время одной операции. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Поиск (from, to) | Чтение по from | Чтение по to | Обновление | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 3.34 µs | 124 ns | 1.39 µs | 1.47 µs | 1.51 µs | 1.49 µs | 8.53 µs | 5.59 µs | — |
 | SQLite File | 9.22 µs | 127 ns | 2.18 µs | 2.57 µs | 2.56 µs | 2.53 µs | 24 µs | 14.5 µs | 501.0 MiB |
 | Doublets United Volatile | 2.16 µs (в 1.55× быстрее) | 2.26 ns (в 54.6× быстрее) | 35 ns (в 39.7× быстрее) | 1.26 µs (в 1.17× быстрее) | 1.56 µs (≈ так же) | 1.61 µs (в 1.08× медленнее) | 6.55 µs (в 1.3× быстрее) | 2.73 µs (в 2.05× быстрее) | — |
@@ -94,7 +160,7 @@ _1 повтор после прогрева, медианное время од�
 _10 повторов после прогрева, медианное время одной операции. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Поиск (from, to) | Чтение по from | Чтение по to | Обновление | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 1.69 µs | 126 ns | 616 ns | 721 ns | 752 ns | 743 ns | 3.12 µs | 2.01 µs | — |
 | SQLite File | 2.02 µs | 130 ns | 639 ns | 762 ns | 789 ns | 788 ns | 10.4 µs | 5.18 µs | 4.4 MiB |
 | Doublets United Volatile | 449 ns (в 3.77× быстрее) | 1.81 ns (в 69.8× быстрее) | 3.2 ns (в 192× быстрее) | 179 ns (в 4.04× быстрее) | 234 ns (в 3.21× быстрее) | 253 ns (в 2.94× быстрее) | 1.13 µs (в 2.75× быстрее) | 444 ns (в 4.54× быстрее) | — |
@@ -107,7 +173,7 @@ _10 повторов после прогрева, медианное время 
 _3 повтора после прогрева, медианное время одной операции. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Поиск (from, to) | Чтение по from | Чтение по to | Обновление | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 2.09 µs | 124 ns | 745 ns | 839 ns | 879 ns | 858 ns | 4.77 µs | 3.14 µs | — |
 | SQLite File | 5.65 µs | 127 ns | 1.83 µs | 1.82 µs | 1.85 µs | 1.84 µs | 18.4 µs | 10.3 µs | 48.2 MiB |
 | Doublets United Volatile | 750 ns (в 2.79× быстрее) | 3.05 ns (в 40.4× быстрее) | 20.2 ns (в 36.9× быстрее) | 385 ns (в 2.18× быстрее) | 471 ns (в 1.87× быстрее) | 567 ns (в 1.51× быстрее) | 2.55 µs (в 1.87× быстрее) | 856 ns (в 3.66× быстрее) | — |
@@ -120,7 +186,7 @@ _3 повтора после прогрева, медианное время о�
 _1 повтор после прогрева, медианное время одной операции. SQLite 3.53.2, Ubuntu 24.04.5 LTS, INTEL(R) XEON(R) PLATINUM 8573C, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Поиск (from, to) | Чтение по from | Чтение по to | Обновление | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 3.34 µs | 105 ns | 1.62 µs | 1.62 µs | 1.57 µs | 1.5 µs | 9.58 µs | 6.3 µs | — |
 | SQLite File | 7.41 µs | 106 ns | 1.81 µs | 2.05 µs | 1.98 µs | 1.97 µs | 18.3 µs | 10.9 µs | 501.0 MiB |
 | Doublets United Volatile | 2.38 µs (в 1.41× быстрее) | 6.42 ns (в 16.4× быстрее) | 22.4 ns (в 72.3× быстрее) | 1.3 µs (в 1.25× быстрее) | 1.43 µs (в 1.1× быстрее) | 2.3 µs (в 1.53× медленнее) | 6.59 µs (в 1.45× быстрее) | 2.48 µs (в 2.54× быстрее) | — |
@@ -139,7 +205,7 @@ _1 повтор после прогрева, медианное время од�
 _10 повторов после прогрева, медианное время одной операции. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Поиск (from, to) | Чтение по from | Чтение по to | Обновление | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 6.27 µs | 380 ns | 1.2 µs | 1.46 µs | 1.51 µs | 1.5 µs | 4.27 µs | 2.84 µs | — |
 | SQLite File | 5.75 µs | 385 ns | 1.21 µs | 1.48 µs | 1.52 µs | 1.52 µs | 12.2 µs | 6.22 µs | 4.4 MiB |
 | Doublets United Volatile | 1.02 µs (в 6.12× быстрее) | 14.9 ns (в 25.5× быстрее) | 60.1 ns (в 20× быстрее) | 226 ns (в 6.45× быстрее) | 350 ns (в 4.32× быстрее) | 264 ns (в 5.67× быстрее) | 2.03 µs (в 2.1× быстрее) | 1.05 µs (в 2.7× быстрее) | — |
@@ -152,7 +218,7 @@ _10 повторов после прогрева, медианное время 
 _3 повтора после прогрева, медианное время одной операции. SQLite 3.53.3, Ubuntu 24.04.5 LTS, Intel(R) Xeon(R) 6973P-C, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Поиск (from, to) | Чтение по from | Чтение по to | Обновление | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 7.05 µs | 428 ns | 1.51 µs | 1.69 µs | 1.76 µs | 1.77 µs | 6.76 µs | 4.12 µs | — |
 | SQLite File | 6.89 µs | 385 ns | 1.81 µs | 1.95 µs | 2.02 µs | 2.04 µs | 12.3 µs | 8.07 µs | 48.2 MiB |
 | Doublets United Volatile | 1.7 µs (в 4.16× быстрее) | 16.4 ns (в 26.1× быстрее) | 117 ns (в 12.9× быстрее) | 574 ns (в 2.94× быстрее) | 691 ns (в 2.55× быстрее) | 824 ns (в 2.15× быстрее) | 4.3 µs (в 1.57× быстрее) | 1.85 µs (в 2.23× быстрее) | — |
@@ -165,7 +231,7 @@ _3 повтора после прогрева, медианное время о�
 _1 повтор после прогрева, медианное время одной операции. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Поиск (from, to) | Чтение по from | Чтение по to | Обновление | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 7.41 µs | 316 ns | 1.86 µs | 2.01 µs | 2.06 µs | 2.06 µs | 9.49 µs | 6.49 µs | — |
 | SQLite File | 18.2 µs | 318 ns | 2.72 µs | 3.16 µs | 3.11 µs | 3.1 µs | 24.6 µs | 14.8 µs | 501.0 MiB |
 | Doublets United Volatile | 3.01 µs (в 2.46× быстрее) | 10 ns (в 31.6× быстрее) | 181 ns (в 10.3× быстрее) | 1.45 µs (в 1.39× быстрее) | 1.67 µs (в 1.23× быстрее) | 1.88 µs (в 1.1× быстрее) | 8.16 µs (в 1.16× быстрее) | 3.52 µs (в 1.85× быстрее) | — |
@@ -182,7 +248,7 @@ _1 повтор после прогрева, медианное время од�
 _10 повторов после прогрева, медианное время одной операции. SQLite 3.53.3, Ubuntu 24.04.5 LTS, Intel(R) Xeon(R) 6973P-C, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Поиск (from, to) | Чтение по from | Чтение по to | Обновление | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 4.63 µs | 355 ns | 882 ns | 1.07 µs | 1.12 µs | 1.13 µs | 3.45 µs | 2.3 µs | — |
 | SQLite File | 3.83 µs | 363 ns | 844 ns | 1.03 µs | 1.07 µs | 1.08 µs | 7.17 µs | 4.04 µs | 4.4 MiB |
 | Doublets United Volatile | 1.12 µs (в 4.12× быстрее) | 19.6 ns (в 18.1× быстрее) | 65 ns (в 13.6× быстрее) | 223 ns (в 4.81× быстрее) | 265 ns (в 4.23× быстрее) | 371 ns (в 3.04× быстрее) | 2.49 µs (в 1.39× быстрее) | 1.24 µs (в 1.86× быстрее) | — |
@@ -195,7 +261,7 @@ _10 повторов после прогрева, медианное время 
 _3 повтора после прогрева, медианное время одной операции. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Поиск (from, to) | Чтение по from | Чтение по to | Обновление | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 7.39 µs | 386 ns | 1.49 µs | 1.8 µs | 1.83 µs | 1.83 µs | 7.12 µs | 4.86 µs | — |
 | SQLite File | 9.97 µs | 386 ns | 2.64 µs | 2.76 µs | 2.84 µs | 2.86 µs | 21 µs | 11.7 µs | 48.2 MiB |
 | Doublets United Volatile | 2.15 µs (в 3.44× быстрее) | 22.3 ns (в 17.3× быстрее) | 162 ns (в 9.17× быстрее) | 576 ns (в 3.12× быстрее) | 687 ns (в 2.66× быстрее) | 918 ns (в 2× быстрее) | 5.14 µs (в 1.39× быстрее) | 2.32 µs (в 2.1× быстрее) | — |
@@ -208,7 +274,7 @@ _3 повтора после прогрева, медианное время о�
 _1 повтор после прогрева, медианное время одной операции. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Поиск (from, to) | Чтение по from | Чтение по to | Обновление | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 8.4 µs | 384 ns | 1.89 µs | 2.21 µs | 2.18 µs | 2.16 µs | 9.45 µs | 6.63 µs | — |
 | SQLite File | 20 µs | 383 ns | 2.88 µs | 3.38 µs | 3.32 µs | 3.32 µs | 25.4 µs | 15.3 µs | 501.0 MiB |
 | Doublets United Volatile | 3.04 µs (в 2.76× быстрее) | 13.9 ns (в 27.7× быстрее) | 180 ns (в 10.5× быстрее) | 1.31 µs (в 1.69× быстрее) | 1.5 µs (в 1.45× быстрее) | 1.75 µs (в 1.24× быстрее) | 8.6 µs (в 1.1× быстрее) | 3.84 µs (в 1.72× быстрее) | — |
@@ -229,7 +295,7 @@ _1 повтор после прогрева, медианное время од�
 _5 повторов после прогрева, медианное время одной операции. SQLite 3.53.2, Ubuntu 24.04.5 LTS, Intel(R) Xeon(R) 6973P-C, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 838 ns | 485 ns | 1.37 µs | 1.49 µs | — |
 | SQLite File | 4.96 µs | 476 ns | 1.63 µs | 8.03 µs | 78.3 MiB |
 | Doublets United Volatile Cached | 4.58 µs (в 5.46× медленнее) | 1.35 µs (в 2.79× медленнее) | 2 µs (в 1.46× медленнее) | 4.51 µs (в 3.03× медленнее) | — |
@@ -246,7 +312,7 @@ _5 повторов после прогрева, медианное время �
 _1 повтор после прогрева, медианное время одной операции. SQLite 3.53.2, Ubuntu 24.04.5 LTS, INTEL(R) XEON(R) PLATINUM 8573C, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 965 ns | 478 ns | 2.06 µs | 2.7 µs | — |
 | SQLite File | 5.93 µs | 470 ns | 2.71 µs | 11.1 µs | 783.2 MiB |
 | Doublets United Volatile Cached | 6.88 µs (в 7.13× медленнее) | 1.64 µs (в 3.42× медленнее) | 3.23 µs (в 1.56× медленнее) | 10.7 µs (в 3.97× медленнее) | — |
@@ -267,7 +333,7 @@ _1 повтор после прогрева, медианное время од�
 _5 повторов после прогрева, медианное время одной операции. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 1.22 µs | 548 ns | 1.44 µs | 1.7 µs | — |
 | SQLite File | 2.01 µs | 625 ns | 2.6 µs | 7.27 µs | 78.3 MiB |
 | Doublets United Volatile Cached | 5.17 µs (в 4.22× медленнее) | 1.46 µs (в 2.67× медленнее) | 2.25 µs (в 1.57× медленнее) | 6.12 µs (в 3.6× медленнее) | — |
@@ -284,7 +350,7 @@ _5 повторов после прогрева, медианное время �
 _1 повтор после прогрева, медианное время одной операции. SQLite 3.53.2, Ubuntu 24.04.5 LTS, INTEL(R) XEON(R) PLATINUM 8573C, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 971 ns | 481 ns | 2.07 µs | 2.66 µs | — |
 | SQLite File | 5.28 µs | 466 ns | 2.69 µs | 10.8 µs | 783.2 MiB |
 | Doublets United Volatile Cached | 7.42 µs (в 7.64× медленнее) | 1.77 µs (в 3.69× медленнее) | 3.27 µs (в 1.58× медленнее) | 11 µs (в 4.13× медленнее) | — |
@@ -307,7 +373,7 @@ _1 повтор после прогрева, медианное время од�
 _5 повторов после прогрева, медианное время одной операции. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 5.16 µs | 1.51 µs | 2.86 µs | 2.09 µs | — |
 | SQLite File | 6.4 µs | 1.6 µs | 4.03 µs | 8.14 µs | 78.3 MiB |
 | Doublets United Volatile Cached | 16.7 µs (в 3.23× медленнее) | 8.6 µs (в 5.68× медленнее) | 2.77 µs (≈ так же) | 11.7 µs (в 5.59× медленнее) | — |
@@ -324,7 +390,7 @@ _5 повторов после прогрева, медианное время �
 _1 повтор после прогрева, медианное время одной операции. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 4.17 µs | 1.24 µs | 3.03 µs | 2.93 µs | — |
 | SQLite File | 8.39 µs | 1.27 µs | 4.81 µs | 16 µs | 783.2 MiB |
 | Doublets United Volatile Cached | 16.5 µs (в 3.96× медленнее) | 7.17 µs (в 5.77× медленнее) | 3.77 µs (в 1.25× медленнее) | 14 µs (в 4.77× медленнее) | — |
@@ -345,7 +411,7 @@ _1 повтор после прогрева, медианное время од�
 _5 повторов после прогрева, медианное время одной операции. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 5.06 µs | 1.43 µs | 2.73 µs | 1.9 µs | — |
 | SQLite File | 6.09 µs | 1.56 µs | 3.81 µs | 7.65 µs | 78.3 MiB |
 | Doublets United Volatile Cached | 17.8 µs (в 3.52× медленнее) | 9.46 µs (в 6.62× медленнее) | 2.83 µs (≈ так же) | 12.7 µs (в 6.7× медленнее) | — |
@@ -362,7 +428,7 @@ _5 повторов после прогрева, медианное время �
 _1 повтор после прогрева, медианное время одной операции. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [запуск GitHub Actions](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) от 2026-10-04._
 
 | Хранилище | Создание | Чтение всех | Чтение по id | Удаление | Размер файлов |
-|---|---:|---:|---:|---:|---:|
+| --- | ---: | ---: | ---: | ---: | ---: |
 | SQLite Memory | 5.71 µs | 1.59 µs | 3.41 µs | 3.18 µs | — |
 | SQLite File | 7.73 µs | 1.66 µs | 5.17 µs | 11.5 µs | 783.2 MiB |
 | Doublets United Volatile Cached | 22.3 µs (в 3.9× медленнее) | 9.91 µs (в 6.22× медленнее) | 4.25 µs (в 1.25× медленнее) | 20.3 µs (в 6.38× медленнее) | — |
@@ -375,13 +441,17 @@ _1 повтор после прогрева, медианное время од�
 | Doublets Split NonVolatile Uncached | 132 µs (в 17.1× медленнее) | 402 µs (в 242× медленнее) | 407 µs (в 78.7× медленнее) | 16.6 µs (в 1.45× медленнее) | 800.0 MiB |
 
 ![Дуплеты на C# против SQLite, 64 бит, объекты](docs/benchmarks/objects-csharp-64.png)
+<!-- markdownlint-restore -->
 <!--BENCHMARK_RESULTS_END-->
 
 ## Исходное сравнение
 
 Исходное сравнение объектов на C# и его исторические результаты.
 
+<!-- markdownlint-disable MD013 MD060 -->
+
 ### SQLite
+
 ```C#
 using System.Linq;
 using Comparisons.SQLiteVSDoublets.Model;
@@ -426,6 +496,7 @@ namespace Comparisons.SQLiteVSDoublets.SQLite
 ```
 
 ### Дуплеты
+
 ``` C#
 using System.IO;
 using Platform.IO;
@@ -486,15 +557,19 @@ namespace Comparisons.SQLiteVSDoublets.Doublets
 ### [Результат](https://www.icloud.com/keynote/0cYVNWkWD5RLU0k-XIBs3qWkA#Sqlite_vs_Doublets)
 
 #### Производительность
+
 ![Изображение с результатом сравнения производительности SQLite и Дуплетов.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_performance.png "Результат сравнения производительности SQLite и Дуплетов")
 
 #### Использование пространства на диске
+
 ![Изображение с результатом сравнения использования пространства на диске SQLite и Дуплетов.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_disk_usage.png "Результат сравнения использования пространства на диске SQLite и Дуплетов")
 
 #### Использование оперативной памяти
+
 ![Изображение с результатом сравнения использования оперативной памяти SQLite и Дуплетов.](https://raw.githubusercontent.com/linksplatform/Documentation/master/doc/Examples/sqlite_vs_doublets_ram_usage.png "Результат сравнения использования оперативной памяти SQLite и Дуплетов")
 
 #### Исходные данные
+
 ``` ini
 
 BenchmarkDotNet=v0.12.0, OS=Windows 10.0.18362
@@ -507,6 +582,7 @@ InvocationCount=1  IterationCount=1  UnrollFactor=1
 WarmupCount=2  
 
 ```
+
 |   Method |      N |        Mean | Error |        Gen 0 |       Gen 1 | Gen 2 |   Allocated | SizeAfterCreation |
 |--------- |------- |------------:|------:|-------------:|------------:|------:|------------:|------------------:|
 |   **SQLite** |   **1000** |    **719.1 ms** |    **NA** |    **5000.0000** |           **-** |     **-** |    **30.67 MB** |            **925696** |
@@ -516,7 +592,10 @@ WarmupCount=2
 |   **SQLite** | **100000** | **35,853.8 ms** |    **NA** |  **680000.0000** | **151000.0000** |     **-** |  **3234.09 MB** |          **90890240** |
 | Doublets | 100000 | 13,083.4 ms |    NA | 3088000.0000 | 328000.0000 |     - | 12356.33 MB |          64192256 |
 
+<!-- markdownlint-restore -->
 
 ### Заключение
 
-В этом конкретном сравнении Дуплеты работают быстрее и используют меньше памяти на диске, но это достигается за счёт дополнительного использования оперативной памяти (Sqlite использует её меньше).
+В этом конкретном сравнении Дуплеты работают быстрее и используют меньше памяти
+на диске, но это достигается за счёт дополнительного использования оперативной
+памяти (Sqlite использует её меньше).

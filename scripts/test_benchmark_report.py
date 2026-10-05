@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Tests for benchmark_report.py: run with `python -m unittest discover -s scripts`."""
 
+import contextlib
 import importlib.util
+import io
 import json
 import tempfile
 import unittest
@@ -91,6 +93,7 @@ class ComparisonTests(unittest.TestCase):
         table = report.table(sample(), self.text).splitlines()
         self.assertEqual(len(table), 2 + 3)
         self.assertEqual(table[0].count("|"), len(report.OPERATIONS["links"]) + 3)
+        self.assertEqual(table[1], "| --- |" + " ---: |" * (len(report.OPERATIONS["links"]) + 1))
         self.assertNotIn("faster", table[2])
         self.assertEqual(table[4].count("10× faster"), len(report.OPERATIONS["links"]))
 
@@ -148,9 +151,15 @@ class DocumentTests(unittest.TestCase):
     def test_only_the_marked_section_is_replaced(self):
         document = f"before\n{report.START_MARKER}\nold\n{report.END_MARKER}\nafter\n"
         self.assertEqual(report.replace_section(document, "new\n"),
-                         f"before\n{report.START_MARKER}\nnew\n{report.END_MARKER}\nafter\n")
+                         f"before\n{report.START_MARKER}\n{report.LINT_OFF}\nnew\n{report.LINT_ON}\n"
+                         f"{report.END_MARKER}\nafter\n")
         with self.assertRaises(ValueError):
             report.replace_section("no markers", "new\n")
+
+    def test_usage_starts_with_the_summary(self):
+        with contextlib.redirect_stdout(io.StringIO()) as output, self.assertRaises(SystemExit):
+            report.main(["--help"])
+        self.assertIn("Turns the benchmark JSON reports into the README results sections and charts.", output.getvalue())
 
     def test_duplicate_reports_are_rejected(self):
         for name in ("a.json", "b.json"):

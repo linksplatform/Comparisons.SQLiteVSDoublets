@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Turns the benchmark JSON reports into the README results sections and charts.
+"""
+Turns the benchmark JSON reports into the README results sections and charts.
 
 Usage: benchmark_report.py RESULTS_DIR [--readme README.md] [--readme README.ru.md] [--charts DIR]
 
@@ -17,6 +18,9 @@ from pathlib import Path
 
 START_MARKER = "<!--BENCHMARK_RESULTS_START-->"
 END_MARKER = "<!--BENCHMARK_RESULTS_END-->"
+# The wide tables cannot be wrapped, and the hierarchy repeats headings under different parents.
+LINT_OFF = "<!-- markdownlint-disable MD013 MD024 -->"
+LINT_ON = "<!-- markdownlint-restore -->"
 
 CATEGORIES = ("links", "objects")
 NOISE = 0.05
@@ -166,7 +170,8 @@ def quartiles(measured):
 
 
 def comparison(measured, reference, text):
-    """How `measured` compares with `reference`.
+    """
+    How `measured` compares with `reference`.
 
     Overlapping interquartile ranges and medians within NOISE of each other (single samples have no range)
     are not called a difference.
@@ -185,7 +190,7 @@ def table(report, text):
     operations = OPERATIONS[report["category"]]
     by_variant = {result["variant"]: result for result in report["results"]}
     header = [text["storage"], *(text["operations"][operation] for operation in operations), text["file_size"]]
-    lines = ["| " + " | ".join(header) + " |", "|" + "---|" + "---:|" * (len(header) - 1)]
+    lines = ["| " + " | ".join(header) + " |", "| --- |" + " ---: |" * (len(header) - 1)]
     for variant, result in by_variant.items():
         reference = by_variant.get(baseline(variant))
         cells = [variant.replace("_", " ")]
@@ -249,7 +254,7 @@ def replace_section(document, generated):
     pattern = re.compile(re.escape(START_MARKER) + ".*?" + re.escape(END_MARKER), re.DOTALL)
     if not pattern.search(document):
         raise ValueError(f"{START_MARKER} ... {END_MARKER} markers are missing")
-    return pattern.sub(lambda _: f"{START_MARKER}\n{generated}{END_MARKER}", document)
+    return pattern.sub(lambda _: f"{START_MARKER}\n{LINT_OFF}\n{generated}{LINT_ON}\n{END_MARKER}", document)
 
 
 def charts(reports, directory):
@@ -300,7 +305,7 @@ def charts(reports, directory):
 
 
 def main(arguments=None):
-    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser = argparse.ArgumentParser(description=__doc__.strip().splitlines()[0])
     parser.add_argument("results", type=Path, help="directory with the JSON reports")
     parser.add_argument("--readme", type=Path, action="append", default=[], help="README to update in place")
     parser.add_argument("--charts", type=Path, help="directory for the charts, relative to the READMEs")

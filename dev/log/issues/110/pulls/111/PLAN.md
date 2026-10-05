@@ -23,10 +23,15 @@ logs here; experiments and reusable regression checks live under `experiments/ci
 - [x] Commit useful atomic changes and push only `issue-110-e1f96d946132`.
 - [x] Merge the current default branch if needed; review the complete PR diff for
   unintended changes and verify a clean working tree.
-- [ ] Replace the placeholder PR title/body with the final solution, reproduction,
+- [x] Replace the placeholder PR title/body with the final solution, reproduction,
   validation, evidence links, and any remaining limits; mark PR 111 ready.
-- [ ] Verify fresh CI runs match the latest implementation commit; download and
+- [x] Verify fresh CI runs match the latest implementation commit; download and
   analyze every unsuccessful run, fix causes, and wait for checks to finish.
+
+All implementation checks pass on `0dba0f522015bd5200c885d4267f96f4b510cef6`;
+PR 111 is ready for review. The final evidence-only commit is checked again
+at its own pushed head before completion. Archived run/check metadata identifies
+the implementation revision explicitly.
 
 ## Scope assumptions
 

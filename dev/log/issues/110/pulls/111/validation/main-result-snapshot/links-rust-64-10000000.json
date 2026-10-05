@@ -1,0 +1,435 @@
+{
+  "bits": 64,
+  "category": "links",
+  "language": "Rust",
+  "repetitions": 1,
+  "results": [
+    {
+      "file_bytes": null,
+      "operations": {
+        "create": {
+          "max_ns": 4471.5663102,
+          "median_ns": 4471.5663102,
+          "min_ns": 4471.5663102,
+          "samples_ns": [
+            4471.5663102
+          ]
+        },
+        "delete": {
+          "max_ns": 7676.1392014,
+          "median_ns": 7676.1392014,
+          "min_ns": 7676.1392014,
+          "samples_ns": [
+            7676.1392014
+          ]
+        },
+        "query_all": {
+          "max_ns": 109.5908536,
+          "median_ns": 109.5908536,
+          "min_ns": 109.5908536,
+          "samples_ns": [
+            109.5908536
+          ]
+        },
+        "query_by_from": {
+          "max_ns": 1947.1128882,
+          "median_ns": 1947.1128882,
+          "min_ns": 1947.1128882,
+          "samples_ns": [
+            1947.1128882
+          ]
+        },
+        "query_by_from_to": {
+          "max_ns": 2007.2334162,
+          "median_ns": 2007.2334162,
+          "min_ns": 2007.2334162,
+          "samples_ns": [
+            2007.2334162
+          ]
+        },
+        "query_by_id": {
+          "max_ns": 1861.2920625,
+          "median_ns": 1861.2920625,
+          "min_ns": 1861.2920625,
+          "samples_ns": [
+            1861.2920625
+          ]
+        },
+        "query_by_to": {
+          "max_ns": 1944.8473246,
+          "median_ns": 1944.8473246,
+          "min_ns": 1944.8473246,
+          "samples_ns": [
+            1944.8473246
+          ]
+        },
+        "update": {
+          "max_ns": 11176.3403427,
+          "median_ns": 11176.3403427,
+          "min_ns": 11176.3403427,
+          "samples_ns": [
+            11176.3403427
+          ]
+        }
+      },
+      "variant": "SQLite_Memory"
+    },
+    {
+      "file_bytes": 525307904,
+      "operations": {
+        "create": {
+          "max_ns": 7794.9302704,
+          "median_ns": 7794.9302704,
+          "min_ns": 7794.9302704,
+          "samples_ns": [
+            7794.9302704
+          ]
+        },
+        "delete": {
+          "max_ns": 11728.128226,
+          "median_ns": 11728.128226,
+          "min_ns": 11728.128226,
+          "samples_ns": [
+            11728.128226
+          ]
+        },
+        "query_all": {
+          "max_ns": 116.6322058,
+          "median_ns": 116.6322058,
+          "min_ns": 116.6322058,
+          "samples_ns": [
+            116.6322058
+          ]
+        },
+        "query_by_from": {
+          "max_ns": 2300.0152284,
+          "median_ns": 2300.0152284,
+          "min_ns": 2300.0152284,
+          "samples_ns": [
+            2300.0152284
+          ]
+        },
+        "query_by_from_to": {
+          "max_ns": 2252.6323411,
+          "median_ns": 2252.6323411,
+          "min_ns": 2252.6323411,
+          "samples_ns": [
+            2252.6323411
+          ]
+        },
+        "query_by_id": {
+          "max_ns": 2116.7991227,
+          "median_ns": 2116.7991227,
+          "min_ns": 2116.7991227,
+          "samples_ns": [
+            2116.7991227
+          ]
+        },
+        "query_by_to": {
+          "max_ns": 2252.1245409,
+          "median_ns": 2252.1245409,
+          "min_ns": 2252.1245409,
+          "samples_ns": [
+            2252.1245409
+          ]
+        },
+        "update": {
+          "max_ns": 19814.2478841,
+          "median_ns": 19814.2478841,
+          "min_ns": 19814.2478841,
+          "samples_ns": [
+            19814.2478841
+          ]
+        }
+      },
+      "variant": "SQLite_File"
+    },
+    {
+      "file_bytes": null,
+      "operations": {
+        "create": {
+          "max_ns": 3458.5161132,
+          "median_ns": 3458.5161132,
+          "min_ns": 3458.5161132,
+          "samples_ns": [
+            3458.5161132
+          ]
+        },
+        "delete": {
+          "max_ns": 3766.8374286,
+          "median_ns": 3766.8374286,
+          "min_ns": 3766.8374286,
+          "samples_ns": [
+            3766.8374286
+          ]
+        },
+        "query_all": {
+          "max_ns": 7.246305,
+          "median_ns": 7.246305,
+          "min_ns": 7.246305,
+          "samples_ns": [
+            7.246305
+          ]
+        },
+        "query_by_from": {
+          "max_ns": 2023.3967568,
+          "median_ns": 2023.3967568,
+          "min_ns": 2023.3967568,
+          "samples_ns": [
+            2023.3967568
+          ]
+        },
+        "query_by_from_to": {
+          "max_ns": 1745.7852296,
+          "median_ns": 1745.7852296,
+          "min_ns": 1745.7852296,
+          "samples_ns": [
+            1745.7852296
+          ]
+        },
+        "query_by_id": {
+          "max_ns": 23.9806364,
+          "median_ns": 23.9806364,
+          "min_ns": 23.9806364,
+          "samples_ns": [
+            23.9806364
+          ]
+        },
+        "query_by_to": {
+          "max_ns": 2458.9031763,
+          "median_ns": 2458.9031763,
+          "min_ns": 2458.9031763,
+          "samples_ns": [
+            2458.9031763
+          ]
+        },
+        "update": {
+          "max_ns": 8898.1101945,
+          "median_ns": 8898.1101945,
+          "min_ns": 8898.1101945,
+          "samples_ns": [
+            8898.1101945
+          ]
+        }
+      },
+      "variant": "Doublets_United_Volatile"
+    },
+    {
+      "file_bytes": 671088640,
+      "operations": {
+        "create": {
+          "max_ns": 4381.5230272,
+          "median_ns": 4381.5230272,
+          "min_ns": 4381.5230272,
+          "samples_ns": [
+            4381.5230272
+          ]
+        },
+        "delete": {
+          "max_ns": 4870.2205129,
+          "median_ns": 4870.2205129,
+          "min_ns": 4870.2205129,
+          "samples_ns": [
+            4870.2205129
+          ]
+        },
+        "query_all": {
+          "max_ns": 7.5760125,
+          "median_ns": 7.5760125,
+          "min_ns": 7.5760125,
+          "samples_ns": [
+            7.5760125
+          ]
+        },
+        "query_by_from": {
+          "max_ns": 2277.9733917,
+          "median_ns": 2277.9733917,
+          "min_ns": 2277.9733917,
+          "samples_ns": [
+            2277.9733917
+          ]
+        },
+        "query_by_from_to": {
+          "max_ns": 2065.8387272,
+          "median_ns": 2065.8387272,
+          "min_ns": 2065.8387272,
+          "samples_ns": [
+            2065.8387272
+          ]
+        },
+        "query_by_id": {
+          "max_ns": 29.1911437,
+          "median_ns": 29.1911437,
+          "min_ns": 29.1911437,
+          "samples_ns": [
+            29.1911437
+          ]
+        },
+        "query_by_to": {
+          "max_ns": 2361.7650713,
+          "median_ns": 2361.7650713,
+          "min_ns": 2361.7650713,
+          "samples_ns": [
+            2361.7650713
+          ]
+        },
+        "update": {
+          "max_ns": 11294.8271926,
+          "median_ns": 11294.8271926,
+          "min_ns": 11294.8271926,
+          "samples_ns": [
+            11294.8271926
+          ]
+        }
+      },
+      "variant": "Doublets_United_NonVolatile"
+    },
+    {
+      "file_bytes": null,
+      "operations": {
+        "create": {
+          "max_ns": 433.3190629,
+          "median_ns": 433.3190629,
+          "min_ns": 433.3190629,
+          "samples_ns": [
+            433.3190629
+          ]
+        },
+        "delete": {
+          "max_ns": 3725.7486788,
+          "median_ns": 3725.7486788,
+          "min_ns": 3725.7486788,
+          "samples_ns": [
+            3725.7486788
+          ]
+        },
+        "query_all": {
+          "max_ns": 9.3594132,
+          "median_ns": 9.3594132,
+          "min_ns": 9.3594132,
+          "samples_ns": [
+            9.3594132
+          ]
+        },
+        "query_by_from": {
+          "max_ns": 144.9681431,
+          "median_ns": 144.9681431,
+          "min_ns": 144.9681431,
+          "samples_ns": [
+            144.9681431
+          ]
+        },
+        "query_by_from_to": {
+          "max_ns": 258.6256985,
+          "median_ns": 258.6256985,
+          "min_ns": 258.6256985,
+          "samples_ns": [
+            258.6256985
+          ]
+        },
+        "query_by_id": {
+          "max_ns": 28.0297457,
+          "median_ns": 28.0297457,
+          "min_ns": 28.0297457,
+          "samples_ns": [
+            28.0297457
+          ]
+        },
+        "query_by_to": {
+          "max_ns": 146.1746295,
+          "median_ns": 146.1746295,
+          "min_ns": 146.1746295,
+          "samples_ns": [
+            146.1746295
+          ]
+        },
+        "update": {
+          "max_ns": 739.5205841,
+          "median_ns": 739.5205841,
+          "min_ns": 739.5205841,
+          "samples_ns": [
+            739.5205841
+          ]
+        }
+      },
+      "variant": "Doublets_Split_Volatile"
+    },
+    {
+      "file_bytes": 838860800,
+      "operations": {
+        "create": {
+          "max_ns": 831.1925845,
+          "median_ns": 831.1925845,
+          "min_ns": 831.1925845,
+          "samples_ns": [
+            831.1925845
+          ]
+        },
+        "delete": {
+          "max_ns": 4591.519844,
+          "median_ns": 4591.519844,
+          "min_ns": 4591.519844,
+          "samples_ns": [
+            4591.519844
+          ]
+        },
+        "query_all": {
+          "max_ns": 8.4425992,
+          "median_ns": 8.4425992,
+          "min_ns": 8.4425992,
+          "samples_ns": [
+            8.4425992
+          ]
+        },
+        "query_by_from": {
+          "max_ns": 161.7886435,
+          "median_ns": 161.7886435,
+          "min_ns": 161.7886435,
+          "samples_ns": [
+            161.7886435
+          ]
+        },
+        "query_by_from_to": {
+          "max_ns": 270.681217,
+          "median_ns": 270.681217,
+          "min_ns": 270.681217,
+          "samples_ns": [
+            270.681217
+          ]
+        },
+        "query_by_id": {
+          "max_ns": 30.80055,
+          "median_ns": 30.80055,
+          "min_ns": 30.80055,
+          "samples_ns": [
+            30.80055
+          ]
+        },
+        "query_by_to": {
+          "max_ns": 169.2948829,
+          "median_ns": 169.2948829,
+          "min_ns": 169.2948829,
+          "samples_ns": [
+            169.2948829
+          ]
+        },
+        "update": {
+          "max_ns": 804.7661739,
+          "median_ns": 804.7661739,
+          "min_ns": 804.7661739,
+          "samples_ns": [
+            804.7661739
+          ]
+        }
+      },
+      "variant": "Doublets_Split_NonVolatile"
+    }
+  ],
+  "size": 10000000,
+  "sqlite_version": "3.53.2",
+  "warm_up_seconds": 1.0,
+  "warm_up_size": 10000,
+  "run_url": "https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868",
+  "date": "2026-10-05",
+  "machine": "Ubuntu 24.04.5 LTS, INTEL(R) XEON(R) PLATINUM 8573C, 4 cores, 16 GiB"
+}

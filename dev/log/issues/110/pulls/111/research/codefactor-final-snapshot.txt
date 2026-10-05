@@ -1,0 +1,98 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e5]:
+      - link "Homepage" [ref=e6] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e13]:
+        - list [ref=e14]:
+          - listitem [ref=e15]:
+            - link "Features" [ref=e16] [cursor=pointer]:
+              - /url: /features
+          - listitem [ref=e17]:
+            - link "Pricing" [ref=e18] [cursor=pointer]:
+              - /url: /pricing
+          - listitem [ref=e19]:
+            - link "Contact" [ref=e20] [cursor=pointer]:
+              - /url: /contact
+        - list [ref=e21]:
+          - generic [ref=e22]: "Login with:"
+          - generic [ref=e23]:
+            - button [ref=e24] [cursor=pointer]:
+              - img "GitHub" [ref=e25]
+            - button [ref=e26] [cursor=pointer]:
+              - img "Bitbucket" [ref=e27]
+    - generic [ref=e29]:
+      - generic [ref=e30]:
+        - generic [ref=e31]:
+          - generic "Default branch main" [ref=e33]: main
+          - link "Comparisons.SQLiteVSDoublets" [ref=e35] [cursor=pointer]:
+            - /url: /repository/github/linksplatform/comparisons.sqlitevsdoublets
+        - generic [ref=e36]:
+          - img "Repository badge with APlus rating" [ref=e38] [cursor=pointer]
+          - link [ref=e39] [cursor=pointer]:
+            - /url: https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+            - img "View on GitHub" [ref=e40]
+      - separator [ref=e41]
+      - list [ref=e42]:
+        - listitem [ref=e43]:
+          - link "0 issues" [ref=e44] [cursor=pointer]:
+            - /url: /repository/github/linksplatform/comparisons.sqlitevsdoublets/issues
+        - listitem [ref=e45]:
+          - link "2 pull requests" [ref=e46] [cursor=pointer]:
+            - /url: /repository/github/linksplatform/comparisons.sqlitevsdoublets/pulls
+        - listitem [ref=e47]:
+          - link "24 files" [ref=e48] [cursor=pointer]:
+            - /url: /repository/github/linksplatform/comparisons.sqlitevsdoublets/files
+        - listitem [ref=e49]:
+          - link "1 active branch" [ref=e50] [cursor=pointer]:
+            - /url: /repository/github/linksplatform/comparisons.sqlitevsdoublets/branches
+    - generic [ref=e51]:
+      - generic [ref=e53]:
+        - generic [ref=e54]: Open
+        - heading [level=2] [ref=e55]:
+          - text: Make CI checks truthful and harden benchmark publication
+          - link "#111" [ref=e56] [cursor=pointer]:
+            - /url: https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/pull/111
+      - generic [ref=e57]:
+        - generic [ref=e58]:
+          - img "Author avatar" [ref=e59]
+          - text: konard
+        - text: wants to merge changes into
+        - generic [ref=e60]: main
+        - text: from
+        - generic [ref=e61]: issue-110-e1f96d946132
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - heading [level=1] [ref=e66]
+          - button "Actions" [ref=e69] [cursor=pointer]
+        - generic [ref=e73]:
+          - heading "No issues found" [level=2] [ref=e74]
+          - generic [ref=e75]:
+            - generic [ref=e76]: “
+            - generic [ref=e77]: People think that computer science is the art of geniuses but the actual reality is the opposite, just many people doing things that build on each other, like a wall of mini stones.
+          - paragraph [ref=e78]: – Donald Knuth
+  - contentinfo [ref=e80]:
+    - generic [ref=e82]:
+      - list [ref=e84]:
+        - listitem [ref=e85]:
+          - link "Security" [ref=e86] [cursor=pointer]:
+            - /url: /security
+        - listitem [ref=e87]:
+          - link "Terms" [ref=e88] [cursor=pointer]:
+            - /url: /terms
+        - listitem [ref=e89]:
+          - link "Privacy" [ref=e90] [cursor=pointer]:
+            - /url: /privacy
+        - listitem [ref=e91]:
+          - link "Contact" [ref=e92] [cursor=pointer]:
+            - /url: /contact
+      - link [ref=e95] [cursor=pointer]:
+        - /url: https://x.com/codefactor_io
+      - generic [ref=e99]: © 2026 CodeFactor
+  - generic [ref=e102]:
+    - paragraph [ref=e103]:
+      - text: We use cookies in order to offer you the most relevant information. See our
+      - link "Privacy Policy" [ref=e104] [cursor=pointer]:
+        - /url: /privacy
+      - text: .
+    - button "Ok, got it!" [ref=e105] [cursor=pointer]

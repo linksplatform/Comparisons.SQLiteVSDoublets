@@ -2285,6 +2285,586 @@
     "text": "Test (macos-latest)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build\t2026-10-05T10:34:51.7286650Z   failed: 0\n"
   },
   {
+    "path": "ci-logs/37302745606.log",
+    "line": 188,
+    "text": "auto-merge\tRun ahmadnassri/action-dependabot-auto-merge@v2\t2026-10-05T11:24:50.7814424Z ##[warning]exiting early - expected PR by \"dependabot[bot]\", found \"konard\" instead\n"
+  },
+  {
+    "path": "ci-logs/37302748167.log",
+    "line": 725,
+    "text": "rust links 32 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:25:14.4601523Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37302748167.log",
+    "line": 1991,
+    "text": "rust links 64 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:25:17.2606328Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37302748167.log",
+    "line": 3257,
+    "text": "rust objects 64 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:25:50.3812317Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37302748167.log",
+    "line": 4103,
+    "text": "rust objects 32 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:25:49.1732019Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37302748240.log",
+    "line": 419,
+    "text": "audit\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:25:04.1270218Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37302748255.log",
+    "line": 233,
+    "text": "Test (windows-2025)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T11:26:25.3045439Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37302748255.log",
+    "line": 562,
+    "text": "Test (ubuntu-24.04)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T11:26:05.2835483Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37302748255.log",
+    "line": 891,
+    "text": "Test (macos-15)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T11:26:14.5053420Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37302748264.log",
+    "line": 717,
+    "text": "python\tRun python scripts/ci_checks.py\t2026-10-05T11:25:30.9582617Z ##[error]Process completed with exit code 1.\n"
+  },
+  {
+    "path": "ci-logs/37302748264.log",
+    "line": 945,
+    "text": "Pipeline Status\tCheck terminal status\t2026-10-05T11:26:21.2406856Z Pipeline failed: python: failure\n"
+  },
+  {
+    "path": "ci-logs/37302748264.log",
+    "line": 946,
+    "text": "Pipeline Status\tCheck terminal status\t2026-10-05T11:26:21.2461667Z ##[error]Process completed with exit code 1.\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 261,
+    "text": "Test (macos-15)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:24:56.9402840Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 483,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T11:25:43.1911120Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 488,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T11:25:43.2001420Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 494,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T11:25:43.2999320Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 502,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T11:26:03.9796150Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 20.78s\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 508,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T11:26:04.2530720Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 793,
+    "text": "Test (windows-2025)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:24:58.3344013Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 1013,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T11:26:05.3970680Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 1019,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T11:26:05.4083913Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 1024,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T11:26:05.4496191Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 1033,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T11:26:32.6684357Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 27.25s\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 1039,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T11:26:32.7379243Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 1336,
+    "text": "Test (ubuntu-24.04)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:24:48.2875234Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 1554,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T11:25:14.1349679Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 1559,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T11:25:14.1355976Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 1564,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T11:25:14.1447976Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 1573,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T11:25:42.0487553Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 27.91s\n"
+  },
+  {
+    "path": "ci-logs/37302748314.log",
+    "line": 1579,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T11:25:42.0731042Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37305439002.log",
+    "line": 191,
+    "text": "auto-merge\tRun ahmadnassri/action-dependabot-auto-merge@v2\t2026-10-05T11:49:55.2366134Z ##[warning]exiting early - expected PR by \"dependabot[bot]\", found \"konard\" instead\n"
+  },
+  {
+    "path": "ci-logs/37305440922.log",
+    "line": 248,
+    "text": "Test (macos-15)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T11:51:20.7838370Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37305440922.log",
+    "line": 575,
+    "text": "Test (ubuntu-24.04)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T11:51:03.6522452Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37305440922.log",
+    "line": 889,
+    "text": "Test (windows-2025)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T11:51:38.3318836Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37305440978.log",
+    "line": 734,
+    "text": "rust objects 32 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:50:20.6365676Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37305440978.log",
+    "line": 1580,
+    "text": "rust links 64 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:50:21.0091188Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37305440978.log",
+    "line": 2386,
+    "text": "rust links 32 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:50:27.9438890Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37305440978.log",
+    "line": 3192,
+    "text": "rust objects 64 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:50:20.8987347Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37305441024.log",
+    "line": 419,
+    "text": "audit\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:50:03.1202071Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 277,
+    "text": "Test (ubuntu-24.04)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:49:50.9803167Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 496,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T11:50:16.2671810Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 501,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T11:50:16.2677281Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 506,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T11:50:16.2780460Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 515,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T11:50:40.8051382Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 24.54s\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 521,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T11:50:40.8567384Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 805,
+    "text": "Test (windows-2025)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:49:58.1558593Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 1024,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T11:51:03.1287534Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 1030,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T11:51:03.1405516Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 1035,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T11:51:03.1666042Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 1044,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T11:51:28.9892672Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 25.84s\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 1050,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T11:51:29.0646874Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 1331,
+    "text": "Test (macos-15)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:50:02.7630700Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 1551,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T11:50:52.4701530Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 1556,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T11:50:52.4843450Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 1562,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T11:50:52.6389450Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 1570,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T11:51:13.1965830Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 20.71s\n"
+  },
+  {
+    "path": "ci-logs/37305441156.log",
+    "line": 1576,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T11:51:13.4088680Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37305441174.log",
+    "line": 771,
+    "text": "python\tRun bandit -r scripts experiments -q\t2026-10-05T11:50:27.9250690Z ##[error]Process completed with exit code 1.\n"
+  },
+  {
+    "path": "ci-logs/37305441174.log",
+    "line": 999,
+    "text": "Pipeline Status\tCheck terminal status\t2026-10-05T11:50:38.5899201Z Pipeline failed: python: failure\n"
+  },
+  {
+    "path": "ci-logs/37305441174.log",
+    "line": 1000,
+    "text": "Pipeline Status\tCheck terminal status\t2026-10-05T11:50:38.5973515Z ##[error]Process completed with exit code 1.\n"
+  },
+  {
+    "path": "ci-logs/37306375540.log",
+    "line": 189,
+    "text": "auto-merge\tRun ahmadnassri/action-dependabot-auto-merge@v2\t2026-10-05T11:58:34.6689275Z ##[warning]exiting early - expected PR by \"dependabot[bot]\", found \"konard\" instead\n"
+  },
+  {
+    "path": "ci-logs/37306378813.log",
+    "line": 246,
+    "text": "Test (ubuntu-24.04)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T11:59:44.8029596Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37306378813.log",
+    "line": 575,
+    "text": "Test (macos-15)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T12:00:00.7124600Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37306378813.log",
+    "line": 889,
+    "text": "Test (windows-2025)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T12:00:17.2407797Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37306378835.log",
+    "line": 419,
+    "text": "audit\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:58:46.5391427Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37306378845.log",
+    "line": 1154,
+    "text": "rust links 32 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:59:00.9348464Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37306378845.log",
+    "line": 2840,
+    "text": "rust links 64 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:59:01.7075462Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37306378845.log",
+    "line": 3646,
+    "text": "rust objects 64 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:59:02.0855242Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37306378845.log",
+    "line": 4952,
+    "text": "rust objects 32 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:59:00.9885115Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37306378854.log",
+    "line": 722,
+    "text": "python\tRun bandit -r scripts experiments -q\t2026-10-05T11:59:09.5276453Z [tester]\tWARNING\tnosec encountered (B603), but no failed test on file experiments/ci/run_smoke.py:19\n"
+  },
+  {
+    "path": "ci-logs/37306378854.log",
+    "line": 723,
+    "text": "python\tRun bandit -r scripts experiments -q\t2026-10-05T11:59:09.5823421Z [tester]\tWARNING\tnosec encountered (B603), but no failed test on file scripts/check_pipeline_status.py:39\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 265,
+    "text": "Test (windows-2025)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:58:38.5788217Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 484,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T11:59:42.7711526Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 490,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T11:59:42.7821290Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 495,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T11:59:42.8070650Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 504,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T12:00:08.4575018Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 25.66s\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 510,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T12:00:08.5258133Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 807,
+    "text": "Test (ubuntu-24.04)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:59:07.2712873Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 1025,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T11:59:36.6945747Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 1030,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T11:59:36.6951381Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 1035,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T11:59:36.7076190Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 1044,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T11:59:59.6340559Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 22.94s\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 1050,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T11:59:59.6613381Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 1330,
+    "text": "Test (macos-15)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:58:40.0934560Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 1550,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T11:59:14.0051840Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 1555,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T11:59:14.0139800Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 1561,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T11:59:14.0954780Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 1569,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T11:59:34.6760260Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 20.66s\n"
+  },
+  {
+    "path": "ci-logs/37306378905.log",
+    "line": 1575,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T11:59:35.7426990Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37307465334.log",
+    "line": 190,
+    "text": "auto-merge\tRun ahmadnassri/action-dependabot-auto-merge@v2\t2026-10-05T12:08:37.5182247Z ##[warning]exiting early - expected PR by \"dependabot[bot]\", found \"konard\" instead\n"
+  },
+  {
+    "path": "ci-logs/37307467742.log",
+    "line": 734,
+    "text": "rust links 32 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:08:54.7503281Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37307467742.log",
+    "line": 2000,
+    "text": "rust objects 32 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:08:57.5148771Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37307467742.log",
+    "line": 3686,
+    "text": "rust links 64 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:08:53.7347051Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37307467742.log",
+    "line": 4492,
+    "text": "rust objects 64 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:08:53.7575413Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37307467851.log",
+    "line": 419,
+    "text": "audit\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:08:42.7707936Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 261,
+    "text": "Test (macos-15)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:08:36.9422950Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 482,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T12:09:20.2456390Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 487,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T12:09:20.2593920Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 493,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T12:09:20.3868420Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 501,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T12:09:40.8898880Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 20.62s\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 507,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T12:09:41.0303420Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 792,
+    "text": "Test (windows-2025)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:08:39.2095365Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 1011,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T12:09:43.8757187Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 1017,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T12:09:43.8865056Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 1022,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T12:09:43.9114514Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 1031,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T12:10:10.5402082Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 26.64s\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 1037,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T12:10:10.6115943Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 1334,
+    "text": "Test (ubuntu-24.04)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:08:30.4225013Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 1551,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T12:09:01.2559257Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 1557,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T12:09:01.2564880Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 1562,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T12:09:01.2682569Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 1571,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T12:09:23.3629384Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 22.11s\n"
+  },
+  {
+    "path": "ci-logs/37307467945.log",
+    "line": 1577,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T12:09:23.3908306Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37307467957.log",
+    "line": 246,
+    "text": "Test (ubuntu-24.04)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T12:09:47.4531460Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37307467957.log",
+    "line": 560,
+    "text": "Test (windows-2025)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T12:10:07.9592586Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37307467957.log",
+    "line": 891,
+    "text": "Test (macos-15)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T12:09:56.4465070Z   failed: 0\n"
+  },
+  {
     "path": "ci-logs/benchmarks-37302748167.log",
     "line": 725,
     "text": "rust links 32 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:25:14.4601523Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
@@ -2338,6 +2918,21 @@
     "path": "ci-logs/quality-37302748264.log",
     "line": 946,
     "text": "Pipeline Status\tCheck terminal status\t2026-10-05T11:26:21.2461667Z ##[error]Process completed with exit code 1.\n"
+  },
+  {
+    "path": "ci-logs/quality-37305441174.log",
+    "line": 771,
+    "text": "python\tRun bandit -r scripts experiments -q\t2026-10-05T11:50:27.9250690Z ##[error]Process completed with exit code 1.\n"
+  },
+  {
+    "path": "ci-logs/quality-37305441174.log",
+    "line": 999,
+    "text": "Pipeline Status\tCheck terminal status\t2026-10-05T11:50:38.5899201Z Pipeline failed: python: failure\n"
+  },
+  {
+    "path": "ci-logs/quality-37305441174.log",
+    "line": 1000,
+    "text": "Pipeline Status\tCheck terminal status\t2026-10-05T11:50:38.5973515Z ##[error]Process completed with exit code 1.\n"
   },
   {
     "path": "ci-logs/rust-37302748314.log",
@@ -5130,6 +5725,31 @@
     "text": "[tester]\tWARNING\tnosec encountered (B603), but no failed test on file scripts/check_pipeline_status.py:38\n"
   },
   {
+    "path": "validation/bandit-nosec-reproduction.log",
+    "line": 3,
+    "text": "[tester]\tWARNING\tnosec encountered (B603), but no failed test on file /tmp/bandit-nosec-olk0s048/nested.py:2\n"
+  },
+  {
+    "path": "validation/bandit-passing-python313.log",
+    "line": 5,
+    "text": "[tester]\tWARNING\tnosec encountered (B603), but no failed test on file experiments/ci/run_smoke.py:19\n"
+  },
+  {
+    "path": "validation/bandit-passing-python313.log",
+    "line": 6,
+    "text": "[tester]\tWARNING\tnosec encountered (B603), but no failed test on file scripts/check_pipeline_status.py:39\n"
+  },
+  {
+    "path": "validation/bandit-passing-python314.log",
+    "line": 1,
+    "text": "[tester]\tWARNING\tnosec encountered (B603), but no failed test on file experiments/ci/run_smoke.py:19\n"
+  },
+  {
+    "path": "validation/bandit-passing-python314.log",
+    "line": 2,
+    "text": "[tester]\tWARNING\tnosec encountered (B603), but no failed test on file scripts/check_pipeline_status.py:39\n"
+  },
+  {
     "path": "validation/csharp-tests-before.log",
     "line": 48,
     "text": "  failed: 0\n"
@@ -5158,6 +5778,261 @@
     "path": "validation/publish-reproduction.log",
     "line": 21,
     "text": "FAILED (errors=1)\n"
+  },
+  {
+    "path": "validation/python313-final.log",
+    "line": 4,
+    "text": "[tester]\tWARNING\tnosec encountered (B603), but no failed test on file experiments/ci/run_smoke.py:19\n"
+  },
+  {
+    "path": "validation/python313-final.log",
+    "line": 5,
+    "text": "[tester]\tWARNING\tnosec encountered (B603), but no failed test on file scripts/check_pipeline_status.py:39\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13504,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/kQtpzswHp8m1pLOR/mdurl-0.1.2.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/mdurl-0.1.2.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13505,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/UKXArstS5kcgtAM5/packageurl_python-0.17.6.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/packageurl_python-0.17.6.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13506,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/AJ7D-o3bqZK-ytZx/cyclonedx_python_lib-11.12.0.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/cyclonedx_python_lib-11.12.0.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13507,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/au9-Uz1PQSKAt_c5/license_expression-30.4.4.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/license_expression-30.4.4.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13508,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/gtV9wUHMoXwTCpTG/yaml-stubs/reader.pyi` to `/tmp/issue-110-python313/lib/python3.13/site-packages/yaml-stubs/reader.pyi`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13509,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/EtE3rz7u2BJxu7sh/charset_normalizer/cd.py` to `/tmp/issue-110-python313/lib/python3.13/site-packages/charset_normalizer/cd.py`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13510,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/2CG5GD2A5VOyU61U/certifi-2026.7.22.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/certifi-2026.7.22.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13511,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/AzXcTbfNDIuTE0F_/packaging_legacy_version.py` to `/tmp/issue-110-python313/lib/python3.13/site-packages/packaging_legacy_version.py`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13512,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/ALhTSxfEq9EOw6AC/mypy_extensions-1.1.0.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/mypy_extensions-1.1.0.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13513,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/VFfFriy-b50Igr_z/idna/py.typed` to `/tmp/issue-110-python313/lib/python3.13/site-packages/idna/py.typed`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13514,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/V3465a8I0Km38DQb/sortedcontainers/sortedset.py` to `/tmp/issue-110-python313/lib/python3.13/site-packages/sortedcontainers/sortedset.py`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13515,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/Flp0wTcRD6hf-nmN/defusedxml-0.7.1.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/defusedxml-0.7.1.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13516,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/3-R7Hj2AmAe34LVX/py_serializable-2.1.0.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/py_serializable-2.1.0.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13517,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/IW3tY_0CF44PLqrW/pip_api-0.0.35.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/pip_api-0.0.35.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13518,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/YF-epBuk2WJHBjK3/tomli_w/py.typed` to `/tmp/issue-110-python313/lib/python3.13/site-packages/tomli_w/py.typed`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13519,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/rYzn0aGAUjMSU4sR/cycler/py.typed` to `/tmp/issue-110-python313/lib/python3.13/site-packages/cycler/py.typed`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13520,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/jRf7lmV4RFNsnRRZ/boolean_py-5.0.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/boolean_py-5.0.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13521,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/o9l0tXAZQvMaY9ZV/pyparsing/helpers.py` to `/tmp/issue-110-python313/lib/python3.13/site-packages/pyparsing/helpers.py`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13522,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/wjsbGPOIW7Es_zx5/cachecontrol-0.14.4.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/cachecontrol-0.14.4.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13523,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/mMq768vTvDwuuwKj/typing_extensions.py` to `/tmp/issue-110-python313/lib/python3.13/site-packages/typing_extensions.py`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13524,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/QK4_kZX5fo4b_tAS/pip_audit-2.10.1.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/pip_audit-2.10.1.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13525,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/ZeRMSRur3qGeUkZ9/rich-15.0.0.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/rich-15.0.0.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13526,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/5za6MJQus9bD4j8p/six-1.17.0.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/six-1.17.0.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13527,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/WKCTFeX9gRaRZzfu/requests/py.typed` to `/tmp/issue-110-python313/lib/python3.13/site-packages/requests/py.typed`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13528,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/q155Jr-RqD4P16hx/packaging-26.3.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/packaging-26.3.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13529,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/7-e18lqO_GmWMoC4/contourpy-1.4.0.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/contourpy-1.4.0.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13530,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/3_ezLudhBZOJ20Ap/msgpack/ext.py` to `/tmp/issue-110-python313/lib/python3.13/site-packages/msgpack/ext.py`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13531,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/4WYEyjn2UNc0d4z1/librt/threading.pyi` to `/tmp/issue-110-python313/lib/python3.13/site-packages/librt/threading.pyi`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13532,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/4gV_YcL9tMBRISmJ/platformdirs-4.12.3.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/platformdirs-4.12.3.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13533,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/-zvfyM4fNw3iZKQh/fontTools/otlLib/builder.py` to `/tmp/issue-110-python313/lib/python3.13/site-packages/fontTools/otlLib/builder.py`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13534,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/N42ceQLjPeEGmVCJ/ast_serialize/py.typed` to `/tmp/issue-110-python313/lib/python3.13/site-packages/ast_serialize/py.typed`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13535,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/nYGkKZGV1vjIlyyj/pyyaml-6.0.3.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/pyyaml-6.0.3.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13536,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/e2wqipXoKDuq-GOq/stevedore-5.9.1.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/stevedore-5.9.1.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13537,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/5yQp-IB1VTOGRuFM/matplotlib/_cm_listed.py` to `/tmp/issue-110-python313/lib/python3.13/site-packages/matplotlib/_cm_listed.py`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13538,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/InPpxCThVvXpIPDC/bandit/core/test_properties.py` to `/tmp/issue-110-python313/lib/python3.13/site-packages/bandit/core/test_properties.py`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13539,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/-ZWm5gP9EPSM7DLe/pygments-2.21.0.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/pygments-2.21.0.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13540,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/NqfnhImqRy6I3EG_/kiwisolver/py.typed` to `/tmp/issue-110-python313/lib/python3.13/site-packages/kiwisolver/py.typed`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13541,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/_532iPzRQY8v99_w/filelock-4.0.11.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/filelock-4.0.11.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13542,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/9liJ0iR9fQ4ZchuN/pip/py.typed` to `/tmp/issue-110-python313/lib/python3.13/site-packages/pip/py.typed`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13543,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/oYsXF8eBaji7cSz3/markdown_it_py-4.2.0.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/markdown_it_py-4.2.0.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13544,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/WLUq0dla38At8BqD/955cd85d9c9a4f4b30d3__mypyc.cpython-313-x86_64-linux-gnu.so` to `/tmp/issue-110-python313/lib/python3.13/site-packages/955cd85d9c9a4f4b30d3__mypyc.cpython-313-x86_64-linux-gnu.so`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13545,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/e6nc6PTtgoLONII8/pillow-12.3.0.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/pillow-12.3.0.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13546,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/xcHK1BqrrH06jjYI/zizmor-1.30.1.data/scripts/zizmor` to `/tmp/issue-110-python313/lib/python3.13/site-packages/zizmor-1.30.1.data/scripts/zizmor`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13547,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/zszGIgJvsrivuMFH/pathspec-1.1.1.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/pathspec-1.1.1.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13548,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/ESI5XdjBqjexChj6/urllib3/poolmanager.py` to `/tmp/issue-110-python313/lib/python3.13/site-packages/urllib3/poolmanager.py`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13549,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/7s4JAzwJ_EuKB2IK/python_dateutil-2.9.0.post0.dist-info/RECORD` to `/tmp/issue-110-python313/lib/python3.13/site-packages/python_dateutil-2.9.0.post0.dist-info/RECORD`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13550,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/1gdCEkML4etYdqu_/numpy/_configtool.pyi` to `/tmp/issue-110-python313/lib/python3.13/site-packages/numpy/_configtool.pyi`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13551,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/9-I5oX8bYmD3CGDb/mypyc/subtype.py` to `/tmp/issue-110-python313/lib/python3.13/site-packages/mypyc/subtype.py`: Operation not supported (os error 95), falling back\n"
+  },
+  {
+    "path": "validation/python313-install.log",
+    "line": 13552,
+    "text": "DEBUG Failed to reflink `/home/box/.cache/uv/archive-v0/J-i07gs9kR-jr_px/ruff-0.16.10.data/scripts/ruff` to `/tmp/issue-110-python313/lib/python3.13/site-packages/ruff-0.16.10.data/scripts/ruff`: Operation not supported (os error 95), falling back\n"
   },
   {
     "path": "validation/report-reproduction.log",

@@ -1,0 +1,7 @@
+[main]	INFO	profile include tests: None
+[main]	INFO	profile exclude tests: None
+[main]	INFO	cli include tests: None
+[main]	INFO	cli exclude tests: None
+[tester]	WARNING	nosec encountered (B603), but no failed test on file experiments/ci/run_smoke.py:19
+[tester]	WARNING	nosec encountered (B603), but no failed test on file scripts/check_pipeline_status.py:39
+[json]	INFO	JSON output written to file: dev/log/issues/110/pulls/111/validation/bandit-passing-python313.json

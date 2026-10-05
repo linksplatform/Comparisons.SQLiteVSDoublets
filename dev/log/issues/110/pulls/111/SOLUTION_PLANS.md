@@ -21,6 +21,10 @@ alternatives considered and the implemented sequence for each issue requirement.
 | Add diagnostics when evidence is insufficient | Permanently enable verbose output; or make targeted tracing opt-in. | Keep artifact/publication verbose flags and full Rust backtraces off by default; include actionable artifact/SHA/tree/Git rejection details in normal failures; preserve complete logs and probe output. The known correctness problems have reproductions; service initialization warnings have documented ownership limits. |
 | Finish everything in PR 111 without rewriting history | Work on main or force-push; or preserve atomic commits and the prepared PR. | Commit source steps, merge current main, commit evidence, push only the prepared branch, update title/body, review the PR diff, inspect every latest-head check and failed log, then mark ready. No package version/release trigger applies because no distributable registry/image target exists. |
 
+The final review also reproduces Bandit's nested-call unused-annotation warning,
+uses separate assignments to retain the exact security check without warnings,
+and adds current-version evidence and a fix suggestion to existing Bandit #1041.
+
 Hosted implementation checks are preserved separately from the original failing
 runs. Final branch checks must be inspected at the actual pushed head; a passing
 older source revision is never used as proof that a newer revision passes.

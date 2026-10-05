@@ -1,0 +1,4 @@
+unannotated: exit 1, findings 1, warning False
+nested: exit 0, findings 0, warning True
+[tester]	WARNING	nosec encountered (B603), but no failed test on file /tmp/bandit-nosec-olk0s048/nested.py:2
+separate: exit 0, findings 0, warning False

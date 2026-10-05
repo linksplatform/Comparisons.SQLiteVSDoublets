@@ -1,0 +1,1078 @@
+workflows	Set up job	﻿2026-10-05T11:58:29.2497881Z Current runner version: '2.337.0'
+workflows	Set up job	2026-10-05T11:58:29.2523156Z ##[group]Runner Image Provisioner
+workflows	Set up job	2026-10-05T11:58:29.2524103Z Hosted Compute Agent
+workflows	Set up job	2026-10-05T11:58:29.2524736Z Version: 20260901.588
+workflows	Set up job	2026-10-05T11:58:29.2525444Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+workflows	Set up job	2026-10-05T11:58:29.2526273Z Build Date: 2026-09-01T19:56:44Z
+workflows	Set up job	2026-10-05T11:58:29.2526974Z Worker ID: {945e7d2c-dae2-4200-a93d-9ef93f4bd94e}
+workflows	Set up job	2026-10-05T11:58:29.2527733Z Azure Region: westcentralus
+workflows	Set up job	2026-10-05T11:58:29.2528368Z ##[endgroup]
+workflows	Set up job	2026-10-05T11:58:29.2529800Z ##[group]Operating System
+workflows	Set up job	2026-10-05T11:58:29.2530841Z Ubuntu
+workflows	Set up job	2026-10-05T11:58:29.2531397Z 24.04.5
+workflows	Set up job	2026-10-05T11:58:29.2531904Z LTS
+workflows	Set up job	2026-10-05T11:58:29.2532505Z ##[endgroup]
+workflows	Set up job	2026-10-05T11:58:29.2533149Z ##[group]Runner Image
+workflows	Set up job	2026-10-05T11:58:29.2533809Z Image: ubuntu-24.04
+workflows	Set up job	2026-10-05T11:58:29.2534396Z Version: 20260927.320.1
+workflows	Set up job	2026-10-05T11:58:29.2535468Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+workflows	Set up job	2026-10-05T11:58:29.2537380Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+workflows	Set up job	2026-10-05T11:58:29.2538443Z ##[endgroup]
+workflows	Set up job	2026-10-05T11:58:29.2539560Z ##[group]GITHUB_TOKEN Permissions
+workflows	Set up job	2026-10-05T11:58:29.2541848Z Contents: read
+workflows	Set up job	2026-10-05T11:58:29.2542525Z Metadata: read
+workflows	Set up job	2026-10-05T11:58:29.2543072Z ##[endgroup]
+workflows	Set up job	2026-10-05T11:58:29.2545698Z Secret source: Actions
+workflows	Set up job	2026-10-05T11:58:29.2546677Z Cache mode: write
+workflows	Set up job	2026-10-05T11:58:29.2547477Z Prepare workflow directory
+workflows	Set up job	2026-10-05T11:58:29.2886726Z Prepare all required actions
+workflows	Set up job	2026-10-05T11:58:29.2934683Z Getting action download info
+workflows	Set up job	2026-10-05T11:58:29.6026291Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+workflows	Set up job	2026-10-05T11:58:29.7173085Z Download action repository 'actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97' (SHA:5fda3b95a4ea91299a34e894583c3862153e4b97)
+workflows	Set up job	2026-10-05T11:58:29.9026750Z Complete job name: workflows
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	﻿2026-10-05T11:58:29.9829251Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:29.9830340Z with:
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:29.9830988Z   fetch-depth: 0
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:29.9831458Z   persist-credentials: false
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:29.9832086Z   repository: linksplatform/Comparisons.SQLiteVSDoublets
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:29.9836134Z   token: ***
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:29.9836564Z   ssh-strict: true
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:29.9837013Z   ssh-user: git
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:29.9837445Z   clean: true
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:29.9837900Z   sparse-checkout-cone-mode: true
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:29.9838438Z   fetch-tags: false
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:29.9838889Z   show-progress: true
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:29.9839344Z   lfs: false
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:29.9839762Z   submodules: false
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:29.9840211Z   set-safe-directory: true
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:29.9840848Z   allow-unsafe-pr-checkout: false
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:29.9841650Z ##[endgroup]
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.0864200Z Syncing repository: linksplatform/Comparisons.SQLiteVSDoublets
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.0867150Z ##[group]Getting Git version info
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.0868258Z Working directory is '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.0870271Z [command]/usr/bin/git version
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.0960360Z git version 2.55.0
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.0987672Z ##[endgroup]
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1006875Z Temporarily overriding HOME='/home/runner/work/_temp/08378c63-b34d-4100-8efc-52dd72b062ca' before making global git config changes
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1008379Z Adding repository directory to the temporary git global config as a safe directory
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1013701Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1069895Z Deleting the contents of '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1073423Z ##[group]Determining repository object format
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1075216Z ##[endgroup]
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1076644Z ##[group]Initializing the repository
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1080190Z [command]/usr/bin/git init /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1208925Z hint: Using 'master' as the name for the initial branch. This default branch name
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1210961Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1212510Z hint: to use in all of your new repositories, which will suppress this warning,
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1213782Z hint: call:
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1214520Z hint:
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1215374Z hint: 	git config --global init.defaultBranch <name>
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1216353Z hint:
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1217264Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1218863Z hint: 'development'. The just-created branch can be renamed via this command:
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1220151Z hint:
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1221030Z hint: 	git branch -m <name>
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1221793Z hint:
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1222871Z hint: Disable this message with "git config set advice.defaultBranchName false"
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1225075Z Initialized empty Git repository in /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1228409Z [command]/usr/bin/git remote add origin https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1323471Z ##[endgroup]
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1325077Z ##[group]Disabling automatic garbage collection
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1326072Z [command]/usr/bin/git config --local gc.auto 0
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1331219Z ##[endgroup]
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1332676Z ##[group]Setting up auth
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1335121Z Removing SSH command configuration
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1341583Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1377835Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1777844Z Removing HTTP extra header
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1779068Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.1814693Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.2033746Z Removing includeIf entries pointing to credentials config files
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.2038839Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.2075427Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.2318569Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-de47a90e-4a9c-4e70-89a0-8ef21d70c1bf.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.2361381Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path /home/runner/work/_temp/git-credentials-de47a90e-4a9c-4e70-89a0-8ef21d70c1bf.config
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.2397116Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-de47a90e-4a9c-4e70-89a0-8ef21d70c1bf.config
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.2447475Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-de47a90e-4a9c-4e70-89a0-8ef21d70c1bf.config
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.2486027Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-de47a90e-4a9c-4e70-89a0-8ef21d70c1bf.config
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.2519931Z ##[endgroup]
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.2521048Z ##[group]Fetching the repository
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:30.2527165Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +9edb881b143e98ac544f0b062eabd5d072db94ac:refs/remotes/pull/111/merge
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8366111Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8368901Z  * [new branch]      dependabot/add-v2-config-file            -> origin/dependabot/add-v2-config-file
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8371574Z  * [new branch]      issue-1-5af7d3ac                         -> origin/issue-1-5af7d3ac
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8374482Z  * [new branch]      issue-101-066b400058fa                   -> origin/issue-101-066b400058fa
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8376292Z  * [new branch]      issue-103-3cc61f722359                   -> origin/issue-103-3cc61f722359
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8378595Z  * [new branch]      issue-105-8fbc60884dea                   -> origin/issue-105-8fbc60884dea
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8381298Z  * [new branch]      issue-107-bce58c21006b                   -> origin/issue-107-bce58c21006b
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8383254Z  * [new branch]      issue-110-e1f96d946132                   -> origin/issue-110-e1f96d946132
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8384988Z  * [new branch]      issue-33-e4040abb                        -> origin/issue-33-e4040abb
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8386777Z  * [new branch]      issue-42-a4c88995                        -> origin/issue-42-a4c88995
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8388532Z  * [new branch]      main                                     -> origin/main
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8389832Z  * [new branch]      master                                   -> origin/master
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8391180Z  * [new tag]         1                                        -> 1
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8392129Z  * [new tag]         2                                        -> 2
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8393104Z  * [new tag]         3                                        -> 3
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8394116Z  * [new tag]         4                                        -> 4
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8395547Z  * [new ref]         9edb881b143e98ac544f0b062eabd5d072db94ac -> pull/111/merge
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8397916Z ##[endgroup]
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8398789Z ##[group]Determining the checkout info
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8399749Z ##[endgroup]
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8400410Z [command]/usr/bin/git sparse-checkout disable
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8455091Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8493975Z ##[group]Checking out the ref
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:31.8497883Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/111/merge
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0290246Z Note: switching to 'refs/remotes/pull/111/merge'.
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0291945Z 
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0292886Z You are in 'detached HEAD' state. You can look around, make experimental
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0295299Z changes and commit them, and you can discard any commits you make in this
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0297707Z state without impacting any branches by switching back to a branch.
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0299056Z 
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0299928Z If you want to create a new branch to retain commits you create, you may
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0302324Z do so (now or later) by using -c with the switch command. Example:
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0303787Z 
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0304435Z   git switch -c <new-branch-name>
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0305349Z 
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0306100Z Or undo this operation with:
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0306967Z 
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0307605Z   git switch -
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0308285Z 
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0309424Z Turn off this advice by setting config variable advice.detachedHead to false
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0311136Z 
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0312865Z HEAD is now at 9edb881 Merge 7d7f9bc4a88b48297f084aa29830395776a597ea into 669369c6e1da777aa71042903a8edba1994deb26
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0321113Z ##[endgroup]
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0374350Z [command]/usr/bin/git log -1 --format=%H
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0404224Z 9edb881b143e98ac544f0b062eabd5d072db94ac
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0415207Z ##[group]Removing auth
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0416776Z Removing SSH command configuration
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0420091Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0459725Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0692784Z Removing HTTP extra header
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0696650Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0745673Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0966172Z Removing includeIf entries pointing to credentials config files
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.0968981Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1000211Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1005510Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1009208Z includeif.gitdir:/github/workspace/.git.path
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1011820Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1017355Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1036719Z /home/runner/work/_temp/git-credentials-de47a90e-4a9c-4e70-89a0-8ef21d70c1bf.config
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1048798Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-de47a90e\-4a9c\-4e70\-89a0\-8ef21d70c1bf\.config
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1110189Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1135460Z /home/runner/work/_temp/git-credentials-de47a90e-4a9c-4e70-89a0-8ef21d70c1bf.config
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1144940Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-de47a90e\-4a9c\-4e70\-89a0\-8ef21d70c1bf\.config
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1187187Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1213608Z /github/runner_temp/git-credentials-de47a90e-4a9c-4e70-89a0-8ef21d70c1bf.config
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1224190Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-de47a90e\-4a9c\-4e70\-89a0\-8ef21d70c1bf\.config
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1268229Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1297142Z /github/runner_temp/git-credentials-de47a90e-4a9c-4e70-89a0-8ef21d70c1bf.config
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1346868Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-de47a90e\-4a9c\-4e70\-89a0\-8ef21d70c1bf\.config
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1392300Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1614172Z Removing credentials config '/home/runner/work/_temp/git-credentials-de47a90e-4a9c-4e70-89a0-8ef21d70c1bf.config'
+workflows	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:32.1621606Z ##[endgroup]
+workflows	Run ./.github/actions/prepare-ci	﻿2026-10-05T11:58:32.2029869Z Prepare all required actions
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.2148721Z ##[group]Run ./.github/actions/prepare-ci
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.2149912Z with:
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.2151157Z ##[endgroup]
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.2223600Z ##[start-action display=Merge current base for pull requests;id=__self.merge]
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.2312585Z ##[group]Run git config user.email 'github-actions[bot]@users.noreply.github.com'
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.2314692Z ^[[36;1mgit config user.email 'github-actions[bot]@users.noreply.github.com'^[[0m
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.2316376Z ^[[36;1mgit config user.name 'github-actions[bot]'^[[0m
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.2317654Z ^[[36;1mgit fetch origin "$BASE_REF"^[[0m
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.2318854Z ^[[36;1mbase="${BASE_SHA:-origin/$BASE_REF}"^[[0m
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.2320280Z ^[[36;1mecho "base=$(git rev-parse "$base")" >> "$GITHUB_OUTPUT"^[[0m
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.2321845Z ^[[36;1mgit merge --no-edit "$base"^[[0m
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.2594356Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.2595709Z env:
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.2596616Z   BASE_REF: main
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.2597524Z   BASE_SHA: 
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.2598386Z ##[endgroup]
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.5214368Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.5215985Z  * branch            main       -> FETCH_HEAD
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.5370436Z Already up to date.
+workflows	Run ./.github/actions/prepare-ci	2026-10-05T11:58:32.5407103Z ##[end-action id=__self.merge;outcome=success;conclusion=success;duration_ms=318]
+workflows	Actionlint and ShellCheck	﻿2026-10-05T11:58:32.5527916Z ##[group]Run docker run --rm -v "$PWD:/repo" -w /repo rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667 -color
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:32.5529611Z ^[[36;1mdocker run --rm -v "$PWD:/repo" -w /repo rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667 -color^[[0m
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:32.5596661Z shell: /usr/bin/bash -e {0}
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:32.5596982Z ##[endgroup]
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:32.7044968Z Unable to find image 'rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667' locally
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:33.2093521Z docker.io/rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667: Pulling from rhysd/actionlint
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:33.4185880Z 589002ba0eae: Pulling fs layer
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:33.4187322Z c09af8888d6a: Pulling fs layer
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:33.4187804Z 4ccd7d76ca98: Pulling fs layer
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:33.4188277Z b6b4b7b0e257: Pulling fs layer
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:33.4188719Z b6b4b7b0e257: Waiting
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:33.7649208Z c09af8888d6a: Download complete
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:33.7697542Z 4ccd7d76ca98: Verifying Checksum
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:33.7740547Z 4ccd7d76ca98: Download complete
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:33.7740977Z 589002ba0eae: Verifying Checksum
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:33.7741786Z 589002ba0eae: Download complete
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:33.8907747Z 589002ba0eae: Pull complete
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:33.9673544Z c09af8888d6a: Pull complete
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:34.0474328Z 4ccd7d76ca98: Pull complete
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:34.2089898Z b6b4b7b0e257: Verifying Checksum
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:34.2090294Z b6b4b7b0e257: Download complete
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:34.7741722Z b6b4b7b0e257: Pull complete
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:34.7783626Z Digest: sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
+workflows	Actionlint and ShellCheck	2026-10-05T11:58:34.7793080Z Status: Downloaded newer image for rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
+workflows	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	﻿2026-10-05T11:58:35.2049332Z ##[group]Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+workflows	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:35.2049792Z with:
+workflows	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:35.2050031Z   python-version: 3.13
+workflows	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:35.2050258Z   check-latest: false
+workflows	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:35.2052929Z   token: ***
+workflows	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:35.2053154Z   update-environment: true
+workflows	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:35.2053406Z   allow-prereleases: false
+workflows	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:35.2053640Z   freethreaded: false
+workflows	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:35.2053854Z ##[endgroup]
+workflows	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:35.3243189Z ##[group]Installed versions
+workflows	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:35.3551181Z Successfully set up CPython (3.13.15)
+workflows	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:35.3552021Z ##[endgroup]
+workflows	Run python -m pip install zizmor==1.30.1	﻿2026-10-05T11:58:35.3711229Z ##[group]Run python -m pip install zizmor==1.30.1
+workflows	Run python -m pip install zizmor==1.30.1	2026-10-05T11:58:35.3711886Z ^[[36;1mpython -m pip install zizmor==1.30.1^[[0m
+workflows	Run python -m pip install zizmor==1.30.1	2026-10-05T11:58:35.3883074Z shell: /usr/bin/bash -e {0}
+workflows	Run python -m pip install zizmor==1.30.1	2026-10-05T11:58:35.3883411Z env:
+workflows	Run python -m pip install zizmor==1.30.1	2026-10-05T11:58:35.3883704Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+workflows	Run python -m pip install zizmor==1.30.1	2026-10-05T11:58:35.3884182Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+workflows	Run python -m pip install zizmor==1.30.1	2026-10-05T11:58:35.3884622Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+workflows	Run python -m pip install zizmor==1.30.1	2026-10-05T11:58:35.3885027Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+workflows	Run python -m pip install zizmor==1.30.1	2026-10-05T11:58:35.3885420Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+workflows	Run python -m pip install zizmor==1.30.1	2026-10-05T11:58:35.3885835Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+workflows	Run python -m pip install zizmor==1.30.1	2026-10-05T11:58:35.3886163Z ##[endgroup]
+workflows	Run python -m pip install zizmor==1.30.1	2026-10-05T11:58:37.9598628Z Collecting zizmor==1.30.1
+workflows	Run python -m pip install zizmor==1.30.1	2026-10-05T11:58:38.0562701Z   Downloading zizmor-1.30.1-py3-none-manylinux_2_28_x86_64.whl.metadata (4.6 kB)
+workflows	Run python -m pip install zizmor==1.30.1	2026-10-05T11:58:38.0817446Z Downloading zizmor-1.30.1-py3-none-manylinux_2_28_x86_64.whl (9.5 MB)
+workflows	Run python -m pip install zizmor==1.30.1	2026-10-05T11:58:38.3023671Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.5/9.5 MB 55.4 MB/s  0:00:00
+workflows	Run python -m pip install zizmor==1.30.1	2026-10-05T11:58:38.4501318Z Installing collected packages: zizmor
+workflows	Run python -m pip install zizmor==1.30.1	2026-10-05T11:58:38.5539414Z Successfully installed zizmor-1.30.1
+workflows	Workflow security	﻿2026-10-05T11:58:38.6046058Z ##[group]Run zizmor --offline --min-severity medium .github
+workflows	Workflow security	2026-10-05T11:58:38.6046545Z ^[[36;1mzizmor --offline --min-severity medium .github^[[0m
+workflows	Workflow security	2026-10-05T11:58:38.6047058Z ^[[36;1mzizmor --offline --persona pedantic --min-severity high --min-confidence high .github^[[0m
+workflows	Workflow security	2026-10-05T11:58:38.6111983Z shell: /usr/bin/bash -e {0}
+workflows	Workflow security	2026-10-05T11:58:38.6112239Z env:
+workflows	Workflow security	2026-10-05T11:58:38.6112505Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+workflows	Workflow security	2026-10-05T11:58:38.6112944Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+workflows	Workflow security	2026-10-05T11:58:38.6113383Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+workflows	Workflow security	2026-10-05T11:58:38.6113767Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+workflows	Workflow security	2026-10-05T11:58:38.6114146Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+workflows	Workflow security	2026-10-05T11:58:38.6114540Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+workflows	Workflow security	2026-10-05T11:58:38.6114861Z ##[endgroup]
+workflows	Workflow security	2026-10-05T11:58:38.6227995Z ^[[32m INFO^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 zizmor v1.30.1
+workflows	Workflow security	2026-10-05T11:58:38.6685092Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/actions/prepare-ci/action.yml
+workflows	Workflow security	2026-10-05T11:58:38.6686681Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/dependabot.yml
+workflows	Workflow security	2026-10-05T11:58:38.6693569Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/AutoMerge.yml
+workflows	Workflow security	2026-10-05T11:58:38.6720015Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/benchmarks.yml
+workflows	Workflow security	2026-10-05T11:58:38.6725774Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/csharp.yml
+workflows	Workflow security	2026-10-05T11:58:38.6731675Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/dependencies.yml
+workflows	Workflow security	2026-10-05T11:58:38.6739455Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/quality.yml
+workflows	Workflow security	2026-10-05T11:58:38.6745407Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/rust.yml
+workflows	Workflow security	2026-10-05T11:58:38.6746428Z ^[[32mNo findings to report. Good job!^[[39m (^[[1m^[[93m8^[[39m ignored, ^[[93m11^[[39m suppressed^[[0m)
+workflows	Workflow security	2026-10-05T11:58:38.6784883Z ^[[32m INFO^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 zizmor v1.30.1
+workflows	Workflow security	2026-10-05T11:58:38.7225559Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/actions/prepare-ci/action.yml
+workflows	Workflow security	2026-10-05T11:58:38.7226693Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/dependabot.yml
+workflows	Workflow security	2026-10-05T11:58:38.7234191Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/AutoMerge.yml
+workflows	Workflow security	2026-10-05T11:58:38.7260052Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/benchmarks.yml
+workflows	Workflow security	2026-10-05T11:58:38.7265883Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/csharp.yml
+workflows	Workflow security	2026-10-05T11:58:38.7271552Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/dependencies.yml
+workflows	Workflow security	2026-10-05T11:58:38.7279587Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/quality.yml
+workflows	Workflow security	2026-10-05T11:58:38.7285414Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/rust.yml
+workflows	Workflow security	2026-10-05T11:58:38.7286173Z ^[[32mNo findings to report. Good job!^[[39m (^[[1m^[[93m18^[[39m ignored, ^[[93m1^[[39m suppressed^[[0m)
+workflows	Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	﻿2026-10-05T11:58:38.7383831Z Post job cleanup.
+workflows	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	﻿2026-10-05T11:58:38.8677275Z Post job cleanup.
+workflows	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:38.9600701Z [command]/usr/bin/git version
+workflows	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:38.9646497Z git version 2.55.0
+workflows	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:38.9687993Z Temporarily overriding HOME='/home/runner/work/_temp/2e1d4ec1-75fc-4ec3-a030-870913f47ed7' before making global git config changes
+workflows	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:38.9690110Z Adding repository directory to the temporary git global config as a safe directory
+workflows	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:38.9694712Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+workflows	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:38.9729856Z Removing SSH command configuration
+workflows	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:38.9737447Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+workflows	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:38.9777847Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+workflows	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:39.0031082Z Removing HTTP extra header
+workflows	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:39.0042844Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+workflows	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:39.0084369Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+workflows	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:39.0340465Z Removing includeIf entries pointing to credentials config files
+workflows	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:39.0347786Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+workflows	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:39.0388638Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+workflows	Complete job	﻿2026-10-05T11:58:39.0783632Z Cleaning up orphan processes
+python	Set up job	﻿2026-10-05T11:58:45.6053774Z Current runner version: '2.337.0'
+python	Set up job	2026-10-05T11:58:45.6075223Z ##[group]Runner Image Provisioner
+python	Set up job	2026-10-05T11:58:45.6075976Z Hosted Compute Agent
+python	Set up job	2026-10-05T11:58:45.6076527Z Version: 20260901.588
+python	Set up job	2026-10-05T11:58:45.6077071Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+python	Set up job	2026-10-05T11:58:45.6077764Z Build Date: 2026-09-01T19:56:44Z
+python	Set up job	2026-10-05T11:58:45.6078610Z Worker ID: {fdd8fc13-79d1-4b0a-b365-c646009d50d6}
+python	Set up job	2026-10-05T11:58:45.6079192Z Azure Region: westus3
+python	Set up job	2026-10-05T11:58:45.6079691Z ##[endgroup]
+python	Set up job	2026-10-05T11:58:45.6081119Z ##[group]Operating System
+python	Set up job	2026-10-05T11:58:45.6081638Z Ubuntu
+python	Set up job	2026-10-05T11:58:45.6082154Z 24.04.5
+python	Set up job	2026-10-05T11:58:45.6082615Z LTS
+python	Set up job	2026-10-05T11:58:45.6083086Z ##[endgroup]
+python	Set up job	2026-10-05T11:58:45.6083574Z ##[group]Runner Image
+python	Set up job	2026-10-05T11:58:45.6084068Z Image: ubuntu-24.04
+python	Set up job	2026-10-05T11:58:45.6084561Z Version: 20260927.320.1
+python	Set up job	2026-10-05T11:58:45.6085406Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+python	Set up job	2026-10-05T11:58:45.6086867Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+python	Set up job	2026-10-05T11:58:45.6087638Z ##[endgroup]
+python	Set up job	2026-10-05T11:58:45.6088704Z ##[group]GITHUB_TOKEN Permissions
+python	Set up job	2026-10-05T11:58:45.6090189Z Contents: read
+python	Set up job	2026-10-05T11:58:45.6090781Z Metadata: read
+python	Set up job	2026-10-05T11:58:45.6091231Z ##[endgroup]
+python	Set up job	2026-10-05T11:58:45.6092839Z Secret source: Actions
+python	Set up job	2026-10-05T11:58:45.6093713Z Cache mode: write
+python	Set up job	2026-10-05T11:58:45.6094269Z Prepare workflow directory
+python	Set up job	2026-10-05T11:58:45.6354942Z Prepare all required actions
+python	Set up job	2026-10-05T11:58:45.6400625Z Getting action download info
+python	Set up job	2026-10-05T11:58:45.9592873Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+python	Set up job	2026-10-05T11:58:46.0551980Z Download action repository 'actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97' (SHA:5fda3b95a4ea91299a34e894583c3862153e4b97)
+python	Set up job	2026-10-05T11:58:46.2557208Z Complete job name: python
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	﻿2026-10-05T11:58:46.3200495Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.3201314Z with:
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.3201645Z   fetch-depth: 0
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.3202030Z   persist-credentials: false
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.3202502Z   repository: linksplatform/Comparisons.SQLiteVSDoublets
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.3205673Z   token: ***
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.3206014Z   ssh-strict: true
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.3206356Z   ssh-user: git
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.3206733Z   clean: true
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.3207081Z   sparse-checkout-cone-mode: true
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.3207493Z   fetch-tags: false
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.3207836Z   show-progress: true
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.3208311Z   lfs: false
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.3208632Z   submodules: false
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.3208985Z   set-safe-directory: true
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.3209377Z   allow-unsafe-pr-checkout: false
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.3209930Z ##[endgroup]
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4019147Z Syncing repository: linksplatform/Comparisons.SQLiteVSDoublets
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4021417Z ##[group]Getting Git version info
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4022715Z Working directory is '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4024340Z [command]/usr/bin/git version
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4057708Z git version 2.55.0
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4073541Z ##[endgroup]
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4081860Z Temporarily overriding HOME='/home/runner/work/_temp/7b565eba-22ce-454e-9515-b5238403a586' before making global git config changes
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4083723Z Adding repository directory to the temporary git global config as a safe directory
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4086838Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4131196Z Deleting the contents of '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4133851Z ##[group]Determining repository object format
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4135150Z ##[endgroup]
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4136079Z ##[group]Initializing the repository
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4139137Z [command]/usr/bin/git init /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4215727Z hint: Using 'master' as the name for the initial branch. This default branch name
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4217319Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4218786Z hint: to use in all of your new repositories, which will suppress this warning,
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4219907Z hint: call:
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4220715Z hint:
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4221507Z hint: 	git config --global init.defaultBranch <name>
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4222308Z hint:
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4223040Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4223942Z hint: 'development'. The just-created branch can be renamed via this command:
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4224600Z hint:
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4224969Z hint: 	git branch -m <name>
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4225375Z hint:
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4225945Z hint: Disable this message with "git config set advice.defaultBranchName false"
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4226944Z Initialized empty Git repository in /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4230390Z [command]/usr/bin/git remote add origin https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4272164Z ##[endgroup]
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4273217Z ##[group]Disabling automatic garbage collection
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4275116Z [command]/usr/bin/git config --local gc.auto 0
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4303323Z ##[endgroup]
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4304745Z ##[group]Setting up auth
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4305466Z Removing SSH command configuration
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4309408Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4337552Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4616277Z Removing HTTP extra header
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4620794Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4654056Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4852317Z Removing includeIf entries pointing to credentials config files
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4856728Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.4886735Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.5078355Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-9af78973-cfdd-46ce-9460-e8b1daad7ec5.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.5112003Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path /home/runner/work/_temp/git-credentials-9af78973-cfdd-46ce-9460-e8b1daad7ec5.config
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.5142246Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-9af78973-cfdd-46ce-9460-e8b1daad7ec5.config
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.5174772Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-9af78973-cfdd-46ce-9460-e8b1daad7ec5.config
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.5206224Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-9af78973-cfdd-46ce-9460-e8b1daad7ec5.config
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.5233703Z ##[endgroup]
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.5234582Z ##[group]Fetching the repository
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:46.5240761Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +9edb881b143e98ac544f0b062eabd5d072db94ac:refs/remotes/pull/111/merge
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1706254Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1708108Z  * [new branch]      dependabot/add-v2-config-file            -> origin/dependabot/add-v2-config-file
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1709710Z  * [new branch]      issue-1-5af7d3ac                         -> origin/issue-1-5af7d3ac
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1710886Z  * [new branch]      issue-101-066b400058fa                   -> origin/issue-101-066b400058fa
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1711786Z  * [new branch]      issue-103-3cc61f722359                   -> origin/issue-103-3cc61f722359
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1712688Z  * [new branch]      issue-105-8fbc60884dea                   -> origin/issue-105-8fbc60884dea
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1713627Z  * [new branch]      issue-107-bce58c21006b                   -> origin/issue-107-bce58c21006b
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1715472Z  * [new branch]      issue-110-e1f96d946132                   -> origin/issue-110-e1f96d946132
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1716534Z  * [new branch]      issue-33-e4040abb                        -> origin/issue-33-e4040abb
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1717362Z  * [new branch]      issue-42-a4c88995                        -> origin/issue-42-a4c88995
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1718136Z  * [new branch]      main                                     -> origin/main
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1719217Z  * [new branch]      master                                   -> origin/master
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1720138Z  * [new tag]         1                                        -> 1
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1720953Z  * [new tag]         2                                        -> 2
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1721799Z  * [new tag]         3                                        -> 3
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1722632Z  * [new tag]         4                                        -> 4
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1723561Z  * [new ref]         9edb881b143e98ac544f0b062eabd5d072db94ac -> pull/111/merge
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1725887Z ##[endgroup]
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1726997Z ##[group]Determining the checkout info
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1727983Z ##[endgroup]
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1728717Z [command]/usr/bin/git sparse-checkout disable
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1769326Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1802783Z ##[group]Checking out the ref
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.1807574Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/111/merge
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3302162Z Note: switching to 'refs/remotes/pull/111/merge'.
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3303594Z 
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3304741Z You are in 'detached HEAD' state. You can look around, make experimental
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3305965Z changes and commit them, and you can discard any commits you make in this
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3306900Z state without impacting any branches by switching back to a branch.
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3307595Z 
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3307999Z If you want to create a new branch to retain commits you create, you may
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3309006Z do so (now or later) by using -c with the switch command. Example:
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3309642Z 
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3310017Z   git switch -c <new-branch-name>
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3310441Z 
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3310728Z Or undo this operation with:
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3311123Z 
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3311366Z   git switch -
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3311682Z 
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3312245Z Turn off this advice by setting config variable advice.detachedHead to false
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3312950Z 
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3313764Z HEAD is now at 9edb881 Merge 7d7f9bc4a88b48297f084aa29830395776a597ea into 669369c6e1da777aa71042903a8edba1994deb26
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3387183Z ##[endgroup]
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3389043Z [command]/usr/bin/git log -1 --format=%H
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3407258Z 9edb881b143e98ac544f0b062eabd5d072db94ac
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3410983Z ##[group]Removing auth
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3412022Z Removing SSH command configuration
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3413539Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3441682Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3633377Z Removing HTTP extra header
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3635585Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3669355Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3860367Z Removing includeIf entries pointing to credentials config files
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3862585Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3888947Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3891736Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3893925Z includeif.gitdir:/github/workspace/.git.path
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3895583Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3899532Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3918694Z /home/runner/work/_temp/git-credentials-9af78973-cfdd-46ce-9460-e8b1daad7ec5.config
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3927976Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-9af78973\-cfdd\-46ce\-9460\-e8b1daad7ec5\.config
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3961086Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3982604Z /home/runner/work/_temp/git-credentials-9af78973-cfdd-46ce-9460-e8b1daad7ec5.config
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.3990396Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-9af78973\-cfdd\-46ce\-9460\-e8b1daad7ec5\.config
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.4019626Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.4041192Z /github/runner_temp/git-credentials-9af78973-cfdd-46ce-9460-e8b1daad7ec5.config
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.4048106Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-9af78973\-cfdd\-46ce\-9460\-e8b1daad7ec5\.config
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.4084574Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.4107856Z /github/runner_temp/git-credentials-9af78973-cfdd-46ce-9460-e8b1daad7ec5.config
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.4151026Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-9af78973\-cfdd\-46ce\-9460\-e8b1daad7ec5\.config
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.4197628Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.4384248Z Removing credentials config '/home/runner/work/_temp/git-credentials-9af78973-cfdd-46ce-9460-e8b1daad7ec5.config'
+python	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:58:48.4392139Z ##[endgroup]
+python	Run ./.github/actions/prepare-ci	﻿2026-10-05T11:58:48.4658978Z Prepare all required actions
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.4745899Z ##[group]Run ./.github/actions/prepare-ci
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.4746798Z with:
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.4747452Z ##[endgroup]
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.4800570Z ##[start-action display=Merge current base for pull requests;id=__self.merge]
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.4866657Z ##[group]Run git config user.email 'github-actions[bot]@users.noreply.github.com'
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.4868529Z ^[[36;1mgit config user.email 'github-actions[bot]@users.noreply.github.com'^[[0m
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.4869809Z ^[[36;1mgit config user.name 'github-actions[bot]'^[[0m
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.4870771Z ^[[36;1mgit fetch origin "$BASE_REF"^[[0m
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.4871670Z ^[[36;1mbase="${BASE_SHA:-origin/$BASE_REF}"^[[0m
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.4872738Z ^[[36;1mecho "base=$(git rev-parse "$base")" >> "$GITHUB_OUTPUT"^[[0m
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.4873776Z ^[[36;1mgit merge --no-edit "$base"^[[0m
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.5071543Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.5072596Z env:
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.5073304Z   BASE_REF: main
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.5073977Z   BASE_SHA: 
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.5074629Z ##[endgroup]
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.8449196Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.8449995Z  * branch            main       -> FETCH_HEAD
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.8509736Z Already up to date.
+python	Run ./.github/actions/prepare-ci	2026-10-05T11:58:48.8539140Z ##[end-action id=__self.merge;outcome=success;conclusion=success;duration_ms=373]
+python	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	﻿2026-10-05T11:58:48.8628443Z ##[group]Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+python	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:48.8628818Z with:
+python	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:48.8628996Z   python-version: 3.13
+python	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:48.8629193Z   check-latest: false
+python	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:48.8631124Z   token: ***
+python	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:48.8631310Z   update-environment: true
+python	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:48.8631542Z   allow-prereleases: false
+python	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:48.8631747Z   freethreaded: false
+python	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:48.8631928Z ##[endgroup]
+python	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:48.9553560Z ##[group]Installed versions
+python	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:48.9605204Z Successfully set up CPython (3.13.15)
+python	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:58:48.9605808Z ##[endgroup]
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	﻿2026-10-05T11:58:48.9722946Z ##[group]Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:48.9723579Z ^[[36;1mpython -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt^[[0m
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:48.9882501Z shell: /usr/bin/bash -e {0}
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:48.9882798Z env:
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:48.9883039Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:48.9883456Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:48.9883847Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:48.9884162Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:48.9884478Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:48.9884802Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:48.9885082Z ##[endgroup]
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:52.6618033Z Collecting matplotlib==3.11.2 (from -r scripts/requirements.txt (line 1))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:52.7219459Z   Downloading matplotlib-3.11.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (80 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:52.9730257Z Collecting ruff==0.16.10 (from -r scripts/requirements-ci.txt (line 1))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:52.9832663Z   Downloading ruff-0.16.10-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (20 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.0877478Z Collecting mypy==2.4.0 (from -r scripts/requirements-ci.txt (line 2))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.0981181Z   Downloading mypy-2.4.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.1226176Z Collecting PyYAML==6.0.3 (from -r scripts/requirements-ci.txt (line 3))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.1327350Z   Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.1435452Z Collecting types-PyYAML==6.0.12.20250915 (from -r scripts/requirements-ci.txt (line 4))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.1534472Z   Downloading types_pyyaml-6.0.12.20250915-py3-none-any.whl.metadata (1.7 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.1645226Z Collecting pip-audit==2.10.1 (from -r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.1744591Z   Downloading pip_audit-2.10.1-py3-none-any.whl.metadata (28 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.2098674Z Collecting zizmor==1.30.1 (from -r scripts/requirements-ci.txt (line 6))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.2199353Z   Downloading zizmor-1.30.1-py3-none-manylinux_2_28_x86_64.whl.metadata (4.6 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.2328827Z Collecting bandit==1.9.4 (from -r scripts/requirements-ci.txt (line 7))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.2427176Z   Downloading bandit-1.9.4-py3-none-any.whl.metadata (7.1 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.2893315Z Collecting contourpy>=1.0.1 (from matplotlib==3.11.2->-r scripts/requirements.txt (line 1))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.2995924Z   Downloading contourpy-1.4.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.3114989Z Collecting cycler>=0.10 (from matplotlib==3.11.2->-r scripts/requirements.txt (line 1))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.3214103Z   Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.4299179Z Collecting fonttools>=4.28.2 (from matplotlib==3.11.2->-r scripts/requirements.txt (line 1))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.4400964Z   Downloading fonttools-4.66.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (130 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.5062346Z Collecting kiwisolver>=1.3.1 (from matplotlib==3.11.2->-r scripts/requirements.txt (line 1))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.5162877Z   Downloading kiwisolver-1.5.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (5.2 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.6549901Z Collecting numpy>=1.25 (from matplotlib==3.11.2->-r scripts/requirements.txt (line 1))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.6652706Z   Downloading numpy-2.5.3-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.6771052Z Collecting packaging>=20.0 (from matplotlib==3.11.2->-r scripts/requirements.txt (line 1))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.6870951Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.8888896Z Collecting pillow>=9 (from matplotlib==3.11.2->-r scripts/requirements.txt (line 1))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.8991128Z   Downloading pillow-12.3.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.9202263Z Collecting pyparsing>=3 (from matplotlib==3.11.2->-r scripts/requirements.txt (line 1))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.9301804Z   Downloading pyparsing-3.3.3-py3-none-any.whl.metadata (5.9 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.9398508Z Collecting python-dateutil>=2.7 (from matplotlib==3.11.2->-r scripts/requirements.txt (line 1))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.9496122Z   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.9625714Z Collecting typing_extensions>=4.6.0 (from mypy==2.4.0->-r scripts/requirements-ci.txt (line 2))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.9725274Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.9806008Z Collecting mypy_extensions>=1.0.0 (from mypy==2.4.0->-r scripts/requirements-ci.txt (line 2))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.9904454Z   Downloading mypy_extensions-1.1.0-py3-none-any.whl.metadata (1.1 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:53.9997217Z Collecting pathspec>=1.0.0 (from mypy==2.4.0->-r scripts/requirements-ci.txt (line 2))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.0096063Z   Downloading pathspec-1.1.1-py3-none-any.whl.metadata (14 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.1209828Z Collecting librt>=0.16.0 (from mypy==2.4.0->-r scripts/requirements-ci.txt (line 2))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.1312963Z   Downloading librt-0.16.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (1.3 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.1646727Z Collecting ast-serialize<1.0.0,>=0.11.2 (from mypy==2.4.0->-r scripts/requirements-ci.txt (line 2))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.1748133Z   Downloading ast_serialize-0.12.1-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.4 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.1857093Z Collecting CacheControl>=0.13.0 (from CacheControl[filecache]>=0.13.0->pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.1956513Z   Downloading cachecontrol-0.14.4-py3-none-any.whl.metadata (3.1 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.2158979Z Collecting cyclonedx-python-lib<12,>=5 (from pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.2259933Z   Downloading cyclonedx_python_lib-11.12.0-py3-none-any.whl.metadata (6.9 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.2377220Z Collecting pip-api>=0.0.28 (from pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.2476378Z   Downloading pip_api-0.0.35-py3-none-any.whl.metadata (17 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.2583271Z Collecting pip-requirements-parser>=32.0.0 (from pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.2682566Z   Downloading pip_requirements_parser-32.0.1-py3-none-any.whl.metadata (9.3 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.2837810Z Collecting requests>=2.31.0 (from pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.2937199Z   Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.3168624Z Collecting rich>=12.4 (from pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.3269489Z   Downloading rich-15.0.0-py3-none-any.whl.metadata (18 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.4192196Z Collecting tomli>=2.2.1 (from pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.4292161Z   Downloading tomli-2.4.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (10 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.4390846Z Collecting tomli-w>=1.2.0 (from pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.4489411Z   Downloading tomli_w-1.2.0-py3-none-any.whl.metadata (5.7 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.5294935Z Collecting platformdirs>=4.2.0 (from pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.5397986Z   Downloading platformdirs-4.12.3-py3-none-any.whl.metadata (5.5 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.5636393Z Collecting stevedore>=1.20.0 (from bandit==1.9.4->-r scripts/requirements-ci.txt (line 7))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.5735955Z   Downloading stevedore-5.9.1-py3-none-any.whl.metadata (2.3 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.5866356Z Collecting license-expression<31,>=30 (from cyclonedx-python-lib<12,>=5->pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.5967297Z   Downloading license_expression-30.4.4-py3-none-any.whl.metadata (11 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.6096828Z Collecting packageurl-python<2,>=0.11 (from cyclonedx-python-lib<12,>=5->pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.6195422Z   Downloading packageurl_python-0.17.6-py3-none-any.whl.metadata (5.1 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.6398032Z Collecting py-serializable<3.0.0,>=2.1.0 (from cyclonedx-python-lib<12,>=5->pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.6497841Z   Downloading py_serializable-2.1.0-py3-none-any.whl.metadata (4.3 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.6606529Z Collecting sortedcontainers<3.0.0,>=2.4.0 (from cyclonedx-python-lib<12,>=5->pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.6705818Z   Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl.metadata (10 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.6807659Z Collecting boolean.py>=4.0 (from license-expression<31,>=30->cyclonedx-python-lib<12,>=5->pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.6906463Z   Downloading boolean_py-5.0-py3-none-any.whl.metadata (2.3 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.7002204Z Collecting defusedxml<0.8.0,>=0.7.1 (from py-serializable<3.0.0,>=2.1.0->cyclonedx-python-lib<12,>=5->pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.7101076Z   Downloading defusedxml-0.7.1-py2.py3-none-any.whl.metadata (32 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.7743277Z Collecting msgpack<2.0.0,>=0.5.2 (from CacheControl>=0.13.0->CacheControl[filecache]>=0.13.0->pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.7847366Z   Downloading msgpack-1.2.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (8.3 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.8444871Z Collecting filelock>=3.8.0 (from CacheControl[filecache]>=0.13.0->pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.8546618Z   Downloading filelock-4.0.11-py3-none-any.whl.metadata (2.0 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.8629983Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.13.15/x64/lib/python3.13/site-packages (from pip-api>=0.0.28->pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5)) (26.2.1)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.8711386Z Collecting six>=1.5 (from python-dateutil>=2.7->matplotlib==3.11.2->-r scripts/requirements.txt (line 1))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.8810938Z   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.9643573Z Collecting charset_normalizer<4,>=2 (from requests>=2.31.0->pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.9746095Z   Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:54.9905273Z Collecting idna<4,>=2.5 (from requests>=2.31.0->pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.0004700Z   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.0153879Z Collecting urllib3<3,>=1.26 (from requests>=2.31.0->pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.0252752Z   Downloading urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.0375082Z Collecting certifi>=2023.5.7 (from requests>=2.31.0->pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.0474046Z   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.0913605Z Collecting markdown-it-py>=2.2.0 (from rich>=12.4->pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.1013810Z   Downloading markdown_it_py-4.2.0-py3-none-any.whl.metadata (7.4 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.1164712Z Collecting pygments<3.0.0,>=2.13.0 (from rich>=12.4->pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.1264631Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.1362692Z Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=12.4->pip-audit==2.10.1->-r scripts/requirements-ci.txt (line 5))
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.1462023Z   Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.1675655Z Downloading matplotlib-3.11.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (9.9 MB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.5734072Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.9/9.9 MB 25.4 MB/s  0:00:00
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.5836806Z Downloading ruff-0.16.10-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (10.4 MB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.7693531Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.4/10.4 MB 55.7 MB/s  0:00:00
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.7795436Z Downloading mypy-2.4.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (15.5 MB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.9658611Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 15.5/15.5 MB 82.8 MB/s  0:00:00
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:55.9759768Z Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (801 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.0646585Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 801.6/801.6 kB 6.3 MB/s  0:00:00
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.0748655Z Downloading types_pyyaml-6.0.12.20250915-py3-none-any.whl (20 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.0929120Z Downloading pip_audit-2.10.1-py3-none-any.whl (62 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.1053979Z Downloading zizmor-1.30.1-py3-none-manylinux_2_28_x86_64.whl (9.5 MB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.2013935Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.5/9.5 MB 98.0 MB/s  0:00:00
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.2114646Z Downloading bandit-1.9.4-py3-none-any.whl (134 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.5654013Z Downloading ast_serialize-0.12.1-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.3 MB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.5860796Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 55.9 MB/s  0:00:00
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.5961381Z Downloading cyclonedx_python_lib-11.12.0-py3-none-any.whl (529 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.6024309Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 529.5/529.5 kB 56.9 MB/s  0:00:00
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.6124771Z Downloading license_expression-30.4.4-py3-none-any.whl (120 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.6246129Z Downloading packageurl_python-0.17.6-py3-none-any.whl (36 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.6359609Z Downloading py_serializable-2.1.0-py3-none-any.whl (23 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.6474219Z Downloading defusedxml-0.7.1-py2.py3-none-any.whl (25 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.6590046Z Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.6705196Z Downloading boolean_py-5.0-py3-none-any.whl (26 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.6818832Z Downloading cachecontrol-0.14.4-py3-none-any.whl (22 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.6932368Z Downloading msgpack-1.2.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (466 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.7078621Z Downloading contourpy-1.4.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (384 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.7226826Z Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.7339804Z Downloading filelock-4.0.11-py3-none-any.whl (111 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.7466525Z Downloading fonttools-4.66.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.4 MB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.7964887Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.4/5.4 MB 106.8 MB/s  0:00:00
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.8091657Z Downloading kiwisolver-1.5.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.5 MB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.8198480Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 109.6 MB/s  0:00:00
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.8301572Z Downloading librt-0.16.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (531 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.8364168Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 531.7/531.7 kB 58.4 MB/s  0:00:00
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.8464310Z Downloading mypy_extensions-1.1.0-py3-none-any.whl (5.0 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:56.8580498Z Downloading numpy-2.5.3-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.0374198Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.7/16.7 MB 92.7 MB/s  0:00:00
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.0476120Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.0597026Z Downloading pathspec-1.1.1-py3-none-any.whl (57 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.0712249Z Downloading pillow-12.3.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.1347723Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 108.6 MB/s  0:00:00
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.1450272Z Downloading pip_api-0.0.35-py3-none-any.whl (123 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.1567364Z Downloading pip_requirements_parser-32.0.1-py3-none-any.whl (35 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.1683225Z Downloading platformdirs-4.12.3-py3-none-any.whl (32 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.1796176Z Downloading pyparsing-3.3.3-py3-none-any.whl (126 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.1915610Z Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.2036166Z Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.2156751Z Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (254 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.2275436Z Downloading idna-3.20-py3-none-any.whl (69 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.2395109Z Downloading urllib3-2.8.0-py3-none-any.whl (135 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.2516191Z Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.2645752Z Downloading rich-15.0.0-py3-none-any.whl (310 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.2776074Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.2868058Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 133.2 MB/s  0:00:00
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.2967568Z Downloading markdown_it_py-4.2.0-py3-none-any.whl (91 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.3087876Z Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.3203630Z Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.3316638Z Downloading stevedore-5.9.1-py3-none-any.whl (54 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.3435099Z Downloading tomli-2.4.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (251 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.3566370Z Downloading tomli_w-1.2.0-py3-none-any.whl (6.7 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.3678319Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:58:57.7545432Z Installing collected packages: sortedcontainers, boolean.py, zizmor, urllib3, typing_extensions, types-PyYAML, tomli-w, tomli, stevedore, six, ruff, PyYAML, pyparsing, pygments, platformdirs, pip-api, pillow, pathspec, packaging, packageurl-python, numpy, mypy_extensions, msgpack, mdurl, license-expression, librt, kiwisolver, idna, fonttools, filelock, defusedxml, cycler, charset_normalizer, certifi, ast-serialize, requests, python-dateutil, py-serializable, pip-requirements-parser, mypy, markdown-it-py, contourpy, rich, matplotlib, cyclonedx-python-lib, CacheControl, bandit, pip-audit
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:59:05.4213275Z 
+python	Run python -m pip install -r scripts/requirements.txt -r scripts/requirements-ci.txt	2026-10-05T11:59:05.4250834Z Successfully installed CacheControl-0.14.4 PyYAML-6.0.3 ast-serialize-0.12.1 bandit-1.9.4 boolean.py-5.0 certifi-2026.7.22 charset_normalizer-3.5.2 contourpy-1.4.0 cycler-0.12.1 cyclonedx-python-lib-11.12.0 defusedxml-0.7.1 filelock-4.0.11 fonttools-4.66.1 idna-3.20 kiwisolver-1.5.1 librt-0.16.0 license-expression-30.4.4 markdown-it-py-4.2.0 matplotlib-3.11.2 mdurl-0.1.2 msgpack-1.2.3 mypy-2.4.0 mypy_extensions-1.1.0 numpy-2.5.3 packageurl-python-0.17.6 packaging-26.3 pathspec-1.1.1 pillow-12.3.0 pip-api-0.0.35 pip-audit-2.10.1 pip-requirements-parser-32.0.1 platformdirs-4.12.3 py-serializable-2.1.0 pygments-2.21.0 pyparsing-3.3.3 python-dateutil-2.9.0.post0 requests-2.34.2 rich-15.0.0 ruff-0.16.10 six-1.17.0 sortedcontainers-2.4.0 stevedore-5.9.1 tomli-2.4.1 tomli-w-1.2.0 types-PyYAML-6.0.12.20250915 typing_extensions-4.16.0 urllib3-2.8.0 zizmor-1.30.1
+python	Run ruff check scripts experiments	﻿2026-10-05T11:59:05.5590197Z ##[group]Run ruff check scripts experiments
+python	Run ruff check scripts experiments	2026-10-05T11:59:05.5590518Z ^[[36;1mruff check scripts experiments^[[0m
+python	Run ruff check scripts experiments	2026-10-05T11:59:05.5651029Z shell: /usr/bin/bash -e {0}
+python	Run ruff check scripts experiments	2026-10-05T11:59:05.5651250Z env:
+python	Run ruff check scripts experiments	2026-10-05T11:59:05.5651476Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run ruff check scripts experiments	2026-10-05T11:59:05.5651834Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+python	Run ruff check scripts experiments	2026-10-05T11:59:05.5652181Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run ruff check scripts experiments	2026-10-05T11:59:05.5652480Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run ruff check scripts experiments	2026-10-05T11:59:05.5652780Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run ruff check scripts experiments	2026-10-05T11:59:05.5653086Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+python	Run ruff check scripts experiments	2026-10-05T11:59:05.5653345Z ##[endgroup]
+python	Run ruff check scripts experiments	2026-10-05T11:59:05.5804797Z All checks passed!
+python	Run ruff format --check scripts experiments	﻿2026-10-05T11:59:05.5841882Z ##[group]Run ruff format --check scripts experiments
+python	Run ruff format --check scripts experiments	2026-10-05T11:59:05.5842228Z ^[[36;1mruff format --check scripts experiments^[[0m
+python	Run ruff format --check scripts experiments	2026-10-05T11:59:05.5900316Z shell: /usr/bin/bash -e {0}
+python	Run ruff format --check scripts experiments	2026-10-05T11:59:05.5900697Z env:
+python	Run ruff format --check scripts experiments	2026-10-05T11:59:05.5900920Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run ruff format --check scripts experiments	2026-10-05T11:59:05.5901255Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+python	Run ruff format --check scripts experiments	2026-10-05T11:59:05.5901590Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run ruff format --check scripts experiments	2026-10-05T11:59:05.5901885Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run ruff format --check scripts experiments	2026-10-05T11:59:05.5902178Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run ruff format --check scripts experiments	2026-10-05T11:59:05.5902472Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+python	Run ruff format --check scripts experiments	2026-10-05T11:59:05.5902726Z ##[endgroup]
+python	Run ruff format --check scripts experiments	2026-10-05T11:59:05.6048508Z 21 files already formatted
+python	Run mypy scripts	﻿2026-10-05T11:59:05.6084989Z ##[group]Run mypy scripts
+python	Run mypy scripts	2026-10-05T11:59:05.6085216Z ^[[36;1mmypy scripts^[[0m
+python	Run mypy scripts	2026-10-05T11:59:05.6144914Z shell: /usr/bin/bash -e {0}
+python	Run mypy scripts	2026-10-05T11:59:05.6145125Z env:
+python	Run mypy scripts	2026-10-05T11:59:05.6145344Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run mypy scripts	2026-10-05T11:59:05.6145689Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+python	Run mypy scripts	2026-10-05T11:59:05.6146035Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run mypy scripts	2026-10-05T11:59:05.6146349Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run mypy scripts	2026-10-05T11:59:05.6146642Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run mypy scripts	2026-10-05T11:59:05.6146944Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+python	Run mypy scripts	2026-10-05T11:59:05.6147203Z ##[endgroup]
+python	Run mypy scripts	2026-10-05T11:59:09.1337753Z Success: no issues found in 16 source files
+python	Run bandit -r scripts experiments -q	﻿2026-10-05T11:59:09.2122311Z ##[group]Run bandit -r scripts experiments -q
+python	Run bandit -r scripts experiments -q	2026-10-05T11:59:09.2122639Z ^[[36;1mbandit -r scripts experiments -q^[[0m
+python	Run bandit -r scripts experiments -q	2026-10-05T11:59:09.2177583Z shell: /usr/bin/bash -e {0}
+python	Run bandit -r scripts experiments -q	2026-10-05T11:59:09.2177786Z env:
+python	Run bandit -r scripts experiments -q	2026-10-05T11:59:09.2178009Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run bandit -r scripts experiments -q	2026-10-05T11:59:09.2178486Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+python	Run bandit -r scripts experiments -q	2026-10-05T11:59:09.2178817Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run bandit -r scripts experiments -q	2026-10-05T11:59:09.2179121Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run bandit -r scripts experiments -q	2026-10-05T11:59:09.2179422Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run bandit -r scripts experiments -q	2026-10-05T11:59:09.2179715Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+python	Run bandit -r scripts experiments -q	2026-10-05T11:59:09.2179971Z ##[endgroup]
+python	Run bandit -r scripts experiments -q	2026-10-05T11:59:09.5276453Z [tester]	WARNING	nosec encountered (B603), but no failed test on file experiments/ci/run_smoke.py:19
+python	Run bandit -r scripts experiments -q	2026-10-05T11:59:09.5823421Z [tester]	WARNING	nosec encountered (B603), but no failed test on file scripts/check_pipeline_status.py:39
+python	Run python scripts/ci_checks.py	﻿2026-10-05T11:59:09.7169048Z ##[group]Run python scripts/ci_checks.py
+python	Run python scripts/ci_checks.py	2026-10-05T11:59:09.7169538Z ^[[36;1mpython scripts/ci_checks.py^[[0m
+python	Run python scripts/ci_checks.py	2026-10-05T11:59:09.7237969Z shell: /usr/bin/bash -e {0}
+python	Run python scripts/ci_checks.py	2026-10-05T11:59:09.7238492Z env:
+python	Run python scripts/ci_checks.py	2026-10-05T11:59:09.7238849Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run python scripts/ci_checks.py	2026-10-05T11:59:09.7239428Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+python	Run python scripts/ci_checks.py	2026-10-05T11:59:09.7239964Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run python scripts/ci_checks.py	2026-10-05T11:59:09.7240532Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run python scripts/ci_checks.py	2026-10-05T11:59:09.7240843Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run python scripts/ci_checks.py	2026-10-05T11:59:09.7241129Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+python	Run python scripts/ci_checks.py	2026-10-05T11:59:09.7241386Z ##[endgroup]
+python	Run python scripts/ci_checks.py	2026-10-05T11:59:09.8592861Z Workflow policies, source line limits, and local documentation links passed
+python	Run python -m unittest discover -s scripts -v	﻿2026-10-05T11:59:09.8863491Z ##[group]Run python -m unittest discover -s scripts -v
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:09.8863839Z ^[[36;1mpython -m unittest discover -s scripts -v^[[0m
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:09.8920221Z shell: /usr/bin/bash -e {0}
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:09.8920436Z env:
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:09.8920658Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:09.8921008Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:09.8921347Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:09.8921841Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:09.8922141Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:09.8922444Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:09.8922700Z ##[endgroup]
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.8590354Z test_clean_graph_is_accepted (test_audit_dotnet.AuditTests.test_clean_graph_is_accepted) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.8591445Z test_incomplete_audit_is_rejected (test_audit_dotnet.AuditTests.test_incomplete_audit_is_rejected) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.8592595Z test_transitive_advisories_fail_the_audit (test_audit_dotnet.AuditTests.test_transitive_advisories_fail_the_audit) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.8642673Z test_complete_current_run (test_benchmark_ci.ArtifactTests.test_complete_current_run) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9540903Z test_different_merge_trees_are_rejected (test_benchmark_ci.ArtifactTests.test_different_merge_trees_are_rejected) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9572711Z test_extra_old_artifacts_are_rejected (test_benchmark_ci.ArtifactTests.test_extra_old_artifacts_are_rejected) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9601799Z test_missing_artifact_fails_even_when_other_tables_are_valid (test_benchmark_ci.ArtifactTests.test_missing_artifact_fails_even_when_other_tables_are_valid) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9649133Z test_missing_storage_variant_fails_even_with_valid_baselines (test_benchmark_ci.ArtifactTests.test_missing_storage_variant_fails_even_with_valid_baselines) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9697415Z test_stale_result_is_not_a_substitute_for_a_failed_job (test_benchmark_ci.ArtifactTests.test_stale_result_is_not_a_substitute_for_a_failed_job) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9745495Z test_wrong_table_cannot_hide_behind_expected_filename (test_benchmark_ci.ArtifactTests.test_wrong_table_cannot_hide_behind_expected_filename) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9746657Z test_csharp_preserves_both_sqlite_providers (test_benchmark_ci.MatrixTests.test_csharp_preserves_both_sqlite_providers) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9747726Z test_default_matrix_preserves_twenty_tables (test_benchmark_ci.MatrixTests.test_default_matrix_preserves_twenty_tables) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9749029Z test_invalid_or_unbounded_inputs_fail_before_starting_jobs (test_benchmark_ci.MatrixTests.test_invalid_or_unbounded_inputs_fail_before_starting_jobs) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9750179Z test_matrix_cannot_exceed_github_job_limit (test_benchmark_ci.MatrixTests.test_matrix_cannot_exceed_github_job_limit) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9751071Z test_clear_differences (test_benchmark_report.ComparisonTests.test_clear_differences) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9752177Z test_doublets_are_compared_with_sqlite_of_the_same_durability (test_benchmark_report.ComparisonTests.test_doublets_are_compared_with_sqlite_of_the_same_durability) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9753513Z test_outlier_repetitions_do_not_hide_a_difference (test_benchmark_report.ComparisonTests.test_outlier_repetitions_do_not_hide_a_difference) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9754838Z test_overlapping_interquartile_ranges_are_not_a_difference (test_benchmark_report.ComparisonTests.test_overlapping_interquartile_ranges_are_not_a_difference) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9756213Z test_single_samples_within_noise_are_not_a_difference (test_benchmark_report.ComparisonTests.test_single_samples_within_noise_are_not_a_difference) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9757335Z test_system_data_sqlite_is_compared_with_the_matching_provider_storage (test_benchmark_report.ComparisonTests.test_system_data_sqlite_is_compared_with_the_matching_provider_storage) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9758631Z test_table_compares_every_operation_with_the_baseline (test_benchmark_report.ComparisonTests.test_table_compares_every_operation_with_the_baseline) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9760839Z test_duplicate_reports_are_rejected (test_benchmark_report.DocumentTests.test_duplicate_reports_are_rejected) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9763477Z test_empty_artifact_download_cannot_generate_a_successful_report (test_benchmark_report.DocumentTests.test_empty_artifact_download_cannot_generate_a_successful_report) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:10.9778690Z test_incomplete_and_nonfinite_measurements_are_rejected (test_benchmark_report.DocumentTests.test_incomplete_and_nonfinite_measurements_are_rejected) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0656798Z test_main_updates_readmes_and_writes_charts (test_benchmark_report.DocumentTests.test_main_updates_readmes_and_writes_charts) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0658431Z test_only_the_marked_section_is_replaced (test_benchmark_report.DocumentTests.test_only_the_marked_section_is_replaced) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0666063Z test_usage_starts_with_the_summary (test_benchmark_report.DocumentTests.test_usage_starts_with_the_summary) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0667298Z test_durations_keep_three_significant_digits (test_benchmark_report.FormattingTests.test_durations_keep_three_significant_digits) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0668870Z test_rounding_up_moves_to_the_next_unit_instead_of_an_exponent (test_benchmark_report.FormattingTests.test_rounding_up_moves_to_the_next_unit_instead_of_an_exponent) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0670080Z test_russian_plurals (test_benchmark_report.FormattingTests.test_russian_plurals) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0670780Z test_sizes (test_benchmark_report.FormattingTests.test_sizes) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0671972Z test_charts_are_linked_per_category_language_and_bits (test_benchmark_report.SectionTests.test_charts_are_linked_per_category_language_and_bits) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0673245Z test_hierarchy_is_category_language_bits_size (test_benchmark_report.SectionTests.test_hierarchy_is_category_language_bits_size) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0684929Z test_missing_groups_and_provenance (test_benchmark_report.SectionTests.test_missing_groups_and_provenance) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0685842Z test_empty_status_is_an_error (test_check_pipeline_status.StatusTests.test_empty_status_is_an_error) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0686934Z test_only_proven_superseded_cancellable_readers_are_accepted (test_check_pipeline_status.StatusTests.test_only_proven_superseded_cancellable_readers_are_accepted) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0688312Z test_success_and_intentional_skips (test_check_pipeline_status.StatusTests.test_success_and_intentional_skips) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0689355Z test_timeout_or_failure_fails_current_run (test_check_pipeline_status.StatusTests.test_timeout_or_failure_fails_current_run) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0690376Z test_yaml_boolean_cancellation_policy (test_check_pipeline_status.StatusTests.test_yaml_boolean_cancellation_policy) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0691401Z test_explicit_false_does_not_suppress_failures (test_ci_checks.PolicyTests.test_explicit_false_does_not_suppress_failures) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0692373Z test_failure_suppression_is_rejected (test_ci_checks.PolicyTests.test_failure_suppression_is_rejected) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0693280Z test_local_missing_link_is_a_failure (test_ci_checks.PolicyTests.test_local_missing_link_is_a_failure) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0694194Z test_matrix_runner_aliases_are_checked (test_ci_checks.PolicyTests.test_matrix_runner_aliases_are_checked) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0695165Z test_privileged_event_rejects_checkout (test_ci_checks.PolicyTests.test_privileged_event_rejects_checkout) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0696019Z test_read_only_workflow (test_ci_checks.PolicyTests.test_read_only_workflow) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0697012Z test_writer_cannot_be_cancelled_or_race_another_workflow (test_ci_checks.PolicyTests.test_writer_cannot_be_cancelled_or_race_another_workflow) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0698632Z test_missing_tool_is_an_error (test_ci_process.ExecutableTests.test_missing_tool_is_an_error) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.0699469Z test_resolved_path_is_used (test_ci_process.ExecutableTests.test_resolved_path_is_used) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.3507998Z test_lost_race_refetches_and_preserves_intervening_commit (test_publish_benchmarks.PublicationTests.test_lost_race_refetches_and_preserves_intervening_commit) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.4326656Z test_new_source_requires_new_measurements (test_publish_benchmarks.PublicationTests.test_new_source_requires_new_measurements) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.4328338Z test_only_non_fast_forward_can_be_retried (test_publish_benchmarks.PushTests.test_only_non_fast_forward_can_be_retried) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.4330502Z test_non_mapping_is_rejected (test_workflow_yaml.WorkflowYamlTests.test_non_mapping_is_rejected) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.4332352Z test_python_object_tags_are_rejected (test_workflow_yaml.WorkflowYamlTests.test_python_object_tags_are_rejected) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.4336739Z test_quoted_events_and_boolean_policy (test_workflow_yaml.WorkflowYamlTests.test_quoted_events_and_boolean_policy) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.4344133Z test_unquoted_privileged_event_is_still_checked (test_workflow_yaml.WorkflowYamlTests.test_unquoted_privileged_event_is_still_checked) ... ok
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.4344775Z 
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.4344987Z ----------------------------------------------------------------------
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.4345402Z Ran 55 tests in 1.576s
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.4345585Z 
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.4345664Z OK
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.4345968Z test: superseded reader cancelled as configured
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.4346335Z test: superseded reader cancelled as configured
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.4346797Z Publication lost a branch race on attempt 1; fetching and regenerating
+python	Run python -m unittest discover -s scripts -v	2026-10-05T11:59:12.4347259Z Published benchmark report on attempt 2
+python	Run npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md cpp/README.md	﻿2026-10-05T11:59:12.5156407Z ##[group]Run npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md cpp/README.md
+python	Run npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md cpp/README.md	2026-10-05T11:59:12.5156997Z ^[[36;1mnpx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md cpp/README.md^[[0m
+python	Run npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md cpp/README.md	2026-10-05T11:59:12.5212033Z shell: /usr/bin/bash -e {0}
+python	Run npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md cpp/README.md	2026-10-05T11:59:12.5212247Z env:
+python	Run npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md cpp/README.md	2026-10-05T11:59:12.5212467Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md cpp/README.md	2026-10-05T11:59:12.5212824Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+python	Run npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md cpp/README.md	2026-10-05T11:59:12.5213156Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md cpp/README.md	2026-10-05T11:59:12.5213467Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md cpp/README.md	2026-10-05T11:59:12.5213764Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Run npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md cpp/README.md	2026-10-05T11:59:12.5214055Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+python	Run npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md cpp/README.md	2026-10-05T11:59:12.5214312Z ##[endgroup]
+python	Scan maintained source for secrets	﻿2026-10-05T11:59:20.7942739Z ##[group]Run git ls-files -z -- ':!dev/log/**' ':!docs/benchmarks/**' ':!*.png' | xargs -0 npx --yes -p secretlint@13.0.7 -p @secretlint/secretlint-rule-preset-recommend@13.0.7 secretlint
+python	Scan maintained source for secrets	2026-10-05T11:59:20.7943776Z ^[[36;1mgit ls-files -z -- ':!dev/log/**' ':!docs/benchmarks/**' ':!*.png' | xargs -0 npx --yes -p secretlint@13.0.7 -p @secretlint/secretlint-rule-preset-recommend@13.0.7 secretlint^[[0m
+python	Scan maintained source for secrets	2026-10-05T11:59:20.8001502Z shell: /usr/bin/bash -e {0}
+python	Scan maintained source for secrets	2026-10-05T11:59:20.8001713Z env:
+python	Scan maintained source for secrets	2026-10-05T11:59:20.8001931Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Scan maintained source for secrets	2026-10-05T11:59:20.8002290Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+python	Scan maintained source for secrets	2026-10-05T11:59:20.8002660Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Scan maintained source for secrets	2026-10-05T11:59:20.8002968Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Scan maintained source for secrets	2026-10-05T11:59:20.8003272Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+python	Scan maintained source for secrets	2026-10-05T11:59:20.8003575Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+python	Scan maintained source for secrets	2026-10-05T11:59:20.8003872Z ##[endgroup]
+python	Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	﻿2026-10-05T11:59:23.6472836Z Post job cleanup.
+python	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	﻿2026-10-05T11:59:23.7509200Z Post job cleanup.
+python	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:23.8222852Z [command]/usr/bin/git version
+python	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:23.8257879Z git version 2.55.0
+python	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:23.8287928Z Temporarily overriding HOME='/home/runner/work/_temp/26d1135f-893b-4f37-ad52-0ce7ad98cb1d' before making global git config changes
+python	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:23.8289445Z Adding repository directory to the temporary git global config as a safe directory
+python	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:23.8292879Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+python	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:23.8320377Z Removing SSH command configuration
+python	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:23.8325930Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+python	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:23.8354985Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+python	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:23.8559629Z Removing HTTP extra header
+python	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:23.8564402Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+python	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:23.8610566Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+python	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:23.8829734Z Removing includeIf entries pointing to credentials config files
+python	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:23.8836459Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+python	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:23.8870456Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+python	Complete job	﻿2026-10-05T11:59:23.9215124Z Cleaning up orphan processes
+Pipeline Status	Set up job	﻿2026-10-05T11:59:29.5580127Z Current runner version: '2.337.0'
+Pipeline Status	Set up job	2026-10-05T11:59:29.5598374Z ##[group]Runner Image Provisioner
+Pipeline Status	Set up job	2026-10-05T11:59:29.5599229Z Hosted Compute Agent
+Pipeline Status	Set up job	2026-10-05T11:59:29.5599696Z Version: 20260901.588
+Pipeline Status	Set up job	2026-10-05T11:59:29.5600185Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+Pipeline Status	Set up job	2026-10-05T11:59:29.5600870Z Build Date: 2026-09-01T19:56:44Z
+Pipeline Status	Set up job	2026-10-05T11:59:29.5601749Z Worker ID: {220f5083-010e-495a-aefe-a850450fedea}
+Pipeline Status	Set up job	2026-10-05T11:59:29.5602317Z Azure Region: centralus
+Pipeline Status	Set up job	2026-10-05T11:59:29.5602804Z ##[endgroup]
+Pipeline Status	Set up job	2026-10-05T11:59:29.5603878Z ##[group]Operating System
+Pipeline Status	Set up job	2026-10-05T11:59:29.5604381Z Ubuntu
+Pipeline Status	Set up job	2026-10-05T11:59:29.5604828Z 24.04.5
+Pipeline Status	Set up job	2026-10-05T11:59:29.5605322Z LTS
+Pipeline Status	Set up job	2026-10-05T11:59:29.5605888Z ##[endgroup]
+Pipeline Status	Set up job	2026-10-05T11:59:29.5606435Z ##[group]Runner Image
+Pipeline Status	Set up job	2026-10-05T11:59:29.5607101Z Image: ubuntu-24.04
+Pipeline Status	Set up job	2026-10-05T11:59:29.5607705Z Version: 20260927.320.1
+Pipeline Status	Set up job	2026-10-05T11:59:29.5608955Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+Pipeline Status	Set up job	2026-10-05T11:59:29.5611011Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+Pipeline Status	Set up job	2026-10-05T11:59:29.5612552Z ##[endgroup]
+Pipeline Status	Set up job	2026-10-05T11:59:29.5613864Z ##[group]GITHUB_TOKEN Permissions
+Pipeline Status	Set up job	2026-10-05T11:59:29.5616309Z Contents: read
+Pipeline Status	Set up job	2026-10-05T11:59:29.5617003Z Metadata: read
+Pipeline Status	Set up job	2026-10-05T11:59:29.5617681Z ##[endgroup]
+Pipeline Status	Set up job	2026-10-05T11:59:29.5619733Z Secret source: Actions
+Pipeline Status	Set up job	2026-10-05T11:59:29.5620804Z Cache mode: write
+Pipeline Status	Set up job	2026-10-05T11:59:29.5622124Z Prepare workflow directory
+Pipeline Status	Set up job	2026-10-05T11:59:29.5948900Z Prepare all required actions
+Pipeline Status	Set up job	2026-10-05T11:59:29.5988991Z Getting action download info
+Pipeline Status	Set up job	2026-10-05T11:59:29.8290265Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+Pipeline Status	Set up job	2026-10-05T11:59:29.9207926Z Download action repository 'actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97' (SHA:5fda3b95a4ea91299a34e894583c3862153e4b97)
+Pipeline Status	Set up job	2026-10-05T11:59:30.0809376Z Complete job name: Pipeline Status
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	﻿2026-10-05T11:59:30.1357153Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.1358005Z with:
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.1358473Z   persist-credentials: false
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.1359054Z   repository: linksplatform/Comparisons.SQLiteVSDoublets
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.1362494Z   token: ***
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.1362936Z   ssh-strict: true
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.1363361Z   ssh-user: git
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.1363977Z   clean: true
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.1364383Z   sparse-checkout-cone-mode: true
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.1364930Z   fetch-depth: 1
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.1365325Z   fetch-tags: false
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.1365746Z   show-progress: true
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.1366154Z   lfs: false
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.1366525Z   submodules: false
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.1366972Z   set-safe-directory: true
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.1367444Z   allow-unsafe-pr-checkout: false
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.1368063Z ##[endgroup]
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2207136Z Syncing repository: linksplatform/Comparisons.SQLiteVSDoublets
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2208804Z ##[group]Getting Git version info
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2209691Z Working directory is '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2210677Z [command]/usr/bin/git version
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2322606Z git version 2.55.0
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2389424Z ##[endgroup]
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2393883Z Temporarily overriding HOME='/home/runner/work/_temp/ba4a4235-5f50-4871-87e0-39e0f08eba54' before making global git config changes
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2395297Z Adding repository directory to the temporary git global config as a safe directory
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2396640Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2398815Z Deleting the contents of '/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets'
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2400157Z ##[group]Determining repository object format
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2401163Z ##[endgroup]
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2402577Z ##[group]Initializing the repository
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2403410Z [command]/usr/bin/git init /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2477233Z hint: Using 'master' as the name for the initial branch. This default branch name
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2478828Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2479901Z hint: to use in all of your new repositories, which will suppress this warning,
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2480904Z hint: call:
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2481688Z hint:
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2482446Z hint: 	git config --global init.defaultBranch <name>
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2483230Z hint:
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2484076Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2485168Z hint: 'development'. The just-created branch can be renamed via this command:
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2486057Z hint:
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2486729Z hint: 	git branch -m <name>
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2487396Z hint:
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2488007Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2489134Z Initialized empty Git repository in /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2490972Z [command]/usr/bin/git remote add origin https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2542233Z ##[endgroup]
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2543354Z ##[group]Disabling automatic garbage collection
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2544516Z [command]/usr/bin/git config --local gc.auto 0
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2569619Z ##[endgroup]
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2570765Z ##[group]Setting up auth
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2572002Z Removing SSH command configuration
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2574820Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2598631Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2888794Z Removing HTTP extra header
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2889964Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.2916781Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.3065353Z Removing includeIf entries pointing to credentials config files
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.3068810Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.3091099Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.3244227Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-c9f2f3a4-afa7-450c-8bd0-d39898df9e83.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.3270239Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path /home/runner/work/_temp/git-credentials-c9f2f3a4-afa7-450c-8bd0-d39898df9e83.config
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.3299103Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-c9f2f3a4-afa7-450c-8bd0-d39898df9e83.config
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.3332505Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-c9f2f3a4-afa7-450c-8bd0-d39898df9e83.config
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.3357516Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-c9f2f3a4-afa7-450c-8bd0-d39898df9e83.config
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.3379149Z ##[endgroup]
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.3379867Z ##[group]Fetching the repository
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:30.3384984Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +9edb881b143e98ac544f0b062eabd5d072db94ac:refs/remotes/pull/111/merge
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.4538427Z From https://github.com/linksplatform/Comparisons.SQLiteVSDoublets
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.4540793Z  * [new ref]         9edb881b143e98ac544f0b062eabd5d072db94ac -> pull/111/merge
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.4545683Z ##[endgroup]
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.4547622Z ##[group]Determining the checkout info
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.4549634Z ##[endgroup]
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.4550911Z [command]/usr/bin/git sparse-checkout disable
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.4595977Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.4622070Z ##[group]Checking out the ref
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.4624334Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/111/merge
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6305774Z Note: switching to 'refs/remotes/pull/111/merge'.
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6307103Z 
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6307951Z You are in 'detached HEAD' state. You can look around, make experimental
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6309691Z changes and commit them, and you can discard any commits you make in this
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6311577Z state without impacting any branches by switching back to a branch.
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6312565Z 
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6313384Z If you want to create a new branch to retain commits you create, you may
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6315481Z do so (now or later) by using -c with the switch command. Example:
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6316544Z 
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6317100Z   git switch -c <new-branch-name>
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6318211Z 
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6318969Z Or undo this operation with:
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6320094Z 
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6320665Z   git switch -
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6321600Z 
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6322547Z Turn off this advice by setting config variable advice.detachedHead to false
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6323724Z 
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6325081Z HEAD is now at 9edb881 Merge 7d7f9bc4a88b48297f084aa29830395776a597ea into 669369c6e1da777aa71042903a8edba1994deb26
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6330066Z ##[endgroup]
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6352705Z [command]/usr/bin/git log -1 --format=%H
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6372902Z 9edb881b143e98ac544f0b062eabd5d072db94ac
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6381194Z ##[group]Removing auth
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6383314Z Removing SSH command configuration
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6385837Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6411772Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6572947Z Removing HTTP extra header
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6575835Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6617378Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6749717Z Removing includeIf entries pointing to credentials config files
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6751854Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6770018Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6770923Z includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6771876Z includeif.gitdir:/github/workspace/.git.path
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6772361Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6775992Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6793001Z /home/runner/work/_temp/git-credentials-c9f2f3a4-afa7-450c-8bd0-d39898df9e83.config
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6799456Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-c9f2f3a4\-afa7\-450c\-8bd0\-d39898df9e83\.config
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6825544Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6840829Z /home/runner/work/_temp/git-credentials-c9f2f3a4-afa7-450c-8bd0-d39898df9e83.config
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6847444Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-c9f2f3a4\-afa7\-450c\-8bd0\-d39898df9e83\.config
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6873128Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6889323Z /github/runner_temp/git-credentials-c9f2f3a4-afa7-450c-8bd0-d39898df9e83.config
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6895106Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-c9f2f3a4\-afa7\-450c\-8bd0\-d39898df9e83\.config
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6919084Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6936745Z /github/runner_temp/git-credentials-c9f2f3a4-afa7-450c-8bd0-d39898df9e83.config
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.6947929Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-c9f2f3a4\-afa7\-450c\-8bd0\-d39898df9e83\.config
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.7021870Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.7153496Z Removing credentials config '/home/runner/work/_temp/git-credentials-c9f2f3a4-afa7-450c-8bd0-d39898df9e83.config'
+Pipeline Status	Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:31.7161689Z ##[endgroup]
+Pipeline Status	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	﻿2026-10-05T11:59:31.7355465Z ##[group]Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+Pipeline Status	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:59:31.7355903Z with:
+Pipeline Status	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:59:31.7356150Z   python-version: 3.13
+Pipeline Status	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:59:31.7356393Z   check-latest: false
+Pipeline Status	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:59:31.7358346Z   token: ***
+Pipeline Status	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:59:31.7358636Z   update-environment: true
+Pipeline Status	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:59:31.7358977Z   allow-prereleases: false
+Pipeline Status	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:59:31.7359272Z   freethreaded: false
+Pipeline Status	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:59:31.7359536Z ##[endgroup]
+Pipeline Status	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:59:31.8277841Z ##[group]Installed versions
+Pipeline Status	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:59:31.8338236Z Successfully set up CPython (3.13.15)
+Pipeline Status	Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	2026-10-05T11:59:31.8339094Z ##[endgroup]
+Pipeline Status	Run python -m pip install PyYAML==6.0.3	﻿2026-10-05T11:59:31.8441906Z ##[group]Run python -m pip install PyYAML==6.0.3
+Pipeline Status	Run python -m pip install PyYAML==6.0.3	2026-10-05T11:59:31.8442617Z ^[[36;1mpython -m pip install PyYAML==6.0.3^[[0m
+Pipeline Status	Run python -m pip install PyYAML==6.0.3	2026-10-05T11:59:31.8673513Z shell: /usr/bin/bash -e {0}
+Pipeline Status	Run python -m pip install PyYAML==6.0.3	2026-10-05T11:59:31.8673888Z env:
+Pipeline Status	Run python -m pip install PyYAML==6.0.3	2026-10-05T11:59:31.8674224Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+Pipeline Status	Run python -m pip install PyYAML==6.0.3	2026-10-05T11:59:31.8674718Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+Pipeline Status	Run python -m pip install PyYAML==6.0.3	2026-10-05T11:59:31.8675154Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+Pipeline Status	Run python -m pip install PyYAML==6.0.3	2026-10-05T11:59:31.8675931Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+Pipeline Status	Run python -m pip install PyYAML==6.0.3	2026-10-05T11:59:31.8676344Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+Pipeline Status	Run python -m pip install PyYAML==6.0.3	2026-10-05T11:59:31.8676750Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+Pipeline Status	Run python -m pip install PyYAML==6.0.3	2026-10-05T11:59:31.8677127Z ##[endgroup]
+Pipeline Status	Run python -m pip install PyYAML==6.0.3	2026-10-05T11:59:32.6593782Z Collecting PyYAML==6.0.3
+Pipeline Status	Run python -m pip install PyYAML==6.0.3	2026-10-05T11:59:32.7452100Z   Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Pipeline Status	Run python -m pip install PyYAML==6.0.3	2026-10-05T11:59:32.7586554Z Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (801 kB)
+Pipeline Status	Run python -m pip install PyYAML==6.0.3	2026-10-05T11:59:32.8468678Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 801.6/801.6 kB 11.2 MB/s  0:00:00
+Pipeline Status	Run python -m pip install PyYAML==6.0.3	2026-10-05T11:59:32.8731538Z Installing collected packages: PyYAML
+Pipeline Status	Run python -m pip install PyYAML==6.0.3	2026-10-05T11:59:32.9148416Z Successfully installed PyYAML-6.0.3
+Pipeline Status	Check terminal status	﻿2026-10-05T11:59:32.9696177Z ##[group]Run python scripts/check_pipeline_status.py
+Pipeline Status	Check terminal status	2026-10-05T11:59:32.9696594Z ^[[36;1mpython scripts/check_pipeline_status.py^[[0m
+Pipeline Status	Check terminal status	2026-10-05T11:59:32.9735539Z shell: /usr/bin/bash -e {0}
+Pipeline Status	Check terminal status	2026-10-05T11:59:32.9735887Z env:
+Pipeline Status	Check terminal status	2026-10-05T11:59:32.9736197Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+Pipeline Status	Check terminal status	2026-10-05T11:59:32.9736634Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+Pipeline Status	Check terminal status	2026-10-05T11:59:32.9737113Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+Pipeline Status	Check terminal status	2026-10-05T11:59:32.9737533Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+Pipeline Status	Check terminal status	2026-10-05T11:59:32.9737898Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+Pipeline Status	Check terminal status	2026-10-05T11:59:32.9738286Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+Pipeline Status	Check terminal status	2026-10-05T11:59:32.9738807Z   NEEDS_JSON: {
+Pipeline Status	Check terminal status	  "workflows": {
+Pipeline Status	Check terminal status	    "result": "success",
+Pipeline Status	Check terminal status	    "outputs": {}
+Pipeline Status	Check terminal status	  },
+Pipeline Status	Check terminal status	  "python": {
+Pipeline Status	Check terminal status	    "result": "success",
+Pipeline Status	Check terminal status	    "outputs": {}
+Pipeline Status	Check terminal status	  }
+Pipeline Status	Check terminal status	}
+Pipeline Status	Check terminal status	2026-10-05T11:59:32.9739343Z   WORKFLOW_FILE: .github/workflows/quality.yml
+Pipeline Status	Check terminal status	2026-10-05T11:59:32.9739716Z   RUN_REF: refs/pull/111/merge
+Pipeline Status	Check terminal status	2026-10-05T11:59:32.9740014Z   RUN_SHA: 9edb881b143e98ac544f0b062eabd5d072db94ac
+Pipeline Status	Check terminal status	2026-10-05T11:59:32.9740305Z ##[endgroup]
+Pipeline Status	Check terminal status	2026-10-05T11:59:33.0193902Z Pipeline passed
+Pipeline Status	Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97	﻿2026-10-05T11:59:33.0355131Z Post job cleanup.
+Pipeline Status	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	﻿2026-10-05T11:59:33.1427496Z Post job cleanup.
+Pipeline Status	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:33.2111862Z [command]/usr/bin/git version
+Pipeline Status	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:33.2138630Z git version 2.55.0
+Pipeline Status	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:33.2161413Z Temporarily overriding HOME='/home/runner/work/_temp/e9699ec0-50b7-4e42-84be-a1a4e590d896' before making global git config changes
+Pipeline Status	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:33.2162645Z Adding repository directory to the temporary git global config as a safe directory
+Pipeline Status	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:33.2165645Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Comparisons.SQLiteVSDoublets/Comparisons.SQLiteVSDoublets
+Pipeline Status	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:33.2190296Z Removing SSH command configuration
+Pipeline Status	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:33.2195425Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Pipeline Status	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:33.2222468Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Pipeline Status	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:33.2407170Z Removing HTTP extra header
+Pipeline Status	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:33.2413303Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Pipeline Status	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:33.2433971Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Pipeline Status	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:33.2597221Z Removing includeIf entries pointing to credentials config files
+Pipeline Status	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:33.2602475Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Pipeline Status	Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1	2026-10-05T11:59:33.2626303Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Pipeline Status	Complete job	﻿2026-10-05T11:59:33.2898965Z Cleaning up orphan processes

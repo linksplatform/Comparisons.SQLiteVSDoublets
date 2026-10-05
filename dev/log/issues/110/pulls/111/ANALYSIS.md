@@ -68,6 +68,9 @@ the semantic comparison below; snapshot archives preserve the complete source.
 | Oct 5, investigation | Archive logs/templates, reproduce false report success and upstream growth, implement regression checks and workflow changes, and run local validation before pushing. |
 | Oct 5, 11:24:41 | First source revision `73c7cff` runs hosted CI: all three OS matrices, eight benchmark cells/report, dependency audit and workflow security pass. Quality fails on a documentation link whose evidence target had not yet been committed (`quality-37302748264.log:716`). |
 | Oct 5, 11:25–11:26 | CodeFactor reports validator complexity and two B506 warnings. Codacy's public API supplies all 31 findings despite the GitHub check containing no annotations; browser snapshots and API JSON are preserved. |
+| Oct 5, 11:49:43 | Revision `ffd5966` includes the archive. Rust, C#, dependency audits and benchmarks pass. Quality run 37305441174 fails on two B603 warnings; Codacy reports the same two locations and CodeFactor passes. |
+| Oct 5, 11:58:24 | Revision `7d7f9bc` adds narrow explanations for the two fixed Git queries. Python 3.13.15 local checks pass, including all 55 tests; the fresh hosted quality, CodeFactor and Codacy checks pass. |
+| Oct 5, 12:08:22 | Revision `0dba0f5` separates nested Git-output parsing after successful checks exposed two spurious unused-annotation warnings. A three-case Bandit probe reproduces the warning and verifies the workaround; confirmation and a code-fix suggestion are posted on existing upstream issue 1041. |
 
 ## Root causes and solution choices
 
@@ -151,6 +154,12 @@ and enable GitHub auto-merge only for patch/minor updates. Pin its Node 24 v3
 revision. The privileged metadata workflow checks out and executes no PR code.
 The existing Dependabot token fallback is retained. Its writer group matches
 benchmark publication. No title-regex parser remains.
+
+Fresh PR logs still run the old auto-merge action from the default branch:
+`37306375540.log:189` records its human-author warning. `pull_request_target`
+intentionally loads the base-branch workflow, so a PR cannot replace privileged
+automation before its changes merge. The new metadata-only job is checked by
+workflow/security policy checks; human-author skips take effect after merging.
 
 ### 5. Missing local/CI policy and dependency coverage
 
@@ -356,3 +365,54 @@ allow a proven superseded reader. Both now pass. Safe-loader tests additionally
 reject object tags and non-mapping workflow documents. `manifest.json` records
 SHA-256/size for each collected file; `diagnostic-index.json` retains diagnostic
 paths and original line numbers, generated in chunks of at most 1,500 lines.
+
+## Final verification and review
+
+All five maintained workflows pass on implementation revision
+`0dba0f522015bd5200c885d4267f96f4b510cef6`: quality, Rust and C# on all
+three operating systems, dependency audit, and all eight benchmark cells plus
+the complete report. Codacy's latest-head check also passes. CodeFactor's PR
+page reports no issues (`research/codefactor-final-snapshot.txt`); its last
+posted GitHub check is successful on `7d7f9bc`, and it has not posted a new
+GitHub check for `0dba0f5`. GitHub reports the PR merge state as CLEAN.
+Main-only publication
+is intentionally skipped on the pull request. `github/implementation-final-*`
+preserves exact check conclusions, run timestamps/SHAs and ready-for-review
+state; the final evidence-only revision is checked again before completion.
+
+The remaining B603 findings in `quality-37305441174.log:717–771` identify
+`experiments/ci/run_smoke.py:19` and `scripts/check_pipeline_status.py:39`.
+Both invoke resolved Git executables with fixed read-only commands and separate
+arguments. Per-call B603 explanations address these findings without changing
+the commands or disabling the rule elsewhere. Reproduction on Python 3.13.15
+and 3.14.7 gives the same two findings: the earlier local result was stale,
+not an analyzer version or recursive-scan defect. `python313-final.log` records
+the passing combined lint, format, type, security, policy and 55-test checks.
+
+The passing `37306378854.log:722–723` scan then exposed two false unused-nosec
+warnings: Bandit visits both the subprocess and its chained `.strip()`/`.split()`
+call, applying the same line annotation to both. The correct B603 finding is
+suppressed, but the outer call emits a warning. The three-case
+`experiments/ci/bandit_nosec_probe.py` verifies the original finding, the spurious
+warning, and the warning-free separate-assignment workaround. The two production
+queries now separate output parsing; `python313-warning-cleanup.log` passes
+without scanner warnings. The existing [Bandit 1041 report](https://github.com/PyCQA/bandit/issues/1041#issuecomment-5994134386)
+has the current-version reproduction, workaround, and a proposed per-file
+aggregation fix, avoiding a duplicate issue.
+
+`validation/main-result-snapshot` preserves all 20 historical checked-in
+measurements at the merged default branch. `validation/hosted-smoke-results`
+preserves all eight real hosted artifacts; `hosted-artifact-verification.log`
+validates their exact source SHA and common tree. The measured PR merge commit
+`9edb881` has parents `669369c` (main) and `7d7f9bc` (PR head), recorded in
+`github/implementation-measured-merge.json`. This distinguishes GitHub's synthetic
+measured merge from the PR-head SHA stored in workflow run metadata.
+
+GitHub's complete PR-diff endpoint returns HTTP 406 above 300 changed files
+because the immutable evidence archive exceeds that limit. The failure is
+preserved in `github/pr-final-diff.error.txt`; review uses paginated
+`github/pr-files.json` and `github/pr-final-source.diff`, generated from the
+merged default branch with the evidence directory excluded. The source diff
+was read in bounded chunks. The removed C++ automation had no build target;
+working Rust/C# comparisons, provider checks, historical reports and existing
+memory-growth workarounds remain present.

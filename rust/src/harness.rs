@@ -171,9 +171,9 @@ pub fn links_lifecycle<T: LinkReference, S: LinksStorage<T>>(
         storage.transaction(|links| {
             let mut tally = Tally::default();
             for id in scattered(n) {
-                let (from, to) = link(id);
-                links.update(int(id), int(to), int(from));
-                tally.add(dataset::link_checksum(id, to, from));
+                let (new_to, new_from) = link(id);
+                links.update(int(id), int(new_from), int(new_to));
+                tally.add(dataset::link_checksum(id, new_from, new_to));
             }
             tally
         })

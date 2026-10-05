@@ -17,7 +17,8 @@ var (category, bits, sizeText) = (args[0], args[1], args[2]);
 var options = args[3..].Chunk(2).ToDictionary(pair => pair[0].TrimStart('-'), pair => pair[1]);
 static ulong Number(string text) => ulong.Parse(text.Replace("_", ""));
 var size = Number(sizeText);
-var work = options.TryGetValue("work", out var workText) ? Number(workText) : category == "links" ? LinksWork : ObjectsWork;
+var defaultWork = category == "links" ? LinksWork : ObjectsWork;
+var work = options.TryGetValue("work", out var workText) ? Number(workText) : defaultWork;
 var repetitions = options.TryGetValue("repetitions", out var count)
     ? int.Parse(count)
     : (int)Math.Clamp(work / size, 1, MaxRepetitions);

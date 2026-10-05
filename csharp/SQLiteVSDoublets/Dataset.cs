@@ -39,7 +39,7 @@ public static class Dataset
         for (ulong i = 1; i <= n; i++)
         {
             var (from, to) = Link(i);
-            checksum += swapped ? LinkChecksum(i, to, from) : LinkChecksum(i, from, to);
+            checksum += LinkChecksum(i, swapped ? to : from, swapped ? from : to);
         }
         return checksum;
     }

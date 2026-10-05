@@ -41,7 +41,7 @@ public static class Harness
         "Doublets_Split_NonVolatile_Uncached",
     ];
 
-    public const ulong WarmUpSize = 10_000;
+    public static ulong WarmUpSize => 10_000;
 
     /// <summary>Count and order-sensitive checksum of the records an operation has seen.</summary>
     public record struct Tally(ulong Count, ulong Checksum)
@@ -143,9 +143,9 @@ public static class Harness
             var tally = new Tally();
             foreach (var id in Scattered(n))
             {
-                var (from, to) = Link(id);
-                storage.Update(Int(id), Int(to), Int(from));
-                tally.Add(LinkChecksum(id, to, from));
+                var (newTo, newFrom) = Link(id);
+                storage.Update(Int(id), Int(newFrom), Int(newTo));
+                tally.Add(LinkChecksum(id, newFrom, newTo));
             }
             return tally;
         }));
@@ -306,10 +306,10 @@ public static class Harness
     /// which makes every blog post creation linear in the number of stored posts;
     /// the AVL trees stay logarithmic (see experiments/csharp_objects_profile).
     /// </remarks>
-    public static ILinks<T> United<T>(IResizableDirectMemory memory, bool external = false) where T : struct, IBinaryInteger<T>, IUnsignedNumber<T>, IMinMaxValue<T> =>
+    public static ILinks<T> United<T>(IResizableDirectMemory memory, bool external) where T : struct, IBinaryInteger<T>, IUnsignedNumber<T>, IMinMaxValue<T> =>
         new UnitedMemoryLinks<T>(memory, UnitedMemoryLinks<T>.DefaultLinksSizeStep, new LinksConstants<T>(external), IndexTreeType.SizedAndThreadedAVLBalancedTree);
 
-    public static ILinks<T> Split<T>(IResizableDirectMemory data, IResizableDirectMemory index, bool external = false) where T : struct, IBinaryInteger<T>, IUnsignedNumber<T>, IMinMaxValue<T> =>
+    public static ILinks<T> Split<T>(IResizableDirectMemory data, IResizableDirectMemory index, bool external) where T : struct, IBinaryInteger<T>, IUnsignedNumber<T>, IMinMaxValue<T> =>
         new SplitMemoryLinks<T>(data, index, SplitMemoryLinks<T>.DefaultLinksSizeStep, new LinksConstants<T>(external));
 
     public static Measurement MeasureLinks<T>(string variant, ulong n, int repetitions, string directory)
@@ -319,10 +319,10 @@ public static class Harness
         {
             "SQLite_Memory" => _ => SQLiteLinks<T>.InMemory(),
             "SQLite_File" => dir => SQLiteLinks<T>.Open(File(dir, "links.db")),
-            "Doublets_United_Volatile" => _ => new DoubletsLinks<T>(United<T>(new HeapResizableDirectMemory())),
-            "Doublets_United_NonVolatile" => dir => new DoubletsLinks<T>(United<T>(Mapped(dir, "links.links"))),
-            "Doublets_Split_Volatile" => _ => new DoubletsLinks<T>(Split<T>(new HeapResizableDirectMemory(), new HeapResizableDirectMemory())),
-            "Doublets_Split_NonVolatile" => dir => new DoubletsLinks<T>(Split<T>(Mapped(dir, "data.links"), Mapped(dir, "index.links"))),
+            "Doublets_United_Volatile" => _ => new DoubletsLinks<T>(United<T>(new HeapResizableDirectMemory(), external: false)),
+            "Doublets_United_NonVolatile" => dir => new DoubletsLinks<T>(United<T>(Mapped(dir, "links.links"), external: false)),
+            "Doublets_Split_Volatile" => _ => new DoubletsLinks<T>(Split<T>(new HeapResizableDirectMemory(), new HeapResizableDirectMemory(), external: false)),
+            "Doublets_Split_NonVolatile" => dir => new DoubletsLinks<T>(Split<T>(Mapped(dir, "data.links"), Mapped(dir, "index.links"), external: false)),
             _ => throw new ArgumentException($"unknown links variant {variant}"),
         };
         return Measure(variant, n, repetitions, directory, open, LinksLifecycle);

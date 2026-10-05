@@ -126,7 +126,7 @@ public sealed class DoubletsLinks<T>(ILinks<T> links) : ILinksStorage<T>
         return _continue;
     }, query);
 
-    private static Link<T> Link(IList<T> link) => new(link[0], link[1], link[2]);
+    private static Link<T> Link(IList<T> values) => new(values[0], values[1], values[2]);
 
     public ulong Count() => ulong.CreateChecked(links.Count());
 

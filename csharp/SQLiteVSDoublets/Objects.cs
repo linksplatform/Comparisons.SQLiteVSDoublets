@@ -89,7 +89,6 @@ public sealed class DoubletsBlogPosts<T> : IBlogPostsStorage<T>
 {
     private readonly ILinks<T> _links;
     private readonly T _any;
-    private readonly T _unicodeSequence;
     private readonly T _title;
     private readonly T _content;
     private readonly T _publicationDate;
@@ -111,7 +110,7 @@ public sealed class DoubletsBlogPosts<T> : IBlogPostsStorage<T>
             return links.Update(marker, meaningRoot, marker);
         }
         var unicodeSymbol = Marker();
-        _unicodeSequence = Marker();
+        var unicodeSequence = Marker();
         _title = Marker();
         _content = Marker();
         _publicationDate = Marker();
@@ -123,12 +122,12 @@ public sealed class DoubletsBlogPosts<T> : IBlogPostsStorage<T>
             links,
             new CharToUnicodeSymbolConverter<T>(links, _addressToNumber, unicodeSymbol),
             new BalancedVariantConverter<T>(links),
-            _unicodeSequence);
+            unicodeSequence);
         IConverter<T, string> sequenceToString = new UnicodeSequenceToStringConverter<T>(
             links,
             new RightSequenceWalker<T>(links, new DefaultStack<T>(), unicodeSymbolMatcher.IsMatched),
             new UnicodeSymbolToCharConverter<T>(links, _numberToAddress, unicodeSymbolMatcher),
-            _unicodeSequence);
+            unicodeSequence);
         _stringToSequence = cacheSequences ? new CachingConverterDecorator<string, T>(stringToSequence) : stringToSequence;
         _sequenceToString = cacheSequences ? new CachingConverterDecorator<T, string>(sequenceToString) : sequenceToString;
     }

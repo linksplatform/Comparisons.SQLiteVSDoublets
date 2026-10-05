@@ -50,7 +50,7 @@ public class StoragesTests
     [Fact]
     public void SplitStoreKeepsLinksUpdatedToReferenceThemselves()
     {
-        using var links = new DoubletsLinks<uint>(Harness.Split<uint>(new HeapResizableDirectMemory(), new HeapResizableDirectMemory()));
+        using var links = new DoubletsLinks<uint>(Harness.Split<uint>(new HeapResizableDirectMemory(), new HeapResizableDirectMemory(), external: false));
         var point = links.Create(1, 1);
         var link = links.Create(point, 2);
         links.Update(point, point, point);

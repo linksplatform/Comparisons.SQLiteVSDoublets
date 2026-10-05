@@ -1,0 +1,4 @@
+---
+# Immutable downloaded logs and template snapshots are evidence, not maintained source.
+exclude_paths:
+  - 'dev/log/**'

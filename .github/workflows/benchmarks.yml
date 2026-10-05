@@ -1,0 +1,238 @@
+name: Benchmarks
+
+on:
+  push:
+    branches: [main]
+    paths: ['rust/**', 'csharp/**', 'scripts/**', 'pyproject.toml', '.github/actions/**', '.github/workflows/benchmarks.yml', '.markdownlint.json']
+  pull_request:
+    paths: ['rust/**', 'csharp/**', 'scripts/**', 'pyproject.toml', '.github/actions/**', '.github/workflows/benchmarks.yml', '.markdownlint.json']
+  workflow_dispatch:
+    inputs:
+      sizes:
+        description: JSON sizes (1..10,000,000; objects stop at 1,000,000)
+        default: '[100000, 1000000, 10000000]'
+      verbose:
+        description: Print artifact diagnostics and Rust backtraces
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+  SOURCE_SHA: ${{ github.sha }}
+
+jobs:
+  report-tests:
+    name: Report script tests and benchmark plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-report-tests
+      cancel-in-progress: true
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      sizes: ${{ steps.plan.outputs.sizes }}
+      tree: ${{ steps.plan.outputs.tree }}
+      base: ${{ steps.prepare.outputs.base-sha || github.sha }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/prepare-ci # zizmor: ignore[self-repository] actionlint 1.7.12 lacks $/ syntax
+        id: prepare
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.13'
+      - run: pip install -r scripts/requirements.txt PyYAML==6.0.3
+      - run: python -m unittest discover -s scripts -v
+      - run: npx --yes markdownlint-cli@0.49.1 README.md README.ru.md
+      - name: Validate sizes and emit matrix
+        id: plan
+        env:
+          SIZES: ${{ inputs.sizes || (github.event_name == 'pull_request' && '[1000]') || '[100000, 1000000, 10000000]' }}
+        run: |
+          matrix=$(python scripts/benchmark_ci.py matrix --sizes "$SIZES")
+          sizes=$(jq -c . <<< "$SIZES")
+          {
+            echo "matrix=$matrix"
+            echo "sizes=$sizes"
+            echo "tree=$(git rev-parse 'HEAD^{tree}')"
+          } >> "$GITHUB_OUTPUT"
+
+  benchmark:
+    name: ${{ matrix.language }} ${{ matrix.category }} ${{ matrix.bits }} bit ${{ matrix.size }}
+    needs: report-tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 355
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-${{ matrix.language }}-${{ matrix.category }}-${{ matrix.bits }}-${{ matrix.size }}
+      cancel-in-progress: true
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.report-tests.outputs.matrix) }}
+    env:
+      LANGUAGE: ${{ matrix.language }}
+      CATEGORY: ${{ matrix.category }}
+      BITS: ${{ matrix.bits }}
+      SIZE: ${{ matrix.size }}
+      RUST_BACKTRACE: ${{ inputs.verbose && 'full' || '0' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/prepare-ci # zizmor: ignore[self-repository] actionlint 1.7.12 lacks $/ syntax
+        with:
+          base-sha: ${{ needs.report-tests.outputs.base }}
+      - if: matrix.language == 'rust'
+        uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
+        with:
+          toolchain: stable
+      - if: matrix.language == 'rust'
+        uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2
+        with:
+          workspaces: rust
+          save-if: ${{ github.ref == 'refs/heads/main' }}
+      - if: matrix.language == 'rust'
+        run: cargo build --locked --release --manifest-path rust/Cargo.toml
+      - if: matrix.language == 'csharp'
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          global-json-file: csharp/global.json
+      - if: matrix.language == 'csharp'
+        run: dotnet build -c Release -warnaserror csharp/SQLiteVSDoublets
+      - name: Benchmark
+        run: |
+          name="$CATEGORY-$LANGUAGE-$BITS-$SIZE"
+          echo "NAME=$name" >> "$GITHUB_ENV"
+          if [ "$LANGUAGE" = rust ]; then
+            benchmark=(rust/target/release/sqlite-vs-doublets)
+          else
+            benchmark=(dotnet csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll)
+          fi
+          "${benchmark[@]}" "$CATEGORY" "$BITS" "$SIZE" \
+            --directory "$RUNNER_TEMP/storage" --output "$RUNNER_TEMP/measured.json"
+          machine="$(. /etc/os-release && echo "$PRETTY_NAME"), $(lscpu | sed -n 's/^Model name: *//p' | head -1)"
+          machine="$machine, $(nproc) cores, $(awk '/^MemTotal/ { printf "%.0f", $2 / 1048576 }' /proc/meminfo) GiB"
+          mkdir results
+          jq --arg run_url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" \
+            --arg source_sha "$SOURCE_SHA" --arg tree_sha "$(git rev-parse 'HEAD^{tree}')" \
+            --arg date "$(date -u +%Y-%m-%d)" --arg machine "$machine" \
+            '. + {run_url: $run_url, source_sha: $source_sha, tree_sha: $tree_sha, date: $date, machine: $machine}' \
+            "$RUNNER_TEMP/measured.json" > "results/$name.json"
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: results-${{ env.NAME }}
+          path: results/${{ env.NAME }}.json
+          if-no-files-found: error
+          retention-days: 14
+
+  report:
+    name: Report
+    needs: [report-tests, benchmark]
+    if: ${{ !cancelled() && needs.report-tests.result == 'success' && needs.benchmark.result == 'success' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-report
+      cancel-in-progress: true
+    env:
+      SIZES: ${{ needs.report-tests.outputs.sizes }}
+      EXPECTED_TREE: ${{ needs.report-tests.outputs.tree }}
+      CI_VERBOSE: ${{ inputs.verbose && 'true' || 'false' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.13'
+      - run: pip install -r scripts/requirements.txt
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          pattern: results-*
+          merge-multiple: true
+          path: ${{ runner.temp }}/results
+      - name: Verify every current-run artifact
+        run: |
+          args=()
+          if [ "$CI_VERBOSE" = true ]; then args+=(--verbose); fi
+          python scripts/benchmark_ci.py verify --directory "$RUNNER_TEMP/results" \
+            --sizes "$SIZES" --sha "$SOURCE_SHA" --tree "$EXPECTED_TREE" "${args[@]}"
+      - name: Check the report
+        run: |
+          python scripts/benchmark_report.py "$RUNNER_TEMP/results" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
+            python scripts/benchmark_report.py "$RUNNER_TEMP/results" --readme README.md --readme README.ru.md
+            npx --yes markdownlint-cli@0.49.1 README.md README.ru.md
+          fi
+
+  publish:
+    name: Publish benchmark results
+    needs: [report-tests, report]
+    if: ${{ !cancelled() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.report.result == 'success' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    concurrency:
+      group: main-writer-${{ github.repository }}-main
+      cancel-in-progress: false
+    env:
+      SIZES: ${{ needs.report-tests.outputs.sizes }}
+      EXPECTED_TREE: ${{ needs.report-tests.outputs.tree }}
+      CI_VERBOSE: ${{ inputs.verbose && 'true' || 'false' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.13'
+      - run: pip install -r scripts/requirements.txt
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          pattern: results-*
+          merge-multiple: true
+          path: ${{ runner.temp }}/results
+      - name: Publish the report
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh auth setup-git
+          args=()
+          if [ "$CI_VERBOSE" = true ]; then args+=(--verbose); fi
+          python scripts/benchmark_ci.py verify --directory "$RUNNER_TEMP/results" \
+            --sizes "$SIZES" --sha "$SOURCE_SHA" --tree "$EXPECTED_TREE" "${args[@]}"
+          python scripts/publish_benchmarks.py "$RUNNER_TEMP/results" \
+            --sizes "$SIZES" --sha "$SOURCE_SHA" "${args[@]}"
+
+  pipeline-status:
+    name: Pipeline Status
+    needs: [report-tests, benchmark, report, publish]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.13'
+      - run: python -m pip install PyYAML==6.0.3
+      - name: Check terminal status
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          WORKFLOW_FILE: .github/workflows/benchmarks.yml
+          RUN_REF: ${{ github.ref }}
+          RUN_SHA: ${{ github.sha }}
+        run: python scripts/check_pipeline_status.py

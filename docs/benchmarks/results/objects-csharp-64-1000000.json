@@ -1,0 +1,483 @@
+{
+  "language": "C#",
+  "category": "objects",
+  "bits": 64,
+  "size": 1000000,
+  "repetitions": 1,
+  "warm_up_size": 10000,
+  "warm_up_seconds": 1,
+  "sqlite_version": "3.53.3",
+  "sqlite_providers": {
+    "Microsoft.Data.Sqlite": {
+      "provider_version": "10.0.12.0",
+      "sqlite_version": "3.53.3"
+    },
+    "System.Data.SQLite": {
+      "provider_version": "2.0.4.0",
+      "sqlite_version": "3.53.3"
+    }
+  },
+  "results": [
+    {
+      "variant": "SQLite_Memory",
+      "file_bytes": null,
+      "operations": {
+        "create": {
+          "median_ns": 5713.4826,
+          "min_ns": 5713.4826,
+          "max_ns": 5713.4826,
+          "samples_ns": [
+            5713.4826
+          ]
+        },
+        "read_all": {
+          "median_ns": 4630.0567,
+          "min_ns": 4630.0567,
+          "max_ns": 4630.0567,
+          "samples_ns": [
+            4630.0567
+          ]
+        },
+        "read_by_id": {
+          "median_ns": 6979.6452,
+          "min_ns": 6979.6452,
+          "max_ns": 6979.6452,
+          "samples_ns": [
+            6979.6452
+          ]
+        },
+        "delete": {
+          "median_ns": 3333.3537,
+          "min_ns": 3333.3537,
+          "max_ns": 3333.3537,
+          "samples_ns": [
+            3333.3537
+          ]
+        }
+      }
+    },
+    {
+      "variant": "SQLite_File",
+      "file_bytes": 821272576,
+      "operations": {
+        "create": {
+          "median_ns": 10493.1326,
+          "min_ns": 10493.1326,
+          "max_ns": 10493.1326,
+          "samples_ns": [
+            10493.1326
+          ]
+        },
+        "read_all": {
+          "median_ns": 4762.3541,
+          "min_ns": 4762.3541,
+          "max_ns": 4762.3541,
+          "samples_ns": [
+            4762.3541
+          ]
+        },
+        "read_by_id": {
+          "median_ns": 7859.3627,
+          "min_ns": 7859.3627,
+          "max_ns": 7859.3627,
+          "samples_ns": [
+            7859.3627
+          ]
+        },
+        "delete": {
+          "median_ns": 15942.5787,
+          "min_ns": 15942.5787,
+          "max_ns": 15942.5787,
+          "samples_ns": [
+            15942.5787
+          ]
+        }
+      }
+    },
+    {
+      "variant": "SystemDataSQLite_Memory",
+      "file_bytes": null,
+      "operations": {
+        "create": {
+          "median_ns": 5391.9855,
+          "min_ns": 5391.9855,
+          "max_ns": 5391.9855,
+          "samples_ns": [
+            5391.9855
+          ]
+        },
+        "read_all": {
+          "median_ns": 4491.92,
+          "min_ns": 4491.92,
+          "max_ns": 4491.92,
+          "samples_ns": [
+            4491.92
+          ]
+        },
+        "read_by_id": {
+          "median_ns": 6956.8359,
+          "min_ns": 6956.8359,
+          "max_ns": 6956.8359,
+          "samples_ns": [
+            6956.8359
+          ]
+        },
+        "delete": {
+          "median_ns": 3281.171,
+          "min_ns": 3281.171,
+          "max_ns": 3281.171,
+          "samples_ns": [
+            3281.171
+          ]
+        }
+      }
+    },
+    {
+      "variant": "SystemDataSQLite_File",
+      "file_bytes": 821272576,
+      "operations": {
+        "create": {
+          "median_ns": 10174.9312,
+          "min_ns": 10174.9312,
+          "max_ns": 10174.9312,
+          "samples_ns": [
+            10174.9312
+          ]
+        },
+        "read_all": {
+          "median_ns": 4663.5742,
+          "min_ns": 4663.5742,
+          "max_ns": 4663.5742,
+          "samples_ns": [
+            4663.5742
+          ]
+        },
+        "read_by_id": {
+          "median_ns": 8005.2199,
+          "min_ns": 8005.2199,
+          "max_ns": 8005.2199,
+          "samples_ns": [
+            8005.2199
+          ]
+        },
+        "delete": {
+          "median_ns": 16530.4128,
+          "min_ns": 16530.4128,
+          "max_ns": 16530.4128,
+          "samples_ns": [
+            16530.4128
+          ]
+        }
+      }
+    },
+    {
+      "variant": "Doublets_United_Volatile_Cached",
+      "file_bytes": null,
+      "operations": {
+        "create": {
+          "median_ns": 24943.9094,
+          "min_ns": 24943.9094,
+          "max_ns": 24943.9094,
+          "samples_ns": [
+            24943.9094
+          ]
+        },
+        "read_all": {
+          "median_ns": 13479.1038,
+          "min_ns": 13479.1038,
+          "max_ns": 13479.1038,
+          "samples_ns": [
+            13479.1038
+          ]
+        },
+        "read_by_id": {
+          "median_ns": 8253.4973,
+          "min_ns": 8253.4973,
+          "max_ns": 8253.4973,
+          "samples_ns": [
+            8253.4973
+          ]
+        },
+        "delete": {
+          "median_ns": 21192.0512,
+          "min_ns": 21192.0512,
+          "max_ns": 21192.0512,
+          "samples_ns": [
+            21192.0512
+          ]
+        }
+      }
+    },
+    {
+      "variant": "Doublets_United_Volatile_Uncached",
+      "file_bytes": null,
+      "operations": {
+        "create": {
+          "median_ns": 241683.2597,
+          "min_ns": 241683.2597,
+          "max_ns": 241683.2597,
+          "samples_ns": [
+            241683.2597
+          ]
+        },
+        "read_all": {
+          "median_ns": 359178.9776,
+          "min_ns": 359178.9776,
+          "max_ns": 359178.9776,
+          "samples_ns": [
+            359178.9776
+          ]
+        },
+        "read_by_id": {
+          "median_ns": 363154.0672,
+          "min_ns": 363154.0672,
+          "max_ns": 363154.0672,
+          "samples_ns": [
+            363154.0672
+          ]
+        },
+        "delete": {
+          "median_ns": 21001.3647,
+          "min_ns": 21001.3647,
+          "max_ns": 21001.3647,
+          "samples_ns": [
+            21001.3647
+          ]
+        }
+      }
+    },
+    {
+      "variant": "Doublets_United_NonVolatile_Cached",
+      "file_bytes": 671088640,
+      "operations": {
+        "create": {
+          "median_ns": 41573.0806,
+          "min_ns": 41573.0806,
+          "max_ns": 41573.0806,
+          "samples_ns": [
+            41573.0806
+          ]
+        },
+        "read_all": {
+          "median_ns": 13497.3284,
+          "min_ns": 13497.3284,
+          "max_ns": 13497.3284,
+          "samples_ns": [
+            13497.3284
+          ]
+        },
+        "read_by_id": {
+          "median_ns": 8553.2699,
+          "min_ns": 8553.2699,
+          "max_ns": 8553.2699,
+          "samples_ns": [
+            8553.2699
+          ]
+        },
+        "delete": {
+          "median_ns": 21671.5309,
+          "min_ns": 21671.5309,
+          "max_ns": 21671.5309,
+          "samples_ns": [
+            21671.5309
+          ]
+        }
+      }
+    },
+    {
+      "variant": "Doublets_United_NonVolatile_Uncached",
+      "file_bytes": 671088640,
+      "operations": {
+        "create": {
+          "median_ns": 272456.2538,
+          "min_ns": 272456.2538,
+          "max_ns": 272456.2538,
+          "samples_ns": [
+            272456.2538
+          ]
+        },
+        "read_all": {
+          "median_ns": 358568.5505,
+          "min_ns": 358568.5505,
+          "max_ns": 358568.5505,
+          "samples_ns": [
+            358568.5505
+          ]
+        },
+        "read_by_id": {
+          "median_ns": 365325.9314,
+          "min_ns": 365325.9314,
+          "max_ns": 365325.9314,
+          "samples_ns": [
+            365325.9314
+          ]
+        },
+        "delete": {
+          "median_ns": 23090.9388,
+          "min_ns": 23090.9388,
+          "max_ns": 23090.9388,
+          "samples_ns": [
+            23090.9388
+          ]
+        }
+      }
+    },
+    {
+      "variant": "Doublets_Split_Volatile_Cached",
+      "file_bytes": null,
+      "operations": {
+        "create": {
+          "median_ns": 14442.8195,
+          "min_ns": 14442.8195,
+          "max_ns": 14442.8195,
+          "samples_ns": [
+            14442.8195
+          ]
+        },
+        "read_all": {
+          "median_ns": 15305.9102,
+          "min_ns": 15305.9102,
+          "max_ns": 15305.9102,
+          "samples_ns": [
+            15305.9102
+          ]
+        },
+        "read_by_id": {
+          "median_ns": 8648.5782,
+          "min_ns": 8648.5782,
+          "max_ns": 8648.5782,
+          "samples_ns": [
+            8648.5782
+          ]
+        },
+        "delete": {
+          "median_ns": 11642.2557,
+          "min_ns": 11642.2557,
+          "max_ns": 11642.2557,
+          "samples_ns": [
+            11642.2557
+          ]
+        }
+      }
+    },
+    {
+      "variant": "Doublets_Split_Volatile_Uncached",
+      "file_bytes": null,
+      "operations": {
+        "create": {
+          "median_ns": 138723.0255,
+          "min_ns": 138723.0255,
+          "max_ns": 138723.0255,
+          "samples_ns": [
+            138723.0255
+          ]
+        },
+        "read_all": {
+          "median_ns": 469265.5894,
+          "min_ns": 469265.5894,
+          "max_ns": 469265.5894,
+          "samples_ns": [
+            469265.5894
+          ]
+        },
+        "read_by_id": {
+          "median_ns": 473785.0263,
+          "min_ns": 473785.0263,
+          "max_ns": 473785.0263,
+          "samples_ns": [
+            473785.0263
+          ]
+        },
+        "delete": {
+          "median_ns": 11108.2628,
+          "min_ns": 11108.2628,
+          "max_ns": 11108.2628,
+          "samples_ns": [
+            11108.2628
+          ]
+        }
+      }
+    },
+    {
+      "variant": "Doublets_Split_NonVolatile_Cached",
+      "file_bytes": 838860800,
+      "operations": {
+        "create": {
+          "median_ns": 32205.6571,
+          "min_ns": 32205.6571,
+          "max_ns": 32205.6571,
+          "samples_ns": [
+            32205.6571
+          ]
+        },
+        "read_all": {
+          "median_ns": 15323.4639,
+          "min_ns": 15323.4639,
+          "max_ns": 15323.4639,
+          "samples_ns": [
+            15323.4639
+          ]
+        },
+        "read_by_id": {
+          "median_ns": 8852.86,
+          "min_ns": 8852.86,
+          "max_ns": 8852.86,
+          "samples_ns": [
+            8852.86
+          ]
+        },
+        "delete": {
+          "median_ns": 19063.5789,
+          "min_ns": 19063.5789,
+          "max_ns": 19063.5789,
+          "samples_ns": [
+            19063.5789
+          ]
+        }
+      }
+    },
+    {
+      "variant": "Doublets_Split_NonVolatile_Uncached",
+      "file_bytes": 838860800,
+      "operations": {
+        "create": {
+          "median_ns": 166420.7768,
+          "min_ns": 166420.7768,
+          "max_ns": 166420.7768,
+          "samples_ns": [
+            166420.7768
+          ]
+        },
+        "read_all": {
+          "median_ns": 468855.1028,
+          "min_ns": 468855.1028,
+          "max_ns": 468855.1028,
+          "samples_ns": [
+            468855.1028
+          ]
+        },
+        "read_by_id": {
+          "median_ns": 475136.2429,
+          "min_ns": 475136.2429,
+          "max_ns": 475136.2429,
+          "samples_ns": [
+            475136.2429
+          ]
+        },
+        "delete": {
+          "median_ns": 13412.5059,
+          "min_ns": 13412.5059,
+          "max_ns": 13412.5059,
+          "samples_ns": [
+            13412.5059
+          ]
+        }
+      }
+    }
+  ],
+  "run_url": "https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37347766917",
+  "source_sha": "dfcba5d9ff035cae0e9fa8b06f7442c96bac6293",
+  "tree_sha": "7834c8bebf366e8d91729cdb252f4160b7c0f39e",
+  "date": "2026-10-05",
+  "machine": "Ubuntu 24.04.5 LTS, INTEL(R) XEON(R) PLATINUM 8573C, 4 cores, 16 GiB"
+}

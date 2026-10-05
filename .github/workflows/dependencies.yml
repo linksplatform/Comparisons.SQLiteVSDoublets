@@ -1,0 +1,72 @@
+name: Dependency audit
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 4 * * 1'
+  push:
+    branches: [main]
+    paths: ['**/Cargo.toml', '**/Cargo.lock', '**/*.csproj', 'csharp/global.json', 'scripts/requirements*.txt', 'scripts/audit_dotnet.py', '.github/workflows/dependencies.yml', '.github/actions/**', 'scripts/check_pipeline_status.py', 'scripts/ci_process.py', 'scripts/workflow_yaml.py']
+  pull_request:
+    paths: ['**/Cargo.toml', '**/Cargo.lock', '**/*.csproj', 'csharp/global.json', 'scripts/requirements*.txt', 'scripts/audit_dotnet.py', '.github/workflows/dependencies.yml', '.github/actions/**', 'scripts/check_pipeline_status.py', 'scripts/ci_process.py', 'scripts/workflow_yaml.py']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/prepare-ci # zizmor: ignore[self-repository] actionlint 1.7.12 lacks $/ syntax
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.13'
+      - run: python -m pip install pip-audit==2.10.1
+      - run: pip-audit -r scripts/requirements.txt -r scripts/requirements-ci.txt
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
+        with:
+          toolchain: stable
+      - run: cargo install cargo-audit --version 0.22.2 --locked
+      - name: Audit every Rust dependency tree
+        run: |
+          while IFS= read -r lockfile; do
+            cargo audit --file "$lockfile" --deny warnings
+          done < <(git ls-files '**/Cargo.lock')
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          global-json-file: csharp/global.json
+      - run: python scripts/audit_dotnet.py
+
+  pipeline-status:
+    name: Pipeline Status
+    needs: [audit]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.13'
+      - run: python -m pip install PyYAML==6.0.3
+      - name: Check terminal status
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          WORKFLOW_FILE: .github/workflows/dependencies.yml
+          RUN_REF: ${{ github.ref }}
+          RUN_SHA: ${{ github.sha }}
+        run: python scripts/check_pipeline_status.py

@@ -71,6 +71,7 @@ TEXT: dict[str, dict[str, Any]] = {
         },
         "storage": "Storage",
         "file_size": "File size",
+        "server_size": "Server relations",
         "faster": "{ratio}× faster",
         "slower": "{ratio}× slower",
         "same": "≈ same",
@@ -105,6 +106,7 @@ TEXT: dict[str, dict[str, Any]] = {
         },
         "storage": "Хранилище",
         "file_size": "Размер файлов",
+        "server_size": "Размер на сервере",
         "faster": "в {ratio}× быстрее",
         "slower": "в {ratio}× медленнее",
         "same": "≈ так же",
@@ -140,6 +142,7 @@ def validate(report, path):
     try:
         validate_metadata(report)
         validate_variants(report["results"])
+        validate_postgresql(report)
         for result in report["results"]:
             if set(result["operations"]) != set(OPERATIONS[report["category"]]):
                 raise ValueError("missing or unexpected operations")
@@ -168,6 +171,23 @@ def validate_variants(results):
         raise ValueError("missing SQLite baseline")
 
 
+def validate_postgresql(report):
+    """Require PostgreSQL provenance and keep server bytes separate from local files."""
+    postgres = [result for result in report["results"] if result["variant"] == "PostgreSQL_EFCore"]
+    if not postgres:
+        return
+    metadata = report.get("postgresql", {})
+    if (
+        report["language"] != "C#"
+        or report["category"] != "objects"
+        or metadata.get("provider") != "Npgsql.EntityFrameworkCore.PostgreSQL"
+        or not all(metadata.get(key) for key in ("provider_version", "ef_core_version", "server_version"))
+        or postgres[0].get("file_bytes") is not None
+        or not positive_integer(postgres[0].get("server_bytes"))
+    ):
+        raise ValueError("missing or invalid PostgreSQL provenance or server size")
+
+
 def positive_integer(value):
     return isinstance(value, int) and not isinstance(value, bool) and value > 0
 
@@ -189,7 +209,7 @@ def validate_measurement(measurement):
 
 def baseline(variant):
     """Compare with Microsoft.Data.Sqlite of the same durability, including the System.Data.SQLite provider."""
-    if variant.startswith("SQLite"):
+    if variant.startswith("SQLite") or variant == "PostgreSQL_EFCore":
         return None
     if variant.startswith("SystemDataSQLite_"):
         return variant.replace("SystemDataSQLite_", "SQLite_", 1)
@@ -245,10 +265,12 @@ def comparison(measured, reference, text):
 def table(report, text):
     operations = OPERATIONS[report["category"]]
     by_variant = {result["variant"]: result for result in report["results"]}
+    has_server = "PostgreSQL_EFCore" in by_variant
     header = [
         text["storage"],
         *(text["operations"][operation] for operation in operations),
         text["file_size"],
+        *([text["server_size"]] if has_server else []),
     ]
     lines = ["| " + " | ".join(header) + " |", "| --- |" + " ---: |" * (len(header) - 1)]
     for variant, result in by_variant.items():
@@ -261,18 +283,28 @@ def table(report, text):
                 cell += f" ({comparison(measured, reference['operations'][operation], text)})"
             cells.append(cell)
         cells.append(file_size(result["file_bytes"]))
+        if has_server:
+            cells.append(file_size(result.get("server_bytes")))
         lines.append("| " + " | ".join(cells) + " |")
     return "\n".join(lines)
 
 
 def provenance(report, text):
     run = report.get("run_url")
-    return text["provenance"].format(
+    value = text["provenance"].format(
         repetitions=text["repetitions"](report["repetitions"]),
         sqlite=report["sqlite_version"],
         machine=report.get("machine") or text["machine"],
         source=text["run"].format(url=run, date=report.get("date")) if run else text["local"],
     )
+    if "postgresql" in report:
+        postgres = report["postgresql"]
+        value += (
+            f" PostgreSQL {postgres['server_version']}; "
+            f"Npgsql.EntityFrameworkCore.PostgreSQL {postgres['provider_version']}; "
+            f"EF Core {postgres['ef_core_version']}."
+        )
+    return value
 
 
 def chart_name(category, language, bits):

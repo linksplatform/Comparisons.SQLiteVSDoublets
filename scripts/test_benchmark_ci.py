@@ -17,6 +17,16 @@ def complete_sample(category, language, bits, size, **extra):
         dict(copy.deepcopy(measured), variant=variant)
         for variant in sorted(ci.expected_variants(category, language))
     ]
+    if category == "objects" and language == "C#":
+        data["postgresql"] = {
+            "provider": "Npgsql.EntityFrameworkCore.PostgreSQL",
+            "provider_version": "10.0.3",
+            "ef_core_version": "10.0.4",
+            "server_version": "18.3",
+        }
+        next(result for result in data["results"] if result["variant"] == "PostgreSQL_EFCore")[
+            "server_bytes"
+        ] = 8192
     return data
 
 
@@ -48,6 +58,14 @@ class ArtifactTests(unittest.TestCase):
         path = next(self.root.glob("*.json"))
         data = json.loads(path.read_text())
         data["results"] = [result for result in data["results"] if result["variant"].startswith("SQLite")]
+        path.write_text(json.dumps(data), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "variants"):
+            ci.verify(self.root, [1000], self.sha)
+
+    def test_missing_postgresql_measurement_fails_the_csharp_objects_plan(self):
+        path = self.root / "objects-csharp-32-1000.json"
+        data = json.loads(path.read_text())
+        data["results"] = [result for result in data["results"] if result["variant"] != "PostgreSQL_EFCore"]
         path.write_text(json.dumps(data), encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "variants"):
             ci.verify(self.root, [1000], self.sha)
@@ -87,7 +105,8 @@ class MatrixTests(unittest.TestCase):
         for category in ("links", "objects"):
             self.assertEqual(
                 ci.expected_variants(category, "C#") - ci.expected_variants(category, "Rust"),
-                {"SystemDataSQLite_Memory", "SystemDataSQLite_File"},
+                {"SystemDataSQLite_Memory", "SystemDataSQLite_File"}
+                | ({"PostgreSQL_EFCore"} if category == "objects" else set()),
             )
 
     def test_default_matrix_preserves_twenty_tables(self):

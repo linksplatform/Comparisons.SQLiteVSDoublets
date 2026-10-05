@@ -53,6 +53,44 @@ Microsoft.Data.Sqlite. Оба провайдера используют один
 надёжности хранения. Опубликованные таблицы старых запусков содержат только
 измеренные тогда провайдеры; следующий запуск Benchmarks добавит новые строки.
 
+Тесты объектов на C# также поддерживают `PostgreSQL_EFCore` через
+[Npgsql.EntityFrameworkCore.PostgreSQL](https://www.npgsql.org/efcore/).
+Переменная `POSTGRESQL_CONNECTION_STRING` добавляет этот вариант к сравнению
+объектов по умолчанию. Без неё встроенные хранилища работают как прежде,
+а явный выбор PostgreSQL завершается сообщением о настройке. Оба размера
+идентификаторов используют те же данные, прогрев, проверяемые операции,
+порядок точечных чтений и транзакции. EF сохраняет записи по одной, очищает
+трекер после сохранения, читает без отслеживания и удаляет по id. Каждый
+прогрев и повтор создаёт и удаляет собственную схему со случайным именем;
+другие схемы и сама база сохраняются. Пользователю нужны права подключения
+и создания схем в базе для тестирования.
+
+PostgreSQL работает как сервер, а EF Core добавляет расходы ORM и сети.
+Строка показывает абсолютное время без коэффициента относительно встроенного
+SQLite. `server_bytes` — размер таблицы, индексов и TOAST после создания,
+показанный в отдельном столбце; общие WAL, память сервера и локальные файлы
+клиента в него не входят. JSON и таблицы содержат версии PostgreSQL, провайдера
+Npgsql EF Core и EF Core. Опубликованные измерения сохраняются. CI запускает
+PostgreSQL в том же задании, что и остальные варианты объектов C#.
+`POSTGRESQL_VERBOSE=1` включает диагностику EF в stderr; по умолчанию она
+выключена, чувствительные значения не записываются.
+
+Пример с небольшим объёмом данных:
+
+```bash
+docker run -d --name benchmark-postgres -p 127.0.0.1:5432:5432 \
+  -e POSTGRES_USER=benchmark -e POSTGRES_PASSWORD=benchmark \
+  -e POSTGRES_DB=benchmark postgres:18.3
+export POSTGRESQL_CONNECTION_STRING='Host=127.0.0.1;Database=benchmark;Username=benchmark;Password=benchmark'
+dotnet run -c Release --project csharp/SQLiteVSDoublets -- \
+  objects 64 1000 --repetitions 3 \
+  --variants SQLite_Memory,SQLite_File,PostgreSQL_EFCore \
+  --output results/objects-csharp-64-1000.json
+python3 experiments/postgresql/check_reports.py
+docker stop benchmark-postgres
+docker rm benchmark-postgres
+```
+
 Каждый повтор выполняется на новом хранилище в пустой папке после
 отбрасываемых прогревочных повторов на не более чем 10 000 записей, которые
 длятся не меньше секунды, чтобы JIT .NET уже оптимизировал код. Каждая

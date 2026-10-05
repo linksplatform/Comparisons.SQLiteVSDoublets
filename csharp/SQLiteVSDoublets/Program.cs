@@ -24,7 +24,8 @@ var repetitions = options.TryGetValue("repetitions", out var count)
 var allVariants = category == "links" ? Harness.LinksVariants : Harness.ObjectsVariants;
 var variants = options.TryGetValue("variants", out var names)
     ? names.Split(',').Select(name => allVariants.Contains(name) ? name : throw new ArgumentException(name)).ToArray()
-    : allVariants;
+    : allVariants.Where(name => name != "PostgreSQL_EFCore" ||
+        !string.IsNullOrEmpty(Environment.GetEnvironmentVariable(PostgreSQLBlogPosts<uint>.ConnectionStringVariable))).ToArray();
 var directory = options.GetValueOrDefault("directory") ?? Path.GetTempPath();
 
 var measurements = variants.Select(variant => (category, bits) switch
@@ -61,6 +62,18 @@ var report = new JsonObject
     },
     ["results"] = new JsonArray(measurements.Select(measurement => (JsonNode)measurement.ToJson()).ToArray()),
 };
+if (variants.Contains("PostgreSQL_EFCore"))
+{
+    using var connection = new Npgsql.NpgsqlConnection(PostgreSQLBlogPosts<uint>.ConnectionString());
+    connection.Open();
+    report["postgresql"] = new JsonObject
+    {
+        ["provider"] = "Npgsql.EntityFrameworkCore.PostgreSQL",
+        ["provider_version"] = typeof(Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.NpgsqlDbContextOptionsBuilder).Assembly.GetName().Version!.ToString(),
+        ["ef_core_version"] = typeof(Microsoft.EntityFrameworkCore.DbContext).Assembly.GetName().Version!.ToString(),
+        ["server_version"] = connection.ServerVersion,
+    };
+}
 var json = report.ToJsonString(new JsonSerializerOptions { WriteIndented = true });
 if (options.TryGetValue("output", out var output))
 {

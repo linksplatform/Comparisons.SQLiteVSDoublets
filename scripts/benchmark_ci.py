@@ -29,6 +29,8 @@ def expected_variants(category, language):
     variants = VARIANTS[category]
     if language in ("C#", "csharp"):
         variants = variants | {"SystemDataSQLite_Memory", "SystemDataSQLite_File"}
+        if category == "objects":
+            variants = variants | {"PostgreSQL_EFCore"}
     return variants
 
 

@@ -1,318 +1,321 @@
 #!/usr/bin/env python3
-"""Shared benchmark reporting helpers for the SQLite vs Doublets comparison."""
+"""Turns the benchmark JSON reports into the README results sections and charts."""
 
-# The language-specific pipelines parse their own benchmark formats, then use
-# this module for consistent Markdown tables, speedup annotations, linear and
-# logarithmic charts, and in-place result-section updates. The report format
-# follows the sibling LinksPlatform database comparisons.
+# Usage: benchmark_report.py RESULTS_DIR [--readme README.md] [--readme README.ru.md] [--charts DIR]
+#
+# Every JSON report (written by `rust` and `csharp` with `--output`) is one table: a language,
+# a category (links or objects), an address/id space (32 or 64 bit) and a size, measured on one machine.
+# The README section between the markers is regenerated in the hierarchy
+# category -> language -> bits -> size, and charts are written per category, language and bits.
 
-import os
+import argparse
+import json
 import re
-import shutil
-from datetime import datetime, timezone
+import statistics
+from pathlib import Path
 
-try:
+START_MARKER = "<!--BENCHMARK_RESULTS_START-->"
+END_MARKER = "<!--BENCHMARK_RESULTS_END-->"
+# The wide tables cannot be wrapped, and the hierarchy repeats headings under different parents.
+LINT_OFF = "<!-- markdownlint-disable MD013 MD024 -->"
+LINT_ON = "<!-- markdownlint-restore -->"
+
+CATEGORIES = ("links", "objects")
+NOISE = 0.05
+LANGUAGES = ("Rust", "C#")
+BITS = (32, 64)
+
+OPERATIONS = {
+    "links": (
+        "create",
+        "query_all",
+        "query_by_id",
+        "query_by_from_to",
+        "query_by_from",
+        "query_by_to",
+        "update",
+        "delete",
+    ),
+    "objects": ("create", "read_all", "read_by_id", "delete"),
+}
+
+
+def russian_plural(count, one, few, many):
+    if count % 10 == 1 and count % 100 != 11:
+        return one
+    return few if 2 <= count % 10 <= 4 and not 12 <= count % 100 <= 14 else many
+
+
+TEXT = {
+    "en": {
+        "category": {
+            "links": "Doublets vs SQLite as storage for links",
+            "objects": "Doublets vs SQLite as storage for objects",
+        },
+        "language": "{language} doublets vs SQLite",
+        "bits": "{bits} bit address/id space benchmarks",
+        "size": {"links": "{size} links", "objects": "{size} blog posts"},
+        "operations": {
+            "create": "Create",
+            "query_all": "Read all",
+            "query_by_id": "Read by id",
+            "query_by_from_to": "Search (from, to)",
+            "query_by_from": "Read by from",
+            "query_by_to": "Read by to",
+            "update": "Update",
+            "delete": "Delete",
+            "read_all": "Read all",
+            "read_by_id": "Read by id",
+        },
+        "storage": "Storage",
+        "file_size": "File size",
+        "faster": "{ratio}× faster",
+        "slower": "{ratio}× slower",
+        "same": "≈ same",
+        "provenance": "_{repetitions} after a warm-up, median time per operation. SQLite {sqlite}, {machine}, {source}._",
+        "repetitions": lambda count: f"{count} repetition" + ("" if count == 1 else "s"),
+        "machine": "unknown machine",
+        "local": "a local run",
+        "run": "[GitHub Actions run]({url}) on {date}",
+        "missing": "_No results yet._",
+        "chart": "{language} doublets vs SQLite, {bits} bit, {category}",
+        "nouns": {"links": "links", "objects": "objects"},
+    },
+    "ru": {
+        "category": {
+            "links": "Дуплеты против SQLite как хранилище связей",
+            "objects": "Дуплеты против SQLite как хранилище объектов",
+        },
+        "language": "Дуплеты на {language} против SQLite",
+        "bits": "Тесты с {bits}-битным пространством адресов/идентификаторов",
+        "size": {"links": "{size} связей", "objects": "{size} записей блога"},
+        "operations": {
+            "create": "Создание",
+            "query_all": "Чтение всех",
+            "query_by_id": "Чтение по id",
+            "query_by_from_to": "Поиск (from, to)",
+            "query_by_from": "Чтение по from",
+            "query_by_to": "Чтение по to",
+            "update": "Обновление",
+            "delete": "Удаление",
+            "read_all": "Чтение всех",
+            "read_by_id": "Чтение по id",
+        },
+        "storage": "Хранилище",
+        "file_size": "Размер файлов",
+        "faster": "в {ratio}× быстрее",
+        "slower": "в {ratio}× медленнее",
+        "same": "≈ так же",
+        "provenance": "_{repetitions} после прогрева, медианное время одной операции. SQLite {sqlite}, {machine}, {source}._",
+        "repetitions": lambda count: f"{count} повтор" + russian_plural(count, "", "а", "ов"),
+        "machine": "неизвестная машина",
+        "local": "локальный запуск",
+        "run": "[запуск GitHub Actions]({url}) от {date}",
+        "missing": "_Результатов пока нет._",
+        "chart": "Дуплеты на {language} против SQLite, {bits} бит, {category}",
+        "nouns": {"links": "связи", "objects": "объекты"},
+    },
+}
+
+
+def load(directory):
+    """All reports in `directory`, keyed by (category, language, bits, size)."""
+    reports = {}
+    for path in sorted(Path(directory).glob("*.json")):
+        report = json.loads(path.read_text(encoding="utf-8"))
+        key = (report["category"], report["language"], report["bits"], report["size"])
+        if key in reports:
+            raise ValueError(f"{path} duplicates the results of {key}")
+        reports[key] = report
+    return reports
+
+
+def baseline(variant):
+    """Doublets are compared with SQLite of the same durability: volatile with memory, non-volatile with file."""
+    if variant.startswith("SQLite"):
+        return None
+    return "SQLite_File" if "_NonVolatile" in variant else "SQLite_Memory"
+
+
+def significant(value):
+    """Three significant digits without an exponent: 999.6 is 1000, not 1e+03."""
+    return f"{float(f'{value:.3g}'):g}"
+
+
+def duration(nanoseconds):
+    rounded = float(significant(nanoseconds))
+    for unit, scale in (("s", 1e9), ("ms", 1e6), ("µs", 1e3)):
+        if rounded >= scale:
+            return f"{significant(rounded / scale)} {unit}"
+    return f"{significant(rounded)} ns"
+
+
+def size(count):
+    return f"{count:,}"
+
+
+def file_size(count):
+    return "—" if count is None else f"{count / 2**20:.1f} MiB"
+
+
+def quartiles(measured):
+    """The middle half of the samples: unlike the full range, one outlier repetition does not widen it."""
+    samples = measured["samples_ns"]
+    if len(samples) == 1:
+        return samples[0], samples[0]
+    first, _, third = statistics.quantiles(samples, n=4, method="inclusive")
+    return first, third
+
+
+def comparison(measured, reference, text):
+    """How `measured` compares with `reference`."""
+    # Overlapping interquartile ranges and medians within NOISE of each other (single samples have no range)
+    # are not called a difference.
+    (low, high), (reference_low, reference_high) = quartiles(measured), quartiles(reference)
+    overlapping = low <= reference_high and reference_low <= high
+    ratio = max(measured["median_ns"], reference["median_ns"]) / min(measured["median_ns"], reference["median_ns"])
+    if overlapping or ratio < 1 + NOISE:
+        return text["same"]
+    if measured["median_ns"] <= reference["median_ns"]:
+        return text["faster"].format(ratio=significant(reference["median_ns"] / measured["median_ns"]))
+    return text["slower"].format(ratio=significant(measured["median_ns"] / reference["median_ns"]))
+
+
+def table(report, text):
+    operations = OPERATIONS[report["category"]]
+    by_variant = {result["variant"]: result for result in report["results"]}
+    header = [text["storage"], *(text["operations"][operation] for operation in operations), text["file_size"]]
+    lines = ["| " + " | ".join(header) + " |", "| --- |" + " ---: |" * (len(header) - 1)]
+    for variant, result in by_variant.items():
+        reference = by_variant.get(baseline(variant))
+        cells = [variant.replace("_", " ")]
+        for operation in operations:
+            measured = result["operations"][operation]
+            cell = duration(measured["median_ns"])
+            if reference is not None:
+                cell += f" ({comparison(measured, reference['operations'][operation], text)})"
+            cells.append(cell)
+        cells.append(file_size(result["file_bytes"]))
+        lines.append("| " + " | ".join(cells) + " |")
+    return "\n".join(lines)
+
+
+def provenance(report, text):
+    run = report.get("run_url")
+    return text["provenance"].format(
+        repetitions=text["repetitions"](report["repetitions"]),
+        sqlite=report["sqlite_version"],
+        machine=report.get("machine") or text["machine"],
+        source=text["run"].format(url=run, date=report.get("date")) if run else text["local"],
+    )
+
+
+def chart_name(category, language, bits):
+    return f"{category}-{language.lower().replace('#', 'sharp')}-{bits}.png"
+
+
+def section(reports, language_code, charts_link):
+    """The Markdown results section in the category -> language -> bits -> size hierarchy."""
+    text = TEXT[language_code]
+    lines = []
+    for category in CATEGORIES:
+        lines += [f"## {text['category'][category]}", ""]
+        for language in LANGUAGES:
+            lines += [f"### {text['language'].format(language=language)}", ""]
+            for bits in BITS:
+                lines += [f"#### {text['bits'].format(bits=bits)}", ""]
+                sizes = sorted(key[3] for key in reports if key[:3] == (category, language, bits))
+                if not sizes:
+                    lines += [text["missing"], ""]
+                    continue
+                for count in sizes:
+                    report = reports[(category, language, bits, count)]
+                    lines += [
+                        f"##### {text['size'][category].format(size=size(count))}",
+                        "",
+                        provenance(report, text),
+                        "",
+                        table(report, text),
+                        "",
+                    ]
+                if charts_link is not None:
+                    name = chart_name(category, language, bits)
+                    title = text["chart"].format(language=language, bits=bits, category=text["nouns"][category])
+                    lines += [f"![{title}]({charts_link}/{name})", ""]
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def replace_section(document, generated):
+    pattern = re.compile(re.escape(START_MARKER) + ".*?" + re.escape(END_MARKER), re.DOTALL)
+    if not pattern.search(document):
+        raise ValueError(f"{START_MARKER} ... {END_MARKER} markers are missing")
+    return pattern.sub(lambda _: f"{START_MARKER}\n{LINT_OFF}\n{generated}{LINT_ON}\n{END_MARKER}", document)
+
+
+def charts(reports, directory):
+    """One logarithmic bar chart per category, language and bits, with a panel per size."""
     import matplotlib
 
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    import numpy as np
 
-    HAS_MATPLOTLIB = True
-except ImportError:  # pragma: no cover - exercised only without matplotlib
-    print("Warning: matplotlib/numpy not installed, skipping chart generation")
-    HAS_MATPLOTLIB = False
-
-RUST_START_MARKER = "<!--RUST_BENCHMARK_RESULTS_START-->"
-RUST_END_MARKER = "<!--RUST_BENCHMARK_RESULTS_END-->"
-CSHARP_START_MARKER = "<!--CSHARP_BENCHMARK_RESULTS_START-->"
-CSHARP_END_MARKER = "<!--CSHARP_BENCHMARK_RESULTS_END-->"
-
-# Operations shared by every language of this comparison. The first element of
-# each pair is the identifier used by the benchmark runner, the second one is
-# the label used in reports.
-LINK_OPERATIONS = (
-    ("create", "Create"),
-    ("update", "Update"),
-    ("delete", "Delete"),
-    ("query_all", "Each All"),
-    ("query_by_id", "Each Identity"),
-    ("query_by_source_target", "Each Concrete"),
-    ("query_by_source", "Each Outgoing"),
-    ("query_by_target", "Each Incoming"),
-)
-
-# Object-like structures (blog posts), the operations the C# comparison has
-# been built around from the beginning.
-OBJECT_OPERATIONS = (
-    ("objects_create", "Objects Create List"),
-    ("objects_read", "Objects Read List"),
-    ("objects_delete", "Objects Delete List"),
-)
-
-OPERATIONS = LINK_OPERATIONS + OBJECT_OPERATIONS
-
-# Benchmarked backends: identifier, label and chart color.
-DOUBLETS_VARIANTS = (
-    ("Doublets_United_Volatile", "Doublets United Volatile", "salmon"),
-    ("Doublets_United_NonVolatile", "Doublets United NonVolatile", "red"),
-    ("Doublets_Split_Volatile", "Doublets Split Volatile", "lightgreen"),
-    ("Doublets_Split_NonVolatile", "Doublets Split NonVolatile", "green"),
-)
-
-SQLITE_VARIANTS = (
-    ("SQLite_Memory", "SQLite Memory", "lightblue"),
-    ("SQLite_File", "SQLite File", "royalblue"),
-)
-
-VARIANTS = DOUBLETS_VARIANTS + SQLITE_VARIANTS
-
-# Doublets cells are annotated relative to the fastest SQLite measurement of
-# the same operation, the same way Comparisons.Neo4jVSDoublets annotates
-# against the fastest of the two Neo4j modes.
-BASELINES = tuple(key for key, _label, _color in SQLITE_VARIANTS)
+    directory.mkdir(parents=True, exist_ok=True)
+    written = []
+    for category in CATEGORIES:
+        operations = OPERATIONS[category]
+        labels = [TEXT["en"]["operations"][operation] for operation in operations]
+        for language in LANGUAGES:
+            for bits in BITS:
+                sizes = sorted(key[3] for key in reports if key[:3] == (category, language, bits))
+                if not sizes:
+                    continue
+                figure, axes = plt.subplots(
+                    1, len(sizes), figsize=(6 * len(sizes), 5), squeeze=False, sharey=False
+                )
+                for axis, count in zip(axes[0], sizes):
+                    results = reports[(category, language, bits, count)]["results"]
+                    width = 0.8 / len(results)
+                    for index, result in enumerate(results):
+                        axis.bar(
+                            [position + index * width for position in range(len(operations))],
+                            [result["operations"][operation]["median_ns"] for operation in operations],
+                            width,
+                            label=result["variant"].replace("_", " "),
+                            color=plt.get_cmap("tab10")(index % 10),
+                        )
+                    axis.set_yscale("log")
+                    axis.set_title(TEXT["en"]["size"][category].format(size=size(count)))
+                    axis.set_ylabel("median ns per operation (log scale)")
+                    axis.set_xticks([position + 0.4 - width / 2 for position in range(len(operations))])
+                    axis.set_xticklabels(labels, rotation=30, ha="right")
+                    axis.grid(axis="y", which="major", alpha=0.3)
+                axes[0][0].legend(fontsize="small")
+                figure.suptitle(TEXT["en"]["chart"].format(language=language, bits=bits, category=category))
+                figure.tight_layout()
+                path = directory / chart_name(category, language, bits)
+                figure.savefig(path, dpi=80)
+                plt.close(figure)
+                written.append(path)
+    return written
 
 
-def empty_results(operations=OPERATIONS):
-    """Build an empty ``{operation: {variant: nanoseconds}}`` mapping."""
-    return {op: {} for op, _label in operations}
+def main(arguments=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("results", type=Path, help="directory with the JSON reports")
+    parser.add_argument("--readme", type=Path, action="append", default=[], help="README to update in place")
+    parser.add_argument("--charts", type=Path, help="directory for the charts, relative to the READMEs")
+    options = parser.parse_args(arguments)
+    reports = load(options.results)
+    if options.charts is not None:
+        charts(reports, options.charts)
+    for readme in options.readme:
+        language_code = "ru" if readme.name.endswith(".ru.md") else "en"
+        link = None if options.charts is None else options.charts.resolve().relative_to(readme.resolve().parent).as_posix()
+        document = readme.read_text(encoding="utf-8")
+        readme.write_text(replace_section(document, section(reports, language_code, link)), encoding="utf-8")
+    if not options.readme:
+        print(section(reports, "en", None))
 
 
-def has_any_results(results):
-    """Return ``True`` when at least one measurement was parsed."""
-    return any(measurements for measurements in results.values())
-
-
-def missing_measurements(results, operations=OPERATIONS, variants=VARIANTS):
-    """List expected ``operation/variant`` pairs absent from parsed output."""
-    missing = []
-    for operation, _operation_label in operations:
-        measured = results.get(operation, {})
-        for variant, _variant_label, _color in variants:
-            if not measured.get(variant):
-                missing.append(f"{operation}/{variant}")
-    return missing
-
-
-def baseline_of(measurements, baselines=BASELINES):
-    """Fastest baseline (SQLite) measurement of a single operation, 0 if none."""
-    values = [measurements.get(key, 0) for key in baselines]
-    values = [value for value in values if value]
-    return min(values) if values else 0
-
-
-def format_speedup(value, baseline):
-    """Annotate ``value`` with how it compares to the ``baseline`` measurement."""
-    if not value:
-        return "N/A"
-    if not baseline:
-        return f"{value}"
-    if value <= baseline:
-        return f"{value} ({baseline / value:.1f}x faster)"
-    return f"{value} ({value / baseline:.1f}x slower)"
-
-
-def format_results_table(results, operations=OPERATIONS, variants=VARIANTS, baselines=BASELINES):
-    """Render the Markdown results table (all numbers in nanoseconds)."""
-    labels = [label for _key, label, _color in variants]
-    cells_by_variant = []
-    for key, _label, _color in variants:
-        column = []
-        for op, _op_label in operations:
-            measurements = results.get(op, {})
-            value = measurements.get(key, 0)
-            if key in baselines:
-                column.append(str(value) if value else "N/A")
-            else:
-                column.append(format_speedup(value, baseline_of(measurements, baselines)))
-        cells_by_variant.append(column)
-
-    widths = [
-        max(len(label), *(len(cell) for cell in column))
-        for label, column in zip(labels, cells_by_variant)
-    ]
-    operation_width = max(len("Operation"), *(len(label) for _key, label in operations))
-
-    header = "| " + "Operation".ljust(operation_width) + " | "
-    header += " | ".join(label.ljust(width) for label, width in zip(labels, widths))
-    header += " |"
-    separator = "|" + "-" * (operation_width + 2)
-    separator += "".join("|" + "-" * (width + 2) for width in widths) + "|"
-
-    lines = [header, separator]
-    for index, (_op, op_label) in enumerate(operations):
-        row = "| " + op_label.ljust(operation_width) + " | "
-        row += " | ".join(
-            column[index].ljust(width) for column, width in zip(cells_by_variant, widths)
-        )
-        row += " |"
-        lines.append(row)
-
-    return "\n".join(lines)
-
-
-def build_provenance(
-    benchmark_links=None,
-    background_links=None,
-    object_count=None,
-    generated_at=None,
-    language=None,
-):
-    """Describe how and when the committed results were produced."""
-    benchmark_links = benchmark_links or os.environ.get("BENCHMARK_LINK_COUNT", "1000")
-    background_links = background_links or os.environ.get("BACKGROUND_LINK_COUNT", "3000")
-    if object_count is not False:
-        object_count = object_count or os.environ.get("BENCHMARK_OBJECT_COUNT", "1000")
-    generated_at = generated_at or datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-
-    source = "a local benchmark run"
-    repository = os.environ.get("GITHUB_REPOSITORY")
-    run_id = os.environ.get("GITHUB_RUN_ID")
-    if repository and run_id:
-        source = (
-            f"[GitHub Actions run {run_id}]"
-            f"(https://github.com/{repository}/actions/runs/{run_id})"
-        )
-
-    prefix = f"_Generated {generated_at}"
-    if language:
-        prefix += f" for {language}"
-    quantities = (
-        f"{benchmark_links} benchmarked links, "
-        f"{background_links} background links"
-    )
-    if object_count is not False:
-        quantities += f", {object_count} objects"
-    return f"{prefix} by {source} — {quantities}._"
-
-
-def render_results_section(results, provenance=None, **table_options):
-    """Render a results section: provenance line plus the results table."""
-    provenance = provenance if provenance is not None else build_provenance()
-    return f"{provenance}\n\n{format_results_table(results, **table_options)}"
-
-
-def update_markers(path, section, start_marker, end_marker):
-    """Replace a marked Markdown section and report whether it changed."""
-    with open(path, "r", encoding="utf-8") as handle:
-        document = handle.read()
-
-    if start_marker not in document or end_marker not in document:
-        raise ValueError(f"{path} does not contain the {start_marker} / {end_marker} markers")
-
-    pattern = re.compile(
-        re.escape(start_marker) + r".*?" + re.escape(end_marker),
-        re.DOTALL,
-    )
-    replacement = f"{start_marker}\n{section}\n{end_marker}"
-    updated = pattern.sub(lambda _match: replacement, document, count=1)
-
-    if updated == document:
-        return False
-
-    with open(path, "w", encoding="utf-8") as handle:
-        handle.write(updated)
-    return True
-
-
-def _series(results, variant, operations):
-    """Measurements of one variant across all operations, 0 when missing."""
-    return [results.get(op, {}).get(variant, 0) for op, _label in operations]
-
-
-def _ensure_min_visible(values, minimum):
-    """Keep non-zero bars at least ``minimum`` wide so they stay visible."""
-    return [max(value, minimum) if value > 0 else 0 for value in values]
-
-
-def _plot(results, path, title, log_scale, operations, variants):
-    positions = np.arange(len(operations))
-    width = 0.8 / len(variants)
-    figure, axes = plt.subplots(figsize=(12, 8))
-
-    series = {key: _series(results, key, operations) for key, _label, _color in variants}
-
-    if log_scale:
-        plotted = series
-    else:
-        # On a linear scale Doublets bars are invisible next to SQLite, so give
-        # every non-zero measurement a minimum visible width (~0.5% of the
-        # maximum), matching the sibling benchmark charts.
-        all_values = [value for values in series.values() for value in values]
-        max_value = max(all_values) if all_values else 1
-        minimum = max_value * 0.005
-        plotted = {key: _ensure_min_visible(values, minimum) for key, values in series.items()}
-
-    offset_base = (len(variants) - 1) / 2
-    for index, (key, label, color) in enumerate(variants):
-        offset = (index - offset_base) * width
-        axes.barh(positions + offset, plotted[key], width, label=label, color=color)
-
-    axes.set_xlabel("Time (ns) – log scale" if log_scale else "Time (ns)")
-    axes.set_title(title)
-    axes.set_yticks(positions)
-    axes.set_yticklabels([label for _op, label in operations])
-    if log_scale:
-        axes.set_xscale("log")
-    axes.legend()
-    figure.tight_layout()
-
-    directory = os.path.dirname(path)
-    if directory:
-        os.makedirs(directory, exist_ok=True)
-    figure.savefig(path)
-    plt.close(figure)
-    print(f"Generated {path}")
-
-
-def generate_charts(
-    results,
-    prefix,
-    title,
-    output_dir="",
-    operations=OPERATIONS,
-    variants=VARIANTS,
-):
-    """Generate linear/log charts and return their paths when available."""
-    if not HAS_MATPLOTLIB:
-        return []
-
-    linear = os.path.join(output_dir, f"{prefix}.png") if output_dir else f"{prefix}.png"
-    logarithmic = (
-        os.path.join(output_dir, f"{prefix}_log_scale.png")
-        if output_dir
-        else f"{prefix}_log_scale.png"
-    )
-    _plot(results, linear, title, False, operations, variants)
-    _plot(results, logarithmic, title, True, operations, variants)
-    return [linear, logarithmic]
-
-
-def copy_charts(charts, docs_dir):
-    """Copy generated charts into the documentation directory."""
-    if not docs_dir:
-        return []
-    os.makedirs(docs_dir, exist_ok=True)
-    copied = []
-    for chart in charts:
-        if os.path.exists(chart):
-            destination = os.path.join(docs_dir, os.path.basename(chart))
-            shutil.copyfile(chart, destination)
-            copied.append(destination)
-            print(f"Copied {chart} -> {destination}")
-    return copied
-
-
-def report_input_excerpt(path, lines=20):
-    """Describe the tail of ``path`` so an unparsable run can be diagnosed."""
-    if not os.path.exists(path):
-        return f"{path} does not exist"
-
-    with open(path, "r", encoding="utf-8") as handle:
-        content = handle.read()
-
-    if not content.strip():
-        return f"{path} is empty"
-
-    tail = content.splitlines()[-lines:]
-    return "\n".join([f"Last {len(tail)} line(s) of {path}:", *tail])
+if __name__ == "__main__":
+    main()

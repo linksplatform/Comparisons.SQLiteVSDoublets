@@ -15,3 +15,10 @@ __pycache__/
 *.swp
 *~
 .DS_Store
+
+# Rust build output
+target/
+
+# .NET build output
+bin/
+obj/

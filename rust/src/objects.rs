@@ -1,164 +1,341 @@
-//! Object-like structures (blog posts) shared by both storages.
-//!
-//! The C# part of this repository compares SQLite and Doublets on an object
-//! like structure — a blog post with a title, a content and a publication date.
-//! This module provides the same model for the Rust benchmarks, so that both
-//! languages measure the same three operations:
-//!
-//! | Operation             | Meaning                                       |
-//! |-----------------------|-----------------------------------------------|
-//! | `Objects Create List` | save a list of blog posts into empty storage  |
-//! | `Objects Read List`   | read every stored blog post back              |
-//! | `Objects Delete List` | delete every stored blog post                 |
-//!
-//! The generated data matches `csharp/Model/BlogPosts.cs`: the title is
-//! `Blog post {n}`, the content is one of five lorem ipsum paragraphs and the
-//! publication date is within the last 30 days. Generation is deterministic
-//! (a small xorshift generator seeded by [`OBJECT_SEED`]) so that every run and
-//! every storage is benchmarked on exactly the same data.
+use crate::dataset::BlogPost;
+use doublets::{
+    Doublets,
+    data::{AddrToRaw, Flow, LinkReference, RawToAddr},
+};
+use rusqlite::{Connection, OptionalExtension, params};
+use std::{collections::HashMap, marker::PhantomData, path::Path, sync::Arc};
 
-use once_cell::sync::Lazy;
-use std::env;
+pub trait BlogPostsStorage<T> {
+    fn create(&mut self, post: &BlogPost) -> T;
+    fn get(&mut self, id: T) -> Option<BlogPost>;
+    fn each(&mut self, visit: impl FnMut(T, BlogPost));
+    fn delete(&mut self, id: T);
+    fn count(&mut self) -> u64;
 
-/// Number of blog posts used by the object benchmarks.
-///
-/// Can be overridden with the `BENCHMARK_OBJECT_COUNT` environment variable,
-/// which the CI workflow lowers for pull request runs.
-pub static BENCHMARK_OBJECT_COUNT: Lazy<usize> = Lazy::new(|| {
-    env::var("BENCHMARK_OBJECT_COUNT")
-        .ok()
-        .and_then(|value| value.parse().ok())
-        .unwrap_or(1000)
-});
-
-/// Seed of the deterministic generator of blog posts.
-pub const OBJECT_SEED: u64 = 0x5148_5157_2D31_3235;
-
-/// Lorem ipsum paragraphs used as blog post contents.
-///
-/// The same five paragraphs are used by `csharp/Model/BlogPosts.cs`.
-pub const CONTENTS: [&str; 5] = [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis malesuada blandit mauris nec bibendum.",
-    "Curabitur tincidunt nibh sit amet finibus dictum. Suspendisse aliquet arcu non rutrum ultrices.",
-    "Donec vitae felis lectus. Aenean velit sapien, porttitor ut feugiat a, consectetur et risus.",
-    "Aliquam sed egestas felis. Maecenas sollicitudin nisl in sapien posuere vulputate.",
-    "Ut a eleifend augue, eget posuere augue. Proin purus neque, pretium condimentum ipsum ut.",
-];
-
-/// An object like structure: a blog post.
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct BlogPost {
-    /// Storage assigned identifier, `0` before the post is saved.
-    pub id: u64,
-    /// Unique title of the post.
-    pub title: String,
-    /// Body of the post.
-    pub content: String,
-    /// Publication date as a Unix timestamp in seconds.
-    pub publication_date_time: i64,
+    fn transaction<R>(&mut self, work: impl FnOnce(&mut Self) -> R) -> R {
+        work(self)
+    }
 }
 
-impl BlogPost {
-    /// Creates a not yet stored blog post.
-    pub fn new(
-        title: impl Into<String>,
-        content: impl Into<String>,
-        publication_date_time: i64,
-    ) -> Self {
+pub struct SqliteBlogPosts<T> {
+    connection: Connection,
+    id_type: PhantomData<T>,
+}
+
+impl<T: LinkReference> SqliteBlogPosts<T> {
+    pub fn open(path: impl AsRef<Path>) -> Self {
+        Self::new(Connection::open(path).unwrap())
+    }
+
+    pub fn in_memory() -> Self {
+        Self::new(Connection::open_in_memory().unwrap())
+    }
+
+    fn new(connection: Connection) -> Self {
+        connection
+            .execute_batch(
+                "CREATE TABLE blog_posts (id INTEGER PRIMARY KEY, title TEXT NOT NULL, content TEXT NOT NULL, publication_date INTEGER NOT NULL)",
+            )
+            .unwrap();
         Self {
-            id: 0,
-            title: title.into(),
-            content: content.into(),
-            publication_date_time,
+            connection,
+            id_type: PhantomData,
         }
     }
 }
 
-/// Deterministic xorshift64* generator, so every benchmark sees the same data.
-struct Generator(u64);
+fn blog_post(row: &rusqlite::Row<'_>) -> rusqlite::Result<BlogPost> {
+    Ok(BlogPost {
+        title: row.get(0)?,
+        content: row.get(1)?,
+        publication_date: row.get(2)?,
+    })
+}
 
-impl Generator {
-    fn next(&mut self) -> u64 {
-        let mut state = self.0;
-        state ^= state << 13;
-        state ^= state >> 7;
-        state ^= state << 17;
-        self.0 = state;
-        state
+fn sql<T: LinkReference>(id: T) -> i64 {
+    id.try_into().unwrap()
+}
+
+impl<T: LinkReference> BlogPostsStorage<T> for SqliteBlogPosts<T> {
+    fn create(&mut self, post: &BlogPost) -> T {
+        let mut statement = self
+            .connection
+            .prepare_cached(
+                "INSERT INTO blog_posts (title, content, publication_date) VALUES (?1, ?2, ?3)",
+            )
+            .unwrap();
+        statement
+            .execute(params![post.title, post.content, post.publication_date])
+            .unwrap();
+        T::try_from(self.connection.last_insert_rowid()).unwrap()
+    }
+
+    fn get(&mut self, id: T) -> Option<BlogPost> {
+        let mut statement = self
+            .connection
+            .prepare_cached("SELECT title, content, publication_date FROM blog_posts WHERE id = ?1")
+            .unwrap();
+        statement
+            .query_row([sql(id)], blog_post)
+            .optional()
+            .unwrap()
+    }
+
+    fn each(&mut self, mut visit: impl FnMut(T, BlogPost)) {
+        let mut statement = self
+            .connection
+            .prepare_cached("SELECT title, content, publication_date, id FROM blog_posts")
+            .unwrap();
+        let mut rows = statement.query([]).unwrap();
+        while let Some(row) = rows.next().unwrap() {
+            visit(
+                T::try_from(row.get::<_, i64>(3).unwrap()).unwrap(),
+                blog_post(row).unwrap(),
+            );
+        }
+    }
+
+    fn delete(&mut self, id: T) {
+        let mut statement = self
+            .connection
+            .prepare_cached("DELETE FROM blog_posts WHERE id = ?1")
+            .unwrap();
+        statement.execute([sql(id)]).unwrap();
+    }
+
+    fn count(&mut self) -> u64 {
+        self.connection
+            .query_row("SELECT COUNT(*) FROM blog_posts", [], |row| row.get(0))
+            .unwrap()
+    }
+
+    fn transaction<R>(&mut self, work: impl FnOnce(&mut Self) -> R) -> R {
+        self.connection.execute_batch("BEGIN IMMEDIATE").unwrap();
+        let result = work(self);
+        self.connection.execute_batch("COMMIT").unwrap();
+        result
     }
 }
 
-/// Generates `count` blog posts, mirroring `BlogPosts.GenerateData` of the C# benchmark.
-pub fn generate_posts(count: usize) -> Vec<BlogPost> {
-    // A fixed "now" keeps the generated data stable between runs.
-    const NOW: i64 = 1_700_000_000;
-    const SECONDS_IN_30_DAYS: i64 = 30 * 24 * 60 * 60;
+/// Stores each blog post as a `(blog_post, itself)` link with `(post, property) -> value` properties,
+/// strings as balanced-variant sequences of Unicode symbols and dates as raw numbers,
+/// using the same layout as `Platform.Data.Doublets.Sequences` in C#.
+pub struct DoubletsBlogPosts<T, D> {
+    links: D,
+    unicode_symbol: T,
+    unicode_sequence: T,
+    title: T,
+    content: T,
+    publication_date: T,
+    blog_post: T,
+    cache: Option<SequencesCache<T>>,
+}
 
-    let mut generator = Generator(OBJECT_SEED);
-    (0..count)
-        .map(|index| {
-            let content = CONTENTS[(generator.next() % CONTENTS.len() as u64) as usize];
-            let age = (generator.next() % SECONDS_IN_30_DAYS as u64) as i64;
-            BlogPost::new(format!("Blog post {}", index + 1), content, NOW - age)
+#[derive(Default)]
+struct SequencesCache<T> {
+    sequences: HashMap<Arc<str>, T>,
+    strings: HashMap<T, Arc<str>>,
+}
+
+impl<T: LinkReference, D: Doublets<T>> DoubletsBlogPosts<T, D> {
+    pub fn new(mut links: D, cache_sequences: bool) -> Self {
+        let meaning_root = links.create_point().unwrap();
+        let mut marker = || {
+            let marker = links.create().unwrap();
+            links.update(marker, meaning_root, marker).unwrap()
+        };
+        Self {
+            unicode_symbol: marker(),
+            unicode_sequence: marker(),
+            title: marker(),
+            content: marker(),
+            publication_date: marker(),
+            blog_post: marker(),
+            cache: cache_sequences.then(SequencesCache::default),
+            links,
+        }
+    }
+
+    fn sequence(&mut self, string: &Arc<str>) -> T {
+        if let Some(sequence) = self
+            .cache
+            .as_ref()
+            .and_then(|cache| cache.sequences.get(&**string))
+        {
+            return *sequence;
+        }
+        if string.is_empty() {
+            return self.unicode_sequence;
+        }
+        let symbols: Vec<T> = string
+            .encode_utf16()
+            .map(|char| {
+                self.links
+                    .get_or_create(
+                        AddrToRaw.convert(T::try_from(char).unwrap()),
+                        self.unicode_symbol,
+                    )
+                    .unwrap()
+            })
+            .collect();
+        let balanced = self.balanced_variant(symbols);
+        let sequence = self
+            .links
+            .get_or_create(balanced, self.unicode_sequence)
+            .unwrap();
+        if let Some(cache) = &mut self.cache {
+            cache.sequences.insert(Arc::clone(string), sequence);
+        }
+        sequence
+    }
+
+    fn balanced_variant(&mut self, mut layer: Vec<T>) -> T {
+        while layer.len() > 1 {
+            layer = layer
+                .chunks(2)
+                .map(|pair| match *pair {
+                    [source, target] => self.links.get_or_create(source, target).unwrap(),
+                    [last] => last,
+                    _ => unreachable!(),
+                })
+                .collect();
+        }
+        layer[0]
+    }
+
+    fn string(&mut self, sequence: T) -> Arc<str> {
+        if let Some(string) = self
+            .cache
+            .as_ref()
+            .and_then(|cache| cache.strings.get(&sequence))
+        {
+            return Arc::clone(string);
+        }
+        if sequence == self.unicode_sequence {
+            return Arc::default();
+        }
+        let mut utf16 = Vec::new();
+        self.walk(self.source(sequence), |symbol| {
+            utf16.push(RawToAddr.convert(self.source(symbol)).try_into().unwrap());
+        });
+        let string: Arc<str> = String::from_utf16(&utf16).unwrap().into();
+        if let Some(cache) = &mut self.cache {
+            cache.strings.insert(sequence, Arc::clone(&string));
+        }
+        string
+    }
+
+    /// Visits the symbols of a balanced sequence from left to right, like `RightSequenceWalker` in C#.
+    fn walk(&self, sequence: T, mut visit: impl FnMut(T)) {
+        let is_symbol = |link| self.target(link) == self.unicode_symbol;
+        let mut stack = Vec::new();
+        let mut element = sequence;
+        if is_symbol(element) {
+            return visit(element);
+        }
+        loop {
+            if is_symbol(element) {
+                let Some(pair) = stack.pop() else { break };
+                let (source, target) = (self.source(pair), self.target(pair));
+                for part in [source, target] {
+                    if is_symbol(part) {
+                        visit(part);
+                    }
+                }
+                element = target;
+            } else {
+                stack.push(element);
+                element = self.source(element);
+            }
+        }
+    }
+
+    fn source(&self, link: T) -> T {
+        self.links.get_link(link).unwrap().source
+    }
+
+    fn target(&self, link: T) -> T {
+        self.links.get_link(link).unwrap().target
+    }
+
+    fn set_property(&mut self, object: T, property: T, value: T) {
+        let object_property = self.links.get_or_create(object, property).unwrap();
+        let any = self.links.constants().any;
+        self.links
+            .delete_query_with([any, object_property, any], |_, _| Flow::Continue)
+            .unwrap();
+        self.links.get_or_create(object_property, value).unwrap();
+    }
+
+    fn property(&self, object: T, property: T) -> Option<T> {
+        let object_property = self.links.search(object, property)?;
+        let any = self.links.constants().any;
+        self.links
+            .single([any, object_property, any])
+            .map(|value| value.target)
+    }
+
+    fn delete_property(&mut self, object: T, property: T) {
+        let object_property = self.links.search(object, property).unwrap();
+        let any = self.links.constants().any;
+        let value = self.links.single([any, object_property, any]).unwrap();
+        self.links.delete(value.index).unwrap();
+        self.links.delete(object_property).unwrap();
+    }
+}
+
+impl<T: LinkReference, D: Doublets<T>> BlogPostsStorage<T> for DoubletsBlogPosts<T, D> {
+    fn create(&mut self, post: &BlogPost) -> T {
+        let blog_post = self.links.create().unwrap();
+        self.links
+            .update(blog_post, self.blog_post, blog_post)
+            .unwrap();
+        let title = self.sequence(&post.title);
+        self.set_property(blog_post, self.title, title);
+        let content = self.sequence(&post.content);
+        self.set_property(blog_post, self.content, content);
+        let publication_date = AddrToRaw.convert(T::try_from(post.publication_date).unwrap());
+        self.set_property(blog_post, self.publication_date, publication_date);
+        blog_post
+    }
+
+    fn get(&mut self, id: T) -> Option<BlogPost> {
+        let title = self.property(id, self.title)?;
+        let content = self.property(id, self.content)?;
+        let publication_date = self.property(id, self.publication_date)?;
+        Some(BlogPost {
+            title: self.string(title),
+            content: self.string(content),
+            publication_date: RawToAddr.convert(publication_date).try_into().unwrap(),
         })
-        .collect()
-}
-
-/// Storage of object like structures.
-///
-/// Implemented natively by every benchmarked backend: SQLite stores blog posts
-/// as rows of a table, Doublets stores them as links (with strings represented
-/// as sequences of links).
-pub trait Objects {
-    /// Saves every post of the list, returns the assigned identifiers.
-    fn create_posts(&mut self, posts: &[BlogPost]) -> Vec<u64>;
-
-    /// Reads every stored post back.
-    fn read_posts(&self) -> Vec<BlogPost>;
-
-    /// Deletes every stored post.
-    fn delete_posts(&mut self);
-
-    /// Number of stored posts.
-    fn count_posts(&self) -> usize;
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn generated_data_is_deterministic() {
-        assert_eq!(generate_posts(16), generate_posts(16));
     }
 
-    #[test]
-    fn generated_titles_match_the_csharp_benchmark() {
-        let posts = generate_posts(3);
-        assert_eq!(posts[0].title, "Blog post 1");
-        assert_eq!(posts[2].title, "Blog post 3");
-    }
-
-    #[test]
-    fn generated_contents_are_taken_from_the_lorem_ipsum_paragraphs() {
-        for post in generate_posts(64) {
-            assert!(CONTENTS.contains(&post.content.as_str()));
+    fn each(&mut self, mut visit: impl FnMut(T, BlogPost)) {
+        let any = self.links.constants().any;
+        let mut ids = Vec::new();
+        self.links.each_by([any, self.blog_post, any], |post| {
+            ids.push(post.index);
+            Flow::Continue
+        });
+        for id in ids {
+            let post = self.get(id).unwrap();
+            visit(id, post);
         }
     }
 
-    #[test]
-    fn generated_dates_are_within_the_last_30_days() {
-        let posts = generate_posts(64);
-        let newest = posts
-            .iter()
-            .map(|post| post.publication_date_time)
-            .max()
-            .unwrap();
-        let oldest = posts
-            .iter()
-            .map(|post| post.publication_date_time)
-            .min()
-            .unwrap();
-        assert!(newest - oldest <= 30 * 24 * 60 * 60);
+    fn delete(&mut self, id: T) {
+        for property in [self.title, self.content, self.publication_date] {
+            self.delete_property(id, property);
+        }
+        self.links.delete(id).unwrap();
+    }
+
+    fn count(&mut self) -> u64 {
+        let any = self.links.constants().any;
+        self.links
+            .count_by([any, self.blog_post, any])
+            .try_into()
+            .unwrap()
     }
 }

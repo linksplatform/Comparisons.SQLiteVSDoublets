@@ -57,12 +57,16 @@ it is `≈ same`. The file size is measured after creation; Doublets files are
 preallocated memory-mapped files, so small stores show the preallocation size.
 
 Every table is measured by its own GitHub Actions job, with all variants on
-the same runner, by the [Benchmarks workflow](.github/workflows/benchmarks.yml):
-links with 100,000, 1,000,000 and 10,000,000 records and objects with 100,000
-and 1,000,000 records (larger sizes do not fit into the 6 hour limit of a
-job). Pull requests check the whole pipeline on 1,000 records, and pushes to
-`main` update the results below. The workflow can also be started manually
-with other sizes.
+the same runner, so that a difference is never a difference between machines,
+by the [Benchmarks workflow](.github/workflows/benchmarks.yml): links with
+100,000, 1,000,000 and 10,000,000 records and objects with 100,000 and
+1,000,000 records. These are the largest sizes that fit into the 6 hour limit
+of a job: one SQLite File repetition on 100,000,000 links did not finish in
+4.5 hours
+([run 37228604862](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37228604862)),
+and 1,000,000 blog posts already take an hour in C#. Pull requests check the
+whole pipeline on 1,000 records, and pushes to `main` update the results below.
+The workflow can also be started manually with other sizes.
 
 Run locally:
 

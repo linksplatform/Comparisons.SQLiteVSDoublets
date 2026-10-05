@@ -48,7 +48,7 @@ jobs:
         bits: [32, 64]
         size: ${{ fromJSON(inputs.sizes || (github.event_name == 'pull_request' && '[1000]') || '[100000, 1000000, 10000000]') }}
         exclude:
-          # One million blog posts already take hours in C#; ten millions would not fit into a job.
+          # One million blog posts already take an hour in C#; ten millions would not fit into a job.
           - category: objects
             size: 10000000
           - category: objects

@@ -134,42 +134,42 @@ Notes:
 
 ##### 100,000 links
 
-_10 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_10 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 9V45 96-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 1.72 µs | 125 ns | 606 ns | 693 ns | 765 ns | 766 ns | 3.36 µs | 2.17 µs | — |
-| SQLite File | 2.09 µs | 128 ns | 621 ns | 727 ns | 782 ns | 790 ns | 12.3 µs | 6.04 µs | 4.4 MiB |
-| Doublets United Volatile | 458 ns (3.76× faster) | 1.91 ns (65.7× faster) | 5.72 ns (106× faster) | 194 ns (3.57× faster) | 248 ns (3.09× faster) | 267 ns (2.86× faster) | 1.24 µs (2.72× faster) | 459 ns (4.72× faster) | — |
-| Doublets United NonVolatile | 499 ns (4.19× faster) | 1.91 ns (67.3× faster) | 5.88 ns (106× faster) | 214 ns (3.39× faster) | 278 ns (2.81× faster) | 288 ns (2.75× faster) | 1.29 µs (9.52× faster) | 484 ns (12.5× faster) | 32.0 MiB |
-| Doublets Split Volatile | 97.1 ns (17.7× faster) | 3.68 ns (34× faster) | 5.56 ns (109× faster) | 58.7 ns (11.8× faster) | 29.4 ns (26× faster) | 30.1 ns (25.5× faster) | 174 ns (19.3× faster) | 607 ns (3.57× faster) | — |
-| Doublets Split NonVolatile | 119 ns (17.6× faster) | 3.57 ns (36× faster) | 7.43 ns (83.6× faster) | 61.8 ns (11.8× faster) | 31.2 ns (25.1× faster) | 32 ns (24.7× faster) | 184 ns (66.8× faster) | 649 ns (9.31× faster) | 40.0 MiB |
+| SQLite Memory | 1.04 µs | 65.7 ns | 373 ns | 419 ns | 446 ns | 451 ns | 2.01 µs | 1.3 µs | — |
+| SQLite File | 1.34 µs | 68.6 ns | 379 ns | 435 ns | 464 ns | 459 ns | 7.6 µs | 3.77 µs | 4.4 MiB |
+| Doublets United Volatile | 299 ns (3.47× faster) | 1.18 ns (55.8× faster) | 2.57 ns (145× faster) | 121 ns (3.45× faster) | 140 ns (3.19× faster) | 151 ns (2.98× faster) | 753 ns (2.67× faster) | 290 ns (4.48× faster) | — |
+| Doublets United NonVolatile | 293 ns (4.57× faster) | 1.17 ns (58.4× faster) | 2.38 ns (159× faster) | 129 ns (3.37× faster) | 147 ns (3.16× faster) | 153 ns (3.01× faster) | 752 ns (10.1× faster) | 283 ns (13.3× faster) | 32.0 MiB |
+| Doublets Split Volatile | 58.9 ns (17.6× faster) | 2.34 ns (28.1× faster) | 2.42 ns (154× faster) | 35.9 ns (11.7× faster) | 17.8 ns (25.1× faster) | 17.9 ns (25.2× faster) | 106 ns (18.9× faster) | 358 ns (3.63× faster) | — |
+| Doublets Split NonVolatile | 56.7 ns (23.6× faster) | 2.25 ns (30.5× faster) | 2.27 ns (167× faster) | 36.5 ns (11.9× faster) | 18 ns (25.8× faster) | 18.2 ns (25.3× faster) | 110 ns (69.2× faster) | 373 ns (10.1× faster) | 40.0 MiB |
 
 ##### 1,000,000 links
 
-_3 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_3 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 9V45 96-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 2.39 µs | 124 ns | 874 ns | 983 ns | 997 ns | 1 µs | 6.48 µs | 4.26 µs | — |
-| SQLite File | 5.76 µs | 128 ns | 1.96 µs | 1.9 µs | 1.92 µs | 1.91 µs | 19 µs | 10.6 µs | 48.2 MiB |
-| Doublets United Volatile | 755 ns (3.16× faster) | 1.84 ns (67.5× faster) | 20.7 ns (42.2× faster) | 417 ns (2.36× faster) | 579 ns (1.72× faster) | 620 ns (1.61× faster) | 2.39 µs (2.71× faster) | 828 ns (5.14× faster) | — |
-| Doublets United NonVolatile | 868 ns (6.64× faster) | 2.11 ns (60.5× faster) | 22.7 ns (86.3× faster) | 502 ns (3.79× faster) | 681 ns (2.82× faster) | 689 ns (2.77× faster) | 2.62 µs (7.27× faster) | 914 ns (11.6× faster) | 32.0 MiB |
-| Doublets Split Volatile | 162 ns (14.7× faster) | 3.87 ns (32.1× faster) | 23 ns (38.1× faster) | 159 ns (6.2× faster) | 116 ns (8.58× faster) | 112 ns (8.96× faster) | 457 ns (14.2× faster) | 1.2 µs (3.55× faster) | — |
-| Doublets Split NonVolatile | 174 ns (33.1× faster) | 3.91 ns (32.7× faster) | 24.9 ns (78.6× faster) | 167 ns (11.4× faster) | 129 ns (14.9× faster) | 124 ns (15.4× faster) | 494 ns (38.6× faster) | 1.42 µs (7.5× faster) | 40.0 MiB |
+| SQLite Memory | 1.9 µs | 67.7 ns | 856 ns | 784 ns | 864 ns | 776 ns | 6.57 µs | 4.48 µs | — |
+| SQLite File | 4.27 µs | 70.1 ns | 1.44 µs | 1.39 µs | 1.35 µs | 1.33 µs | 13.7 µs | 7.8 µs | 48.2 MiB |
+| Doublets United Volatile | 902 ns (2.11× faster) | 1.25 ns (53.9× faster) | 23.3 ns (36.8× faster) | 581 ns (1.35× faster) | 837 ns (≈ same) | 893 ns (1.15× slower) | 3.42 µs (1.92× faster) | 1.11 µs (4.03× faster) | — |
+| Doublets United NonVolatile | 1.03 µs (4.15× faster) | 1.27 ns (55.3× faster) | 23.5 ns (61.2× faster) | 763 ns (1.82× faster) | 983 ns (1.37× faster) | 956 ns (1.39× faster) | 3.4 µs (4.03× faster) | 1.1 µs (7.1× faster) | 32.0 MiB |
+| Doublets Split Volatile | 231 ns (8.24× faster) | 2.37 ns (28.6× faster) | 22.2 ns (38.5× faster) | 190 ns (4.14× faster) | 115 ns (7.51× faster) | 120 ns (6.47× faster) | 488 ns (13.5× faster) | 1.41 µs (3.18× faster) | — |
+| Doublets Split NonVolatile | 238 ns (17.9× faster) | 2.39 ns (29.3× faster) | 22.6 ns (63.8× faster) | 198 ns (6.99× faster) | 115 ns (11.7× faster) | 122 ns (10.9× faster) | 473 ns (29× faster) | 1.32 µs (5.93× faster) | 40.0 MiB |
 
 ##### 10,000,000 links
 
-_1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 3.34 µs | 124 ns | 1.39 µs | 1.47 µs | 1.51 µs | 1.49 µs | 8.53 µs | 5.59 µs | — |
-| SQLite File | 9.22 µs | 127 ns | 2.18 µs | 2.57 µs | 2.56 µs | 2.53 µs | 24 µs | 14.5 µs | 501.0 MiB |
-| Doublets United Volatile | 2.16 µs (1.55× faster) | 2.26 ns (54.6× faster) | 35 ns (39.7× faster) | 1.26 µs (1.17× faster) | 1.56 µs (≈ same) | 1.61 µs (1.08× slower) | 6.55 µs (1.3× faster) | 2.73 µs (2.05× faster) | — |
-| Doublets United NonVolatile | 2.42 µs (3.81× faster) | 2.36 ns (53.5× faster) | 32.6 ns (66.8× faster) | 1.27 µs (2.02× faster) | 1.52 µs (1.68× faster) | 1.56 µs (1.62× faster) | 6.91 µs (3.48× faster) | 2.96 µs (4.89× faster) | 320.0 MiB |
-| Doublets Split Volatile | 317 ns (10.5× faster) | 3.88 ns (31.9× faster) | 30.1 ns (46.2× faster) | 240 ns (6.14× faster) | 170 ns (8.84× faster) | 169 ns (8.82× faster) | 752 ns (11.3× faster) | 2.64 µs (2.12× faster) | — |
-| Doublets Split NonVolatile | 467 ns (19.8× faster) | 3.94 ns (32.1× faster) | 34.7 ns (62.7× faster) | 251 ns (10.2× faster) | 181 ns (14.1× faster) | 187 ns (13.5× faster) | 781 ns (30.8× faster) | 2.92 µs (4.96× faster) | 400.0 MiB |
+| SQLite Memory | 3.88 µs | 103 ns | 1.52 µs | 1.61 µs | 1.65 µs | 1.64 µs | 9.22 µs | 6.12 µs | — |
+| SQLite File | 7.52 µs | 109 ns | 2.03 µs | 2.27 µs | 2.22 µs | 2.22 µs | 18.6 µs | 11.3 µs | 501.0 MiB |
+| Doublets United Volatile | 2.11 µs (1.84× faster) | 3.35 ns (30.8× faster) | 30.9 ns (49.1× faster) | 1.49 µs (1.08× faster) | 1.75 µs (1.06× slower) | 1.83 µs (1.12× slower) | 7.42 µs (1.24× faster) | 3.22 µs (1.9× faster) | — |
+| Doublets United NonVolatile | 2.84 µs (2.65× faster) | 3.59 ns (30.5× faster) | 30.5 ns (66.4× faster) | 1.58 µs (1.43× faster) | 1.82 µs (1.22× faster) | 1.82 µs (1.22× faster) | 8.17 µs (2.28× faster) | 3.68 µs (3.06× faster) | 320.0 MiB |
+| Doublets Split Volatile | 340 ns (11.4× faster) | 4.28 ns (24.1× faster) | 30.7 ns (49.4× faster) | 217 ns (7.43× faster) | 159 ns (10.4× faster) | 154 ns (10.7× faster) | 663 ns (13.9× faster) | 3.2 µs (1.91× faster) | — |
+| Doublets Split NonVolatile | 476 ns (15.8× faster) | 4.11 ns (26.6× faster) | 39.4 ns (51.5× faster) | 235 ns (9.67× faster) | 162 ns (13.7× faster) | 166 ns (13.4× faster) | 702 ns (26.6× faster) | 3.95 µs (2.85× faster) | 400.0 MiB |
 
 ![Rust doublets vs SQLite, 32 bit, links](docs/benchmarks/links-rust-32.png)
 
@@ -177,42 +177,42 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 
 
 ##### 100,000 links
 
-_10 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_10 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, INTEL(R) XEON(R) PLATINUM 8573C, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 1.69 µs | 126 ns | 616 ns | 721 ns | 752 ns | 743 ns | 3.12 µs | 2.01 µs | — |
-| SQLite File | 2.02 µs | 130 ns | 639 ns | 762 ns | 789 ns | 788 ns | 10.4 µs | 5.18 µs | 4.4 MiB |
-| Doublets United Volatile | 449 ns (3.77× faster) | 1.81 ns (69.8× faster) | 3.2 ns (192× faster) | 179 ns (4.04× faster) | 234 ns (3.21× faster) | 253 ns (2.94× faster) | 1.13 µs (2.75× faster) | 444 ns (4.54× faster) | — |
-| Doublets United NonVolatile | 471 ns (4.29× faster) | 1.89 ns (68.9× faster) | 3.52 ns (182× faster) | 198 ns (3.85× faster) | 255 ns (3.1× faster) | 269 ns (2.93× faster) | 1.19 µs (8.73× faster) | 462 ns (11.2× faster) | 64.0 MiB |
-| Doublets Split Volatile | 114 ns (14.8× faster) | 3.77 ns (33.5× faster) | 4.12 ns (149× faster) | 56.1 ns (12.9× faster) | 27.6 ns (27.2× faster) | 29.2 ns (25.4× faster) | 164 ns (19× faster) | 591 ns (3.41× faster) | — |
-| Doublets Split NonVolatile | 106 ns (19× faster) | 3.74 ns (34.8× faster) | 3.91 ns (164× faster) | 57 ns (13.4× faster) | 28.7 ns (27.5× faster) | 29.9 ns (26.4× faster) | 171 ns (61× faster) | 609 ns (8.49× faster) | 80.0 MiB |
+| SQLite Memory | 1.54 µs | 110 ns | 528 ns | 618 ns | 655 ns | 656 ns | 3.08 µs | 2.08 µs | — |
+| SQLite File | 1.94 µs | 116 ns | 545 ns | 653 ns | 682 ns | 692 ns | 8 µs | 4.35 µs | 4.4 MiB |
+| Doublets United Volatile | 492 ns (3.13× faster) | 2.63 ns (41.9× faster) | 6.11 ns (86.5× faster) | 208 ns (2.97× faster) | 250 ns (2.62× faster) | 268 ns (2.45× faster) | 1.38 µs (2.23× faster) | 520 ns (4× faster) | — |
+| Doublets United NonVolatile | 527 ns (3.69× faster) | 3.03 ns (38.4× faster) | 6.55 ns (83.2× faster) | 242 ns (2.69× faster) | 272 ns (2.51× faster) | 273 ns (2.54× faster) | 1.44 µs (5.57× faster) | 527 ns (8.26× faster) | 64.0 MiB |
+| Doublets Split Volatile | 101 ns (15.2× faster) | 3.37 ns (32.8× faster) | 6.35 ns (83.2× faster) | 68.5 ns (9.03× faster) | 40.3 ns (16.3× faster) | 40.2 ns (16.3× faster) | 208 ns (14.8× faster) | 672 ns (3.1× faster) | — |
+| Doublets Split NonVolatile | 108 ns (18× faster) | 3.79 ns (30.7× faster) | 7.23 ns (75.3× faster) | 70.3 ns (9.29× faster) | 43.2 ns (15.8× faster) | 41.7 ns (16.6× faster) | 209 ns (38.2× faster) | 706 ns (6.16× faster) | 80.0 MiB |
 
 ##### 1,000,000 links
 
-_3 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_3 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 2.09 µs | 124 ns | 745 ns | 839 ns | 879 ns | 858 ns | 4.77 µs | 3.14 µs | — |
-| SQLite File | 5.65 µs | 127 ns | 1.83 µs | 1.82 µs | 1.85 µs | 1.84 µs | 18.4 µs | 10.3 µs | 48.2 MiB |
-| Doublets United Volatile | 750 ns (2.79× faster) | 3.05 ns (40.4× faster) | 20.2 ns (36.9× faster) | 385 ns (2.18× faster) | 471 ns (1.87× faster) | 567 ns (1.51× faster) | 2.55 µs (1.87× faster) | 856 ns (3.66× faster) | — |
-| Doublets United NonVolatile | 840 ns (6.72× faster) | 3.5 ns (36.2× faster) | 22.7 ns (80.7× faster) | 495 ns (3.67× faster) | 622 ns (2.97× faster) | 642 ns (2.87× faster) | 2.91 µs (6.31× faster) | 1.02 µs (10× faster) | 64.0 MiB |
-| Doublets Split Volatile | 184 ns (11.4× faster) | 4.05 ns (30.5× faster) | 21.6 ns (34.5× faster) | 171 ns (4.9× faster) | 130 ns (6.76× faster) | 132 ns (6.5× faster) | 485 ns (9.83× faster) | 1.18 µs (2.65× faster) | — |
-| Doublets Split NonVolatile | 190 ns (29.8× faster) | 4.4 ns (28.8× faster) | 23.8 ns (76.9× faster) | 181 ns (10.1× faster) | 141 ns (13.1× faster) | 141 ns (13.1× faster) | 532 ns (34.5× faster) | 1.38 µs (7.43× faster) | 80.0 MiB |
+| SQLite Memory | 2.34 µs | 126 ns | 802 ns | 928 ns | 989 ns | 978 ns | 6.09 µs | 4.02 µs | — |
+| SQLite File | 5.88 µs | 131 ns | 1.96 µs | 1.9 µs | 1.99 µs | 1.93 µs | 19.2 µs | 10.7 µs | 48.2 MiB |
+| Doublets United Volatile | 1.38 µs (1.7× faster) | 3.31 ns (38× faster) | 22.6 ns (35.5× faster) | 761 ns (1.22× faster) | 931 ns (1.06× faster) | 1.02 µs (≈ same) | 4.09 µs (1.49× faster) | 1.54 µs (2.61× faster) | — |
+| Doublets United NonVolatile | 1.63 µs (3.6× faster) | 3.75 ns (34.9× faster) | 25.3 ns (77.2× faster) | 978 ns (1.95× faster) | 1.19 µs (1.67× faster) | 1.24 µs (1.56× faster) | 4.74 µs (4.05× faster) | 1.76 µs (6.1× faster) | 64.0 MiB |
+| Doublets Split Volatile | 306 ns (7.63× faster) | 4.33 ns (29× faster) | 23.2 ns (34.6× faster) | 224 ns (4.15× faster) | 159 ns (6.23× faster) | 159 ns (6.15× faster) | 639 ns (9.53× faster) | 1.85 µs (2.18× faster) | — |
+| Doublets Split NonVolatile | 323 ns (18.2× faster) | 4.75 ns (27.6× faster) | 26.9 ns (72.8× faster) | 230 ns (8.26× faster) | 173 ns (11.5× faster) | 173 ns (11.2× faster) | 723 ns (26.6× faster) | 2.07 µs (5.17× faster) | 80.0 MiB |
 
 ##### 10,000,000 links
 
-_1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, INTEL(R) XEON(R) PLATINUM 8573C, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, INTEL(R) XEON(R) PLATINUM 8573C, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 3.34 µs | 105 ns | 1.62 µs | 1.62 µs | 1.57 µs | 1.5 µs | 9.58 µs | 6.3 µs | — |
-| SQLite File | 7.41 µs | 106 ns | 1.81 µs | 2.05 µs | 1.98 µs | 1.97 µs | 18.3 µs | 10.9 µs | 501.0 MiB |
-| Doublets United Volatile | 2.38 µs (1.41× faster) | 6.42 ns (16.4× faster) | 22.4 ns (72.3× faster) | 1.3 µs (1.25× faster) | 1.43 µs (1.1× faster) | 2.3 µs (1.53× slower) | 6.59 µs (1.45× faster) | 2.48 µs (2.54× faster) | — |
-| Doublets United NonVolatile | 2.72 µs (2.72× faster) | 6.31 ns (16.9× faster) | 22.4 ns (81× faster) | 1.42 µs (1.44× faster) | 1.67 µs (1.19× faster) | 1.65 µs (1.19× faster) | 7.75 µs (2.36× faster) | 3.36 µs (3.25× faster) | 640.0 MiB |
-| Doublets Split Volatile | 363 ns (9.19× faster) | 6.9 ns (15.3× faster) | 23.4 ns (69.3× faster) | 246 ns (6.59× faster) | 141 ns (11.1× faster) | 148 ns (10.1× faster) | 728 ns (13.2× faster) | 3.05 µs (2.07× faster) | — |
-| Doublets Split NonVolatile | 644 ns (11.5× faster) | 7.01 ns (15.2× faster) | 26.2 ns (69.2× faster) | 240 ns (8.57× faster) | 143 ns (13.9× faster) | 145 ns (13.6× faster) | 709 ns (25.8× faster) | 3.62 µs (3.01× faster) | 800.0 MiB |
+| SQLite Memory | 4.47 µs | 110 ns | 1.86 µs | 2.01 µs | 1.95 µs | 1.94 µs | 11.2 µs | 7.68 µs | — |
+| SQLite File | 7.79 µs | 117 ns | 2.12 µs | 2.25 µs | 2.3 µs | 2.25 µs | 19.8 µs | 11.7 µs | 501.0 MiB |
+| Doublets United Volatile | 3.46 µs (1.29× faster) | 7.25 ns (15.1× faster) | 24 ns (77.6× faster) | 1.75 µs (1.15× faster) | 2.02 µs (≈ same) | 2.46 µs (1.26× slower) | 8.9 µs (1.26× faster) | 3.77 µs (2.04× faster) | — |
+| Doublets United NonVolatile | 4.38 µs (1.78× faster) | 7.58 ns (15.4× faster) | 29.2 ns (72.5× faster) | 2.07 µs (1.09× faster) | 2.28 µs (≈ same) | 2.36 µs (≈ same) | 11.3 µs (1.75× faster) | 4.87 µs (2.41× faster) | 640.0 MiB |
+| Doublets Split Volatile | 433 ns (10.3× faster) | 9.36 ns (11.7× faster) | 28 ns (66.4× faster) | 259 ns (7.76× faster) | 145 ns (13.4× faster) | 146 ns (13.3× faster) | 740 ns (15.1× faster) | 3.73 µs (2.06× faster) | — |
+| Doublets Split NonVolatile | 831 ns (9.38× faster) | 8.44 ns (13.8× faster) | 30.8 ns (68.7× faster) | 271 ns (8.32× faster) | 162 ns (14.2× faster) | 169 ns (13.3× faster) | 805 ns (24.6× faster) | 4.59 µs (2.55× faster) | 800.0 MiB |
 
 ![Rust doublets vs SQLite, 64 bit, links](docs/benchmarks/links-rust-64.png)
 
@@ -222,42 +222,42 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 
 
 ##### 100,000 links
 
-_10 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_10 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 6.27 µs | 380 ns | 1.2 µs | 1.46 µs | 1.51 µs | 1.5 µs | 4.27 µs | 2.84 µs | — |
-| SQLite File | 5.75 µs | 385 ns | 1.21 µs | 1.48 µs | 1.52 µs | 1.52 µs | 12.2 µs | 6.22 µs | 4.4 MiB |
-| Doublets United Volatile | 1.02 µs (6.12× faster) | 14.9 ns (25.5× faster) | 60.1 ns (20× faster) | 226 ns (6.45× faster) | 350 ns (4.32× faster) | 264 ns (5.67× faster) | 2.03 µs (2.1× faster) | 1.05 µs (2.7× faster) | — |
-| Doublets United NonVolatile | 1.08 µs (5.32× faster) | 14.8 ns (26× faster) | 60.5 ns (20× faster) | 258 ns (5.73× faster) | 366 ns (4.17× faster) | 267 ns (5.68× faster) | 2.11 µs (5.76× faster) | 1.06 µs (5.89× faster) | 32.0 MiB |
-| Doublets Split Volatile | 192 ns (32.7× faster) | 16 ns (23.7× faster) | 69.6 ns (17.2× faster) | 107 ns (13.7× faster) | 84.5 ns (17.9× faster) | 84.8 ns (17.7× faster) | 218 ns (19.6× faster) | 276 ns (10.3× faster) | — |
-| Doublets Split NonVolatile | 241 ns (23.9× faster) | 16.5 ns (23.4× faster) | 69.1 ns (17.5× faster) | 110 ns (13.5× faster) | 86.7 ns (17.6× faster) | 86.4 ns (17.6× faster) | 225 ns (54.1× faster) | 263 ns (23.6× faster) | 40.0 MiB |
+| SQLite Memory | 2.47 µs | 379 ns | 1.18 µs | 1.47 µs | 1.52 µs | 1.5 µs | 4.28 µs | 2.87 µs | — |
+| SQLite File | 2.84 µs | 387 ns | 1.2 µs | 1.49 µs | 1.55 µs | 1.54 µs | 12.4 µs | 6.41 µs | 4.4 MiB |
+| Doublets United Volatile | 1.04 µs (2.37× faster) | 15.5 ns (24.4× faster) | 67.3 ns (17.5× faster) | 243 ns (6.05× faster) | 275 ns (5.52× faster) | 282 ns (5.31× faster) | 2.19 µs (1.96× faster) | 1.16 µs (2.46× faster) | — |
+| Doublets United NonVolatile | 1.08 µs (2.63× faster) | 15.5 ns (24.9× faster) | 63.8 ns (18.9× faster) | 264 ns (5.64× faster) | 382 ns (4.05× faster) | 272 ns (5.68× faster) | 2.19 µs (5.65× faster) | 1.11 µs (5.78× faster) | 32.0 MiB |
+| Doublets Split Volatile | 198 ns (12.5× faster) | 16.3 ns (23.2× faster) | 68.8 ns (17.1× faster) | 116 ns (12.7× faster) | 99.1 ns (15.3× faster) | 86.9 ns (17.2× faster) | 228 ns (18.8× faster) | 290 ns (9.89× faster) | — |
+| Doublets Split NonVolatile | 257 ns (11.1× faster) | 16.7 ns (23.1× faster) | 68.9 ns (17.5× faster) | 122 ns (12.2× faster) | 93.7 ns (16.5× faster) | 91.5 ns (16.8× faster) | 235 ns (52.6× faster) | 265 ns (24.2× faster) | 40.0 MiB |
 
 ##### 1,000,000 links
 
-_3 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, Intel(R) Xeon(R) 6973P-C, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_3 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 9V45 96-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 7.05 µs | 428 ns | 1.51 µs | 1.69 µs | 1.76 µs | 1.77 µs | 6.76 µs | 4.12 µs | — |
-| SQLite File | 6.89 µs | 385 ns | 1.81 µs | 1.95 µs | 2.02 µs | 2.04 µs | 12.3 µs | 8.07 µs | 48.2 MiB |
-| Doublets United Volatile | 1.7 µs (4.16× faster) | 16.4 ns (26.1× faster) | 117 ns (12.9× faster) | 574 ns (2.94× faster) | 691 ns (2.55× faster) | 824 ns (2.15× faster) | 4.3 µs (1.57× faster) | 1.85 µs (2.23× faster) | — |
-| Doublets United NonVolatile | 1.85 µs (3.72× faster) | 16.5 ns (23.4× faster) | 123 ns (14.7× faster) | 688 ns (2.83× faster) | 861 ns (2.35× faster) | 982 ns (2.07× faster) | 4.93 µs (2.49× faster) | 2.25 µs (3.59× faster) | 32.0 MiB |
-| Doublets Split Volatile | 400 ns (17.6× faster) | 16.8 ns (25.5× faster) | 231 ns (6.54× faster) | 396 ns (4.26× faster) | 324 ns (5.44× faster) | 338 ns (5.24× faster) | 594 ns (11.4× faster) | 674 ns (6.11× faster) | — |
-| Doublets Split NonVolatile | 467 ns (14.8× faster) | 17.6 ns (21.9× faster) | 238 ns (7.58× faster) | 439 ns (4.43× faster) | 369 ns (5.49× faster) | 357 ns (5.7× faster) | 618 ns (19.9× faster) | 601 ns (13.4× faster) | 40.0 MiB |
+| SQLite Memory | 2.05 µs | 313 ns | 1.01 µs | 1.15 µs | 1.18 µs | 1.16 µs | 5.52 µs | 3.72 µs | — |
+| SQLite File | 4.83 µs | 315 ns | 1.83 µs | 1.83 µs | 1.9 µs | 1.89 µs | 14.8 µs | 8.63 µs | 48.2 MiB |
+| Doublets United Volatile | 1.32 µs (1.56× faster) | 8.41 ns (37.2× faster) | 149 ns (6.8× faster) | 621 ns (1.86× faster) | 824 ns (1.43× faster) | 783 ns (1.49× faster) | 4.43 µs (1.25× faster) | 1.81 µs (2.06× faster) | — |
+| Doublets United NonVolatile | 1.67 µs (2.88× faster) | 8.31 ns (38× faster) | 133 ns (13.8× faster) | 667 ns (2.74× faster) | 883 ns (2.15× faster) | 744 ns (2.54× faster) | 4.93 µs (3.01× faster) | 2.02 µs (4.26× faster) | 32.0 MiB |
+| Doublets Split Volatile | 302 ns (6.8× faster) | 7.07 ns (44.3× faster) | 163 ns (6.21× faster) | 391 ns (2.95× faster) | 308 ns (3.83× faster) | 297 ns (3.92× faster) | 576 ns (9.57× faster) | 484 ns (7.68× faster) | — |
+| Doublets Split NonVolatile | 360 ns (13.4× faster) | 7.07 ns (44.6× faster) | 162 ns (11.3× faster) | 379 ns (4.83× faster) | 310 ns (6.12× faster) | 302 ns (6.26× faster) | 582 ns (25.5× faster) | 490 ns (17.6× faster) | 40.0 MiB |
 
 ##### 10,000,000 links
 
-_1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 7.41 µs | 316 ns | 1.86 µs | 2.01 µs | 2.06 µs | 2.06 µs | 9.49 µs | 6.49 µs | — |
-| SQLite File | 18.2 µs | 318 ns | 2.72 µs | 3.16 µs | 3.11 µs | 3.1 µs | 24.6 µs | 14.8 µs | 501.0 MiB |
-| Doublets United Volatile | 3.01 µs (2.46× faster) | 10 ns (31.6× faster) | 181 ns (10.3× faster) | 1.45 µs (1.39× faster) | 1.67 µs (1.23× faster) | 1.88 µs (1.1× faster) | 8.16 µs (1.16× faster) | 3.52 µs (1.85× faster) | — |
-| Doublets United NonVolatile | 3.95 µs (4.61× faster) | 14.1 ns (22.6× faster) | 187 ns (14.5× faster) | 1.44 µs (2.19× faster) | 1.64 µs (1.9× faster) | 1.93 µs (1.61× faster) | 8.99 µs (2.74× faster) | 4.35 µs (3.39× faster) | 320.0 MiB |
-| Doublets Split Volatile | 431 ns (17.2× faster) | 10.3 ns (30.8× faster) | 199 ns (9.3× faster) | 475 ns (4.23× faster) | 323 ns (6.38× faster) | 324 ns (6.37× faster) | 795 ns (11.9× faster) | 574 ns (11.3× faster) | — |
-| Doublets Split NonVolatile | 1.16 µs (15.7× faster) | 9.1 ns (35× faster) | 211 ns (12.9× faster) | 508 ns (6.21× faster) | 354 ns (8.79× faster) | 357 ns (8.69× faster) | 1.01 µs (24.5× faster) | 780 ns (18.9× faster) | 400.0 MiB |
+| SQLite Memory | 4.26 µs | 311 ns | 2.02 µs | 2.2 µs | 2.12 µs | 2.11 µs | 9.69 µs | 6.89 µs | — |
+| SQLite File | 9.68 µs | 315 ns | 2.74 µs | 3.3 µs | 3.19 µs | 3.18 µs | 26 µs | 15.5 µs | 501.0 MiB |
+| Doublets United Volatile | 3.36 µs (1.27× faster) | 11.9 ns (26.2× faster) | 164 ns (12.3× faster) | 1.39 µs (1.58× faster) | 1.61 µs (1.32× faster) | 1.46 µs (1.45× faster) | 7.94 µs (1.22× faster) | 3.77 µs (1.83× faster) | — |
+| Doublets United NonVolatile | 4.98 µs (1.95× faster) | 11.6 ns (27.1× faster) | 192 ns (14.3× faster) | 1.9 µs (1.74× faster) | 2.2 µs (1.45× faster) | 1.95 µs (1.63× faster) | 9.83 µs (2.64× faster) | 4.65 µs (3.34× faster) | 320.0 MiB |
+| Doublets Split Volatile | 416 ns (10.2× faster) | 11.3 ns (27.5× faster) | 187 ns (10.8× faster) | 452 ns (4.86× faster) | 315 ns (6.73× faster) | 315 ns (6.71× faster) | 788 ns (12.3× faster) | 576 ns (12× faster) | — |
+| Doublets Split NonVolatile | 1.2 µs (8.08× faster) | 11.2 ns (28× faster) | 210 ns (13× faster) | 513 ns (6.44× faster) | 358 ns (8.91× faster) | 355 ns (8.96× faster) | 1.07 µs (24.4× faster) | 847 ns (18.3× faster) | 400.0 MiB |
 
 ![C# doublets vs SQLite, 32 bit, links](docs/benchmarks/links-csharp-32.png)
 
@@ -265,42 +265,42 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 
 
 ##### 100,000 links
 
-_10 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, Intel(R) Xeon(R) 6973P-C, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_10 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, Intel(R) Xeon(R) 6973P-C, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 4.63 µs | 355 ns | 882 ns | 1.07 µs | 1.12 µs | 1.13 µs | 3.45 µs | 2.3 µs | — |
-| SQLite File | 3.83 µs | 363 ns | 844 ns | 1.03 µs | 1.07 µs | 1.08 µs | 7.17 µs | 4.04 µs | 4.4 MiB |
-| Doublets United Volatile | 1.12 µs (4.12× faster) | 19.6 ns (18.1× faster) | 65 ns (13.6× faster) | 223 ns (4.81× faster) | 265 ns (4.23× faster) | 371 ns (3.04× faster) | 2.49 µs (1.39× faster) | 1.24 µs (1.86× faster) | — |
-| Doublets United NonVolatile | 1.2 µs (3.19× faster) | 20.8 ns (17.4× faster) | 73 ns (11.6× faster) | 279 ns (3.68× faster) | 360 ns (2.96× faster) | 299 ns (3.61× faster) | 2.57 µs (2.8× faster) | 1.24 µs (3.26× faster) | 64.0 MiB |
-| Doublets Split Volatile | 247 ns (18.8× faster) | 15.4 ns (23.1× faster) | 91.2 ns (9.67× faster) | 130 ns (8.23× faster) | 118 ns (9.54× faster) | 113 ns (9.98× faster) | 234 ns (14.8× faster) | 296 ns (7.76× faster) | — |
-| Doublets Split NonVolatile | 278 ns (13.8× faster) | 14 ns (26× faster) | 86.6 ns (9.74× faster) | 128 ns (8.03× faster) | 118 ns (9.03× faster) | 116 ns (9.32× faster) | 236 ns (30.4× faster) | 266 ns (15.2× faster) | 80.0 MiB |
+| SQLite Memory | 1.63 µs | 323 ns | 821 ns | 1.01 µs | 1.06 µs | 1.07 µs | 3.2 µs | 2.15 µs | — |
+| SQLite File | 2 µs | 358 ns | 915 ns | 1.09 µs | 1.14 µs | 1.17 µs | 7.53 µs | 4.17 µs | 4.4 MiB |
+| Doublets United Volatile | 1.23 µs (1.33× faster) | 20 ns (16.2× faster) | 83.6 ns (9.81× faster) | 250 ns (4.04× faster) | 292 ns (3.61× faster) | 319 ns (3.36× faster) | 2.59 µs (1.23× faster) | 1.28 µs (1.67× faster) | — |
+| Doublets United NonVolatile | 1.26 µs (1.59× faster) | 20.2 ns (17.8× faster) | 70.5 ns (13× faster) | 291 ns (3.75× faster) | 387 ns (2.95× faster) | 309 ns (3.8× faster) | 2.66 µs (2.83× faster) | 1.28 µs (3.24× faster) | 64.0 MiB |
+| Doublets Split Volatile | 231 ns (7.06× faster) | 21.4 ns (15.1× faster) | 88.6 ns (9.26× faster) | 130 ns (7.76× faster) | 119 ns (8.84× faster) | 117 ns (9.14× faster) | 231 ns (13.9× faster) | 297 ns (7.23× faster) | — |
+| Doublets Split NonVolatile | 286 ns (6.99× faster) | 20.5 ns (17.5× faster) | 91 ns (10.1× faster) | 139 ns (7.84× faster) | 128 ns (8.89× faster) | 123 ns (9.53× faster) | 243 ns (31× faster) | 271 ns (15.4× faster) | 80.0 MiB |
 
 ##### 1,000,000 links
 
-_3 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_3 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 7.39 µs | 386 ns | 1.49 µs | 1.8 µs | 1.83 µs | 1.83 µs | 7.12 µs | 4.86 µs | — |
-| SQLite File | 9.97 µs | 386 ns | 2.64 µs | 2.76 µs | 2.84 µs | 2.86 µs | 21 µs | 11.7 µs | 48.2 MiB |
-| Doublets United Volatile | 2.15 µs (3.44× faster) | 22.3 ns (17.3× faster) | 162 ns (9.17× faster) | 576 ns (3.12× faster) | 687 ns (2.66× faster) | 918 ns (2× faster) | 5.14 µs (1.39× faster) | 2.32 µs (2.1× faster) | — |
-| Doublets United NonVolatile | 2.2 µs (4.54× faster) | 21.6 ns (17.8× faster) | 169 ns (15.6× faster) | 710 ns (3.89× faster) | 826 ns (3.44× faster) | 1.01 µs (2.83× faster) | 5.66 µs (3.7× faster) | 2.58 µs (4.55× faster) | 64.0 MiB |
-| Doublets Split Volatile | 366 ns (20.2× faster) | 20.8 ns (18.6× faster) | 220 ns (6.75× faster) | 328 ns (5.49× faster) | 280 ns (6.51× faster) | 282 ns (6.51× faster) | 658 ns (10.8× faster) | 567 ns (8.57× faster) | — |
-| Doublets Split NonVolatile | 458 ns (21.8× faster) | 21.2 ns (18.2× faster) | 245 ns (10.8× faster) | 369 ns (7.48× faster) | 317 ns (8.97× faster) | 323 ns (8.84× faster) | 716 ns (29.3× faster) | 580 ns (20.2× faster) | 80.0 MiB |
+| SQLite Memory | 3.23 µs | 380 ns | 1.68 µs | 1.89 µs | 1.98 µs | 1.88 µs | 7.78 µs | 5.42 µs | — |
+| SQLite File | 6.7 µs | 382 ns | 2.67 µs | 2.7 µs | 2.77 µs | 2.79 µs | 20.6 µs | 11.7 µs | 48.2 MiB |
+| Doublets United Volatile | 2.07 µs (1.56× faster) | 21.5 ns (17.7× faster) | 157 ns (10.7× faster) | 625 ns (3.03× faster) | 966 ns (2.05× faster) | 758 ns (2.49× faster) | 5.22 µs (1.49× faster) | 2.32 µs (2.33× faster) | — |
+| Doublets United NonVolatile | 2.28 µs (2.94× faster) | 21.8 ns (17.5× faster) | 176 ns (15.1× faster) | 760 ns (3.56× faster) | 975 ns (2.84× faster) | 786 ns (3.54× faster) | 5.33 µs (3.86× faster) | 2.55 µs (4.59× faster) | 64.0 MiB |
+| Doublets Split Volatile | 381 ns (8.49× faster) | 13.3 ns (28.7× faster) | 220 ns (7.65× faster) | 344 ns (5.5× faster) | 262 ns (7.57× faster) | 276 ns (6.82× faster) | 667 ns (11.7× faster) | 559 ns (9.69× faster) | — |
+| Doublets Split NonVolatile | 472 ns (14.2× faster) | 13.7 ns (27.9× faster) | 233 ns (11.5× faster) | 364 ns (7.42× faster) | 291 ns (9.52× faster) | 297 ns (9.38× faster) | 709 ns (29× faster) | 566 ns (20.6× faster) | 80.0 MiB |
 
 ##### 10,000,000 links
 
-_1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 8.4 µs | 384 ns | 1.89 µs | 2.21 µs | 2.18 µs | 2.16 µs | 9.45 µs | 6.63 µs | — |
-| SQLite File | 20 µs | 383 ns | 2.88 µs | 3.38 µs | 3.32 µs | 3.32 µs | 25.4 µs | 15.3 µs | 501.0 MiB |
-| Doublets United Volatile | 3.04 µs (2.76× faster) | 13.9 ns (27.7× faster) | 180 ns (10.5× faster) | 1.31 µs (1.69× faster) | 1.5 µs (1.45× faster) | 1.75 µs (1.24× faster) | 8.6 µs (1.1× faster) | 3.84 µs (1.72× faster) | — |
-| Doublets United NonVolatile | 4.43 µs (4.52× faster) | 21.6 ns (17.7× faster) | 172 ns (16.8× faster) | 1.36 µs (2.49× faster) | 1.55 µs (2.14× faster) | 1.65 µs (2.01× faster) | 9.64 µs (2.63× faster) | 4.78 µs (3.19× faster) | 640.0 MiB |
-| Doublets Split Volatile | 458 ns (18.4× faster) | 13 ns (29.5× faster) | 308 ns (6.12× faster) | 445 ns (4.97× faster) | 329 ns (6.64× faster) | 350 ns (6.17× faster) | 908 ns (10.4× faster) | 725 ns (9.14× faster) | — |
-| Doublets Split NonVolatile | 1.26 µs (15.8× faster) | 11.9 ns (32.3× faster) | 326 ns (8.84× faster) | 467 ns (7.24× faster) | 332 ns (10× faster) | 345 ns (9.64× faster) | 1.05 µs (24.2× faster) | 875 ns (17.4× faster) | 800.0 MiB |
+| SQLite Memory | 4.28 µs | 327 ns | 2.03 µs | 2.19 µs | 2.25 µs | 2.27 µs | 10.1 µs | 6.93 µs | — |
+| SQLite File | 10.2 µs | 322 ns | 2.76 µs | 3.26 µs | 3.2 µs | 3.15 µs | 25 µs | 15.3 µs | 501.0 MiB |
+| Doublets United Volatile | 3.68 µs (1.16× faster) | 18.1 ns (18.1× faster) | 175 ns (11.6× faster) | 1.34 µs (1.64× faster) | 1.61 µs (1.4× faster) | 1.87 µs (1.21× faster) | 9.07 µs (1.12× faster) | 4.07 µs (1.7× faster) | — |
+| Doublets United NonVolatile | 6.39 µs (1.59× faster) | 17.9 ns (18× faster) | 189 ns (14.6× faster) | 2.06 µs (1.58× faster) | 2.53 µs (1.26× faster) | 2.35 µs (1.34× faster) | 13.5 µs (1.85× faster) | 6.32 µs (2.42× faster) | 640.0 MiB |
+| Doublets Split Volatile | 505 ns (8.49× faster) | 18.1 ns (18.1× faster) | 240 ns (8.45× faster) | 572 ns (3.83× faster) | 369 ns (6.1× faster) | 379 ns (6× faster) | 927 ns (10.9× faster) | 659 ns (10.5× faster) | — |
+| Doublets Split NonVolatile | 2.04 µs (4.99× faster) | 18.2 ns (17.7× faster) | 233 ns (11.8× faster) | 598 ns (5.46× faster) | 410 ns (7.8× faster) | 426 ns (7.39× faster) | 1.03 µs (24.4× faster) | 661 ns (23.1× faster) | 800.0 MiB |
 
 ![C# doublets vs SQLite, 64 bit, links](docs/benchmarks/links-csharp-64.png)
 
@@ -312,37 +312,37 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 
 
 ##### 100,000 blog posts
 
-_5 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, Intel(R) Xeon(R) 6973P-C, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_5 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 838 ns | 485 ns | 1.37 µs | 1.49 µs | — |
-| SQLite File | 4.96 µs | 476 ns | 1.63 µs | 8.03 µs | 78.3 MiB |
-| Doublets United Volatile Cached | 4.58 µs (5.46× slower) | 1.35 µs (2.79× slower) | 2 µs (1.46× slower) | 4.51 µs (3.03× slower) | — |
-| Doublets United Volatile Uncached | 95.5 µs (114× slower) | 7.59 µs (15.7× slower) | 8.21 µs (5.99× slower) | 4.52 µs (3.04× slower) | — |
-| Doublets United NonVolatile Cached | 4.87 µs (≈ same) | 1.41 µs (2.96× slower) | 2.25 µs (1.38× slower) | 4.82 µs (1.66× faster) | 32.0 MiB |
-| Doublets United NonVolatile Uncached | 92.7 µs (18.7× slower) | 7.8 µs (16.4× slower) | 8.54 µs (5.24× slower) | 4.86 µs (1.65× faster) | 32.0 MiB |
-| Doublets Split Volatile Cached | 2.89 µs (3.45× slower) | 698 ns (1.44× slower) | 601 ns (2.28× faster) | 2.18 µs (1.47× slower) | — |
-| Doublets Split Volatile Uncached | 36.3 µs (43.3× slower) | 9.78 µs (20.2× slower) | 10.1 µs (7.36× slower) | 2.11 µs (1.42× slower) | — |
-| Doublets Split NonVolatile Cached | 2.84 µs (1.75× faster) | 641 ns (1.35× slower) | 588 ns (2.77× faster) | 2.33 µs (3.45× faster) | 40.0 MiB |
-| Doublets Split NonVolatile Uncached | 35.9 µs (7.23× slower) | 9.33 µs (19.6× slower) | 9.69 µs (5.94× slower) | 2.37 µs (3.39× faster) | 40.0 MiB |
+| SQLite Memory | 1.02 µs | 523 ns | 1.37 µs | 1.91 µs | — |
+| SQLite File | 5.51 µs | 529 ns | 2.4 µs | 14.9 µs | 78.3 MiB |
+| Doublets United Volatile Cached | 4.44 µs (4.35× slower) | 1.14 µs (2.17× slower) | 2.16 µs (1.58× slower) | 6.6 µs (3.46× slower) | — |
+| Doublets United Volatile Uncached | 65.4 µs (64.1× slower) | 7.63 µs (14.6× slower) | 8.95 µs (6.55× slower) | 6.29 µs (3.3× slower) | — |
+| Doublets United NonVolatile Cached | 4.6 µs (1.2× faster) | 1.12 µs (2.12× slower) | 2.13 µs (1.12× faster) | 6.84 µs (2.18× faster) | 32.0 MiB |
+| Doublets United NonVolatile Uncached | 67.7 µs (12.3× slower) | 7.5 µs (14.2× slower) | 8.92 µs (3.72× slower) | 6.46 µs (2.31× faster) | 32.0 MiB |
+| Doublets Split Volatile Cached | 2.81 µs (2.76× slower) | 634 ns (1.21× slower) | 699 ns (1.95× faster) | 3.49 µs (1.83× slower) | — |
+| Doublets Split Volatile Uncached | 25.1 µs (24.6× slower) | 10.7 µs (20.5× slower) | 11.1 µs (8.15× slower) | 2.44 µs (1.28× slower) | — |
+| Doublets Split NonVolatile Cached | 2.71 µs (2.03× faster) | 595 ns (1.13× slower) | 603 ns (3.98× faster) | 2.99 µs (4.98× faster) | 40.0 MiB |
+| Doublets Split NonVolatile Uncached | 26 µs (4.71× slower) | 10.6 µs (20× slower) | 11.1 µs (4.61× slower) | 2.86 µs (5.21× faster) | 40.0 MiB |
 
 ##### 1,000,000 blog posts
 
-_1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, INTEL(R) XEON(R) PLATINUM 8573C, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 965 ns | 478 ns | 2.06 µs | 2.7 µs | — |
-| SQLite File | 5.93 µs | 470 ns | 2.71 µs | 11.1 µs | 783.2 MiB |
-| Doublets United Volatile Cached | 6.88 µs (7.13× slower) | 1.64 µs (3.42× slower) | 3.23 µs (1.56× slower) | 10.7 µs (3.97× slower) | — |
-| Doublets United Volatile Uncached | 113 µs (117× slower) | 8.34 µs (17.4× slower) | 10.3 µs (5× slower) | 9.72 µs (3.6× slower) | — |
-| Doublets United NonVolatile Cached | 7.85 µs (1.32× slower) | 1.61 µs (3.43× slower) | 3.15 µs (1.16× slower) | 10.4 µs (1.06× faster) | 320.0 MiB |
-| Doublets United NonVolatile Uncached | 121 µs (20.3× slower) | 8.46 µs (18× slower) | 10.4 µs (3.83× slower) | 10.4 µs (1.06× faster) | 320.0 MiB |
-| Doublets Split Volatile Cached | 4.16 µs (4.32× slower) | 914 ns (1.91× slower) | 1.06 µs (1.95× faster) | 4.99 µs (1.85× slower) | — |
-| Doublets Split Volatile Uncached | 39.3 µs (40.7× slower) | 11.2 µs (23.4× slower) | 11.7 µs (5.69× slower) | 4.8 µs (1.78× slower) | — |
-| Doublets Split NonVolatile Cached | 5.52 µs (1.08× faster) | 913 ns (1.94× slower) | 1.12 µs (2.42× faster) | 5.7 µs (1.94× faster) | 400.0 MiB |
-| Doublets Split NonVolatile Uncached | 41.6 µs (7.02× slower) | 11.1 µs (23.7× slower) | 11.7 µs (4.3× slower) | 5.88 µs (1.88× faster) | 400.0 MiB |
+| SQLite Memory | 1.4 µs | 608 ns | 2.2 µs | 3.44 µs | — |
+| SQLite File | 3.45 µs | 636 ns | 3.69 µs | 10.5 µs | 783.2 MiB |
+| Doublets United Volatile Cached | 7.53 µs (5.37× slower) | 1.56 µs (2.57× slower) | 3.31 µs (1.51× slower) | 12.1 µs (3.53× slower) | — |
+| Doublets United Volatile Uncached | 102 µs (72.5× slower) | 9.58 µs (15.8× slower) | 12.1 µs (5.52× slower) | 12.2 µs (3.56× slower) | — |
+| Doublets United NonVolatile Cached | 8.5 µs (2.47× slower) | 1.57 µs (2.47× slower) | 3.39 µs (1.09× faster) | 12.4 µs (1.18× slower) | 320.0 MiB |
+| Doublets United NonVolatile Uncached | 106 µs (30.8× slower) | 9.78 µs (15.4× slower) | 11.6 µs (3.14× slower) | 11.3 µs (1.07× slower) | 320.0 MiB |
+| Doublets Split Volatile Cached | 5.27 µs (3.76× slower) | 919 ns (1.51× slower) | 960 ns (2.29× faster) | 6.36 µs (1.85× slower) | — |
+| Doublets Split Volatile Uncached | 45.4 µs (32.3× slower) | 14.7 µs (24.1× slower) | 15.3 µs (6.97× slower) | 6.65 µs (1.94× slower) | — |
+| Doublets Split NonVolatile Cached | 6.32 µs (1.83× slower) | 878 ns (1.38× slower) | 922 ns (4× faster) | 7.58 µs (1.38× faster) | 400.0 MiB |
+| Doublets Split NonVolatile Uncached | 50.9 µs (14.8× slower) | 15.4 µs (24.2× slower) | 16.2 µs (4.38× slower) | 8.35 µs (1.26× faster) | 400.0 MiB |
 
 ![Rust doublets vs SQLite, 32 bit, objects](docs/benchmarks/objects-rust-32.png)
 
@@ -350,37 +350,37 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 
 
 ##### 100,000 blog posts
 
-_5 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_5 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 9V45 96-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 1.22 µs | 548 ns | 1.44 µs | 1.7 µs | — |
-| SQLite File | 2.01 µs | 625 ns | 2.6 µs | 7.27 µs | 78.3 MiB |
-| Doublets United Volatile Cached | 5.17 µs (4.22× slower) | 1.46 µs (2.67× slower) | 2.25 µs (1.57× slower) | 6.12 µs (3.6× slower) | — |
-| Doublets United Volatile Uncached | 95.7 µs (78.2× slower) | 9.79 µs (17.9× slower) | 10.7 µs (7.47× slower) | 5.33 µs (3.13× slower) | — |
-| Doublets United NonVolatile Cached | 5.58 µs (2.78× slower) | 1.45 µs (2.32× slower) | 2.13 µs (1.22× faster) | 5.65 µs (1.29× faster) | 64.0 MiB |
-| Doublets United NonVolatile Uncached | 99.7 µs (49.7× slower) | 9.73 µs (15.6× slower) | 11 µs (4.22× slower) | 5.68 µs (1.28× faster) | 64.0 MiB |
-| Doublets Split Volatile Cached | 3.39 µs (2.77× slower) | 771 ns (1.41× slower) | 608 ns (2.37× faster) | 2.94 µs (1.73× slower) | — |
-| Doublets Split Volatile Uncached | 48.1 µs (39.3× slower) | 14.1 µs (25.7× slower) | 14.5 µs (10.1× slower) | 2.97 µs (1.75× slower) | — |
-| Doublets Split NonVolatile Cached | 3.75 µs (1.87× slower) | 801 ns (1.28× slower) | 634 ns (4.09× faster) | 3.68 µs (1.98× faster) | 80.0 MiB |
-| Doublets Split NonVolatile Uncached | 47.4 µs (23.6× slower) | 14.1 µs (22.5× slower) | 14.6 µs (5.6× slower) | 3.23 µs (2.25× faster) | 80.0 MiB |
+| SQLite Memory | 801 ns | 516 ns | 1.2 µs | 1.48 µs | — |
+| SQLite File | 5.53 µs | 429 ns | 1.79 µs | 10.2 µs | 78.3 MiB |
+| Doublets United Volatile Cached | 3.59 µs (4.48× slower) | 1.3 µs (2.52× slower) | 2.41 µs (2.02× slower) | 6.82 µs (4.61× slower) | — |
+| Doublets United Volatile Uncached | 55.2 µs (68.9× slower) | 6.6 µs (12.8× slower) | 8.02 µs (6.71× slower) | 6.94 µs (4.69× slower) | — |
+| Doublets United NonVolatile Cached | 3.69 µs (1.5× faster) | 1.29 µs (3.01× slower) | 2.34 µs (1.31× slower) | 5.39 µs (1.89× faster) | 64.0 MiB |
+| Doublets United NonVolatile Uncached | 54.8 µs (9.93× slower) | 6.47 µs (15.1× slower) | 7.83 µs (4.39× slower) | 6.51 µs (1.57× faster) | 64.0 MiB |
+| Doublets Split Volatile Cached | 2.46 µs (3.07× slower) | 511 ns (≈ same) | 603 ns (1.98× faster) | 3.76 µs (2.54× slower) | — |
+| Doublets Split Volatile Uncached | 28.4 µs (35.4× slower) | 8.02 µs (15.5× slower) | 8.47 µs (7.09× slower) | 3.65 µs (2.47× slower) | — |
+| Doublets Split NonVolatile Cached | 2.58 µs (2.14× faster) | 519 ns (1.21× slower) | 582 ns (3.07× faster) | 3.87 µs (2.64× faster) | 80.0 MiB |
+| Doublets Split NonVolatile Uncached | 28.4 µs (5.15× slower) | 8.21 µs (19.2× slower) | 8.72 µs (4.89× slower) | 3.69 µs (2.76× faster) | 80.0 MiB |
 
 ##### 1,000,000 blog posts
 
-_1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, INTEL(R) XEON(R) PLATINUM 8573C, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 971 ns | 481 ns | 2.07 µs | 2.66 µs | — |
-| SQLite File | 5.28 µs | 466 ns | 2.69 µs | 10.8 µs | 783.2 MiB |
-| Doublets United Volatile Cached | 7.42 µs (7.64× slower) | 1.77 µs (3.69× slower) | 3.27 µs (1.58× slower) | 11 µs (4.13× slower) | — |
-| Doublets United Volatile Uncached | 114 µs (117× slower) | 8.55 µs (17.8× slower) | 10.8 µs (5.19× slower) | 11.8 µs (4.44× slower) | — |
-| Doublets United NonVolatile Cached | 9.17 µs (1.74× slower) | 1.72 µs (3.69× slower) | 3.45 µs (1.28× slower) | 11.8 µs (1.1× slower) | 640.0 MiB |
-| Doublets United NonVolatile Uncached | 124 µs (23.4× slower) | 9.19 µs (19.7× slower) | 11.2 µs (4.17× slower) | 12.3 µs (1.14× slower) | 640.0 MiB |
-| Doublets Split Volatile Cached | 4.83 µs (4.98× slower) | 919 ns (1.91× slower) | 1.19 µs (1.74× faster) | 6.82 µs (2.56× slower) | — |
-| Doublets Split Volatile Uncached | 43.2 µs (44.5× slower) | 11 µs (22.9× slower) | 11.7 µs (5.65× slower) | 5.93 µs (2.23× slower) | — |
-| Doublets Split NonVolatile Cached | 6.98 µs (1.32× slower) | 896 ns (1.92× slower) | 1.23 µs (2.18× faster) | 7.21 µs (1.49× faster) | 800.0 MiB |
-| Doublets Split NonVolatile Uncached | 46.4 µs (8.78× slower) | 11.3 µs (24.3× slower) | 12 µs (4.45× slower) | 7.58 µs (1.42× faster) | 800.0 MiB |
+| SQLite Memory | 1.37 µs | 555 ns | 1.87 µs | 2.47 µs | — |
+| SQLite File | 3.38 µs | 627 ns | 3.45 µs | 9.92 µs | 783.2 MiB |
+| Doublets United Volatile Cached | 6.99 µs (5.09× slower) | 1.57 µs (2.82× slower) | 2.78 µs (1.49× slower) | 9.83 µs (3.98× slower) | — |
+| Doublets United Volatile Uncached | 106 µs (76.9× slower) | 10.2 µs (18.3× slower) | 11.7 µs (6.25× slower) | 10.3 µs (4.15× slower) | — |
+| Doublets United NonVolatile Cached | 9.34 µs (2.76× slower) | 1.55 µs (2.48× slower) | 2.9 µs (1.19× faster) | 11 µs (1.11× slower) | 640.0 MiB |
+| Doublets United NonVolatile Uncached | 116 µs (34.4× slower) | 10.4 µs (16.6× slower) | 12 µs (3.49× slower) | 11.4 µs (1.15× slower) | 640.0 MiB |
+| Doublets Split Volatile Cached | 4.8 µs (3.5× slower) | 897 ns (1.62× slower) | 923 ns (2.03× faster) | 6.44 µs (2.6× slower) | — |
+| Doublets Split Volatile Uncached | 50.4 µs (36.7× slower) | 14.1 µs (25.3× slower) | 14.6 µs (7.79× slower) | 6.39 µs (2.58× slower) | — |
+| Doublets Split NonVolatile Cached | 7.44 µs (2.2× slower) | 882 ns (1.41× slower) | 956 ns (3.6× faster) | 6.91 µs (1.44× faster) | 800.0 MiB |
+| Doublets Split NonVolatile Uncached | 55 µs (16.3× slower) | 14.6 µs (23.4× slower) | 15 µs (4.36× slower) | 7.3 µs (1.36× faster) | 800.0 MiB |
 
 ![Rust doublets vs SQLite, 64 bit, objects](docs/benchmarks/objects-rust-64.png)
 
@@ -390,37 +390,37 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 
 
 ##### 100,000 blog posts
 
-_5 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_5 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 5.16 µs | 1.51 µs | 2.86 µs | 2.09 µs | — |
-| SQLite File | 6.4 µs | 1.6 µs | 4.03 µs | 8.14 µs | 78.3 MiB |
-| Doublets United Volatile Cached | 16.7 µs (3.23× slower) | 8.6 µs (5.68× slower) | 2.77 µs (≈ same) | 11.7 µs (5.59× slower) | — |
-| Doublets United Volatile Uncached | 178 µs (34.5× slower) | 322 µs (213× slower) | 324 µs (113× slower) | 10.7 µs (5.13× slower) | — |
-| Doublets United NonVolatile Cached | 17 µs (2.65× slower) | 8.53 µs (5.31× slower) | 2.88 µs (1.4× faster) | 11.6 µs (1.43× slower) | 32.0 MiB |
-| Doublets United NonVolatile Uncached | 178 µs (27.8× slower) | 330 µs (205× slower) | 331 µs (82.2× slower) | 12.4 µs (1.52× slower) | 32.0 MiB |
-| Doublets Split Volatile Cached | 8.93 µs (1.73× slower) | 9.8 µs (6.48× slower) | 4.17 µs (1.46× slower) | 7.87 µs (3.77× slower) | — |
-| Doublets Split Volatile Uncached | 113 µs (21.8× slower) | 389 µs (257× slower) | 392 µs (137× slower) | 7.86 µs (3.76× slower) | — |
-| Doublets Split NonVolatile Cached | 9.64 µs (1.51× slower) | 9.74 µs (6.07× slower) | 4.26 µs (1.06× slower) | 8.29 µs (≈ same) | 40.0 MiB |
-| Doublets Split NonVolatile Uncached | 110 µs (17.2× slower) | 379 µs (236× slower) | 381 µs (94.6× slower) | 8.03 µs (≈ same) | 40.0 MiB |
+| SQLite Memory | 5.4 µs | 4.28 µs | 5.51 µs | 2.24 µs | — |
+| SQLite File | 6.25 µs | 4.4 µs | 6.68 µs | 7.59 µs | 78.3 MiB |
+| Doublets United Volatile Cached | 17.7 µs (3.28× slower) | 10.9 µs (2.56× slower) | 5.34 µs (≈ same) | 8.73 µs (3.89× slower) | — |
+| Doublets United Volatile Uncached | 169 µs (31.3× slower) | 300 µs (70.2× slower) | 296 µs (53.8× slower) | 8.47 µs (3.78× slower) | — |
+| Doublets United NonVolatile Cached | 17.9 µs (2.87× slower) | 10.7 µs (2.43× slower) | 5.49 µs (1.22× faster) | 8.87 µs (1.17× slower) | 32.0 MiB |
+| Doublets United NonVolatile Uncached | 170 µs (27.2× slower) | 300 µs (68.3× slower) | 307 µs (46× slower) | 9.73 µs (1.28× slower) | 32.0 MiB |
+| Doublets Split Volatile Cached | 11.1 µs (2.05× slower) | 12.1 µs (2.82× slower) | 5.1 µs (1.08× faster) | 6.23 µs (2.78× slower) | — |
+| Doublets Split Volatile Uncached | 107 µs (19.9× slower) | 368 µs (86× slower) | 363 µs (65.9× slower) | 5.98 µs (2.66× slower) | — |
+| Doublets Split NonVolatile Cached | 11.3 µs (1.81× slower) | 11.7 µs (2.67× slower) | 5.07 µs (1.32× faster) | 6.3 µs (1.2× faster) | 40.0 MiB |
+| Doublets Split NonVolatile Uncached | 107 µs (17.1× slower) | 366 µs (83.3× slower) | 366 µs (54.7× slower) | 6.84 µs (1.11× faster) | 40.0 MiB |
 
 ##### 1,000,000 blog posts
 
-_1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 4.17 µs | 1.24 µs | 3.03 µs | 2.93 µs | — |
-| SQLite File | 8.39 µs | 1.27 µs | 4.81 µs | 16 µs | 783.2 MiB |
-| Doublets United Volatile Cached | 16.5 µs (3.96× slower) | 7.17 µs (5.77× slower) | 3.77 µs (1.25× slower) | 14 µs (4.77× slower) | — |
-| Doublets United Volatile Uncached | 192 µs (46× slower) | 248 µs (200× slower) | 251 µs (82.9× slower) | 14.1 µs (4.8× slower) | — |
-| Doublets United NonVolatile Cached | 23.3 µs (2.77× slower) | 7.07 µs (5.59× slower) | 4.05 µs (1.19× faster) | 14.3 µs (1.12× faster) | 320.0 MiB |
-| Doublets United NonVolatile Uncached | 196 µs (23.3× slower) | 250 µs (197× slower) | 251 µs (52.2× slower) | 14.7 µs (1.09× faster) | 320.0 MiB |
-| Doublets Split Volatile Cached | 7.97 µs (1.91× slower) | 8.1 µs (6.52× slower) | 3.82 µs (1.26× slower) | 9.2 µs (3.14× slower) | — |
-| Doublets Split Volatile Uncached | 87.2 µs (20.9× slower) | 335 µs (270× slower) | 327 µs (108× slower) | 9.22 µs (3.15× slower) | — |
-| Doublets Split NonVolatile Cached | 15.6 µs (1.86× slower) | 8.73 µs (6.9× slower) | 3.9 µs (1.23× faster) | 12.9 µs (1.25× faster) | 400.0 MiB |
-| Doublets Split NonVolatile Uncached | 98.9 µs (11.8× slower) | 320 µs (253× slower) | 323 µs (67.2× slower) | 10.2 µs (1.57× faster) | 400.0 MiB |
+| SQLite Memory | 4.44 µs | 3.58 µs | 5.64 µs | 3.12 µs | — |
+| SQLite File | 8.82 µs | 3.63 µs | 7.13 µs | 20.5 µs | 783.2 MiB |
+| Doublets United Volatile Cached | 19.4 µs (4.36× slower) | 9.78 µs (2.73× slower) | 6.61 µs (1.17× slower) | 17.5 µs (5.62× slower) | — |
+| Doublets United Volatile Uncached | 199 µs (44.7× slower) | 259 µs (72.3× slower) | 262 µs (46.4× slower) | 15.2 µs (4.85× slower) | — |
+| Doublets United NonVolatile Cached | 26.8 µs (3.04× slower) | 9.88 µs (2.72× slower) | 6.63 µs (1.08× faster) | 18.6 µs (1.1× faster) | 320.0 MiB |
+| Doublets United NonVolatile Uncached | 219 µs (24.8× slower) | 256 µs (70.5× slower) | 265 µs (37.1× slower) | 18.3 µs (1.12× faster) | 320.0 MiB |
+| Doublets Split Volatile Cached | 11.4 µs (2.57× slower) | 11.1 µs (3.11× slower) | 6.92 µs (1.23× slower) | 11.6 µs (3.71× slower) | — |
+| Doublets Split Volatile Uncached | 94.7 µs (21.3× slower) | 348 µs (97.2× slower) | 355 µs (63× slower) | 11.8 µs (3.77× slower) | — |
+| Doublets Split NonVolatile Cached | 20 µs (2.26× slower) | 11.4 µs (3.15× slower) | 7.18 µs (≈ same) | 13.6 µs (1.51× faster) | 400.0 MiB |
+| Doublets Split NonVolatile Uncached | 119 µs (13.5× slower) | 350 µs (96.4× slower) | 354 µs (49.6× slower) | 13.4 µs (1.53× faster) | 400.0 MiB |
 
 ![C# doublets vs SQLite, 32 bit, objects](docs/benchmarks/objects-csharp-32.png)
 
@@ -428,37 +428,37 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 
 
 ##### 100,000 blog posts
 
-_5 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_5 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 5.06 µs | 1.43 µs | 2.73 µs | 1.9 µs | — |
-| SQLite File | 6.09 µs | 1.56 µs | 3.81 µs | 7.65 µs | 78.3 MiB |
-| Doublets United Volatile Cached | 17.8 µs (3.52× slower) | 9.46 µs (6.62× slower) | 2.83 µs (≈ same) | 12.7 µs (6.7× slower) | — |
-| Doublets United Volatile Uncached | 187 µs (36.9× slower) | 346 µs (243× slower) | 362 µs (133× slower) | 12.6 µs (6.65× slower) | — |
-| Doublets United NonVolatile Cached | 18.5 µs (3.04× slower) | 9.61 µs (6.16× slower) | 3.09 µs (1.24× faster) | 12.9 µs (1.69× slower) | 64.0 MiB |
-| Doublets United NonVolatile Uncached | 183 µs (30.1× slower) | 351 µs (225× slower) | 356 µs (93.3× slower) | 13.2 µs (1.72× slower) | 64.0 MiB |
-| Doublets Split Volatile Cached | 8.24 µs (1.63× slower) | 9.57 µs (6.71× slower) | 4.19 µs (1.53× slower) | 7.52 µs (3.96× slower) | — |
-| Doublets Split Volatile Uncached | 109 µs (21.5× slower) | 383 µs (268× slower) | 389 µs (142× slower) | 7.54 µs (3.97× slower) | — |
-| Doublets Split NonVolatile Cached | 9.47 µs (1.56× slower) | 9.56 µs (6.13× slower) | 4.11 µs (1.08× slower) | 7.7 µs (≈ same) | 80.0 MiB |
-| Doublets Split NonVolatile Uncached | 108 µs (17.8× slower) | 377 µs (242× slower) | 385 µs (101× slower) | 8.35 µs (1.09× slower) | 80.0 MiB |
+| SQLite Memory | 5.07 µs | 3.8 µs | 5.2 µs | 2.32 µs | — |
+| SQLite File | 5.85 µs | 3.92 µs | 6.27 µs | 7.71 µs | 78.3 MiB |
+| Doublets United Volatile Cached | 19 µs (3.75× slower) | 10.7 µs (2.82× slower) | 5.42 µs (≈ same) | 11.7 µs (5.06× slower) | — |
+| Doublets United Volatile Uncached | 178 µs (35× slower) | 302 µs (79.4× slower) | 303 µs (58.1× slower) | 11.6 µs (5× slower) | — |
+| Doublets United NonVolatile Cached | 20.1 µs (3.43× slower) | 10.6 µs (2.7× slower) | 5.61 µs (1.12× faster) | 12.2 µs (1.59× slower) | 64.0 MiB |
+| Doublets United NonVolatile Uncached | 181 µs (31× slower) | 301 µs (76.8× slower) | 303 µs (48.3× slower) | 12.7 µs (1.65× slower) | 64.0 MiB |
+| Doublets Split Volatile Cached | 10.3 µs (2.03× slower) | 11.4 µs (3.01× slower) | 5.06 µs (≈ same) | 7.23 µs (3.12× slower) | — |
+| Doublets Split Volatile Uncached | 107 µs (21× slower) | 371 µs (97.7× slower) | 373 µs (71.7× slower) | 7.38 µs (3.19× slower) | — |
+| Doublets Split NonVolatile Cached | 11.4 µs (1.96× slower) | 11.5 µs (2.93× slower) | 4.89 µs (1.28× faster) | 7.31 µs (1.05× faster) | 80.0 MiB |
+| Doublets Split NonVolatile Uncached | 108 µs (18.5× slower) | 367 µs (93.4× slower) | 369 µs (58.9× slower) | 7.8 µs (≈ same) | 80.0 MiB |
 
 ##### 1,000,000 blog posts
 
-_1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37226110636) on 2026-10-04._
+_1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37293771868) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| SQLite Memory | 5.71 µs | 1.59 µs | 3.41 µs | 3.18 µs | — |
-| SQLite File | 7.73 µs | 1.66 µs | 5.17 µs | 11.5 µs | 783.2 MiB |
-| Doublets United Volatile Cached | 22.3 µs (3.9× slower) | 9.91 µs (6.22× slower) | 4.25 µs (1.25× slower) | 20.3 µs (6.38× slower) | — |
-| Doublets United Volatile Uncached | 232 µs (40.7× slower) | 318 µs (200× slower) | 320 µs (93.9× slower) | 18.2 µs (5.73× slower) | — |
-| Doublets United NonVolatile Cached | 29.2 µs (3.78× slower) | 9.25 µs (5.58× slower) | 4.04 µs (1.28× faster) | 18.3 µs (1.59× slower) | 640.0 MiB |
-| Doublets United NonVolatile Uncached | 236 µs (30.5× slower) | 315 µs (190× slower) | 319 µs (61.8× slower) | 20.7 µs (1.8× slower) | 640.0 MiB |
-| Doublets Split Volatile Cached | 10.6 µs (1.85× slower) | 10.3 µs (6.46× slower) | 4.65 µs (1.36× slower) | 12 µs (3.76× slower) | — |
-| Doublets Split Volatile Uncached | 111 µs (19.4× slower) | 387 µs (243× slower) | 405 µs (119× slower) | 13 µs (4.09× slower) | — |
-| Doublets Split NonVolatile Cached | 20.4 µs (2.64× slower) | 11 µs (6.61× slower) | 5.27 µs (≈ same) | 15 µs (1.3× slower) | 800.0 MiB |
-| Doublets Split NonVolatile Uncached | 132 µs (17.1× slower) | 402 µs (242× slower) | 407 µs (78.7× slower) | 16.6 µs (1.45× slower) | 800.0 MiB |
+| SQLite Memory | 5.51 µs | 4.5 µs | 6.59 µs | 3.52 µs | — |
+| SQLite File | 7.59 µs | 4.38 µs | 8.78 µs | 15.5 µs | 783.2 MiB |
+| Doublets United Volatile Cached | 25 µs (4.55× slower) | 12.1 µs (2.69× slower) | 8.2 µs (1.25× slower) | 21 µs (5.97× slower) | — |
+| Doublets United Volatile Uncached | 248 µs (45.1× slower) | 317 µs (70.6× slower) | 319 µs (48.4× slower) | 18.9 µs (5.36× slower) | — |
+| Doublets United NonVolatile Cached | 35.3 µs (4.65× slower) | 12.2 µs (2.78× slower) | 8.21 µs (1.07× faster) | 21.5 µs (1.38× slower) | 640.0 MiB |
+| Doublets United NonVolatile Uncached | 270 µs (35.5× slower) | 316 µs (72.1× slower) | 319 µs (36.3× slower) | 21.3 µs (1.37× slower) | 640.0 MiB |
+| Doublets Split Volatile Cached | 13.2 µs (2.39× slower) | 13.3 µs (2.95× slower) | 8.16 µs (1.24× slower) | 13.4 µs (3.8× slower) | — |
+| Doublets Split Volatile Uncached | 121 µs (21.9× slower) | 424 µs (94.2× slower) | 425 µs (64.4× slower) | 14.6 µs (4.14× slower) | — |
+| Doublets Split NonVolatile Cached | 24.1 µs (3.17× slower) | 14.1 µs (3.22× slower) | 9.4 µs (1.07× slower) | 15.5 µs (≈ same) | 800.0 MiB |
+| Doublets Split NonVolatile Uncached | 147 µs (19.3× slower) | 420 µs (95.9× slower) | 407 µs (46.4× slower) | 14 µs (1.11× faster) | 800.0 MiB |
 
 ![C# doublets vs SQLite, 64 bit, objects](docs/benchmarks/objects-csharp-64.png)
 <!-- markdownlint-restore -->

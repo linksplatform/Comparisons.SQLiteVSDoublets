@@ -74,6 +74,17 @@ class ComparisonTests(unittest.TestCase):
         self.assertEqual(report.comparison(measurement(2500), measurement(1000), self.text), "2.5× slower")
         self.assertEqual(report.comparison(measurement(1), measurement(1000), self.text), "1000× faster")
 
+    def test_system_data_sqlite_is_compared_with_the_matching_provider_storage(self):
+        self.assertEqual(report.baseline("SystemDataSQLite_Memory"), "SQLite_Memory")
+        self.assertEqual(report.baseline("SystemDataSQLite_File"), "SQLite_File")
+        data = results("objects", {
+            "SQLite_Memory": 1000, "SQLite_File": 2000,
+            "SystemDataSQLite_Memory": 500, "SystemDataSQLite_File": 500,
+        })
+        table = report.table(data, self.text).splitlines()
+        self.assertEqual(table[4].count("2× faster"), 4)
+        self.assertEqual(table[5].count("4× faster"), 4)
+
     def test_overlapping_interquartile_ranges_are_not_a_difference(self):
         measured, reference = measurement(150, 90, 100, 150, 200, 300), measurement(190, 150, 180, 190, 210, 260)
         self.assertEqual(report.quartiles(measured), (100, 200))

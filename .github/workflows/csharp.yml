@@ -1,0 +1,33 @@
+name: C#
+
+on:
+  push:
+    branches: [main]
+    paths: ['csharp/**', '.github/workflows/csharp.yml']
+  pull_request:
+    paths: ['csharp/**', '.github/workflows/csharp.yml']
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: csharp
+
+jobs:
+  test:
+    name: Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: csharp/global.json
+      - run: dotnet build -c Release -warnaserror
+      - run: dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build

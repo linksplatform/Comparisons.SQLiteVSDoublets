@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SQLiteVSDoublets.Tests/SQLiteVSDoublets.Tests.csproj" />
+  <Project Path="SQLiteVSDoublets/SQLiteVSDoublets.csproj" />
+</Solution>

@@ -135,11 +135,17 @@ def baseline(variant):
     return "SQLite_File" if "_NonVolatile" in variant else "SQLite_Memory"
 
 
+def significant(value):
+    """Three significant digits without an exponent: 999.6 is 1000, not 1e+03."""
+    return f"{float(f'{value:.3g}'):g}"
+
+
 def duration(nanoseconds):
+    rounded = float(significant(nanoseconds))
     for unit, scale in (("s", 1e9), ("ms", 1e6), ("µs", 1e3)):
-        if nanoseconds >= scale:
-            return f"{nanoseconds / scale:.3g} {unit}"
-    return f"{nanoseconds:.3g} ns"
+        if rounded >= scale:
+            return f"{significant(rounded / scale)} {unit}"
+    return f"{significant(rounded)} ns"
 
 
 def size(count):
@@ -171,8 +177,8 @@ def comparison(measured, reference, text):
     if overlapping or ratio < 1 + NOISE:
         return text["same"]
     if measured["median_ns"] <= reference["median_ns"]:
-        return text["faster"].format(ratio=f"{reference['median_ns'] / measured['median_ns']:.3g}")
-    return text["slower"].format(ratio=f"{measured['median_ns'] / reference['median_ns']:.3g}")
+        return text["faster"].format(ratio=significant(reference["median_ns"] / measured["median_ns"]))
+    return text["slower"].format(ratio=significant(measured["median_ns"] / reference["median_ns"]))
 
 
 def table(report, text):

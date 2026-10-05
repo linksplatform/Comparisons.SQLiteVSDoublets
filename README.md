@@ -65,7 +65,7 @@ _3 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| SQLite Memory | 2.39 µs | 124 ns | 874 ns | 983 ns | 997 ns | 1e+03 ns | 6.48 µs | 4.26 µs | — |
+| SQLite Memory | 2.39 µs | 124 ns | 874 ns | 983 ns | 997 ns | 1 µs | 6.48 µs | 4.26 µs | — |
 | SQLite File | 5.76 µs | 128 ns | 1.96 µs | 1.9 µs | 1.92 µs | 1.91 µs | 19 µs | 10.6 µs | 48.2 MiB |
 | Doublets United Volatile | 755 ns (3.16× faster) | 1.84 ns (67.5× faster) | 20.7 ns (42.2× faster) | 417 ns (2.36× faster) | 579 ns (1.72× faster) | 620 ns (1.61× faster) | 2.39 µs (2.71× faster) | 828 ns (5.14× faster) | — |
 | Doublets United NonVolatile | 868 ns (6.64× faster) | 2.11 ns (60.5× faster) | 22.7 ns (86.3× faster) | 502 ns (3.79× faster) | 681 ns (2.82× faster) | 689 ns (2.77× faster) | 2.62 µs (7.27× faster) | 914 ns (11.6× faster) | 32.0 MiB |

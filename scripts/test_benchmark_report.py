@@ -42,6 +42,12 @@ class FormattingTests(unittest.TestCase):
         self.assertEqual(report.duration(45_600_000), "45.6 ms")
         self.assertEqual(report.duration(2e9), "2 s")
 
+    def test_rounding_up_moves_to_the_next_unit_instead_of_an_exponent(self):
+        # Rust links, 32 bit, 1,000,000 links, read by to: SQLite Memory took 999.6 ns.
+        self.assertEqual(report.duration(999.6), "1 µs")
+        self.assertEqual(report.duration(999_700), "1 ms")
+        self.assertEqual(report.significant(1234.5), "1230")
+
     def test_sizes(self):
         self.assertEqual(report.size(10_000_000), "10,000,000")
         self.assertEqual(report.file_size(64 * 2**20), "64.0 MiB")
@@ -64,6 +70,7 @@ class ComparisonTests(unittest.TestCase):
     def test_clear_differences(self):
         self.assertEqual(report.comparison(measurement(100), measurement(1000), self.text), "10× faster")
         self.assertEqual(report.comparison(measurement(2500), measurement(1000), self.text), "2.5× slower")
+        self.assertEqual(report.comparison(measurement(1), measurement(1000), self.text), "1000× faster")
 
     def test_overlapping_interquartile_ranges_are_not_a_difference(self):
         measured, reference = measurement(150, 90, 100, 150, 200, 300), measurement(190, 150, 180, 190, 210, 260)

@@ -47,7 +47,7 @@ public sealed class SQLiteLinks<T> : SQLiteStorage, ILinksStorage<T> where T : s
         CREATE INDEX links_to_from ON links ("to", "from");
         """)
     {
-        _create = Command("""INSERT INTO links ("from", "to") VALUES ($from, $to) RETURNING id""", FromParameter, ToParameter);
+        _create = Command("""INSERT INTO links ("from", "to") VALUES ($from, $to)""", FromParameter, ToParameter);
         _update = Command("""UPDATE links SET "from" = $from, "to" = $to WHERE id = $id""", IdParameter, FromParameter, ToParameter);
         _delete = Command("DELETE FROM links WHERE id = $id", IdParameter);
         _get = Command("""SELECT "from", "to" FROM links WHERE id = $id""", IdParameter);
@@ -68,7 +68,11 @@ public sealed class SQLiteLinks<T> : SQLiteStorage, ILinksStorage<T> where T : s
         return command;
     }
 
-    public T Create(T from, T to) => Id((long)With(_create, from, to).ExecuteScalar()!);
+    public T Create(T from, T to)
+    {
+        With(_create, from, to).ExecuteNonQuery();
+        return Id(LastInsertRowId);
+    }
 
     public void Update(T id, T from, T to) => With(_update, id, from, to).ExecuteNonQuery();
 

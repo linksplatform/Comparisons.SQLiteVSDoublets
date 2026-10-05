@@ -39,7 +39,7 @@ public sealed class SQLiteBlogPosts<T> : SQLiteStorage, IBlogPostsStorage<T> whe
         "CREATE TABLE blog_posts (id INTEGER PRIMARY KEY, title TEXT NOT NULL, content TEXT NOT NULL, publication_date INTEGER NOT NULL)")
     {
         _create = Command(
-            "INSERT INTO blog_posts (title, content, publication_date) VALUES ($title, $content, $publication_date) RETURNING id",
+            "INSERT INTO blog_posts (title, content, publication_date) VALUES ($title, $content, $publication_date)",
             ("$title", SqliteType.Text), ("$content", SqliteType.Text), ("$publication_date", SqliteType.Integer));
         _get = Command("SELECT title, content, publication_date FROM blog_posts WHERE id = $id", ("$id", SqliteType.Integer));
         _each = Command("SELECT title, content, publication_date, id FROM blog_posts");
@@ -54,7 +54,8 @@ public sealed class SQLiteBlogPosts<T> : SQLiteStorage, IBlogPostsStorage<T> whe
         _create.Parameters[0].Value = post.Title;
         _create.Parameters[1].Value = post.Content;
         _create.Parameters[2].Value = (long)post.PublicationDate;
-        return T.CreateChecked((long)_create.ExecuteScalar()!);
+        _create.ExecuteNonQuery();
+        return T.CreateChecked(LastInsertRowId);
     }
 
     public BlogPost? Get(T id)

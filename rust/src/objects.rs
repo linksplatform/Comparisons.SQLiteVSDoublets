@@ -111,7 +111,7 @@ impl<T: LinkReference> BlogPostsStorage<T> for SqliteBlogPosts<T> {
     }
 
     fn transaction<R>(&mut self, work: impl FnOnce(&mut Self) -> R) -> R {
-        self.connection.execute_batch("BEGIN").unwrap();
+        self.connection.execute_batch("BEGIN IMMEDIATE").unwrap();
         let result = work(self);
         self.connection.execute_batch("COMMIT").unwrap();
         result

@@ -1,4 +1,5 @@
 using Microsoft.Data.Sqlite;
+using SQLitePCL;
 
 namespace Comparisons.SQLiteVSDoublets;
 
@@ -30,6 +31,9 @@ public abstract class SQLiteStorage : IDisposable
         _commands.Add(command);
         return command;
     }
+
+    /// <summary>Like <c>RETURNING id</c>, but without its cost (3× slower inserts, see experiments/sqlite_returning).</summary>
+    protected long LastInsertRowId => raw.sqlite3_last_insert_rowid(_connection.Handle);
 
     public ulong Count()
     {

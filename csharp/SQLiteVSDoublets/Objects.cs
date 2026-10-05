@@ -1,5 +1,6 @@
+using System.Data;
+using System.Data.Common;
 using System.Numerics;
-using Microsoft.Data.Sqlite;
 using Platform.Collections.Stacks;
 using Platform.Converters;
 using Platform.Data;
@@ -26,27 +27,31 @@ public interface IBlogPostsStorage<T> : IDisposable where T : struct
 
 public sealed class SQLiteBlogPosts<T> : SQLiteStorage, IBlogPostsStorage<T> where T : struct, IBinaryInteger<T>
 {
-    private readonly SqliteCommand _create;
-    private readonly SqliteCommand _get;
-    private readonly SqliteCommand _each;
-    private readonly SqliteCommand _delete;
+    private readonly DbCommand _create;
+    private readonly DbCommand _get;
+    private readonly DbCommand _each;
+    private readonly DbCommand _delete;
 
-    public static SQLiteBlogPosts<T> Open(string path) => new(path);
+    public static SQLiteBlogPosts<T> Open(string path) => Open(path, SQLiteProvider.MicrosoftDataSqlite);
 
-    public static SQLiteBlogPosts<T> InMemory() => new(":memory:");
+    public static SQLiteBlogPosts<T> Open(string path, SQLiteProvider provider) => new(path, provider);
 
-    private SQLiteBlogPosts(string path) : base(path, "blog_posts",
-        "CREATE TABLE blog_posts (id INTEGER PRIMARY KEY, title TEXT NOT NULL, content TEXT NOT NULL, publication_date INTEGER NOT NULL)")
+    public static SQLiteBlogPosts<T> InMemory() => InMemory(SQLiteProvider.MicrosoftDataSqlite);
+
+    public static SQLiteBlogPosts<T> InMemory(SQLiteProvider provider) => new(":memory:", provider);
+
+    private SQLiteBlogPosts(string path, SQLiteProvider provider) : base(path, "blog_posts",
+        "CREATE TABLE blog_posts (id INTEGER PRIMARY KEY, title TEXT NOT NULL, content TEXT NOT NULL, publication_date INTEGER NOT NULL)", provider)
     {
         _create = Command(
             "INSERT INTO blog_posts (title, content, publication_date) VALUES ($title, $content, $publication_date)",
-            ("$title", SqliteType.Text), ("$content", SqliteType.Text), ("$publication_date", SqliteType.Integer));
-        _get = Command("SELECT title, content, publication_date FROM blog_posts WHERE id = $id", ("$id", SqliteType.Integer));
+            ("$title", DbType.String), ("$content", DbType.String), ("$publication_date", DbType.Int64));
+        _get = Command("SELECT title, content, publication_date FROM blog_posts WHERE id = $id", ("$id", DbType.Int64));
         _each = Command("SELECT title, content, publication_date, id FROM blog_posts");
-        _delete = Command("DELETE FROM blog_posts WHERE id = $id", ("$id", SqliteType.Integer));
+        _delete = Command("DELETE FROM blog_posts WHERE id = $id", ("$id", DbType.Int64));
     }
 
-    private static BlogPost BlogPost(SqliteDataReader reader) =>
+    private static BlogPost BlogPost(DbDataReader reader) =>
         new(reader.GetString(0), reader.GetString(1), (ulong)reader.GetInt64(2));
 
     public T Create(BlogPost post)

@@ -1,5 +1,6 @@
+using System.Data;
+using System.Data.Common;
 using System.Numerics;
-using Microsoft.Data.Sqlite;
 using Platform.Data;
 using Platform.Data.Doublets;
 
@@ -24,28 +25,32 @@ public interface ILinksStorage<T> : IDisposable where T : struct
 
 public sealed class SQLiteLinks<T> : SQLiteStorage, ILinksStorage<T> where T : struct, IBinaryInteger<T>
 {
-    private static readonly (string, SqliteType) IdParameter = ("$id", SqliteType.Integer);
-    private static readonly (string, SqliteType) FromParameter = ("$from", SqliteType.Integer);
-    private static readonly (string, SqliteType) ToParameter = ("$to", SqliteType.Integer);
+    private static readonly (string, DbType) IdParameter = ("$id", DbType.Int64);
+    private static readonly (string, DbType) FromParameter = ("$from", DbType.Int64);
+    private static readonly (string, DbType) ToParameter = ("$to", DbType.Int64);
 
-    private readonly SqliteCommand _create;
-    private readonly SqliteCommand _update;
-    private readonly SqliteCommand _delete;
-    private readonly SqliteCommand _get;
-    private readonly SqliteCommand _search;
-    private readonly SqliteCommand _each;
-    private readonly SqliteCommand _eachWithFrom;
-    private readonly SqliteCommand _eachWithTo;
+    private readonly DbCommand _create;
+    private readonly DbCommand _update;
+    private readonly DbCommand _delete;
+    private readonly DbCommand _get;
+    private readonly DbCommand _search;
+    private readonly DbCommand _each;
+    private readonly DbCommand _eachWithFrom;
+    private readonly DbCommand _eachWithTo;
 
-    public static SQLiteLinks<T> Open(string path) => new(path);
+    public static SQLiteLinks<T> Open(string path) => Open(path, SQLiteProvider.MicrosoftDataSqlite);
 
-    public static SQLiteLinks<T> InMemory() => new(":memory:");
+    public static SQLiteLinks<T> Open(string path, SQLiteProvider provider) => new(path, provider);
 
-    private SQLiteLinks(string path) : base(path, "links", """
+    public static SQLiteLinks<T> InMemory() => InMemory(SQLiteProvider.MicrosoftDataSqlite);
+
+    public static SQLiteLinks<T> InMemory(SQLiteProvider provider) => new(":memory:", provider);
+
+    private SQLiteLinks(string path, SQLiteProvider provider) : base(path, "links", """
         CREATE TABLE links (id INTEGER PRIMARY KEY, "from" INTEGER NOT NULL, "to" INTEGER NOT NULL);
         CREATE INDEX links_from_to ON links ("from", "to");
         CREATE INDEX links_to_from ON links ("to", "from");
-        """)
+        """, provider)
     {
         _create = Command("""INSERT INTO links ("from", "to") VALUES ($from, $to)""", FromParameter, ToParameter);
         _update = Command("""UPDATE links SET "from" = $from, "to" = $to WHERE id = $id""", IdParameter, FromParameter, ToParameter);
@@ -59,7 +64,7 @@ public sealed class SQLiteLinks<T> : SQLiteStorage, ILinksStorage<T> where T : s
 
     private static T Id(long sql) => T.CreateChecked(sql);
 
-    private static SqliteCommand With(SqliteCommand command, params ReadOnlySpan<T> values)
+    private static DbCommand With(DbCommand command, params ReadOnlySpan<T> values)
     {
         for (var i = 0; i < values.Length; i++)
         {
@@ -92,7 +97,7 @@ public sealed class SQLiteLinks<T> : SQLiteStorage, ILinksStorage<T> where T : s
 
     public void EachWithTo(T to, Action<Link<T>> visit) => Read(With(_eachWithTo, to), visit);
 
-    private static void Read(SqliteCommand command, Action<Link<T>> visit)
+    private static void Read(DbCommand command, Action<Link<T>> visit)
     {
         using var reader = command.ExecuteReader();
         while (reader.Read())

@@ -7,7 +7,6 @@
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Comparisons.SQLiteVSDoublets;
-using Microsoft.Data.Sqlite;
 
 const ulong LinksWork = 3_000_000;
 const ulong ObjectsWork = 500_000;
@@ -37,10 +36,6 @@ var measurements = variants.Select(variant => (category, bits) switch
     _ => throw new ArgumentException("category must be links or objects and bits must be 32 or 64"),
 }).ToList();
 
-using var connection = new SqliteConnection("Data Source=:memory:");
-connection.Open();
-using var version = connection.CreateCommand();
-version.CommandText = "SELECT sqlite_version()";
 var report = new JsonObject
 {
     ["language"] = "C#",
@@ -50,7 +45,20 @@ var report = new JsonObject
     ["repetitions"] = repetitions,
     ["warm_up_size"] = Math.Min(size, Harness.WarmUpSize),
     ["warm_up_seconds"] = Harness.WarmUpTime.TotalSeconds,
-    ["sqlite_version"] = (string)version.ExecuteScalar()!,
+    ["sqlite_version"] = SQLiteStorage.Version(SQLiteProvider.MicrosoftDataSqlite),
+    ["sqlite_providers"] = new JsonObject
+    {
+        ["Microsoft.Data.Sqlite"] = new JsonObject
+        {
+            ["provider_version"] = typeof(Microsoft.Data.Sqlite.SqliteConnection).Assembly.GetName().Version!.ToString(),
+            ["sqlite_version"] = SQLiteStorage.Version(SQLiteProvider.MicrosoftDataSqlite),
+        },
+        ["System.Data.SQLite"] = new JsonObject
+        {
+            ["provider_version"] = typeof(System.Data.SQLite.SQLiteConnection).Assembly.GetName().Version!.ToString(),
+            ["sqlite_version"] = SQLiteStorage.Version(SQLiteProvider.SystemDataSQLite),
+        },
+    },
     ["results"] = new JsonArray(measurements.Select(measurement => (JsonNode)measurement.ToJson()).ToArray()),
 };
 var json = report.ToJsonString(new JsonSerializerOptions { WriteIndented = true });

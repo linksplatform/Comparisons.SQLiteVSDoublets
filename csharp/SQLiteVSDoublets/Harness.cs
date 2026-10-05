@@ -21,6 +21,8 @@ public static class Harness
     [
         "SQLite_Memory",
         "SQLite_File",
+        "SystemDataSQLite_Memory",
+        "SystemDataSQLite_File",
         "Doublets_United_Volatile",
         "Doublets_United_NonVolatile",
         "Doublets_Split_Volatile",
@@ -31,6 +33,8 @@ public static class Harness
     [
         "SQLite_Memory",
         "SQLite_File",
+        "SystemDataSQLite_Memory",
+        "SystemDataSQLite_File",
         "Doublets_United_Volatile_Cached",
         "Doublets_United_Volatile_Uncached",
         "Doublets_United_NonVolatile_Cached",
@@ -328,6 +332,8 @@ public static class Harness
         {
             "SQLite_Memory" => _ => SQLiteLinks<T>.InMemory(),
             "SQLite_File" => dir => SQLiteLinks<T>.Open(File(dir, "links.db")),
+            "SystemDataSQLite_Memory" => _ => SQLiteLinks<T>.InMemory(SQLiteProvider.SystemDataSQLite),
+            "SystemDataSQLite_File" => dir => SQLiteLinks<T>.Open(File(dir, "links.db"), SQLiteProvider.SystemDataSQLite),
             "Doublets_United_Volatile" => _ => new DoubletsLinks<T>(United<T>(new HeapResizableDirectMemory(), external: false)),
             "Doublets_United_NonVolatile" => dir => new DoubletsLinks<T>(United<T>(Mapped(dir, "links.links"), external: false)),
             "Doublets_Split_Volatile" => _ => new DoubletsLinks<T>(Split<T>(new HeapResizableDirectMemory(), new HeapResizableDirectMemory(), external: false)),
@@ -345,6 +351,8 @@ public static class Harness
         {
             "SQLite_Memory" => _ => SQLiteBlogPosts<T>.InMemory(),
             "SQLite_File" => dir => SQLiteBlogPosts<T>.Open(File(dir, "blog_posts.db")),
+            "SystemDataSQLite_Memory" => _ => SQLiteBlogPosts<T>.InMemory(SQLiteProvider.SystemDataSQLite),
+            "SystemDataSQLite_File" => dir => SQLiteBlogPosts<T>.Open(File(dir, "blog_posts.db"), SQLiteProvider.SystemDataSQLite),
             "Doublets_United_Volatile" => _ => new DoubletsBlogPosts<T>(United<T>(new HeapResizableDirectMemory(), external: true), cached),
             "Doublets_United_NonVolatile" => dir => new DoubletsBlogPosts<T>(United<T>(Mapped(dir, "links.links"), external: true), cached),
             "Doublets_Split_Volatile" => _ => new DoubletsBlogPosts<T>(Split<T>(new HeapResizableDirectMemory(), new HeapResizableDirectMemory(), external: true), cached),

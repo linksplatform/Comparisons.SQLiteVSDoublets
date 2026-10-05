@@ -18,7 +18,8 @@ Rust ([doublets](https://crates.io/crates/doublets) и
 [rusqlite](https://crates.io/crates/rusqlite) со встроенной SQLite) и C#
 ([Platform.Data.Doublets](https://www.nuget.org/packages/Platform.Data.Doublets),
 [Platform.Data.Doublets.Sequences](https://www.nuget.org/packages/Platform.Data.Doublets.Sequences)
-и [Microsoft.Data.Sqlite](https://www.nuget.org/packages/Microsoft.Data.Sqlite))
+и провайдеры [Microsoft.Data.Sqlite](https://www.nuget.org/packages/Microsoft.Data.Sqlite)
+и [System.Data.SQLite](https://www.nuget.org/packages/System.Data.SQLite))
 выполняют одинаковую нагрузку на одинаковых детерминированных данных
 с 32-битными (`u32`/`uint`) и 64-битными (`u64`/`ulong`) идентификаторами:
 
@@ -41,6 +42,16 @@ Rust ([doublets](https://crates.io/crates/doublets) и
 каждое энергозависимое (в памяти) и энергонезависимое (в отображаемых в память
 файлах). Дуплеты сравниваются с SQLite той же надёжности хранения:
 энергозависимые с `SQLite Memory`, энергонезависимые с `SQLite File`.
+
+C# также проверяет `SystemDataSQLite_Memory` и `SystemDataSQLite_File`
+с System.Data.SQLite 2.0.4. `SQLite_Memory` и `SQLite_File` используют
+Microsoft.Data.Sqlite. Оба провайдера используют одинаковые схемы,
+параметризованные команды, немедленные транзакции и нативную библиотеку
+`e_sqlite3` из Microsoft.Data.Sqlite на Linux, macOS и Windows. JSON-отчёты
+содержат версии каждого провайдера и движка в `sqlite_providers`.
+Строки System.Data.SQLite сравниваются с Microsoft.Data.Sqlite той же
+надёжности хранения. Опубликованные таблицы старых запусков содержат только
+измеренные тогда провайдеры; следующий запуск Benchmarks добавит новые строки.
 
 Каждый повтор выполняется на новом хранилище в пустой папке после
 отбрасываемых прогревочных повторов на не более чем 10 000 записей, которые
@@ -77,6 +88,10 @@ cargo run --release --manifest-path rust/Cargo.toml -- \
   links 64 100000 --output results/links-rust-64-100000.json
 dotnet run -c Release --project csharp/SQLiteVSDoublets -- \
   objects 32 1000 --variants SQLite_File,Doublets_Split_NonVolatile_Cached
+dotnet run -c Release --project csharp/SQLiteVSDoublets -- \
+  links 64 1000 --repetitions 3 \
+  --variants SQLite_Memory,SystemDataSQLite_Memory \
+  --output results/links-csharp-64-1000.json
 # печатает таблицы, для обновления этого файла добавьте
 # --readme README.ru.md --charts docs/benchmarks
 python3 scripts/benchmark_report.py results

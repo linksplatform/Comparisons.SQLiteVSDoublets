@@ -18,7 +18,8 @@ Rust ([doublets](https://crates.io/crates/doublets) and
 [rusqlite](https://crates.io/crates/rusqlite) with bundled SQLite) and C#
 ([Platform.Data.Doublets](https://www.nuget.org/packages/Platform.Data.Doublets),
 [Platform.Data.Doublets.Sequences](https://www.nuget.org/packages/Platform.Data.Doublets.Sequences)
-and [Microsoft.Data.Sqlite](https://www.nuget.org/packages/Microsoft.Data.Sqlite))
+and the providers [Microsoft.Data.Sqlite](https://www.nuget.org/packages/Microsoft.Data.Sqlite)
+and [System.Data.SQLite](https://www.nuget.org/packages/System.Data.SQLite))
 run the same workloads on the same deterministic data, with 32 bit
 (`u32`/`uint`) and 64 bit (`u64`/`ulong`) ids:
 
@@ -41,6 +42,16 @@ with index trees) and split (separate data and index arrays), each volatile
 (in memory) and non-volatile (in memory-mapped files). Doublets are compared
 with SQLite of the same durability: volatile with `SQLite Memory`,
 non-volatile with `SQLite File`.
+
+C# also runs `SystemDataSQLite_Memory` and `SystemDataSQLite_File` with
+System.Data.SQLite 2.0.4. `SQLite_Memory` and `SQLite_File` use
+Microsoft.Data.Sqlite. Both providers use the same schemas, parameterized
+commands, immediate transactions and native `e_sqlite3` library supplied by
+Microsoft.Data.Sqlite, on Linux, macOS and Windows. The JSON reports record
+each provider and engine version in `sqlite_providers`. The System.Data.SQLite
+rows compare with Microsoft.Data.Sqlite of the same durability. Published
+tables from older runs include only the providers measured in those runs;
+the next Benchmarks run adds the new rows.
 
 Every repetition runs on a fresh store in an empty directory, after discarded
 warm-up repetitions on up to 10,000 records that run for at least a second, so
@@ -76,6 +87,10 @@ cargo run --release --manifest-path rust/Cargo.toml -- \
   links 64 100000 --output results/links-rust-64-100000.json
 dotnet run -c Release --project csharp/SQLiteVSDoublets -- \
   objects 32 1000 --variants SQLite_File,Doublets_Split_NonVolatile_Cached
+dotnet run -c Release --project csharp/SQLiteVSDoublets -- \
+  links 64 1000 --repetitions 3 \
+  --variants SQLite_Memory,SystemDataSQLite_Memory \
+  --output results/links-csharp-64-1000.json
 # print the tables, add --readme README.md --charts docs/benchmarks to update
 python3 scripts/benchmark_report.py results
 ```

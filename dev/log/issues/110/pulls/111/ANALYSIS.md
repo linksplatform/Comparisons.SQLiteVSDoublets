@@ -376,17 +376,23 @@ paths and original line numbers, generated in chunks of at most 1,500 lines.
 
 ## Final verification and review
 
-All five maintained workflows pass on implementation revision
-`0dba0f522015bd5200c885d4267f96f4b510cef6`: quality, Rust and C# on all
-three operating systems, dependency audit, and all eight benchmark cells plus
-the complete report. Codacy's latest-head check also passes. CodeFactor's PR
-page reports no issues (`research/codefactor-final-snapshot.txt`); its last
-posted GitHub check is successful on `7d7f9bc`, and it has not posted a new
-GitHub check for `0dba0f5`. GitHub reports the PR merge state as CLEAN.
-Main-only publication
-is intentionally skipped on the pull request. `github/implementation-final-*`
-preserves exact check conclusions, run timestamps/SHAs and ready-for-review
-state; the final PR revision is checked again before completion.
+All five maintained workflows pass on final implementation revision
+`6eff47bffcbf9300f4a80e7dec5da45db0eb67b1`: quality (including all 61 Python
+tests and complete archive verification), Rust and C# on all three operating
+systems, dependency audit, and all eight benchmark cells plus the complete
+report. Codacy and CodeFactor both post SUCCESS at this exact head. GitHub
+reports the PR merge state as CLEAN and the PR is ready for review. Main-only
+publication is intentionally skipped on the pull request.
+`github/packaged-6eff-*` preserves exact check conclusions, run timestamps/SHAs,
+the successful full GitHub diff and PR state. Earlier `implementation-final-*`
+records remain historical evidence for `0dba0f5`. The final evidence-only
+revision is checked again at its actual pushed head before completion.
+
+Codacy's successful PR log, `research/codacy-packaged-6eff-pr-logs.json`, records
+Diff completing in 1,413 ms and Deltas in 424 ms, compared with the prior
+60,008 ms Diff error. Its new-issues response is empty. This confirms that
+packaging the same raw data resolves the comparison failure without changing
+quality gates or the underlying benchmark implementation.
 
 The subsequent main result commit `4528bc4` is merged as `9505fbc`. Its 20
 reports are preserved separately in `validation/main-result-snapshot-4528bc4`;
@@ -466,7 +472,7 @@ and an unextracted checkout. The latter fails before the guard is added
 five raw directories before opening the archive, preserving the existing bundle
 on an incomplete checkout. All 61 Python tests pass locally.
 
-The packaged collection contains 666 original raw files (12,854,036 compressed
+The first packaged collection contains 666 original raw files (12,854,036 compressed
 bytes). Verification succeeds with only the tracked archive and manifest,
 matching a fresh CI checkout. The staged PR diff contains 52 files and 13,847
 lines / 754,444 bytes, within the documented review limits. All original

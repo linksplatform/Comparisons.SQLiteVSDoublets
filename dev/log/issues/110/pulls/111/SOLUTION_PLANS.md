@@ -29,3 +29,7 @@ and adds current-version evidence and a fix suggestion to existing Bandit #1041.
 Hosted implementation checks are preserved separately from the original failing
 runs. Final branch checks must be inspected at the actual pushed head; a passing
 older source revision is never used as proof that a newer revision passes.
+
+Packaging restores the complete GitHub diff and Codacy SUCCESS at `6eff47b`: its
+Diff step drops from the observed 60,008 ms failure to a 1,413 ms success.
+The quality workflow verifies all archived bytes and six integrity regressions.

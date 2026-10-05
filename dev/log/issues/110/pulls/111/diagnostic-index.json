@@ -3255,6 +3255,136 @@
     "text": "audit\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:26:02.4160901Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
   },
   {
+    "path": "ci-logs/37311813175.log",
+    "line": 734,
+    "text": "rust links 32 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:46:40.3008342Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37311813175.log",
+    "line": 1540,
+    "text": "rust links 64 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:46:38.7078404Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37311813175.log",
+    "line": 3186,
+    "text": "rust objects 32 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:46:37.5741114Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37311813175.log",
+    "line": 4492,
+    "text": "rust objects 64 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:46:38.7413036Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37311813182.log",
+    "line": 246,
+    "text": "Test (ubuntu-24.04)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T12:47:23.6634421Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37311813182.log",
+    "line": 575,
+    "text": "Test (macos-15)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T12:47:45.8426620Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37311813182.log",
+    "line": 889,
+    "text": "Test (windows-2025)\tRun dotnet test --project SQLiteVSDoublets.Tests -c Release --no-build -- --timeout 10m\t2026-10-05T12:47:50.8015665Z   failed: 0\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 265,
+    "text": "Test (windows-2025)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:46:22.7184345Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 484,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T12:47:43.0955363Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 490,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T12:47:43.1051309Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 495,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T12:47:43.1245314Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 504,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T12:48:12.4448970Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 29.33s\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 510,
+    "text": "Test (windows-2025)\tRun cargo test --locked --release\t2026-10-05T12:48:12.5021795Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 791,
+    "text": "Test (macos-15)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:46:14.7284330Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 1013,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T12:46:46.2743420Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 1018,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T12:46:46.3252260Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 1023,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T12:46:46.3768810Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 1031,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T12:47:06.8155760Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 20.57s\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 1037,
+    "text": "Test (macos-15)\tRun cargo test --locked --release\t2026-10-05T12:47:06.9581840Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 1334,
+    "text": "Test (ubuntu-24.04)\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:46:10.0462313Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 1553,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T12:46:41.5908687Z test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 1558,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T12:46:41.5913225Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 1563,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T12:46:41.6064955Z test lifecycle_rejects_a_storage_that_loses_records - should panic ... ok\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 1572,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T12:47:03.6759920Z test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 22.08s\n"
+  },
+  {
+    "path": "ci-logs/37311813265.log",
+    "line": 1578,
+    "text": "Test (ubuntu-24.04)\tRun cargo test --locked --release\t2026-10-05T12:47:03.7032349Z test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n"
+  },
+  {
+    "path": "ci-logs/37311813457.log",
+    "line": 419,
+    "text": "audit\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T12:46:26.3183348Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"
+  },
+  {
     "path": "ci-logs/benchmarks-37302748167.log",
     "line": 725,
     "text": "rust links 32 bit 1000\tRun dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d\t2026-10-05T11:25:14.4601523Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' \"$log\" \\^[[0m\n"

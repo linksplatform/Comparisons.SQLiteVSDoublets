@@ -28,15 +28,11 @@ logs here; experiments and reusable regression checks live under `experiments/ci
 - [x] Verify fresh CI runs match the latest implementation commit; download and
   analyze every unsuccessful run, fix causes, and wait for checks to finish.
 
-All implementation checks pass on `0dba0f522015bd5200c885d4267f96f4b510cef6`;
-PR 111 is ready for review. Final collection also recovers all 29 terminal-escape-blocked job logs and
-merges main result commit `4528bc4`; schema, Markdown, lint/security and all
-55 core Python checks pass again. Six additional integrity regressions guard
-the compressed raw evidence, and hosted CI verifies every original member.
-The oversized PR-diff failure is reproduced and addressed by packaging, with
-all raw files preserved. The final PR revision is checked again at its
-own pushed head before completion. Archived run/check metadata identifies
-the implementation revision explicitly.
+All implementation checks pass on `6eff47bffcbf9300f4a80e7dec5da45db0eb67b1`;
+Codacy and CodeFactor both pass, GitHub reports CLEAN, and PR 111 is ready.
+The final archive contains the successful implementation logs and the original
+failures, with every raw member verified by SHA-256 and size. The final
+evidence-only commit is checked again at its own pushed head before completion.
 
 ## Scope assumptions
 

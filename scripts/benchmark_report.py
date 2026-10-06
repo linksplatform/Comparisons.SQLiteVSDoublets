@@ -16,6 +16,8 @@ import statistics
 from pathlib import Path
 from typing import Any
 
+from benchmark_provenance import library_versions
+
 START_MARKER = "<!--BENCHMARK_RESULTS_START-->"
 END_MARKER = "<!--BENCHMARK_RESULTS_END-->"
 # The wide tables cannot be wrapped, and the hierarchy repeats headings under different parents.
@@ -75,7 +77,14 @@ TEXT: dict[str, dict[str, Any]] = {
         "faster": "{ratio}× faster",
         "slower": "{ratio}× slower",
         "same": "≈ same",
-        "provenance": "_{repetitions} after a warm-up, median time per operation. SQLite {sqlite}, {machine}, {source}._",
+        "provenance": "{repetitions} after a warm-up, median time per operation. SQLite {sqlite}; {software}. {machine}, {source}.",
+        "unrecorded": "version at measurement not recorded",
+        "toolchain_missing": "toolchain version not recorded",
+        "log_scale": "log scale",
+        "linear_scale": "linear scale",
+        "conclusions": "Conclusions",
+        "summary": "{language}, {category}: {faster} faster, {slower} slower, {same} approximately equal Doublets operation comparisons with SQLite.",
+        "summary_note": "Each comparison uses SQLite of matching durability and the same noise rule as the tables. Counts span the measured variants, sizes and id widths; they are not an overall speed ranking. RAM usage is not measured.",
         "repetitions": lambda count: f"{count} repetition" + ("" if count == 1 else "s"),
         "machine": "unknown machine",
         "local": "a local run",
@@ -110,7 +119,14 @@ TEXT: dict[str, dict[str, Any]] = {
         "faster": "в {ratio}× быстрее",
         "slower": "в {ratio}× медленнее",
         "same": "≈ так же",
-        "provenance": "_{repetitions} после прогрева, медианное время одной операции. SQLite {sqlite}, {machine}, {source}._",
+        "provenance": "{repetitions} после прогрева, медианное время одной операции. SQLite {sqlite}; {software}. {machine}, {source}.",
+        "unrecorded": "версия при измерении не записана",
+        "toolchain_missing": "версия среды разработки не записана",
+        "log_scale": "логарифмическая шкала",
+        "linear_scale": "линейная шкала",
+        "conclusions": "Выводы",
+        "summary": "{language}, {category}: Дуплеты быстрее в {faster}, медленнее в {slower}, примерно равны SQLite в {same} сравнениях операций.",
+        "summary_note": "Каждое сравнение использует SQLite той же надёжности хранения и то же правило учёта шума, что и таблицы. Числа охватывают измеренные варианты, размеры и разрядности id и не являются общим рейтингом скорости. Использование ОЗУ не измеряется.",
         "repetitions": lambda count: f"{count} повтор" + russian_plural(count, "", "а", "ов"),
         "machine": "неизвестная машина",
         "local": "локальный запуск",
@@ -161,6 +177,18 @@ def validate_metadata(report):
         raise ValueError("invalid repetitions")
     if not report["sqlite_version"]:
         raise ValueError("missing SQLite version")
+    if "software" in report:
+        software = report["software"]
+        library = "doublets" if report["language"] == "Rust" else "Platform.Data.Doublets"
+        if (
+            not isinstance(software, dict)
+            or not isinstance(software.get("libraries"), dict)
+            or not isinstance(software["libraries"].get(library), str)
+            or not software["libraries"][library].strip()
+            or not isinstance(software.get("toolchain"), str)
+            or not software["toolchain"].strip()
+        ):
+            raise ValueError("missing or invalid software provenance")
 
 
 def validate_variants(results):
@@ -291,9 +319,21 @@ def table(report, text):
 
 def provenance(report, text):
     run = report.get("run_url")
+    software = report.get("software")
+    if software:
+        libraries = software["libraries"]
+        versions = "; ".join(f"{name} {version}" for name, version in libraries.items())
+        versions += f"; {software['toolchain']}"
+    else:
+        # Older reports remain readable, but today's manifests are not measured provenance.
+        versions = "; ".join(
+            f"{name} {version}" for name, version in library_versions(report["language"]).items()
+        )
+        versions += f" ({text['unrecorded']}); {text['toolchain_missing']}"
     value = text["provenance"].format(
         repetitions=text["repetitions"](report["repetitions"]),
         sqlite=report["sqlite_version"],
+        software=versions,
         machine=report.get("machine") or text["machine"],
         source=text["run"].format(url=run, date=report.get("date")) if run else text["local"],
     )
@@ -304,11 +344,44 @@ def provenance(report, text):
             f"Npgsql.EntityFrameworkCore.PostgreSQL {postgres['provider_version']}; "
             f"EF Core {postgres['ef_core_version']}."
         )
-    return value
+    return f"_{value}_"
 
 
-def chart_name(category, language, bits):
-    return f"{category}-{language.lower().replace('#', 'sharp')}-{bits}.png"
+def chart_name(category, language, bits, scale="log"):
+    suffix = "-linear" if scale == "linear" else ""
+    return f"{category}-{language.lower().replace('#', 'sharp')}-{bits}{suffix}.png"
+
+
+def conclusions(reports, text):
+    """Summarize the measured Doublets comparisons with the table's durability and noise rules."""
+    lines = [f"## {text['conclusions']}", "", text["summary_note"], ""]
+    for category in CATEGORIES:
+        for language in LANGUAGES:
+            counts = {"faster": 0, "slower": 0, "same": 0}
+            for key, data in reports.items():
+                if key[:2] != (category, language):
+                    continue
+                variants = {result["variant"]: result for result in data["results"]}
+                for variant, result in variants.items():
+                    if not variant.startswith("Doublets_"):
+                        continue
+                    reference = variants[baseline(variant)]
+                    for operation, measured in result["operations"].items():
+                        other = reference["operations"][operation]
+                        outcome = (
+                            "same"
+                            if comparison(measured, other, text) == text["same"]
+                            else "faster"
+                            if measured["median_ns"] < other["median_ns"]
+                            else "slower"
+                        )
+                        counts[outcome] += 1
+            if sum(counts.values()):
+                lines.append(
+                    "- "
+                    + text["summary"].format(language=language, category=text["nouns"][category], **counts)
+                )
+    return lines
 
 
 def section(reports, language_code, charts_link):
@@ -336,11 +409,13 @@ def section(reports, language_code, charts_link):
                         "",
                     ]
                 if charts_link is not None:
-                    name = chart_name(category, language, bits)
                     title = text["chart"].format(
                         language=language, bits=bits, category=text["nouns"][category]
                     )
-                    lines += [f"![{title}]({charts_link}/{name})", ""]
+                    for scale in ("linear", "log"):
+                        name = chart_name(category, language, bits, scale)
+                        lines += [f"![{title}, {text[f'{scale}_scale']}]({charts_link}/{name})", ""]
+    lines += conclusions(reports, text)
     return "\n".join(lines).rstrip() + "\n"
 
 
@@ -352,50 +427,75 @@ def replace_section(document, generated):
 
 
 def charts(reports, directory):
-    """One logarithmic bar chart per category, language and bits, with a panel per size."""
+    """Linear and log charts per category, language and bits, with a panel per size."""
     import matplotlib
 
     matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-
     directory.mkdir(parents=True, exist_ok=True)
     written = []
     for category in CATEGORIES:
-        operations = OPERATIONS[category]
-        labels = [TEXT["en"]["operations"][operation] for operation in operations]
         for language in LANGUAGES:
             for bits in BITS:
                 sizes = sorted(key[3] for key in reports if key[:3] == (category, language, bits))
                 if not sizes:
                     continue
-                figure, axes = plt.subplots(
-                    1, len(sizes), figsize=(6 * len(sizes), 5), squeeze=False, sharey=False
-                )
-                for axis, count in zip(axes[0], sizes, strict=True):
-                    results = reports[(category, language, bits, count)]["results"]
-                    width = 0.8 / len(results)
-                    for index, result in enumerate(results):
-                        axis.bar(
-                            [position + index * width for position in range(len(operations))],
-                            [result["operations"][operation]["median_ns"] for operation in operations],
-                            width,
-                            label=result["variant"].replace("_", " "),
-                            color=plt.get_cmap("tab10")(index % 10),
-                        )
-                    axis.set_yscale("log")
-                    axis.set_title(TEXT["en"]["size"][category].format(size=size(count)))
-                    axis.set_ylabel("median ns per operation (log scale)")
-                    axis.set_xticks([position + 0.4 - width / 2 for position in range(len(operations))])
-                    axis.set_xticklabels(labels, rotation=30, ha="right")
-                    axis.grid(axis="y", which="major", alpha=0.3)
-                axes[0][0].legend(fontsize="small")
-                figure.suptitle(TEXT["en"]["chart"].format(language=language, bits=bits, category=category))
-                figure.tight_layout()
-                path = directory / chart_name(category, language, bits)
-                figure.savefig(path, dpi=80)
-                plt.close(figure)
-                written.append(path)
+                for scale in ("linear", "log"):
+                    path = directory / chart_name(category, language, bits, scale)
+                    draw_chart(reports, category, language, bits, sizes, scale, path)
+                    written.append(path)
     return written
+
+
+def draw_chart(reports, category, language, bits, sizes, scale, path):
+    """Draw each size in its own panel, with a visibility floor only on the linear scale."""
+    import matplotlib.pyplot as plt
+
+    operations = OPERATIONS[category]
+    labels = [TEXT["en"]["operations"][operation] for operation in operations]
+    figure, axes = plt.subplots(1, len(sizes), figsize=(6 * len(sizes), 6), squeeze=False, sharey=False)
+    try:
+        for axis, count in zip(axes[0], sizes, strict=True):
+            results = reports[(category, language, bits, count)]["results"]
+            width = 0.8 / len(results)
+            maximum = max(
+                result["operations"][operation]["median_ns"] for result in results for operation in operations
+            )
+            minimum = maximum * 0.005 if scale == "linear" else 0
+            for index, result in enumerate(results):
+                axis.bar(
+                    [position + index * width for position in range(len(operations))],
+                    [max(result["operations"][operation]["median_ns"], minimum) for operation in operations],
+                    width,
+                    label=result["variant"].replace("_", " "),
+                    color=plt.get_cmap("tab20" if len(results) > 10 else "tab10")(index),
+                )
+            axis.set_yscale(scale)
+            if scale == "linear":
+                axis.set_ylim(bottom=0)
+            axis.set_title(TEXT["en"]["size"][category].format(size=size(count)))
+            axis.set_ylabel(f"median ns per operation ({scale} scale)")
+            axis.set_xticks([position + 0.4 - width / 2 for position in range(len(operations))])
+            axis.set_xticklabels(labels, rotation=30, ha="right")
+            axis.grid(axis="y", which="major", alpha=0.3)
+        handles, names = axes[0][0].get_legend_handles_labels()
+        footer = 0.04 if scale == "linear" else 0
+        figure.legend(
+            handles, names, loc="lower center", ncol=3, fontsize="small", bbox_to_anchor=(0.5, footer)
+        )
+        figure.suptitle(TEXT["en"]["chart"].format(language=language, bits=bits, category=category))
+        if scale == "linear":
+            figure.text(
+                0.5,
+                0.01,
+                "Bars below 0.5% of each panel's maximum are raised for visibility.\nSee tables for exact times.",
+                ha="center",
+                fontsize="small",
+            )
+        legend_height = 0.05 + math.ceil(len(names) / 3) * 0.035
+        figure.tight_layout(rect=(0, legend_height + footer, 1, 1))
+        figure.savefig(path, dpi=80)
+    finally:
+        plt.close(figure)
 
 
 def main(arguments=None):

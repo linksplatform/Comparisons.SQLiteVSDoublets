@@ -1,12 +1,5 @@
 # Root level gitignore for the repository
 # C# specific gitignore is in csharp/.gitignore
-# C++ specific files
-cpp/build/
-cpp/*.o
-cpp/*.a
-cpp/*.so
-cpp/*.exe
-
 # Common temporary files
 __pycache__/
 .venv/

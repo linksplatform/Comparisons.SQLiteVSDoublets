@@ -120,8 +120,10 @@ jobs:
           echo "NAME=$name" >> "$GITHUB_ENV"
           if [ "$LANGUAGE" = rust ]; then
             benchmark=(rust/target/release/sqlite-vs-doublets)
+            toolchain="$(rustc --version)"
           else
             benchmark=(dotnet csharp/SQLiteVSDoublets/bin/Release/net10.0/sqlite-vs-doublets.dll)
+            toolchain=".NET SDK $(dotnet --version)"
           fi
           "${benchmark[@]}" "$CATEGORY" "$BITS" "$SIZE" \
             --directory "$RUNNER_TEMP/storage" --output "$RUNNER_TEMP/measured.json"
@@ -133,6 +135,7 @@ jobs:
             --arg date "$(date -u +%Y-%m-%d)" --arg machine "$machine" \
             '. + {run_url: $run_url, source_sha: $source_sha, tree_sha: $tree_sha, date: $date, machine: $machine}' \
             "$RUNNER_TEMP/measured.json" > "results/$name.json"
+          python3 scripts/benchmark_provenance.py "results/$name.json" --toolchain "$toolchain"
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: results-${{ env.NAME }}

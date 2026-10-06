@@ -10,18 +10,17 @@ WRITER_GROUP = "main-writer-${{ github.repository }}-main"
 DOCUMENT_SECTIONS = {
     "README.md": (
         "## Benchmarks",
-        "## Original comparison",
+        "## Conclusions",
         "<!--BENCHMARK_RESULTS_START-->",
         "<!--BENCHMARK_RESULTS_END-->",
     ),
     "README.ru.md": (
         "## Тесты производительности",
-        "## Исходное сравнение",
+        "## Выводы",
         "<!--BENCHMARK_RESULTS_START-->",
         "<!--BENCHMARK_RESULTS_END-->",
     ),
     "CONTRIBUTING.md": ("## Local checks", "## Dependencies and diagnostics"),
-    "cpp/README.md": ("# C++ placeholder",),
 }
 
 
@@ -70,8 +69,6 @@ def main():
     for path in sorted((ROOT / ".github/workflows").glob("*.yml")):
         workflow = load_workflow(path.read_text(encoding="utf-8"))
         errors += [f"{path.name}: {error}" for error in workflow_errors(workflow)]
-    if (ROOT / ".github/workflows/cpp.yml").exists() and not (ROOT / "cpp/CMakeLists.txt").exists():
-        errors.append("C++ build workflow has no CMake project")
     for directory in ("scripts", "rust/src", "rust/tests", "csharp", "experiments"):
         for path in (ROOT / directory).rglob("*"):
             if path.suffix not in (".py", ".rs", ".cs", ".sh") or any(

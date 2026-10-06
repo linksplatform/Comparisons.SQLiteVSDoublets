@@ -89,6 +89,12 @@ repetitions do not overlap and the medians differ by more than 5%, otherwise
 it is `≈ same`. The file size is measured after creation; Doublets files are
 preallocated memory-mapped files, so small stores show the preallocation size.
 
+Each results group includes linear and logarithmic charts. Linear charts raise
+bars below 0.5% of the panel maximum for visibility; the tables retain exact
+times. Provenance records the Doublets library and Rust compiler or .NET SDK
+versions used for that run. Older reports without this metadata identify it
+as missing rather than attributing current toolchains to past measurements.
+
 Every table is measured by its own GitHub Actions job, with all variants on
 the same runner, so that a difference is never a difference between machines,
 by the [Benchmarks workflow](.github/workflows/benchmarks.yml): links with
@@ -113,6 +119,10 @@ dotnet run -c Release --project csharp/SQLiteVSDoublets -- \
   links 64 1000 --repetitions 3 \
   --variants SQLite_Memory,SystemDataSQLite_Memory \
   --output results/links-csharp-64-1000.json
+python3 scripts/benchmark_provenance.py results/links-rust-64-100000.json \
+  --toolchain "$(rustc --version)"
+python3 scripts/benchmark_provenance.py results/links-csharp-64-1000.json \
+  --toolchain ".NET SDK $(dotnet --version)"
 # print the tables, add --readme README.md --charts docs/benchmarks to update
 python3 scripts/benchmark_report.py results
 ```
@@ -173,7 +183,7 @@ Notes:
 
 ##### 100,000 links
 
-_10 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
+_10 repetitions after a warm-up, median time per operation. SQLite 3.53.2; doublets 0.5.0; rustc 1.99.0 (b940084d7 2026-09-28). Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -186,7 +196,7 @@ _10 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubunt
 
 ##### 1,000,000 links
 
-_3 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
+_3 repetitions after a warm-up, median time per operation. SQLite 3.53.2; doublets 0.5.0; rustc 1.99.0 (b940084d7 2026-09-28). Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -199,7 +209,7 @@ _3 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu
 
 ##### 10,000,000 links
 
-_1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
+_1 repetition after a warm-up, median time per operation. SQLite 3.53.2; doublets 0.5.0; rustc 1.99.0 (b940084d7 2026-09-28). Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -210,13 +220,15 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 
 | Doublets Split Volatile | 337 ns (9.32× faster) | 2.83 ns (34.7× faster) | 30.9 ns (44.9× faster) | 238 ns (5.79× faster) | 171 ns (8.23× faster) | 170 ns (8.18× faster) | 689 ns (12.3× faster) | 2.78 µs (2.09× faster) | — |
 | Doublets Split NonVolatile | 490 ns (17.9× faster) | 2.8 ns (35.7× faster) | 31.6 ns (67× faster) | 244 ns (9.81× faster) | 177 ns (13.1× faster) | 180 ns (12.9× faster) | 737 ns (31.5× faster) | 3.13 µs (4.39× faster) | 400.0 MiB |
 
-![Rust doublets vs SQLite, 32 bit, links](docs/benchmarks/links-rust-32.png)
+![Rust doublets vs SQLite, 32 bit, links, linear scale](docs/benchmarks/links-rust-32-linear.png)
+
+![Rust doublets vs SQLite, 32 bit, links, log scale](docs/benchmarks/links-rust-32.png)
 
 #### 64 bit address/id space benchmarks
 
 ##### 100,000 links
 
-_10 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
+_10 repetitions after a warm-up, median time per operation. SQLite 3.53.2; doublets 0.5.0; rustc 1.99.0 (b940084d7 2026-09-28). Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -229,7 +241,7 @@ _10 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubunt
 
 ##### 1,000,000 links
 
-_3 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
+_3 repetitions after a warm-up, median time per operation. SQLite 3.53.2; doublets 0.5.0; rustc 1.99.0 (b940084d7 2026-09-28). Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -242,7 +254,7 @@ _3 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu
 
 ##### 10,000,000 links
 
-_1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
+_1 repetition after a warm-up, median time per operation. SQLite 3.53.2; doublets 0.5.0; rustc 1.99.0 (b940084d7 2026-09-28). Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -253,7 +265,9 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 
 | Doublets Split Volatile | 381 ns (8.71× faster) | 3.88 ns (24.7× faster) | 28 ns (54.4× faster) | 247 ns (5.91× faster) | 174 ns (8.47× faster) | 176 ns (8.31× faster) | 719 ns (12.1× faster) | 2.78 µs (2.19× faster) | — |
 | Doublets Split NonVolatile | 677 ns (13.4× faster) | 4.19 ns (23.7× faster) | 36.7 ns (58.3× faster) | 248 ns (9.71× faster) | 173 ns (13.4× faster) | 179 ns (13.1× faster) | 755 ns (32.6× faster) | 3.64 µs (4.18× faster) | 800.0 MiB |
 
-![Rust doublets vs SQLite, 64 bit, links](docs/benchmarks/links-rust-64.png)
+![Rust doublets vs SQLite, 64 bit, links, linear scale](docs/benchmarks/links-rust-64-linear.png)
+
+![Rust doublets vs SQLite, 64 bit, links, log scale](docs/benchmarks/links-rust-64.png)
 
 ### C# doublets vs SQLite
 
@@ -261,7 +275,7 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 
 
 ##### 100,000 links
 
-_10 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
+_10 repetitions after a warm-up, median time per operation. SQLite 3.53.3; Platform.Data.Doublets 0.18.1; .NET SDK 10.0.401. Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -276,7 +290,7 @@ _10 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubunt
 
 ##### 1,000,000 links
 
-_3 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
+_3 repetitions after a warm-up, median time per operation. SQLite 3.53.3; Platform.Data.Doublets 0.18.1; .NET SDK 10.0.401. Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -291,7 +305,7 @@ _3 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu
 
 ##### 10,000,000 links
 
-_1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, INTEL(R) XEON(R) PLATINUM 8573C, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
+_1 repetition after a warm-up, median time per operation. SQLite 3.53.3; Platform.Data.Doublets 0.18.1; .NET SDK 10.0.401. Ubuntu 24.04.5 LTS, INTEL(R) XEON(R) PLATINUM 8573C, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -304,13 +318,15 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 
 | Doublets Split Volatile | 486 ns (9.61× faster) | 10 ns (47.1× faster) | 176 ns (12.6× faster) | 431 ns (5.82× faster) | 265 ns (9.74× faster) | 257 ns (10× faster) | 694 ns (16.4× faster) | 563 ns (13.2× faster) | — |
 | Doublets Split NonVolatile | 1.27 µs (6.33× faster) | 10.1 ns (46.4× faster) | 205 ns (12.2× faster) | 507 ns (5.7× faster) | 309 ns (9.38× faster) | 305 ns (9.52× faster) | 979 ns (20.4× faster) | 817 ns (14.5× faster) | 400.0 MiB |
 
-![C# doublets vs SQLite, 32 bit, links](docs/benchmarks/links-csharp-32.png)
+![C# doublets vs SQLite, 32 bit, links, linear scale](docs/benchmarks/links-csharp-32-linear.png)
+
+![C# doublets vs SQLite, 32 bit, links, log scale](docs/benchmarks/links-csharp-32.png)
 
 #### 64 bit address/id space benchmarks
 
 ##### 100,000 links
 
-_10 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
+_10 repetitions after a warm-up, median time per operation. SQLite 3.53.3; Platform.Data.Doublets 0.18.1; .NET SDK 10.0.401. Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -325,7 +341,7 @@ _10 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubunt
 
 ##### 1,000,000 links
 
-_3 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
+_3 repetitions after a warm-up, median time per operation. SQLite 3.53.3; Platform.Data.Doublets 0.18.1; .NET SDK 10.0.401. Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -340,7 +356,7 @@ _3 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu
 
 ##### 10,000,000 links
 
-_1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
+_1 repetition after a warm-up, median time per operation. SQLite 3.53.3; Platform.Data.Doublets 0.18.1; .NET SDK 10.0.401. Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -353,7 +369,9 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 
 | Doublets Split Volatile | 449 ns (10× faster) | 12.6 ns (36.6× faster) | 294 ns (7.12× faster) | 443 ns (5.32× faster) | 317 ns (7.65× faster) | 330 ns (7.26× faster) | 859 ns (11.3× faster) | 688 ns (8.95× faster) | — |
 | Doublets Split NonVolatile | 1.27 µs (8.22× faster) | 12.6 ns (36.8× faster) | 331 ns (8.88× faster) | 484 ns (7.17× faster) | 339 ns (9.86× faster) | 351 ns (9.55× faster) | 1.19 µs (21.4× faster) | 853 ns (18.1× faster) | 800.0 MiB |
 
-![C# doublets vs SQLite, 64 bit, links](docs/benchmarks/links-csharp-64.png)
+![C# doublets vs SQLite, 64 bit, links, linear scale](docs/benchmarks/links-csharp-64-linear.png)
+
+![C# doublets vs SQLite, 64 bit, links, log scale](docs/benchmarks/links-csharp-64.png)
 
 ## Doublets vs SQLite as storage for objects
 
@@ -363,7 +381,7 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 
 
 ##### 100,000 blog posts
 
-_5 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 9V45 96-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
+_5 repetitions after a warm-up, median time per operation. SQLite 3.53.2; doublets 0.5.0; rustc 1.99.0 (b940084d7 2026-09-28). Ubuntu 24.04.5 LTS, AMD EPYC 9V45 96-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -380,7 +398,7 @@ _5 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu
 
 ##### 1,000,000 blog posts
 
-_1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
+_1 repetition after a warm-up, median time per operation. SQLite 3.53.2; doublets 0.5.0; rustc 1.99.0 (b940084d7 2026-09-28). Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -395,13 +413,15 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 
 | Doublets Split NonVolatile Cached | 6.46 µs (1.89× slower) | 882 ns (1.34× slower) | 961 ns (4.23× faster) | 6.75 µs (1.68× faster) | 400.0 MiB |
 | Doublets Split NonVolatile Uncached | 36.6 µs (10.7× slower) | 14.5 µs (22.1× slower) | 14.8 µs (3.64× slower) | 6.98 µs (1.63× faster) | 400.0 MiB |
 
-![Rust doublets vs SQLite, 32 bit, objects](docs/benchmarks/objects-rust-32.png)
+![Rust doublets vs SQLite, 32 bit, objects, linear scale](docs/benchmarks/objects-rust-32-linear.png)
+
+![Rust doublets vs SQLite, 32 bit, objects, log scale](docs/benchmarks/objects-rust-32.png)
 
 #### 64 bit address/id space benchmarks
 
 ##### 100,000 blog posts
 
-_5 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 9V45 96-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
+_5 repetitions after a warm-up, median time per operation. SQLite 3.53.2; doublets 0.5.0; rustc 1.99.0 (b940084d7 2026-09-28). Ubuntu 24.04.5 LTS, AMD EPYC 9V45 96-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -418,7 +438,7 @@ _5 repetitions after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu
 
 ##### 1,000,000 blog posts
 
-_1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
+_1 repetition after a warm-up, median time per operation. SQLite 3.53.2; doublets 0.5.0; rustc 1.99.0 (b940084d7 2026-09-28). Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._
 
 | Storage | Create | Read all | Read by id | Delete | File size |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -433,7 +453,9 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 
 | Doublets Split NonVolatile Cached | 8.1 µs (2.3× slower) | 952 ns (1.5× slower) | 1.02 µs (3.45× faster) | 7.65 µs (1.32× faster) | 800.0 MiB |
 | Doublets Split NonVolatile Uncached | 55.9 µs (15.9× slower) | 14.7 µs (23.1× slower) | 15.4 µs (4.35× slower) | 8.04 µs (1.26× faster) | 800.0 MiB |
 
-![Rust doublets vs SQLite, 64 bit, objects](docs/benchmarks/objects-rust-64.png)
+![Rust doublets vs SQLite, 64 bit, objects, linear scale](docs/benchmarks/objects-rust-64-linear.png)
+
+![Rust doublets vs SQLite, 64 bit, objects, log scale](docs/benchmarks/objects-rust-64.png)
 
 ### C# doublets vs SQLite
 
@@ -441,7 +463,7 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.2, Ubuntu 
 
 ##### 100,000 blog posts
 
-_5 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._ PostgreSQL 18.3 (Debian 18.3-1.pgdg13+1); Npgsql.EntityFrameworkCore.PostgreSQL 10.0.3.0; EF Core 10.0.4.0.
+_5 repetitions after a warm-up, median time per operation. SQLite 3.53.3; Platform.Data.Doublets 0.18.1; .NET SDK 10.0.401. Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05. PostgreSQL 18.3 (Debian 18.3-1.pgdg13+1); Npgsql.EntityFrameworkCore.PostgreSQL 10.0.3.0; EF Core 10.0.4.0._
 
 | Storage | Create | Read all | Read by id | Delete | File size | Server relations |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -461,7 +483,7 @@ _5 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu
 
 ##### 1,000,000 blog posts
 
-_1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, INTEL(R) XEON(R) PLATINUM 8573C, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._ PostgreSQL 18.3 (Debian 18.3-1.pgdg13+1); Npgsql.EntityFrameworkCore.PostgreSQL 10.0.3.0; EF Core 10.0.4.0.
+_1 repetition after a warm-up, median time per operation. SQLite 3.53.3; Platform.Data.Doublets 0.18.1; .NET SDK 10.0.401. Ubuntu 24.04.5 LTS, INTEL(R) XEON(R) PLATINUM 8573C, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05. PostgreSQL 18.3 (Debian 18.3-1.pgdg13+1); Npgsql.EntityFrameworkCore.PostgreSQL 10.0.3.0; EF Core 10.0.4.0._
 
 | Storage | Create | Read all | Read by id | Delete | File size | Server relations |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -479,13 +501,15 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 
 | Doublets Split NonVolatile Cached | 21 µs (2.32× slower) | 14 µs (3.79× slower) | 7.1 µs (≈ same) | 10.8 µs (≈ same) | 400.0 MiB | — |
 | Doublets Split NonVolatile Uncached | 142 µs (15.7× slower) | 460 µs (125× slower) | 460 µs (67.5× slower) | 11.2 µs (≈ same) | 400.0 MiB | — |
 
-![C# doublets vs SQLite, 32 bit, objects](docs/benchmarks/objects-csharp-32.png)
+![C# doublets vs SQLite, 32 bit, objects, linear scale](docs/benchmarks/objects-csharp-32-linear.png)
+
+![C# doublets vs SQLite, 32 bit, objects, log scale](docs/benchmarks/objects-csharp-32.png)
 
 #### 64 bit address/id space benchmarks
 
 ##### 100,000 blog posts
 
-_5 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._ PostgreSQL 18.3 (Debian 18.3-1.pgdg13+1); Npgsql.EntityFrameworkCore.PostgreSQL 10.0.3.0; EF Core 10.0.4.0.
+_5 repetitions after a warm-up, median time per operation. SQLite 3.53.3; Platform.Data.Doublets 0.18.1; .NET SDK 10.0.401. Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05. PostgreSQL 18.3 (Debian 18.3-1.pgdg13+1); Npgsql.EntityFrameworkCore.PostgreSQL 10.0.3.0; EF Core 10.0.4.0._
 
 | Storage | Create | Read all | Read by id | Delete | File size | Server relations |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -505,7 +529,7 @@ _5 repetitions after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu
 
 ##### 1,000,000 blog posts
 
-_1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05._ PostgreSQL 18.3 (Debian 18.3-1.pgdg13+1); Npgsql.EntityFrameworkCore.PostgreSQL 10.0.3.0; EF Core 10.0.4.0.
+_1 repetition after a warm-up, median time per operation. SQLite 3.53.3; Platform.Data.Doublets 0.18.1; .NET SDK 10.0.401. Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025) on 2026-10-05. PostgreSQL 18.3 (Debian 18.3-1.pgdg13+1); Npgsql.EntityFrameworkCore.PostgreSQL 10.0.3.0; EF Core 10.0.4.0._
 
 | Storage | Create | Read all | Read by id | Delete | File size | Server relations |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -523,123 +547,17 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.3, Ubuntu 
 | Doublets Split NonVolatile Cached | 27.6 µs (3.25× slower) | 11.3 µs (3.14× slower) | 7.63 µs (1.1× slower) | 13 µs (1.3× faster) | 800.0 MiB | — |
 | Doublets Split NonVolatile Uncached | 121 µs (14.2× slower) | 323 µs (90× slower) | 320 µs (46.2× slower) | 12.5 µs (1.35× faster) | 800.0 MiB | — |
 
-![C# doublets vs SQLite, 64 bit, objects](docs/benchmarks/objects-csharp-64.png)
+![C# doublets vs SQLite, 64 bit, objects, linear scale](docs/benchmarks/objects-csharp-64-linear.png)
+
+![C# doublets vs SQLite, 64 bit, objects, log scale](docs/benchmarks/objects-csharp-64.png)
+
+## Conclusions
+
+Each comparison uses SQLite of matching durability and the same noise rule as the tables. Counts span the measured variants, sizes and id widths; they are not an overall speed ranking. RAM usage is not measured.
+
+- Rust, links: 187 faster, 3 slower, 2 approximately equal Doublets operation comparisons with SQLite.
+- C#, links: 192 faster, 0 slower, 0 approximately equal Doublets operation comparisons with SQLite.
+- Rust, objects: 28 faster, 98 slower, 2 approximately equal Doublets operation comparisons with SQLite.
+- C#, objects: 10 faster, 109 slower, 9 approximately equal Doublets operation comparisons with SQLite.
 <!-- markdownlint-restore -->
 <!--BENCHMARK_RESULTS_END-->
-
-## Original comparison
-
-The original C# object comparison and its historical results.
-
-<!-- markdownlint-disable MD013 MD060 -->
-
-### SQLite
-
-```C#
-using System.Linq;
-using Comparisons.SQLiteVSDoublets.Model;
-
-namespace Comparisons.SQLiteVSDoublets.SQLite
-{
-    public class SQLiteTestRun : TestRun
-    {
-        public SQLiteTestRun(string dbFilename) : base(dbFilename) { }
-
-        public override void Prepare()
-        {
-            using var dbContext = new SQLiteDbContext(DbFilename);
-            dbContext.Database.EnsureCreated();
-        }
-
-        public override void CreateList()
-        {
-            using var dbContext = new SQLiteDbContext(DbFilename);
-            dbContext.BlogPosts.AddRange(BlogPosts.List);
-            dbContext.SaveChanges();
-        }
-
-        public override void ReadList()
-        {
-            using var dbContext = new SQLiteDbContext(DbFilename);
-            foreach (var blogPost in dbContext.BlogPosts)
-            {
-                ReadBlogPosts.Add(blogPost);
-            }
-        }
-
-        public override void DeleteList()
-        {
-            using var dbContext = new SQLiteDbContext(DbFilename);
-            var blogPostsToDelete = dbContext.BlogPosts.ToList();
-            dbContext.BlogPosts.RemoveRange(blogPostsToDelete);
-            dbContext.SaveChanges();
-        }
-    }
-}
-```
-
-### Doublets
-
-``` C#
-using System.IO;
-using Platform.IO;
-using Comparisons.SQLiteVSDoublets.Model;
-
-namespace Comparisons.SQLiteVSDoublets.Doublets
-{
-    public class DoubletsTestRun : TestRun
-    {
-        public string DbIndexFilename { get; }
-
-        public DoubletsTestRun(string dbFilename) : base(dbFilename) => DbIndexFilename = $"{Path.GetFileNameWithoutExtension(dbFilename)}.links.index";
-
-        public override void Prepare()
-        {
-            using var dbContext = new DoubletsDbContext(DbFilename, DbIndexFilename);
-        }
-
-        public override void CreateList()
-        {
-            using var dbContext = new DoubletsDbContext(DbFilename, DbIndexFilename);
-            foreach (var blogPost in BlogPosts.List)
-            {
-                dbContext.SaveBlogPost(blogPost);
-            }
-        }
-
-        public override void ReadList()
-        {
-            using var dbContext = new DoubletsDbContext(DbFilename, DbIndexFilename);
-            foreach (var blogPost in dbContext.BlogPosts)
-            {
-                ReadBlogPosts.Add(blogPost);
-            }
-        }
-
-        public override void DeleteList()
-        {
-            using var dbContext = new DoubletsDbContext(DbFilename, DbIndexFilename);
-            var blogPostsToDelete = dbContext.BlogPosts;
-            foreach (var blogPost in blogPostsToDelete)
-            {
-                dbContext.Delete((uint)blogPost.Id);
-            }
-        }
-
-        protected override void DeleteDatabase()
-        {
-            File.Delete(DbFilename);
-            File.Delete(DbIndexFilename);
-        }
-
-        protected override long GetDatabaseSizeInBytes() => FileHelpers.GetSize(DbFilename) + FileHelpers.GetSize(DbIndexFilename);
-    }
-}
-```
-
-<!-- markdownlint-restore -->
-
-### Conclusion
-
-In this particular comparison, Doublets are faster and use less memory on disk,
-but this comes with the cost of additional use of RAM (Sqlite uses it less).

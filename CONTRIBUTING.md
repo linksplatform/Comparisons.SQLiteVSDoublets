@@ -31,7 +31,7 @@ dotnet format whitespace csharp/SQLiteVSDoublets.slnx --verify-no-changes
 dotnet build csharp/SQLiteVSDoublets.slnx -c Release -warnaserror
 (cd csharp && dotnet test --project SQLiteVSDoublets.Tests -c Release \
   --no-build -- --timeout 10m)
-npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md cpp/README.md
+npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md
 ```
 
 Workflow validation also runs actionlint with ShellCheck and zizmor. The pinned
@@ -60,7 +60,6 @@ reports from the newly fetched branch on every retry.
 This repository contains benchmark executables, without a package release or
 container deployment pipeline. Package changesets, registry credentials, and
 container build steps should be added with an actual distributable component.
-The C++ directory is a placeholder; see [its prerequisites](cpp/README.md).
 
 Immutable investigation evidence is preserved in
 [the issue 110 investigation](dev/log/issues/110/pulls/111/ANALYSIS.md).

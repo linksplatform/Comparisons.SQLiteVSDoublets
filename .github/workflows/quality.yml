@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['.github/**', 'scripts/**', 'experiments/**', 'pyproject.toml', 'README*.md', 'CONTRIBUTING.md', 'cpp/**', '.secretlintrc.json', '.pre-commit-config.yaml', '.markdownlint.json', '.codacy.yml']
+    paths: ['.github/**', 'scripts/**', 'experiments/**', 'pyproject.toml', 'README*.md', 'CONTRIBUTING.md', '.secretlintrc.json', '.pre-commit-config.yaml', '.markdownlint.json', '.codacy.yml']
   pull_request:
-    paths: ['.github/**', 'scripts/**', 'experiments/**', 'pyproject.toml', 'README*.md', 'CONTRIBUTING.md', 'cpp/**', '.secretlintrc.json', '.pre-commit-config.yaml', '.markdownlint.json', '.codacy.yml']
+    paths: ['.github/**', 'scripts/**', 'experiments/**', 'pyproject.toml', 'README*.md', 'CONTRIBUTING.md', '.secretlintrc.json', '.pre-commit-config.yaml', '.markdownlint.json', '.codacy.yml']
 
 permissions:
   contents: read
@@ -59,7 +59,7 @@ jobs:
       - run: python -m unittest discover -s experiments/ci -v
       - name: Verify preserved investigation evidence
         run: python experiments/ci/package_evidence.py dev/log/issues/110/pulls/111 --verify
-      - run: npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md cpp/README.md
+      - run: npx --yes markdownlint-cli@0.49.1 README.md README.ru.md CONTRIBUTING.md
       - name: Scan maintained source for secrets
         run: git ls-files -z -- ':!dev/log/**' ':!docs/benchmarks/**' ':!*.png' | xargs -0 npx --yes -p secretlint@13.0.7 -p @secretlint/secretlint-rule-preset-recommend@13.0.7 secretlint
 

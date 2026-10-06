@@ -8,6 +8,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 import benchmark_report as report
 
@@ -120,6 +121,23 @@ class ComparisonTests(unittest.TestCase):
 
 
 class SectionTests(unittest.TestCase):
+    def test_recorded_software_versions_are_inside_the_provenance_line(self):
+        data = sample(software={"libraries": {"doublets": "0.4.0"}, "toolchain": "rustc 1.97.0"})
+        text = report.provenance(data, report.TEXT["en"])
+        self.assertIn("doublets 0.4.0", text)
+        self.assertIn("rustc 1.97.0", text)
+        self.assertEqual(text.count("_"), 2)
+
+    def test_conclusions_are_generated_from_the_current_measurements(self):
+        text = report.section({("links", "Rust", 64, 100_000): sample()}, "en", None)
+        self.assertIn("## Conclusions", text)
+        self.assertIn("8 faster, 0 slower, 0 approximately equal", text)
+        data = sample()
+        for measured in data["results"][-1]["operations"].values():
+            measured.update(measurement(10_000))
+        text = report.section({("links", "Rust", 64, 100_000): data}, "en", None)
+        self.assertIn("0 faster, 8 slower, 0 approximately equal", text)
+
     def test_hierarchy_is_category_language_bits_size(self):
         reports = {
             ("links", "Rust", 64, 1_000_000): sample(size=1_000_000),
@@ -149,6 +167,7 @@ class SectionTests(unittest.TestCase):
                 "#### 32 bit address/id space benchmarks",
                 "##### 100,000 blog posts",
                 "#### 64 bit address/id space benchmarks",
+                "## Conclusions",
             ],
         )
 
@@ -160,10 +179,10 @@ class SectionTests(unittest.TestCase):
         text = report.section(reports, "en", None)
         self.assertEqual(text.count("_No results yet._"), 7)
         self.assertIn(
-            f"_3 repetitions after a warm-up, median time per operation. SQLite 3.53.2, ubuntu-24.04, "
             f"[GitHub Actions run]({url}) on 2026-10-04._",
             text,
         )
+        self.assertIn("toolchain version not recorded", text)
         self.assertNotIn("![", text)
 
     def test_charts_are_linked_per_category_language_and_bits(self):
@@ -224,6 +243,36 @@ class DocumentTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     report.load(self.root)
 
+    def test_recorded_provenance_requires_the_measured_library_and_toolchain(self):
+        for software in (
+            {},
+            {"libraries": {"doublets": "0.5.0"}, "toolchain": ""},
+            {"libraries": {"other": "0.5.0"}, "toolchain": "rustc 1.99.0"},
+        ):
+            with self.subTest(software=software), self.assertRaisesRegex(ValueError, "software provenance"):
+                report.validate(sample(software=software), "report.json")
+
+    @unittest.skipUnless(importlib.util.find_spec("matplotlib"), "matplotlib is not installed")
+    def test_linear_charts_keep_small_bars_visible_and_log_charts_keep_actual_values(self):
+        data = sample()
+        data["results"][-1]["operations"]["create"] = measurement(1)
+        captured = {}
+
+        def capture(figure, path, **kwargs):
+            captured[path.name] = figure
+
+        with patch("matplotlib.figure.Figure.savefig", autospec=True, side_effect=capture):
+            paths = report.charts({("links", "Rust", 64, 100_000): data}, self.root)
+        self.assertEqual({path.name for path in paths}, {"links-rust-64.png", "links-rust-64-linear.png"})
+        for name, scale, minimum in (
+            ("links-rust-64.png", "log", 1),
+            ("links-rust-64-linear.png", "linear", 10),
+        ):
+            axis = captured[name].axes[0]
+            self.assertEqual(axis.get_yscale(), scale)
+            self.assertEqual(min(bar.get_height() for bar in axis.patches), minimum)
+        self.assertEqual(data["results"][-1]["operations"]["create"]["median_ns"], 1)
+
     @unittest.skipUnless(importlib.util.find_spec("matplotlib"), "matplotlib is not installed")
     def test_main_updates_readmes_and_writes_charts(self):
         results_directory = self.root / "results"
@@ -247,11 +296,33 @@ class DocumentTests(unittest.TestCase):
         )
         self.assertEqual(
             sorted(path.name for path in (self.root / "docs").iterdir()),
-            ["links-rust-64.png", "objects-csharp-32.png"],
+            [
+                "links-rust-64-linear.png",
+                "links-rust-64.png",
+                "objects-csharp-32-linear.png",
+                "objects-csharp-32.png",
+            ],
         )
         english = (self.root / "README.md").read_text(encoding="utf-8")
-        self.assertIn("![Rust doublets vs SQLite, 64 bit, links](docs/links-rust-64.png)", english)
+        self.assertIn("![Rust doublets vs SQLite, 64 bit, links, log scale](docs/links-rust-64.png)", english)
+        self.assertIn(
+            "![Rust doublets vs SQLite, 64 bit, links, linear scale](docs/links-rust-64-linear.png)", english
+        )
         self.assertIn("Дуплеты на C# против SQLite", (self.root / "README.ru.md").read_text(encoding="utf-8"))
+
+
+class RepositoryReportsTests(unittest.TestCase):
+    def test_both_committed_readmes_match_the_generator_without_a_stale_tail(self):
+        root = Path(__file__).resolve().parents[1]
+        reports = report.load(root / "docs/benchmarks/results")
+        for name, language in (("README.md", "en"), ("README.ru.md", "ru")):
+            with self.subTest(name=name):
+                document = (root / name).read_text(encoding="utf-8")
+                self.assertTrue(document.rstrip().endswith(report.END_MARKER))
+                self.assertEqual(
+                    document,
+                    report.replace_section(document, report.section(reports, language, "docs/benchmarks")),
+                )
 
 
 if __name__ == "__main__":

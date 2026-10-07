@@ -23,67 +23,67 @@
       "file_bytes": null,
       "operations": {
         "create": {
-          "median_ns": 4674.19369,
-          "min_ns": 4674.19369,
-          "max_ns": 4674.19369,
+          "median_ns": 4062.09039,
+          "min_ns": 4062.09039,
+          "max_ns": 4062.09039,
           "samples_ns": [
-            4674.19369
+            4062.09039
           ]
         },
         "query_all": {
-          "median_ns": 470.76318,
-          "min_ns": 470.76318,
-          "max_ns": 470.76318,
+          "median_ns": 380.80871,
+          "min_ns": 380.80871,
+          "max_ns": 380.80871,
           "samples_ns": [
-            470.76318
+            380.80871
           ]
         },
         "query_by_id": {
-          "median_ns": 2222.5084,
-          "min_ns": 2222.5084,
-          "max_ns": 2222.5084,
+          "median_ns": 1888.13573,
+          "min_ns": 1888.13573,
+          "max_ns": 1888.13573,
           "samples_ns": [
-            2222.5084
+            1888.13573
           ]
         },
         "query_by_from_to": {
-          "median_ns": 2509.03994,
-          "min_ns": 2509.03994,
-          "max_ns": 2509.03994,
+          "median_ns": 2218.39219,
+          "min_ns": 2218.39219,
+          "max_ns": 2218.39219,
           "samples_ns": [
-            2509.03994
+            2218.39219
           ]
         },
         "query_by_from": {
-          "median_ns": 2582.74529,
-          "min_ns": 2582.74529,
-          "max_ns": 2582.74529,
+          "median_ns": 2198.3503,
+          "min_ns": 2198.3503,
+          "max_ns": 2198.3503,
           "samples_ns": [
-            2582.74529
+            2198.3503
           ]
         },
         "query_by_to": {
-          "median_ns": 2568.69488,
-          "min_ns": 2568.69488,
-          "max_ns": 2568.69488,
+          "median_ns": 2186.55849,
+          "min_ns": 2186.55849,
+          "max_ns": 2186.55849,
           "samples_ns": [
-            2568.69488
+            2186.55849
           ]
         },
         "update": {
-          "median_ns": 11388.59346,
-          "min_ns": 11388.59346,
-          "max_ns": 11388.59346,
+          "median_ns": 9480.25642,
+          "min_ns": 9480.25642,
+          "max_ns": 9480.25642,
           "samples_ns": [
-            11388.59346
+            9480.25642
           ]
         },
         "delete": {
-          "median_ns": 7449.2373,
-          "min_ns": 7449.2373,
-          "max_ns": 7449.2373,
+          "median_ns": 6290.43267,
+          "min_ns": 6290.43267,
+          "max_ns": 6290.43267,
           "samples_ns": [
-            7449.2373
+            6290.43267
           ]
         }
       }
@@ -93,67 +93,67 @@
       "file_bytes": 525307904,
       "operations": {
         "create": {
-          "median_ns": 8011.47922,
-          "min_ns": 8011.47922,
-          "max_ns": 8011.47922,
+          "median_ns": 10131.88116,
+          "min_ns": 10131.88116,
+          "max_ns": 10131.88116,
           "samples_ns": [
-            8011.47922
+            10131.88116
           ]
         },
         "query_all": {
-          "median_ns": 470.40587,
-          "min_ns": 470.40587,
-          "max_ns": 470.40587,
+          "median_ns": 383.26945,
+          "min_ns": 383.26945,
+          "max_ns": 383.26945,
           "samples_ns": [
-            470.40587
+            383.26945
           ]
         },
         "query_by_id": {
-          "median_ns": 2497.62993,
-          "min_ns": 2497.62993,
-          "max_ns": 2497.62993,
+          "median_ns": 2948.35156,
+          "min_ns": 2948.35156,
+          "max_ns": 2948.35156,
           "samples_ns": [
-            2497.62993
+            2948.35156
           ]
         },
         "query_by_from_to": {
-          "median_ns": 2894.0799,
-          "min_ns": 2894.0799,
-          "max_ns": 2894.0799,
+          "median_ns": 3461.18358,
+          "min_ns": 3461.18358,
+          "max_ns": 3461.18358,
           "samples_ns": [
-            2894.0799
+            3461.18358
           ]
         },
         "query_by_from": {
-          "median_ns": 2901.15543,
-          "min_ns": 2901.15543,
-          "max_ns": 2901.15543,
+          "median_ns": 3388.12488,
+          "min_ns": 3388.12488,
+          "max_ns": 3388.12488,
           "samples_ns": [
-            2901.15543
+            3388.12488
           ]
         },
         "query_by_to": {
-          "median_ns": 2906.7422,
-          "min_ns": 2906.7422,
-          "max_ns": 2906.7422,
+          "median_ns": 3384.84173,
+          "min_ns": 3384.84173,
+          "max_ns": 3384.84173,
           "samples_ns": [
-            2906.7422
+            3384.84173
           ]
         },
         "update": {
-          "median_ns": 19942.70507,
-          "min_ns": 19942.70507,
-          "max_ns": 19942.70507,
+          "median_ns": 25118.35776,
+          "min_ns": 25118.35776,
+          "max_ns": 25118.35776,
           "samples_ns": [
-            19942.70507
+            25118.35776
           ]
         },
         "delete": {
-          "median_ns": 11878.51812,
-          "min_ns": 11878.51812,
-          "max_ns": 11878.51812,
+          "median_ns": 15626.5301,
+          "min_ns": 15626.5301,
+          "max_ns": 15626.5301,
           "samples_ns": [
-            11878.51812
+            15626.5301
           ]
         }
       }
@@ -163,67 +163,67 @@
       "file_bytes": null,
       "operations": {
         "create": {
-          "median_ns": 4345.70456,
-          "min_ns": 4345.70456,
-          "max_ns": 4345.70456,
+          "median_ns": 3963.89998,
+          "min_ns": 3963.89998,
+          "max_ns": 3963.89998,
           "samples_ns": [
-            4345.70456
+            3963.89998
           ]
         },
         "query_all": {
-          "median_ns": 300.42543,
-          "min_ns": 300.42543,
-          "max_ns": 300.42543,
+          "median_ns": 309.62688,
+          "min_ns": 309.62688,
+          "max_ns": 309.62688,
           "samples_ns": [
-            300.42543
+            309.62688
           ]
         },
         "query_by_id": {
-          "median_ns": 2214.08741,
-          "min_ns": 2214.08741,
-          "max_ns": 2214.08741,
+          "median_ns": 2165.35731,
+          "min_ns": 2165.35731,
+          "max_ns": 2165.35731,
           "samples_ns": [
-            2214.08741
+            2165.35731
           ]
         },
         "query_by_from_to": {
-          "median_ns": 2481.1883,
-          "min_ns": 2481.1883,
-          "max_ns": 2481.1883,
+          "median_ns": 2485.49396,
+          "min_ns": 2485.49396,
+          "max_ns": 2485.49396,
           "samples_ns": [
-            2481.1883
+            2485.49396
           ]
         },
         "query_by_from": {
-          "median_ns": 2537.99463,
-          "min_ns": 2537.99463,
-          "max_ns": 2537.99463,
+          "median_ns": 2446.48005,
+          "min_ns": 2446.48005,
+          "max_ns": 2446.48005,
           "samples_ns": [
-            2537.99463
+            2446.48005
           ]
         },
         "query_by_to": {
-          "median_ns": 2541.21608,
-          "min_ns": 2541.21608,
-          "max_ns": 2541.21608,
+          "median_ns": 2399.44494,
+          "min_ns": 2399.44494,
+          "max_ns": 2399.44494,
           "samples_ns": [
-            2541.21608
+            2399.44494
           ]
         },
         "update": {
-          "median_ns": 10481.01005,
-          "min_ns": 10481.01005,
-          "max_ns": 10481.01005,
+          "median_ns": 8987.16606,
+          "min_ns": 8987.16606,
+          "max_ns": 8987.16606,
           "samples_ns": [
-            10481.01005
+            8987.16606
           ]
         },
         "delete": {
-          "median_ns": 7356.62927,
-          "min_ns": 7356.62927,
-          "max_ns": 7356.62927,
+          "median_ns": 6092.92109,
+          "min_ns": 6092.92109,
+          "max_ns": 6092.92109,
           "samples_ns": [
-            7356.62927
+            6092.92109
           ]
         }
       }
@@ -233,67 +233,67 @@
       "file_bytes": 525307904,
       "operations": {
         "create": {
-          "median_ns": 8174.77015,
-          "min_ns": 8174.77015,
-          "max_ns": 8174.77015,
+          "median_ns": 10367.58987,
+          "min_ns": 10367.58987,
+          "max_ns": 10367.58987,
           "samples_ns": [
-            8174.77015
+            10367.58987
           ]
         },
         "query_all": {
-          "median_ns": 308.42535,
-          "min_ns": 308.42535,
-          "max_ns": 308.42535,
+          "median_ns": 315.36867,
+          "min_ns": 315.36867,
+          "max_ns": 315.36867,
           "samples_ns": [
-            308.42535
+            315.36867
           ]
         },
         "query_by_id": {
-          "median_ns": 2678.5623,
-          "min_ns": 2678.5623,
-          "max_ns": 2678.5623,
+          "median_ns": 3188.61177,
+          "min_ns": 3188.61177,
+          "max_ns": 3188.61177,
           "samples_ns": [
-            2678.5623
+            3188.61177
           ]
         },
         "query_by_from_to": {
-          "median_ns": 3116.6219,
-          "min_ns": 3116.6219,
-          "max_ns": 3116.6219,
+          "median_ns": 3736.59988,
+          "min_ns": 3736.59988,
+          "max_ns": 3736.59988,
           "samples_ns": [
-            3116.6219
+            3736.59988
           ]
         },
         "query_by_from": {
-          "median_ns": 3068.95323,
-          "min_ns": 3068.95323,
-          "max_ns": 3068.95323,
+          "median_ns": 3623.76534,
+          "min_ns": 3623.76534,
+          "max_ns": 3623.76534,
           "samples_ns": [
-            3068.95323
+            3623.76534
           ]
         },
         "query_by_to": {
-          "median_ns": 3075.58529,
-          "min_ns": 3075.58529,
-          "max_ns": 3075.58529,
+          "median_ns": 3626.14835,
+          "min_ns": 3626.14835,
+          "max_ns": 3626.14835,
           "samples_ns": [
-            3075.58529
+            3626.14835
           ]
         },
         "update": {
-          "median_ns": 19853.65647,
-          "min_ns": 19853.65647,
-          "max_ns": 19853.65647,
+          "median_ns": 25648.8696,
+          "min_ns": 25648.8696,
+          "max_ns": 25648.8696,
           "samples_ns": [
-            19853.65647
+            25648.8696
           ]
         },
         "delete": {
-          "median_ns": 12407.02942,
-          "min_ns": 12407.02942,
-          "max_ns": 12407.02942,
+          "median_ns": 15840.69574,
+          "min_ns": 15840.69574,
+          "max_ns": 15840.69574,
           "samples_ns": [
-            12407.02942
+            15840.69574
           ]
         }
       }
@@ -303,67 +303,67 @@
       "file_bytes": null,
       "operations": {
         "create": {
-          "median_ns": 3118.38595,
-          "min_ns": 3118.38595,
-          "max_ns": 3118.38595,
+          "median_ns": 3048.20643,
+          "min_ns": 3048.20643,
+          "max_ns": 3048.20643,
           "samples_ns": [
-            3118.38595
+            3048.20643
           ]
         },
         "query_all": {
-          "median_ns": 12.23848,
-          "min_ns": 12.23848,
-          "max_ns": 12.23848,
+          "median_ns": 14.55035,
+          "min_ns": 14.55035,
+          "max_ns": 14.55035,
           "samples_ns": [
-            12.23848
+            14.55035
           ]
         },
         "query_by_id": {
-          "median_ns": 147.94469,
-          "min_ns": 147.94469,
-          "max_ns": 147.94469,
+          "median_ns": 157.16718,
+          "min_ns": 157.16718,
+          "max_ns": 157.16718,
           "samples_ns": [
-            147.94469
+            157.16718
           ]
         },
         "query_by_from_to": {
-          "median_ns": 1213.27705,
-          "min_ns": 1213.27705,
-          "max_ns": 1213.27705,
+          "median_ns": 1097.64015,
+          "min_ns": 1097.64015,
+          "max_ns": 1097.64015,
           "samples_ns": [
-            1213.27705
+            1097.64015
           ]
         },
         "query_by_from": {
-          "median_ns": 1425.70993,
-          "min_ns": 1425.70993,
-          "max_ns": 1425.70993,
+          "median_ns": 1260.6749,
+          "min_ns": 1260.6749,
+          "max_ns": 1260.6749,
           "samples_ns": [
-            1425.70993
+            1260.6749
           ]
         },
         "query_by_to": {
-          "median_ns": 1438.7326,
-          "min_ns": 1438.7326,
-          "max_ns": 1438.7326,
+          "median_ns": 1044.24364,
+          "min_ns": 1044.24364,
+          "max_ns": 1044.24364,
           "samples_ns": [
-            1438.7326
+            1044.24364
           ]
         },
         "update": {
-          "median_ns": 7607.89243,
-          "min_ns": 7607.89243,
-          "max_ns": 7607.89243,
+          "median_ns": 6775.87849,
+          "min_ns": 6775.87849,
+          "max_ns": 6775.87849,
           "samples_ns": [
-            7607.89243
+            6775.87849
           ]
         },
         "delete": {
-          "median_ns": 3447.09742,
-          "min_ns": 3447.09742,
-          "max_ns": 3447.09742,
+          "median_ns": 3224.21372,
+          "min_ns": 3224.21372,
+          "max_ns": 3224.21372,
           "samples_ns": [
-            3447.09742
+            3224.21372
           ]
         }
       }
@@ -373,67 +373,67 @@
       "file_bytes": 335544320,
       "operations": {
         "create": {
-          "median_ns": 4550.28196,
-          "min_ns": 4550.28196,
-          "max_ns": 4550.28196,
+          "median_ns": 3814.44256,
+          "min_ns": 3814.44256,
+          "max_ns": 3814.44256,
           "samples_ns": [
-            4550.28196
+            3814.44256
           ]
         },
         "query_all": {
-          "median_ns": 12.24076,
-          "min_ns": 12.24076,
-          "max_ns": 12.24076,
+          "median_ns": 14.54965,
+          "min_ns": 14.54965,
+          "max_ns": 14.54965,
           "samples_ns": [
-            12.24076
+            14.54965
           ]
         },
         "query_by_id": {
-          "median_ns": 201.26567,
-          "min_ns": 201.26567,
-          "max_ns": 201.26567,
+          "median_ns": 181.21167,
+          "min_ns": 181.21167,
+          "max_ns": 181.21167,
           "samples_ns": [
-            201.26567
+            181.21167
           ]
         },
         "query_by_from_to": {
-          "median_ns": 1580.85009,
-          "min_ns": 1580.85009,
-          "max_ns": 1580.85009,
+          "median_ns": 1372.75084,
+          "min_ns": 1372.75084,
+          "max_ns": 1372.75084,
           "samples_ns": [
-            1580.85009
+            1372.75084
           ]
         },
         "query_by_from": {
-          "median_ns": 1770.58098,
-          "min_ns": 1770.58098,
-          "max_ns": 1770.58098,
+          "median_ns": 1826.11311,
+          "min_ns": 1826.11311,
+          "max_ns": 1826.11311,
           "samples_ns": [
-            1770.58098
+            1826.11311
           ]
         },
         "query_by_to": {
-          "median_ns": 1723.64534,
-          "min_ns": 1723.64534,
-          "max_ns": 1723.64534,
+          "median_ns": 1655.72922,
+          "min_ns": 1655.72922,
+          "max_ns": 1655.72922,
           "samples_ns": [
-            1723.64534
+            1655.72922
           ]
         },
         "update": {
-          "median_ns": 10710.21476,
-          "min_ns": 10710.21476,
-          "max_ns": 10710.21476,
+          "median_ns": 8903.77019,
+          "min_ns": 8903.77019,
+          "max_ns": 8903.77019,
           "samples_ns": [
-            10710.21476
+            8903.77019
           ]
         },
         "delete": {
-          "median_ns": 5282.66212,
-          "min_ns": 5282.66212,
-          "max_ns": 5282.66212,
+          "median_ns": 4315.548,
+          "min_ns": 4315.548,
+          "max_ns": 4315.548,
           "samples_ns": [
-            5282.66212
+            4315.548
           ]
         }
       }
@@ -443,67 +443,67 @@
       "file_bytes": null,
       "operations": {
         "create": {
-          "median_ns": 486.46151,
-          "min_ns": 486.46151,
-          "max_ns": 486.46151,
+          "median_ns": 451.85687,
+          "min_ns": 451.85687,
+          "max_ns": 451.85687,
           "samples_ns": [
-            486.46151
+            451.85687
           ]
         },
         "query_all": {
-          "median_ns": 10.00124,
-          "min_ns": 10.00124,
-          "max_ns": 10.00124,
+          "median_ns": 14.14418,
+          "min_ns": 14.14418,
+          "max_ns": 14.14418,
           "samples_ns": [
-            10.00124
+            14.14418
           ]
         },
         "query_by_id": {
-          "median_ns": 176.303,
-          "min_ns": 176.303,
-          "max_ns": 176.303,
+          "median_ns": 258.99459,
+          "min_ns": 258.99459,
+          "max_ns": 258.99459,
           "samples_ns": [
-            176.303
+            258.99459
           ]
         },
         "query_by_from_to": {
-          "median_ns": 430.96143,
-          "min_ns": 430.96143,
-          "max_ns": 430.96143,
+          "median_ns": 394.79866,
+          "min_ns": 394.79866,
+          "max_ns": 394.79866,
           "samples_ns": [
-            430.96143
+            394.79866
           ]
         },
         "query_by_from": {
-          "median_ns": 265.19034,
-          "min_ns": 265.19034,
-          "max_ns": 265.19034,
+          "median_ns": 287.48569,
+          "min_ns": 287.48569,
+          "max_ns": 287.48569,
           "samples_ns": [
-            265.19034
+            287.48569
           ]
         },
         "query_by_to": {
-          "median_ns": 256.95222,
-          "min_ns": 256.95222,
-          "max_ns": 256.95222,
+          "median_ns": 309.86113,
+          "min_ns": 309.86113,
+          "max_ns": 309.86113,
           "samples_ns": [
-            256.95222
+            309.86113
           ]
         },
         "update": {
-          "median_ns": 694.14717,
-          "min_ns": 694.14717,
-          "max_ns": 694.14717,
+          "median_ns": 784.46986,
+          "min_ns": 784.46986,
+          "max_ns": 784.46986,
           "samples_ns": [
-            694.14717
+            784.46986
           ]
         },
         "delete": {
-          "median_ns": 563.21009,
-          "min_ns": 563.21009,
-          "max_ns": 563.21009,
+          "median_ns": 645.89889,
+          "min_ns": 645.89889,
+          "max_ns": 645.89889,
           "samples_ns": [
-            563.21009
+            645.89889
           ]
         }
       }
@@ -513,77 +513,77 @@
       "file_bytes": 419430400,
       "operations": {
         "create": {
-          "median_ns": 1265.79518,
-          "min_ns": 1265.79518,
-          "max_ns": 1265.79518,
+          "median_ns": 796.06188,
+          "min_ns": 796.06188,
+          "max_ns": 796.06188,
           "samples_ns": [
-            1265.79518
+            796.06188
           ]
         },
         "query_all": {
-          "median_ns": 10.13093,
-          "min_ns": 10.13093,
-          "max_ns": 10.13093,
+          "median_ns": 14.15812,
+          "min_ns": 14.15812,
+          "max_ns": 14.15812,
           "samples_ns": [
-            10.13093
+            14.15812
           ]
         },
         "query_by_id": {
-          "median_ns": 204.9507,
-          "min_ns": 204.9507,
-          "max_ns": 204.9507,
+          "median_ns": 315.75481,
+          "min_ns": 315.75481,
+          "max_ns": 315.75481,
           "samples_ns": [
-            204.9507
+            315.75481
           ]
         },
         "query_by_from_to": {
-          "median_ns": 507.32753,
-          "min_ns": 507.32753,
-          "max_ns": 507.32753,
+          "median_ns": 475.08131,
+          "min_ns": 475.08131,
+          "max_ns": 475.08131,
           "samples_ns": [
-            507.32753
+            475.08131
           ]
         },
         "query_by_from": {
-          "median_ns": 309.36914,
-          "min_ns": 309.36914,
-          "max_ns": 309.36914,
+          "median_ns": 328.04407,
+          "min_ns": 328.04407,
+          "max_ns": 328.04407,
           "samples_ns": [
-            309.36914
+            328.04407
           ]
         },
         "query_by_to": {
-          "median_ns": 305.17477,
-          "min_ns": 305.17477,
-          "max_ns": 305.17477,
+          "median_ns": 345.19324,
+          "min_ns": 345.19324,
+          "max_ns": 345.19324,
           "samples_ns": [
-            305.17477
+            345.19324
           ]
         },
         "update": {
-          "median_ns": 978.54084,
-          "min_ns": 978.54084,
-          "max_ns": 978.54084,
+          "median_ns": 902.76895,
+          "min_ns": 902.76895,
+          "max_ns": 902.76895,
           "samples_ns": [
-            978.54084
+            902.76895
           ]
         },
         "delete": {
-          "median_ns": 817.48135,
-          "min_ns": 817.48135,
-          "max_ns": 817.48135,
+          "median_ns": 750.29024,
+          "min_ns": 750.29024,
+          "max_ns": 750.29024,
           "samples_ns": [
-            817.48135
+            750.29024
           ]
         }
       }
     }
   ],
-  "run_url": "https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37381004025",
-  "source_sha": "4e269b47eb3e6d0a264b57f27b9a51832562a99b",
-  "tree_sha": "412060b55aeed6f627c46da833f68ae21c71a6aa",
-  "date": "2026-10-05",
-  "machine": "Ubuntu 24.04.5 LTS, INTEL(R) XEON(R) PLATINUM 8573C, 4 cores, 16 GiB",
+  "run_url": "https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/37547766777",
+  "source_sha": "7e6d53396ef3fc2580814e691a755e6a0c643b5a",
+  "tree_sha": "bc9bfa5b0debb7b67d5e519a9a64cc9f6a0da1a7",
+  "date": "2026-10-07",
+  "machine": "Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB",
   "software": {
     "libraries": {
       "Platform.Data.Doublets": "0.18.1"

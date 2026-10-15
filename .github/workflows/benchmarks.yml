@@ -136,7 +136,7 @@ jobs:
             '. + {run_url: $run_url, source_sha: $source_sha, tree_sha: $tree_sha, date: $date, machine: $machine}' \
             "$RUNNER_TEMP/measured.json" > "results/$name.json"
           python3 scripts/benchmark_provenance.py "results/$name.json" --toolchain "$toolchain"
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: results-${{ env.NAME }}
           path: results/${{ env.NAME }}.json

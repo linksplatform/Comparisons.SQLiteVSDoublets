@@ -5,7 +5,7 @@ edition = "2024"
 publish = false
 
 [dependencies]
-doublets = "0.5.0"
+doublets = "0.8.0"
 
 [workspace]
 

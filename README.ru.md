@@ -14,12 +14,15 @@
 
 ## Тесты производительности
 
-Rust ([doublets](https://crates.io/crates/doublets) и
-[rusqlite](https://crates.io/crates/rusqlite) со встроенной SQLite) и C#
-([Platform.Data.Doublets](https://www.nuget.org/packages/Platform.Data.Doublets),
+Rust ([doublets](https://crates.io/crates/doublets) 0.21.0 и
+[rusqlite](https://crates.io/crates/rusqlite) 0.43.0 со встроенной SQLite
+3.54.1) и C#
+([Platform.Data.Doublets](https://www.nuget.org/packages/Platform.Data.Doublets)
+1.0.0,
 [Platform.Data.Doublets.Sequences](https://www.nuget.org/packages/Platform.Data.Doublets.Sequences)
 и провайдеры [Microsoft.Data.Sqlite](https://www.nuget.org/packages/Microsoft.Data.Sqlite)
-и [System.Data.SQLite](https://www.nuget.org/packages/System.Data.SQLite))
+11.0.0 с SQLite 3.53.4 и
+[System.Data.SQLite](https://www.nuget.org/packages/System.Data.SQLite))
 выполняют одинаковую нагрузку на одинаковых детерминированных данных
 с 32-битными (`u32`/`uint`) и 64-битными (`u64`/`ulong`) идентификаторами:
 
@@ -40,8 +43,29 @@ Rust ([doublets](https://crates.io/crates/doublets) и
 Хранилища: SQLite в памяти и в файле; Дуплеты объединённые (один массив связей
 с деревьями индексов) и разделённые (отдельные массивы данных и индексов),
 каждое энергозависимое (в памяти) и энергонезависимое (в отображаемых в память
-файлах). Дуплеты сравниваются с SQLite той же надёжности хранения:
-энергозависимые с `SQLite Memory`, энергонезависимые с `SQLite File`.
+файлах). Энергозависимые Дуплеты сравниваются с `SQLite Memory`.
+Энергонезависимые Дуплеты хранятся в файлах без гарантий надёжности: они
+не ведут журнал и не вызывают `fsync`, поэтому сбой может потерять или
+испортить любую запись с момента, когда операционная система в последний раз
+сбросила отображаемые страницы. `SQLite File` работает с настройками
+по умолчанию (журнал отката и `synchronous=FULL`) и синхронизирует данные
+при каждой фиксации, то есть надёжен при фиксации.
+
+`SQLite File Tuned` — тот же файл с прагмами
+`PRAGMA cache_size = -1048576; PRAGMA mmap_size = 1073741824;`, выполняемыми
+до создания схемы: кэш страниц 1 ГиБ вместо 2 МиБ по умолчанию и чтение через
+отображение в память размером 1 ГиБ, как Дуплеты читают свои отображаемые
+файлы. Надёжность хранения не меняется. Его проверяют Rust и оба провайдера
+C# (`SQLite_File_Tuned` и `SystemDataSQLite_File_Tuned`), и в выводах
+энергонезависимые Дуплеты сравниваются с ним.
+
+`Doublets United NonVolatile Transactional` (Rust) — объединённое хранилище
+в отображаемом файле за `TransactionsDecorator` из doublets с поставляемым
+`FileTransitionLog`, который вызывает `sync_all` после каждой записи журнала.
+Каждая записывающая фаза жизненного цикла — одна транзакция, которая
+начинается при её первой записи и фиксируется в её конце. Оно надёжно при
+фиксации, как `SQLite File`, и измеряется в отдельной таблице, см.
+[Тесты в особых конфигурациях](#тесты-в-особых-конфигурациях).
 
 C# также проверяет `SystemDataSQLite_Memory` и `SystemDataSQLite_File`
 с System.Data.SQLite 2.0.4. `SQLite_Memory` и `SQLite_File` используют
@@ -124,6 +148,57 @@ docker rm benchmark-postgres
 процесс на 1 000 записей, а push в `main` обновляет результаты ниже. Workflow
 можно запустить и вручную с другими размерами.
 
+### Тесты в особых конфигурациях
+
+[Workflow особых конфигураций](.github/workflows/configurations.yml) измеряет
+таблицы связей на Rust в нестандартной обстановке, каждую таблицу в отдельной
+задаче с `--repetitions 1`, и хранит их в
+[docs/benchmarks/configurations](docs/benchmarks/configurations).
+Создаваемый раздел ниже показывает их отдельными таблицами после обычных
+результатов:
+
+- **Надёжное хранение в файле**, 10 000 000 связей, 32 и 64 бита:
+  `SQLite File`, `SQLite File Tuned` и
+  `Doublets United NonVolatile Transactional`.
+- **При нехватке памяти**, 32 бита: `SQLite File`,
+  `Doublets United NonVolatile` и `Doublets Split NonVolatile` в cgroup
+  с `memory.max` 24 МиБ на 1 000 000 связей и 240 МиБ на 10 000 000 связей,
+  без подкачки. Ограничение учитывает и страничный кэш, поэтому страницы
+  хранилищ читаются обратно с диска. Прогрев на 10 000 связей укладывается
+  в оба ограничения. Таблица записывает `memory.peak` cgroup и число крупных
+  страничных отказов. `SQLite File Tuned` не участвует, потому что его кэш
+  в 1 ГиБ был бы анонимной памятью в пределах ограничения. Транзакционное
+  хранилище участвовать не может: его декоратор хранит в памяти каждый переход
+  и полный снимок связей, что не помещается ни в какое ограничение,
+  достаточно малое для нехватки памяти.
+
+Обе конфигурации записывают задержки диска хранилищ: медианное время
+случайного чтения 4 КиБ в обход страничного кэша (`O_DIRECT`) и `fsync` после
+небольшой дозаписи. Pull request проверяют процесс на небольшом плане
+(1 000 связей с надёжным хранением и 20 000 связей при 24 МиБ); опубликованные
+таблицы получены запуском с планом выше. При ручном запуске workflow
+принимает план в JSON и диск хранилищ (рабочий диск runner или `/mnt`).
+
+Локальный запуск конфигурации (ограничению памяти нужен systemd
+с делегированным контроллером памяти):
+
+```bash
+mkdir -p results/configured
+python3 scripts/benchmark_configuration.py probe /tmp/probe > disk.json
+variants=SQLite_File,SQLite_File_Tuned,Doublets_United_NonVolatile_Transactional
+cargo run --release --manifest-path rust/Cargo.toml -- \
+  links 32 100000 --repetitions 1 --variants "$variants" \
+  --directory /tmp/stores \
+  --output results/configured/durable-links-rust-32-100000.json
+python3 scripts/benchmark_provenance.py \
+  results/configured/durable-links-rust-32-100000.json \
+  --toolchain "$(rustc --version)"
+python3 scripts/benchmark_configuration.py record \
+  results/configured/durable-links-rust-32-100000.json \
+  --kind durable --disk "$(cat disk.json)"
+python3 scripts/benchmark_report.py results --configurations results/configured
+```
+
 Локальный запуск:
 
 ```bash
@@ -147,28 +222,43 @@ python3 scripts/benchmark_report.py results
 
 Замечания:
 
-- Разделённые хранилища doublets 0.5.0 (Rust) теряют связь, обновлённую так,
-  чтобы она ссылалась на саму себя, поэтому тест сначала обновляет связь
-  до `(0, 0)` — состояния, в котором связи создаются
-  ([experiments/split_store_delete](experiments/split_store_delete)).
-- Хранилища doublets 0.5.0 (Rust) принимают часть памяти, которую
-  `platform-mem` 0.3.0 возвращает после её увеличения, за всю память, поэтому
-  хранилище ломается после 1 040 384 связей; тесты оборачивают память
-  в [`memory::Whole`](rust/src/memory.rs), которая возвращает всю память
-  ([experiments/unit_store_growth](experiments/unit_store_growth)).
+- doublets 0.21.0 (Rust) исправляет две ошибки 0.5.0, которые тесты раньше
+  обходили: разделённые хранилища теряли связь, обновлённую так, чтобы она
+  ссылалась на саму себя
+  ([experiments/split_store_delete](experiments/split_store_delete)),
+  а хранилища ломались после 1 040 384 связей, потому что после увеличения
+  памяти принимали только её часть
+  ([experiments/unit_store_growth](experiments/unit_store_growth)). Оба
+  эксперимента проходят с 0.21.0, и обходные решения удалены.
+- doublets 0.21.0 (Rust) увеличивает память через `grow_filled`, который
+  записывает нули во всю новую область отображаемого файла, хотя файл
+  расширяется через `set_len` и уже читается как нули. Объединённое 32-битное
+  хранилище загрязняет 32 МиБ при создании и при каждом увеличении, больше
+  ограничения в 24 МиБ, поэтому энергонезависимые хранилища отображают файлы
+  через [`memory::ZeroExtended`](rust/src/memory.rs), которая оставляет новую
+  область как есть
+  ([doublets-rs#95](https://github.com/linksplatform/doublets-rs/issues/95)).
 - В C# связи удаляются через `Delete(id, handler: null)`, который сбрасывает
-  связь перед удалением; простой `Delete(id)` оставляет связь в деревьях
-  индексов, и последующий поиск ломается
-  ([experiments/csharp_tree_delete](experiments/csharp_tree_delete)).
-- Объединённые хранилища на C# используют АВЛ-деревья индексов: деревья
-  по умолчанию, сбалансированные по размеру, вырождаются, когда много связей
-  имеют общее начало или конец, и создание каждой записи блога становится
-  линейным по числу записей
-  ([experiments/csharp_objects_profile](experiments/csharp_objects_profile)).
+  связь перед удалением; простой `Delete(id)` в Platform.Data.Doublets 1.0.0
+  по-прежнему оставляет связь в деревьях индексов, и последующий поиск
+  ломается
+  ([experiments/csharp_tree_delete](experiments/csharp_tree_delete),
+  [experiments/csharp_delete_minimal](experiments/csharp_delete_minimal),
+  [Data.Doublets#576](https://github.com/linksplatform/Data.Doublets/issues/576)).
+- Объединённые хранилища на C# используют АВЛ-деревья индексов: в
+  Platform.Data.Doublets 1.0.0 деревья по умолчанию, сбалансированные
+  по размеру, по-прежнему вырождаются, когда много связей имеют общее начало
+  или конец, и создание каждой записи блога становится линейным по числу
+  записей
+  ([experiments/csharp_objects_profile](experiments/csharp_objects_profile),
+  [Data.Doublets#577](https://github.com/linksplatform/Data.Doublets/issues/577)).
 - Раздельные хранилища на C# оставляют связный список внутренних начал,
-  который включён по умолчанию и которого нет в doublets 0.5.0 (Rust); с ним
-  обновления на C# быстрее, а остальные операции занимают примерно то же время
-  ([experiments/csharp_split_linked_list](experiments/csharp_split_linked_list)).
+  который включён по умолчанию и которого по-прежнему нет в разделённом
+  хранилище doublets 0.21.0 (Rust): `USE_LIST` равен `false`, а список —
+  `todo!()`; с ним обновления на C# быстрее, а остальные операции занимают
+  примерно то же время
+  ([experiments/csharp_split_linked_list](experiments/csharp_split_linked_list),
+  [doublets-rs#94](https://github.com/linksplatform/doublets-rs/issues/94)).
 - Хранилища объектов используют внешние ссылки для чисел и символов Юникода,
   поэтому исходные значения никогда не совпадают с идентификаторами связей.
 - Чтение строки без кэша обходит её последовательность связь за связью; в C#

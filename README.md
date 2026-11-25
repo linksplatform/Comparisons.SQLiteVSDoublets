@@ -14,12 +14,15 @@ Based on examples from <https://github.com/FahaoTang/dotnetcore-examples> and
 
 ## Benchmarks
 
-Rust ([doublets](https://crates.io/crates/doublets) and
-[rusqlite](https://crates.io/crates/rusqlite) with bundled SQLite) and C#
-([Platform.Data.Doublets](https://www.nuget.org/packages/Platform.Data.Doublets),
+Rust ([doublets](https://crates.io/crates/doublets) 0.21.0 and
+[rusqlite](https://crates.io/crates/rusqlite) 0.43.0 with bundled SQLite
+3.54.1) and C#
+([Platform.Data.Doublets](https://www.nuget.org/packages/Platform.Data.Doublets)
+1.0.0,
 [Platform.Data.Doublets.Sequences](https://www.nuget.org/packages/Platform.Data.Doublets.Sequences)
 and the providers [Microsoft.Data.Sqlite](https://www.nuget.org/packages/Microsoft.Data.Sqlite)
-and [System.Data.SQLite](https://www.nuget.org/packages/System.Data.SQLite))
+11.0.0 with SQLite 3.53.4 and
+[System.Data.SQLite](https://www.nuget.org/packages/System.Data.SQLite))
 run the same workloads on the same deterministic data, with 32 bit
 (`u32`/`uint`) and 64 bit (`u64`/`ulong`) ids:
 
@@ -39,9 +42,27 @@ run the same workloads on the same deterministic data, with 32 bit
 
 Storages: SQLite in memory and in a file; Doublets united (one array of links
 with index trees) and split (separate data and index arrays), each volatile
-(in memory) and non-volatile (in memory-mapped files). Doublets are compared
-with SQLite of the same durability: volatile with `SQLite Memory`,
-non-volatile with `SQLite File`.
+(in memory) and non-volatile (in memory-mapped files). Volatile Doublets are
+compared with `SQLite Memory`. Non-volatile Doublets are file-backed without
+durability guarantees: they write no journal and never call `fsync`, so a
+crash can lose or corrupt any write since the operating system last flushed
+the mapped pages. `SQLite File` keeps its defaults (a rollback journal and
+`synchronous=FULL`) and syncs at every commit, so it is durable at commit.
+
+`SQLite File Tuned` is the same file with the pragmas
+`PRAGMA cache_size = -1048576; PRAGMA mmap_size = 1073741824;` run before the
+schema: a 1 GiB page cache instead of the default 2 MiB and reads through a
+1 GiB memory map, like the Doublets stores read their mapped files. Its
+durability is unchanged. Rust and both C# providers run it
+(`SQLite_File_Tuned` and `SystemDataSQLite_File_Tuned`), and the summary
+compares the non-volatile Doublets with it.
+
+`Doublets United NonVolatile Transactional` (Rust) is the united file-mapped
+store behind doublets' `TransactionsDecorator` with the shipped
+`FileTransitionLog`, which calls `sync_all` after every journal record. Each
+lifecycle phase that writes is one transaction, begun at its first write and
+committed at its end. It is durable at commit like `SQLite File`, and it is
+measured in its own table, see [Configured benchmarks](#configured-benchmarks).
 
 C# also runs `SystemDataSQLite_Memory` and `SystemDataSQLite_File` with
 System.Data.SQLite 2.0.4. `SQLite_Memory` and `SQLite_File` use
@@ -107,6 +128,56 @@ and 1,000,000 blog posts already take an hour in C#. Pull requests check the
 whole pipeline on 1,000 records, and pushes to `main` update the results below.
 The workflow can also be started manually with other sizes.
 
+### Configured benchmarks
+
+The [Configured benchmarks workflow](.github/workflows/configurations.yml)
+measures Rust links tables in a non-default setup, each table in its own job
+with `--repetitions 1`, and stores them in
+[docs/benchmarks/configurations](docs/benchmarks/configurations). The
+generated section below shows them as separate tables after the regular
+results:
+
+- **Durable file storage**, 10,000,000 links, 32 and 64 bit:
+  `SQLite File`, `SQLite File Tuned` and
+  `Doublets United NonVolatile Transactional`.
+- **Under memory pressure**, 32 bit: `SQLite File`,
+  `Doublets United NonVolatile` and `Doublets Split NonVolatile` in a cgroup
+  with `memory.max` of 24 MiB at 1,000,000 links and 240 MiB at 10,000,000
+  links, without swap. The limit charges the page cache too, so the stores'
+  pages are read back from the disk. The warm-up on 10,000 links fits in
+  either limit. The table records the cgroup's `memory.peak` and major page
+  faults. `SQLite File Tuned` is left out, because its 1 GiB cache would be
+  anonymous memory charged to the limit. The transactional store can't take
+  part: its decorator keeps every transition and a full snapshot of the links
+  in memory, which no limit small enough to create pressure can hold.
+
+Both kinds record the disk the stores use: the median latency of a random
+4 KiB read that bypasses the page cache (`O_DIRECT`) and of an `fsync` after
+a small append. Pull requests run the pipeline on a small plan (1,000 durable
+links and 20,000 links under 24 MiB); the published tables come from a run
+with the plan above. Started manually, the workflow takes a JSON plan and the
+disk of the stores (the runner's work disk or `/mnt`).
+
+Run a configuration locally (the memory limit needs a systemd with a
+delegated memory controller):
+
+```bash
+mkdir -p results/configured
+python3 scripts/benchmark_configuration.py probe /tmp/probe > disk.json
+variants=SQLite_File,SQLite_File_Tuned,Doublets_United_NonVolatile_Transactional
+cargo run --release --manifest-path rust/Cargo.toml -- \
+  links 32 100000 --repetitions 1 --variants "$variants" \
+  --directory /tmp/stores \
+  --output results/configured/durable-links-rust-32-100000.json
+python3 scripts/benchmark_provenance.py \
+  results/configured/durable-links-rust-32-100000.json \
+  --toolchain "$(rustc --version)"
+python3 scripts/benchmark_configuration.py record \
+  results/configured/durable-links-rust-32-100000.json \
+  --kind durable --disk "$(cat disk.json)"
+python3 scripts/benchmark_report.py results --configurations results/configured
+```
+
 Run locally:
 
 ```bash
@@ -146,27 +217,39 @@ docker rm benchmark-postgres
 
 Notes:
 
-- The split stores of doublets 0.5.0 (Rust) lose a link that is updated to
-  reference itself, so the benchmark updates a link to `(0, 0)` first, which
-  is the state links are created in
-  ([experiments/split_store_delete](experiments/split_store_delete)).
-- The stores of doublets 0.5.0 (Rust) take the part of the memory that
-  `platform-mem` 0.3.0 returns after growing it for the whole memory, so a
-  store fails after 1,040,384 links; the benchmarks wrap the memory in
-  [`memory::Whole`](rust/src/memory.rs), which returns the whole memory
-  ([experiments/unit_store_growth](experiments/unit_store_growth)).
+- doublets 0.21.0 (Rust) fixed two bugs of 0.5.0 that the benchmarks used
+  to work around: the split stores lost a link updated to reference itself
+  ([experiments/split_store_delete](experiments/split_store_delete)), and
+  the stores failed after 1,040,384 links, because they took only part of
+  the memory after growing it
+  ([experiments/unit_store_growth](experiments/unit_store_growth)). Both
+  experiments pass with 0.21.0, so the workarounds are gone.
+- doublets 0.21.0 (Rust) grows its memory with `grow_filled`, which writes
+  zeros over the whole new region of a mapped file, although the file is
+  extended with `set_len` and already reads as zeros. A united 32-bit store
+  dirties 32 MiB at creation and at every growth, more than the 24 MiB limit,
+  so the non-volatile stores map their files with
+  [`memory::ZeroExtended`](rust/src/memory.rs), which leaves the new region
+  as it is
+  ([doublets-rs#95](https://github.com/linksplatform/doublets-rs/issues/95)).
 - In C#, links are deleted with `Delete(id, handler: null)`, which resets the
-  link before deleting it; the bare `Delete(id)` leaves the link in the index
-  trees, and later searches fail
-  ([experiments/csharp_tree_delete](experiments/csharp_tree_delete)).
-- The C# united stores use AVL index trees: the default size balanced trees
-  degenerate when many links share a source or a target, which makes each
-  blog post creation linear in the number of posts
-  ([experiments/csharp_objects_profile](experiments/csharp_objects_profile)).
+  link before deleting it; the bare `Delete(id)` of Platform.Data.Doublets
+  1.0.0 still leaves the link in the index trees, and later searches fail
+  ([experiments/csharp_tree_delete](experiments/csharp_tree_delete),
+  [experiments/csharp_delete_minimal](experiments/csharp_delete_minimal),
+  [Data.Doublets#576](https://github.com/linksplatform/Data.Doublets/issues/576)).
+- The C# united stores use AVL index trees: in Platform.Data.Doublets 1.0.0
+  the default size balanced trees still degenerate when many links share a
+  source or a target, which makes each blog post creation linear in the
+  number of posts
+  ([experiments/csharp_objects_profile](experiments/csharp_objects_profile),
+  [Data.Doublets#577](https://github.com/linksplatform/Data.Doublets/issues/577)).
 - The C# split stores keep the default linked list of the internal sources,
-  which doublets 0.5.0 (Rust) does not have; it makes the C# updates faster
-  and the other operations take about the same time
-  ([experiments/csharp_split_linked_list](experiments/csharp_split_linked_list)).
+  which the Rust split store of doublets 0.21.0 still does not have
+  (`USE_LIST` is `false` and its list is `todo!()`); in C# it makes the
+  updates faster and the other operations take about the same time
+  ([experiments/csharp_split_linked_list](experiments/csharp_split_linked_list),
+  [doublets-rs#94](https://github.com/linksplatform/doublets-rs/issues/94)).
 - Objects stores use external references for numbers and Unicode symbols, so
   raw values never collide with link ids.
 - Reading a string without the cache walks its sequence link by link; in C#

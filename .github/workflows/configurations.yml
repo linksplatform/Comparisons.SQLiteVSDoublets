@@ -43,7 +43,7 @@ jobs:
       - name: Validate the plan and emit the matrix
         id: plan
         env:
-          PLAN: ${{ inputs.plan || '[{"kind":"memory_limit","bits":32,"size":1000000,"limit_mib":24},{"kind":"memory_limit","bits":32,"size":10000000,"limit_mib":240}]' }}
+          PLAN: ${{ inputs.plan || '[{"kind":"durable","bits":32,"size":1000},{"kind":"memory_limit","bits":32,"size":20000,"limit_mib":24}]' }}
         run: echo "matrix=$(python scripts/benchmark_configuration.py plan "$PLAN")" >> "$GITHUB_OUTPUT"
 
   benchmark:

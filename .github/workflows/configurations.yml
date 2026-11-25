@@ -98,18 +98,22 @@ jobs:
           record=(--kind "$KIND" --disk "$DISK_LATENCY")
           if [ "$KIND" = memory_limit ]; then
             # The scope's memory.max charges the page cache too; without swap the stores' pages are evicted
-            # to their files. The stats of the scope are written by the shell inside it.
-            sudo systemd-run --scope --quiet -p "MemoryMax=${LIMIT_MIB}M" -p MemorySwapMax=0 --same-dir -- \
+            # to their files. The stats of the scope are written by the shell inside it, which outlives an
+            # OOM kill of the benchmark, so memory.events shows the kill.
+            status=0
+            sudo systemd-run --scope --quiet -p "MemoryMax=${LIMIT_MIB}M" -p MemorySwapMax=0 -p OOMPolicy=continue \
+              --same-dir -- \
               sh -c 'stats=$1; shift; "$@"; status=$?; cgroup=/sys/fs/cgroup$(cut -d: -f3- /proc/self/cgroup)
                 { cat "$cgroup/memory.peak"; cat "$cgroup/memory.stat"; cat "$cgroup/memory.events"; } > "$stats"
-                exit $status' sh "$RUNNER_TEMP/cgroup-stats" "${benchmark[@]}"
-            sudo chown "$(id -u):$(id -g)" "$RUNNER_TEMP/measured.json" "$RUNNER_TEMP/cgroup-stats"
+                exit $status' sh "$RUNNER_TEMP/cgroup-stats" "${benchmark[@]}" || status=$?
             cat "$RUNNER_TEMP/cgroup-stats"
+            if [ "$status" != 0 ]; then exit "$status"; fi
+            sudo chown "$(id -u):$(id -g)" "$RUNNER_TEMP/measured.json" "$RUNNER_TEMP/cgroup-stats"
             record+=(--memory-limit-bytes "$((LIMIT_MIB * 1048576))" --cgroup-stats "$RUNNER_TEMP/cgroup-stats")
           else
             "${benchmark[@]}"
           fi
-          machine="$(. /etc/os-release && echo "$PRETTY_NAME"), $(lscpu | sed -n 's/^Model name: *//p' | head -1)"
+          machine="$(sed -n 's/^PRETTY_NAME=//p' /etc/os-release | tr -d '"'), $(lscpu | sed -n 's/^Model name: *//p' | head -1)"
           machine="$machine, $(nproc) cores, $(awk '/^MemTotal/ { printf "%.0f", $2 / 1048576 }' /proc/meminfo) GiB"
           mkdir results
           jq --arg run_url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" \

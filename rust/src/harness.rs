@@ -10,7 +10,6 @@ use crate::{
 use doublets::{
     data::{LinkReference, LinksConstants},
     decorators::{DecoratorsExt, FileTransitionLog},
-    mem::FileMapped,
     split, unit,
 };
 use serde_json::{Value, json};
@@ -372,7 +371,7 @@ fn file(directory: &Path, name: &str) -> PathBuf {
     directory.join(name)
 }
 
-fn mapped<P>(directory: &Path, name: &str) -> FileMapped<P> {
+fn mapped<P>(directory: &Path, name: &str) -> crate::memory::ZeroExtended<P> {
     crate::memory::mapped(file(directory, name))
 }
 

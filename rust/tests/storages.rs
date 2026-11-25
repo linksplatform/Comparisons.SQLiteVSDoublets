@@ -8,10 +8,10 @@ use sqlite_vs_doublets::{
     dataset::{BlogPost, blog_post, link, scattered},
     harness::{self, LINKS_VARIANTS, OBJECTS_VARIANTS, OPTIONAL_LINKS_VARIANTS},
     links::{DoubletsLinks, Link, LinksStorage, SqliteLinks, TransactionalLinks},
-    memory::volatile,
+    memory::{mapped, volatile},
     objects::{BlogPostsStorage, DoubletsBlogPosts, SqliteBlogPosts},
 };
-use std::collections::HashSet;
+use std::{collections::HashSet, fs, os::unix::fs::MetadataExt, path::Path};
 
 const SIZE: u64 = 1_000;
 
@@ -186,6 +186,76 @@ fn stores_keep_their_links_when_their_memory_grows() {
 }
 
 #[test]
+fn mapped_stores_keep_their_links_when_their_memory_grows() {
+    let directory = tempdir("mapped-growth");
+    create_until_grown(DoubletsLinks::new(
+        unit::Store::<u32, _>::new(mapped(directory.join("links.links"))).unwrap(),
+    ));
+    create_until_grown(DoubletsLinks::new(
+        split::Store::<u32, _, _>::new(
+            mapped(directory.join("data.links")),
+            mapped(directory.join("index.links")),
+        )
+        .unwrap(),
+    ));
+    fs::remove_dir_all(directory).unwrap();
+}
+
+/// The bytes of `path` the file system allocated once its dirty pages are written back.
+fn written_bytes(path: &Path) -> (u64, u64) {
+    fs::File::open(path).unwrap().sync_all().unwrap();
+    let metadata = fs::metadata(path).unwrap();
+    (metadata.len(), metadata.blocks() * 512)
+}
+
+fn assert_reopened(links: &impl LinksStorage<u32>) {
+    assert_eq!(links.count(), SIZE);
+    for i in [1, SIZE / 2, SIZE] {
+        let (from, to) = link(i);
+        let (id, from, to) = (i as u32, from as u32, to as u32);
+        assert_eq!(links.get(id), Some(Link { id, from, to }));
+    }
+}
+
+#[test]
+fn mapped_stores_do_not_write_their_reservation_and_reopen_with_their_links() {
+    let directory = tempdir("mapped-reservation");
+    let (united, data, index) = (
+        directory.join("links.links"),
+        directory.join("data.links"),
+        directory.join("index.links"),
+    );
+    {
+        let mut unit_links =
+            DoubletsLinks::new(unit::Store::<u32, _>::new(mapped(&united)).unwrap());
+        let mut split_links = DoubletsLinks::new(
+            split::Store::<u32, _, _>::new(mapped(&data), mapped(&index)).unwrap(),
+        );
+        for i in 1..=SIZE {
+            let (from, to) = link(i);
+            unit_links.create(from as u32, to as u32);
+            split_links.create(from as u32, to as u32);
+        }
+    }
+    // Each file reserves 2^20 links, which the file system holds as a hole until they are written.
+    for path in [&united, &data, &index] {
+        let (length, allocated) = written_bytes(path);
+        assert!(length >= 1 << 23, "{path:?} is only {length} bytes");
+        assert!(
+            allocated < 1 << 20,
+            "{path:?} allocated {allocated} of {length} bytes"
+        );
+    }
+    assert_reopened(&DoubletsLinks::new(
+        unit::Store::<u32, _>::new(mapped(&united)).unwrap(),
+    ));
+    assert_reopened(&DoubletsLinks::new(
+        split::Store::<u32, _, _>::new(mapped(&data), mapped(&index)).unwrap(),
+    ));
+    fs::remove_dir_all(directory).unwrap();
+}
+
+#[test]
 #[should_panic(expected = "query_all returned unexpected records")]
 fn lifecycle_rejects_a_storage_that_loses_records() {
     struct Lossy(SqliteLinks<u32>);
@@ -292,6 +362,6 @@ fn tempdir(name: &str) -> std::path::PathBuf {
         "sqlite-vs-doublets-test-{name}-{}",
         std::process::id()
     ));
-    std::fs::create_dir_all(&directory).unwrap();
+    fs::create_dir_all(&directory).unwrap();
     directory
 }

@@ -1,0 +1,169 @@
+name: Configured benchmarks
+
+# Rust links tables in a non-default configuration: the durable transactional store next to SQLite File,
+# and the file-backed stores under a cgroup memory limit. Pull requests run a small plan that checks the
+# pipeline; the published tables are measured with a manual run and committed to
+# docs/benchmarks/configurations (see README.md, "Configured benchmarks").
+on:
+  pull_request:
+    paths: ['rust/**', 'scripts/benchmark_configuration.py', 'scripts/benchmark_report.py', 'scripts/benchmark_provenance.py', '.github/actions/**', '.github/workflows/configurations.yml']
+  workflow_dispatch:
+    inputs:
+      plan:
+        description: 'JSON runs: {"kind": "durable", "bits", "size"} or {"kind": "memory_limit", "bits", "size", "limit_mib"}'
+        default: '[{"kind": "memory_limit", "bits": 32, "size": 1000000, "limit_mib": 24}]'
+      disk:
+        description: Disk of the stores, the runner's work disk (temp) or its temporary disk (mnt)
+        type: choice
+        options: [temp, mnt]
+        default: temp
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+  SOURCE_SHA: ${{ github.sha }}
+
+jobs:
+  plan:
+    name: Plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.13'
+      - name: Validate the plan and emit the matrix
+        id: plan
+        env:
+          PLAN: ${{ inputs.plan || '[{"kind":"durable","bits":32,"size":1000},{"kind":"memory_limit","bits":32,"size":20000,"limit_mib":24}]' }}
+        run: echo "matrix=$(python scripts/benchmark_configuration.py plan "$PLAN")" >> "$GITHUB_OUTPUT"
+
+  benchmark:
+    name: ${{ matrix.name }}
+    needs: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 355
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-${{ matrix.name }}
+      cancel-in-progress: true
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    env:
+      KIND: ${{ matrix.kind }}
+      BITS: ${{ matrix.bits }}
+      SIZE: ${{ matrix.size }}
+      LIMIT_MIB: ${{ matrix.limit_mib }}
+      VARIANTS: ${{ matrix.variants }}
+      NAME: ${{ matrix.name }}
+      DISK: ${{ inputs.disk || 'temp' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: ./.github/actions/prepare-ci # zizmor: ignore[self-repository] actionlint 1.7.12 lacks $/ syntax
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
+        with:
+          toolchain: stable
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2
+        with:
+          workspaces: rust
+          save-if: false
+      - run: cargo build --locked --release --manifest-path rust/Cargo.toml
+      - name: Probe the disks
+        run: |
+          sudo mkdir -p /mnt/benchmark
+          sudo chown "$(id -u):$(id -g)" /mnt/benchmark
+          # Both disks are logged; the published latencies are those of the disk the stores use.
+          for directory in "$RUNNER_TEMP/probe" /mnt/benchmark/probe; do
+            mkdir -p "$directory"
+            echo "$directory: $(df --output=source,fstype "$directory" | tail -1)"
+            python3 scripts/benchmark_configuration.py probe "$directory"
+          done
+          if [ "$DISK" = mnt ]; then root=/mnt/benchmark; else root="$RUNNER_TEMP"; fi
+          echo "STORAGE=$root/storage" >> "$GITHUB_ENV"
+          echo "DISK_LATENCY=$(python3 scripts/benchmark_configuration.py probe "$root/probe")" >> "$GITHUB_ENV"
+      - name: Benchmark
+        run: |
+          benchmark=("$PWD/rust/target/release/sqlite-vs-doublets" links "$BITS" "$SIZE" --repetitions 1
+            --variants "$VARIANTS" --directory "$STORAGE" --output "$RUNNER_TEMP/measured.json")
+          record=(--kind "$KIND" --disk "$DISK_LATENCY")
+          if [ "$KIND" = memory_limit ]; then
+            # The scope's memory.max charges the page cache too; without swap the stores' pages are evicted
+            # to their files. The stats of the scope are written by the shell inside it.
+            sudo systemd-run --scope --quiet -p "MemoryMax=${LIMIT_MIB}M" -p MemorySwapMax=0 --same-dir -- \
+              sh -c 'stats=$1; shift; "$@"; status=$?; cgroup=/sys/fs/cgroup$(cut -d: -f3- /proc/self/cgroup)
+                { cat "$cgroup/memory.peak"; cat "$cgroup/memory.stat"; cat "$cgroup/memory.events"; } > "$stats"
+                exit $status' sh "$RUNNER_TEMP/cgroup-stats" "${benchmark[@]}"
+            sudo chown "$(id -u):$(id -g)" "$RUNNER_TEMP/measured.json" "$RUNNER_TEMP/cgroup-stats"
+            cat "$RUNNER_TEMP/cgroup-stats"
+            record+=(--memory-limit-bytes "$((LIMIT_MIB * 1048576))" --cgroup-stats "$RUNNER_TEMP/cgroup-stats")
+          else
+            "${benchmark[@]}"
+          fi
+          machine="$(. /etc/os-release && echo "$PRETTY_NAME"), $(lscpu | sed -n 's/^Model name: *//p' | head -1)"
+          machine="$machine, $(nproc) cores, $(awk '/^MemTotal/ { printf "%.0f", $2 / 1048576 }' /proc/meminfo) GiB"
+          mkdir results
+          jq --arg run_url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" \
+            --arg source_sha "$SOURCE_SHA" --arg tree_sha "$(git rev-parse 'HEAD^{tree}')" \
+            --arg date "$(date -u +%Y-%m-%d)" --arg machine "$machine" \
+            '. + {run_url: $run_url, source_sha: $source_sha, tree_sha: $tree_sha, date: $date, machine: $machine}' \
+            "$RUNNER_TEMP/measured.json" > "results/$NAME.json"
+          python3 scripts/benchmark_provenance.py "results/$NAME.json" --toolchain "$(rustc --version)"
+          python3 scripts/benchmark_configuration.py record "results/$NAME.json" "${record[@]}"
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: configured-${{ env.NAME }}
+          path: results/${{ env.NAME }}.json
+          if-no-files-found: error
+          retention-days: 90
+
+  report:
+    name: Report
+    needs: benchmark
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.13'
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          pattern: configured-*
+          merge-multiple: true
+          path: ${{ runner.temp }}/results
+      - name: Check the configured tables
+        run: python scripts/benchmark_configuration.py report "$RUNNER_TEMP/results" --sha "$SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"
+
+  pipeline-status:
+    name: Pipeline Status
+    needs: [plan, benchmark, report]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.13'
+      - run: python -m pip install PyYAML==6.0.3
+      - name: Check terminal status
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          WORKFLOW_FILE: .github/workflows/configurations.yml
+          RUN_REF: ${{ github.ref }}
+          RUN_SHA: ${{ github.sha }}
+        run: python scripts/check_pipeline_status.py

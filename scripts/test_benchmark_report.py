@@ -194,6 +194,113 @@ class SectionTests(unittest.TestCase):
         self.assertIn("локальный запуск", text)
 
 
+def configured(kind="durable", size=1_000, **configuration):
+    doublets = {"durable": report.TRANSACTIONAL, "memory_limit": "Doublets_United_NonVolatile"}[kind]
+    tuned = {"SQLite_File_Tuned": 1000} if kind == "durable" else {}
+    data = results("links", {"SQLite_File": 2000, **tuned, doublets: 4000})
+    data.update(language="Rust", bits=32, size=size, repetitions=1, sqlite_version="3.53.2")
+    data["configuration"] = {"kind": kind, "disk": {"random_read_4k_ns": 90_000, "fsync_ns": 1_500_000}}
+    data["configuration"].update(configuration)
+    return data
+
+
+class ConfigurationTests(unittest.TestCase):
+    text = report.TEXT["en"]
+
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+
+    def test_file_backed_stores_are_compared_with_the_tuned_sqlite_file_when_it_was_measured(self):
+        tuned = {"SQLite_File": None, "SQLite_File_Tuned": None}
+        self.assertEqual(report.baseline("Doublets_Split_NonVolatile", tuned), "SQLite_File_Tuned")
+        self.assertEqual(report.baseline("Doublets_Split_NonVolatile", {"SQLite_File": None}), "SQLite_File")
+        self.assertEqual(report.baseline(report.TRANSACTIONAL, tuned), "SQLite_File")
+        self.assertEqual(report.baseline("SQLite_File_Tuned", tuned), "SQLite_File")
+        self.assertEqual(report.baseline("SystemDataSQLite_File_Tuned"), "SQLite_File_Tuned")
+
+    def test_transactional_store_is_compared_with_the_syncing_sqlite_file(self):
+        table = report.table(configured(), self.text).splitlines()
+        # SQLite File Tuned is twice as fast as SQLite File; the transactional store twice as slow.
+        self.assertEqual(table[3].count("2× faster"), len(report.OPERATIONS["links"]))
+        self.assertEqual(table[4].count("2× slower"), len(report.OPERATIONS["links"]))
+
+    def test_configured_and_default_reports_stay_in_their_own_directories(self):
+        (self.root / "configured.json").write_text(json.dumps(configured()), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "configured reports"):
+            report.load(self.root)
+        self.assertEqual(len(report.load_configurations(self.root)), 1)
+        (self.root / "configured.json").write_text(json.dumps(sample()), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "default reports"):
+            report.load_configurations(self.root)
+        self.assertEqual(report.load_configurations(self.root / "missing"), {})
+
+    def test_invalid_configurations_are_rejected(self):
+        broken = {
+            "durable without the transactional store": configured(),
+            "limit with the transactional store": configured("memory_limit", memory_limit_bytes=2**20),
+            "limit without the limit": configured("memory_limit"),
+            "limit without the read latency": configured("memory_limit", memory_limit_bytes=2**20),
+            "volatile store": configured(),
+            "unknown": configured(),
+            "negative latency": configured(),
+        }
+        broken["durable without the transactional store"]["results"].pop()
+        broken["limit with the transactional store"]["results"][-1]["variant"] = report.TRANSACTIONAL
+        del broken["limit without the read latency"]["configuration"]["disk"]["random_read_4k_ns"]
+        broken["volatile store"]["results"][-1]["variant"] = "Doublets_United_Volatile"
+        broken["unknown"]["configuration"]["kind"] = "unknown"
+        broken["negative latency"]["configuration"]["disk"]["fsync_ns"] = -1
+        for name, data in broken.items():
+            with self.subTest(name=name), self.assertRaises(ValueError):
+                report.validate(data, "report.json")
+
+    def test_configured_sections_label_the_limit_and_the_disk(self):
+        reports = {
+            report.configuration_key(data): data
+            for data in (
+                configured(),
+                configured(
+                    "memory_limit",
+                    1_000_000,
+                    memory_limit_bytes=24 * 2**20,
+                    peak_bytes=25_000_000,
+                    major_faults=12_345,
+                ),
+                configured("memory_limit", 1_000, memory_limit_bytes=24 * 2**20),
+            )
+        }
+        for language in ("en", "ru"):
+            with self.subTest(language=language):
+                text = report.TEXT[language]
+                document = report.section(
+                    {("links", "Rust", 32, 1_000): sample(bits=32, size=1_000)}, language, None, reports
+                )
+                headings = [line for line in document.splitlines() if line.startswith("##")]
+                durable, limit = (f"## {text['configurations'][kind]}" for kind in report.CONFIGURATIONS)
+                self.assertLess(headings.index(durable), headings.index(limit))
+                self.assertLess(headings.index(limit), headings.index(f"## {text['conclusions']}"))
+                limited = [
+                    heading for heading in headings if heading.startswith("### ") and "24 MiB" in heading
+                ]
+                self.assertEqual(len(limited), 2)
+                self.assertLess(document.index("1,000 "), document.index("1,000,000 "))
+                self.assertIn("23.8 MiB", document)
+                self.assertIn("12,345", document)
+                self.assertIn("90 µs", document)
+                self.assertIn("1.5 ms", document)
+                self.assertEqual(document.count(text["configuration_intro"]["memory_limit"]), 1)
+                self.assertEqual(
+                    sum(
+                        text["configuration_names"]["memory_limit"] in line
+                        for line in document.splitlines()
+                        if line.startswith("- ")
+                    ),
+                    1,
+                )
+
+
 class DocumentTests(unittest.TestCase):
     def setUp(self):
         temporary = tempfile.TemporaryDirectory()
@@ -315,13 +422,16 @@ class RepositoryReportsTests(unittest.TestCase):
     def test_both_committed_readmes_match_the_generator_without_a_stale_tail(self):
         root = Path(__file__).resolve().parents[1]
         reports = report.load(root / "docs/benchmarks/results")
+        configured = report.load_configurations(root / "docs/benchmarks/configurations")
         for name, language in (("README.md", "en"), ("README.ru.md", "ru")):
             with self.subTest(name=name):
                 document = (root / name).read_text(encoding="utf-8")
                 self.assertTrue(document.rstrip().endswith(report.END_MARKER))
                 self.assertEqual(
                     document,
-                    report.replace_section(document, report.section(reports, language, "docs/benchmarks")),
+                    report.replace_section(
+                        document, report.section(reports, language, "docs/benchmarks", configured)
+                    ),
                 )
 
 

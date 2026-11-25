@@ -553,7 +553,7 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.3; Platfor
 
 ## Conclusions
 
-Each comparison uses SQLite of matching durability and the same noise rule as the tables. Counts span the measured variants, sizes and id widths; they are not an overall speed ranking. RAM usage is not measured.
+Volatile Doublets stores are compared with `SQLite Memory`. Non-volatile ones are file-backed without durability guarantees (no journal, no `fsync`) and are compared with `SQLite File Tuned` (or `SQLite File` where no tuned row was measured), which still syncs at every commit; the transactional store is compared with `SQLite File`, both durable at every commit. The same noise rule as in the tables applies. Counts span the measured variants, sizes and id widths; they are not an overall speed ranking. RAM usage is measured only as the cgroup peak of the memory-limit tables.
 
 - Rust, links: 186 faster, 4 slower, 2 approximately equal Doublets operation comparisons with SQLite.
 - C#, links: 192 faster, 0 slower, 0 approximately equal Doublets operation comparisons with SQLite.

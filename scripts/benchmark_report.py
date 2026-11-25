@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """Turns the benchmark JSON reports into the README results sections and charts."""
 
-# Usage: benchmark_report.py RESULTS_DIR [--readme README.md] [--readme README.ru.md] [--charts DIR]
+# Usage: benchmark_report.py RESULTS_DIR [--configurations DIR] [--readme README.md] [--readme README.ru.md]
+#        [--charts DIR]
 #
 # Every JSON report (written by `rust` and `csharp` with `--output`) is one table: a language,
 # a category (links or objects), an address/id space (32 or 64 bit) and a size, measured on one machine.
 # The README section between the markers is regenerated in the hierarchy
 # category -> language -> bits -> size, and charts are written per category, language and bits.
+# Reports labelled with a `configuration` (see benchmark_configuration.py) are measured in a non-default
+# setup, a durable store or a memory limit, and follow as separate tables.
 
 import argparse
 import json
@@ -25,6 +28,8 @@ LINT_OFF = "<!-- markdownlint-disable MD013 MD024 -->"
 LINT_ON = "<!-- markdownlint-restore -->"
 
 CATEGORIES = ("links", "objects")
+CONFIGURATIONS = ("durable", "memory_limit")
+TRANSACTIONAL = "Doublets_United_NonVolatile_Transactional"
 NOISE = 0.05
 LANGUAGES = ("Rust", "C#")
 BITS = (32, 64)
@@ -84,7 +89,23 @@ TEXT: dict[str, dict[str, Any]] = {
         "linear_scale": "linear scale",
         "conclusions": "Conclusions",
         "summary": "{language}, {category}: {faster} faster, {slower} slower, {same} approximately equal Doublets operation comparisons with SQLite.",
-        "summary_note": "Each comparison uses SQLite of matching durability and the same noise rule as the tables. Counts span the measured variants, sizes and id widths; they are not an overall speed ranking. RAM usage is not measured.",
+        "summary_note": "Volatile Doublets stores are compared with `SQLite Memory`. Non-volatile ones are file-backed without durability guarantees (no journal, no `fsync`) and are compared with `SQLite File Tuned` (or `SQLite File` where no tuned row was measured), which still syncs at every commit; the transactional store is compared with `SQLite File`, both durable at every commit. The same noise rule as in the tables applies. Counts span the measured variants, sizes and id widths; they are not an overall speed ranking. RAM usage is measured only as the cgroup peak of the memory-limit tables.",
+        "configured_summary": "{language}, {category}, {configuration}: {faster} faster, {slower} slower, {same} approximately equal Doublets operation comparisons with SQLite.",
+        "configurations": {
+            "durable": "Durable file storage",
+            "memory_limit": "Under memory pressure",
+        },
+        "configuration_names": {"durable": "durable", "memory_limit": "memory limit"},
+        "configuration_intro": {
+            "durable": "`Doublets United NonVolatile Transactional` is the united file-mapped store behind doublets' `TransactionsDecorator` with the shipped `FileTransitionLog`, which calls `sync_all` after every journal record. One transaction covers each lifecycle phase that writes: it begins at the phase's first write and commits at its end, so the read phases begin none. It is compared with `SQLite File`, which syncs its rollback journal and database at every `COMMIT` (`synchronous=FULL`): both are durable at commit.",
+            "memory_limit": "The benchmark process runs in a cgroup with a memory limit (`memory.max`, swap disabled). The limit charges the page cache too, so neither the SQLite file nor the mapped Doublets store fits in memory, and pages that are not resident are read from the disk. The transactional store cannot take part: its decorator keeps every transition and a full snapshot of the links in memory, which exceeds any limit small enough to create pressure.",
+        },
+        "configured_heading": "{language}, {bits} bit, {size}",
+        "limit_heading": ", memory limit {limit}",
+        "limit_provenance": "Memory limit {limit}; peak cgroup memory {peak}; {faults} major page faults.",
+        "disk_provenance": "Disk of the stores: {latencies}.",
+        "random_read": "random 4 KiB read {value}",
+        "fsync": "`fsync` {value}",
         "repetitions": lambda count: f"{count} repetition" + ("" if count == 1 else "s"),
         "machine": "unknown machine",
         "local": "a local run",
@@ -126,7 +147,23 @@ TEXT: dict[str, dict[str, Any]] = {
         "linear_scale": "линейная шкала",
         "conclusions": "Выводы",
         "summary": "{language}, {category}: Дуплеты быстрее в {faster}, медленнее в {slower}, примерно равны SQLite в {same} сравнениях операций.",
-        "summary_note": "Каждое сравнение использует SQLite той же надёжности хранения и то же правило учёта шума, что и таблицы. Числа охватывают измеренные варианты, размеры и разрядности id и не являются общим рейтингом скорости. Использование ОЗУ не измеряется.",
+        "summary_note": "Энергозависимые хранилища Дуплетов сравниваются с `SQLite Memory`. Энергонезависимые хранятся в файле без гарантий надёжности (без журнала и `fsync`) и сравниваются с `SQLite File Tuned` (или `SQLite File`, если настроенный вариант не измерялся), который всё равно синхронизирует данные при каждой фиксации; транзакционное хранилище сравнивается с `SQLite File`, и оба надёжны при каждой фиксации. Применяется то же правило учёта шума, что и в таблицах. Числа охватывают измеренные варианты, размеры и разрядности id и не являются общим рейтингом скорости. Использование ОЗУ измеряется только как пиковое потребление cgroup в таблицах с ограничением памяти.",
+        "configured_summary": "{language}, {category}, {configuration}: Дуплеты быстрее в {faster}, медленнее в {slower}, примерно равны SQLite в {same} сравнениях операций.",
+        "configurations": {
+            "durable": "Надёжное хранение в файле",
+            "memory_limit": "При нехватке памяти",
+        },
+        "configuration_names": {"durable": "надёжное хранение", "memory_limit": "ограничение памяти"},
+        "configuration_intro": {
+            "durable": "`Doublets United NonVolatile Transactional` — объединённое хранилище в отображаемом файле за `TransactionsDecorator` из doublets с поставляемым `FileTransitionLog`, который вызывает `sync_all` после каждой записи журнала. Каждая записывающая фаза жизненного цикла — одна транзакция: она начинается при первой записи фазы и фиксируется в её конце, поэтому фазы чтения транзакций не начинают. Оно сравнивается с `SQLite File`, который синхронизирует журнал отката и базу при каждом `COMMIT` (`synchronous=FULL`): оба надёжны при фиксации.",
+            "memory_limit": "Процесс теста работает в cgroup с ограничением памяти (`memory.max`, без подкачки). Ограничение учитывает и страничный кэш, поэтому ни файл SQLite, ни отображаемое хранилище Дуплетов не помещаются в память, и отсутствующие в памяти страницы читаются с диска. Транзакционное хранилище в этом участвовать не может: его декоратор хранит в памяти каждый переход и полный снимок связей, что больше любого ограничения, достаточно малого для нехватки памяти.",
+        },
+        "configured_heading": "{language}, {bits} бит, {size}",
+        "limit_heading": ", ограничение памяти {limit}",
+        "limit_provenance": "Ограничение памяти {limit}; пиковое потребление cgroup {peak}; {faults} основных страничных отказов.",
+        "disk_provenance": "Диск хранилищ: {latencies}.",
+        "random_read": "случайное чтение 4 КиБ {value}",
+        "fsync": "`fsync` {value}",
         "repetitions": lambda count: f"{count} повтор" + russian_plural(count, "", "а", "ов"),
         "machine": "неизвестная машина",
         "local": "локальный запуск",
@@ -144,6 +181,8 @@ def load(directory):
     for path in sorted(Path(directory).glob("*.json")):
         report = json.loads(path.read_text(encoding="utf-8"))
         validate(report, path)
+        if "configuration" in report:
+            raise ValueError(f"{path} is measured in a configuration; keep it with the configured reports")
         key = (report["category"], report["language"], report["bits"], report["size"])
         if key in reports:
             raise ValueError(f"{path} duplicates the results of {key}")
@@ -153,11 +192,41 @@ def load(directory):
     return reports
 
 
+def load_configurations(directory):
+    """The configured reports in `directory`, if it exists, keyed by configuration_key()."""
+    reports = {}
+    for path in sorted(Path(directory).glob("*.json")):
+        report = json.loads(path.read_text(encoding="utf-8"))
+        validate(report, path)
+        if "configuration" not in report:
+            raise ValueError(f"{path} has no configuration; keep it with the default reports")
+        key = configuration_key(report)
+        if key in reports:
+            raise ValueError(f"{path} duplicates the results of {key}")
+        reports[key] = report
+    return reports
+
+
+def configuration_key(report):
+    configuration = report["configuration"]
+    return (
+        CONFIGURATIONS.index(configuration["kind"]),
+        configuration.get("memory_limit_bytes", 0),
+        CATEGORIES.index(report["category"]),
+        LANGUAGES.index(report["language"]),
+        report["bits"],
+        report["size"],
+    )
+
+
 def validate(report, path):
     """Reject incomplete measurements before publishing tables or charts."""
     try:
         validate_metadata(report)
-        validate_variants(report["results"])
+        if "configuration" in report:
+            validate_configuration(report)
+        else:
+            validate_variants(report["results"])
         validate_postgresql(report)
         for result in report["results"]:
             if set(result["operations"]) != set(OPERATIONS[report["category"]]):
@@ -199,6 +268,42 @@ def validate_variants(results):
         raise ValueError("missing SQLite baseline")
 
 
+def validate_configuration(report):
+    """A durable report pairs the transactional store with SQLite File; a memory limit excludes it."""
+    configuration = report["configuration"]
+    variants = [result["variant"] for result in report["results"]]
+    if len(variants) != len(set(variants)) or "SQLite_File" not in variants:
+        raise ValueError("duplicate variants or missing SQLite File baseline")
+    if any(variant.startswith("Doublets_") and "_NonVolatile" not in variant for variant in variants):
+        raise ValueError("configured reports measure file-backed stores only")
+    disk = configuration.get("disk", {})
+    if not isinstance(disk, dict) or not all(positive_number(value) for value in disk.values()):
+        raise ValueError("invalid disk latencies")
+    if configuration["kind"] == "durable":
+        if TRANSACTIONAL not in variants:
+            raise ValueError(f"a durable report needs {TRANSACTIONAL}")
+    elif configuration["kind"] == "memory_limit":
+        if TRANSACTIONAL in variants:
+            raise ValueError(
+                "the transactional store keeps its journal in memory and cannot run under a limit"
+            )
+        if not positive_integer(configuration.get("memory_limit_bytes")) or not positive_number(
+            disk.get("random_read_4k_ns")
+        ):
+            raise ValueError("a memory limit report needs the limit and the disk's random 4 KiB read latency")
+        for key in ("peak_bytes", "major_faults"):
+            if key in configuration and not isinstance(configuration[key], int):
+                raise ValueError(f"invalid {key}")
+    else:
+        raise ValueError("unknown configuration")
+
+
+def positive_number(value):
+    return (
+        isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value) and value > 0
+    )
+
+
 def validate_postgresql(report):
     """Require PostgreSQL provenance and keep server bytes separate from local files."""
     postgres = [result for result in report["results"] if result["variant"] == "PostgreSQL_EFCore"]
@@ -235,13 +340,25 @@ def validate_measurement(measurement):
         raise ValueError("median must be between min and max")
 
 
-def baseline(variant):
-    """Compare with Microsoft.Data.Sqlite of the same durability, including the System.Data.SQLite provider."""
+def baseline(variant, measured=()):
+    """The Microsoft.Data.Sqlite row each variant is compared with, among the `measured` variants.
+
+    Volatile stores are compared with SQLite Memory. File-backed stores without durability guarantees are
+    compared with the tuned SQLite file, whose page cache and memory map cover the file like the mapped
+    Doublets store, if it was measured. The transactional store pays for durability like SQLite File.
+    The tuned SQLite rows are compared with the stock ones and System.Data.SQLite with the same storage.
+    """
+    if variant.startswith("SQLite_File_"):
+        return "SQLite_File"
     if variant.startswith("SQLite") or variant == "PostgreSQL_EFCore":
         return None
     if variant.startswith("SystemDataSQLite_"):
         return variant.replace("SystemDataSQLite_", "SQLite_", 1)
-    return "SQLite_File" if "_NonVolatile" in variant else "SQLite_Memory"
+    if variant == TRANSACTIONAL:
+        return "SQLite_File"
+    if "_NonVolatile" in variant:
+        return "SQLite_File_Tuned" if "SQLite_File_Tuned" in measured else "SQLite_File"
+    return "SQLite_Memory"
 
 
 def significant(value):
@@ -302,7 +419,7 @@ def table(report, text):
     ]
     lines = ["| " + " | ".join(header) + " |", "| --- |" + " ---: |" * (len(header) - 1)]
     for variant, result in by_variant.items():
-        reference = by_variant.get(baseline(variant))
+        reference = by_variant.get(baseline(variant, by_variant))
         cells = [variant.replace("_", " ")]
         for operation in operations:
             measured = result["operations"][operation]
@@ -344,7 +461,27 @@ def provenance(report, text):
             f"Npgsql.EntityFrameworkCore.PostgreSQL {postgres['provider_version']}; "
             f"EF Core {postgres['ef_core_version']}."
         )
+    configuration = report.get("configuration", {})
+    if "memory_limit_bytes" in configuration:
+        value += " " + text["limit_provenance"].format(
+            limit=memory(configuration["memory_limit_bytes"]),
+            peak=memory(configuration["peak_bytes"]) if "peak_bytes" in configuration else "—",
+            faults=size(configuration["major_faults"]) if "major_faults" in configuration else "—",
+        )
+    disk = configuration.get("disk", {})
+    latencies = [
+        text[name].format(value=duration(disk[key]))
+        for name, key in (("random_read", "random_read_4k_ns"), ("fsync", "fsync_ns"))
+        if key in disk
+    ]
+    if latencies:
+        value += " " + text["disk_provenance"].format(latencies=", ".join(latencies))
     return f"_{value}_"
+
+
+def memory(count):
+    """Memory limits are whole MiB, peaks are rounded to one decimal."""
+    return f"{count // 2**20} MiB" if count % 2**20 == 0 else file_size(count)
 
 
 def chart_name(category, language, bits, scale="log"):
@@ -352,40 +489,91 @@ def chart_name(category, language, bits, scale="log"):
     return f"{category}-{language.lower().replace('#', 'sharp')}-{bits}{suffix}.png"
 
 
-def conclusions(reports, text):
+def count_outcomes(reports, text):
+    """How the Doublets operations of `reports` compare with their SQLite baselines."""
+    counts = {"faster": 0, "slower": 0, "same": 0}
+    for data in reports:
+        variants = {result["variant"]: result for result in data["results"]}
+        for variant, result in variants.items():
+            if not variant.startswith("Doublets_"):
+                continue
+            reference = variants[baseline(variant, variants)]
+            for operation, measured in result["operations"].items():
+                other = reference["operations"][operation]
+                outcome = (
+                    "same"
+                    if comparison(measured, other, text) == text["same"]
+                    else "faster"
+                    if measured["median_ns"] < other["median_ns"]
+                    else "slower"
+                )
+                counts[outcome] += 1
+    return counts
+
+
+def conclusions(reports, text, configured=None):
     """Summarize the measured Doublets comparisons with the table's durability and noise rules."""
     lines = [f"## {text['conclusions']}", "", text["summary_note"], ""]
     for category in CATEGORIES:
         for language in LANGUAGES:
-            counts = {"faster": 0, "slower": 0, "same": 0}
-            for key, data in reports.items():
-                if key[:2] != (category, language):
-                    continue
-                variants = {result["variant"]: result for result in data["results"]}
-                for variant, result in variants.items():
-                    if not variant.startswith("Doublets_"):
-                        continue
-                    reference = variants[baseline(variant)]
-                    for operation, measured in result["operations"].items():
-                        other = reference["operations"][operation]
-                        outcome = (
-                            "same"
-                            if comparison(measured, other, text) == text["same"]
-                            else "faster"
-                            if measured["median_ns"] < other["median_ns"]
-                            else "slower"
-                        )
-                        counts[outcome] += 1
+            counts = count_outcomes(
+                (data for key, data in reports.items() if key[:2] == (category, language)), text
+            )
             if sum(counts.values()):
                 lines.append(
                     "- "
                     + text["summary"].format(language=language, category=text["nouns"][category], **counts)
                 )
+    for kind in CONFIGURATIONS:
+        for category in CATEGORIES:
+            for language in LANGUAGES:
+                counts = count_outcomes(
+                    (
+                        data
+                        for data in (configured or {}).values()
+                        if (data["configuration"]["kind"], data["category"], data["language"])
+                        == (kind, category, language)
+                    ),
+                    text,
+                )
+                if sum(counts.values()):
+                    lines.append(
+                        "- "
+                        + text["configured_summary"].format(
+                            language=language,
+                            category=text["nouns"][category],
+                            configuration=text["configuration_names"][kind],
+                            **counts,
+                        )
+                    )
     return lines
 
 
-def section(reports, language_code, charts_link):
-    """The Markdown results section in the category -> language -> bits -> size hierarchy."""
+def configured_sections(configured, text):
+    """One section per configuration, with a table per report in the configuration_key() order."""
+    lines = []
+    for kind in CONFIGURATIONS:
+        reports = [configured[key] for key in sorted(configured) if CONFIGURATIONS[key[0]] == kind]
+        if not reports:
+            continue
+        lines += [f"## {text['configurations'][kind]}", "", text["configuration_intro"][kind], ""]
+        for report in reports:
+            heading = text["configured_heading"].format(
+                language=report["language"],
+                bits=report["bits"],
+                size=text["size"][report["category"]].format(size=size(report["size"])),
+            )
+            if "memory_limit_bytes" in report["configuration"]:
+                heading += text["limit_heading"].format(
+                    limit=memory(report["configuration"]["memory_limit_bytes"])
+                )
+            lines += [f"### {heading}", "", provenance(report, text), "", table(report, text), ""]
+    return lines
+
+
+def section(reports, language_code, charts_link, configured=None):
+    """The Markdown results section in the category -> language -> bits -> size hierarchy,
+    followed by the configured reports and the conclusions."""
     text = TEXT[language_code]
     lines = []
     for category in CATEGORIES:
@@ -415,7 +603,8 @@ def section(reports, language_code, charts_link):
                     for scale in ("linear", "log"):
                         name = chart_name(category, language, bits, scale)
                         lines += [f"![{title}, {text[f'{scale}_scale']}]({charts_link}/{name})", ""]
-    lines += conclusions(reports, text)
+    lines += configured_sections(configured or {}, text)
+    lines += conclusions(reports, text, configured)
     return "\n".join(lines).rstrip() + "\n"
 
 
@@ -501,10 +690,12 @@ def draw_chart(reports, category, language, bits, sizes, scale, path):
 def main(arguments=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("results", type=Path, help="directory with the JSON reports")
+    parser.add_argument("--configurations", type=Path, help="directory with the configured JSON reports")
     parser.add_argument("--readme", type=Path, action="append", default=[], help="README to update in place")
     parser.add_argument("--charts", type=Path, help="directory for the charts, relative to the READMEs")
     options = parser.parse_args(arguments)
     reports = load(options.results)
+    configured = {} if options.configurations is None else load_configurations(options.configurations)
     if options.charts is not None:
         charts(reports, options.charts)
     for readme in options.readme:
@@ -515,9 +706,11 @@ def main(arguments=None):
             else options.charts.resolve().relative_to(readme.resolve().parent).as_posix()
         )
         document = readme.read_text(encoding="utf-8")
-        readme.write_text(replace_section(document, section(reports, language_code, link)), encoding="utf-8")
+        readme.write_text(
+            replace_section(document, section(reports, language_code, link, configured)), encoding="utf-8"
+        )
     if not options.readme:
-        print(section(reports, "en", None))
+        print(section(reports, "en", None, configured))
 
 
 if __name__ == "__main__":

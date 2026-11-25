@@ -127,7 +127,7 @@ class RecordTests(unittest.TestCase):
         )
         tables = configuration.report(self.root, "abc")
         self.assertIn("memory limit 24 MiB", tables)
-        self.assertIn("Dirty page cache limit 4.8 MiB, background writeback from 2.4 MiB.", tables)
+        self.assertIn("`vm.dirty_bytes` 4.8 MiB, `vm.dirty_background_bytes` 2.4 MiB.", tables)
         # One table compares the three jobs' storages, and a second one shows each job's peak.
         self.assertEqual(tables.count("| Doublets United NonVolatile | "), 2)
         self.assertEqual(tables.count("| Doublets Split NonVolatile | "), 2)

@@ -145,11 +145,16 @@ results:
   with `memory.max` of 24 MiB at 1,000,000 links and 240 MiB at 10,000,000
   links, without swap. The limit charges the page cache too, so the stores'
   pages are read back from the disk. The warm-up on 10,000 links fits in
-  either limit. The kernel's dirty page thresholds (`vm.dirty_bytes` and
-  `vm.dirty_background_bytes`) are set to its default ratios, 20% and 10%, of
-  the limit, as on a machine with that much memory. Computed from the whole
-  runner, they let the united store dirty 21 MiB of its mapping before
-  writeback throttled it, and the kernel killed it under 24 MiB. Under
+  either limit. With the kernel's default dirty page thresholds, the united
+  store's dirty pages and pages under writeback filled 21 MiB of the 24 MiB,
+  which reclaim cannot free, and the kernel killed it. So the runner's
+  `vm.dirty_bytes` and `vm.dirty_background_bytes` are set to 20% and 10% of
+  the limit. The kernel applies byte thresholds to a cgroup as a fraction of
+  the runner's whole memory, rounded up to 1/4096, of the memory the cgroup
+  can use (`domain_dirty_limits` in `mm/page-writeback.c`). The cgroup's own
+  thresholds are therefore a few pages under 24 MiB and below 1 MiB under
+  240 MiB, so the mapped stores write back their pages almost as soon as they
+  dirty them. Under
   pressure a store can take hours, so each storage runs in its own job of
   the run, and the jobs' reports are merged into one table. A second table
   shows each job's runner, disk latencies, the cgroup's `memory.peak` and

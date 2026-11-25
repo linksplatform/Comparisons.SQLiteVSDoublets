@@ -44,7 +44,9 @@ jobs:
         id: plan
         env:
           PLAN: ${{ inputs.plan || '[{"kind":"durable","bits":32,"size":1000},{"kind":"memory_limit","bits":32,"size":20000,"limit_mib":24}]' }}
-        run: echo "matrix=$(python scripts/benchmark_configuration.py plan "$PLAN")" >> "$GITHUB_OUTPUT"
+        run: |
+          matrix="$(python scripts/benchmark_configuration.py plan "$PLAN")"
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
 
   benchmark:
     name: ${{ matrix.name }}
@@ -101,11 +103,12 @@ jobs:
             # The scope's memory.max charges the page cache too; without swap the stores' pages are evicted
             # to their files. The stats of the scope are written by the shell inside it, which outlives an
             # OOM kill of the benchmark, so memory.events shows the kill.
-            # The kernel's dirty page thresholds are computed from the runner's whole memory, so a mapped
-            # store could dirty more pages than the limit holds before writeback throttled it, and the
-            # united store was killed under 24 MiB (run 45604850024: 21 MiB dirty, 15 MiB under writeback).
-            # They are set to the default ratios, 20% and 10%, of the limit, as on a machine with that much
-            # memory; SQLite is unaffected, as it syncs every commit.
+            # With the default dirty page thresholds, the united store's dirty pages and pages under
+            # writeback filled the limit, which reclaim cannot free, and it was killed under 24 MiB (run
+            # 45604850024: 21 MiB dirty, 15 MiB of it under writeback). The byte thresholds are set to 20%
+            # and 10% of the limit; the kernel applies them to the cgroup as a fraction of the runner's
+            # memory, rounded up to 1/4096 (domain_dirty_limits), so the cgroup's own thresholds are a
+            # few pages under 24 MiB and below 1 MiB under 240 MiB. SQLite syncs every commit anyway.
             dirty=$((LIMIT_MIB * 1048576 / 5)) background=$((LIMIT_MIB * 1048576 / 10))
             sudo sysctl -q "vm.dirty_bytes=$dirty" "vm.dirty_background_bytes=$background"
             status=0

@@ -146,8 +146,8 @@ def cgroup_stats(path):
 def record(path, kind, disk=None, memory_limit_bytes=None, stats=None, dirty=None):
     """Add the configuration while preserving every measurement and existing metadata field.
 
-    `dirty` holds the kernel's dirty page thresholds of a memory limit run, `dirty_bytes` and
-    `dirty_background_bytes`.
+    `dirty` holds the kernel's dirty page thresholds of a memory limit run, `dirty_ratio` and
+    `dirty_background_ratio`, in percent.
     """
     data = json.loads(path.read_text(encoding="utf-8"))
     configuration = {"kind": kind}
@@ -244,9 +244,9 @@ def main(arguments=None):
     recording.add_argument("--disk", type=json.loads, help="the JSON printed by probe")
     recording.add_argument("--memory-limit-bytes", type=int)
     recording.add_argument("--cgroup-stats", type=Path)
-    recording.add_argument("--dirty-bytes", type=int, help="vm.dirty_bytes of a memory limit run")
+    recording.add_argument("--dirty-ratio", type=int, help="vm.dirty_ratio of a memory limit run")
     recording.add_argument(
-        "--dirty-background-bytes", type=int, help="vm.dirty_background_bytes of a memory limit run"
+        "--dirty-background-ratio", type=int, help="vm.dirty_background_ratio of a memory limit run"
     )
     options = parser.parse_args(arguments)
     if options.command == "plan":
@@ -267,8 +267,8 @@ def main(arguments=None):
     dirty = {
         key: value
         for key, value in (
-            ("dirty_bytes", options.dirty_bytes),
-            ("dirty_background_bytes", options.dirty_background_bytes),
+            ("dirty_ratio", options.dirty_ratio),
+            ("dirty_background_ratio", options.dirty_background_ratio),
         )
         if value is not None
     }

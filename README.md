@@ -147,14 +147,14 @@ results:
   pages are read back from the disk. The warm-up on 10,000 links fits in
   either limit. With the kernel's default dirty page thresholds, the united
   store's dirty pages and pages under writeback filled 21 MiB of the 24 MiB,
-  which reclaim cannot free, and the kernel killed it. So the runner's
-  `vm.dirty_bytes` and `vm.dirty_background_bytes` are set to 20% and 10% of
-  the limit. The kernel applies byte thresholds to a cgroup as a fraction of
-  the runner's whole memory, rounded up to 1/4096, of the memory the cgroup
-  can use (`domain_dirty_limits` in `mm/page-writeback.c`). The cgroup's own
-  thresholds are therefore a few pages under 24 MiB and below 1 MiB under
-  240 MiB, so the mapped stores write back their pages almost as soon as they
-  dirty them. Under
+  which reclaim cannot free, and the kernel killed it. Byte thresholds do not
+  help: the kernel applies `vm.dirty_bytes` to a cgroup as a fraction of the
+  runner's whole memory, rounded up to 1/4096, of the memory the cgroup can
+  use (`domain_dirty_limits` in `mm/page-writeback.c`). Set to 20% of the
+  limit, it came to a few pages, and every store, SQLite too, waited in
+  `balance_dirty_pages` for most of the pages it wrote. So the runner's
+  `vm.dirty_ratio` and `vm.dirty_background_ratio` are lowered to 5% and 2%,
+  which the kernel applies to the memory the cgroup can use. Under
   pressure a store can take hours, so each storage runs in its own job of
   the run, and the jobs' reports are merged into one table. A store still
   running after 340 minutes, the time a job has for it, is stopped. Its row

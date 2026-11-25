@@ -107,12 +107,13 @@ jobs:
             # The scope's memory.max charges the page cache too; without swap the stores' pages are evicted
             # to their files. memory_limit_run.sh samples the scope while the benchmark runs and writes its
             # stats at the end.
-            # With the default dirty page thresholds, the united store's dirty pages and pages under
-            # writeback filled the limit, which reclaim cannot free, and it was killed under 24 MiB (run
-            # 45604850024: 21 MiB dirty, 15 MiB of it under writeback). The byte thresholds are set to 20%
-            # and 10% of the limit; the kernel applies them to the cgroup as a fraction of the runner's
-            # memory, rounded up to 1/4096 (domain_dirty_limits), so the cgroup's own thresholds are a
-            # few pages under 24 MiB and below 1 MiB under 240 MiB. SQLite syncs every commit anyway.
+            # With the default dirty page thresholds (20% and 10%), the united store's dirty pages and pages
+            # under writeback filled the limit, which reclaim cannot free, and it was killed under 24 MiB
+            # (run 45604850024: 21 MiB dirty, 15 MiB of it under writeback). Byte thresholds of 20% and 10%
+            # of the limit throttled every store instead: the kernel applies byte thresholds to a cgroup as
+            # a fraction of the runner's memory, rounded up to 1/4096 (domain_dirty_limits), so they came to
+            # a few pages, and each store waited in balance_dirty_pages after a minute (run 45681559798).
+            # The ratios apply to the memory the cgroup can use.
             # A store that has not finished when the job's time runs out is stopped, and its report keeps
             # the phases it finished, from the benchmark's phase log. 340 minutes leave the job's setup and
             # report their time within its 355.
@@ -121,8 +122,7 @@ jobs:
               exit 1
             fi
             budget=$((MINUTES * 60))
-            dirty=$((LIMIT_MIB * 1048576 / 5)) background=$((LIMIT_MIB * 1048576 / 10))
-            sudo sysctl -q "vm.dirty_bytes=$dirty" "vm.dirty_background_bytes=$background"
+            sudo sysctl -q vm.dirty_ratio=5 vm.dirty_background_ratio=2
             status=0
             sudo systemd-run --scope --quiet -p "MemoryMax=${LIMIT_MIB}M" -p MemorySwapMax=0 -p OOMPolicy=continue \
               --same-dir -- \
@@ -139,8 +139,8 @@ jobs:
               exit "$status"
             fi
             record+=(--memory-limit-bytes "$((LIMIT_MIB * 1048576))" --cgroup-stats "$RUNNER_TEMP/cgroup-stats"
-              --dirty-bytes "$(cat /proc/sys/vm/dirty_bytes)"
-              --dirty-background-bytes "$(cat /proc/sys/vm/dirty_background_bytes)")
+              --dirty-ratio "$(cat /proc/sys/vm/dirty_ratio)"
+              --dirty-background-ratio "$(cat /proc/sys/vm/dirty_background_ratio)")
           else
             "${benchmark[@]}"
           fi

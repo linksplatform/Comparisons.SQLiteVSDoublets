@@ -109,12 +109,12 @@ TEXT: dict[str, dict[str, Any]] = {
         "configuration_names": {"durable": "durable", "memory_limit": "memory limit"},
         "configuration_intro": {
             "durable": "`Doublets United NonVolatile Transactional` is the united file-mapped store behind doublets' `TransactionsDecorator` with the shipped `FileTransitionLog`, which calls `sync_all` after every journal record. One transaction covers each lifecycle phase that writes: it begins at the phase's first write and commits at its end, so the read phases begin none. It is compared with `SQLite File`, which syncs its rollback journal and database at every `COMMIT` (`synchronous=FULL`): both are durable at commit.",
-            "memory_limit": "The benchmark process runs in a cgroup with a memory limit (`memory.max`, swap disabled). The limit charges the page cache too, so neither the SQLite file nor the mapped Doublets store fits in memory, and pages that are not resident are read from the disk. With the kernel's default dirty page thresholds, a mapped store's dirty pages and pages under writeback filled the limit, which reclaim cannot free, and the store was killed. So the runner's `vm.dirty_bytes` and `vm.dirty_background_bytes` are set to 20% and 10% of the limit. The kernel applies byte thresholds to a cgroup as a fraction of the runner's whole memory, rounded up to 1/4096, of the memory the cgroup can use, so the cgroup's own thresholds are a few pages under 24 MiB and below 1 MiB under 240 MiB: the mapped stores write back their pages almost as soon as they dirty them. The transactional store cannot take part: its decorator keeps every transition and a full snapshot of the links in memory, which exceeds any limit small enough to create pressure. Under pressure a store can take hours, so each storage runs in its own job of one run, and the second table shows each job's runner, disk latencies, peak cgroup memory and major page faults. Major page faults count the misses of the mapped stores only: SQLite reads its file with `read`, whose misses are not page faults.",
+            "memory_limit": "The benchmark process runs in a cgroup with a memory limit (`memory.max`, swap disabled). The limit charges the page cache too, so neither the SQLite file nor the mapped Doublets store fits in memory, and pages that are not resident are read from the disk. With the kernel's default dirty page thresholds, a mapped store's dirty pages and pages under writeback filled the limit, which reclaim cannot free, and the store was killed. Byte thresholds do not help: the kernel applies them to a cgroup as a fraction of the runner's whole memory, rounded up to 1/4096, so 20% of the limit came to a few pages, and every store, SQLite too, waited in `balance_dirty_pages` for most of the pages it wrote. So the runner's `vm.dirty_ratio` and `vm.dirty_background_ratio` are lowered, which the kernel applies to the memory the cgroup can use. The transactional store cannot take part: its decorator keeps every transition and a full snapshot of the links in memory, which exceeds any limit small enough to create pressure. Under pressure a store can take hours, so each storage runs in its own job of one run, and the second table shows each job's runner, disk latencies, peak cgroup memory and major page faults. Major page faults count the misses of the mapped stores only: SQLite reads its file with `read`, whose misses are not page faults.",
         },
         "configured_heading": "{language}, {bits} bit, {size}",
         "limit_heading": ", memory limit {limit}",
         "limit_provenance": "Memory limit {limit}; peak cgroup memory {peak}; {faults} major page faults.",
-        "dirty_provenance": "`vm.dirty_bytes` {dirty}, `vm.dirty_background_bytes` {background}.",
+        "dirty_provenance": "`vm.dirty_ratio` {dirty}%, `vm.dirty_background_ratio` {background}%.",
         "disk_provenance": "Disk of the stores: {latencies}.",
         "job_machines": "Each storage in its own job (below)",
         "job_limit_provenance": "Memory limit {limit}.",
@@ -181,12 +181,12 @@ TEXT: dict[str, dict[str, Any]] = {
         "configuration_names": {"durable": "надёжное хранение", "memory_limit": "ограничение памяти"},
         "configuration_intro": {
             "durable": "`Doublets United NonVolatile Transactional` — объединённое хранилище в отображаемом файле за `TransactionsDecorator` из doublets с поставляемым `FileTransitionLog`, который вызывает `sync_all` после каждой записи журнала. Каждая записывающая фаза жизненного цикла — одна транзакция: она начинается при первой записи фазы и фиксируется в её конце, поэтому фазы чтения транзакций не начинают. Оно сравнивается с `SQLite File`, который синхронизирует журнал отката и базу при каждом `COMMIT` (`synchronous=FULL`): оба надёжны при фиксации.",
-            "memory_limit": "Процесс теста работает в cgroup с ограничением памяти (`memory.max`, без подкачки). Ограничение учитывает и страничный кэш, поэтому ни файл SQLite, ни отображаемое хранилище Дуплетов не помещаются в память, и отсутствующие в памяти страницы читаются с диска. С порогами грязных страниц ядра по умолчанию грязные страницы отображаемого хранилища и страницы в процессе записи заполнили ограничение, освободить которое возврат памяти не может, и хранилище было завершено принудительно. Поэтому `vm.dirty_bytes` и `vm.dirty_background_bytes` машины задаются равными 20% и 10% от ограничения. Ядро применяет пороги в байтах к cgroup как долю всей памяти машины, округлённую вверх до 1/4096, от памяти, доступной cgroup, поэтому собственные пороги cgroup составляют несколько страниц при 24 МиБ и меньше 1 МиБ при 240 МиБ: отображаемые хранилища записывают страницы на диск почти сразу после изменения. Транзакционное хранилище в этом участвовать не может: его декоратор хранит в памяти каждый переход и полный снимок связей, что больше любого ограничения, достаточно малого для нехватки памяти. При нехватке памяти хранилище может работать часами, поэтому каждое хранилище измеряется в отдельном задании одного запуска, а вторая таблица показывает машину, задержки диска, пиковое потребление cgroup и основные страничные отказы каждого задания. Основные страничные отказы учитывают промахи только отображаемых хранилищ: SQLite читает файл вызовом `read`, промахи которого не являются страничными отказами.",
+            "memory_limit": "Процесс теста работает в cgroup с ограничением памяти (`memory.max`, без подкачки). Ограничение учитывает и страничный кэш, поэтому ни файл SQLite, ни отображаемое хранилище Дуплетов не помещаются в память, и отсутствующие в памяти страницы читаются с диска. С порогами грязных страниц ядра по умолчанию грязные страницы отображаемого хранилища и страницы в процессе записи заполнили ограничение, освободить которое возврат памяти не может, и хранилище было завершено принудительно. Пороги в байтах не помогают: ядро применяет их к cgroup как долю всей памяти машины, округлённую вверх до 1/4096, поэтому 20% от ограничения составили несколько страниц, и каждое хранилище, включая SQLite, ждало в `balance_dirty_pages` большую часть записываемых страниц. Поэтому `vm.dirty_ratio` и `vm.dirty_background_ratio` машины понижаются, а их ядро применяет к памяти, доступной cgroup. Транзакционное хранилище в этом участвовать не может: его декоратор хранит в памяти каждый переход и полный снимок связей, что больше любого ограничения, достаточно малого для нехватки памяти. При нехватке памяти хранилище может работать часами, поэтому каждое хранилище измеряется в отдельном задании одного запуска, а вторая таблица показывает машину, задержки диска, пиковое потребление cgroup и основные страничные отказы каждого задания. Основные страничные отказы учитывают промахи только отображаемых хранилищ: SQLite читает файл вызовом `read`, промахи которого не являются страничными отказами.",
         },
         "configured_heading": "{language}, {bits} бит, {size}",
         "limit_heading": ", ограничение памяти {limit}",
         "limit_provenance": "Ограничение памяти {limit}; пиковое потребление cgroup {peak}; {faults} основных страничных отказов.",
-        "dirty_provenance": "`vm.dirty_bytes` {dirty}, `vm.dirty_background_bytes` {background}.",
+        "dirty_provenance": "`vm.dirty_ratio` {dirty}%, `vm.dirty_background_ratio` {background}%.",
         "disk_provenance": "Диск хранилищ: {latencies}.",
         "job_machines": "Каждое хранилище в отдельном задании (ниже)",
         "job_limit_provenance": "Ограничение памяти {limit}.",
@@ -413,8 +413,10 @@ def validate_configuration(report):
         for key in ("peak_bytes", "major_faults"):
             if key in configuration and not isinstance(configuration[key], int):
                 raise ValueError(f"invalid {key}")
-        for key in ("dirty_bytes", "dirty_background_bytes"):
-            if key in configuration and not positive_integer(configuration[key]):
+        for key in ("dirty_ratio", "dirty_background_ratio"):
+            if key in configuration and not (
+                positive_integer(configuration[key]) and configuration[key] <= 100
+            ):
                 raise ValueError(f"invalid {key}")
     else:
         raise ValueError("unknown configuration")
@@ -622,10 +624,10 @@ def provenance(report, text):
                 peak=memory(configuration["peak_bytes"]) if "peak_bytes" in configuration else "—",
                 faults=size(configuration["major_faults"]) if "major_faults" in configuration else "—",
             )
-        if "dirty_bytes" in configuration:
+        if "dirty_ratio" in configuration:
             value += " " + text["dirty_provenance"].format(
-                dirty=memory(configuration["dirty_bytes"]),
-                background=memory(configuration.get("dirty_background_bytes", configuration["dirty_bytes"])),
+                dirty=configuration["dirty_ratio"],
+                background=configuration.get("dirty_background_ratio", "—"),
             )
     disk = configuration.get("disk", {})
     latencies = [

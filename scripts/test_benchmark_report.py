@@ -245,9 +245,10 @@ class ConfigurationTests(unittest.TestCase):
             "volatile store": configured(),
             "unknown": configured(),
             "negative latency": configured(),
-            "zero dirty bytes": configured("memory_limit", memory_limit_bytes=2**20, dirty_bytes=0),
-            "fractional dirty background bytes": configured(
-                "memory_limit", memory_limit_bytes=2**20, dirty_background_bytes=0.5
+            "zero dirty ratio": configured("memory_limit", memory_limit_bytes=2**20, dirty_ratio=0),
+            "dirty ratio over 100": configured("memory_limit", memory_limit_bytes=2**20, dirty_ratio=101),
+            "fractional dirty background ratio": configured(
+                "memory_limit", memory_limit_bytes=2**20, dirty_background_ratio=0.5
             ),
         }
         broken["durable without the transactional store"]["results"].pop()
@@ -262,7 +263,7 @@ class ConfigurationTests(unittest.TestCase):
 
     def job(self, variant, number, **fields):
         """The report of one storage's job of a 24 MiB memory limit table, written to the directory."""
-        data = configured("memory_limit", 1_000_000, memory_limit_bytes=24 * 2**20, dirty_bytes=2**20)
+        data = configured("memory_limit", 1_000_000, memory_limit_bytes=24 * 2**20, dirty_ratio=5)
         data["results"] = results("links", {variant: 1000 * (number + 1)})["results"]
         data["configuration"].update(peak_bytes=20 * 2**20 + number, major_faults=100 + number)
         data["configuration"]["disk"] = {"random_read_4k_ns": 90_000 + number, "fsync_ns": 1_500_000}
@@ -298,7 +299,7 @@ class ConfigurationTests(unittest.TestCase):
                 document = "\n".join(report.configured_sections({(1,): merged}, text))
                 self.assertIn(text["job_machines"], document)
                 self.assertIn(text["job_limit_provenance"].format(limit="24 MiB"), document)
-                self.assertIn(text["dirty_provenance"].format(dirty="1 MiB", background="1 MiB"), document)
+                self.assertIn(text["dirty_provenance"].format(dirty=5, background="—"), document)
                 self.assertIn("| " + " | ".join(text["job_header"]) + " |", document)
                 self.assertIn("| SQLite File | runner 2 | 90 µs | 1.5 ms | 20.0 MiB | 102 |", document)
                 self.assertIn(
@@ -416,8 +417,8 @@ class ConfigurationTests(unittest.TestCase):
                     memory_limit_bytes=24 * 2**20,
                     peak_bytes=25_000_000,
                     major_faults=12_345,
-                    dirty_bytes=24 * 2**20 // 5,
-                    dirty_background_bytes=24 * 2**20 // 10,
+                    dirty_ratio=5,
+                    dirty_background_ratio=2,
                 ),
                 configured("memory_limit", 1_000, memory_limit_bytes=24 * 2**20),
             )
@@ -439,9 +440,7 @@ class ConfigurationTests(unittest.TestCase):
                 self.assertLess(document.index("1,000 "), document.index("1,000,000 "))
                 self.assertIn("23.8 MiB", document)
                 self.assertIn("12,345", document)
-                self.assertIn(
-                    text["dirty_provenance"].format(dirty="4.8 MiB", background="2.4 MiB"), document
-                )
+                self.assertIn(text["dirty_provenance"].format(dirty=5, background=2), document)
                 self.assertIn("90 µs", document)
                 self.assertIn("1.5 ms", document)
                 self.assertEqual(document.count(text["configuration_intro"]["memory_limit"]), 1)

@@ -149,8 +149,11 @@ results:
   `vm.dirty_background_bytes`) are set to its default ratios, 20% and 10%, of
   the limit, as on a machine with that much memory. Computed from the whole
   runner, they let the united store dirty 21 MiB of its mapping before
-  writeback throttled it, and the kernel killed it under 24 MiB. The table
-  records the cgroup's `memory.peak`, major page faults and both thresholds.
+  writeback throttled it, and the kernel killed it under 24 MiB. Under
+  pressure a store can take hours, so each storage runs in its own job of
+  the run, and the jobs' reports are merged into one table. A second table
+  shows each job's runner, disk latencies, the cgroup's `memory.peak` and
+  major page faults; the provenance line shows both thresholds.
   `SQLite File Tuned` is left out, because its 1 GiB cache would be
   anonymous memory charged to the limit. The transactional store can't take
   part: its decorator keeps every transition and a full snapshot of the links

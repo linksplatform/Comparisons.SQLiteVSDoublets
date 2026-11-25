@@ -3,7 +3,8 @@ name: Configured benchmarks
 # Rust links tables in a non-default configuration: the durable transactional store next to SQLite File,
 # and the file-backed stores under a cgroup memory limit. Pull requests run a small plan that checks the
 # pipeline; the published tables are measured with a manual run and committed to
-# docs/benchmarks/configurations (see README.md, "Configured benchmarks").
+# docs/benchmarks/configurations (see README.md, "Configured benchmarks"). Under a memory limit a store
+# can take hours, so the plan gives each storage its own job, and the report merges their reports.
 on:
   pull_request:
     paths: ['rust/**', 'scripts/benchmark_configuration.py', 'scripts/benchmark_report.py', 'scripts/benchmark_provenance.py', '.github/actions/**', '.github/workflows/configurations.yml']

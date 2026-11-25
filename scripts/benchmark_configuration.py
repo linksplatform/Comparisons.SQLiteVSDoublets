@@ -12,8 +12,8 @@ an `fsync` after a small append, the two disk operations the configured tables p
 a memory limit and the journal syncs of the transactional store.
 `record` adds the configuration, the probed latencies and the cgroup's memory.peak and major page
 faults (a file with `memory.peak` followed by `memory.stat`, as the configured workflow writes it).
-`plan` validates the runs of a configured benchmark workflow and prints its job matrix, and `report`
-validates the reports the runs wrote and prints their tables.
+`plan` validates the runs of a configured benchmark workflow and prints its job matrix, with a job per
+storage under a memory limit, and `report` validates the reports the runs wrote and prints their tables.
 """
 
 import argparse
@@ -28,17 +28,15 @@ from pathlib import Path
 import benchmark_report
 
 PAGE = 4096
-# The durable table pairs the transactional store with both SQLite files, which sync at every commit.
-# Under a memory limit the tuned SQLite cache would be anonymous memory charged to the limit, so the stock
-# SQLite file is measured; the transactional store keeps its journal in memory and cannot take part.
-VARIANTS = {
-    "durable": ["SQLite_File", "SQLite_File_Tuned", "Doublets_United_NonVolatile_Transactional"],
-    "memory_limit": ["SQLite_File", "Doublets_United_NonVolatile", "Doublets_Split_NonVolatile"],
-}
+VARIANTS = benchmark_report.CONFIGURED_VARIANTS
 
 
 def plan(runs):
-    """The matrix rows of `runs`: Rust links tables with their variants and, under a limit, its MiB."""
+    """The matrix rows of `runs`: Rust links tables with their variants and, under a limit, its MiB.
+
+    Under a memory limit a store can take hours, so each storage gets its own job, named after it, and
+    the report merges the jobs' reports into one table.
+    """
     if not isinstance(runs, list) or not 1 <= len(runs) <= 16:
         raise ValueError("the plan must list between 1 and 16 runs")
     rows = []
@@ -57,14 +55,21 @@ def plan(runs):
             raise ValueError("sizes stop at 10,000,000")
         limit = f"-{run['limit_mib']}MiB" if "limit_mib" in run else ""
         name = f"{run['kind'].replace('_', '-')}{limit}-links-rust-{run['bits']}-{run['size']}"
-        rows.append(
-            {
-                **run,
-                "limit_mib": run.get("limit_mib", 0),
-                "name": name,
-                "variants": ",".join(VARIANTS[run["kind"]]),
-            }
+        jobs = (
+            [[variant] for variant in VARIANTS[run["kind"]]]
+            if run["kind"] == "memory_limit"
+            else [list(VARIANTS[run["kind"]])]
         )
+        for variants in jobs:
+            suffix = f"-{variants[0].lower().replace('_', '-')}" if len(variants) == 1 else ""
+            rows.append(
+                {
+                    **run,
+                    "limit_mib": run.get("limit_mib", 0),
+                    "name": name + suffix,
+                    "variants": ",".join(variants),
+                }
+            )
     if len({row["name"] for row in rows}) != len(rows):
         raise ValueError("runs must be unique")
     return rows

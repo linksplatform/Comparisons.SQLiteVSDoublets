@@ -21,16 +21,23 @@ class PlanTests(unittest.TestCase):
                 {"kind": "memory_limit", "bits": 32, "size": 1_000_000, "limit_mib": 24},
             ]
         )
+        limited = "memory-limit-24MiB-links-rust-32-1000000"
+        # Under a limit a store can take hours, so each storage gets its own job.
         self.assertEqual(
-            [(row["name"], row["limit_mib"]) for row in rows],
-            [("durable-links-rust-64-10000000", 0), ("memory-limit-24MiB-links-rust-32-1000000", 24)],
-        )
-        self.assertEqual(
-            rows[0]["variants"], "SQLite_File,SQLite_File_Tuned,Doublets_United_NonVolatile_Transactional"
+            [(row["name"], row["limit_mib"], row["variants"]) for row in rows],
+            [
+                (
+                    "durable-links-rust-64-10000000",
+                    0,
+                    "SQLite_File,SQLite_File_Tuned,Doublets_United_NonVolatile_Transactional",
+                ),
+                (f"{limited}-sqlite-file", 24, "SQLite_File"),
+                (f"{limited}-doublets-united-nonvolatile", 24, "Doublets_United_NonVolatile"),
+                (f"{limited}-doublets-split-nonvolatile", 24, "Doublets_Split_NonVolatile"),
+            ],
         )
         # The transactional store keeps its journal in memory, so it never runs under a limit.
-        self.assertNotIn(report.TRANSACTIONAL, rows[1]["variants"])
-        self.assertIn("Doublets_Split_NonVolatile", rows[1]["variants"])
+        self.assertNotIn(report.TRANSACTIONAL, ",".join(row["variants"] for row in rows[1:]))
 
     def test_invalid_plans_are_rejected(self):
         for plan in (
@@ -78,29 +85,32 @@ class RecordTests(unittest.TestCase):
 
     def test_recorded_reports_pass_validation_and_render(self):
         durable = self.measured("durable.json", configuration.VARIANTS["durable"])
-        limited = self.measured("limited.json", configuration.VARIANTS["memory_limit"])
         stats = self.root / "stats"
-        stats.write_text("25000000\npgmajfault 7\n", encoding="utf-8")
         disk = '{"random_read_4k_ns": 90000, "fsync_ns": 1500000}'
         configuration.main(["record", str(durable), "--kind", "durable", "--disk", disk])
-        configuration.main(
-            [
-                "record",
-                str(limited),
-                "--kind",
-                "memory_limit",
-                "--disk",
-                disk,
-                "--memory-limit-bytes",
-                str(24 * 2**20),
-                "--cgroup-stats",
-                str(stats),
-                "--dirty-bytes",
-                str(24 * 2**20 // 5),
-                "--dirty-background-bytes",
-                str(24 * 2**20 // 10),
-            ]
-        )
+        # Each storage under the limit is measured and recorded by its own job.
+        for peak, variant in enumerate(configuration.VARIANTS["memory_limit"]):
+            limited = self.measured(f"limited-{variant}.json", [variant])
+            stats.write_text(f"{25_000_000 + peak}\npgmajfault 7\n", encoding="utf-8")
+            configuration.main(
+                [
+                    "record",
+                    str(limited),
+                    "--kind",
+                    "memory_limit",
+                    "--disk",
+                    disk,
+                    "--memory-limit-bytes",
+                    str(24 * 2**20),
+                    "--cgroup-stats",
+                    str(stats),
+                    "--dirty-bytes",
+                    str(24 * 2**20 // 5),
+                    "--dirty-background-bytes",
+                    str(24 * 2**20 // 10),
+                ]
+            )
+        limited = self.root / "limited-SQLite_File.json"
         recorded = json.loads(limited.read_text(encoding="utf-8"))
         self.assertEqual(recorded["source_sha"], "abc")
         self.assertEqual(
@@ -118,6 +128,11 @@ class RecordTests(unittest.TestCase):
         tables = configuration.report(self.root, "abc")
         self.assertIn("memory limit 24 MiB", tables)
         self.assertIn("Dirty page cache limit 4.8 MiB, background writeback from 2.4 MiB.", tables)
+        # One table compares the three jobs' storages, and a second one shows each job's peak.
+        self.assertEqual(tables.count("| Doublets United NonVolatile | "), 2)
+        self.assertEqual(tables.count("| Doublets Split NonVolatile | "), 2)
+        self.assertIn("Each storage in its own job (below)", tables)
+        self.assertEqual(tables.count(" | 90 µs | 1.5 ms | 23.8 MiB | 7 |"), 3)
         self.assertIn(report.TEXT["en"]["configurations"]["durable"], tables)
         with self.assertRaisesRegex(ValueError, "not measured from"):
             configuration.report(self.root, "def")

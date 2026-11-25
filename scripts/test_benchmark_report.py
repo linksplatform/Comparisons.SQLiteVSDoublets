@@ -260,6 +260,77 @@ class ConfigurationTests(unittest.TestCase):
             with self.subTest(name=name), self.assertRaises(ValueError):
                 report.validate(data, "report.json")
 
+    def job(self, variant, number, **fields):
+        """The report of one storage's job of a 24 MiB memory limit table, written to the directory."""
+        data = configured("memory_limit", 1_000_000, memory_limit_bytes=24 * 2**20, dirty_bytes=2**20)
+        data["results"] = results("links", {variant: 1000 * (number + 1)})["results"]
+        data["configuration"].update(peak_bytes=20 * 2**20 + number, major_faults=100 + number)
+        data["configuration"]["disk"] = {"random_read_4k_ns": 90_000 + number, "fsync_ns": 1_500_000}
+        data.update(
+            {
+                "run_url": "https://github.com/o/r/actions/runs/1",
+                "source_sha": "abc",
+                "date": f"2026-11-2{number}",
+                "machine": f"runner {number}",
+                **fields,
+            }
+        )
+        (self.root / f"{number}.json").write_text(json.dumps(data), encoding="utf-8")
+        return data
+
+    def test_the_jobs_of_one_memory_limit_table_are_merged(self):
+        # The files are read in name order; the table keeps the order of the configured variants.
+        self.job("Doublets_Split_NonVolatile", 1)
+        self.job("SQLite_File", 2)
+        self.job("Doublets_United_NonVolatile", 3)
+        (merged,) = report.load_configurations(self.root).values()
+        self.assertEqual(
+            [result["variant"] for result in merged["results"]],
+            list(report.CONFIGURED_VARIANTS["memory_limit"]),
+        )
+        self.assertEqual([job["machine"] for job in merged["jobs"]], ["runner 2", "runner 3", "runner 1"])
+        self.assertEqual(merged["jobs"][0]["peak_bytes"], 20 * 2**20 + 2)
+        self.assertEqual(merged["date"], "2026-11-23")
+        self.assertNotIn("disk", merged["configuration"])
+        for language in ("en", "ru"):
+            with self.subTest(language=language):
+                text = report.TEXT[language]
+                document = "\n".join(report.configured_sections({(1,): merged}, text))
+                self.assertIn(text["job_machines"], document)
+                self.assertIn(text["job_limit_provenance"].format(limit="24 MiB"), document)
+                self.assertIn(text["dirty_provenance"].format(dirty="1 MiB", background="1 MiB"), document)
+                self.assertIn("| " + " | ".join(text["job_header"]) + " |", document)
+                self.assertIn("| SQLite File | runner 2 | 90 µs | 1.5 ms | 20.0 MiB | 102 |", document)
+                self.assertIn(
+                    "| Doublets Split NonVolatile | runner 1 | 90 µs | 1.5 ms | 20.0 MiB | 101 |", document
+                )
+                # SQLite File's job measured 3 µs, the united store's 4 µs.
+                slower = text["slower"].format(ratio="1.33")
+                self.assertIn(f"| Doublets United NonVolatile | 4 µs ({slower})", document)
+
+    def test_jobs_of_different_runs_or_storages_are_not_merged(self):
+        cases = {
+            "not measured by one run": {"run_url": "https://github.com/o/r/actions/runs/2"},
+            "duplicates a storage": {"variant": "SQLite_File"},
+            "no SQLite File baseline": {
+                "variant": "Doublets_Split_NonVolatile",
+                "first": "Doublets_United_NonVolatile",
+            },
+        }
+        for message, fields in cases.items():
+            with self.subTest(message=message):
+                for stale in self.root.glob("*.json"):
+                    stale.unlink()
+                self.job(fields.pop("first", "SQLite_File"), 1)
+                self.job(fields.pop("variant", "Doublets_United_NonVolatile"), 2, **fields)
+                with self.assertRaisesRegex(ValueError, message):
+                    report.load_configurations(self.root)
+        # Only the memory limit tables are measured by several jobs.
+        for number in (1, 2):
+            (self.root / f"{number}.json").write_text(json.dumps(configured()), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "duplicates the results"):
+            report.load_configurations(self.root)
+
     def test_configured_sections_label_the_limit_and_the_disk(self):
         reports = {
             report.configuration_key(data): data

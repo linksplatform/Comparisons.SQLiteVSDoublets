@@ -30,6 +30,17 @@ LINT_ON = "<!-- markdownlint-restore -->"
 CATEGORIES = ("links", "objects")
 CONFIGURATIONS = ("durable", "memory_limit")
 TRANSACTIONAL = "Doublets_United_NonVolatile_Transactional"
+# The variants of each configured table, in table order. The durable table pairs the transactional store
+# with both SQLite files, which sync at every commit. Under a memory limit the tuned SQLite cache would be
+# anonymous memory charged to the limit, so the stock SQLite file is measured; the transactional store
+# keeps its journal in memory and cannot take part.
+CONFIGURED_VARIANTS = {
+    "durable": ("SQLite_File", "SQLite_File_Tuned", TRANSACTIONAL),
+    "memory_limit": ("SQLite_File", "Doublets_United_NonVolatile", "Doublets_Split_NonVolatile"),
+}
+# A memory limit table is measured by one job per storage of one run; these fields belong to each job.
+JOB_FIELDS = ("machine", "date")
+JOB_CONFIGURATION = ("disk", "peak_bytes", "major_faults")
 NOISE = 0.05
 LANGUAGES = ("Rust", "C#")
 BITS = (32, 64)
@@ -98,13 +109,23 @@ TEXT: dict[str, dict[str, Any]] = {
         "configuration_names": {"durable": "durable", "memory_limit": "memory limit"},
         "configuration_intro": {
             "durable": "`Doublets United NonVolatile Transactional` is the united file-mapped store behind doublets' `TransactionsDecorator` with the shipped `FileTransitionLog`, which calls `sync_all` after every journal record. One transaction covers each lifecycle phase that writes: it begins at the phase's first write and commits at its end, so the read phases begin none. It is compared with `SQLite File`, which syncs its rollback journal and database at every `COMMIT` (`synchronous=FULL`): both are durable at commit.",
-            "memory_limit": "The benchmark process runs in a cgroup with a memory limit (`memory.max`, swap disabled). The limit charges the page cache too, so neither the SQLite file nor the mapped Doublets store fits in memory, and pages that are not resident are read from the disk. The kernel's dirty page thresholds (`vm.dirty_bytes`, `vm.dirty_background_bytes`) are set to its default ratios, 20% and 10%, of the limit, as on a machine with that much memory: computed from the whole runner, they let a mapped store dirty more pages than the limit holds before writeback throttles it, and the store is killed. The transactional store cannot take part: its decorator keeps every transition and a full snapshot of the links in memory, which exceeds any limit small enough to create pressure.",
+            "memory_limit": "The benchmark process runs in a cgroup with a memory limit (`memory.max`, swap disabled). The limit charges the page cache too, so neither the SQLite file nor the mapped Doublets store fits in memory, and pages that are not resident are read from the disk. The kernel's dirty page thresholds (`vm.dirty_bytes`, `vm.dirty_background_bytes`) are set to its default ratios, 20% and 10%, of the limit, as on a machine with that much memory: computed from the whole runner, they let a mapped store dirty more pages than the limit holds before writeback throttles it, and the store is killed. The transactional store cannot take part: its decorator keeps every transition and a full snapshot of the links in memory, which exceeds any limit small enough to create pressure. Under pressure a store can take hours, so each storage runs in its own job of one run, and the second table shows each job's runner, disk latencies, peak cgroup memory and major page faults.",
         },
         "configured_heading": "{language}, {bits} bit, {size}",
         "limit_heading": ", memory limit {limit}",
         "limit_provenance": "Memory limit {limit}; peak cgroup memory {peak}; {faults} major page faults.",
         "dirty_provenance": "Dirty page cache limit {dirty}, background writeback from {background}.",
         "disk_provenance": "Disk of the stores: {latencies}.",
+        "job_machines": "Each storage in its own job (below)",
+        "job_limit_provenance": "Memory limit {limit}.",
+        "job_header": (
+            "Storage",
+            "Machine",
+            "Random 4 KiB read",
+            "`fsync`",
+            "Peak cgroup memory",
+            "Major page faults",
+        ),
         "random_read": "random 4 KiB read {value}",
         "fsync": "`fsync` {value}",
         "repetitions": lambda count: f"{count} repetition" + ("" if count == 1 else "s"),
@@ -157,13 +178,23 @@ TEXT: dict[str, dict[str, Any]] = {
         "configuration_names": {"durable": "надёжное хранение", "memory_limit": "ограничение памяти"},
         "configuration_intro": {
             "durable": "`Doublets United NonVolatile Transactional` — объединённое хранилище в отображаемом файле за `TransactionsDecorator` из doublets с поставляемым `FileTransitionLog`, который вызывает `sync_all` после каждой записи журнала. Каждая записывающая фаза жизненного цикла — одна транзакция: она начинается при первой записи фазы и фиксируется в её конце, поэтому фазы чтения транзакций не начинают. Оно сравнивается с `SQLite File`, который синхронизирует журнал отката и базу при каждом `COMMIT` (`synchronous=FULL`): оба надёжны при фиксации.",
-            "memory_limit": "Процесс теста работает в cgroup с ограничением памяти (`memory.max`, без подкачки). Ограничение учитывает и страничный кэш, поэтому ни файл SQLite, ни отображаемое хранилище Дуплетов не помещаются в память, и отсутствующие в памяти страницы читаются с диска. Пороги грязных страниц ядра (`vm.dirty_bytes`, `vm.dirty_background_bytes`) задаются его долями по умолчанию, 20% и 10%, от ограничения, как на машине с таким объёмом памяти: вычисленные от всей памяти машины, они позволяют отображаемому хранилищу загрязнить больше страниц, чем вмещает ограничение, прежде чем запись на диск его притормозит, и хранилище завершается принудительно. Транзакционное хранилище в этом участвовать не может: его декоратор хранит в памяти каждый переход и полный снимок связей, что больше любого ограничения, достаточно малого для нехватки памяти.",
+            "memory_limit": "Процесс теста работает в cgroup с ограничением памяти (`memory.max`, без подкачки). Ограничение учитывает и страничный кэш, поэтому ни файл SQLite, ни отображаемое хранилище Дуплетов не помещаются в память, и отсутствующие в памяти страницы читаются с диска. Пороги грязных страниц ядра (`vm.dirty_bytes`, `vm.dirty_background_bytes`) задаются его долями по умолчанию, 20% и 10%, от ограничения, как на машине с таким объёмом памяти: вычисленные от всей памяти машины, они позволяют отображаемому хранилищу загрязнить больше страниц, чем вмещает ограничение, прежде чем запись на диск его притормозит, и хранилище завершается принудительно. Транзакционное хранилище в этом участвовать не может: его декоратор хранит в памяти каждый переход и полный снимок связей, что больше любого ограничения, достаточно малого для нехватки памяти. При нехватке памяти хранилище может работать часами, поэтому каждое хранилище измеряется в отдельном задании одного запуска, а вторая таблица показывает машину, задержки диска, пиковое потребление cgroup и основные страничные отказы каждого задания.",
         },
         "configured_heading": "{language}, {bits} бит, {size}",
         "limit_heading": ", ограничение памяти {limit}",
         "limit_provenance": "Ограничение памяти {limit}; пиковое потребление cgroup {peak}; {faults} основных страничных отказов.",
         "dirty_provenance": "Предел грязных страниц кэша {dirty}, фоновая запись с {background}.",
         "disk_provenance": "Диск хранилищ: {latencies}.",
+        "job_machines": "Каждое хранилище в отдельном задании (ниже)",
+        "job_limit_provenance": "Ограничение памяти {limit}.",
+        "job_header": (
+            "Хранилище",
+            "Машина",
+            "Случайное чтение 4 КиБ",
+            "`fsync`",
+            "Пиковое потребление cgroup",
+            "Основные страничные отказы",
+        ),
         "random_read": "случайное чтение 4 КиБ {value}",
         "fsync": "`fsync` {value}",
         "repetitions": lambda count: f"{count} повтор" + russian_plural(count, "", "а", "ов"),
@@ -195,18 +226,77 @@ def load(directory):
 
 
 def load_configurations(directory):
-    """The configured reports in `directory`, if it exists, keyed by configuration_key()."""
-    reports = {}
+    """The configured reports in `directory`, if it exists, keyed by configuration_key().
+
+    The reports of one memory limit table, measured by separate jobs of one run, are merged into one.
+    """
+    groups: dict[tuple, list[tuple[Path, dict]]] = {}
     for path in sorted(Path(directory).glob("*.json")):
         report = json.loads(path.read_text(encoding="utf-8"))
         validate(report, path)
         if "configuration" not in report:
             raise ValueError(f"{path} has no configuration; keep it with the default reports")
         key = configuration_key(report)
-        if key in reports:
+        if key in groups and report["configuration"]["kind"] != "memory_limit":
             raise ValueError(f"{path} duplicates the results of {key}")
+        groups.setdefault(key, []).append((path, report))
+    reports = {}
+    for key, group in groups.items():
+        report = group[0][1] if len(group) == 1 else merge_jobs(group)
+        if "SQLite_File" not in (result["variant"] for result in report["results"]):
+            raise ValueError(f"{group[0][0]} has no SQLite File baseline in its table")
         reports[key] = report
     return reports
+
+
+def merge_jobs(group):
+    """One table of the (path, report) pairs that separate jobs of one run measured, a storage each.
+
+    Everything but the runner, the date and the disk and memory of each job must match; they are kept
+    in the merged report's `jobs`, and its date is the date of the last job.
+    """
+    first_path, first = group[0]
+    shared = {key: value for key, value in first.items() if key not in (*JOB_FIELDS, "results")}
+    shared["configuration"] = {
+        key: value for key, value in first["configuration"].items() if key not in JOB_CONFIGURATION
+    }
+    jobs: list[dict] = []
+    results: list[dict] = []
+    for path, report in group:
+        configuration = {
+            key: value for key, value in report["configuration"].items() if key not in JOB_CONFIGURATION
+        }
+        others = {key: value for key, value in report.items() if key not in (*JOB_FIELDS, "results")}
+        if {**others, "configuration": configuration} != shared:
+            raise ValueError(f"{path} and {first_path} are not measured by one run in one configuration")
+        variants = [result["variant"] for result in report["results"]]
+        if any(result["variant"] in variants for result in results):
+            raise ValueError(f"{path} duplicates a storage of {first_path}")
+        results += report["results"]
+        jobs.append(
+            {
+                "variants": variants,
+                **{key: report[key] for key in JOB_FIELDS if key in report},
+                **{
+                    key: report["configuration"][key]
+                    for key in JOB_CONFIGURATION
+                    if key in report["configuration"]
+                },
+            }
+        )
+    order = CONFIGURED_VARIANTS[shared["configuration"]["kind"]]
+
+    def position(variant):
+        return (order.index(variant), "") if variant in order else (len(order), variant)
+
+    jobs.sort(key=lambda job: position(job["variants"][0]))
+    dates = [job["date"] for job in jobs if "date" in job]
+    return {
+        **shared,
+        **({"date": max(dates)} if dates else {}),
+        "results": sorted(results, key=lambda result: position(result["variant"])),
+        "jobs": jobs,
+    }
 
 
 def configuration_key(report):
@@ -274,16 +364,16 @@ def validate_configuration(report):
     """A durable report pairs the transactional store with SQLite File; a memory limit excludes it."""
     configuration = report["configuration"]
     variants = [result["variant"] for result in report["results"]]
-    if len(variants) != len(set(variants)) or "SQLite_File" not in variants:
-        raise ValueError("duplicate variants or missing SQLite File baseline")
+    if len(variants) != len(set(variants)):
+        raise ValueError("duplicate variants")
     if any(variant.startswith("Doublets_") and "_NonVolatile" not in variant for variant in variants):
         raise ValueError("configured reports measure file-backed stores only")
     disk = configuration.get("disk", {})
     if not isinstance(disk, dict) or not all(positive_number(value) for value in disk.values()):
         raise ValueError("invalid disk latencies")
     if configuration["kind"] == "durable":
-        if TRANSACTIONAL not in variants:
-            raise ValueError(f"a durable report needs {TRANSACTIONAL}")
+        if TRANSACTIONAL not in variants or "SQLite_File" not in variants:
+            raise ValueError(f"a durable report needs {TRANSACTIONAL} and SQLite File")
     elif configuration["kind"] == "memory_limit":
         if TRANSACTIONAL in variants:
             raise ValueError(
@@ -456,7 +546,7 @@ def provenance(report, text):
         repetitions=text["repetitions"](report["repetitions"]),
         sqlite=report["sqlite_version"],
         software=versions,
-        machine=report.get("machine") or text["machine"],
+        machine=text["job_machines"] if "jobs" in report else report.get("machine") or text["machine"],
         source=text["run"].format(url=run, date=report.get("date")) if run else text["local"],
     )
     if "postgresql" in report:
@@ -468,11 +558,15 @@ def provenance(report, text):
         )
     configuration = report.get("configuration", {})
     if "memory_limit_bytes" in configuration:
-        value += " " + text["limit_provenance"].format(
-            limit=memory(configuration["memory_limit_bytes"]),
-            peak=memory(configuration["peak_bytes"]) if "peak_bytes" in configuration else "—",
-            faults=size(configuration["major_faults"]) if "major_faults" in configuration else "—",
-        )
+        limit = memory(configuration["memory_limit_bytes"])
+        if "jobs" in report:
+            value += " " + text["job_limit_provenance"].format(limit=limit)
+        else:
+            value += " " + text["limit_provenance"].format(
+                limit=limit,
+                peak=memory(configuration["peak_bytes"]) if "peak_bytes" in configuration else "—",
+                faults=size(configuration["major_faults"]) if "major_faults" in configuration else "—",
+            )
         if "dirty_bytes" in configuration:
             value += " " + text["dirty_provenance"].format(
                 dirty=memory(configuration["dirty_bytes"]),
@@ -487,6 +581,23 @@ def provenance(report, text):
     if latencies:
         value += " " + text["disk_provenance"].format(latencies=", ".join(latencies))
     return f"_{value}_"
+
+
+def job_table(report, text):
+    """The runner, the disk and the cgroup memory of each job that measured a part of `report`."""
+    header = text["job_header"]
+    lines = ["| " + " | ".join(header) + " |", "| --- | --- |" + " ---: |" * (len(header) - 2)]
+    for job in report["jobs"]:
+        disk = job.get("disk", {})
+        cells = [
+            ", ".join(variant.replace("_", " ") for variant in job["variants"]),
+            job.get("machine") or text["machine"],
+            *(duration(disk[key]) if key in disk else "—" for key in ("random_read_4k_ns", "fsync_ns")),
+            memory(job["peak_bytes"]) if "peak_bytes" in job else "—",
+            size(job["major_faults"]) if "major_faults" in job else "—",
+        ]
+        lines.append("| " + " | ".join(cells) + " |")
+    return "\n".join(lines)
 
 
 def memory(count):
@@ -578,6 +689,8 @@ def configured_sections(configured, text):
                     limit=memory(report["configuration"]["memory_limit_bytes"])
                 )
             lines += [f"### {heading}", "", provenance(report, text), "", table(report, text), ""]
+            if "jobs" in report:
+                lines += [job_table(report, text), ""]
     return lines
 
 

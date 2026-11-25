@@ -639,6 +639,30 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.3; Platfor
 
 ![C# doublets vs SQLite, 64 bit, objects, log scale](docs/benchmarks/objects-csharp-64.png)
 
+## Durable file storage
+
+`Doublets United NonVolatile Transactional` is the united file-mapped store behind doublets' `TransactionsDecorator` with the shipped `FileTransitionLog`, which calls `sync_all` after every journal record. One transaction covers each lifecycle phase that writes: it begins at the phase's first write and commits at its end, so the read phases begin none. It is compared with `SQLite File`, which syncs its rollback journal and database at every `COMMIT` (`synchronous=FULL`): both are durable at commit.
+
+### Rust, 32 bit, 10,000,000 links
+
+_1 repetition after a warm-up, median time per operation. SQLite 3.54.1; doublets 0.21.0; rustc 1.100.0 (0ef1bc386 2026-11-09). Ubuntu 24.04.5 LTS, Intel(R) Xeon(R) 6975P-C, 4 cores, 15 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/45604850024) on 2026-11-25. Disk of the stores: random 4 KiB read 96.2 µs, `fsync` 118 µs._
+
+| Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| SQLite File | 5.6 µs | 74.4 ns | 1.6 µs | 1.75 µs | 1.68 µs | 1.69 µs | 14.9 µs | 9 µs | 501.0 MiB |
+| SQLite File Tuned | 3.34 µs (1.68× faster) | 71.7 ns (≈ same) | 1.56 µs (≈ same) | 1.62 µs (1.08× faster) | 1.55 µs (1.08× faster) | 1.54 µs (1.1× faster) | 10.1 µs (1.48× faster) | 6.78 µs (1.33× faster) | 501.0 MiB |
+| Doublets United NonVolatile Transactional | 210 µs (37.4× slower) | 3.4 ns (21.9× faster) | 30.5 ns (52.3× faster) | 1.66 µs (1.05× faster) | 1.93 µs (1.15× slower) | 1.97 µs (1.17× slower) | 131 µs (8.79× slower) | 121 µs (13.5× slower) | 1930.4 MiB |
+
+### Rust, 64 bit, 10,000,000 links
+
+_1 repetition after a warm-up, median time per operation. SQLite 3.54.1; doublets 0.21.0; rustc 1.100.0 (0ef1bc386 2026-11-09). Ubuntu 24.04.5 LTS, Intel(R) Xeon(R) 6975P-C, 4 cores, 15 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/45604850024) on 2026-11-25. Disk of the stores: random 4 KiB read 96.5 µs, `fsync` 129 µs._
+
+| Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| SQLite File | 5.21 µs | 73.3 ns | 1.37 µs | 1.53 µs | 1.48 µs | 1.48 µs | 14 µs | 8.24 µs | 501.0 MiB |
+| SQLite File Tuned | 2.47 µs (2.1× faster) | 71.2 ns (≈ same) | 891 ns (1.54× faster) | 1.03 µs (1.48× faster) | 1.02 µs (1.45× faster) | 973 ns (1.52× faster) | 7.82 µs (1.79× faster) | 5.26 µs (1.57× faster) | 501.0 MiB |
+| Doublets United NonVolatile Transactional | 236 µs (45.3× slower) | 3.76 ns (19.5× faster) | 26 ns (52.8× faster) | 1.25 µs (1.23× faster) | 1.59 µs (1.08× slower) | 1.5 µs (≈ same) | 162 µs (11.6× slower) | 151 µs (18.3× slower) | 2250.4 MiB |
+
 ## Conclusions
 
 Volatile Doublets stores are compared with `SQLite Memory`. Non-volatile ones are file-backed without durability guarantees (no journal, no `fsync`) and are compared with `SQLite File Tuned` (or `SQLite File` where no tuned row was measured), which still syncs at every commit; the transactional store is compared with `SQLite File`, both durable at every commit. The same noise rule as in the tables applies. Counts span the measured variants, sizes and id widths; they are not an overall speed ranking. RAM usage is measured only as the cgroup peak of the memory-limit tables.
@@ -647,5 +671,6 @@ Volatile Doublets stores are compared with `SQLite Memory`. Non-volatile ones ar
 - C#, links: 192 faster, 0 slower, 0 approximately equal Doublets operation comparisons with SQLite.
 - Rust, objects: 27 faster, 100 slower, 1 approximately equal Doublets operation comparisons with SQLite.
 - C#, objects: 16 faster, 108 slower, 4 approximately equal Doublets operation comparisons with SQLite.
+- Rust, links, durable: 6 faster, 9 slower, 1 approximately equal Doublets operation comparisons with SQLite.
 <!-- markdownlint-restore -->
 <!--BENCHMARK_RESULTS_END-->

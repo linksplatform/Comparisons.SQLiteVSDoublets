@@ -331,6 +331,80 @@ class ConfigurationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "duplicates the results"):
             report.load_configurations(self.root)
 
+    def stopped(self, variant, number, finished, **unfinished):
+        """The job of a store stopped after 340 minutes, which finished its first `finished` phases."""
+        data = self.job(variant, number)
+        result = data["results"][0]
+        operations = report.OPERATIONS["links"]
+        result["operations"] = {
+            operation: result["operations"][operation] for operation in operations[:finished]
+        }
+        result["unfinished"] = {"after_seconds": 340 * 60, "operation": operations[finished], **unfinished}
+        (self.root / f"{number}.json").write_text(json.dumps(data), encoding="utf-8")
+        return data
+
+    def test_stopped_stores_show_their_finished_phases_and_a_lower_bound(self):
+        self.job("SQLite_File", 1)
+        # The united store finished creating and reading all links and had spent at least 5 µs per link
+        # reading them by id, where SQLite File took 2 µs; the split store's job never logged a phase.
+        self.stopped("Doublets_United_NonVolatile", 2, 2, lower_bound_ns=5000)
+        self.stopped("Doublets_Split_NonVolatile", 3, 0)
+        (merged,) = report.load_configurations(self.root).values()
+        rows = {
+            line.split(" | ")[0]: line.split(" | ") for line in report.table(merged, self.text).splitlines()
+        }
+        united, split = rows["| Doublets United NonVolatile"], rows["| Doublets Split NonVolatile"]
+        self.assertEqual(united[1], f"3 µs ({self.text['slower'].format(ratio='1.5')})")
+        self.assertEqual(united[3], f"> 5 µs ({self.text['slower_at_least'].format(ratio='2.5')})")
+        self.assertEqual(united[4:-1], ["—"] * (len(report.OPERATIONS["links"]) - 3))
+        self.assertEqual(split[1:-1], ["—"] * len(report.OPERATIONS["links"]))
+        # Two finished phases slower than SQLite File and the stopped phase, which is clearly slower.
+        self.assertEqual(report.count_outcomes([merged], self.text), {"faster": 0, "slower": 3, "same": 0})
+        for language in ("en", "ru"):
+            with self.subTest(language=language):
+                text = report.TEXT[language]
+                document = "\n".join(report.configured_sections({(1,): merged}, text))
+                note = text["unfinished"].format(
+                    variants="Doublets United NonVolatile, Doublets Split NonVolatile", minutes="340"
+                )
+                self.assertIn(f"{report.table(merged, text)}\n\n{note}\n\n", document)
+                self.assertIn(text["slower_at_least"].format(ratio="2.5"), document)
+
+    def test_a_lower_bound_within_the_noise_is_not_a_comparison(self):
+        self.job("SQLite_File", 1)
+        self.stopped("Doublets_United_NonVolatile", 2, 2, lower_bound_ns=2050)
+        (merged,) = report.load_configurations(self.root).values()
+        self.assertIn("| > 2.05 µs | — |", report.table(merged, self.text))
+        self.assertEqual(report.count_outcomes([merged], self.text), {"faster": 0, "slower": 2, "same": 0})
+        self.assertIsNone(report.unfinished_note(configured("memory_limit"), self.text))
+
+    def test_invalid_stopped_stores_are_rejected(self):
+        cases = {
+            "not the next phase": {"operation": "delete"},
+            "no time": {"after_seconds": 0},
+            "negative bound": {"lower_bound_ns": -1},
+            "unknown field": {"reason": "slow"},
+        }
+        for name, fields in cases.items():
+            with self.subTest(name=name):
+                data = self.stopped("Doublets_United_NonVolatile", 1, 2)
+                data["results"][0]["unfinished"].update(fields)
+                with self.assertRaisesRegex(ValueError, "invalid stopped store"):
+                    report.validate(data, "report.json")
+        repeated = self.stopped("Doublets_United_NonVolatile", 1, 2)
+        repeated["repetitions"] = 3
+        finished = self.job("Doublets_United_NonVolatile", 1)
+        finished["results"][0]["unfinished"] = {"after_seconds": 60, "operation": "create"}
+        skipped = self.stopped("Doublets_United_NonVolatile", 1, 2)
+        del skipped["results"][0]["operations"]["create"]
+        for name, data in {"repeated": repeated, "finished": finished, "skipped": skipped}.items():
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, "invalid stopped store"):
+                report.validate(data, "report.json")
+        durable = configured()
+        durable["results"][-1]["unfinished"] = {"after_seconds": 60, "operation": "create"}
+        with self.assertRaisesRegex(ValueError, "only a memory limit"):
+            report.validate(durable, "report.json")
+
     def test_configured_sections_label_the_limit_and_the_disk(self):
         reports = {
             report.configuration_key(data): data

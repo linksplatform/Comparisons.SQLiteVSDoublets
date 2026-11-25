@@ -6,6 +6,7 @@ Usage:
   benchmark_configuration.py probe DIRECTORY [--file-mib N] [--reads N] [--syncs N]
   benchmark_configuration.py record REPORT --kind durable|memory_limit [--disk JSON]
       [--memory-limit-bytes N] [--cgroup-stats FILE]
+  benchmark_configuration.py unfinished PHASES --variants A,B --after-seconds N
 
 `probe` prints the median latency of random 4 KiB reads that bypass the page cache (O_DIRECT) and of
 an `fsync` after a small append, the two disk operations the configured tables pay for: page misses under
@@ -14,6 +15,9 @@ a memory limit and the journal syncs of the transactional store.
 faults (a file with `memory.peak` followed by `memory.stat`, as the configured workflow writes it).
 `plan` validates the runs of a configured benchmark workflow and prints its job matrix, with a job per
 storage under a memory limit, and `report` validates the reports the runs wrote and prints their tables.
+`unfinished` prints the report of a run that was stopped after N seconds, from the phase log the benchmark
+wrote with `--phases`: the phases it finished, and for the phase in progress the time per operation it
+had already spent, a lower bound.
 """
 
 import argparse
@@ -157,6 +161,52 @@ def record(path, kind, disk=None, memory_limit_bytes=None, stats=None, dirty=Non
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
+# The benchmark opens its phase log after it has started, a few milliseconds into the time it is given;
+# this allowance keeps the time a stopped phase had spent a lower bound.
+START_UP_NS = 1_000_000_000
+
+
+def unfinished(path, variants, after_seconds):
+    """The report of a run of `variants` stopped `after_seconds` after it started, from its phase log."""
+    lines = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    if not lines or "report" not in lines[0]:
+        raise ValueError(f"{path} does not start with the report's metadata")
+    data = lines[0]["report"]
+    if data["repetitions"] != 1:
+        raise ValueError("a stopped run is reported only with one repetition")
+    events = lines[1:]
+    operations = benchmark_report.OPERATIONS[data["category"]]
+    stopped_ns = after_seconds * 1_000_000_000 - START_UP_NS
+    results = []
+    for variant in variants:
+        own = [event for event in events if event["variant"] == variant]
+        ended = {event["operation"]: event["ns_per_operation"] for event in own if event["event"] == "end"}
+        if list(ended) != list(operations[: len(ended)]):
+            raise ValueError(f"{variant} logged its phases out of order")
+        sizes = [event["file_bytes"] for event in own if event["event"] == "file"]
+        result = {
+            "variant": variant,
+            "file_bytes": sizes[-1] if sizes else None,
+            "operations": {
+                operation: {"median_ns": value, "min_ns": value, "max_ns": value, "samples_ns": [value]}
+                for operation, value in ended.items()
+            },
+        }
+        if len(ended) < len(operations):
+            operation = operations[len(ended)]
+            result["unfinished"] = {"after_seconds": after_seconds, "operation": operation}
+            began = [
+                event["at_ns"]
+                for event in own
+                if event["event"] == "begin" and event["operation"] == operation
+            ]
+            # Only the run in progress, the last one logged, spent the rest of the time in its phase.
+            if began and events[-1]["variant"] == variant and stopped_ns > began[-1]:
+                result["unfinished"]["lower_bound_ns"] = (stopped_ns - began[-1]) / data["size"]
+        results.append(result)
+    return {**data, "results": results}
+
+
 def report(directory, sha):
     """The configured tables of the reports in `directory`, which must be measured from `sha`."""
     reports = benchmark_report.load_configurations(directory)
@@ -184,6 +234,10 @@ def main(arguments=None):
     probing.add_argument("--file-mib", type=int, default=512)
     probing.add_argument("--reads", type=int, default=2000)
     probing.add_argument("--syncs", type=int, default=200)
+    stopping = commands.add_parser("unfinished")
+    stopping.add_argument("phases", type=Path)
+    stopping.add_argument("--variants", required=True, type=lambda names: names.split(","))
+    stopping.add_argument("--after-seconds", required=True, type=int)
     recording = commands.add_parser("record")
     recording.add_argument("report", type=Path)
     recording.add_argument("--kind", choices=("durable", "memory_limit"), required=True)
@@ -200,6 +254,10 @@ def main(arguments=None):
         return
     if options.command == "report":
         print(report(options.directory, options.sha), end="")
+        return
+    if options.command == "unfinished":
+        data = unfinished(options.phases, options.variants, options.after_seconds)
+        print(json.dumps(data, indent=2, ensure_ascii=False))
         return
     if options.command == "probe":
         print(json.dumps(probe(options.directory, options.file_mib, options.reads, options.syncs)))

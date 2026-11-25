@@ -14,8 +14,11 @@ use doublets::{
 };
 use serde_json::{Value, json};
 use std::{
-    fs,
+    cell::Cell,
+    fs::{self, OpenOptions},
+    io::Write,
     path::{Path, PathBuf},
+    sync::OnceLock,
     time::{Duration, Instant},
 };
 
@@ -52,6 +55,38 @@ pub const WARM_UP_TIME: Duration = Duration::from_secs(1);
 
 type Timings = Vec<(&'static str, Duration)>;
 
+/// The phase log of [`log_phases`] and the time it was opened.
+static PHASE_LOG: OnceLock<(PathBuf, Instant)> = OnceLock::new();
+
+thread_local! {
+    /// The variant, repetition and size of the measured run in progress; warm-ups are not logged.
+    static MEASURED: Cell<Option<(&'static str, usize, u64)>> = const { Cell::new(None) };
+}
+
+/// Appends a JSON line to `path` (and to stderr) when a measured run starts, when each of its phases
+/// begins and when it ends and passes its check, and when its store's size is known, with the
+/// nanoseconds since this call: a run that is cut short, like one that exceeds its time under a memory
+/// limit, still shows the phases it finished and when the one in progress began.
+pub fn log_phases(path: PathBuf) {
+    PHASE_LOG
+        .set((path, Instant::now()))
+        .expect("the phase log is opened once");
+}
+
+fn log_phase(event: &str, mut fields: Value) {
+    let (Some((path, opened)), Some((variant, repetition, _))) = (PHASE_LOG.get(), MEASURED.get())
+    else {
+        return;
+    };
+    fields["event"] = json!(event);
+    fields["variant"] = json!(variant);
+    fields["repetition"] = json!(repetition);
+    fields["at_ns"] = json!(opened.elapsed().as_nanos() as u64);
+    let mut file = OpenOptions::new().append(true).open(path).unwrap();
+    writeln!(file, "{fields}").unwrap();
+    eprintln!("{fields}");
+}
+
 /// Count and order-sensitive checksum of the records an operation has seen.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct Tally {
@@ -84,10 +119,19 @@ fn timed(
     expected: Tally,
     work: impl FnOnce() -> Tally,
 ) {
+    log_phase("begin", json!({ "operation": operation }));
     let start = Instant::now();
     let actual = work();
-    timings.push((operation, start.elapsed()));
+    let elapsed = start.elapsed();
+    timings.push((operation, elapsed));
     assert_eq!(actual, expected, "{operation} returned unexpected records");
+    if let Some((_, _, size)) = MEASURED.get() {
+        let ns_per_operation = elapsed.as_nanos() as f64 / size as f64;
+        log_phase(
+            "end",
+            json!({ "operation": operation, "ns_per_operation": ns_per_operation }),
+        );
+    }
 }
 
 fn int<T: LinkReference>(value: u64) -> T {
@@ -316,8 +360,12 @@ fn measure<S>(
         fs::create_dir_all(&workspace).unwrap();
         let mut storage = open(&workspace);
         let mut file_bytes = 0;
+        log_phase("start", json!({}));
         let timings = lifecycle(&mut storage, size, &mut || {
-            file_bytes = directory_bytes(&workspace)
+            file_bytes = directory_bytes(&workspace);
+            if file_bytes > 0 {
+                log_phase("file", json!({ "file_bytes": file_bytes }));
+            }
         });
         drop(storage);
         fs::remove_dir_all(&workspace).unwrap();
@@ -334,7 +382,9 @@ fn measure<S>(
         operations: Vec::new(),
     };
     for repetition in 1..=repetitions {
+        MEASURED.set(Some((variant, repetition, n)));
         let (timings, file_bytes) = run(n);
+        MEASURED.set(None);
         eprintln!("{variant} #{repetition}: {}", summary(&timings, n));
         measurement.file_bytes = (file_bytes > 0).then_some(file_bytes);
         for (operation, elapsed) in timings {

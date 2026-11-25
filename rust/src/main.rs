@@ -1,5 +1,8 @@
 //! Usage: sqlite-vs-doublets <links|objects> <32|64> <size> [--work N | --repetitions N]
-//!        [--variants A,B] [--directory DIR] [--output FILE]
+//!        [--variants A,B] [--directory DIR] [--output FILE] [--phases FILE]
+//!
+//! `--phases` writes the report's metadata to FILE and appends a JSON line as each measured phase begins
+//! and ends (see [`harness::log_phases`]), so a run that is stopped before its report still shows its phases.
 //!
 //! Repetitions default to `work / size` clamped to `1..=MAX_REPETITIONS`, so smaller sizes get more,
 //! but not endless, repetitions. Objects get less work, because one blog post takes hundreds of links.
@@ -64,22 +67,26 @@ fn main() {
         .get("directory")
         .map_or_else(env::temp_dir, |directory| directory.into());
 
-    let measurements: Vec<Measurement> = match bits {
-        "32" => measure::<u32>(category, &variants, size, repetitions, &directory),
-        "64" => measure::<u64>(category, &variants, size, repetitions, &directory),
-        _ => panic!("bits must be 32 or 64"),
-    };
-    let report = json!({
+    let mut report = json!({
         "language": "Rust",
         "category": category,
-        "bits": bits.parse::<u32>().unwrap(),
+        "bits": bits.parse::<u32>().expect("bits must be 32 or 64"),
         "size": size,
         "repetitions": repetitions,
         "warm_up_size": size.min(harness::WARM_UP_SIZE),
         "warm_up_seconds": harness::WARM_UP_TIME.as_secs_f64(),
         "sqlite_version": rusqlite::version(),
-        "results": measurements.iter().map(Measurement::to_json).collect::<Vec<_>>(),
     });
+    if let Some(path) = options.get("phases") {
+        fs::write(path, format!("{}\n", json!({ "report": report }))).unwrap();
+        harness::log_phases(path.into());
+    }
+    let measurements: Vec<Measurement> = match bits {
+        "32" => measure::<u32>(category, &variants, size, repetitions, &directory),
+        "64" => measure::<u64>(category, &variants, size, repetitions, &directory),
+        _ => panic!("bits must be 32 or 64"),
+    };
+    report["results"] = measurements.iter().map(Measurement::to_json).collect();
     let report = serde_json::to_string_pretty(&report).unwrap();
     match options.get("output") {
         Some(path) => fs::write(path, report).unwrap(),

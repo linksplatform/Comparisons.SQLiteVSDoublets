@@ -118,6 +118,9 @@ TEXT: dict[str, dict[str, Any]] = {
         "disk_provenance": "Disk of the stores: {latencies}.",
         "job_machines": "Each storage in its own job (below)",
         "job_limit_provenance": "Memory limit {limit}.",
+        "at_least": "> {value}",
+        "slower_at_least": "> {ratio}× slower",
+        "unfinished": "_{variants}: stopped after {minutes} min, the time a job has for its storage. `>` marks the time per operation the phase in progress had already spent, a lower bound, and `—` the phases it did not reach._",
         "job_header": (
             "Storage",
             "Machine",
@@ -187,6 +190,9 @@ TEXT: dict[str, dict[str, Any]] = {
         "disk_provenance": "Диск хранилищ: {latencies}.",
         "job_machines": "Каждое хранилище в отдельном задании (ниже)",
         "job_limit_provenance": "Ограничение памяти {limit}.",
+        "at_least": "> {value}",
+        "slower_at_least": "более чем в {ratio}× медленнее",
+        "unfinished": "_{variants}: остановлено через {minutes} мин, время, которое задание отводит хранилищу. `>` отмечает время одной операции, уже затраченное незавершённым этапом, то есть нижнюю границу, а `—` — этапы, до которых измерение не дошло._",
         "job_header": (
             "Хранилище",
             "Машина",
@@ -321,12 +327,33 @@ def validate(report, path):
             validate_variants(report["results"])
         validate_postgresql(report)
         for result in report["results"]:
-            if set(result["operations"]) != set(OPERATIONS[report["category"]]):
+            if "unfinished" in result:
+                validate_unfinished(report, result)
+            elif set(result["operations"]) != set(OPERATIONS[report["category"]]):
                 raise ValueError("missing or unexpected operations")
             for measurement in result["operations"].values():
                 validate_measurement(measurement)
     except (KeyError, TypeError, ValueError) as error:
         raise ValueError(f"Invalid benchmark report {path}: {error}") from error
+
+
+def validate_unfinished(report, result):
+    """A store stopped under a memory limit has finished the first phases and been stopped in the next."""
+    if report.get("configuration", {}).get("kind") != "memory_limit":
+        raise ValueError("only a memory limit report may have a stopped store")
+    operations = OPERATIONS[report["category"]]
+    finished = len(result["operations"])
+    unfinished = result["unfinished"]
+    if (
+        report["repetitions"] != 1
+        or set(result["operations"]) != set(operations[:finished])
+        or finished == len(operations)
+        or unfinished.get("operation") != operations[finished]
+        or not positive_integer(unfinished.get("after_seconds"))
+        or ("lower_bound_ns" in unfinished and not positive_number(unfinished["lower_bound_ns"]))
+        or set(unfinished) - {"operation", "after_seconds", "lower_bound_ns"}
+    ):
+        raise ValueError(f"invalid stopped store {result['variant']}")
 
 
 def validate_metadata(report):
@@ -517,16 +544,44 @@ def table(report, text):
         reference = by_variant.get(baseline(variant, by_variant))
         cells = [variant.replace("_", " ")]
         for operation in operations:
-            measured = result["operations"][operation]
-            cell = duration(measured["median_ns"])
-            if reference is not None:
-                cell += f" ({comparison(measured, reference['operations'][operation], text)})"
-            cells.append(cell)
+            cells.append(cell(result, reference, operation, text))
         cells.append(file_size(result["file_bytes"]))
         if has_server:
             cells.append(file_size(result.get("server_bytes")))
         lines.append("| " + " | ".join(cells) + " |")
     return "\n".join(lines)
+
+
+def cell(result, reference, operation, text):
+    """The time of `operation` compared with the `reference` row; a stopped store may have a lower bound."""
+    if operation not in result["operations"]:
+        unfinished = result.get("unfinished", {})
+        if unfinished.get("operation") != operation or "lower_bound_ns" not in unfinished:
+            return "—"
+        bound = unfinished["lower_bound_ns"]
+        value = text["at_least"].format(value=duration(bound))
+        other = reference["operations"].get(operation) if reference is not None else None
+        if other is not None and bound > other["median_ns"] * (1 + NOISE):
+            ratio = significant(bound / other["median_ns"])
+            value += f" ({text['slower_at_least'].format(ratio=ratio)})"
+        return value
+    measured = result["operations"][operation]
+    value = duration(measured["median_ns"])
+    if reference is not None and operation in reference["operations"]:
+        value += f" ({comparison(measured, reference['operations'][operation], text)})"
+    return value
+
+
+def unfinished_note(report, text):
+    """Which stores of `report` were stopped and after how long, or None."""
+    stopped = [result for result in report["results"] if "unfinished" in result]
+    if not stopped:
+        return None
+    minutes = {result["unfinished"]["after_seconds"] // 60 for result in stopped}
+    return text["unfinished"].format(
+        variants=", ".join(result["variant"].replace("_", " ") for result in stopped),
+        minutes="/".join(str(value) for value in sorted(minutes)),
+    )
 
 
 def provenance(report, text):
@@ -619,7 +674,14 @@ def count_outcomes(reports, text):
             if not variant.startswith("Doublets_"):
                 continue
             reference = variants[baseline(variant, variants)]
+            # A stopped phase is counted only when the time it had already spent is clearly slower.
+            stopped = result.get("unfinished", {})
+            other = reference["operations"].get(stopped.get("operation"))
+            if other and stopped.get("lower_bound_ns", 0) > other["median_ns"] * (1 + NOISE):
+                counts["slower"] += 1
             for operation, measured in result["operations"].items():
+                if operation not in reference["operations"]:
+                    continue
                 other = reference["operations"][operation]
                 outcome = (
                     "same"
@@ -689,6 +751,9 @@ def configured_sections(configured, text):
                     limit=memory(report["configuration"]["memory_limit_bytes"])
                 )
             lines += [f"### {heading}", "", provenance(report, text), "", table(report, text), ""]
+            note = unfinished_note(report, text)
+            if note:
+                lines += [note, ""]
             if "jobs" in report:
                 lines += [job_table(report, text), ""]
     return lines

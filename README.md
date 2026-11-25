@@ -156,7 +156,11 @@ results:
   240 MiB, so the mapped stores write back their pages almost as soon as they
   dirty them. Under
   pressure a store can take hours, so each storage runs in its own job of
-  the run, and the jobs' reports are merged into one table. A second table
+  the run, and the jobs' reports are merged into one table. A store still
+  running after 340 minutes, the time a job has for it, is stopped. Its row
+  keeps the phases it finished, from the phase log the benchmark writes with
+  `--phases`, a lower bound for the phase in progress and `—` for the rest,
+  and a note under the table names it. A second table
   shows each job's runner, disk latencies, the cgroup's `memory.peak` and
   major page faults; the provenance line shows both thresholds. Only the
   mapped stores' misses are page faults: SQLite reads its file with `read`.

@@ -151,6 +151,102 @@ class RecordTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "No configured reports"):
             configuration.report(self.root, "abc")
 
+    def phase_log(self, *events):
+        """A phase log as the benchmark writes it with --phases, with `events` after its metadata."""
+        metadata = {
+            "category": "links",
+            "language": "Rust",
+            "bits": 32,
+            "size": 1000,
+            "repetitions": 1,
+            "sqlite_version": "3.54.1",
+        }
+        lines: list[dict] = [{"report": metadata}]
+        for variant, event, at_s, fields in events:
+            lines.append(
+                {**fields, "event": event, "variant": variant, "repetition": 1, "at_ns": at_s * 10**9}
+            )
+        path = self.root / "phases.jsonl"
+        path.write_text("".join(json.dumps(line) + "\n" for line in lines), encoding="utf-8")
+        return path
+
+    def test_a_stopped_run_keeps_its_finished_phases_and_a_lower_bound(self):
+        path = self.phase_log(
+            ("SQLite_File", "start", 0, {}),
+            ("SQLite_File", "begin", 1, {"operation": "create"}),
+            ("SQLite_File", "end", 2, {"operation": "create", "ns_per_operation": 1500.0}),
+            ("SQLite_File", "file", 2, {"file_bytes": 4096}),
+            ("SQLite_File", "begin", 2, {"operation": "query_all"}),
+            ("SQLite_File", "end", 3, {"operation": "query_all", "ns_per_operation": 700.0}),
+            ("SQLite_File", "begin", 21, {"operation": "query_by_id"}),
+        )
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            configuration.main(
+                [
+                    "unfinished",
+                    str(path),
+                    "--variants",
+                    "SQLite_File,Doublets_United_NonVolatile",
+                    "--after-seconds",
+                    "60",
+                ]
+            )
+        data = json.loads(output.getvalue())
+        self.assertEqual((data["size"], data["repetitions"]), (1000, 1))
+        sqlite, united = data["results"]
+        self.assertEqual(sqlite["file_bytes"], 4096)
+        self.assertEqual(list(sqlite["operations"]), ["create", "query_all"])
+        self.assertEqual(sqlite["operations"]["query_all"]["samples_ns"], [700.0])
+        # 60 s less the start-up allowance of 1 s, from the begin of query_by_id at 21 s, per link.
+        self.assertEqual(
+            sqlite["unfinished"],
+            {"after_seconds": 60, "operation": "query_by_id", "lower_bound_ns": 38e9 / 1000},
+        )
+        # A store the run never reached has no phases and no bound.
+        self.assertEqual(
+            united,
+            {
+                "variant": "Doublets_United_NonVolatile",
+                "file_bytes": None,
+                "operations": {},
+                "unfinished": {"after_seconds": 60, "operation": "create"},
+            },
+        )
+        data["configuration"] = {
+            "kind": "memory_limit",
+            "memory_limit_bytes": 24 * 2**20,
+            "disk": {"random_read_4k_ns": 90000, "fsync_ns": 1500000},
+        }
+        report.validate(data, "stopped.json")
+
+    def test_a_finished_store_before_the_stopped_one_has_no_bound(self):
+        path = self.phase_log(
+            *(
+                ("SQLite_File", "end", 1, {"operation": operation, "ns_per_operation": 10.0})
+                for operation in report.OPERATIONS["links"]
+            ),
+            ("Doublets_United_NonVolatile", "start", 2, {}),
+        )
+        sqlite, united = configuration.unfinished(path, ["SQLite_File", "Doublets_United_NonVolatile"], 60)[
+            "results"
+        ]
+        self.assertNotIn("unfinished", sqlite)
+        # The united store had not begun its first phase, so the time it spent is unknown.
+        self.assertEqual(united["unfinished"], {"after_seconds": 60, "operation": "create"})
+
+    def test_a_phase_log_out_of_order_or_with_repetitions_is_rejected(self):
+        path = self.phase_log(("SQLite_File", "end", 1, {"operation": "update", "ns_per_operation": 10.0}))
+        with self.assertRaisesRegex(ValueError, "out of order"):
+            configuration.unfinished(path, ["SQLite_File"], 60)
+        text = path.read_text(encoding="utf-8").replace('"repetitions": 1', '"repetitions": 3')
+        path.write_text(text, encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "one repetition"):
+            configuration.unfinished(path, ["SQLite_File"], 60)
+        path.write_text("{}\n", encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "metadata"):
+            configuration.unfinished(path, ["SQLite_File"], 60)
+
     def test_probe_measures_the_disk_and_removes_its_files(self):
         try:
             latencies = configuration.probe(self.root / "probe", file_mib=1, reads=5, syncs=3)

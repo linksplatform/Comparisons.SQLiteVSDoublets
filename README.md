@@ -173,8 +173,9 @@ Both kinds record the disk the stores use: the median latency of a random
 4 KiB read that bypasses the page cache (`O_DIRECT`) and of an `fsync` after
 a small append. Pull requests run the pipeline on a small plan (1,000 durable
 links and 20,000 links under 24 MiB); the published tables come from a run
-with the plan above. Started manually, the workflow takes a JSON plan and the
-disk of the stores (the runner's work disk or `/mnt`).
+with the plan above. Started manually, the workflow takes a JSON plan, the
+disk of the stores (the runner's work disk or `/mnt`) and the minutes a
+memory-limited job gives its storage (340 at most and by default).
 
 Run a configuration locally (the memory limit needs a systemd with a
 delegated memory controller):

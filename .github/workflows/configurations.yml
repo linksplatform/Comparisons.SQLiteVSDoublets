@@ -7,7 +7,7 @@ name: Configured benchmarks
 # can take hours, so the plan gives each storage its own job, and the report merges their reports.
 on:
   pull_request:
-    paths: ['rust/**', 'scripts/benchmark_configuration.py', 'scripts/benchmark_report.py', 'scripts/benchmark_provenance.py', '.github/actions/**', '.github/workflows/configurations.yml']
+    paths: ['rust/**', 'scripts/benchmark_configuration.py', 'scripts/benchmark_report.py', 'scripts/benchmark_provenance.py', 'scripts/memory_limit_run.sh', '.github/actions/**', '.github/workflows/configurations.yml']
   workflow_dispatch:
     inputs:
       plan:
@@ -18,6 +18,9 @@ on:
         type: choice
         options: [temp, mnt]
         default: temp
+      minutes:
+        description: Minutes a memory-limited job gives its storage before it stops it, at most 340
+        default: '340'
 
 permissions:
   contents: read
@@ -67,6 +70,7 @@ jobs:
       VARIANTS: ${{ matrix.variants }}
       NAME: ${{ matrix.name }}
       DISK: ${{ inputs.disk || 'temp' }}
+      MINUTES: ${{ inputs.minutes || '340' }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -110,8 +114,13 @@ jobs:
             # memory, rounded up to 1/4096 (domain_dirty_limits), so the cgroup's own thresholds are a
             # few pages under 24 MiB and below 1 MiB under 240 MiB. SQLite syncs every commit anyway.
             # A store that has not finished when the job's time runs out is stopped, and its report keeps
-            # the phases it finished, from the benchmark's phase log.
-            budget=$((340 * 60))
+            # the phases it finished, from the benchmark's phase log. 340 minutes leave the job's setup and
+            # report their time within its 355.
+            if ! [[ "$MINUTES" =~ ^[1-9][0-9]*$ ]] || [ "$MINUTES" -gt 340 ]; then
+              echo "::error::minutes must be a whole number from 1 to 340, not $MINUTES"
+              exit 1
+            fi
+            budget=$((MINUTES * 60))
             dirty=$((LIMIT_MIB * 1048576 / 5)) background=$((LIMIT_MIB * 1048576 / 10))
             sudo sysctl -q "vm.dirty_bytes=$dirty" "vm.dirty_background_bytes=$background"
             status=0

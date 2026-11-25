@@ -11,7 +11,7 @@ use sqlite_vs_doublets::{
     memory::{mapped, volatile},
     objects::{BlogPostsStorage, DoubletsBlogPosts, SqliteBlogPosts},
 };
-use std::{collections::HashSet, fs, os::unix::fs::MetadataExt, path::Path};
+use std::{collections::HashSet, fs};
 
 const SIZE: u64 = 1_000;
 
@@ -201,8 +201,11 @@ fn mapped_stores_keep_their_links_when_their_memory_grows() {
     fs::remove_dir_all(directory).unwrap();
 }
 
-/// The bytes of `path` the file system allocated once its dirty pages are written back.
-fn written_bytes(path: &Path) -> (u64, u64) {
+/// The length of `path` and the bytes the file system allocated once its dirty pages are written
+/// back.
+#[cfg(target_os = "linux")]
+fn written_bytes(path: &std::path::Path) -> (u64, u64) {
+    use std::os::unix::fs::MetadataExt;
     fs::File::open(path).unwrap().sync_all().unwrap();
     let metadata = fs::metadata(path).unwrap();
     (metadata.len(), metadata.blocks() * 512)
@@ -238,6 +241,10 @@ fn mapped_stores_do_not_write_their_reservation_and_reopen_with_their_links() {
         }
     }
     // Each file reserves 2^20 links, which the file system holds as a hole until they are written.
+    // Checked on Linux, where the memory-limit benchmarks run: whether an extension stays a hole
+    // depends on the file system, and APFS allocated the whole 8 MiB of the split data file
+    // (macOS 15, run 45603348935).
+    #[cfg(target_os = "linux")]
     for path in [&united, &data, &index] {
         let (length, allocated) = written_bytes(path);
         assert!(length >= 1 << 23, "{path:?} is only {length} bytes");

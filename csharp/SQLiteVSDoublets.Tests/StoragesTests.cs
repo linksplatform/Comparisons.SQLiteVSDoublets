@@ -31,8 +31,8 @@ public class StoragesTests
 
     public static TheoryData<string> ObjectsVariants => [.. Harness.ObjectsVariants.Where(variant => variant != "PostgreSQL_EFCore")];
 
-    [Theory, InlineData("SystemDataSQLite_Memory"), InlineData("SystemDataSQLite_File")]
-    public void SystemDataSQLiteVariantsAreRegistered(string variant)
+    [Theory, InlineData("SystemDataSQLite_Memory"), InlineData("SystemDataSQLite_File"), InlineData("SQLite_File_Tuned"), InlineData("SystemDataSQLite_File_Tuned")]
+    public void SQLiteVariantsAreRegistered(string variant)
     {
         Assert.Contains(variant, Harness.LinksVariants);
         Assert.Contains(variant, Harness.ObjectsVariants);
@@ -132,6 +132,31 @@ public class StoragesTests
         var id = links.Transaction(() => links.Create(3, 4));
         Assert.Equal(new Link<ulong>(id, 3, 4), links.Get(id));
         Assert.Equal(1UL, links.Count());
+    }
+
+    [Theory, InlineData(SQLiteProvider.MicrosoftDataSqlite), InlineData(SQLiteProvider.SystemDataSQLite)]
+    public void TunedSQLiteFilesApplyThePragmas(SQLiteProvider provider)
+    {
+        var directory = Directory.CreateTempSubdirectory("sqlite-vs-doublets-tuned-").FullName;
+        try
+        {
+            using (var links = SQLiteLinks<uint>.OpenTuned(Path.Combine(directory, "links.db"), provider))
+            {
+                Assert.Equal(-1048576L, links.Pragma("cache_size"));
+                Assert.Equal(1073741824L, links.Pragma("mmap_size"));
+            }
+            using (var posts = SQLiteBlogPosts<uint>.OpenTuned(Path.Combine(directory, "blog_posts.db"), provider))
+            {
+                Assert.Equal(-1048576L, posts.Pragma("cache_size"));
+                Assert.Equal(1073741824L, posts.Pragma("mmap_size"));
+            }
+            using var stock = SQLiteLinks<uint>.Open(Path.Combine(directory, "stock.db"), provider);
+            Assert.NotEqual(-1048576L, stock.Pragma("cache_size"));
+        }
+        finally
+        {
+            Directory.Delete(directory, recursive: true);
+        }
     }
 
     [Fact]

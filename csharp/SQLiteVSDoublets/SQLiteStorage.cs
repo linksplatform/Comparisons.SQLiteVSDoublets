@@ -15,17 +15,31 @@ public enum SQLiteProvider
 /// <summary>A connection with reusable prepared commands that all join the current transaction.</summary>
 public abstract class SQLiteStorage : IDisposable
 {
+    /// <summary>
+    /// A 1 GiB page cache and a 1 GiB memory map instead of the 2 MiB page cache SQLite starts with;
+    /// the <c>_Tuned</c> variants run them before the schema.
+    /// </summary>
+    public const string Tuning = "PRAGMA cache_size = -1048576; PRAGMA mmap_size = 1073741824;";
+
     private readonly DbConnection _connection;
     private readonly List<DbCommand> _commands = [];
     private readonly string _table;
 
-    protected SQLiteStorage(string path, string table, string schema, SQLiteProvider provider)
+    protected SQLiteStorage(string path, string table, string schema, SQLiteProvider provider, string pragmas = "")
     {
         _connection = OpenConnection(path, provider);
         _table = table;
         using var create = _connection.CreateCommand();
-        create.CommandText = schema;
+        create.CommandText = pragmas + schema;
         create.ExecuteNonQuery();
+    }
+
+    /// <summary>Reads a pragma back, to check that it took effect.</summary>
+    public long Pragma(string name)
+    {
+        using var pragma = _connection.CreateCommand();
+        pragma.CommandText = $"PRAGMA {name}";
+        return (long)pragma.ExecuteScalar()!;
     }
 
     private static DbConnection OpenConnection(string path, SQLiteProvider provider)

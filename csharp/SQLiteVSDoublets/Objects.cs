@@ -34,14 +34,17 @@ public sealed class SQLiteBlogPosts<T> : SQLiteStorage, IBlogPostsStorage<T> whe
 
     public static SQLiteBlogPosts<T> Open(string path) => Open(path, SQLiteProvider.MicrosoftDataSqlite);
 
-    public static SQLiteBlogPosts<T> Open(string path, SQLiteProvider provider) => new(path, provider);
+    public static SQLiteBlogPosts<T> Open(string path, SQLiteProvider provider) => new(path, provider, "");
+
+    /// <summary>Opens the file with <see cref="SQLiteStorage.Tuning"/>.</summary>
+    public static SQLiteBlogPosts<T> OpenTuned(string path, SQLiteProvider provider) => new(path, provider, Tuning);
 
     public static SQLiteBlogPosts<T> InMemory() => InMemory(SQLiteProvider.MicrosoftDataSqlite);
 
-    public static SQLiteBlogPosts<T> InMemory(SQLiteProvider provider) => new(":memory:", provider);
+    public static SQLiteBlogPosts<T> InMemory(SQLiteProvider provider) => new(":memory:", provider, "");
 
-    private SQLiteBlogPosts(string path, SQLiteProvider provider) : base(path, "blog_posts",
-        "CREATE TABLE blog_posts (id INTEGER PRIMARY KEY, title TEXT NOT NULL, content TEXT NOT NULL, publication_date INTEGER NOT NULL)", provider)
+    private SQLiteBlogPosts(string path, SQLiteProvider provider, string pragmas) : base(path, "blog_posts",
+        "CREATE TABLE blog_posts (id INTEGER PRIMARY KEY, title TEXT NOT NULL, content TEXT NOT NULL, publication_date INTEGER NOT NULL)", provider, pragmas)
     {
         _create = Command(
             "INSERT INTO blog_posts (title, content, publication_date) VALUES ($title, $content, $publication_date)",

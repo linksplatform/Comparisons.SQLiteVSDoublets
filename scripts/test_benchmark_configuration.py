@@ -95,6 +95,10 @@ class RecordTests(unittest.TestCase):
                 str(24 * 2**20),
                 "--cgroup-stats",
                 str(stats),
+                "--dirty-bytes",
+                str(24 * 2**20 // 5),
+                "--dirty-background-bytes",
+                str(24 * 2**20 // 10),
             ]
         )
         recorded = json.loads(limited.read_text(encoding="utf-8"))
@@ -106,11 +110,14 @@ class RecordTests(unittest.TestCase):
                 "memory_limit_bytes": 24 * 2**20,
                 "peak_bytes": 25_000_000,
                 "major_faults": 7,
+                "dirty_bytes": 5_033_164,
+                "dirty_background_bytes": 2_516_582,
                 "disk": {"random_read_4k_ns": 90000, "fsync_ns": 1500000},
             },
         )
         tables = configuration.report(self.root, "abc")
         self.assertIn("memory limit 24 MiB", tables)
+        self.assertIn("Dirty page cache limit 4.8 MiB, background writeback from 2.4 MiB.", tables)
         self.assertIn(report.TEXT["en"]["configurations"]["durable"], tables)
         with self.assertRaisesRegex(ValueError, "not measured from"):
             configuration.report(self.root, "def")
@@ -119,6 +126,11 @@ class RecordTests(unittest.TestCase):
         path = self.measured("limited.json", configuration.VARIANTS["memory_limit"])
         with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
             configuration.main(["record", str(path), "--kind", "memory_limit"])
+
+    def test_the_dirty_thresholds_belong_to_a_memory_limit(self):
+        path = self.measured("durable.json", configuration.VARIANTS["durable"])
+        with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+            configuration.main(["record", str(path), "--kind", "durable", "--dirty-bytes", "1048576"])
 
     def test_an_empty_download_has_no_tables(self):
         with self.assertRaisesRegex(ValueError, "No configured reports"):

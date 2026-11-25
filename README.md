@@ -145,8 +145,13 @@ results:
   with `memory.max` of 24 MiB at 1,000,000 links and 240 MiB at 10,000,000
   links, without swap. The limit charges the page cache too, so the stores'
   pages are read back from the disk. The warm-up on 10,000 links fits in
-  either limit. The table records the cgroup's `memory.peak` and major page
-  faults. `SQLite File Tuned` is left out, because its 1 GiB cache would be
+  either limit. The kernel's dirty page thresholds (`vm.dirty_bytes` and
+  `vm.dirty_background_bytes`) are set to its default ratios, 20% and 10%, of
+  the limit, as on a machine with that much memory. Computed from the whole
+  runner, they let the united store dirty 21 MiB of its mapping before
+  writeback throttled it, and the kernel killed it under 24 MiB. The table
+  records the cgroup's `memory.peak`, major page faults and both thresholds.
+  `SQLite File Tuned` is left out, because its 1 GiB cache would be
   anonymous memory charged to the limit. The transactional store can't take
   part: its decorator keeps every transition and a full snapshot of the links
   in memory, which no limit small enough to create pressure can hold.

@@ -98,11 +98,12 @@ TEXT: dict[str, dict[str, Any]] = {
         "configuration_names": {"durable": "durable", "memory_limit": "memory limit"},
         "configuration_intro": {
             "durable": "`Doublets United NonVolatile Transactional` is the united file-mapped store behind doublets' `TransactionsDecorator` with the shipped `FileTransitionLog`, which calls `sync_all` after every journal record. One transaction covers each lifecycle phase that writes: it begins at the phase's first write and commits at its end, so the read phases begin none. It is compared with `SQLite File`, which syncs its rollback journal and database at every `COMMIT` (`synchronous=FULL`): both are durable at commit.",
-            "memory_limit": "The benchmark process runs in a cgroup with a memory limit (`memory.max`, swap disabled). The limit charges the page cache too, so neither the SQLite file nor the mapped Doublets store fits in memory, and pages that are not resident are read from the disk. The transactional store cannot take part: its decorator keeps every transition and a full snapshot of the links in memory, which exceeds any limit small enough to create pressure.",
+            "memory_limit": "The benchmark process runs in a cgroup with a memory limit (`memory.max`, swap disabled). The limit charges the page cache too, so neither the SQLite file nor the mapped Doublets store fits in memory, and pages that are not resident are read from the disk. The kernel's dirty page thresholds (`vm.dirty_bytes`, `vm.dirty_background_bytes`) are set to its default ratios, 20% and 10%, of the limit, as on a machine with that much memory: computed from the whole runner, they let a mapped store dirty more pages than the limit holds before writeback throttles it, and the store is killed. The transactional store cannot take part: its decorator keeps every transition and a full snapshot of the links in memory, which exceeds any limit small enough to create pressure.",
         },
         "configured_heading": "{language}, {bits} bit, {size}",
         "limit_heading": ", memory limit {limit}",
         "limit_provenance": "Memory limit {limit}; peak cgroup memory {peak}; {faults} major page faults.",
+        "dirty_provenance": "Dirty page cache limit {dirty}, background writeback from {background}.",
         "disk_provenance": "Disk of the stores: {latencies}.",
         "random_read": "random 4 KiB read {value}",
         "fsync": "`fsync` {value}",
@@ -156,11 +157,12 @@ TEXT: dict[str, dict[str, Any]] = {
         "configuration_names": {"durable": "надёжное хранение", "memory_limit": "ограничение памяти"},
         "configuration_intro": {
             "durable": "`Doublets United NonVolatile Transactional` — объединённое хранилище в отображаемом файле за `TransactionsDecorator` из doublets с поставляемым `FileTransitionLog`, который вызывает `sync_all` после каждой записи журнала. Каждая записывающая фаза жизненного цикла — одна транзакция: она начинается при первой записи фазы и фиксируется в её конце, поэтому фазы чтения транзакций не начинают. Оно сравнивается с `SQLite File`, который синхронизирует журнал отката и базу при каждом `COMMIT` (`synchronous=FULL`): оба надёжны при фиксации.",
-            "memory_limit": "Процесс теста работает в cgroup с ограничением памяти (`memory.max`, без подкачки). Ограничение учитывает и страничный кэш, поэтому ни файл SQLite, ни отображаемое хранилище Дуплетов не помещаются в память, и отсутствующие в памяти страницы читаются с диска. Транзакционное хранилище в этом участвовать не может: его декоратор хранит в памяти каждый переход и полный снимок связей, что больше любого ограничения, достаточно малого для нехватки памяти.",
+            "memory_limit": "Процесс теста работает в cgroup с ограничением памяти (`memory.max`, без подкачки). Ограничение учитывает и страничный кэш, поэтому ни файл SQLite, ни отображаемое хранилище Дуплетов не помещаются в память, и отсутствующие в памяти страницы читаются с диска. Пороги грязных страниц ядра (`vm.dirty_bytes`, `vm.dirty_background_bytes`) задаются его долями по умолчанию, 20% и 10%, от ограничения, как на машине с таким объёмом памяти: вычисленные от всей памяти машины, они позволяют отображаемому хранилищу загрязнить больше страниц, чем вмещает ограничение, прежде чем запись на диск его притормозит, и хранилище завершается принудительно. Транзакционное хранилище в этом участвовать не может: его декоратор хранит в памяти каждый переход и полный снимок связей, что больше любого ограничения, достаточно малого для нехватки памяти.",
         },
         "configured_heading": "{language}, {bits} бит, {size}",
         "limit_heading": ", ограничение памяти {limit}",
         "limit_provenance": "Ограничение памяти {limit}; пиковое потребление cgroup {peak}; {faults} основных страничных отказов.",
+        "dirty_provenance": "Предел грязных страниц кэша {dirty}, фоновая запись с {background}.",
         "disk_provenance": "Диск хранилищ: {latencies}.",
         "random_read": "случайное чтение 4 КиБ {value}",
         "fsync": "`fsync` {value}",
@@ -293,6 +295,9 @@ def validate_configuration(report):
             raise ValueError("a memory limit report needs the limit and the disk's random 4 KiB read latency")
         for key in ("peak_bytes", "major_faults"):
             if key in configuration and not isinstance(configuration[key], int):
+                raise ValueError(f"invalid {key}")
+        for key in ("dirty_bytes", "dirty_background_bytes"):
+            if key in configuration and not positive_integer(configuration[key]):
                 raise ValueError(f"invalid {key}")
     else:
         raise ValueError("unknown configuration")
@@ -468,6 +473,11 @@ def provenance(report, text):
             peak=memory(configuration["peak_bytes"]) if "peak_bytes" in configuration else "—",
             faults=size(configuration["major_faults"]) if "major_faults" in configuration else "—",
         )
+        if "dirty_bytes" in configuration:
+            value += " " + text["dirty_provenance"].format(
+                dirty=memory(configuration["dirty_bytes"]),
+                background=memory(configuration.get("dirty_background_bytes", configuration["dirty_bytes"])),
+            )
     disk = configuration.get("disk", {})
     latencies = [
         text[name].format(value=duration(disk[key]))

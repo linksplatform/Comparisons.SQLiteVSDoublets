@@ -42,7 +42,7 @@ jobs:
       - name: Validate the plan and emit the matrix
         id: plan
         env:
-          PLAN: ${{ inputs.plan || '[{"kind":"durable","bits":32,"size":10000000},{"kind":"durable","bits":64,"size":10000000},{"kind":"memory_limit","bits":32,"size":1000000,"limit_mib":24},{"kind":"memory_limit","bits":32,"size":10000000,"limit_mib":240}]' }}
+          PLAN: ${{ inputs.plan || '[{"kind":"memory_limit","bits":32,"size":1000000,"limit_mib":24},{"kind":"memory_limit","bits":32,"size":10000000,"limit_mib":240}]' }}
         run: echo "matrix=$(python scripts/benchmark_configuration.py plan "$PLAN")" >> "$GITHUB_OUTPUT"
 
   benchmark:
@@ -100,6 +100,13 @@ jobs:
             # The scope's memory.max charges the page cache too; without swap the stores' pages are evicted
             # to their files. The stats of the scope are written by the shell inside it, which outlives an
             # OOM kill of the benchmark, so memory.events shows the kill.
+            # The kernel's dirty page thresholds are computed from the runner's whole memory, so a mapped
+            # store could dirty more pages than the limit holds before writeback throttled it, and the
+            # united store was killed under 24 MiB (run 45604850024: 21 MiB dirty, 15 MiB under writeback).
+            # They are set to the default ratios, 20% and 10%, of the limit, as on a machine with that much
+            # memory; SQLite is unaffected, as it syncs every commit.
+            dirty=$((LIMIT_MIB * 1048576 / 5)) background=$((LIMIT_MIB * 1048576 / 10))
+            sudo sysctl -q "vm.dirty_bytes=$dirty" "vm.dirty_background_bytes=$background"
             status=0
             sudo systemd-run --scope --quiet -p "MemoryMax=${LIMIT_MIB}M" -p MemorySwapMax=0 -p OOMPolicy=continue \
               --same-dir -- \
@@ -109,7 +116,9 @@ jobs:
             cat "$RUNNER_TEMP/cgroup-stats"
             if [ "$status" != 0 ]; then exit "$status"; fi
             sudo chown "$(id -u):$(id -g)" "$RUNNER_TEMP/measured.json" "$RUNNER_TEMP/cgroup-stats"
-            record+=(--memory-limit-bytes "$((LIMIT_MIB * 1048576))" --cgroup-stats "$RUNNER_TEMP/cgroup-stats")
+            record+=(--memory-limit-bytes "$((LIMIT_MIB * 1048576))" --cgroup-stats "$RUNNER_TEMP/cgroup-stats"
+              --dirty-bytes "$(cat /proc/sys/vm/dirty_bytes)"
+              --dirty-background-bytes "$(cat /proc/sys/vm/dirty_background_bytes)")
           else
             "${benchmark[@]}"
           fi

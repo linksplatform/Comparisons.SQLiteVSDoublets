@@ -134,13 +134,18 @@ def cgroup_stats(path):
     return {"peak_bytes": int(lines[0]), "major_faults": int(stats["pgmajfault"])}
 
 
-def record(path, kind, disk=None, memory_limit_bytes=None, stats=None):
-    """Add the configuration while preserving every measurement and existing metadata field."""
+def record(path, kind, disk=None, memory_limit_bytes=None, stats=None, dirty=None):
+    """Add the configuration while preserving every measurement and existing metadata field.
+
+    `dirty` holds the kernel's dirty page thresholds of a memory limit run, `dirty_bytes` and
+    `dirty_background_bytes`.
+    """
     data = json.loads(path.read_text(encoding="utf-8"))
     configuration = {"kind": kind}
     if memory_limit_bytes is not None:
         configuration["memory_limit_bytes"] = memory_limit_bytes
         configuration.update(stats or {})
+        configuration.update(dirty or {})
     if disk:
         configuration["disk"] = disk
     data["configuration"] = configuration
@@ -180,6 +185,10 @@ def main(arguments=None):
     recording.add_argument("--disk", type=json.loads, help="the JSON printed by probe")
     recording.add_argument("--memory-limit-bytes", type=int)
     recording.add_argument("--cgroup-stats", type=Path)
+    recording.add_argument("--dirty-bytes", type=int, help="vm.dirty_bytes of a memory limit run")
+    recording.add_argument(
+        "--dirty-background-bytes", type=int, help="vm.dirty_background_bytes of a memory limit run"
+    )
     options = parser.parse_args(arguments)
     if options.command == "plan":
         print(json.dumps({"include": plan(options.plan)}, separators=(",", ":")))
@@ -192,8 +201,18 @@ def main(arguments=None):
         return
     if (options.kind == "memory_limit") != (options.memory_limit_bytes is not None):
         parser.error("--memory-limit-bytes is required for, and only for, --kind memory_limit")
+    dirty = {
+        key: value
+        for key, value in (
+            ("dirty_bytes", options.dirty_bytes),
+            ("dirty_background_bytes", options.dirty_background_bytes),
+        )
+        if value is not None
+    }
+    if dirty and options.kind != "memory_limit":
+        parser.error("the dirty page thresholds are recorded only for --kind memory_limit")
     stats = None if options.cgroup_stats is None else cgroup_stats(options.cgroup_stats)
-    record(options.report, options.kind, options.disk, options.memory_limit_bytes, stats)
+    record(options.report, options.kind, options.disk, options.memory_limit_bytes, stats, dirty)
 
 
 if __name__ == "__main__":

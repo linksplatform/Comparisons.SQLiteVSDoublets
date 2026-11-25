@@ -245,6 +245,10 @@ class ConfigurationTests(unittest.TestCase):
             "volatile store": configured(),
             "unknown": configured(),
             "negative latency": configured(),
+            "zero dirty bytes": configured("memory_limit", memory_limit_bytes=2**20, dirty_bytes=0),
+            "fractional dirty background bytes": configured(
+                "memory_limit", memory_limit_bytes=2**20, dirty_background_bytes=0.5
+            ),
         }
         broken["durable without the transactional store"]["results"].pop()
         broken["limit with the transactional store"]["results"][-1]["variant"] = report.TRANSACTIONAL
@@ -267,6 +271,8 @@ class ConfigurationTests(unittest.TestCase):
                     memory_limit_bytes=24 * 2**20,
                     peak_bytes=25_000_000,
                     major_faults=12_345,
+                    dirty_bytes=24 * 2**20 // 5,
+                    dirty_background_bytes=24 * 2**20 // 10,
                 ),
                 configured("memory_limit", 1_000, memory_limit_bytes=24 * 2**20),
             )
@@ -288,6 +294,9 @@ class ConfigurationTests(unittest.TestCase):
                 self.assertLess(document.index("1,000 "), document.index("1,000,000 "))
                 self.assertIn("23.8 MiB", document)
                 self.assertIn("12,345", document)
+                self.assertIn(
+                    text["dirty_provenance"].format(dirty="4.8 MiB", background="2.4 MiB"), document
+                )
                 self.assertIn("90 µs", document)
                 self.assertIn("1.5 ms", document)
                 self.assertEqual(document.count(text["configuration_intro"]["memory_limit"]), 1)

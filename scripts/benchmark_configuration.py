@@ -5,14 +5,16 @@ Usage:
   benchmark_configuration.py report DIRECTORY --sha SHA
   benchmark_configuration.py probe DIRECTORY [--file-mib N] [--reads N] [--syncs N]
   benchmark_configuration.py record REPORT --kind durable|memory_limit [--disk JSON]
-      [--memory-limit-bytes N] [--cgroup-stats FILE]
+      [--memory-limit-bytes N] [--cgroup-stats FILE] [--memory-high-bytes N]
+      [--dirty-ratio PERCENT] [--dirty-background-ratio PERCENT]
   benchmark_configuration.py unfinished PHASES --variants A,B --after-seconds N
 
 `probe` prints the median latency of random 4 KiB reads that bypass the page cache (O_DIRECT) and of
 an `fsync` after a small append, the two disk operations the configured tables pay for: page misses under
 a memory limit and the journal syncs of the transactional store.
 `record` adds the configuration, the probed latencies and the cgroup's memory.peak and major page
-faults (a file with `memory.peak` followed by `memory.stat`, as the configured workflow writes it).
+faults (a file with `memory.peak` followed by `memory.stat`, as the configured workflow writes it), and
+for a memory limit run its cgroup's memory.high and the kernel's dirty page ratios.
 `plan` validates the runs of a configured benchmark workflow and prints its job matrix, with a job per
 storage under a memory limit, and `report` validates the reports the runs wrote and prints their tables.
 `unfinished` prints the report of a run that was stopped after N seconds, from the phase log the benchmark

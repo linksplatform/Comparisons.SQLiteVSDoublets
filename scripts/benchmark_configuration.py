@@ -143,16 +143,18 @@ def cgroup_stats(path):
     return {"peak_bytes": int(lines[0]), "major_faults": int(stats["pgmajfault"])}
 
 
-def record(path, kind, disk=None, memory_limit_bytes=None, stats=None, dirty=None):
+def record(path, kind, disk=None, memory_limit_bytes=None, stats=None, dirty=None, memory_high_bytes=None):
     """Add the configuration while preserving every measurement and existing metadata field.
 
     `dirty` holds the kernel's dirty page thresholds of a memory limit run, `dirty_ratio` and
-    `dirty_background_ratio`, in percent.
+    `dirty_background_ratio`, in percent, and `memory_high_bytes` its cgroup's memory.high.
     """
     data = json.loads(path.read_text(encoding="utf-8"))
     configuration = {"kind": kind}
     if memory_limit_bytes is not None:
         configuration["memory_limit_bytes"] = memory_limit_bytes
+        if memory_high_bytes is not None:
+            configuration["memory_high_bytes"] = memory_high_bytes
         configuration.update(stats or {})
         configuration.update(dirty or {})
     if disk:
@@ -244,6 +246,7 @@ def main(arguments=None):
     recording.add_argument("--disk", type=json.loads, help="the JSON printed by probe")
     recording.add_argument("--memory-limit-bytes", type=int)
     recording.add_argument("--cgroup-stats", type=Path)
+    recording.add_argument("--memory-high-bytes", type=int, help="memory.high of a memory limit run")
     recording.add_argument("--dirty-ratio", type=int, help="vm.dirty_ratio of a memory limit run")
     recording.add_argument(
         "--dirty-background-ratio", type=int, help="vm.dirty_background_ratio of a memory limit run"
@@ -274,8 +277,18 @@ def main(arguments=None):
     }
     if dirty and options.kind != "memory_limit":
         parser.error("the dirty page thresholds are recorded only for --kind memory_limit")
+    if options.memory_high_bytes is not None and options.kind != "memory_limit":
+        parser.error("--memory-high-bytes is recorded only for --kind memory_limit")
     stats = None if options.cgroup_stats is None else cgroup_stats(options.cgroup_stats)
-    record(options.report, options.kind, options.disk, options.memory_limit_bytes, stats, dirty)
+    record(
+        options.report,
+        options.kind,
+        options.disk,
+        options.memory_limit_bytes,
+        stats,
+        dirty,
+        options.memory_high_bytes,
+    )
 
 
 if __name__ == "__main__":

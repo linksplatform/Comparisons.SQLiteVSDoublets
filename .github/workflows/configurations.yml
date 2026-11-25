@@ -147,6 +147,7 @@ jobs:
               exit "$status"
             fi
             record+=(--memory-limit-bytes "$((LIMIT_MIB * 1048576))" --cgroup-stats "$RUNNER_TEMP/cgroup-stats"
+              --memory-high-bytes "$((high_kib * 1024))"
               --dirty-ratio "$(cat /proc/sys/vm/dirty_ratio)"
               --dirty-background-ratio "$(cat /proc/sys/vm/dirty_background_ratio)")
           else

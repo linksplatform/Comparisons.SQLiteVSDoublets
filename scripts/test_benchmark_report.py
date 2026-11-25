@@ -247,6 +247,10 @@ class ConfigurationTests(unittest.TestCase):
             "negative latency": configured(),
             "zero dirty ratio": configured("memory_limit", memory_limit_bytes=2**20, dirty_ratio=0),
             "dirty ratio over 100": configured("memory_limit", memory_limit_bytes=2**20, dirty_ratio=101),
+            "memory.high above the limit": configured(
+                "memory_limit", memory_limit_bytes=2**20, memory_high_bytes=2**20 + 1
+            ),
+            "zero memory.high": configured("memory_limit", memory_limit_bytes=2**20, memory_high_bytes=0),
             "fractional dirty background ratio": configured(
                 "memory_limit", memory_limit_bytes=2**20, dirty_background_ratio=0.5
             ),
@@ -417,6 +421,7 @@ class ConfigurationTests(unittest.TestCase):
                     memory_limit_bytes=24 * 2**20,
                     peak_bytes=25_000_000,
                     major_faults=12_345,
+                    memory_high_bytes=21 * 2**20,
                     dirty_ratio=5,
                     dirty_background_ratio=2,
                 ),
@@ -440,6 +445,7 @@ class ConfigurationTests(unittest.TestCase):
                 self.assertLess(document.index("1,000 "), document.index("1,000,000 "))
                 self.assertIn("23.8 MiB", document)
                 self.assertIn("12,345", document)
+                self.assertIn(text["high_provenance"].format(high="21 MiB"), document)
                 self.assertIn(text["dirty_provenance"].format(dirty=5, background=2), document)
                 self.assertIn("90 µs", document)
                 self.assertIn("1.5 ms", document)

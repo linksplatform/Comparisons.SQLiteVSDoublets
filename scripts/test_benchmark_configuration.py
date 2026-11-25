@@ -104,6 +104,8 @@ class RecordTests(unittest.TestCase):
                     str(24 * 2**20),
                     "--cgroup-stats",
                     str(stats),
+                    "--memory-high-bytes",
+                    str(21 * 2**20),
                     "--dirty-ratio",
                     "5",
                     "--dirty-background-ratio",
@@ -118,6 +120,7 @@ class RecordTests(unittest.TestCase):
             {
                 "kind": "memory_limit",
                 "memory_limit_bytes": 24 * 2**20,
+                "memory_high_bytes": 21 * 2**20,
                 "peak_bytes": 25_000_000,
                 "major_faults": 7,
                 "dirty_ratio": 5,
@@ -127,7 +130,7 @@ class RecordTests(unittest.TestCase):
         )
         tables = configuration.report(self.root, "abc")
         self.assertIn("memory limit 24 MiB", tables)
-        self.assertIn("`vm.dirty_ratio` 5%, `vm.dirty_background_ratio` 2%.", tables)
+        self.assertIn("`memory.high` 21 MiB. `vm.dirty_ratio` 5%, `vm.dirty_background_ratio` 2%.", tables)
         # One table compares the three jobs' storages, and a second one shows each job's peak.
         self.assertEqual(tables.count("| Doublets United NonVolatile | "), 2)
         self.assertEqual(tables.count("| Doublets Split NonVolatile | "), 2)
@@ -146,6 +149,11 @@ class RecordTests(unittest.TestCase):
         path = self.measured("durable.json", configuration.VARIANTS["durable"])
         with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
             configuration.main(["record", str(path), "--kind", "durable", "--dirty-ratio", "5"])
+
+    def test_memory_high_belongs_to_a_memory_limit(self):
+        path = self.measured("durable.json", configuration.VARIANTS["durable"])
+        with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+            configuration.main(["record", str(path), "--kind", "durable", "--memory-high-bytes", "1024"])
 
     def test_an_empty_download_has_no_tables(self):
         with self.assertRaisesRegex(ValueError, "No configured reports"):

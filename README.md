@@ -144,30 +144,36 @@ results:
   `Doublets United NonVolatile` and `Doublets Split NonVolatile` in a cgroup
   with `memory.max` of 24 MiB at 1,000,000 links and 240 MiB at 10,000,000
   links, without swap. The limit charges the page cache too, so the stores'
-  pages are read back from the disk. The warm-up on 10,000 links fits in
-  either limit. With the kernel's default dirty page thresholds, the united
-  store's dirty pages and pages under writeback filled 21 MiB of the 24 MiB,
-  which reclaim cannot free, and the kernel killed it. Byte thresholds do not
-  help: the kernel applies `vm.dirty_bytes` to a cgroup as a fraction of the
-  runner's whole memory, rounded up to 1/4096, of the memory the cgroup can
-  use (`domain_dirty_limits` in `mm/page-writeback.c`). Set to 20% of the
-  limit, it came to a few pages, and every store, SQLite too, waited in
+  pages are read back from the disk. The warm-up on 10,000 links fits in either
+  limit. With the kernel's default dirty page thresholds, the united store's
+  dirty pages and pages under writeback filled 21 MiB of the 24 MiB, which
+  reclaim cannot free, and the kernel killed it. Byte thresholds do not help:
+  the kernel applies `vm.dirty_bytes` to a cgroup as a fraction of the runner's
+  whole memory, rounded up to 1/4096, of the memory the cgroup can use
+  (`domain_dirty_limits` in `mm/page-writeback.c`). Set to 20% of the limit, it
+  came to a few pages, and every store, SQLite too, waited in
   `balance_dirty_pages` for most of the pages it wrote. So the runner's
   `vm.dirty_ratio` and `vm.dirty_background_ratio` are lowered to 5% and 2%,
-  which the kernel applies to the memory the cgroup can use. Under
-  pressure a store can take hours, so each storage runs in its own job of
-  the run, and the jobs' reports are merged into one table. A store still
-  running after 340 minutes, the time a job has for it, is stopped. Its row
-  keeps the phases it finished, from the phase log the benchmark writes with
-  `--phases`, a lower bound for the phase in progress and `—` for the rest,
-  and a note under the table names it. A second table
-  shows each job's runner, disk latencies, the cgroup's `memory.peak` and
-  major page faults; the provenance line shows both thresholds. Only the
-  mapped stores' misses are page faults: SQLite reads its file with `read`.
-  `SQLite File Tuned` is left out, because its 1 GiB cache would be
-  anonymous memory charged to the limit. The transactional store can't take
-  part: its decorator keeps every transition and a full snapshot of the links
-  in memory, which no limit small enough to create pressure can hold.
+  which the kernel applies to the memory the cgroup can use. That alone did not
+  save the united store: the kernel compares the cgroup's dirty pages with its
+  thresholds by counts it refreshes every two seconds
+  (`mem_cgroup_flush_stats_ratelimited` in `mm/memcontrol.c`), and the store
+  filled the limit within four. So `memory.high` is set to 7/8 of the limit: a
+  store above it reclaims and waits on its way back to user space, which gives
+  the writeback time to finish before `memory.max`. Under pressure a store can
+  take hours, so each storage runs in its own job of the run, and the jobs'
+  reports are merged into one table. A store still running after 340 minutes,
+  the time a job has for it, is stopped. Its row keeps the phases it finished,
+  from the phase log the benchmark writes with `--phases`, a lower bound for the
+  phase in progress and `—` for the rest, and a note under the table names it. A
+  second table shows each job's runner, disk latencies, the cgroup's
+  `memory.peak` and major page faults; the provenance line shows `memory.high`
+  and both dirty page thresholds. Only the mapped stores' misses are page
+  faults: SQLite reads its file with `read`. `SQLite File Tuned` is left out,
+  because its 1 GiB cache would be anonymous memory charged to the limit. The
+  transactional store can't take part: its decorator keeps every transition and
+  a full snapshot of the links in memory, which no limit small enough to create
+  pressure can hold.
 
 Both kinds record the disk the stores use: the median latency of a random
 4 KiB read that bypasses the page cache (`O_DIRECT`) and of an `fsync` after

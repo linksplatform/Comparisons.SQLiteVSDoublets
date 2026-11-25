@@ -7,6 +7,9 @@
 //! "index out of bounds" in `InternalSourcesRecursionlessTree::detach_core`.
 //! Creating such a link works, because a fresh link has `source == 0`.
 //!
+//! doublets 0.21.0 fixes it: every scenario passes for both stores, so the benchmark no longer
+//! updates such links to `(0, 0)` first.
+//!
 //! Usage: `cargo run --release -- <unit|split|dump> <scenario index>`, exit code 101 is the panic.
 use doublets::{Doublets, mem::Global, split, unit};
 

@@ -25,14 +25,20 @@ pub struct SqliteBlogPosts<T> {
 
 impl<T: LinkReference> SqliteBlogPosts<T> {
     pub fn open(path: impl AsRef<Path>) -> Self {
-        Self::new(Connection::open(path).unwrap())
+        Self::new(Connection::open(path).unwrap(), "")
+    }
+
+    /// Opens the file with the pragmas of [`crate::links::TUNING`].
+    pub fn open_tuned(path: impl AsRef<Path>) -> Self {
+        Self::new(Connection::open(path).unwrap(), crate::links::TUNING)
     }
 
     pub fn in_memory() -> Self {
-        Self::new(Connection::open_in_memory().unwrap())
+        Self::new(Connection::open_in_memory().unwrap(), "")
     }
 
-    fn new(connection: Connection) -> Self {
+    fn new(connection: Connection, pragmas: &str) -> Self {
+        connection.execute_batch(pragmas).unwrap();
         connection
             .execute_batch(
                 "CREATE TABLE blog_posts (id INTEGER PRIMARY KEY, title TEXT NOT NULL, content TEXT NOT NULL, publication_date INTEGER NOT NULL)",

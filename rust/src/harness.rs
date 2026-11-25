@@ -3,12 +3,13 @@
 
 use crate::{
     dataset::{self, blog_post, link, mix, scattered},
-    links::{DoubletsLinks, Link, LinksStorage, SqliteLinks},
-    memory::{Whole, volatile},
+    links::{DoubletsLinks, Link, LinksStorage, SqliteLinks, TransactionalLinks},
+    memory::volatile,
     objects::{BlogPostsStorage, DoubletsBlogPosts, SqliteBlogPosts},
 };
 use doublets::{
     data::{LinkReference, LinksConstants},
+    decorators::{DecoratorsExt, FileTransitionLog},
     mem::FileMapped,
     split, unit,
 };
@@ -19,18 +20,24 @@ use std::{
     time::{Duration, Instant},
 };
 
-pub const LINKS_VARIANTS: [&str; 6] = [
+pub const LINKS_VARIANTS: [&str; 7] = [
     "SQLite_Memory",
     "SQLite_File",
+    "SQLite_File_Tuned",
     "Doublets_United_Volatile",
     "Doublets_United_NonVolatile",
     "Doublets_Split_Volatile",
     "Doublets_Split_NonVolatile",
 ];
 
-pub const OBJECTS_VARIANTS: [&str; 10] = [
+/// Links variants that run only when named with `--variants`: the transactional store calls
+/// `fsync` for every written link, which would not fit the time of the regular runs.
+pub const OPTIONAL_LINKS_VARIANTS: [&str; 1] = ["Doublets_United_NonVolatile_Transactional"];
+
+pub const OBJECTS_VARIANTS: [&str; 11] = [
     "SQLite_Memory",
     "SQLite_File",
+    "SQLite_File_Tuned",
     "Doublets_United_Volatile_Cached",
     "Doublets_United_Volatile_Uncached",
     "Doublets_United_NonVolatile_Cached",
@@ -365,7 +372,7 @@ fn file(directory: &Path, name: &str) -> PathBuf {
     directory.join(name)
 }
 
-fn mapped<P>(directory: &Path, name: &str) -> Whole<FileMapped<P>> {
+fn mapped<P>(directory: &Path, name: &str) -> FileMapped<P> {
     crate::memory::mapped(file(directory, name))
 }
 
@@ -392,6 +399,14 @@ pub fn measure_links<T: LinkReference>(
             |dir| SqliteLinks::<T>::open(file(dir, "links.db")),
             links_lifecycle,
         ),
+        "SQLite_File_Tuned" => measure(
+            variant,
+            n,
+            repetitions,
+            directory,
+            |dir| SqliteLinks::<T>::open_tuned(file(dir, "links.db")),
+            links_lifecycle,
+        ),
         "Doublets_United_Volatile" => measure(
             variant,
             n,
@@ -406,6 +421,24 @@ pub fn measure_links<T: LinkReference>(
             repetitions,
             directory,
             |dir| DoubletsLinks::new(unit::Store::<T, _>::new(mapped(dir, "links.links")).unwrap()),
+            links_lifecycle,
+        ),
+        "Doublets_United_NonVolatile_Transactional" => measure(
+            variant,
+            n,
+            repetitions,
+            directory,
+            // the journal as shipped, which calls `sync_all` after every record it appends
+            |dir| {
+                TransactionalLinks::new(
+                    unit::Store::<T, _>::new(mapped(dir, "links.links"))
+                        .unwrap()
+                        .with_transactions(
+                            FileTransitionLog::open(file(dir, "links.journal")).unwrap(),
+                        )
+                        .unwrap(),
+                )
+            },
             links_lifecycle,
         ),
         "Doublets_Split_Volatile" => measure(
@@ -461,6 +494,14 @@ pub fn measure_objects<T: LinkReference>(
             repetitions,
             directory,
             |dir| SqliteBlogPosts::<T>::open(file(dir, "blog_posts.db")),
+            objects_lifecycle,
+        ),
+        "SQLite_File_Tuned" => measure(
+            variant,
+            n,
+            repetitions,
+            directory,
+            |dir| SqliteBlogPosts::<T>::open_tuned(file(dir, "blog_posts.db")),
             objects_lifecycle,
         ),
         "Doublets_United_Volatile" => measure(

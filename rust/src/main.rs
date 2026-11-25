@@ -6,7 +6,9 @@
 
 use doublets::data::LinkReference;
 use serde_json::json;
-use sqlite_vs_doublets::harness::{self, LINKS_VARIANTS, Measurement, OBJECTS_VARIANTS};
+use sqlite_vs_doublets::harness::{
+    self, LINKS_VARIANTS, Measurement, OBJECTS_VARIANTS, OPTIONAL_LINKS_VARIANTS,
+};
 use std::{collections::HashMap, env, fs, path::Path};
 
 const LINKS_WORK: u64 = 3_000_000;
@@ -39,22 +41,24 @@ fn main() {
         .map_or((work / size).clamp(1, MAX_REPETITIONS) as usize, |count| {
             count.parse().unwrap()
         });
-    let all_variants: &[&'static str] = if category == "links" {
-        &LINKS_VARIANTS
-    } else {
-        &OBJECTS_VARIANTS
-    };
+    let (default_variants, optional_variants): (&[&'static str], &[&'static str]) =
+        if category == "links" {
+            (&LINKS_VARIANTS, &OPTIONAL_LINKS_VARIANTS)
+        } else {
+            (&OBJECTS_VARIANTS, &[])
+        };
     let variants: Vec<&'static str> = match options.get("variants") {
         Some(names) => names
             .split(',')
             .map(|name| {
-                *all_variants
+                *default_variants
                     .iter()
+                    .chain(optional_variants)
                     .find(|known| **known == name)
                     .expect(name)
             })
             .collect(),
-        None => all_variants.to_vec(),
+        None => default_variants.to_vec(),
     };
     let directory = options
         .get("directory")

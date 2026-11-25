@@ -1,12 +1,13 @@
 use doublets::{
     data::{LinkReference, LinksConstants},
+    decorators::{DecoratorsExt, JournalEntry, MemoryTransitionLog},
     mem::Global,
     split, unit,
 };
 use sqlite_vs_doublets::{
     dataset::{BlogPost, blog_post, link, scattered},
-    harness::{self, LINKS_VARIANTS, OBJECTS_VARIANTS},
-    links::{DoubletsLinks, Link, LinksStorage, SqliteLinks},
+    harness::{self, LINKS_VARIANTS, OBJECTS_VARIANTS, OPTIONAL_LINKS_VARIANTS},
+    links::{DoubletsLinks, Link, LinksStorage, SqliteLinks, TransactionalLinks},
     memory::volatile,
     objects::{BlogPostsStorage, DoubletsBlogPosts, SqliteBlogPosts},
 };
@@ -40,6 +41,92 @@ fn every_links_variant_passes_the_lifecycle() {
         harness::measure_links::<u32>(variant, SIZE, 1, &directory);
         harness::measure_links::<u64>(variant, SIZE, 1, &directory);
     }
+}
+
+#[test]
+fn every_optional_links_variant_passes_the_lifecycle() {
+    // Every written link is an fsync of the journal, so this size keeps the test short.
+    let directory = tempdir("optional-links");
+    for variant in OPTIONAL_LINKS_VARIANTS {
+        harness::measure_links::<u32>(variant, 100, 1, &directory);
+        harness::measure_links::<u64>(variant, 100, 1, &directory);
+    }
+}
+
+fn entries(
+    links: &TransactionalLinks<u32, impl doublets::Doublets<u32>, MemoryTransitionLog<u32>>,
+) -> Vec<String> {
+    links
+        .store()
+        .journal()
+        .entries()
+        .iter()
+        .map(|entry| match entry {
+            JournalEntry::Begin { snapshot, .. } => format!("begin {}", snapshot.len()),
+            JournalEntry::Commit { snapshot, .. } => format!("commit {}", snapshot.len()),
+            JournalEntry::Rollback { .. } => "rollback".into(),
+            JournalEntry::Transition(_) => "transition".into(),
+        })
+        .filter(|entry| entry != "transition")
+        .collect()
+}
+
+#[test]
+fn transactional_store_commits_one_transaction_per_written_phase() {
+    let mut links = TransactionalLinks::new(
+        unit::Store::<u32, _>::new(Global::new())
+            .unwrap()
+            .with_transactions(MemoryTransitionLog::default())
+            .unwrap(),
+    );
+    harness::links_lifecycle(&mut links, 100, &mut || {});
+    // create, update and delete; the five read phases begin nothing
+    assert_eq!(
+        entries(&links),
+        [
+            "begin 0",
+            "commit 100",
+            "begin 100",
+            "commit 100",
+            "begin 100",
+            "commit 0"
+        ]
+    );
+    let mut kinds = [0; 3];
+    for entry in links.store().journal().entries() {
+        if let JournalEntry::Transition(transition) = entry {
+            kinds[transition.kind as usize] += 1;
+        }
+    }
+    // creates, updates and deletes: each create_link is a create and an update, and the update
+    // phase changes every link but the point (1, 1); every one is an fsync of a file journal
+    assert_eq!(kinds, [100, 100 + 99, 100]);
+}
+
+#[test]
+fn transactional_store_journals_writes_outside_a_phase_one_by_one() {
+    let mut links = TransactionalLinks::new(
+        unit::Store::<u32, _>::new(Global::new())
+            .unwrap()
+            .with_transactions(MemoryTransitionLog::default())
+            .unwrap(),
+    );
+    let point = links.create(1, 1);
+    let read = links.transaction(|links| links.get(point));
+    assert_eq!(
+        read,
+        Some(Link {
+            id: point,
+            from: 1,
+            to: 1
+        })
+    );
+    // create_link is a create and an update, each committed by itself outside a phase,
+    // and the read-only phase writes nothing
+    assert_eq!(
+        entries(&links),
+        ["begin 0", "commit 1", "begin 1", "commit 1"]
+    );
 }
 
 #[test]
@@ -130,6 +217,12 @@ fn lifecycle_rejects_a_storage_that_loses_records() {
         }
         fn count(&self) -> u64 {
             self.0.count()
+        }
+
+        type Phase<'a> = Self;
+
+        fn transaction<R>(&mut self, work: impl FnOnce(&mut Self) -> R) -> R {
+            work(self)
         }
     }
 

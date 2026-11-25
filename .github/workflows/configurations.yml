@@ -125,15 +125,14 @@ jobs:
             sudo sysctl -q vm.dirty_ratio=5 vm.dirty_background_ratio=2
             # The cgroup's dirty and writeback counts that balance_dirty_pages compares with its thresholds are
             # flushed every few seconds (mem_cgroup_wb_stats), long enough for the united store to dirty the
-            # whole limit (run 45683252380: killed 4 seconds into create with 23 MiB under writeback). With
-            # strict_limit on the storage disk the throttling counts the pages of the cgroup's own writeback.
-            device=/sys/dev/block/$(findmnt -no MAJ:MIN -T "$(dirname "$STORAGE")" | tr -d ' ')
-            if [ -e "$device/partition" ]; then device=$device/..; fi
-            bdi=$(readlink -f "$device/bdi")
-            echo 1 | sudo tee "$bdi/strict_limit" > /dev/null
-            echo "$bdi: strict_limit $(cat "$bdi/strict_limit"), max_ratio $(cat "$bdi/max_ratio")"
+            # whole limit (run 45683252380: killed 4 seconds into create with 23 MiB under writeback).
+            # strict_limit on the storage disk throttled the mapped stores to a few MiB in six minutes
+            # (run 45685437372). memory.high at 7/8 of the limit makes a store over it reclaim and wait on
+            # its way back to user space, which gives the writeback time to finish before memory.max.
+            high_kib=$((LIMIT_MIB * 1024 * 7 / 8))
             status=0
-            sudo systemd-run --scope --quiet -p "MemoryMax=${LIMIT_MIB}M" -p MemorySwapMax=0 -p OOMPolicy=continue \
+            sudo systemd-run --scope --quiet -p "MemoryMax=${LIMIT_MIB}M" -p "MemoryHigh=${high_kib}K" \
+              -p MemorySwapMax=0 -p OOMPolicy=continue \
               --same-dir -- \
               sh scripts/memory_limit_run.sh "$RUNNER_TEMP/cgroup-stats" "$budget" \
               "${benchmark[@]}" --phases "$RUNNER_TEMP/phases.jsonl" || status=$?

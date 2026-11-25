@@ -158,7 +158,8 @@ results:
   pressure a store can take hours, so each storage runs in its own job of
   the run, and the jobs' reports are merged into one table. A second table
   shows each job's runner, disk latencies, the cgroup's `memory.peak` and
-  major page faults; the provenance line shows both thresholds.
+  major page faults; the provenance line shows both thresholds. Only the
+  mapped stores' misses are page faults: SQLite reads its file with `read`.
   `SQLite File Tuned` is left out, because its 1 GiB cache would be
   anonymous memory charged to the limit. The transactional store can't take
   part: its decorator keeps every transition and a full snapshot of the links

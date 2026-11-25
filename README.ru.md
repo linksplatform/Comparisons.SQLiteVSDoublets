@@ -209,7 +209,9 @@ python3 scripts/benchmark_provenance.py \
 python3 scripts/benchmark_configuration.py record \
   results/configured/durable-links-rust-32-100000.json \
   --kind durable --disk "$(cat disk.json)"
-python3 scripts/benchmark_report.py results --configurations results/configured
+# Записывает README с локальными таблицами после опубликованных результатов.
+python3 scripts/benchmark_report.py docs/benchmarks/results \
+  --configurations results/configured > configured.md
 ```
 
 Локальный запуск:

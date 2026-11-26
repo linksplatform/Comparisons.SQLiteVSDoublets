@@ -1,0 +1,106 @@
+{
+  "bits": 32,
+  "category": "links",
+  "language": "Rust",
+  "repetitions": 1,
+  "results": [
+    {
+      "file_bytes": 50540544,
+      "operations": {
+        "create": {
+          "max_ns": 36624.635715,
+          "median_ns": 36624.635715,
+          "min_ns": 36624.635715,
+          "samples_ns": [
+            36624.635715
+          ]
+        },
+        "delete": {
+          "max_ns": 276763.863902,
+          "median_ns": 276763.863902,
+          "min_ns": 276763.863902,
+          "samples_ns": [
+            276763.863902
+          ]
+        },
+        "query_all": {
+          "max_ns": 225.86666,
+          "median_ns": 225.86666,
+          "min_ns": 225.86666,
+          "samples_ns": [
+            225.86666
+          ]
+        },
+        "query_by_from": {
+          "max_ns": 37028.627508,
+          "median_ns": 37028.627508,
+          "min_ns": 37028.627508,
+          "samples_ns": [
+            37028.627508
+          ]
+        },
+        "query_by_from_to": {
+          "max_ns": 35468.558701,
+          "median_ns": 35468.558701,
+          "min_ns": 35468.558701,
+          "samples_ns": [
+            35468.558701
+          ]
+        },
+        "query_by_id": {
+          "max_ns": 90356.90987,
+          "median_ns": 90356.90987,
+          "min_ns": 90356.90987,
+          "samples_ns": [
+            90356.90987
+          ]
+        },
+        "query_by_to": {
+          "max_ns": 17439.680395,
+          "median_ns": 17439.680395,
+          "min_ns": 17439.680395,
+          "samples_ns": [
+            17439.680395
+          ]
+        },
+        "update": {
+          "max_ns": 574579.026128,
+          "median_ns": 574579.026128,
+          "min_ns": 574579.026128,
+          "samples_ns": [
+            574579.026128
+          ]
+        }
+      },
+      "variant": "SQLite_File"
+    }
+  ],
+  "size": 1000000,
+  "sqlite_version": "3.54.1",
+  "warm_up_seconds": 1.0,
+  "warm_up_size": 10000,
+  "run_url": "https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/45689097621",
+  "source_sha": "326f6e14f9fd4619fb41abeb7a7cb535992c4d26",
+  "tree_sha": "da294142072170d18aaac850cdaa1380086a5b70",
+  "date": "2026-11-25",
+  "machine": "Ubuntu 24.04.5 LTS, Intel(R) Xeon(R) 6975P-C, 4 cores, 15 GiB",
+  "software": {
+    "libraries": {
+      "doublets": "0.21.0"
+    },
+    "toolchain": "rustc 1.100.0 (0ef1bc386 2026-11-09)"
+  },
+  "configuration": {
+    "kind": "memory_limit",
+    "memory_limit_bytes": 25165824,
+    "memory_high_bytes": 22020096,
+    "peak_bytes": 22282240,
+    "major_faults": 16,
+    "dirty_ratio": 5,
+    "dirty_background_ratio": 2,
+    "disk": {
+      "random_read_4k_ns": 96621.0,
+      "fsync_ns": 134288.0
+    }
+  }
+}

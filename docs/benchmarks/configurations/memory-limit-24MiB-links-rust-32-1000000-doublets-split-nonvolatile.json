@@ -1,0 +1,103 @@
+{
+  "bits": 32,
+  "category": "links",
+  "language": "Rust",
+  "repetitions": 1,
+  "size": 1000000,
+  "sqlite_version": "3.54.1",
+  "warm_up_seconds": 1.0,
+  "warm_up_size": 10000,
+  "results": [
+    {
+      "variant": "Doublets_Split_NonVolatile",
+      "file_bytes": 41943040,
+      "operations": {
+        "create": {
+          "median_ns": 345054.571643,
+          "min_ns": 345054.571643,
+          "max_ns": 345054.571643,
+          "samples_ns": [
+            345054.571643
+          ]
+        },
+        "query_all": {
+          "median_ns": 48.608668,
+          "min_ns": 48.608668,
+          "max_ns": 48.608668,
+          "samples_ns": [
+            48.608668
+          ]
+        },
+        "query_by_id": {
+          "median_ns": 465515.852389,
+          "min_ns": 465515.852389,
+          "max_ns": 465515.852389,
+          "samples_ns": [
+            465515.852389
+          ]
+        },
+        "query_by_from_to": {
+          "median_ns": 839528.481551,
+          "min_ns": 839528.481551,
+          "max_ns": 839528.481551,
+          "samples_ns": [
+            839528.481551
+          ]
+        },
+        "query_by_from": {
+          "median_ns": 556242.74897,
+          "min_ns": 556242.74897,
+          "max_ns": 556242.74897,
+          "samples_ns": [
+            556242.74897
+          ]
+        },
+        "query_by_to": {
+          "median_ns": 561312.544097,
+          "min_ns": 561312.544097,
+          "max_ns": 561312.544097,
+          "samples_ns": [
+            561312.544097
+          ]
+        },
+        "update": {
+          "median_ns": 2643003.33793,
+          "min_ns": 2643003.33793,
+          "max_ns": 2643003.33793,
+          "samples_ns": [
+            2643003.33793
+          ]
+        }
+      },
+      "unfinished": {
+        "after_seconds": 20400,
+        "operation": "delete",
+        "lower_bound_ns": 14987158.258904
+      }
+    }
+  ],
+  "run_url": "https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/45689097621",
+  "source_sha": "326f6e14f9fd4619fb41abeb7a7cb535992c4d26",
+  "tree_sha": "da294142072170d18aaac850cdaa1380086a5b70",
+  "date": "2026-11-26",
+  "machine": "Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB",
+  "software": {
+    "libraries": {
+      "doublets": "0.21.0"
+    },
+    "toolchain": "rustc 1.100.0 (0ef1bc386 2026-11-09)"
+  },
+  "configuration": {
+    "kind": "memory_limit",
+    "memory_limit_bytes": 25165824,
+    "memory_high_bytes": 22020096,
+    "peak_bytes": 22528000,
+    "major_faults": 51081818,
+    "dirty_ratio": 5,
+    "dirty_background_ratio": 2,
+    "disk": {
+      "random_read_4k_ns": 127069.0,
+      "fsync_ns": 247725.0
+    }
+  }
+}

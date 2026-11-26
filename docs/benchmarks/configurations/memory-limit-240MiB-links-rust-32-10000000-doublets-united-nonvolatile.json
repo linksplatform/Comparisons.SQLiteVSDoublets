@@ -1,0 +1,46 @@
+{
+  "bits": 32,
+  "category": "links",
+  "language": "Rust",
+  "repetitions": 1,
+  "size": 10000000,
+  "sqlite_version": "3.54.1",
+  "warm_up_seconds": 1.0,
+  "warm_up_size": 10000,
+  "results": [
+    {
+      "variant": "Doublets_United_NonVolatile",
+      "file_bytes": null,
+      "operations": {},
+      "unfinished": {
+        "after_seconds": 20400,
+        "operation": "create",
+        "lower_bound_ns": 2039796.8004306
+      }
+    }
+  ],
+  "run_url": "https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/45689097621",
+  "source_sha": "326f6e14f9fd4619fb41abeb7a7cb535992c4d26",
+  "tree_sha": "da294142072170d18aaac850cdaa1380086a5b70",
+  "date": "2026-11-26",
+  "machine": "Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB",
+  "software": {
+    "libraries": {
+      "doublets": "0.21.0"
+    },
+    "toolchain": "rustc 1.100.0 (0ef1bc386 2026-11-09)"
+  },
+  "configuration": {
+    "kind": "memory_limit",
+    "memory_limit_bytes": 251658240,
+    "memory_high_bytes": 220200960,
+    "peak_bytes": 223698944,
+    "major_faults": 20756046,
+    "dirty_ratio": 5,
+    "dirty_background_ratio": 2,
+    "disk": {
+      "random_read_4k_ns": 130499.0,
+      "fsync_ns": 197509.0
+    }
+  }
+}

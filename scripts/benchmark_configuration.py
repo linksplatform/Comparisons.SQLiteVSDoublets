@@ -1,26 +1,25 @@
-"""Probe the disk of a benchmark directory and label a report measured in a non-default configuration.
+"""Probe the disk of a benchmark directory and label a report measured in a non-default configuration."""
 
-Usage:
-  benchmark_configuration.py plan PLAN_JSON
-  benchmark_configuration.py report DIRECTORY --sha SHA
-  benchmark_configuration.py probe DIRECTORY [--file-mib N] [--reads N] [--syncs N]
-  benchmark_configuration.py record REPORT --kind durable|memory_limit [--disk JSON]
-      [--memory-limit-bytes N] [--cgroup-stats FILE] [--memory-high-bytes N]
-      [--dirty-ratio PERCENT] [--dirty-background-ratio PERCENT]
-  benchmark_configuration.py unfinished PHASES --variants A,B --after-seconds N
-
-`probe` prints the median latency of random 4 KiB reads that bypass the page cache (O_DIRECT) and of
-an `fsync` after a small append, the two disk operations the configured tables pay for: page misses under
-a memory limit and the journal syncs of the transactional store.
-`record` adds the configuration, the probed latencies and the cgroup's memory.peak and major page
-faults (a file with `memory.peak` followed by `memory.stat`, as the configured workflow writes it), and
-for a memory limit run its cgroup's memory.high and the kernel's dirty page ratios.
-`plan` validates the runs of a configured benchmark workflow and prints its job matrix, with a job per
-storage under a memory limit, and `report` validates the reports the runs wrote and prints their tables.
-`unfinished` prints the report of a run that was stopped after N seconds, from the phase log the benchmark
-wrote with `--phases`: the phases it finished, and for the phase in progress the time per operation it
-had already spent, a lower bound.
-"""
+# Usage:
+#   benchmark_configuration.py plan PLAN_JSON
+#   benchmark_configuration.py report DIRECTORY --sha SHA
+#   benchmark_configuration.py probe DIRECTORY [--file-mib N] [--reads N] [--syncs N]
+#   benchmark_configuration.py record REPORT --kind durable|memory_limit [--disk JSON]
+#       [--memory-limit-bytes N] [--cgroup-stats FILE] [--memory-high-bytes N]
+#       [--dirty-ratio PERCENT] [--dirty-background-ratio PERCENT]
+#   benchmark_configuration.py unfinished PHASES --variants A,B --after-seconds N
+#
+# `probe` prints the median latency of random 4 KiB reads that bypass the page cache (O_DIRECT) and of
+# an `fsync` after a small append, the two disk operations the configured tables pay for: page misses under
+# a memory limit and the journal syncs of the transactional store.
+# `record` adds the configuration, the probed latencies and the cgroup's memory.peak and major page
+# faults (a file with `memory.peak` followed by `memory.stat`, as the configured workflow writes it), and
+# for a memory limit run its cgroup's memory.high and the kernel's dirty page ratios.
+# `plan` validates the runs of a configured benchmark workflow and prints its job matrix, with a job per
+# storage under a memory limit, and `report` validates the reports the runs wrote and prints their tables.
+# `unfinished` prints the report of a run that was stopped after N seconds, from the phase log the benchmark
+# wrote with `--phases`: the phases it finished, and for the phase in progress the time per operation it
+# had already spent, a lower bound.
 
 import argparse
 import json
@@ -38,11 +37,9 @@ VARIANTS = benchmark_report.CONFIGURED_VARIANTS
 
 
 def plan(runs):
-    """The matrix rows of `runs`: Rust links tables with their variants and, under a limit, its MiB.
-
-    Under a memory limit a store can take hours, so each storage gets its own job, named after it, and
-    the report merges the jobs' reports into one table.
-    """
+    """The matrix rows of `runs`: Rust links tables with their variants and, under a limit, its MiB."""
+    # Under a memory limit a store can take hours, so each storage gets its own job, named after it, and
+    # the report merges the jobs' reports into one table.
     if not isinstance(runs, list) or not 1 <= len(runs) <= 16:
         raise ValueError("the plan must list between 1 and 16 runs")
     rows = []
@@ -146,11 +143,9 @@ def cgroup_stats(path):
 
 
 def record(path, kind, disk=None, memory_limit_bytes=None, stats=None, dirty=None, memory_high_bytes=None):
-    """Add the configuration while preserving every measurement and existing metadata field.
-
-    `dirty` holds the kernel's dirty page thresholds of a memory limit run, `dirty_ratio` and
-    `dirty_background_ratio`, in percent, and `memory_high_bytes` its cgroup's memory.high.
-    """
+    """Add the configuration while preserving every measurement and existing metadata field."""
+    # `dirty` holds the kernel's dirty page thresholds of a memory limit run, `dirty_ratio` and
+    # `dirty_background_ratio`, in percent, and `memory_high_bytes` its cgroup's memory.high.
     data = json.loads(path.read_text(encoding="utf-8"))
     configuration = {"kind": kind}
     if memory_limit_bytes is not None:
@@ -226,7 +221,7 @@ def report(directory, sha):
 
 
 def main(arguments=None):
-    parser = argparse.ArgumentParser(description=__doc__.split("\n", 1)[0])
+    parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     planning = commands.add_parser("plan")
     planning.add_argument("plan", type=json.loads)

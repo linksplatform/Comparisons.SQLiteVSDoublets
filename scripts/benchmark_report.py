@@ -234,10 +234,8 @@ def load(directory):
 
 
 def load_configurations(directory):
-    """The configured reports in `directory`, if it exists, keyed by configuration_key().
-
-    The reports of one memory limit table, measured by separate jobs of one run, are merged into one.
-    """
+    """The configured reports in `directory`, if it exists, keyed by configuration_key()."""
+    # The reports of one memory limit table, measured by separate jobs of one run, are merged into one.
     groups: dict[tuple, list[tuple[Path, dict]]] = {}
     for path in sorted(Path(directory).glob("*.json")):
         report = json.loads(path.read_text(encoding="utf-8"))
@@ -257,25 +255,30 @@ def load_configurations(directory):
     return reports
 
 
-def merge_jobs(group):
-    """One table of the (path, report) pairs that separate jobs of one run measured, a storage each.
+def picked(mapping, keys):
+    """The entries of `mapping` under the `keys` it has."""
+    return {key: mapping[key] for key in keys if key in mapping}
 
-    Everything but the runner, the date and the disk and memory of each job must match; they are kept
-    in the merged report's `jobs`, and its date is the date of the last job.
-    """
-    first_path, first = group[0]
-    shared = {key: value for key, value in first.items() if key not in (*JOB_FIELDS, "results")}
+
+def shared_fields(report):
+    """The fields of a job's report that every job of its memory limit table must share."""
+    shared = {key: value for key, value in report.items() if key not in (*JOB_FIELDS, "results")}
     shared["configuration"] = {
-        key: value for key, value in first["configuration"].items() if key not in JOB_CONFIGURATION
+        key: value for key, value in report["configuration"].items() if key not in JOB_CONFIGURATION
     }
+    return shared
+
+
+def merge_jobs(group):
+    """One table of the (path, report) pairs that separate jobs of one run measured, a storage each."""
+    # Everything but the runner, the date and the disk and memory of each job must match; they are kept
+    # in the merged report's `jobs`, and its date is the date of the last job.
+    first_path, first = group[0]
+    shared = shared_fields(first)
     jobs: list[dict] = []
     results: list[dict] = []
     for path, report in group:
-        configuration = {
-            key: value for key, value in report["configuration"].items() if key not in JOB_CONFIGURATION
-        }
-        others = {key: value for key, value in report.items() if key not in (*JOB_FIELDS, "results")}
-        if {**others, "configuration": configuration} != shared:
+        if shared_fields(report) != shared:
             raise ValueError(f"{path} and {first_path} are not measured by one run in one configuration")
         variants = [result["variant"] for result in report["results"]]
         if any(result["variant"] in variants for result in results):
@@ -284,12 +287,8 @@ def merge_jobs(group):
         jobs.append(
             {
                 "variants": variants,
-                **{key: report[key] for key in JOB_FIELDS if key in report},
-                **{
-                    key: report["configuration"][key]
-                    for key in JOB_CONFIGURATION
-                    if key in report["configuration"]
-                },
+                **picked(report, JOB_FIELDS),
+                **picked(report["configuration"], JOB_CONFIGURATION),
             }
         )
     order = CONFIGURED_VARIANTS[shared["configuration"]["kind"]]
@@ -472,13 +471,11 @@ def validate_measurement(measurement):
 
 
 def baseline(variant, measured=()):
-    """The Microsoft.Data.Sqlite row each variant is compared with, among the `measured` variants.
-
-    Volatile stores are compared with SQLite Memory. File-backed stores without durability guarantees are
-    compared with the tuned SQLite file, whose page cache and memory map cover the file like the mapped
-    Doublets store, if it was measured. The transactional store pays for durability like SQLite File.
-    The tuned SQLite rows are compared with the stock ones and System.Data.SQLite with the same storage.
-    """
+    """The Microsoft.Data.Sqlite row each variant is compared with, among the `measured` variants."""
+    # Volatile stores are compared with SQLite Memory. File-backed stores without durability guarantees are
+    # compared with the tuned SQLite file, whose page cache and memory map cover the file like the mapped
+    # Doublets store, if it was measured. The transactional store pays for durability like SQLite File.
+    # The tuned SQLite rows are compared with the stock ones and System.Data.SQLite with the same storage.
     if variant.startswith("SQLite_File_"):
         return "SQLite_File"
     if variant.startswith("SQLite") or variant == "PostgreSQL_EFCore":
@@ -771,8 +768,7 @@ def configured_sections(configured, text):
 
 
 def section(reports, language_code, charts_link, configured=None):
-    """The Markdown results section in the category -> language -> bits -> size hierarchy,
-    followed by the configured reports and the conclusions."""
+    """The Markdown results section: category -> language -> bits -> size, configured reports, conclusions."""
     text = TEXT[language_code]
     lines = []
     for category in CATEGORIES:

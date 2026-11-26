@@ -19,13 +19,13 @@ public abstract class SQLiteStorage : IDisposable
     /// A 1 GiB page cache and a 1 GiB memory map instead of the 2 MiB page cache SQLite starts with;
     /// the <c>_Tuned</c> variants run them before the schema.
     /// </summary>
-    public const string Tuning = "PRAGMA cache_size = -1048576; PRAGMA mmap_size = 1073741824;";
+    public static string Tuning { get; } = "PRAGMA cache_size = -1048576; PRAGMA mmap_size = 1073741824;";
 
     private readonly DbConnection _connection;
     private readonly List<DbCommand> _commands = [];
     private readonly string _table;
 
-    protected SQLiteStorage(string path, string table, string schema, SQLiteProvider provider, string pragmas = "")
+    protected SQLiteStorage(string path, string table, string schema, SQLiteProvider provider, string pragmas)
     {
         _connection = OpenConnection(path, provider);
         _table = table;

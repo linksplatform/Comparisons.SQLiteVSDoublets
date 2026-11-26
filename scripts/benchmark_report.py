@@ -403,29 +403,30 @@ def validate_configuration(report):
         if TRANSACTIONAL not in variants or "SQLite_File" not in variants:
             raise ValueError(f"a durable report needs {TRANSACTIONAL} and SQLite File")
     elif configuration["kind"] == "memory_limit":
-        if TRANSACTIONAL in variants:
-            raise ValueError(
-                "the transactional store keeps its journal in memory and cannot run under a limit"
-            )
-        if not positive_integer(configuration.get("memory_limit_bytes")) or not positive_number(
-            disk.get("random_read_4k_ns")
-        ):
-            raise ValueError("a memory limit report needs the limit and the disk's random 4 KiB read latency")
-        for key in ("peak_bytes", "major_faults"):
-            if key in configuration and not isinstance(configuration[key], int):
-                raise ValueError(f"invalid {key}")
-        if "memory_high_bytes" in configuration and not (
-            positive_integer(configuration["memory_high_bytes"])
-            and configuration["memory_high_bytes"] <= configuration["memory_limit_bytes"]
-        ):
-            raise ValueError("invalid memory_high_bytes")
-        for key in ("dirty_ratio", "dirty_background_ratio"):
-            if key in configuration and not (
-                positive_integer(configuration[key]) and configuration[key] <= 100
-            ):
-                raise ValueError(f"invalid {key}")
+        validate_memory_limit(configuration, variants, disk)
     else:
         raise ValueError("unknown configuration")
+
+
+def validate_memory_limit(configuration, variants, disk):
+    """A memory limit report excludes the transactional store and records its limit and cgroup."""
+    if TRANSACTIONAL in variants:
+        raise ValueError("the transactional store keeps its journal in memory and cannot run under a limit")
+    if not positive_integer(configuration.get("memory_limit_bytes")) or not positive_number(
+        disk.get("random_read_4k_ns")
+    ):
+        raise ValueError("a memory limit report needs the limit and the disk's random 4 KiB read latency")
+    for key in ("peak_bytes", "major_faults"):
+        if key in configuration and not isinstance(configuration[key], int):
+            raise ValueError(f"invalid {key}")
+    if "memory_high_bytes" in configuration and not (
+        positive_integer(configuration["memory_high_bytes"])
+        and configuration["memory_high_bytes"] <= configuration["memory_limit_bytes"]
+    ):
+        raise ValueError("invalid memory_high_bytes")
+    for key in ("dirty_ratio", "dirty_background_ratio"):
+        if key in configuration and not (positive_integer(configuration[key]) and configuration[key] <= 100):
+            raise ValueError(f"invalid {key}")
 
 
 def positive_number(value):
@@ -590,23 +591,48 @@ def unfinished_note(report, text):
     )
 
 
-def provenance(report, text):
-    run = report.get("run_url")
+def software_versions(report, text):
+    """The libraries and the toolchain that measured `report`."""
     software = report.get("software")
     if software:
         libraries = software["libraries"]
         versions = "; ".join(f"{name} {version}" for name, version in libraries.items())
-        versions += f"; {software['toolchain']}"
+        return versions + f"; {software['toolchain']}"
+    # Older reports remain readable, but today's manifests are not measured provenance.
+    versions = "; ".join(
+        f"{name} {version}" for name, version in library_versions(report["language"]).items()
+    )
+    return versions + f" ({text['unrecorded']}); {text['toolchain_missing']}"
+
+
+def limit_provenance(report, text):
+    """The memory limit of `report` and, for one job, its cgroup's peak and major faults."""
+    configuration = report["configuration"]
+    limit = memory(configuration["memory_limit_bytes"])
+    if "jobs" in report:
+        value = " " + text["job_limit_provenance"].format(limit=limit)
     else:
-        # Older reports remain readable, but today's manifests are not measured provenance.
-        versions = "; ".join(
-            f"{name} {version}" for name, version in library_versions(report["language"]).items()
+        value = " " + text["limit_provenance"].format(
+            limit=limit,
+            peak=memory(configuration["peak_bytes"]) if "peak_bytes" in configuration else "—",
+            faults=size(configuration["major_faults"]) if "major_faults" in configuration else "—",
         )
-        versions += f" ({text['unrecorded']}); {text['toolchain_missing']}"
+    if "memory_high_bytes" in configuration:
+        value += " " + text["high_provenance"].format(high=memory(configuration["memory_high_bytes"]))
+    if "dirty_ratio" in configuration:
+        value += " " + text["dirty_provenance"].format(
+            dirty=configuration["dirty_ratio"],
+            background=configuration.get("dirty_background_ratio", "—"),
+        )
+    return value
+
+
+def provenance(report, text):
+    run = report.get("run_url")
     value = text["provenance"].format(
         repetitions=text["repetitions"](report["repetitions"]),
         sqlite=report["sqlite_version"],
-        software=versions,
+        software=software_versions(report, text),
         machine=text["job_machines"] if "jobs" in report else report.get("machine") or text["machine"],
         source=text["run"].format(url=run, date=report.get("date")) if run else text["local"],
     )
@@ -619,22 +645,7 @@ def provenance(report, text):
         )
     configuration = report.get("configuration", {})
     if "memory_limit_bytes" in configuration:
-        limit = memory(configuration["memory_limit_bytes"])
-        if "jobs" in report:
-            value += " " + text["job_limit_provenance"].format(limit=limit)
-        else:
-            value += " " + text["limit_provenance"].format(
-                limit=limit,
-                peak=memory(configuration["peak_bytes"]) if "peak_bytes" in configuration else "—",
-                faults=size(configuration["major_faults"]) if "major_faults" in configuration else "—",
-            )
-        if "memory_high_bytes" in configuration:
-            value += " " + text["high_provenance"].format(high=memory(configuration["memory_high_bytes"]))
-        if "dirty_ratio" in configuration:
-            value += " " + text["dirty_provenance"].format(
-                dirty=configuration["dirty_ratio"],
-                background=configuration.get("dirty_background_ratio", "—"),
-            )
+        value += limit_provenance(report, text)
     disk = configuration.get("disk", {})
     latencies = [
         text[name].format(value=duration(disk[key]))

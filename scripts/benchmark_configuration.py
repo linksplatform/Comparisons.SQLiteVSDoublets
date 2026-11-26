@@ -44,35 +44,8 @@ def plan(runs):
         raise ValueError("the plan must list between 1 and 16 runs")
     rows = []
     for run in runs:
-        if not isinstance(run, dict) or run.get("kind") not in VARIANTS:
-            raise ValueError(f"unknown configuration in {run}")
-        expected = {"kind", "bits", "size"} | ({"limit_mib"} if run["kind"] == "memory_limit" else set())
-        if set(run) != expected:
-            raise ValueError(f"{run} must have exactly {sorted(expected)}")
-        if run["bits"] not in (32, 64) or any(
-            not isinstance(run[key], int) or isinstance(run[key], bool) or run[key] < 1
-            for key in expected - {"kind"}
-        ):
-            raise ValueError(f"invalid bits, size or limit in {run}")
-        if run["size"] > 10_000_000:
-            raise ValueError("sizes stop at 10,000,000")
-        limit = f"-{run['limit_mib']}MiB" if "limit_mib" in run else ""
-        name = f"{run['kind'].replace('_', '-')}{limit}-links-rust-{run['bits']}-{run['size']}"
-        jobs = (
-            [[variant] for variant in VARIANTS[run["kind"]]]
-            if run["kind"] == "memory_limit"
-            else [list(VARIANTS[run["kind"]])]
-        )
-        for variants in jobs:
-            suffix = f"-{variants[0].lower().replace('_', '-')}" if len(variants) == 1 else ""
-            rows.append(
-                {
-                    **run,
-                    "limit_mib": run.get("limit_mib", 0),
-                    "name": name + suffix,
-                    "variants": ",".join(variants),
-                }
-            )
+        validate_run(run)
+        rows += run_rows(run)
     if len({row["name"] for row in rows}) != len(rows):
         raise ValueError("runs must be unique")
     return rows
@@ -165,6 +138,42 @@ def record(path, kind, disk=None, memory_limit_bytes=None, stats=None, dirty=Non
 START_UP_NS = 1_000_000_000
 
 
+def validate_run(run):
+    """Reject a run of a plan that is not a known configuration of valid bits, size and limit."""
+    if not isinstance(run, dict) or run.get("kind") not in VARIANTS:
+        raise ValueError(f"unknown configuration in {run}")
+    expected = {"kind", "bits", "size"} | ({"limit_mib"} if run["kind"] == "memory_limit" else set())
+    if set(run) != expected:
+        raise ValueError(f"{run} must have exactly {sorted(expected)}")
+    if run["bits"] not in (32, 64) or any(
+        not isinstance(run[key], int) or isinstance(run[key], bool) or run[key] < 1
+        for key in expected - {"kind"}
+    ):
+        raise ValueError(f"invalid bits, size or limit in {run}")
+    if run["size"] > 10_000_000:
+        raise ValueError("sizes stop at 10,000,000")
+
+
+def run_rows(run):
+    """The matrix rows of a valid `run`: a job per storage under a memory limit, otherwise one job."""
+    limit = f"-{run['limit_mib']}MiB" if "limit_mib" in run else ""
+    name = f"{run['kind'].replace('_', '-')}{limit}-links-rust-{run['bits']}-{run['size']}"
+    jobs = (
+        [[variant] for variant in VARIANTS[run["kind"]]]
+        if run["kind"] == "memory_limit"
+        else [list(VARIANTS[run["kind"]])]
+    )
+    return [
+        {
+            **run,
+            "limit_mib": run.get("limit_mib", 0),
+            "name": name + (f"-{variants[0].lower().replace('_', '-')}" if len(variants) == 1 else ""),
+            "variants": ",".join(variants),
+        }
+        for variants in jobs
+    ]
+
+
 def unfinished(path, variants, after_seconds):
     """The report of a run of `variants` stopped `after_seconds` after it started, from its phase log."""
     lines = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
@@ -175,35 +184,47 @@ def unfinished(path, variants, after_seconds):
         raise ValueError("a stopped run is reported only with one repetition")
     events = lines[1:]
     operations = benchmark_report.OPERATIONS[data["category"]]
-    stopped_ns = after_seconds * 1_000_000_000 - START_UP_NS
-    results = []
-    for variant in variants:
-        own = [event for event in events if event["variant"] == variant]
-        ended = {event["operation"]: event["ns_per_operation"] for event in own if event["event"] == "end"}
-        if list(ended) != list(operations[: len(ended)]):
-            raise ValueError(f"{variant} logged its phases out of order")
-        sizes = [event["file_bytes"] for event in own if event["event"] == "file"]
-        result = {
-            "variant": variant,
-            "file_bytes": sizes[-1] if sizes else None,
-            "operations": {
-                operation: {"median_ns": value, "min_ns": value, "max_ns": value, "samples_ns": [value]}
-                for operation, value in ended.items()
-            },
-        }
-        if len(ended) < len(operations):
-            operation = operations[len(ended)]
-            result["unfinished"] = {"after_seconds": after_seconds, "operation": operation}
-            began = [
-                event["at_ns"]
-                for event in own
-                if event["event"] == "begin" and event["operation"] == operation
-            ]
-            # Only the run in progress, the last one logged, spent the rest of the time in its phase.
-            if began and events[-1]["variant"] == variant and stopped_ns > began[-1]:
-                result["unfinished"]["lower_bound_ns"] = (stopped_ns - began[-1]) / data["size"]
-        results.append(result)
+    results = [
+        stopped_result(variant, events, operations, after_seconds, data["size"]) for variant in variants
+    ]
     return {**data, "results": results}
+
+
+def stopped_result(variant, events, operations, after_seconds, links):
+    """The result of `variant` in a run stopped `after_seconds` after it started: its finished phases."""
+    own = [event for event in events if event["variant"] == variant]
+    ended = {event["operation"]: event["ns_per_operation"] for event in own if event["event"] == "end"}
+    if list(ended) != list(operations[: len(ended)]):
+        raise ValueError(f"{variant} logged its phases out of order")
+    sizes = [event["file_bytes"] for event in own if event["event"] == "file"]
+    result = {
+        "variant": variant,
+        "file_bytes": sizes[-1] if sizes else None,
+        "operations": {
+            operation: {"median_ns": value, "min_ns": value, "max_ns": value, "samples_ns": [value]}
+            for operation, value in ended.items()
+        },
+    }
+    if len(ended) < len(operations):
+        result["unfinished"] = phase_in_progress(
+            variant, events, operations[len(ended)], after_seconds, links
+        )
+    return result
+
+
+def phase_in_progress(variant, events, operation, after_seconds, links):
+    """The phase `variant` had not finished when it was stopped, with a lower bound if it was running."""
+    phase = {"after_seconds": after_seconds, "operation": operation}
+    began = [
+        event["at_ns"]
+        for event in events
+        if event["variant"] == variant and event["event"] == "begin" and event["operation"] == operation
+    ]
+    stopped_ns = after_seconds * 1_000_000_000 - START_UP_NS
+    # Only the run in progress, the last one logged, spent the rest of the time in its phase.
+    if began and events[-1]["variant"] == variant and stopped_ns > began[-1]:
+        phase["lower_bound_ns"] = (stopped_ns - began[-1]) / links
+    return phase
 
 
 def report(directory, sha):

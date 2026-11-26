@@ -4,6 +4,10 @@
 //!   execute + last_insert_rowid: 1968-2181 ns/insert
 //!   query_row RETURNING id:      5804-6202 ns/insert
 //!   query + drain RETURNING id:  5862-6105 ns/insert
+//! rusqlite 0.43.0 (SQLite 3.54.1) gives the same ratio:
+//!   execute + last_insert_rowid: 1904-2057 ns/insert
+//!   query_row RETURNING id:      5130-5810 ns/insert
+//!   query + drain RETURNING id:  5468-5598 ns/insert
 use rusqlite::Connection;
 use std::time::Instant;
 

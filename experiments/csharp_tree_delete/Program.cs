@@ -9,6 +9,8 @@
 //   --self          united: fails at 8 links,  split: fails at 10 links
 //   --reset         united and split: no failure up to 151 links
 //   --self --reset  united and split: no failure up to 151 links
+// Platform.Data.Doublets 1.0.0 gives the same results; experiments/csharp_delete_minimal is the 5-link store of the
+// first failure.
 using Platform.Data;
 using Platform.Data.Doublets;
 using Platform.Data.Doublets.Memory.Split.Generic;

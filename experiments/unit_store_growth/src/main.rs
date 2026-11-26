@@ -6,8 +6,12 @@
 //! 2^20 − 1 are reserved: creating link 1,040,384 panics with "Data part should be in data memory"
 //! (or "index out of bounds" in a tree). A later growth would leave the store with an empty memory.
 //!
-//! Usage: `cargo run --release -- <bare|whole>`: `bare` panics, `whole` uses
-//! `sqlite_vs_doublets::memory::Whole` and creates 2^21 + 1 links, growing the memory twice.
+//! With doublets 0.5.0, `bare` panicked and `whole` used the benchmark's former `memory::Whole`
+//! wrapper, which returned the whole memory, to create 2^21 + 1 links, growing the memory twice.
+//! doublets 0.21.0 fixes it: both print `Ok(Ok(2097153))`, so the wrapper is gone and `whole`
+//! now runs the benchmark's own memory, which is the bare `Global`.
+//!
+//! Usage: `cargo run --release -- <bare|whole>`.
 use doublets::{Doublets, Error, mem::Global, unit};
 use sqlite_vs_doublets::memory::volatile;
 use std::{env, panic};

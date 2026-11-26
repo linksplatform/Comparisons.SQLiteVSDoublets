@@ -1,0 +1,95 @@
+{
+  "bits": 32,
+  "category": "links",
+  "language": "Rust",
+  "repetitions": 1,
+  "size": 1000000,
+  "sqlite_version": "3.54.1",
+  "warm_up_seconds": 1.0,
+  "warm_up_size": 10000,
+  "results": [
+    {
+      "variant": "Doublets_United_NonVolatile",
+      "file_bytes": 33554432,
+      "operations": {
+        "create": {
+          "median_ns": 1978265.237756,
+          "min_ns": 1978265.237756,
+          "max_ns": 1978265.237756,
+          "samples_ns": [
+            1978265.237756
+          ]
+        },
+        "query_all": {
+          "median_ns": 41.762373,
+          "min_ns": 41.762373,
+          "max_ns": 41.762373,
+          "samples_ns": [
+            41.762373
+          ]
+        },
+        "query_by_id": {
+          "median_ns": 143273.182625,
+          "min_ns": 143273.182625,
+          "max_ns": 143273.182625,
+          "samples_ns": [
+            143273.182625
+          ]
+        },
+        "query_by_from_to": {
+          "median_ns": 723438.566222,
+          "min_ns": 723438.566222,
+          "max_ns": 723438.566222,
+          "samples_ns": [
+            723438.566222
+          ]
+        },
+        "query_by_from": {
+          "median_ns": 905309.641218,
+          "min_ns": 905309.641218,
+          "max_ns": 905309.641218,
+          "samples_ns": [
+            905309.641218
+          ]
+        },
+        "query_by_to": {
+          "median_ns": 906184.833503,
+          "min_ns": 906184.833503,
+          "max_ns": 906184.833503,
+          "samples_ns": [
+            906184.833503
+          ]
+        }
+      },
+      "unfinished": {
+        "after_seconds": 20400,
+        "operation": "update",
+        "lower_bound_ns": 15741474.924544
+      }
+    }
+  ],
+  "run_url": "https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/45689097621",
+  "source_sha": "326f6e14f9fd4619fb41abeb7a7cb535992c4d26",
+  "tree_sha": "da294142072170d18aaac850cdaa1380086a5b70",
+  "date": "2026-11-26",
+  "machine": "Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB",
+  "software": {
+    "libraries": {
+      "doublets": "0.21.0"
+    },
+    "toolchain": "rustc 1.100.0 (0ef1bc386 2026-11-09)"
+  },
+  "configuration": {
+    "kind": "memory_limit",
+    "memory_limit_bytes": 25165824,
+    "memory_high_bytes": 22020096,
+    "peak_bytes": 22765568,
+    "major_faults": 55671063,
+    "dirty_ratio": 5,
+    "dirty_background_ratio": 2,
+    "disk": {
+      "random_read_4k_ns": 117028.5,
+      "fsync_ns": 215648.0
+    }
+  }
+}

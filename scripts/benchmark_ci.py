@@ -9,12 +9,12 @@ from pathlib import Path
 import benchmark_report
 
 VARIANTS = {
-    "links": {"SQLite_Memory", "SQLite_File"}
+    "links": {"SQLite_Memory", "SQLite_File", "SQLite_File_Tuned"}
     | {
         f"Doublets_{layout}_{durability}"
         for layout, durability in itertools.product(("United", "Split"), ("Volatile", "NonVolatile"))
     },
-    "objects": {"SQLite_Memory", "SQLite_File"}
+    "objects": {"SQLite_Memory", "SQLite_File", "SQLite_File_Tuned"}
     | {
         f"Doublets_{layout}_{durability}_{cache}"
         for layout, durability, cache in itertools.product(
@@ -28,7 +28,11 @@ def expected_variants(category, language):
     """C# also benchmarks the System.Data.SQLite provider introduced on main."""
     variants = VARIANTS[category]
     if language in ("C#", "csharp"):
-        variants = variants | {"SystemDataSQLite_Memory", "SystemDataSQLite_File"}
+        variants = variants | {
+            "SystemDataSQLite_Memory",
+            "SystemDataSQLite_File",
+            "SystemDataSQLite_File_Tuned",
+        }
         if category == "objects":
             variants = variants | {"PostgreSQL_EFCore"}
     return variants

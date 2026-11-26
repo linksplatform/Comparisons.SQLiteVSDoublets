@@ -105,9 +105,14 @@ class MatrixTests(unittest.TestCase):
         for category in ("links", "objects"):
             self.assertEqual(
                 ci.expected_variants(category, "C#") - ci.expected_variants(category, "Rust"),
-                {"SystemDataSQLite_Memory", "SystemDataSQLite_File"}
+                {"SystemDataSQLite_Memory", "SystemDataSQLite_File", "SystemDataSQLite_File_Tuned"}
                 | ({"PostgreSQL_EFCore"} if category == "objects" else set()),
             )
+
+    def test_both_languages_benchmark_the_tuned_sqlite_file(self):
+        for category in ("links", "objects"):
+            for language in ("Rust", "C#"):
+                self.assertIn("SQLite_File_Tuned", ci.expected_variants(category, language))
 
     def test_default_matrix_preserves_twenty_tables(self):
         rows = ci.matrix([100000, 1000000, 10000000])

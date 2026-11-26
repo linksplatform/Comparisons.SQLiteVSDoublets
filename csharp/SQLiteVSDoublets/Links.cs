@@ -40,17 +40,20 @@ public sealed class SQLiteLinks<T> : SQLiteStorage, ILinksStorage<T> where T : s
 
     public static SQLiteLinks<T> Open(string path) => Open(path, SQLiteProvider.MicrosoftDataSqlite);
 
-    public static SQLiteLinks<T> Open(string path, SQLiteProvider provider) => new(path, provider);
+    public static SQLiteLinks<T> Open(string path, SQLiteProvider provider) => new(path, provider, "");
+
+    /// <summary>Opens the file with <see cref="SQLiteStorage.Tuning"/>.</summary>
+    public static SQLiteLinks<T> OpenTuned(string path, SQLiteProvider provider) => new(path, provider, Tuning);
 
     public static SQLiteLinks<T> InMemory() => InMemory(SQLiteProvider.MicrosoftDataSqlite);
 
-    public static SQLiteLinks<T> InMemory(SQLiteProvider provider) => new(":memory:", provider);
+    public static SQLiteLinks<T> InMemory(SQLiteProvider provider) => new(":memory:", provider, "");
 
-    private SQLiteLinks(string path, SQLiteProvider provider) : base(path, "links", """
+    private SQLiteLinks(string path, SQLiteProvider provider, string pragmas) : base(path, "links", """
         CREATE TABLE links (id INTEGER PRIMARY KEY, "from" INTEGER NOT NULL, "to" INTEGER NOT NULL);
         CREATE INDEX links_from_to ON links ("from", "to");
         CREATE INDEX links_to_from ON links ("to", "from");
-        """, provider)
+        """, provider, pragmas)
     {
         _create = Command("""INSERT INTO links ("from", "to") VALUES ($from, $to)""", FromParameter, ToParameter);
         _update = Command("""UPDATE links SET "from" = $from, "to" = $to WHERE id = $id""", IdParameter, FromParameter, ToParameter);

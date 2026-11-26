@@ -10,6 +10,12 @@
 //   united RecursionlessSizeBalancedTree    47 µs -> 742 µs
 //   united SizedAndThreadedAVLBalancedTree  22 µs -> 2.2 µs
 //   split                                  0.9 µs -> 0.2 µs
+// Platform.Data.Doublets 1.0.0 behaves the same:
+//   united Default                          20 µs -> 184 µs
+//   united SizeBalancedTree                 25 µs -> 335 µs
+//   united RecursionlessSizeBalancedTree    22 µs -> 275 µs
+//   united SizedAndThreadedAVLBalancedTree  27 µs -> 2.0 µs
+//   split                                  1.0 µs -> 0.2 µs
 // `internal` (no external references) degenerates the same way (Default: 50 µs -> 584 µs), and plain hubs
 // without the rest of the blog post links do not, so the benchmarks use the AVL trees for the united store.
 using System.Diagnostics;

@@ -194,6 +194,272 @@ class SectionTests(unittest.TestCase):
         self.assertIn("локальный запуск", text)
 
 
+def configured(kind="durable", size=1_000, **configuration):
+    doublets = {"durable": report.TRANSACTIONAL, "memory_limit": "Doublets_United_NonVolatile"}[kind]
+    tuned = {"SQLite_File_Tuned": 1000} if kind == "durable" else {}
+    data = results("links", {"SQLite_File": 2000, **tuned, doublets: 4000})
+    data.update(language="Rust", bits=32, size=size, repetitions=1, sqlite_version="3.53.2")
+    data["configuration"] = {"kind": kind, "disk": {"random_read_4k_ns": 90_000, "fsync_ns": 1_500_000}}
+    data["configuration"].update(configuration)
+    return data
+
+
+class ConfigurationTests(unittest.TestCase):
+    text = report.TEXT["en"]
+
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+
+    def test_file_backed_stores_are_compared_with_the_tuned_sqlite_file_when_it_was_measured(self):
+        tuned = {"SQLite_File": None, "SQLite_File_Tuned": None}
+        self.assertEqual(report.baseline("Doublets_Split_NonVolatile", tuned), "SQLite_File_Tuned")
+        self.assertEqual(report.baseline("Doublets_Split_NonVolatile", {"SQLite_File": None}), "SQLite_File")
+        self.assertEqual(report.baseline(report.TRANSACTIONAL, tuned), "SQLite_File")
+        self.assertEqual(report.baseline("SQLite_File_Tuned", tuned), "SQLite_File")
+        self.assertEqual(report.baseline("SystemDataSQLite_File_Tuned"), "SQLite_File_Tuned")
+
+    def test_transactional_store_is_compared_with_the_syncing_sqlite_file(self):
+        table = report.table(configured(), self.text).splitlines()
+        # SQLite File Tuned is twice as fast as SQLite File; the transactional store twice as slow.
+        self.assertEqual(table[3].count("2× faster"), len(report.OPERATIONS["links"]))
+        self.assertEqual(table[4].count("2× slower"), len(report.OPERATIONS["links"]))
+
+    def test_configured_and_default_reports_stay_in_their_own_directories(self):
+        (self.root / "configured.json").write_text(json.dumps(configured()), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "configured reports"):
+            report.load(self.root)
+        self.assertEqual(len(report.load_configurations(self.root)), 1)
+        (self.root / "configured.json").write_text(json.dumps(sample()), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "default reports"):
+            report.load_configurations(self.root)
+        self.assertEqual(report.load_configurations(self.root / "missing"), {})
+
+    def test_invalid_configurations_are_rejected(self):
+        broken = {
+            "durable without the transactional store": configured(),
+            "limit with the transactional store": configured("memory_limit", memory_limit_bytes=2**20),
+            "limit without the limit": configured("memory_limit"),
+            "limit without the read latency": configured("memory_limit", memory_limit_bytes=2**20),
+            "volatile store": configured(),
+            "unknown": configured(),
+            "negative latency": configured(),
+            "zero dirty ratio": configured("memory_limit", memory_limit_bytes=2**20, dirty_ratio=0),
+            "dirty ratio over 100": configured("memory_limit", memory_limit_bytes=2**20, dirty_ratio=101),
+            "memory.high above the limit": configured(
+                "memory_limit", memory_limit_bytes=2**20, memory_high_bytes=2**20 + 1
+            ),
+            "zero memory.high": configured("memory_limit", memory_limit_bytes=2**20, memory_high_bytes=0),
+            "fractional dirty background ratio": configured(
+                "memory_limit", memory_limit_bytes=2**20, dirty_background_ratio=0.5
+            ),
+        }
+        broken["durable without the transactional store"]["results"].pop()
+        broken["limit with the transactional store"]["results"][-1]["variant"] = report.TRANSACTIONAL
+        del broken["limit without the read latency"]["configuration"]["disk"]["random_read_4k_ns"]
+        broken["volatile store"]["results"][-1]["variant"] = "Doublets_United_Volatile"
+        broken["unknown"]["configuration"]["kind"] = "unknown"
+        broken["negative latency"]["configuration"]["disk"]["fsync_ns"] = -1
+        for name, data in broken.items():
+            with self.subTest(name=name), self.assertRaises(ValueError):
+                report.validate(data, "report.json")
+
+    def job(self, variant, number, **fields):
+        """The report of one storage's job of a 24 MiB memory limit table, written to the directory."""
+        data = configured("memory_limit", 1_000_000, memory_limit_bytes=24 * 2**20, dirty_ratio=5)
+        data["results"] = results("links", {variant: 1000 * (number + 1)})["results"]
+        data["configuration"].update(peak_bytes=20 * 2**20 + number, major_faults=100 + number)
+        data["configuration"]["disk"] = {"random_read_4k_ns": 90_000 + number, "fsync_ns": 1_500_000}
+        data.update(
+            {
+                "run_url": "https://github.com/o/r/actions/runs/1",
+                "source_sha": "abc",
+                "date": f"2026-11-2{number}",
+                "machine": f"runner {number}",
+                **fields,
+            }
+        )
+        (self.root / f"{number}.json").write_text(json.dumps(data), encoding="utf-8")
+        return data
+
+    def test_the_jobs_of_one_memory_limit_table_are_merged(self):
+        # The files are read in name order; the table keeps the order of the configured variants.
+        self.job("Doublets_Split_NonVolatile", 1)
+        self.job("SQLite_File", 2)
+        self.job("Doublets_United_NonVolatile", 3)
+        (merged,) = report.load_configurations(self.root).values()
+        self.assertEqual(
+            [result["variant"] for result in merged["results"]],
+            list(report.CONFIGURED_VARIANTS["memory_limit"]),
+        )
+        self.assertEqual([job["machine"] for job in merged["jobs"]], ["runner 2", "runner 3", "runner 1"])
+        self.assertEqual(merged["jobs"][0]["peak_bytes"], 20 * 2**20 + 2)
+        self.assertEqual(merged["date"], "2026-11-23")
+        self.assertNotIn("disk", merged["configuration"])
+        for language in ("en", "ru"):
+            with self.subTest(language=language):
+                text = report.TEXT[language]
+                document = "\n".join(report.configured_sections({(1,): merged}, text))
+                self.assertIn(text["job_machines"], document)
+                self.assertIn(text["job_limit_provenance"].format(limit="24 MiB"), document)
+                self.assertIn(text["dirty_provenance"].format(dirty=5, background="—"), document)
+                self.assertIn("| " + " | ".join(text["job_header"]) + " |", document)
+                self.assertIn("| SQLite File | runner 2 | 90 µs | 1.5 ms | 20.0 MiB | 102 |", document)
+                self.assertIn(
+                    "| Doublets Split NonVolatile | runner 1 | 90 µs | 1.5 ms | 20.0 MiB | 101 |", document
+                )
+                # SQLite File's job measured 3 µs, the united store's 4 µs.
+                slower = text["slower"].format(ratio="1.33")
+                self.assertIn(f"| Doublets United NonVolatile | 4 µs ({slower})", document)
+
+    def test_jobs_of_different_runs_or_storages_are_not_merged(self):
+        cases = {
+            "not measured by one run": {"run_url": "https://github.com/o/r/actions/runs/2"},
+            "duplicates a storage": {"variant": "SQLite_File"},
+            "no SQLite File baseline": {
+                "variant": "Doublets_Split_NonVolatile",
+                "first": "Doublets_United_NonVolatile",
+            },
+        }
+        for message, fields in cases.items():
+            with self.subTest(message=message):
+                for stale in self.root.glob("*.json"):
+                    stale.unlink()
+                self.job(fields.pop("first", "SQLite_File"), 1)
+                self.job(fields.pop("variant", "Doublets_United_NonVolatile"), 2, **fields)
+                with self.assertRaisesRegex(ValueError, message):
+                    report.load_configurations(self.root)
+        # Only the memory limit tables are measured by several jobs.
+        for number in (1, 2):
+            (self.root / f"{number}.json").write_text(json.dumps(configured()), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "duplicates the results"):
+            report.load_configurations(self.root)
+
+    def stopped(self, variant, number, finished, **unfinished):
+        """The job of a store stopped after 340 minutes, which finished its first `finished` phases."""
+        data = self.job(variant, number)
+        result = data["results"][0]
+        operations = report.OPERATIONS["links"]
+        result["operations"] = {
+            operation: result["operations"][operation] for operation in operations[:finished]
+        }
+        result["unfinished"] = {"after_seconds": 340 * 60, "operation": operations[finished], **unfinished}
+        (self.root / f"{number}.json").write_text(json.dumps(data), encoding="utf-8")
+        return data
+
+    def test_stopped_stores_show_their_finished_phases_and_a_lower_bound(self):
+        self.job("SQLite_File", 1)
+        # The united store finished creating and reading all links and had spent at least 5 µs per link
+        # reading them by id, where SQLite File took 2 µs; the split store's job never logged a phase.
+        self.stopped("Doublets_United_NonVolatile", 2, 2, lower_bound_ns=5000)
+        self.stopped("Doublets_Split_NonVolatile", 3, 0)
+        (merged,) = report.load_configurations(self.root).values()
+        rows = {
+            line.split(" | ")[0]: line.split(" | ") for line in report.table(merged, self.text).splitlines()
+        }
+        united, split = rows["| Doublets United NonVolatile"], rows["| Doublets Split NonVolatile"]
+        self.assertEqual(united[1], f"3 µs ({self.text['slower'].format(ratio='1.5')})")
+        self.assertEqual(united[3], f"> 5 µs ({self.text['slower_at_least'].format(ratio='2.5')})")
+        self.assertEqual(united[4:-1], ["—"] * (len(report.OPERATIONS["links"]) - 3))
+        self.assertEqual(split[1:-1], ["—"] * len(report.OPERATIONS["links"]))
+        # Two finished phases slower than SQLite File and the stopped phase, which is clearly slower.
+        self.assertEqual(report.count_outcomes([merged], self.text), {"faster": 0, "slower": 3, "same": 0})
+        for language in ("en", "ru"):
+            with self.subTest(language=language):
+                text = report.TEXT[language]
+                document = "\n".join(report.configured_sections({(1,): merged}, text))
+                note = text["unfinished"].format(
+                    variants="Doublets United NonVolatile, Doublets Split NonVolatile", minutes="340"
+                )
+                self.assertIn(f"{report.table(merged, text)}\n\n{note}\n\n", document)
+                self.assertIn(text["slower_at_least"].format(ratio="2.5"), document)
+
+    def test_a_lower_bound_within_the_noise_is_not_a_comparison(self):
+        self.job("SQLite_File", 1)
+        self.stopped("Doublets_United_NonVolatile", 2, 2, lower_bound_ns=2050)
+        (merged,) = report.load_configurations(self.root).values()
+        self.assertIn("| > 2.05 µs | — |", report.table(merged, self.text))
+        self.assertEqual(report.count_outcomes([merged], self.text), {"faster": 0, "slower": 2, "same": 0})
+        self.assertIsNone(report.unfinished_note(configured("memory_limit"), self.text))
+
+    def test_invalid_stopped_stores_are_rejected(self):
+        cases = {
+            "not the next phase": {"operation": "delete"},
+            "no time": {"after_seconds": 0},
+            "negative bound": {"lower_bound_ns": -1},
+            "unknown field": {"reason": "slow"},
+        }
+        for name, fields in cases.items():
+            with self.subTest(name=name):
+                data = self.stopped("Doublets_United_NonVolatile", 1, 2)
+                data["results"][0]["unfinished"].update(fields)
+                with self.assertRaisesRegex(ValueError, "invalid stopped store"):
+                    report.validate(data, "report.json")
+        repeated = self.stopped("Doublets_United_NonVolatile", 1, 2)
+        repeated["repetitions"] = 3
+        finished = self.job("Doublets_United_NonVolatile", 1)
+        finished["results"][0]["unfinished"] = {"after_seconds": 60, "operation": "create"}
+        skipped = self.stopped("Doublets_United_NonVolatile", 1, 2)
+        del skipped["results"][0]["operations"]["create"]
+        for name, data in {"repeated": repeated, "finished": finished, "skipped": skipped}.items():
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, "invalid stopped store"):
+                report.validate(data, "report.json")
+        durable = configured()
+        durable["results"][-1]["unfinished"] = {"after_seconds": 60, "operation": "create"}
+        with self.assertRaisesRegex(ValueError, "only a memory limit"):
+            report.validate(durable, "report.json")
+
+    def test_configured_sections_label_the_limit_and_the_disk(self):
+        reports = {
+            report.configuration_key(data): data
+            for data in (
+                configured(),
+                configured(
+                    "memory_limit",
+                    1_000_000,
+                    memory_limit_bytes=24 * 2**20,
+                    peak_bytes=25_000_000,
+                    major_faults=12_345,
+                    memory_high_bytes=21 * 2**20,
+                    dirty_ratio=5,
+                    dirty_background_ratio=2,
+                ),
+                configured("memory_limit", 1_000, memory_limit_bytes=24 * 2**20),
+            )
+        }
+        for language in ("en", "ru"):
+            with self.subTest(language=language):
+                text = report.TEXT[language]
+                document = report.section(
+                    {("links", "Rust", 32, 1_000): sample(bits=32, size=1_000)}, language, None, reports
+                )
+                headings = [line for line in document.splitlines() if line.startswith("##")]
+                durable, limit = (f"## {text['configurations'][kind]}" for kind in report.CONFIGURATIONS)
+                self.assertLess(headings.index(durable), headings.index(limit))
+                self.assertLess(headings.index(limit), headings.index(f"## {text['conclusions']}"))
+                limited = [
+                    heading for heading in headings if heading.startswith("### ") and "24 MiB" in heading
+                ]
+                self.assertEqual(len(limited), 2)
+                self.assertLess(document.index("1,000 "), document.index("1,000,000 "))
+                self.assertIn("23.8 MiB", document)
+                self.assertIn("12,345", document)
+                self.assertIn(text["high_provenance"].format(high="21 MiB"), document)
+                self.assertIn(text["dirty_provenance"].format(dirty=5, background=2), document)
+                self.assertIn("90 µs", document)
+                self.assertIn("1.5 ms", document)
+                self.assertEqual(document.count(text["configuration_intro"]["memory_limit"]), 1)
+                self.assertEqual(
+                    sum(
+                        text["configuration_names"]["memory_limit"] in line
+                        for line in document.splitlines()
+                        if line.startswith("- ")
+                    ),
+                    1,
+                )
+
+
 class DocumentTests(unittest.TestCase):
     def setUp(self):
         temporary = tempfile.TemporaryDirectory()
@@ -315,13 +581,16 @@ class RepositoryReportsTests(unittest.TestCase):
     def test_both_committed_readmes_match_the_generator_without_a_stale_tail(self):
         root = Path(__file__).resolve().parents[1]
         reports = report.load(root / "docs/benchmarks/results")
+        configured = report.load_configurations(root / "docs/benchmarks/configurations")
         for name, language in (("README.md", "en"), ("README.ru.md", "ru")):
             with self.subTest(name=name):
                 document = (root / name).read_text(encoding="utf-8")
                 self.assertTrue(document.rstrip().endswith(report.END_MARKER))
                 self.assertEqual(
                     document,
-                    report.replace_section(document, report.section(reports, language, "docs/benchmarks")),
+                    report.replace_section(
+                        document, report.section(reports, language, "docs/benchmarks", configured)
+                    ),
                 )
 
 

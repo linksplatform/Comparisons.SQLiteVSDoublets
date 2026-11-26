@@ -69,7 +69,7 @@ class PostgreSQLReports(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             data = json.loads(result.stdout)
             self.assertNotIn("postgresql", data)
-            self.assertEqual(len(data["results"]), 12)
+            self.assertEqual(len(data["results"]), 14)
             self.assertNotIn("PostgreSQL_EFCore", [row["variant"] for row in data["results"]])
 
     def test_explicit_unconfigured_postgresql_fails(self):

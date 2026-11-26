@@ -14,12 +14,15 @@ Based on examples from <https://github.com/FahaoTang/dotnetcore-examples> and
 
 ## Benchmarks
 
-Rust ([doublets](https://crates.io/crates/doublets) and
-[rusqlite](https://crates.io/crates/rusqlite) with bundled SQLite) and C#
-([Platform.Data.Doublets](https://www.nuget.org/packages/Platform.Data.Doublets),
+Rust ([doublets](https://crates.io/crates/doublets) 0.21.0 and
+[rusqlite](https://crates.io/crates/rusqlite) 0.43.0 with bundled SQLite
+3.54.1) and C#
+([Platform.Data.Doublets](https://www.nuget.org/packages/Platform.Data.Doublets)
+1.0.0,
 [Platform.Data.Doublets.Sequences](https://www.nuget.org/packages/Platform.Data.Doublets.Sequences)
 and the providers [Microsoft.Data.Sqlite](https://www.nuget.org/packages/Microsoft.Data.Sqlite)
-and [System.Data.SQLite](https://www.nuget.org/packages/System.Data.SQLite))
+11.0.0 with SQLite 3.53.4 and
+[System.Data.SQLite](https://www.nuget.org/packages/System.Data.SQLite))
 run the same workloads on the same deterministic data, with 32 bit
 (`u32`/`uint`) and 64 bit (`u64`/`ulong`) ids:
 
@@ -39,9 +42,27 @@ run the same workloads on the same deterministic data, with 32 bit
 
 Storages: SQLite in memory and in a file; Doublets united (one array of links
 with index trees) and split (separate data and index arrays), each volatile
-(in memory) and non-volatile (in memory-mapped files). Doublets are compared
-with SQLite of the same durability: volatile with `SQLite Memory`,
-non-volatile with `SQLite File`.
+(in memory) and non-volatile (in memory-mapped files). Volatile Doublets are
+compared with `SQLite Memory`. Non-volatile Doublets are file-backed without
+durability guarantees: they write no journal and never call `fsync`, so a
+crash can lose or corrupt any write since the operating system last flushed
+the mapped pages. `SQLite File` keeps its defaults (a rollback journal and
+`synchronous=FULL`) and syncs at every commit, so it is durable at commit.
+
+`SQLite File Tuned` is the same file with the pragmas
+`PRAGMA cache_size = -1048576; PRAGMA mmap_size = 1073741824;` run before the
+schema: a 1 GiB page cache instead of the default 2 MiB and reads through a
+1 GiB memory map, like the Doublets stores read their mapped files. Its
+durability is unchanged. Rust and both C# providers run it
+(`SQLite_File_Tuned` and `SystemDataSQLite_File_Tuned`), and the summary
+compares the non-volatile Doublets with it.
+
+`Doublets United NonVolatile Transactional` (Rust) is the united file-mapped
+store behind doublets' `TransactionsDecorator` with the shipped
+`FileTransitionLog`, which calls `sync_all` after every journal record. Each
+lifecycle phase that writes is one transaction, begun at its first write and
+committed at its end. It is durable at commit like `SQLite File`, and it is
+measured in its own table, see [Configured benchmarks](#configured-benchmarks).
 
 C# also runs `SystemDataSQLite_Memory` and `SystemDataSQLite_File` with
 System.Data.SQLite 2.0.4. `SQLite_Memory` and `SQLite_File` use
@@ -107,6 +128,83 @@ and 1,000,000 blog posts already take an hour in C#. Pull requests check the
 whole pipeline on 1,000 records, and pushes to `main` update the results below.
 The workflow can also be started manually with other sizes.
 
+### Configured benchmarks
+
+The [Configured benchmarks workflow](.github/workflows/configurations.yml)
+measures Rust links tables in a non-default setup, each table in its own job
+with `--repetitions 1`, and stores them in
+[docs/benchmarks/configurations](docs/benchmarks/configurations). The
+generated section below shows them as separate tables after the regular
+results:
+
+- **Durable file storage**, 10,000,000 links, 32 and 64 bit:
+  `SQLite File`, `SQLite File Tuned` and
+  `Doublets United NonVolatile Transactional`.
+- **Under memory pressure**, 32 bit: `SQLite File`,
+  `Doublets United NonVolatile` and `Doublets Split NonVolatile` in a cgroup
+  with `memory.max` of 24 MiB at 1,000,000 links and 240 MiB at 10,000,000
+  links, without swap. The limit charges the page cache too, so the stores'
+  pages are read back from the disk. The warm-up on 10,000 links fits in either
+  limit. With the kernel's default dirty page thresholds, the united store's
+  dirty pages and pages under writeback filled 21 MiB of the 24 MiB, which
+  reclaim cannot free, and the kernel killed it. Byte thresholds do not help:
+  the kernel applies `vm.dirty_bytes` to a cgroup as a fraction of the runner's
+  whole memory, rounded up to 1/4096, of the memory the cgroup can use
+  (`domain_dirty_limits` in `mm/page-writeback.c`). Set to 20% of the limit, it
+  came to a few pages, and every store, SQLite too, waited in
+  `balance_dirty_pages` for most of the pages it wrote. So the runner's
+  `vm.dirty_ratio` and `vm.dirty_background_ratio` are lowered to 5% and 2%,
+  which the kernel applies to the memory the cgroup can use. That alone did not
+  save the united store: the kernel compares the cgroup's dirty pages with its
+  thresholds by counts it refreshes every two seconds
+  (`mem_cgroup_flush_stats_ratelimited` in `mm/memcontrol.c`), and the store
+  filled the limit within four. So `memory.high` is set to 7/8 of the limit: a
+  store above it reclaims and waits on its way back to user space, which gives
+  the writeback time to finish before `memory.max`. Under pressure a store can
+  take hours, so each storage runs in its own job of the run, and the jobs'
+  reports are merged into one table. A store still running after 340 minutes,
+  the time a job has for it, is stopped. Its row keeps the phases it finished,
+  from the phase log the benchmark writes with `--phases`, a lower bound for the
+  phase in progress and `—` for the rest, and a note under the table names it. A
+  second table shows each job's runner, disk latencies, the cgroup's
+  `memory.peak` and major page faults; the provenance line shows `memory.high`
+  and both dirty page thresholds. Only the mapped stores' misses are page
+  faults: SQLite reads its file with `read`. `SQLite File Tuned` is left out,
+  because its 1 GiB cache would be anonymous memory charged to the limit. The
+  transactional store can't take part: its decorator keeps every transition and
+  a full snapshot of the links in memory, which no limit small enough to create
+  pressure can hold.
+
+Both kinds record the disk the stores use: the median latency of a random
+4 KiB read that bypasses the page cache (`O_DIRECT`) and of an `fsync` after
+a small append. Pull requests run the pipeline on a small plan (1,000 durable
+links and 20,000 links under 24 MiB); the published tables come from a run
+with the plan above. Started manually, the workflow takes a JSON plan, the
+disk of the stores (the runner's work disk or `/mnt`) and the minutes a
+memory-limited job gives its storage (340 at most and by default).
+
+Run a configuration locally (the memory limit needs a systemd with a
+delegated memory controller):
+
+```bash
+mkdir -p results/configured
+python3 scripts/benchmark_configuration.py probe /tmp/probe > disk.json
+variants=SQLite_File,SQLite_File_Tuned,Doublets_United_NonVolatile_Transactional
+cargo run --release --manifest-path rust/Cargo.toml -- \
+  links 32 100000 --repetitions 1 --variants "$variants" \
+  --directory /tmp/stores \
+  --output results/configured/durable-links-rust-32-100000.json
+python3 scripts/benchmark_provenance.py \
+  results/configured/durable-links-rust-32-100000.json \
+  --toolchain "$(rustc --version)"
+python3 scripts/benchmark_configuration.py record \
+  results/configured/durable-links-rust-32-100000.json \
+  --kind durable --disk "$(cat disk.json)"
+# Writes the README with the local tables after the published results.
+python3 scripts/benchmark_report.py docs/benchmarks/results \
+  --configurations results/configured > configured.md
+```
+
 Run locally:
 
 ```bash
@@ -146,27 +244,39 @@ docker rm benchmark-postgres
 
 Notes:
 
-- The split stores of doublets 0.5.0 (Rust) lose a link that is updated to
-  reference itself, so the benchmark updates a link to `(0, 0)` first, which
-  is the state links are created in
-  ([experiments/split_store_delete](experiments/split_store_delete)).
-- The stores of doublets 0.5.0 (Rust) take the part of the memory that
-  `platform-mem` 0.3.0 returns after growing it for the whole memory, so a
-  store fails after 1,040,384 links; the benchmarks wrap the memory in
-  [`memory::Whole`](rust/src/memory.rs), which returns the whole memory
-  ([experiments/unit_store_growth](experiments/unit_store_growth)).
+- doublets 0.21.0 (Rust) fixed two bugs of 0.5.0 that the benchmarks used
+  to work around: the split stores lost a link updated to reference itself
+  ([experiments/split_store_delete](experiments/split_store_delete)), and
+  the stores failed after 1,040,384 links, because they took only part of
+  the memory after growing it
+  ([experiments/unit_store_growth](experiments/unit_store_growth)). Both
+  experiments pass with 0.21.0, so the workarounds are gone.
+- doublets 0.21.0 (Rust) grows its memory with `grow_filled`, which writes
+  zeros over the whole new region of a mapped file, although the file is
+  extended with `set_len` and already reads as zeros. A united 32-bit store
+  dirties 32 MiB at creation and at every growth, more than the 24 MiB limit,
+  so the non-volatile stores map their files with
+  [`memory::ZeroExtended`](rust/src/memory.rs), which leaves the new region
+  as it is
+  ([doublets-rs#95](https://github.com/linksplatform/doublets-rs/issues/95)).
 - In C#, links are deleted with `Delete(id, handler: null)`, which resets the
-  link before deleting it; the bare `Delete(id)` leaves the link in the index
-  trees, and later searches fail
-  ([experiments/csharp_tree_delete](experiments/csharp_tree_delete)).
-- The C# united stores use AVL index trees: the default size balanced trees
-  degenerate when many links share a source or a target, which makes each
-  blog post creation linear in the number of posts
-  ([experiments/csharp_objects_profile](experiments/csharp_objects_profile)).
+  link before deleting it; the bare `Delete(id)` of Platform.Data.Doublets
+  1.0.0 still leaves the link in the index trees, and later searches fail
+  ([experiments/csharp_tree_delete](experiments/csharp_tree_delete),
+  [experiments/csharp_delete_minimal](experiments/csharp_delete_minimal),
+  [Data.Doublets#576](https://github.com/linksplatform/Data.Doublets/issues/576)).
+- The C# united stores use AVL index trees: in Platform.Data.Doublets 1.0.0
+  the default size balanced trees still degenerate when many links share a
+  source or a target, which makes each blog post creation linear in the
+  number of posts
+  ([experiments/csharp_objects_profile](experiments/csharp_objects_profile),
+  [Data.Doublets#577](https://github.com/linksplatform/Data.Doublets/issues/577)).
 - The C# split stores keep the default linked list of the internal sources,
-  which doublets 0.5.0 (Rust) does not have; it makes the C# updates faster
-  and the other operations take about the same time
-  ([experiments/csharp_split_linked_list](experiments/csharp_split_linked_list)).
+  which the Rust split store of doublets 0.21.0 still does not have
+  (`USE_LIST` is `false` and its list is `todo!()`); in C# it makes the
+  updates faster and the other operations take about the same time
+  ([experiments/csharp_split_linked_list](experiments/csharp_split_linked_list),
+  [doublets-rs#94](https://github.com/linksplatform/doublets-rs/issues/94)).
 - Objects stores use external references for numbers and Unicode symbols, so
   raw values never collide with link ids.
 - Reading a string without the cache walks its sequence link by link; in C#
@@ -551,13 +661,79 @@ _1 repetition after a warm-up, median time per operation. SQLite 3.53.3; Platfor
 
 ![C# doublets vs SQLite, 64 bit, objects, log scale](docs/benchmarks/objects-csharp-64.png)
 
+## Durable file storage
+
+`Doublets United NonVolatile Transactional` is the united file-mapped store behind doublets' `TransactionsDecorator` with the shipped `FileTransitionLog`, which calls `sync_all` after every journal record. One transaction covers each lifecycle phase that writes: it begins at the phase's first write and commits at its end, so the read phases begin none. It is compared with `SQLite File`, which syncs its rollback journal and database at every `COMMIT` (`synchronous=FULL`): both are durable at commit.
+
+### Rust, 32 bit, 10,000,000 links
+
+_1 repetition after a warm-up, median time per operation. SQLite 3.54.1; doublets 0.21.0; rustc 1.100.0 (0ef1bc386 2026-11-09). Ubuntu 24.04.5 LTS, Intel(R) Xeon(R) 6975P-C, 4 cores, 15 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/45604850024) on 2026-11-25. Disk of the stores: random 4 KiB read 96.2 µs, `fsync` 118 µs._
+
+| Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| SQLite File | 5.6 µs | 74.4 ns | 1.6 µs | 1.75 µs | 1.68 µs | 1.69 µs | 14.9 µs | 9 µs | 501.0 MiB |
+| SQLite File Tuned | 3.34 µs (1.68× faster) | 71.7 ns (≈ same) | 1.56 µs (≈ same) | 1.62 µs (1.08× faster) | 1.55 µs (1.08× faster) | 1.54 µs (1.1× faster) | 10.1 µs (1.48× faster) | 6.78 µs (1.33× faster) | 501.0 MiB |
+| Doublets United NonVolatile Transactional | 210 µs (37.4× slower) | 3.4 ns (21.9× faster) | 30.5 ns (52.3× faster) | 1.66 µs (1.05× faster) | 1.93 µs (1.15× slower) | 1.97 µs (1.17× slower) | 131 µs (8.79× slower) | 121 µs (13.5× slower) | 1930.4 MiB |
+
+### Rust, 64 bit, 10,000,000 links
+
+_1 repetition after a warm-up, median time per operation. SQLite 3.54.1; doublets 0.21.0; rustc 1.100.0 (0ef1bc386 2026-11-09). Ubuntu 24.04.5 LTS, Intel(R) Xeon(R) 6975P-C, 4 cores, 15 GiB, [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/45604850024) on 2026-11-25. Disk of the stores: random 4 KiB read 96.5 µs, `fsync` 129 µs._
+
+| Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| SQLite File | 5.21 µs | 73.3 ns | 1.37 µs | 1.53 µs | 1.48 µs | 1.48 µs | 14 µs | 8.24 µs | 501.0 MiB |
+| SQLite File Tuned | 2.47 µs (2.1× faster) | 71.2 ns (≈ same) | 891 ns (1.54× faster) | 1.03 µs (1.48× faster) | 1.02 µs (1.45× faster) | 973 ns (1.52× faster) | 7.82 µs (1.79× faster) | 5.26 µs (1.57× faster) | 501.0 MiB |
+| Doublets United NonVolatile Transactional | 236 µs (45.3× slower) | 3.76 ns (19.5× faster) | 26 ns (52.8× faster) | 1.25 µs (1.23× faster) | 1.59 µs (1.08× slower) | 1.5 µs (≈ same) | 162 µs (11.6× slower) | 151 µs (18.3× slower) | 2250.4 MiB |
+
+## Under memory pressure
+
+The benchmark process runs in a cgroup with a memory limit (`memory.max`, swap disabled). The limit charges the page cache too, so neither the SQLite file nor the mapped Doublets store fits in memory, and pages that are not resident are read from the disk. With the kernel's default dirty page thresholds, a mapped store's dirty pages and pages under writeback filled the limit, which reclaim cannot free, and the store was killed. Byte thresholds do not help: the kernel applies them to a cgroup as a fraction of the runner's whole memory, rounded up to 1/4096, so 20% of the limit came to a few pages, and every store, SQLite too, waited in `balance_dirty_pages` for most of the pages it wrote. So the runner's `vm.dirty_ratio` and `vm.dirty_background_ratio` are lowered, which the kernel applies to the memory the cgroup can use. That alone did not save the united store: the kernel compares the cgroup's dirty pages with its thresholds by counts it refreshes every two seconds, and in that time the store filled the limit. So `memory.high` is set to 7/8 of the limit: a store above it reclaims and waits on its way back to user space, which gives the writeback time to finish before `memory.max`. The transactional store cannot take part: its decorator keeps every transition and a full snapshot of the links in memory, which exceeds any limit small enough to create pressure. Under pressure a store can take hours, so each storage runs in its own job of one run, and the second table shows each job's runner, disk latencies, peak cgroup memory and major page faults. Major page faults count the misses of the mapped stores only: SQLite reads its file with `read`, whose misses are not page faults.
+
+### Rust, 32 bit, 1,000,000 links, memory limit 24 MiB
+
+_1 repetition after a warm-up, median time per operation. SQLite 3.54.1; doublets 0.21.0; rustc 1.100.0 (0ef1bc386 2026-11-09). Each storage in its own job (below), [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/45689097621) on 2026-11-26. Memory limit 24 MiB. `memory.high` 21 MiB. `vm.dirty_ratio` 5%, `vm.dirty_background_ratio` 2%._
+
+| Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| SQLite File | 36.6 µs | 226 ns | 90.4 µs | 35.5 µs | 37 µs | 17.4 µs | 575 µs | 277 µs | 48.2 MiB |
+| Doublets United NonVolatile | 1.98 ms (54× slower) | 41.8 ns (5.41× faster) | 143 µs (1.59× slower) | 723 µs (20.4× slower) | 905 µs (24.4× slower) | 906 µs (52× slower) | > 15.7 ms (> 27.4× slower) | — | 32.0 MiB |
+| Doublets Split NonVolatile | 345 µs (9.42× slower) | 48.6 ns (4.65× faster) | 466 µs (5.15× slower) | 840 µs (23.7× slower) | 556 µs (15× slower) | 561 µs (32.2× slower) | 2.64 ms (4.6× slower) | > 15 ms (> 54.2× slower) | 40.0 MiB |
+
+_Doublets United NonVolatile, Doublets Split NonVolatile: stopped after 340 min, the time a job has for its storage. `>` marks the time per operation the phase in progress had already spent, a lower bound, and `—` the phases it did not reach._
+
+| Storage | Machine | Random 4 KiB read | `fsync` | Peak cgroup memory | Major page faults |
+| --- | --- | ---: | ---: | ---: | ---: |
+| SQLite File | Ubuntu 24.04.5 LTS, Intel(R) Xeon(R) 6975P-C, 4 cores, 15 GiB | 96.6 µs | 134 µs | 21.2 MiB | 16 |
+| Doublets United NonVolatile | Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB | 117 µs | 216 µs | 21.7 MiB | 55,671,063 |
+| Doublets Split NonVolatile | Ubuntu 24.04.5 LTS, AMD EPYC 7763 64-Core Processor, 4 cores, 16 GiB | 127 µs | 248 µs | 21.5 MiB | 51,081,818 |
+
+### Rust, 32 bit, 10,000,000 links, memory limit 240 MiB
+
+_1 repetition after a warm-up, median time per operation. SQLite 3.54.1; doublets 0.21.0; rustc 1.100.0 (0ef1bc386 2026-11-09). Each storage in its own job (below), [GitHub Actions run](https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/45689097621) on 2026-11-26. Memory limit 240 MiB. `memory.high` 210 MiB. `vm.dirty_ratio` 5%, `vm.dirty_background_ratio` 2%._
+
+| Storage | Create | Read all | Read by id | Search (from, to) | Read by from | Read by to | Update | Delete | File size |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| SQLite File | 55.5 µs | 374 ns | 152 µs | 52.7 µs | 38.9 µs | 33.3 µs | 966 µs | 508 µs | 501.0 MiB |
+| Doublets United NonVolatile | > 2.04 ms (> 36.7× slower) | — | — | — | — | — | — | — | — |
+| Doublets Split NonVolatile | 435 µs (7.83× slower) | 71.9 ns (5.21× faster) | 594 µs (3.91× slower) | > 1.01 ms (> 19.2× slower) | — | — | — | — | 400.0 MiB |
+
+_Doublets United NonVolatile, Doublets Split NonVolatile: stopped after 340 min, the time a job has for its storage. `>` marks the time per operation the phase in progress had already spent, a lower bound, and `—` the phases it did not reach._
+
+| Storage | Machine | Random 4 KiB read | `fsync` | Peak cgroup memory | Major page faults |
+| --- | --- | ---: | ---: | ---: | ---: |
+| SQLite File | Ubuntu 24.04.5 LTS, INTEL(R) XEON(R) PLATINUM 8573C, 4 cores, 16 GiB | 147 µs | 326 µs | 210.2 MiB | 98 |
+| Doublets United NonVolatile | Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB | 130 µs | 198 µs | 213.3 MiB | 20,756,046 |
+| Doublets Split NonVolatile | Ubuntu 24.04.5 LTS, AMD EPYC 9V74 80-Core Processor, 4 cores, 16 GiB | 124 µs | 205 µs | 210.5 MiB | 46,766,831 |
+
 ## Conclusions
 
-Each comparison uses SQLite of matching durability and the same noise rule as the tables. Counts span the measured variants, sizes and id widths; they are not an overall speed ranking. RAM usage is not measured.
+Volatile Doublets stores are compared with `SQLite Memory`. Non-volatile ones are file-backed without durability guarantees (no journal, no `fsync`) and are compared with `SQLite File Tuned` (or `SQLite File` where no tuned row was measured), which still syncs at every commit; the transactional store is compared with `SQLite File`, both durable at every commit. The same noise rule as in the tables applies. Counts span the measured variants, sizes and id widths; they are not an overall speed ranking. RAM usage is measured only as the cgroup peak of the memory-limit tables.
 
 - Rust, links: 186 faster, 4 slower, 2 approximately equal Doublets operation comparisons with SQLite.
 - C#, links: 192 faster, 0 slower, 0 approximately equal Doublets operation comparisons with SQLite.
 - Rust, objects: 27 faster, 100 slower, 1 approximately equal Doublets operation comparisons with SQLite.
 - C#, objects: 16 faster, 108 slower, 4 approximately equal Doublets operation comparisons with SQLite.
+- Rust, links, durable: 6 faster, 9 slower, 1 approximately equal Doublets operation comparisons with SQLite.
+- Rust, links, memory limit: 3 faster, 17 slower, 0 approximately equal Doublets operation comparisons with SQLite.
 <!-- markdownlint-restore -->
 <!--BENCHMARK_RESULTS_END-->

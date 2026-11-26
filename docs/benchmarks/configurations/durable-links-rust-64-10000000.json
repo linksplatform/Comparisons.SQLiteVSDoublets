@@ -1,0 +1,240 @@
+{
+  "bits": 64,
+  "category": "links",
+  "language": "Rust",
+  "repetitions": 1,
+  "results": [
+    {
+      "file_bytes": 525307904,
+      "operations": {
+        "create": {
+          "max_ns": 5206.2372335,
+          "median_ns": 5206.2372335,
+          "min_ns": 5206.2372335,
+          "samples_ns": [
+            5206.2372335
+          ]
+        },
+        "delete": {
+          "max_ns": 8242.0156471,
+          "median_ns": 8242.0156471,
+          "min_ns": 8242.0156471,
+          "samples_ns": [
+            8242.0156471
+          ]
+        },
+        "query_all": {
+          "max_ns": 73.2728902,
+          "median_ns": 73.2728902,
+          "min_ns": 73.2728902,
+          "samples_ns": [
+            73.2728902
+          ]
+        },
+        "query_by_from": {
+          "max_ns": 1476.1832428,
+          "median_ns": 1476.1832428,
+          "min_ns": 1476.1832428,
+          "samples_ns": [
+            1476.1832428
+          ]
+        },
+        "query_by_from_to": {
+          "max_ns": 1533.2220858,
+          "median_ns": 1533.2220858,
+          "min_ns": 1533.2220858,
+          "samples_ns": [
+            1533.2220858
+          ]
+        },
+        "query_by_id": {
+          "max_ns": 1370.2081826,
+          "median_ns": 1370.2081826,
+          "min_ns": 1370.2081826,
+          "samples_ns": [
+            1370.2081826
+          ]
+        },
+        "query_by_to": {
+          "max_ns": 1478.6004136,
+          "median_ns": 1478.6004136,
+          "min_ns": 1478.6004136,
+          "samples_ns": [
+            1478.6004136
+          ]
+        },
+        "update": {
+          "max_ns": 13988.7643322,
+          "median_ns": 13988.7643322,
+          "min_ns": 13988.7643322,
+          "samples_ns": [
+            13988.7643322
+          ]
+        }
+      },
+      "variant": "SQLite_File"
+    },
+    {
+      "file_bytes": 525307904,
+      "operations": {
+        "create": {
+          "max_ns": 2474.6214209,
+          "median_ns": 2474.6214209,
+          "min_ns": 2474.6214209,
+          "samples_ns": [
+            2474.6214209
+          ]
+        },
+        "delete": {
+          "max_ns": 5263.6763235,
+          "median_ns": 5263.6763235,
+          "min_ns": 5263.6763235,
+          "samples_ns": [
+            5263.6763235
+          ]
+        },
+        "query_all": {
+          "max_ns": 71.1637648,
+          "median_ns": 71.1637648,
+          "min_ns": 71.1637648,
+          "samples_ns": [
+            71.1637648
+          ]
+        },
+        "query_by_from": {
+          "max_ns": 1015.3484845,
+          "median_ns": 1015.3484845,
+          "min_ns": 1015.3484845,
+          "samples_ns": [
+            1015.3484845
+          ]
+        },
+        "query_by_from_to": {
+          "max_ns": 1032.7862071,
+          "median_ns": 1032.7862071,
+          "min_ns": 1032.7862071,
+          "samples_ns": [
+            1032.7862071
+          ]
+        },
+        "query_by_id": {
+          "max_ns": 890.5420887,
+          "median_ns": 890.5420887,
+          "min_ns": 890.5420887,
+          "samples_ns": [
+            890.5420887
+          ]
+        },
+        "query_by_to": {
+          "max_ns": 973.1502594,
+          "median_ns": 973.1502594,
+          "min_ns": 973.1502594,
+          "samples_ns": [
+            973.1502594
+          ]
+        },
+        "update": {
+          "max_ns": 7819.1072054,
+          "median_ns": 7819.1072054,
+          "min_ns": 7819.1072054,
+          "samples_ns": [
+            7819.1072054
+          ]
+        }
+      },
+      "variant": "SQLite_File_Tuned"
+    },
+    {
+      "file_bytes": 2359716228,
+      "operations": {
+        "create": {
+          "max_ns": 235806.9492931,
+          "median_ns": 235806.9492931,
+          "min_ns": 235806.9492931,
+          "samples_ns": [
+            235806.9492931
+          ]
+        },
+        "delete": {
+          "max_ns": 150926.5378466,
+          "median_ns": 150926.5378466,
+          "min_ns": 150926.5378466,
+          "samples_ns": [
+            150926.5378466
+          ]
+        },
+        "query_all": {
+          "max_ns": 3.764791,
+          "median_ns": 3.764791,
+          "min_ns": 3.764791,
+          "samples_ns": [
+            3.764791
+          ]
+        },
+        "query_by_from": {
+          "max_ns": 1594.8748989,
+          "median_ns": 1594.8748989,
+          "min_ns": 1594.8748989,
+          "samples_ns": [
+            1594.8748989
+          ]
+        },
+        "query_by_from_to": {
+          "max_ns": 1250.0609324,
+          "median_ns": 1250.0609324,
+          "min_ns": 1250.0609324,
+          "samples_ns": [
+            1250.0609324
+          ]
+        },
+        "query_by_id": {
+          "max_ns": 25.9712385,
+          "median_ns": 25.9712385,
+          "min_ns": 25.9712385,
+          "samples_ns": [
+            25.9712385
+          ]
+        },
+        "query_by_to": {
+          "max_ns": 1499.9896634,
+          "median_ns": 1499.9896634,
+          "min_ns": 1499.9896634,
+          "samples_ns": [
+            1499.9896634
+          ]
+        },
+        "update": {
+          "max_ns": 161955.2447908,
+          "median_ns": 161955.2447908,
+          "min_ns": 161955.2447908,
+          "samples_ns": [
+            161955.2447908
+          ]
+        }
+      },
+      "variant": "Doublets_United_NonVolatile_Transactional"
+    }
+  ],
+  "size": 10000000,
+  "sqlite_version": "3.54.1",
+  "warm_up_seconds": 1.0,
+  "warm_up_size": 10000,
+  "run_url": "https://github.com/linksplatform/Comparisons.SQLiteVSDoublets/actions/runs/45604850024",
+  "source_sha": "303ad99b22b9db5db790f0712d7ae73750dd29bb",
+  "tree_sha": "04d6d6ca45ded8ce76ec6f958c827182488dbfff",
+  "date": "2026-11-25",
+  "machine": "Ubuntu 24.04.5 LTS, Intel(R) Xeon(R) 6975P-C, 4 cores, 15 GiB",
+  "software": {
+    "libraries": {
+      "doublets": "0.21.0"
+    },
+    "toolchain": "rustc 1.100.0 (0ef1bc386 2026-11-09)"
+  },
+  "configuration": {
+    "kind": "durable",
+    "disk": {
+      "random_read_4k_ns": 96454.0,
+      "fsync_ns": 129338.5
+    }
+  }
+}

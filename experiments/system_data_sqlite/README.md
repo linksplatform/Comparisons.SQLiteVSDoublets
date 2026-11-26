@@ -5,7 +5,7 @@
 System.Data.SQLite 2.0.4 contains the managed provider and requires a native
 `e_sqlite3` library, as described in the
 [upstream build documentation](https://system.data.sqlite.org/home/doc/trunk/www/build.md).
-Microsoft.Data.Sqlite 10.0.12 supplies this library for Linux, macOS and Windows.
+Microsoft.Data.Sqlite 11.0.0 supplies this library for Linux, macOS and Windows.
 
 From the repository root, reproduce the missing native dependency in a
 separate output directory:

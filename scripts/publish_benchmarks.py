@@ -11,6 +11,8 @@ import benchmark_ci
 import benchmark_report
 from ci_process import executable
 
+CONFIGURATIONS = "docs/benchmarks/configurations"
+
 
 def is_race(message):
     blocked = ("GH006", "GH013", "protected branch", "rule violations", "pre-receive hook declined")
@@ -58,11 +60,13 @@ def publish(directory, sizes, sha, branch="main", verbose=False):
                 for path in directory.glob("*.json"):
                     shutil.copy2(path, results / path.name)
                 reports = benchmark_report.load(results)
+                # Configured reports are measured by hand-started runs and kept as committed.
+                configured = benchmark_report.load_configurations(worktree / CONFIGURATIONS)
                 benchmark_report.charts(reports, worktree / "docs/benchmarks")
                 for name in ("README.md", "README.ru.md"):
                     readme = worktree / name
                     text = benchmark_report.section(
-                        reports, "ru" if ".ru." in name else "en", "docs/benchmarks"
+                        reports, "ru" if ".ru." in name else "en", "docs/benchmarks", configured
                     )
                     readme.write_text(
                         benchmark_report.replace_section(readme.read_text(encoding="utf-8"), text),
